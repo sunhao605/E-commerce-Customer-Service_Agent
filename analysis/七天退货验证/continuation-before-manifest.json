@@ -1,0 +1,12 @@
+{
+  "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/aftersale/AfterSaleRequestRepository.java": "3ec3a7ea46595fb8494161f86bbde5b93b2201d513b4fd31eef56eb13856e3d4",
+  "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/aftersale/AdminAfterSaleService.java": "c3edfbcfb2afa513b72451f1fb2e035894644135245fcf338032b854bbe36e97",
+  "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/order/ShopService.java": "9c8bb98b7fe91378c4218a44e5cc7e60123000a4871ffe80a8b15336979e0260",
+  "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/order/AdminOrderService.java": "d5f785ecd284d554d4e424d14824de1653990a77fe76b75703a40343d739540b",
+  "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/order/OrderRepository.java": "70aaf194eddf08348e4a6251f1e4c2498b99143b643bebccd8fd12c0ef34c912",
+  "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/CustomerServiceGatewayService.java": "6be06725c129b595c2bcd3b98add292ccafc16fe794391c68e82701ca32af51f",
+  "backend/agent/tools/planning.py": "6fc0d0d404df6e9bffaf0bb3497da6e721cfe3c50f0252eedc6b433450d6577f",
+  "backend/agent/customer_service_agent.py": "f8474838f8140e2d6a319837e6c78ee6a9dbf772453ff593601245ef83ada270",
+  "backend/tests/test_refund_submission_boundary.py": "4e851feec05e546fe9d2d3230fc922ce8f561fafaa0221fa0ab6d4b5f5626855",
+  "analysis/缺口一验证/CustomerRefundCheck.java": "d4268de77d8b2fcd90e3c3ff4bc94d36d5c30dbba276220724d0e2cbf3e4526c"
+}

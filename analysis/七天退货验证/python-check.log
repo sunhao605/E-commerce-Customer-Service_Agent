@@ -1,0 +1,20 @@
+test_all_model_paths_set_thinking_explicitly (test_deepseek_config.DeepSeekConfigTest.test_all_model_paths_set_thinking_explicitly) ... ok
+test_accepts_confirmed_shipped_synonym (test_eval_contract.AnswerContractMatcherTests.test_accepts_confirmed_shipped_synonym) ... ok
+test_does_not_use_internal_state_to_satisfy_answer_contract (test_eval_contract.AnswerContractMatcherTests.test_does_not_use_internal_state_to_satisfy_answer_contract) ... ok
+test_negated_phrase_does_not_count_as_positive_claim (test_eval_contract.AnswerContractMatcherTests.test_negated_phrase_does_not_count_as_positive_claim) ... ok
+test_normalizes_spaces_and_full_width_punctuation (test_eval_contract.AnswerContractMatcherTests.test_normalizes_spaces_and_full_width_punctuation) ... ok
+test_positive_forbidden_claim_is_detected (test_eval_contract.AnswerContractMatcherTests.test_positive_forbidden_claim_is_detected) ... ok
+test_answer_contract_replaces_legacy_exact_signal_gate (test_eval_contract.EvalRunnerContractIntegrationTests.test_answer_contract_replaces_legacy_exact_signal_gate) ... ok
+test_runner_does_not_use_flattened_session_state_for_answer_claims (test_eval_contract.EvalRunnerContractIntegrationTests.test_runner_does_not_use_flattened_session_state_for_answer_claims) ... ok
+test_outdoor_paths_and_evidence (test_outdoor_scenario.OutdoorScenarioTest.test_outdoor_paths_and_evidence) ... ok
+test_eligible_seven_day_return_stops_before_submission (test_refund_submission_boundary.RefundSubmissionBoundaryTest.test_eligible_seven_day_return_stops_before_submission) ... ok
+test_missing_payment_stops_refund_workflow (test_refund_submission_boundary.RefundSubmissionBoundaryTest.test_missing_payment_stops_refund_workflow) ... ok
+test_no_reason_return_prepares_without_inventing_quality_facts (test_refund_submission_boundary.RefundSubmissionBoundaryTest.test_no_reason_return_prepares_without_inventing_quality_facts) ... ok
+test_progress_reads_existing_business_status (test_refund_submission_boundary.RefundSubmissionBoundaryTest.test_progress_reads_existing_business_status) ... ok
+test_return_progress_reads_each_real_stage_without_new_workflow (test_refund_submission_boundary.RefundSubmissionBoundaryTest.test_return_progress_reads_each_real_stage_without_new_workflow) ... ok
+test_workbench_approval_is_independent_simulation (test_refund_submission_boundary.RefundSubmissionBoundaryTest.test_workbench_approval_is_independent_simulation) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 0.467s
+
+OK

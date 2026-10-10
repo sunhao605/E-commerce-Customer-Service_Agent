@@ -1,0 +1,29 @@
+{
+  "java_classes_checked": 153,
+  "java_domains": [
+    "account",
+    "aftersale",
+    "catalog",
+    "common",
+    "config",
+    "customer_service",
+    "order"
+  ],
+  "java_cleanup_checked": [
+    "seedExistingProductPromotions 转发层",
+    "未使用的 saveProductIfMissing",
+    "未使用的五参数 savePromotionIfMissing"
+  ],
+  "frontend_source_groups": [
+    "admin",
+    "shared",
+    "shop"
+  ],
+  "frontend_entries": [
+    "index.html",
+    "admin/index.html"
+  ],
+  "shared_type_definitions": "unique",
+  "layout_checks": "passed",
+  "model_calls": 0
+}

@@ -1,0 +1,951 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="blueprint" data-mode="auto">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="Answer me with HTML 0.4.2">
+<title>七天无理由退货退款：产品设计与问题复盘</title>
+<style>
+html[data-theme="blueprint"], html[data-theme="blueprint"][data-mode="light"] {
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "JetBrains Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  --radius: 0px;
+  --shadow: none;
+  --bw: 1.5px;
+  --head-font: var(--font-sans);
+  --bg: #f6f6f3;
+  --paper: #ffffff;
+  --ink: #16181d;
+  --ink-2: #4b5260;
+  --ink-3: #8b929e;
+  --line: #1d2026;
+  --line-2: #d6dae1;
+  --fill: #f3f5f8;
+  --accent: #1d5fbf;
+  --accent-bg: #e4ecf8;
+  --ok: #1d5fbf;
+  --ok-bg: #e4ecf8;
+  --err: #c62828;
+  --err-bg: #fbeaea;
+  --warn: #a8620a;
+  --warn-bg: #fdf3e2;
+  --head-bg: #16181d;
+  --head-fg: #ffffff;
+}
+html[data-theme="blueprint"][data-mode="dark"] {
+  --bg: #081322;
+  --paper: #0d1c31;
+  --ink: #e6edf7;
+  --ink-2: #a9b8cc;
+  --ink-3: #6b7f99;
+  --line: #c9d6e8;
+  --line-2: #23385a;
+  --fill: #12253f;
+  --accent: #6ea8ff;
+  --accent-bg: #16305a;
+  --ok: #6ea8ff;
+  --ok-bg: #16305a;
+  --err: #ff7070;
+  --err-bg: #3b1620;
+  --warn: #f0b14a;
+  --warn-bg: #3a2a10;
+  --head-bg: #e6edf7;
+  --head-fg: #081322;
+}
+@media (prefers-color-scheme: dark) {
+html[data-theme="blueprint"][data-mode="auto"] {
+  --bg: #081322;
+  --paper: #0d1c31;
+  --ink: #e6edf7;
+  --ink-2: #a9b8cc;
+  --ink-3: #6b7f99;
+  --line: #c9d6e8;
+  --line-2: #23385a;
+  --fill: #12253f;
+  --accent: #6ea8ff;
+  --accent-bg: #16305a;
+  --ok: #6ea8ff;
+  --ok-bg: #16305a;
+  --err: #ff7070;
+  --err-bg: #3b1620;
+  --warn: #f0b14a;
+  --warn-bg: #3a2a10;
+  --head-bg: #e6edf7;
+  --head-fg: #081322;
+}
+}
+
+html[data-theme="shadcn"], html[data-theme="shadcn"][data-mode="light"] {
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "JetBrains Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  --radius: 8px;
+  --shadow: 0 1px 2px 0 rgba(0,0,0,0.05);
+  --bw: 1px;
+  --head-font: var(--font-sans);
+  --bg: #fafafa;
+  --paper: #ffffff;
+  --ink: #09090b;
+  --ink-2: #71717a;
+  --ink-3: #a1a1aa;
+  --line: #e4e4e7;
+  --line-2: #f0f0f2;
+  --fill: #f4f4f5;
+  --accent: #2563eb;
+  --accent-bg: #eff6ff;
+  --ok: #16a34a;
+  --ok-bg: #f0fdf4;
+  --err: #dc2626;
+  --err-bg: #fef2f2;
+  --warn: #d97706;
+  --warn-bg: #fffbeb;
+  --head-bg: #18181b;
+  --head-fg: #fafafa;
+}
+html[data-theme="shadcn"][data-mode="dark"] {
+  --bg: #09090b;
+  --paper: #121215;
+  --ink: #fafafa;
+  --ink-2: #a1a1aa;
+  --ink-3: #71717a;
+  --line: #27272a;
+  --line-2: #1c1c1f;
+  --fill: #18181b;
+  --accent: #60a5fa;
+  --accent-bg: #172554;
+  --ok: #4ade80;
+  --ok-bg: #052e16;
+  --err: #f87171;
+  --err-bg: #450a0a;
+  --warn: #fbbf24;
+  --warn-bg: #451a03;
+  --head-bg: #fafafa;
+  --head-fg: #18181b;
+}
+@media (prefers-color-scheme: dark) {
+html[data-theme="shadcn"][data-mode="auto"] {
+  --bg: #09090b;
+  --paper: #121215;
+  --ink: #fafafa;
+  --ink-2: #a1a1aa;
+  --ink-3: #71717a;
+  --line: #27272a;
+  --line-2: #1c1c1f;
+  --fill: #18181b;
+  --accent: #60a5fa;
+  --accent-bg: #172554;
+  --ok: #4ade80;
+  --ok-bg: #052e16;
+  --err: #f87171;
+  --err-bg: #450a0a;
+  --warn: #fbbf24;
+  --warn-bg: #451a03;
+  --head-bg: #fafafa;
+  --head-fg: #18181b;
+}
+}
+
+/* Answer me with HTML base — 只引用主题变量，禁止写死颜色（主题 token 见 themes/index.js） */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: var(--font-sans); font-size: 14px; line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+code, pre, kbd { font-family: var(--font-mono); }
+
+/* ── 工具栏 ─────────────────────────────── */
+.am-toolbar {
+  position: fixed; top: 12px; right: 12px; z-index: 10; display: flex; gap: 6px;
+}
+.am-btn {
+  font: 12px/1 var(--font-sans); color: var(--ink); background: var(--paper);
+  border: 1px solid var(--line-2); border-radius: var(--radius); padding: 7px 10px; cursor: pointer;
+}
+.am-btn:hover { border-color: var(--ink-3); }
+.am-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* ── 页头 ───────────────────────────────── */
+.am-head { margin: 0 0 20px; padding-right: 260px; }
+.am-head h1 { margin: 0; font-size: 24px; line-height: 1.25; letter-spacing: -0.01em; }
+.am-sub { margin: 4px 0 0; color: var(--ink-2); }
+.am-head-meta { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 10px; font-size: 12px; color: var(--ink-2); }
+.am-head-meta b { font-family: var(--font-mono); font-weight: 400; color: var(--ink-3); margin-right: 6px; }
+.am-intro { margin-top: 12px; max-width: 80ch; }
+
+/* ── sheet 图纸板 ────────────────────────── */
+.am-sheet { max-width: 1680px; margin: 0 auto; padding: 32px 28px 40px; }
+.am-frame { position: relative; }
+.am-grid {
+  display: grid; grid-template-columns: repeat(var(--cols, 3), minmax(0, 1fr));
+  gap: 20px; align-items: start;
+}
+.am-ruler { display: none; }
+html[data-theme="blueprint"] .am-frame { border: 1px solid var(--line); padding: 30px; }
+html[data-theme="blueprint"] .am-frame::before {
+  content: ""; position: absolute; inset: 18px; border: 1px solid var(--line); pointer-events: none;
+}
+html[data-theme="blueprint"] .am-ruler {
+  display: flex; position: absolute; font: 10px/1 var(--font-mono); color: var(--ink-3);
+}
+.am-ruler span { flex: 1; display: flex; align-items: center; justify-content: center; }
+.am-ruler--top, .am-ruler--bottom { left: 18px; right: 18px; height: 18px; }
+.am-ruler--top { top: 0; }
+.am-ruler--bottom { bottom: 0; }
+.am-ruler--left, .am-ruler--right { top: 18px; bottom: 18px; width: 18px; flex-direction: column; }
+.am-ruler--left { left: 0; }
+.am-ruler--right { right: 0; }
+.am-ruler--top span + span, .am-ruler--bottom span + span { border-left: 1px solid var(--line); }
+.am-ruler--left span + span, .am-ruler--right span + span { border-top: 1px solid var(--line); }
+
+/* ── 面板 ───────────────────────────────── */
+.am-panel {
+  background: var(--paper); border: var(--bw) solid var(--line); border-radius: var(--radius);
+  box-shadow: var(--shadow); min-width: 0; overflow: hidden;
+}
+.am-panel-head {
+  display: flex; align-items: stretch; gap: 0; border-bottom: var(--bw) solid var(--line); min-height: 34px;
+}
+.am-panel-id {
+  display: flex; align-items: center; justify-content: center; min-width: 34px; padding: 0 8px;
+  background: var(--head-bg); color: var(--head-fg); font-weight: 600; font-size: 14px;
+}
+html[data-theme="shadcn"] .am-panel-id { border-radius: 6px; min-width: 24px; height: 24px; margin: 9px 0 9px 14px; font-size: 12px; }
+html[data-theme="shadcn"] .am-panel-head { border-bottom-width: 1px; }
+.am-panel-head h2 { margin: 0; padding: 7px 12px; font-size: 15px; font-weight: 600; flex: 1; display: flex; align-items: center; }
+.am-panel-meta { align-self: center; padding: 0 12px; font: 11px/1.3 var(--font-mono); color: var(--ink-2); text-align: right; }
+.am-panel-body { padding: 14px 16px 16px; }
+.am-panel-body > * + * { margin-top: 12px; }
+
+/* ── Markdown 正文 ───────────────────────── */
+.am-md > :first-child { margin-top: 0; }
+.am-md > :last-child { margin-bottom: 0; }
+.am-md p { margin: 0 0 8px; }
+.am-md ul, .am-md ol { margin: 0 0 8px; padding-left: 20px; }
+.am-md li + li { margin-top: 3px; }
+.am-md h3, .am-md h4 { margin: 14px 0 6px; font-size: 13px; }
+.am-md a { color: var(--accent); }
+.am-md blockquote { margin: 0 0 8px; padding: 2px 12px; border-left: 3px solid var(--line-2); color: var(--ink-2); }
+.am-md :not(pre) > code { font-size: 0.9em; background: var(--fill); padding: 1px 5px; border-radius: 4px; }
+.am-md hr { border: 0; border-top: 1px solid var(--line-2); margin: 12px 0; }
+.am-md table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.am-md th {
+  text-align: left; font: 11px/1.3 var(--font-mono); color: var(--ink-2); font-weight: 400;
+  padding: 6px 10px; border-bottom: 1px solid var(--line-2);
+}
+.am-md td { padding: 7px 10px; border-bottom: 1px solid var(--line-2); vertical-align: top; }
+.am-md tbody tr:nth-child(even) td { background: var(--fill); }
+.am-table-wrap { overflow-x: auto; }
+.am-code {
+  margin: 0; padding: 12px 14px; background: var(--fill); border: 1px solid var(--line-2);
+  border-radius: var(--radius); overflow-x: auto; font-size: 12.5px; line-height: 1.5;
+}
+
+/* ── 状态徽章 ok / no / warn ──────────────── */
+.am-status { white-space: nowrap; font-weight: 500; }
+.am-status--ok { color: var(--ok); }
+.am-status--no { color: var(--err); }
+.am-status--warn { color: var(--warn); }
+.am-status-icon { display: inline-block; width: 1.1em; font-weight: 700; }
+
+/* ── callout ─────────────────────────────── */
+.am-callout {
+  border: 1px solid var(--line-2); border-left: 3px solid var(--accent); background: var(--accent-bg);
+  padding: 10px 14px; border-radius: var(--radius);
+}
+.am-callout--ok { border-left-color: var(--ok); background: var(--ok-bg); }
+.am-callout--warn { border-left-color: var(--warn); background: var(--warn-bg); }
+.am-callout--err { border-left-color: var(--err); background: var(--err-bg); }
+.am-callout-title { font-weight: 600; margin-bottom: 4px; }
+
+/* ── kv 标题栏格 ─────────────────────────── */
+.am-kv {
+  display: grid; grid-template-columns: repeat(var(--kv-cols, 2), minmax(0, 1fr)); margin: 0;
+  border-top: var(--bw) solid var(--line); border-left: var(--bw) solid var(--line);
+}
+.am-kv-cell { border-right: var(--bw) solid var(--line); border-bottom: var(--bw) solid var(--line); padding: 6px 10px 8px; min-width: 0; }
+.am-kv-cell--wide { grid-column: 1 / -1; }
+.am-kv dt { font: 11px/1.4 var(--font-mono); color: var(--ink-2); }
+.am-kv dd { margin: 2px 0 0; font-size: 14px; font-weight: 500; overflow-wrap: anywhere; }
+.am-kv-cell--wide dd { font-size: 17px; font-weight: 600; }
+html[data-theme="shadcn"] .am-kv { border-color: var(--line); border-radius: var(--radius); overflow: hidden; }
+
+/* ── timeline ────────────────────────────── */
+.am-timeline { list-style: none; margin: 0; padding: 0; }
+.am-timeline--h { display: grid; grid-template-columns: repeat(var(--n, 1), minmax(0, 1fr)); padding-top: 4px; }
+.am-timeline--h li { position: relative; text-align: center; padding: 0 6px; }
+.am-timeline--h li::before {
+  content: ""; position: absolute; top: 31px; left: 0; right: 0; border-top: var(--bw) solid var(--line);
+}
+.am-timeline--h li:first-child::before { left: 50%; }
+.am-timeline--h li:last-child::before { right: 50%; }
+.am-tl-when { display: block; font-size: 15px; font-weight: 500; height: 24px; }
+.am-tl-dot {
+  position: relative; display: block; width: 11px; height: 11px; margin: 2px auto 8px;
+  border: var(--bw) solid var(--line); border-radius: 50%; background: var(--paper);
+}
+.am-tl-item--hi .am-tl-dot { background: var(--accent); border-color: var(--accent); }
+.am-tl-title { display: block; font-size: 12.5px; font-weight: 500; }
+.am-tl-text { display: block; font-size: 12px; color: var(--ink-2); line-height: 1.45; }
+.am-timeline--v li { position: relative; padding: 0 0 14px 22px; }
+.am-timeline--v li::before { content: ""; position: absolute; left: 5px; top: 6px; bottom: -6px; border-left: var(--bw) solid var(--line-2); }
+.am-timeline--v li:last-child::before { display: none; }
+.am-timeline--v .am-tl-dot { position: absolute; left: 0; top: 4px; margin: 0; }
+.am-timeline--v .am-tl-when { display: inline; height: auto; font: 12px var(--font-mono); color: var(--ink-2); margin-right: 8px; }
+.am-timeline--v .am-tl-title { display: inline; font-size: 14px; }
+.am-timeline--v .am-tl-text { margin-top: 2px; }
+
+/* ── annot 句子标注 ──────────────────────── */
+.am-annot + .am-annot { border-top: 1px solid var(--line-2); padding-top: 12px; }
+.am-annot-head { display: flex; justify-content: space-between; gap: 12px; font-size: 13px; font-weight: 600; margin-bottom: 8px; }
+.am-annot-meta { font: 11px var(--font-mono); font-weight: 400; color: var(--ink-2); }
+.am-annot-scroll { overflow-x: auto; }
+.am-annot-line {
+  position: relative; display: inline-block; white-space: pre; font: 14px/1.6 var(--font-mono);
+  padding-bottom: calc(var(--rows, 0) * 17px + 14px);
+}
+.am-annot-line--wrap { display: block; white-space: normal; padding-bottom: 10px; }
+.am-annot-line--wrap .am-seg { white-space: nowrap; }
+.am-seg { position: relative; }
+.am-seg::after {
+  content: ""; position: absolute; left: 1px; right: 1px; top: calc(100% + 1px); height: 5px;
+  border: 1px solid var(--accent); border-top: 0;
+}
+.am-seg-n {
+  position: absolute; left: 0; top: calc(100% + 8px + var(--row, 0) * 17px);
+  font: 11px/16px var(--font-sans); color: var(--accent); white-space: nowrap;
+}
+.am-seg--err { color: var(--err); }
+.am-seg--err::after { border-color: var(--err); }
+.am-seg--err .am-seg-n { color: var(--err); }
+.am-annot-caption { font-size: 12px; color: var(--ink-2); }
+
+/* ── limits 限值条 ───────────────────────── */
+.am-lim + .am-lim { margin-top: 14px; }
+.am-lim-head { display: flex; justify-content: space-between; gap: 12px; font-size: 13px; margin-bottom: 4px; }
+.am-lim-val { font: 12px var(--font-mono); color: var(--accent); white-space: nowrap; }
+.am-lim-track { position: relative; height: 12px; border: 1px solid var(--line-2); background: var(--fill); border-radius: calc(var(--radius) / 2); }
+.am-lim-fill { position: absolute; left: 0; top: 0; bottom: 0; background: var(--accent-bg); border-right: 1px solid var(--accent); }
+.am-lim-mark { position: absolute; top: -4px; bottom: -4px; border-left: 2px solid var(--accent); }
+.am-lim.is-over .am-lim-fill { background: var(--err-bg); border-right-color: var(--err); }
+.am-lim.is-over .am-lim-val { color: var(--err); }
+.am-lim-ticks { position: relative; height: 16px; font: 10px/16px var(--font-mono); color: var(--ink-3); }
+.am-lim-ticks span { position: absolute; transform: translateX(-50%); }
+.am-lim-ticks span:first-child { transform: none; }
+.am-lim-note { font-size: 11px; color: var(--ink-2); margin-left: 6px; }
+
+/* ── tree 结构树 ─────────────────────────── */
+.am-tree { font-size: 13px; }
+.am-tree-root { display: flex; justify-content: center; position: relative; padding-bottom: 18px; }
+.am-tree-root::after { content: ""; position: absolute; bottom: 0; left: 50%; height: 18px; border-left: var(--bw) solid var(--line); }
+.am-tree-root--solo { padding-bottom: 12px; }
+.am-tree-root--solo::after { display: none; }
+.am-tree-box {
+  border: var(--bw) solid var(--line); background: var(--paper); padding: 6px 14px; text-align: center;
+  border-radius: var(--radius); font-weight: 600;
+}
+.am-tree-box small { display: block; font-weight: 400; color: var(--ink-2); font-size: 12px; }
+.am-tree-box--root { background: var(--accent-bg); font-size: 15px; padding: 8px 28px; }
+.am-tree-cols { display: grid; grid-template-columns: repeat(var(--n, 1), minmax(0, 1fr)); }
+.am-tree-col { position: relative; padding: 18px 8px 0; min-width: 0; }
+.am-tree-col::before { content: ""; position: absolute; top: 0; left: 0; right: 0; border-top: var(--bw) solid var(--line); }
+.am-tree-col:first-child::before { left: 50%; }
+.am-tree-col:last-child::before { right: 50%; }
+.am-tree-col::after { content: ""; position: absolute; top: 0; left: 50%; height: 18px; border-left: var(--bw) solid var(--line); }
+.am-tree-list, .am-tree-list ul { list-style: none; margin: 0; padding: 0; }
+.am-tree-col > .am-tree-list { margin: 8px 0 0 14px; }
+.am-tree-list ul { margin-left: 16px; }
+.am-tree-list li { position: relative; padding: 3px 0 3px 18px; }
+.am-tree-list li::before { content: ""; position: absolute; left: 0; top: 0.95em; width: 12px; border-top: 1px solid var(--ink-3); }
+.am-tree-list li::after { content: ""; position: absolute; left: 0; top: 0; bottom: 0; border-left: 1px solid var(--ink-3); }
+.am-tree-list li:last-child::after { bottom: auto; height: 0.95em; }
+.am-tree-tag { font: 11px var(--font-mono); color: var(--ink-3); margin-right: 4px; }
+.am-tree code { font: 12px var(--font-mono); }
+.am-tree-sub { display: block; font-size: 11.5px; color: var(--ink-2); }
+.am-tree-hi > .am-tree-label { color: var(--accent); font-weight: 600; }
+
+/* ── 图（flow / sequence）───────────────── */
+.am-diagram { margin: 0; overflow-x: auto; text-align: center; }
+.am-diagram svg { max-width: 100%; height: auto; font-family: var(--font-sans); }
+.am-diagram text { fill: var(--ink); font-size: 13px; }
+.am-node-shape { fill: var(--paper); stroke: var(--line); stroke-width: var(--bw); }
+.am-node--hi .am-node-shape { fill: var(--accent-bg); stroke: var(--accent); }
+.am-node--hi text { fill: var(--accent); font-weight: 600; }
+.am-edge { fill: none; stroke: var(--ink-2); stroke-width: 1.3; }
+.am-edge--dashed { stroke-dasharray: 5 4; }
+.am-arrow { fill: var(--ink-2); }
+.am-edge-label rect { fill: var(--paper); }
+.am-diagram .am-edge-label text { fill: var(--accent); font-size: 11.5px; }
+.am-cluster { fill: var(--fill); stroke: var(--line-2); stroke-width: 1; stroke-dasharray: 4 3; }
+.am-diagram .am-cluster-label { fill: var(--ink-2); font: 11px var(--font-mono); }
+.am-lifeline { stroke: var(--ink-3); stroke-width: 1; stroke-dasharray: 4 4; }
+.am-actor { fill: var(--paper); stroke: var(--line); stroke-width: var(--bw); }
+.am-note { fill: var(--warn-bg); stroke: var(--warn); stroke-width: 1; }
+.am-diagram .am-step { fill: var(--ink-3); font: 10px var(--font-mono); }
+
+/* ── doc 线性讲解 ────────────────────────── */
+.am-doc { max-width: 1120px; margin: 0 auto; padding: 40px 28px 64px; }
+.am-doc-layout { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 32px; align-items: start; }
+.am-doc-layout--notoc { grid-template-columns: minmax(0, 1fr); max-width: 860px; }
+.am-toc { position: sticky; top: 24px; font-size: 13px; }
+.am-toc a { display: block; color: var(--ink-2); text-decoration: none; padding: 4px 0 4px 10px; border-left: 2px solid var(--line-2); }
+.am-toc a:hover { color: var(--ink); border-left-color: var(--accent); }
+.am-doc-body > .am-panel + .am-panel { margin-top: 20px; }
+
+/* ── 响应式与打印 ─────────────────────────── */
+@media (max-width: 1100px) {
+  .am-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .am-grid > .am-panel { grid-column: auto !important; }
+  .am-grid > .am-panel.am-span-wide { grid-column: 1 / -1 !important; }
+}
+@media (max-width: 760px) {
+  .am-sheet, .am-doc { padding: 56px 12px 24px; }
+  .am-head { padding-right: 0; }
+  .am-grid { grid-template-columns: minmax(0, 1fr); }
+  .am-grid > .am-panel.am-span-wide { grid-column: auto !important; }
+  html[data-theme="blueprint"] .am-frame { padding: 0; border: 0; }
+  html[data-theme="blueprint"] .am-frame::before, html[data-theme="blueprint"] .am-ruler { display: none; }
+  .am-doc-layout { grid-template-columns: minmax(0, 1fr); }
+  .am-toc { position: static; }
+  .am-timeline--h { grid-template-columns: minmax(0, 1fr); }
+  .am-tree-cols { grid-template-columns: minmax(0, 1fr); }
+}
+.am-colophon { text-align: center; padding: 0 0 28px; font: 11px var(--font-mono); color: var(--ink-3); }
+
+@media print {
+  .am-toolbar { display: none; }
+  body { background: var(--paper); }
+  .am-panel { break-inside: avoid; box-shadow: none; }
+}
+.am-panel--bare { border: 0; background: transparent; box-shadow: none; }
+.am-panel--bare > .am-panel-body { padding: 0; }
+.am-panel--bare .am-kv { background: var(--paper); }
+
+</style>
+</head>
+<body>
+<div class="am-toolbar">
+<button class="am-btn" type="button" data-am="theme" data-labels="{&quot;blueprint&quot;:&quot;主题：图纸&quot;,&quot;shadcn&quot;:&quot;主题：卡片&quot;}">主题：图纸</button>
+<button class="am-btn" type="button" data-am="mode" data-labels="{&quot;auto&quot;:&quot;明暗：跟随系统&quot;,&quot;light&quot;:&quot;明暗：亮&quot;,&quot;dark&quot;:&quot;明暗：暗&quot;}">明暗：跟随系统</button>
+<button class="am-btn" type="button" data-am="copy" data-done="已复制 ✓">复制源稿</button>
+</div>
+<main class="am-doc">
+<header class="am-head"><h1>七天无理由退货退款：产品设计与问题复盘</h1><p class="am-sub">从角色分工、状态规则到并发验收｜2026-10-09</p><div class="am-head-meta"><span><b>source</b>本项目代码、产品计划与隔离验收记录</span></div><div class="am-intro am-md"><div class="am-md"><p>本次把已签收退货拆成独立的申请、初审和验收退款。我们沿用原商城与后台能力，补齐执行边界和验收。</p>
+</div></div></header>
+<div class="am-doc-layout">
+<nav class="am-toc" aria-label="目录"><a href="#panel-A">A · 为什么要拆开三种决定</a><a href="#panel-B">B · 流程怎样贴近现实</a><a href="#panel-C">C · 资格规则：减少误判，也保留恢复路径</a><a href="#panel-D">D · 并发旧状态：背景与原因</a><a href="#panel-E">E · 产品规则如何落到工程修复</a><a href="#panel-F">F · 修改时还遇到了哪些问题</a><a href="#panel-G">G · 结果怎样，证据能说明到哪一步</a><a href="#panel-H">H · 可复用的产品设计方法</a></nav><div class="am-doc-body">
+<section class="am-panel" id="panel-A">
+<header class="am-panel-head"><span class="am-panel-id">A</span><h2>为什么要拆开三种决定</h2></header>
+<div class="am-panel-body"><div class="am-callout am-callout--info" role="note"><div class="am-callout-title">核心判断</div><div class="am-callout-body am-md"><p>客户确认只表达申请意愿。后台初审只同意买家寄回商品。后台确认收货且验收通过后，系统才退款。</p>
+</div></div>
+<div class="am-md"><p>此前已有未发货退款与独立后台审核。接手时，退货接口和页面已部分接通。本次扩展这些能力，并修复未通过的检查。</p>
+<div class="am-table-wrap"><table>
+<thead>
+<tr>
+<th>参与者</th>
+<th>本次职责</th>
+<th>权限边界</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>客户</td>
+<td>核对订单与金额、确认申请、填写退回物流</td>
+<td>只能处理本人订单，不能审批</td>
+</tr>
+<tr>
+<td>客服 Agent</td>
+<td>查询事实、准备确认卡、说明进度</td>
+<td>不能批准退款，也不能判断实物完好</td>
+</tr>
+<tr>
+<td>后台审核员</td>
+<td>同意或驳回退货、确认收货验收</td>
+<td>身份来自管理员登录，初审不能退钱</td>
+</tr>
+<tr>
+<td>业务服务</td>
+<td>核验资格、保存状态、执行退款</td>
+<td>以支付流水和业务记录为依据</td>
+</tr>
+</tbody></table></div>
+<p>客户和审核员属于两种权限角色。这里复用同一个客服 Agent 和独立后台服务。</p>
+</div></div>
+</section>
+<section class="am-panel" id="panel-B">
+<header class="am-panel-head"><span class="am-panel-id">B</span><h2>流程怎样贴近现实</h2></header>
+<div class="am-panel-body"><figure class="am-diagram am-flow"><svg viewBox="0 0 311 459" width="311" height="459" role="img" aria-label="流程图：待审核、待买家寄回、已驳回、待商家验收、已退款、验收未通过" xmlns="http://www.w3.org/2000/svg"><defs><marker id="am1-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="am-arrow" d="M0,0 L10,5 L0,10 z"/></marker></defs><g></g><g><g data-step="0"><path class="am-edge" d="M134.5,49 L153.6,65 Q172.8,81 172.8,97 L172.8,113" marker-end="url(#am1-arrow)"/><g class="am-edge-label"><rect x="116" y="72" width="113.5" height="18" rx="3"/><text x="172.8" y="81" text-anchor="middle" dominant-baseline="central">后台同意，填写地址</text></g></g><g data-step="1"><path class="am-edge" d="M92.7,49 L73.6,65 Q54.5,81 54.5,97 L54.5,113" marker-end="url(#am1-arrow)"/><g class="am-edge-label"><rect x="15" y="72" width="79" height="18" rx="3"/><text x="54.5" y="81" text-anchor="middle" dominant-baseline="central">后台说明原因</text></g></g><g data-step="2"><path class="am-edge" d="M172.8,148 L172.8,164 Q172.8,180 172.8,196 L172.8,212" marker-end="url(#am1-arrow)"/><g class="am-edge-label"><rect x="121.8" y="171" width="102" height="18" rx="3"/><text x="172.8" y="180" text-anchor="middle" dominant-baseline="central">本人填写退回物流</text></g></g><g data-step="3"><path class="am-edge" d="M196.1,247 L217.5,263 Q238.9,279 238.9,303.8 Q238.9,328.5 238.9,353.3 Q238.9,378 217.5,394 L196.1,410" marker-end="url(#am1-arrow)"/><g class="am-edge-label"><rect x="182.1" y="319.5" width="113.5" height="18" rx="3"/><text x="238.9" y="328.5" text-anchor="middle" dominant-baseline="central">确认收货且验收通过</text></g></g><g data-step="4"><path class="am-edge" d="M149.4,247 L128,263 Q106.6,279 106.6,295 L106.6,311" marker-end="url(#am1-arrow)"/><g class="am-edge-label"><rect x="49.9" y="270" width="113.5" height="18" rx="3"/><text x="106.6" y="279" text-anchor="middle" dominant-baseline="central">记录原因，暂不退款</text></g></g><g data-step="5"><path class="am-edge" d="M106.6,346 L106.6,362 Q106.6,378 128,394 L149.4,410" marker-end="url(#am1-arrow)"/><g class="am-edge-label"><rect x="49.9" y="369" width="113.5" height="18" rx="3"/><text x="106.6" y="378" text-anchor="middle" dominant-baseline="central">人工核验后确认通过</text></g></g></g><g><g class="am-node am-node--rect" data-key="待审核" data-step="0"><rect class="am-node-shape" x="80.1" y="14" width="67" height="35" rx="3"/><text x="113.6" y="31.5" text-anchor="middle" dominant-baseline="central">待审核</text></g><g class="am-node am-node--rect" data-key="待买家寄回" data-step="0"><rect class="am-node-shape" x="126.3" y="113" width="93" height="35" rx="3"/><text x="172.8" y="130.5" text-anchor="middle" dominant-baseline="central">待买家寄回</text></g><g class="am-node am-node--rect" data-key="已驳回" data-step="1"><rect class="am-node-shape" x="21" y="113" width="67" height="35" rx="3"/><text x="54.5" y="130.5" text-anchor="middle" dominant-baseline="central">已驳回</text></g><g class="am-node am-node--rect" data-key="待商家验收" data-step="2"><rect class="am-node-shape" x="126.3" y="212" width="93" height="35" rx="3"/><text x="172.8" y="229.5" text-anchor="middle" dominant-baseline="central">待商家验收</text></g><g class="am-node am-node--rect am-node--hi" data-key="已退款" data-step="3"><rect class="am-node-shape" x="139.3" y="410" width="67" height="35" rx="3"/><text x="172.8" y="427.5" text-anchor="middle" dominant-baseline="central">已退款</text></g><g class="am-node am-node--rect" data-key="验收未通过" data-step="4"><rect class="am-node-shape" x="60.1" y="311" width="93" height="35" rx="3"/><text x="106.6" y="328.5" text-anchor="middle" dominant-baseline="central">验收未通过</text></g></g></svg></figure>
+<div class="am-md"><div class="am-table-wrap"><table>
+<thead>
+<tr>
+<th>状态</th>
+<th>可执行动作</th>
+<th>资金变化</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>PENDING_REVIEW／待审核</td>
+<td>同意并填写地址，或说明原因驳回</td>
+<td>余额不变</td>
+</tr>
+<tr>
+<td>WAITING_RETURN／待买家寄回</td>
+<td>本人填写快递公司与单号</td>
+<td>余额不变</td>
+</tr>
+<tr>
+<td>RETURN_IN_TRANSIT／待商家验收</td>
+<td>人工确认验收通过，或记录异常</td>
+<td>通过后一次退款</td>
+</tr>
+<tr>
+<td>RETURN_INSPECTION_FAILED／验收未通过</td>
+<td>展示原因，等待人工核验</td>
+<td>核验通过前不退款</td>
+</tr>
+<tr>
+<td>REFUNDED／已退款</td>
+<td>查看结果与处理记录</td>
+<td>禁止再次入账</td>
+</tr>
+<tr>
+<td>REJECTED／已驳回</td>
+<td>查看驳回原因</td>
+<td>余额不变</td>
+</tr>
+</tbody></table></div>
+<p>买家提供单号后，系统仍等待商家收货验收。退款完成时，订单和支付显示已退款。履约显示已退回，并保留原发货与物流历史。</p>
+<p>首版由审核员兼管收货验收。勾选收货是人工声明，尚未接入仓库或物流证明。</p>
+<p>依据：<a href="%E4%B8%83%E5%A4%A9%E6%97%A0%E7%90%86%E7%94%B1%E9%80%80%E8%B4%A7%E9%80%80%E6%AC%BE%E4%BA%A7%E5%93%81%E8%AE%BE%E8%AE%A1%E8%AE%A1%E5%88%92.md">产品计划</a>。</p>
+</div></div>
+</section>
+<section class="am-panel" id="panel-C">
+<header class="am-panel-head"><span class="am-panel-id">C</span><h2>资格规则：减少误判，也保留恢复路径</h2></header>
+<div class="am-panel-body"><div class="am-md"><div class="am-table-wrap"><table>
+<thead>
+<tr>
+<th>设计决定</th>
+<th>解决的问题</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>自动受理本人已支付、已签收的整单申请</td>
+<td>运输中转人工处理拦截，避免提前退款</td>
+</tr>
+<tr>
+<td>上海日期下，签收次日起算七天</td>
+<td>统一日期口径；签收当日也可申请</td>
+</tr>
+<tr>
+<td>按首次有效提交判断期限</td>
+<td>买家不因后台审核延迟失去本流程资格</td>
+</tr>
+<tr>
+<td>检查真实支付流水，冻结整单实付金额</td>
+<td>客户或模型不能编金额，审核员不能改成部分退款</td>
+</tr>
+<tr>
+<td>使用购买时的可退属性</td>
+<td>商品现在改了政策，也不能覆盖购买时的事实</td>
+</tr>
+<tr>
+<td>无理由作为申请类型，无需另编原因</td>
+<td>减少无用追问；质量问题等其他售后保留原义</td>
+</tr>
+<tr>
+<td>缺事实、过期或不支持时转人工核验</td>
+<td>明确本流程的边界，保留其他售后处理机会</td>
+</tr>
+</tbody></table></div>
+<p>**项目规则示例：**10月1日签收，10月8日结束前提交有效。10月10日才审核，原有效申请仍可继续。</p>
+<p>后台初审读取提交时的资格记录。最终退款还会核对支付、当前状态和冻结金额。</p>
+</div></div>
+</section>
+<section class="am-panel" id="panel-D">
+<header class="am-panel-head"><span class="am-panel-id">D</span><h2>并发旧状态：背景与原因</h2></header>
+<div class="am-panel-body"><div class="am-md"><p>页面重复点击、网络重试或多人审核，可能产生重叠请求。隔离测试让两个请求同时确认验收退款。</p>
+<p>旧实现先普通查询售后实体，再锁订单与售后行。ORM 会缓存本事务读过的 Java 对象。再次加锁查询时，可能复用这个旧对象。</p>
+<p>数据库行锁负责让写操作排队。<strong>拿到锁，不保证原对象已经刷新。</strong></p>
+</div>
+<figure class="am-diagram am-seq"><svg viewBox="0 0 505 478" width="505" height="478" role="img" aria-label="时序图：页面、请求A、请求B、数据库" xmlns="http://www.w3.org/2000/svg"><defs><marker id="am2-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="am-arrow" d="M0,0 L10,5 L0,10 z"/></marker></defs><line class="am-lifeline" x1="54" y1="42" x2="54" y2="474"/><g data-key="页面"><rect class="am-actor" x="12" y="8" width="84" height="34" rx="2"/><text x="54" y="25" text-anchor="middle" dominant-baseline="central" font-weight="600">页面</text></g><line class="am-lifeline" x1="174.8" y1="42" x2="174.8" y2="474"/><g data-key="请求A"><rect class="am-actor" x="132.8" y="8" width="84" height="34" rx="2"/><text x="174.8" y="25" text-anchor="middle" dominant-baseline="central" font-weight="600">请求A</text></g><line class="am-lifeline" x1="286.8" y1="42" x2="286.8" y2="474"/><g data-key="请求B"><rect class="am-actor" x="244.8" y="8" width="84" height="34" rx="2"/><text x="286.8" y="25" text-anchor="middle" dominant-baseline="central" font-weight="600">请求B</text></g><line class="am-lifeline" x1="450.8" y1="42" x2="450.8" y2="474"/><g data-key="数据库"><rect class="am-actor" x="408.8" y="8" width="84" height="34" rx="2"/><text x="450.8" y="25" text-anchor="middle" dominant-baseline="central" font-weight="600">数据库</text></g><g data-step="0"><text x="114.4" y="70" text-anchor="middle">提交验收退款</text><path class="am-edge" d="M54,80 L172.8,80" marker-end="url(#am2-arrow)"/><text class="am-step" x="60" y="74" text-anchor="start">1</text></g><g data-step="1"><text x="170.4" y="110" text-anchor="middle">再次提交同一申请</text><path class="am-edge" d="M54,120 L284.8,120" marker-end="url(#am2-arrow)"/><text class="am-step" x="60" y="114" text-anchor="start">2</text></g><g data-step="2"><text x="312.8" y="150" text-anchor="middle">普通查询，读到待验收</text><path class="am-edge" d="M174.8,160 L448.8,160" marker-end="url(#am2-arrow)"/><text class="am-step" x="180.8" y="154" text-anchor="start">3</text></g><g data-step="3"><text x="368.8" y="190" text-anchor="middle">普通查询，读到待验收</text><path class="am-edge" d="M286.8,200 L448.8,200" marker-end="url(#am2-arrow)"/><text class="am-step" x="292.8" y="194" text-anchor="start">4</text></g><g data-step="4"><text x="312.8" y="230" text-anchor="middle">锁订单，完成退款并提交</text><path class="am-edge" d="M174.8,240 L448.8,240" marker-end="url(#am2-arrow)"/><text class="am-step" x="180.8" y="234" text-anchor="start">5</text></g><g data-step="5"><rect class="am-note" x="198.8" y="264" width="176" height="28" rx="2"/><text x="286.8" y="278" text-anchor="middle" dominant-baseline="central" font-size="12">等待订单锁，保留旧售后对象</text></g><g data-step="6"><text x="114.4" y="314" text-anchor="middle">200，退款成功</text><path class="am-edge am-edge--dashed" d="M174.8,324 L56,324" marker-end="url(#am2-arrow)"/><text class="am-step" x="168.8" y="318" text-anchor="end">6</text></g><g data-step="7"><text x="368.8" y="354" text-anchor="middle">拿到锁，订单已退款</text><path class="am-edge" d="M286.8,364 L448.8,364" marker-end="url(#am2-arrow)"/><text class="am-step" x="292.8" y="358" text-anchor="start">7</text></g><g data-step="8"><rect class="am-note" x="216.8" y="388" width="140" height="28" rx="2"/><text x="286.8" y="402" text-anchor="middle" dominant-baseline="central" font-size="12">售后对象却仍是待验收</text></g><g data-step="9"><text x="170.4" y="438" text-anchor="middle">400，误走资格错误分支</text><path class="am-edge am-edge--dashed" d="M286.8,448 L56,448" marker-end="url(#am2-arrow)"/><text class="am-step" x="280.8" y="442" text-anchor="end">8</text></g></svg></figure>
+<div class="am-md"><p>第二个请求看到的是一组矛盾事实：售后对象仍待验收，订单却已退款。它随后误走资格校验失败分支。</p>
+<p><strong>修复前观察：200／400，未观察到第二笔退款。</strong></p>
+<p>本次缺陷是重复处理的状态判断与返回结果错误。</p>
+<p>证据：<a href="../analysis/%E4%B8%83%E5%A4%A9%E9%80%80%E8%B4%A7%E9%AA%8C%E8%AF%81/previous-failed-check.log">原失败日志</a>、<a href="BadCase.md#bc-006%E5%B9%B6%E5%8F%91%E9%80%80%E8%B4%A7%E6%9C%80%E7%BB%88%E7%A1%AE%E8%AE%A4%E8%AF%BB%E5%88%B0%E6%97%A7%E5%94%AE%E5%90%8E%E7%8A%B6%E6%80%81">问题记录 BC-006</a>。</p>
+</div></div>
+</section>
+<section class="am-panel" id="panel-E">
+<header class="am-panel-head"><span class="am-panel-id">E</span><h2>产品规则如何落到工程修复</h2></header>
+<div class="am-panel-body"><div class="am-md"><p>先定义产品要保证的结果，再选择执行层措施。产品设计确定验收合同，工程实现负责兑现它。</p>
+<div class="am-table-wrap"><table>
+<thead>
+<tr>
+<th>产品必须保证什么</th>
+<th>执行层怎样保证</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>同一申请最多退款一次</td>
+<td>加锁后读取当前状态，再决定能否退款</td>
+</tr>
+<tr>
+<td>重复处理返回已处理结果</td>
+<td>已退款后返回409冲突，不误报资格不足</td>
+</tr>
+<tr>
+<td>不同订单退款到同一账户时，金额正确累加</td>
+<td>锁定余额行，基于最新余额计算</td>
+</tr>
+<tr>
+<td>钱、流水、售后与订单状态同时生效</td>
+<td>放进同一个事务，任何保存失败都回滚</td>
+</tr>
+<tr>
+<td>多条写入路径按一致顺序拿锁</td>
+<td>统一订单、售后、余额顺序，降低交叉等待风险</td>
+</tr>
+</tbody></table></div>
+</div>
+<figure class="am-diagram am-flow"><svg viewBox="0 0 350 525" width="350" height="525" role="img" aria-label="流程图：读取订单号与归属字段、锁订单、锁售后并读取当前状态、申请仍可退款吗、返回409已处理冲突、锁余额并执行退款、同一事务提交钱和状态" xmlns="http://www.w3.org/2000/svg"><defs><marker id="am3-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="am-arrow" d="M0,0 L10,5 L0,10 z"/></marker></defs><g></g><g><g data-step="0"><path class="am-edge" d="M179.2,49 L179.2,65 Q179.2,81 179.2,97 L179.2,113" marker-end="url(#am3-arrow)"/><g class="am-edge-label"><rect x="111" y="72" width="136.5" height="18" rx="3"/><text x="179.2" y="81" text-anchor="middle" dominant-baseline="central">不提前加载售后状态对象</text></g></g><g data-step="1"><path class="am-edge" d="M179.2,148 L179.2,159.5 Q179.2,171 179.2,182.5 L179.2,194" marker-end="url(#am3-arrow)"/></g><g data-step="2"><path class="am-edge" d="M179.2,229 L179.2,240.5 Q179.2,252 179.2,263.5 L179.2,275" marker-end="url(#am3-arrow)"/></g><g data-step="3"><path class="am-edge" d="M206.9,322.3 L236.2,342.7 Q265.4,363 265.4,379 L265.4,395" marker-end="url(#am3-arrow)"/><g class="am-edge-label"><rect x="237.4" y="354" width="56" height="18" rx="3"/><text x="265.4" y="363" text-anchor="middle" dominant-baseline="central">已经退款</text></g></g><g data-step="4"><path class="am-edge" d="M151.5,322.3 L122.2,342.7 Q93,363 93,379 L93,395" marker-end="url(#am3-arrow)"/><g class="am-edge-label"><rect x="36.3" y="354" width="113.5" height="18" rx="3"/><text x="93" y="363" text-anchor="middle" dominant-baseline="central">状态合法且事实通过</text></g></g><g data-step="5"><path class="am-edge" d="M93,430 L93,441.5 Q93,453 93,464.5 L93,476" marker-end="url(#am3-arrow)"/></g></g><g><g class="am-node am-node--rect" data-key="读取订单号与归属字段" data-step="0"><rect class="am-node-shape" x="100.2" y="14" width="158" height="35" rx="3"/><text x="179.2" y="31.5" text-anchor="middle" dominant-baseline="central">读取订单号与归属字段</text></g><g class="am-node am-node--rect" data-key="锁订单" data-step="0"><rect class="am-node-shape" x="145.7" y="113" width="67" height="35" rx="3"/><text x="179.2" y="130.5" text-anchor="middle" dominant-baseline="central">锁订单</text></g><g class="am-node am-node--rect" data-key="锁售后并读取当前状态" data-step="1"><rect class="am-node-shape" x="100.2" y="194" width="158" height="35" rx="3"/><text x="179.2" y="211.5" text-anchor="middle" dominant-baseline="central">锁售后并读取当前状态</text></g><g class="am-node am-node--diamond" data-key="申请仍可退款吗" data-step="2"><polygon class="am-node-shape" points="179.2,275 268.5,303 179.2,331 90,303"/><text x="179.2" y="303" text-anchor="middle" dominant-baseline="central">申请仍可退款吗</text></g><g class="am-node am-node--rect" data-key="返回409已处理冲突" data-step="3"><rect class="am-node-shape" x="195" y="395" width="140.8" height="35" rx="3"/><text x="265.4" y="412.5" text-anchor="middle" dominant-baseline="central">返回409已处理冲突</text></g><g class="am-node am-node--rect" data-key="锁余额并执行退款" data-step="4"><rect class="am-node-shape" x="27" y="395" width="132" height="35" rx="3"/><text x="93" y="412.5" text-anchor="middle" dominant-baseline="central">锁余额并执行退款</text></g><g class="am-node am-node--rect" data-key="同一事务提交钱和状态" data-step="5"><rect class="am-node-shape" x="14" y="476" width="158" height="35" rx="3"/><text x="93" y="493.5" text-anchor="middle" dominant-baseline="central">同一事务提交钱和状态</text></g></g></svg></figure>
+<div class="am-md"><p>先查归属字段，服务就能找到要锁的订单。此时不把售后状态读入对象缓存。随后锁定并读取售后实体，按当前状态判断。</p>
+<p>按钮禁重复负责减少误操作。服务端仍检查角色、状态与重复入账。</p>
+<p><strong>修复后：同一申请并发返回200／409，只入账一次。</strong></p>
+<p>不同订单的并发退款，也能正确累加余额。</p>
+<p>源码：<a href="../ecommerce-backend/src/main/java/com/teachdemo/ecommerce/aftersale/AdminAfterSaleService.java">锁后状态读取与退款事务</a>、<a href="../ecommerce-backend/src/main/java/com/teachdemo/ecommerce/aftersale/AfterSaleRequestRepository.java">归属字段查询</a>。</p>
+</div></div>
+</section>
+<section class="am-panel" id="panel-F">
+<header class="am-panel-head"><span class="am-panel-id">F</span><h2>修改时还遇到了哪些问题</h2></header>
+<div class="am-panel-body"><div class="am-md"><div class="am-table-wrap"><table>
+<thead>
+<tr>
+<th>问题与背景</th>
+<th>产品设计与修改</th>
+<th>观察到的结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>旧草稿接口还能创建REFUND记录</td>
+<td>已发货退款统一受退货验收门槛约束</td>
+<td>旧入口无法绕过；未新增退款流水</td>
+</tr>
+<tr>
+<td>无理由流程仍追问退货原因</td>
+<td>将无理由固定为申请类型，保留其他售后原义</td>
+<td>无需额外原因；质量问题不变成无理由</td>
+</tr>
+<tr>
+<td>改订单、取消后，旧确认卡可能被复用</td>
+<td>确认凭证绑定订单与内容，变化后失效</td>
+<td>旧卡被拦截，取消不建立申请</td>
+</tr>
+<tr>
+<td>启动代码重建七笔历史样例明细</td>
+<td>购买快照保持原值，只补缺失记录</td>
+<td>再次初始化保留快照，余额不变</td>
+</tr>
+<tr>
+<td>审核发生在七天之后</td>
+<td>期限按有效提交判断，不按审核当日判断</td>
+<td>隔离延后审核案例仍能完成退款</td>
+</tr>
+<tr>
+<td>查询退货进度可能走申请流程</td>
+<td>查询只读已有记录，覆盖各退货状态</td>
+<td>读到真实进度，不启动新申请流程</td>
+</tr>
+</tbody></table></div>
+<p>购买快照问题与退货资格直接相关。旧初始化删除明细后，会用当前商品属性重建。因此本次移除删除重建动作，保留首次初始化能力。</p>
+<p>两个测试环境问题也单独处理。前端构建使用匹配本机架构的现有 Node。浏览器等待页面数据就绪后，再检查详情。</p>
+<p>这些处理没有改业务响应，也没有放宽业务断言。</p>
+<p>依据：<a href="../analysis/%E4%B8%83%E5%A4%A9%E9%80%80%E8%B4%A7%E9%AA%8C%E8%AF%81/README.md">实现与验收记录</a>。</p>
+</div></div>
+</section>
+<section class="am-panel" id="panel-G">
+<header class="am-panel-head"><span class="am-panel-id">G</span><h2>结果怎样，证据能说明到哪一步</h2></header>
+<div class="am-panel-body"><div class="am-md"><div class="am-table-wrap"><table>
+<thead>
+<tr>
+<th>验证</th>
+<th>本次结果</th>
+<th>证据范围</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Java业务检查</td>
+<td>98项通过，155个源文件编译</td>
+<td>隔离H2、真实HTTP／认证／事务，模型为替身</td>
+</tr>
+<tr>
+<td>Python检查</td>
+<td>15项通过</td>
+<td>禁用模型与业务网络，检查类型、边界和进度</td>
+</tr>
+<tr>
+<td>双角色页面</td>
+<td>7组通过</td>
+<td>页面连接隔离Java服务，覆盖零入账初审与验收退款</td>
+</tr>
+<tr>
+<td>构建打包</td>
+<td>前端与Docker／Maven成功</td>
+<td>打包成功；业务断言由前述检查单独验证</td>
+</tr>
+<tr>
+<td>本地服务更新</td>
+<td>Java与Python已更新</td>
+<td>新路由、历史状态与登录读取核验通过</td>
+</tr>
+<tr>
+<td>已有数据保护</td>
+<td>8张业务表原字段行哈希一致</td>
+<td>更新未重写已有订单、余额、流水和审批</td>
+</tr>
+</tbody></table></div>
+<p>验收重点包括：初审零入账、权限隔离、金额篡改拦截。还包括并发防重、异常恢复和失败整体回滚。未发货退款的49项既有检查也保留。</p>
+<p>本次没有调用在线模型。当前MySQL未新增申请、审批或退款。新资金行为在隔离H2中验证。</p>
+<p>以上结果说明本地实现通过这些检查。它们不能直接代表线上成功率或真实收货能力。</p>
+<p>证据：<a href="../analysis/%E4%B8%83%E5%A4%A9%E9%80%80%E8%B4%A7%E9%AA%8C%E8%AF%81/java-result.json">Java结果</a>、<a href="../analysis/%E4%B8%83%E5%A4%A9%E9%80%80%E8%B4%A7%E9%AA%8C%E8%AF%81/python-check.log">Python记录</a>、<a href="../analysis/%E4%B8%83%E5%A4%A9%E9%80%80%E8%B4%A7%E9%AA%8C%E8%AF%81/ui-result.json">页面结果</a>、<a href="../analysis/%E4%B8%83%E5%A4%A9%E9%80%80%E8%B4%A7%E9%AA%8C%E8%AF%81/live-after.json">更新后数据对比</a>。</p>
+</div></div>
+</section>
+<section class="am-panel" id="panel-H">
+<header class="am-panel-head"><span class="am-panel-id">H</span><h2>可复用的产品设计方法</h2></header>
+<div class="am-panel-body"><div class="am-md"><ul>
+<li>给每个动作写清角色、前置状态和所需事实。</li>
+<li>把资金变化绑定到收货验收通过的业务事实。</li>
+<li>在提交时保存期限、实付与购买资格依据。</li>
+<li>定义重复、并发、失败和人工恢复的可见结果。</li>
+<li>用流水与状态验收，不能只看成功文案。</li>
+</ul>
+</div>
+<div class="am-callout am-callout--warn" role="note"><div class="am-callout-title">本轮边界</div><div class="am-callout-body am-md"><p>审核员仍兼管收货验收。尚未实现独立仓库角色、真实物流、运费和库存恢复。部分退货与工作台原有模拟审批问题也未扩展。</p>
+</div></div>
+<div class="am-md"><p>后续用新建支付订单验证真实模型交互。按照<a href="%E6%9C%AC%E5%9C%B0%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B.md#%E4%B8%83%E5%A4%A9%E6%97%A0%E7%90%86%E7%94%B1%E9%80%80%E8%B4%A7%E9%80%80%E6%AC%BE%E6%89%8B%E6%B5%8B2026-10-09%E6%96%B0%E5%A2%9E">手测步骤</a>，模拟发货与签收，再走双角色流程。页面中的七天规则属于本项目实现范围。</p>
+</div></div>
+</section>
+</div>
+</div>
+</main>
+<footer class="am-colophon">Generated by Answer me with HTML 0.4.2 · 2026-10-09 17:02</footer>
+<textarea id="am-source" hidden readonly aria-hidden="true">---
+template: doc
+theme: blueprint
+lang: zh
+title: 七天无理由退货退款：产品设计与问题复盘
+subtitle: 从角色分工、状态规则到并发验收｜2026-10-09
+source: 本项目代码、产品计划与隔离验收记录
+---
+本次把已签收退货拆成独立的申请、初审和验收退款。我们沿用原商城与后台能力，补齐执行边界和验收。
+
+## A 为什么要拆开三种决定
+
+```callout info 核心判断
+客户确认只表达申请意愿。后台初审只同意买家寄回商品。后台确认收货且验收通过后，系统才退款。
+```
+
+此前已有未发货退款与独立后台审核。接手时，退货接口和页面已部分接通。本次扩展这些能力，并修复未通过的检查。
+
+| 参与者 | 本次职责 | 权限边界 |
+|---|---|---|
+| 客户 | 核对订单与金额、确认申请、填写退回物流 | 只能处理本人订单，不能审批 |
+| 客服 Agent | 查询事实、准备确认卡、说明进度 | 不能批准退款，也不能判断实物完好 |
+| 后台审核员 | 同意或驳回退货、确认收货验收 | 身份来自管理员登录，初审不能退钱 |
+| 业务服务 | 核验资格、保存状态、执行退款 | 以支付流水和业务记录为依据 |
+
+客户和审核员属于两种权限角色。这里复用同一个客服 Agent 和独立后台服务。
+
+## B 流程怎样贴近现实
+
+```flow TB
+待审核 -&gt; 待买家寄回: 后台同意，填写地址
+待审核 -&gt; 已驳回: 后台说明原因
+待买家寄回 -&gt; 待商家验收: 本人填写退回物流
+待商家验收 -&gt; *已退款: 确认收货且验收通过
+待商家验收 -&gt; 验收未通过: 记录原因，暂不退款
+验收未通过 -&gt; 已退款: 人工核验后确认通过
+```
+
+| 状态 | 可执行动作 | 资金变化 |
+|---|---|---|
+| PENDING_REVIEW／待审核 | 同意并填写地址，或说明原因驳回 | 余额不变 |
+| WAITING_RETURN／待买家寄回 | 本人填写快递公司与单号 | 余额不变 |
+| RETURN_IN_TRANSIT／待商家验收 | 人工确认验收通过，或记录异常 | 通过后一次退款 |
+| RETURN_INSPECTION_FAILED／验收未通过 | 展示原因，等待人工核验 | 核验通过前不退款 |
+| REFUNDED／已退款 | 查看结果与处理记录 | 禁止再次入账 |
+| REJECTED／已驳回 | 查看驳回原因 | 余额不变 |
+
+买家提供单号后，系统仍等待商家收货验收。退款完成时，订单和支付显示已退款。履约显示已退回，并保留原发货与物流历史。
+
+首版由审核员兼管收货验收。勾选收货是人工声明，尚未接入仓库或物流证明。
+
+依据：[产品计划](七天无理由退货退款产品设计计划.md)。
+
+## C 资格规则：减少误判，也保留恢复路径
+
+| 设计决定 | 解决的问题 |
+|---|---|
+| 自动受理本人已支付、已签收的整单申请 | 运输中转人工处理拦截，避免提前退款 |
+| 上海日期下，签收次日起算七天 | 统一日期口径；签收当日也可申请 |
+| 按首次有效提交判断期限 | 买家不因后台审核延迟失去本流程资格 |
+| 检查真实支付流水，冻结整单实付金额 | 客户或模型不能编金额，审核员不能改成部分退款 |
+| 使用购买时的可退属性 | 商品现在改了政策，也不能覆盖购买时的事实 |
+| 无理由作为申请类型，无需另编原因 | 减少无用追问；质量问题等其他售后保留原义 |
+| 缺事实、过期或不支持时转人工核验 | 明确本流程的边界，保留其他售后处理机会 |
+
+**项目规则示例：**10月1日签收，10月8日结束前提交有效。10月10日才审核，原有效申请仍可继续。
+
+后台初审读取提交时的资格记录。最终退款还会核对支付、当前状态和冻结金额。
+
+## D 并发旧状态：背景与原因
+
+页面重复点击、网络重试或多人审核，可能产生重叠请求。隔离测试让两个请求同时确认验收退款。
+
+旧实现先普通查询售后实体，再锁订单与售后行。ORM 会缓存本事务读过的 Java 对象。再次加锁查询时，可能复用这个旧对象。
+
+数据库行锁负责让写操作排队。**拿到锁，不保证原对象已经刷新。**
+
+```sequence num
+participants: 页面, 请求A, 请求B, 数据库
+页面 -&gt; 请求A: 提交验收退款
+页面 -&gt; 请求B: 再次提交同一申请
+请求A -&gt; 数据库: 普通查询，读到待验收
+请求B -&gt; 数据库: 普通查询，读到待验收
+请求A -&gt; 数据库: 锁订单，完成退款并提交
+note 请求B: 等待订单锁，保留旧售后对象
+请求A --&gt; 页面: 200，退款成功
+请求B -&gt; 数据库: 拿到锁，订单已退款
+note 请求B: 售后对象却仍是待验收
+请求B --&gt; 页面: 400，误走资格错误分支
+```
+
+第二个请求看到的是一组矛盾事实：售后对象仍待验收，订单却已退款。它随后误走资格校验失败分支。
+
+**修复前观察：200／400，未观察到第二笔退款。**
+
+本次缺陷是重复处理的状态判断与返回结果错误。
+
+证据：[原失败日志](../analysis/七天退货验证/previous-failed-check.log)、[问题记录 BC-006](BadCase.md#bc-006并发退货最终确认读到旧售后状态)。
+
+## E 产品规则如何落到工程修复
+
+先定义产品要保证的结果，再选择执行层措施。产品设计确定验收合同，工程实现负责兑现它。
+
+| 产品必须保证什么 | 执行层怎样保证 |
+|---|---|
+| 同一申请最多退款一次 | 加锁后读取当前状态，再决定能否退款 |
+| 重复处理返回已处理结果 | 已退款后返回409冲突，不误报资格不足 |
+| 不同订单退款到同一账户时，金额正确累加 | 锁定余额行，基于最新余额计算 |
+| 钱、流水、售后与订单状态同时生效 | 放进同一个事务，任何保存失败都回滚 |
+| 多条写入路径按一致顺序拿锁 | 统一订单、售后、余额顺序，降低交叉等待风险 |
+
+```flow TB
+读取订单号与归属字段 -&gt; 锁订单: 不提前加载售后状态对象
+锁订单 -&gt; 锁售后并读取当前状态
+锁售后并读取当前状态 -&gt; {申请仍可退款吗}
+{申请仍可退款吗} -&gt; 返回409已处理冲突: 已经退款
+{申请仍可退款吗} -&gt; 锁余额并执行退款: 状态合法且事实通过
+锁余额并执行退款 -&gt; 同一事务提交钱和状态
+```
+
+先查归属字段，服务就能找到要锁的订单。此时不把售后状态读入对象缓存。随后锁定并读取售后实体，按当前状态判断。
+
+按钮禁重复负责减少误操作。服务端仍检查角色、状态与重复入账。
+
+**修复后：同一申请并发返回200／409，只入账一次。**
+
+不同订单的并发退款，也能正确累加余额。
+
+源码：[锁后状态读取与退款事务](../ecommerce-backend/src/main/java/com/teachdemo/ecommerce/aftersale/AdminAfterSaleService.java)、[归属字段查询](../ecommerce-backend/src/main/java/com/teachdemo/ecommerce/aftersale/AfterSaleRequestRepository.java)。
+
+## F 修改时还遇到了哪些问题
+
+| 问题与背景 | 产品设计与修改 | 观察到的结果 |
+|---|---|---|
+| 旧草稿接口还能创建REFUND记录 | 已发货退款统一受退货验收门槛约束 | 旧入口无法绕过；未新增退款流水 |
+| 无理由流程仍追问退货原因 | 将无理由固定为申请类型，保留其他售后原义 | 无需额外原因；质量问题不变成无理由 |
+| 改订单、取消后，旧确认卡可能被复用 | 确认凭证绑定订单与内容，变化后失效 | 旧卡被拦截，取消不建立申请 |
+| 启动代码重建七笔历史样例明细 | 购买快照保持原值，只补缺失记录 | 再次初始化保留快照，余额不变 |
+| 审核发生在七天之后 | 期限按有效提交判断，不按审核当日判断 | 隔离延后审核案例仍能完成退款 |
+| 查询退货进度可能走申请流程 | 查询只读已有记录，覆盖各退货状态 | 读到真实进度，不启动新申请流程 |
+
+购买快照问题与退货资格直接相关。旧初始化删除明细后，会用当前商品属性重建。因此本次移除删除重建动作，保留首次初始化能力。
+
+两个测试环境问题也单独处理。前端构建使用匹配本机架构的现有 Node。浏览器等待页面数据就绪后，再检查详情。
+
+这些处理没有改业务响应，也没有放宽业务断言。
+
+依据：[实现与验收记录](../analysis/七天退货验证/README.md)。
+
+## G 结果怎样，证据能说明到哪一步
+
+| 验证 | 本次结果 | 证据范围 |
+|---|---|---|
+| Java业务检查 | 98项通过，155个源文件编译 | 隔离H2、真实HTTP／认证／事务，模型为替身 |
+| Python检查 | 15项通过 | 禁用模型与业务网络，检查类型、边界和进度 |
+| 双角色页面 | 7组通过 | 页面连接隔离Java服务，覆盖零入账初审与验收退款 |
+| 构建打包 | 前端与Docker／Maven成功 | 打包成功；业务断言由前述检查单独验证 |
+| 本地服务更新 | Java与Python已更新 | 新路由、历史状态与登录读取核验通过 |
+| 已有数据保护 | 8张业务表原字段行哈希一致 | 更新未重写已有订单、余额、流水和审批 |
+
+验收重点包括：初审零入账、权限隔离、金额篡改拦截。还包括并发防重、异常恢复和失败整体回滚。未发货退款的49项既有检查也保留。
+
+本次没有调用在线模型。当前MySQL未新增申请、审批或退款。新资金行为在隔离H2中验证。
+
+以上结果说明本地实现通过这些检查。它们不能直接代表线上成功率或真实收货能力。
+
+证据：[Java结果](../analysis/七天退货验证/java-result.json)、[Python记录](../analysis/七天退货验证/python-check.log)、[页面结果](../analysis/七天退货验证/ui-result.json)、[更新后数据对比](../analysis/七天退货验证/live-after.json)。
+
+## H 可复用的产品设计方法
+
+- 给每个动作写清角色、前置状态和所需事实。
+- 把资金变化绑定到收货验收通过的业务事实。
+- 在提交时保存期限、实付与购买资格依据。
+- 定义重复、并发、失败和人工恢复的可见结果。
+- 用流水与状态验收，不能只看成功文案。
+
+```callout warn 本轮边界
+审核员仍兼管收货验收。尚未实现独立仓库角色、真实物流、运费和库存恢复。部分退货与工作台原有模拟审批问题也未扩展。
+```
+
+后续用新建支付订单验证真实模型交互。按照[手测步骤](本地测试用例.md#七天无理由退货退款手测2026-10-09新增)，模拟发货与签收，再走双角色流程。页面中的七天规则属于本项目实现范围。
+</textarea>
+<script>
+(() => {
+  const root = document.documentElement;
+  const cycle = (list, cur) => list[(list.indexOf(cur) + 1) % list.length];
+  const label = (btn, value) => {
+    const map = JSON.parse(btn.dataset.labels || '{}');
+    btn.textContent = map[value] || value;
+  };
+  const bind = (name, attr, values) => {
+    const btn = document.querySelector(`[data-am="${name}"]`);
+    if (!btn) return;
+    label(btn, root.getAttribute(attr));
+    btn.addEventListener('click', () => {
+      const next = cycle(values, root.getAttribute(attr));
+      root.setAttribute(attr, next);
+      label(btn, next);
+    });
+  };
+  bind('theme', 'data-theme', ['blueprint', 'shadcn']);
+  bind('mode', 'data-mode', ['auto', 'light', 'dark']);
+
+  const copyBtn = document.querySelector('[data-am="copy"]');
+  copyBtn?.addEventListener('click', async () => {
+    const text = document.getElementById('am-source').value;
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch {
+      const ta = Object.assign(document.createElement('textarea'), { value: text });
+      document.body.append(ta);
+      ta.select();
+      document.execCommand('copy');
+      ta.remove();
+    }
+    const original = copyBtn.textContent;
+    copyBtn.textContent = copyBtn.dataset.done;
+    setTimeout(() => { copyBtn.textContent = original; }, 1400);
+  });
+})();
+</script>
+</body>
+</html>

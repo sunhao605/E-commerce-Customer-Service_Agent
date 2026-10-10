@@ -1,0 +1,22 @@
+{
+  "date": "2026-10-09",
+  "http": {
+    "8000/health": {
+      "status": "ok",
+      "lesson": "41"
+    },
+    "8081/actuator/health": {
+      "status": "UP"
+    },
+    "5173/": 200,
+    "5174/": 200,
+    "5174/admin/": 200
+  },
+  "image": "sha256:5a16999a46e88be9f1f8e1025f8d0c9046a127d9832426625cddf01113aa7414",
+  "processes": {
+    "agent": 18159,
+    "workbench": 18195,
+    "shop": 18217
+  },
+  "automaticStartupAfterReboot": false
+}

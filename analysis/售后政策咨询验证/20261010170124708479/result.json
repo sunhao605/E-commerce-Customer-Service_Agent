@@ -1,0 +1,460 @@
+{
+  "run_id": "20261010170124708479",
+  "health": {
+    "status": "ok",
+    "lesson": "41"
+  },
+  "results": [
+    {
+      "id": "B01",
+      "input": "退款政策是什么？我先了解一下，不申请退款。",
+      "session_id": "policy-eval-20261010170124708479-B01",
+      "http_status": 200,
+      "elapsed_ms": 933,
+      "rule_fallback": "refund_request",
+      "intent": "faq_query",
+      "answer": "电子发票一般在订单完成后 24 小时内开具，开具后可以在订单详情页查看和下载。\n\n如果你在订单详情页暂时没看到，可能是发票还在开具中，建议稍后再刷新看看；如果超过 24 小时仍未显示，可以告诉我订单号，我帮你进一步核实。",
+      "next_action": "answer_user",
+      "cache_hit": true,
+      "model": {
+        "route_planner": {
+          "used_model": true,
+          "model_name": "deepseek-flash",
+          "fallback_reason": null,
+          "prompt_fragments": [
+            {
+              "name": "prompt_security",
+              "level": "global_policy",
+              "version": "v1",
+              "load": "always",
+              "priority": 100,
+              "phase": "route",
+              "estimated_tokens": 29
+            },
+            {
+              "name": "system_customer_service",
+              "level": "role",
+              "version": "v1",
+              "load": "always",
+              "priority": 90,
+              "phase": "route",
+              "estimated_tokens": 32
+            },
+            {
+              "name": "route_contract",
+              "level": "task_contract",
+              "version": "v1",
+              "load": "when_route",
+              "priority": 80,
+              "phase": "route",
+              "estimated_tokens": 414
+            }
+          ]
+        },
+        "final_answer": {
+          "used_model": false,
+          "model_name": null,
+          "fallback_reason": "common_hit_cache",
+          "prompt_fragments": []
+        }
+      },
+      "citations": [
+        {
+          "source": "knowledge/payment_invoice_policy.md",
+          "title": "荒野户外发票 FAQ",
+          "snippet": "电子发票通常在订单完成后 24 小时内开具，可在订单详情页查看和下载。",
+          "score": 0.9,
+          "retrieval_stage": "pre_retrieval",
+          "metadata": {
+            "policy_id": "invoice_issue",
+            "scene_key": "payment_invoice"
+          }
+        }
+      ],
+      "tool_calls": [],
+      "workflow": null,
+      "clarification": null,
+      "trace_events": [
+        "runtime_context_built",
+        "context_built",
+        "model_route_planned",
+        "route_plan_built",
+        "context_source_safety_checked",
+        "model_answer_skipped",
+        "mcp_binding_resolved",
+        "prompt_context_built",
+        "hook_executed",
+        "cost_recorded",
+        "final_answer_generated"
+      ],
+      "route_plan": {
+        "intent": "faq_query",
+        "needs_rag": true,
+        "needs_business_tools": false,
+        "required_tools": [],
+        "tool_candidates": [],
+        "knowledge_domains": [
+          "faq"
+        ],
+        "entity_refs": [],
+        "risk_level": "low",
+        "requires_workflow": false,
+        "confidence": 0.9,
+        "source": "llm_with_policy_constraints",
+        "fallback_policy": "safe_deterministic_path"
+      },
+      "memory": {
+        "runtime_user_id": "intent-eval",
+        "last_order_id": null,
+        "last_product_name": null,
+        "recent_intent": "faq_query",
+        "open_task": null,
+        "low_risk_preferences": {},
+        "write_decisions": [],
+        "excluded_items": [],
+        "ttl": "session"
+      },
+      "cost_summary": {
+        "schema_version": "cost_summary_v1",
+        "cost_profile": "teaching",
+        "path_type": "cached_faq_light_path",
+        "model_calls": {
+          "route_planner": 1,
+          "tool_agent": 0,
+          "final_answer": 0,
+          "extra_reasoning": 0
+        },
+        "frameworks": {
+          "langchain_runnable_sequence": true,
+          "langchain_create_agent": false,
+          "langgraph_state_graph": false,
+          "offline_deterministic_fallback": false
+        },
+        "tool_call_count": 0,
+        "business_tool_call_count": 0,
+        "rag": {
+          "needs_rag": true,
+          "hit_count": 1,
+          "pre_retrieval_count": 0,
+          "tool_retrieval_count": 0,
+          "retrieval_paths": [
+            "pre_retrieval"
+          ],
+          "cache_hit": true
+        },
+        "tokens": {
+          "context_estimated": 10,
+          "prompt_estimated": 158,
+          "answer_estimated": 27,
+          "total_estimated": 195,
+          "context_budget": 160
+        },
+        "prompt_fragments": {
+          "selected": [
+            "prompt_security",
+            "system_customer_service",
+            "route_contract"
+          ],
+          "selections": [
+            {
+              "name": "prompt_security",
+              "level": "global_policy",
+              "version": "v1",
+              "load": "always",
+              "priority": 100,
+              "phase": "route",
+              "estimated_tokens": 29
+            },
+            {
+              "name": "system_customer_service",
+              "level": "role",
+              "version": "v1",
+              "load": "always",
+              "priority": 90,
+              "phase": "route",
+              "estimated_tokens": 32
+            },
+            {
+              "name": "route_contract",
+              "level": "task_contract",
+              "version": "v1",
+              "load": "when_route",
+              "priority": 80,
+              "phase": "route",
+              "estimated_tokens": 414
+            }
+          ],
+          "fragment_count": 3,
+          "fragmentized": true,
+          "source": "actual_model_invocations"
+        },
+        "cache": {
+          "common_hit_cache": true,
+          "cache_key": null,
+          "does_not_cache_high_risk_workflow": true
+        },
+        "observation_compression": {
+          "schema_version": "observation_compression_v1",
+          "original_tokens": 0,
+          "compressed_tokens": 0,
+          "saved_tokens": 0,
+          "strategy": "keep_status_next_action_and_risk_summary"
+        },
+        "workflow": {
+          "used_langgraph": false,
+          "workflow_id": null,
+          "workflow_type": null,
+          "graph_name": null,
+          "node_history": [],
+          "hitl_required": false,
+          "status": null
+        },
+        "degradation": {
+          "degraded": false,
+          "reason": null,
+          "cost_threshold_exceeded": true,
+          "warnings": [
+            "total_estimated_tokens_over_teaching_budget"
+          ]
+        },
+        "reasoning": {
+          "view": "default",
+          "thinking_requested": false,
+          "reasoning_content_returned": false,
+          "source": null
+        },
+        "safety_boundary": {
+          "cost_control_does_not_skip_business_facts": true,
+          "cost_control_does_not_skip_hitl": true,
+          "not_finops_or_billing_system": true
+        }
+      }
+    },
+    {
+      "id": "B02",
+      "input": "七天无理由退货需要满足什么条件？只是咨询，暂时不退。",
+      "session_id": "policy-eval-20261010170124708479-B02",
+      "http_status": 200,
+      "elapsed_ms": 483,
+      "rule_fallback": "return_request",
+      "intent": "return_request",
+      "answer": "你要查询哪一个订单？请选择订单号，或直接补充订单号。",
+      "next_action": "ask_clarification",
+      "cache_hit": false,
+      "model": {
+        "route_planner": {
+          "used_model": true,
+          "model_name": "deepseek-flash",
+          "fallback_reason": null,
+          "prompt_fragments": [
+            {
+              "name": "prompt_security",
+              "level": "global_policy",
+              "version": "v1",
+              "load": "always",
+              "priority": 100,
+              "phase": "route",
+              "estimated_tokens": 29
+            },
+            {
+              "name": "system_customer_service",
+              "level": "role",
+              "version": "v1",
+              "load": "always",
+              "priority": 90,
+              "phase": "route",
+              "estimated_tokens": 32
+            },
+            {
+              "name": "route_contract",
+              "level": "task_contract",
+              "version": "v1",
+              "load": "when_route",
+              "priority": 80,
+              "phase": "route",
+              "estimated_tokens": 414
+            }
+          ]
+        },
+        "final_answer": {
+          "used_model": false,
+          "model_name": null,
+          "fallback_reason": "clarification_required",
+          "prompt_fragments": []
+        }
+      },
+      "citations": [],
+      "tool_calls": [],
+      "workflow": null,
+      "clarification": {
+        "clarification_field": "order_id",
+        "message": "你要查询哪一个订单？请选择订单号，或直接补充订单号。",
+        "candidates": []
+      },
+      "trace_events": [
+        "runtime_context_built",
+        "context_built",
+        "model_route_planned",
+        "route_plan_built",
+        "tool_clarification_required",
+        "model_answer_skipped",
+        "mcp_binding_resolved",
+        "prompt_context_built",
+        "hook_executed",
+        "cost_recorded",
+        "final_answer_generated"
+      ],
+      "route_plan": {
+        "intent": "return_request",
+        "needs_rag": true,
+        "needs_business_tools": true,
+        "required_tools": [],
+        "tool_candidates": [
+          {
+            "name": "get_order_detail",
+            "domain": "order",
+            "risk_level": "low",
+            "reason": "读取当前用户订单事实，不执行业务写操作。"
+          }
+        ],
+        "knowledge_domains": [
+          "received_return_policy"
+        ],
+        "entity_refs": [],
+        "risk_level": "high",
+        "requires_workflow": true,
+        "confidence": 0.9,
+        "source": "llm_with_policy_constraints",
+        "fallback_policy": "ask_order_id"
+      },
+      "memory": {
+        "runtime_user_id": "intent-eval",
+        "last_order_id": null,
+        "last_product_name": null,
+        "recent_intent": "return_request",
+        "open_task": {
+          "intent": "return_request",
+          "pending_slot": "order_id",
+          "candidates": []
+        },
+        "low_risk_preferences": {},
+        "write_decisions": [],
+        "excluded_items": [],
+        "ttl": "session"
+      },
+      "cost_summary": {
+        "schema_version": "cost_summary_v1",
+        "cost_profile": "teaching",
+        "path_type": "light_react_agent",
+        "model_calls": {
+          "route_planner": 1,
+          "tool_agent": 0,
+          "final_answer": 0,
+          "extra_reasoning": 0
+        },
+        "frameworks": {
+          "langchain_runnable_sequence": true,
+          "langchain_create_agent": false,
+          "langgraph_state_graph": false,
+          "offline_deterministic_fallback": false
+        },
+        "tool_call_count": 0,
+        "business_tool_call_count": 0,
+        "rag": {
+          "needs_rag": false,
+          "hit_count": 0,
+          "pre_retrieval_count": 0,
+          "tool_retrieval_count": 0,
+          "retrieval_paths": [],
+          "cache_hit": false
+        },
+        "tokens": {
+          "context_estimated": 13,
+          "prompt_estimated": 475,
+          "answer_estimated": 13,
+          "total_estimated": 501,
+          "context_budget": 160
+        },
+        "prompt_fragments": {
+          "selected": [
+            "prompt_security",
+            "system_customer_service",
+            "route_contract"
+          ],
+          "selections": [
+            {
+              "name": "prompt_security",
+              "level": "global_policy",
+              "version": "v1",
+              "load": "always",
+              "priority": 100,
+              "phase": "route",
+              "estimated_tokens": 29
+            },
+            {
+              "name": "system_customer_service",
+              "level": "role",
+              "version": "v1",
+              "load": "always",
+              "priority": 90,
+              "phase": "route",
+              "estimated_tokens": 32
+            },
+            {
+              "name": "route_contract",
+              "level": "task_contract",
+              "version": "v1",
+              "load": "when_route",
+              "priority": 80,
+              "phase": "route",
+              "estimated_tokens": 414
+            }
+          ],
+          "fragment_count": 3,
+          "fragmentized": true,
+          "source": "actual_model_invocations"
+        },
+        "cache": {
+          "common_hit_cache": false,
+          "cache_key": null,
+          "does_not_cache_high_risk_workflow": true
+        },
+        "observation_compression": {
+          "schema_version": "observation_compression_v1",
+          "original_tokens": 0,
+          "compressed_tokens": 0,
+          "saved_tokens": 0,
+          "strategy": "keep_status_next_action_and_risk_summary"
+        },
+        "workflow": {
+          "used_langgraph": false,
+          "workflow_id": null,
+          "workflow_type": null,
+          "graph_name": null,
+          "node_history": [],
+          "hitl_required": false,
+          "status": null
+        },
+        "degradation": {
+          "degraded": false,
+          "reason": null,
+          "cost_threshold_exceeded": true,
+          "warnings": [
+            "total_estimated_tokens_over_teaching_budget"
+          ]
+        },
+        "reasoning": {
+          "view": "default",
+          "thinking_requested": false,
+          "reasoning_content_returned": false,
+          "source": null
+        },
+        "safety_boundary": {
+          "cost_control_does_not_skip_business_facts": true,
+          "cost_control_does_not_skip_hitl": true,
+          "not_finops_or_billing_system": true
+        }
+      }
+    }
+  ]
+}

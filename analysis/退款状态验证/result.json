@@ -1,0 +1,20 @@
+{
+  "date": "2026-10-09",
+  "javaCompiled": 153,
+  "isolatedHTTPChecks": 49,
+  "isolatedBrowserGroups": 4,
+  "liveReadOnlyBrowserChecks": 3,
+  "mavenPackage": true,
+  "deployedLocally": true,
+  "image": "sha256:f51992e4660d6991542db50f6e3af74622e94b4e04d18d8d9a3286104b9e7b0e",
+  "existingMySQLOrderStatusRepairRows": 1,
+  "existingMySQLApprovalWrites": 0,
+  "existingMySQLMoneyWrites": 0,
+  "modelCalls": 0,
+  "balanceAfterRepair": 100000,
+  "excluded": [
+    "shipped returns",
+    "partial refund completion",
+    "bulk historical repair"
+  ]
+}

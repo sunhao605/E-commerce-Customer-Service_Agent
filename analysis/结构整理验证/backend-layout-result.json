@@ -1,0 +1,29 @@
+{
+  "date": "2026-10-07",
+  "backend_folders_before": 20,
+  "backend_folders_after": 6,
+  "moved_files": 38,
+  "python_unittests_passed": 9,
+  "migration_contract": "passed",
+  "logic_files_checked": 27,
+  "resource_files_unchanged": 15,
+  "api_check": "backend-api-check.json",
+  "structure_check": "structure-check.json",
+  "offline_eval": {
+    "total": 13,
+    "passed": 10,
+    "failed": 3,
+    "unchanged_failure_ids": [
+      "product-tool-rag-joint-answer",
+      "received-return-workflow",
+      "promotion-member-rag-path"
+    ],
+    "artifact": "backend-layout-eval.json"
+  },
+  "model_calls": 0,
+  "running_services_restarted": false,
+  "database_changed": false,
+  "startup_command_unchanged": "PYTHONPATH=backend uvicorn api.routes:app",
+  "legacy_module_imports_supported": false,
+  "style_check": "passed；旧样式源码哈希保留为历史记录，当前逻辑对照目录迁移前契约"
+}

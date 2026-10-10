@@ -1,0 +1,12 @@
+{
+  "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/CustomerServiceGatewayService.java": "589d1ee69a14fe34629f8a4794f7949b45ffc5ab8e791fa66fdc32626b9cf82c",
+  "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/CustomerServiceSession.java": "35773d97cda8f2c821f50fb1856bc3ffeed98268379ce43fa81088b4a323aaeb",
+  "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/order/ShopService.java": "a7076d0982a3110b3ac747af975b53104fd3181303629b85489f7dede4d76b25",
+  "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/order/OrderRepository.java": "a0c57c4f7afee106b11c66a8ed34c57628eb046d10b93e448d30810a6e7b91b4",
+  "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/RuntimeOrderSummaryResponse.java": "f18db08be81484a00aee259ae9b2e48507163e9db04931d5277967f4451e5d94",
+  "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/RuntimeOrderContextService.java": "f005be18cf02bd62c6dbc7dd6a7e623478bf26df37b6109cb001a8806c5d6ca3",
+  "ecommerce-backend/frontend/src/shop/App.tsx": "cff3a754ad35e6b7a0476ee12cb6a373eacc7478f0271ea2140ddf00f74f38f4",
+  "frontend/src/components/TracePanel.tsx": "a2f26a2fb6a8ce7235fe531f03c9560653aebe228bfcd3dd77c8139be7d96c6b",
+  "backend/agent/tools/tool_runtime.py": "771b05f5bc6281912921bb7041b16b8a7c10bca86f0775a362faba9df99f322b",
+  "backend/agent/workflows/after_sale_graph.py": "fccc0b83d5be2442135c642efa1d539a81b618306dd06df1c968038d754578c6"
+}

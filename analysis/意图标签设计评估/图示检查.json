@@ -1,0 +1,20 @@
+{
+  "panels": 8,
+  "flow_figures": 1,
+  "widths": [
+    {
+      "width": 1440,
+      "page_overflow": false
+    },
+    {
+      "width": 1024,
+      "page_overflow": false
+    },
+    {
+      "width": 390,
+      "page_overflow": false
+    }
+  ],
+  "page_errors": [],
+  "network": "all HTTP/HTTPS requests blocked; local file only"
+}

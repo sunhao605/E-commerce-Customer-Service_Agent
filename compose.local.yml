@@ -1,0 +1,36 @@
+name: huangye-outdoor
+
+services:
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: huangye_demo
+      MYSQL_USER: huangye
+      MYSQL_PASSWORD: ${HUANGYE_DB_PASSWORD:?Set in .env.local}
+      MYSQL_ROOT_PASSWORD: ${HUANGYE_DB_ROOT_PASSWORD:?Set in .env.local}
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "--silent"]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+
+  ecommerce:
+    build:
+      context: ./ecommerce-backend
+    ports:
+      - "127.0.0.1:8081:8081"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/huangye_demo?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+      SPRING_DATASOURCE_USERNAME: huangye
+      SPRING_DATASOURCE_PASSWORD: ${HUANGYE_DB_PASSWORD:?Set in .env.local}
+      SPRING_PROFILES_ACTIVE: course-debug
+      AGENT_SERVICE_BASE_URL: http://host.docker.internal:8000
+      AGENT_SERVICE_AUTH_TOKEN: course-debug-agent-service
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+volumes:
+  mysql-data:

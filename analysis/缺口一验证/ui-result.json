@@ -1,0 +1,27 @@
+{
+  "mode": "real browser and Java HTTP/auth + isolated H2; API routing proxy; synthetic Agent",
+  "checks": [
+    "缺少原因只追问；补齐后显示订单、范围、实付金额和未提交状态",
+    "继续提问保留待确认；仅最新卡可操作",
+    "修改原因后旧卡失效，新卡内容正确",
+    "页面提交结果与实际待审核记录一致，按钮失效",
+    "取消实际写回后端、无新申请，旧卡重放被拒绝；余额不变",
+    "桌面和手机宽度无横向溢出、无页面异常"
+  ],
+  "decision_requests": [
+    {
+      "sessionId": "cs-fb4f1385-d7d2-45a5-a6c4-66936bf965ea",
+      "resumeToken": "77039d8e-3bf1-45c4-8afe-09d371beacae",
+      "decision": "CONFIRM_SUBMIT",
+      "relatedOrderNo": "ORD9200"
+    },
+    {
+      "sessionId": "cs-fb4f1385-d7d2-45a5-a6c4-66936bf965ea",
+      "resumeToken": "cfa2d277-3bb6-4176-8ed2-7738367929d6",
+      "decision": "CANCEL_SUBMIT",
+      "relatedOrderNo": "ORD9201"
+    }
+  ],
+  "page_errors": [],
+  "model_calls": 0
+}

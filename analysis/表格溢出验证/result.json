@@ -1,0 +1,81 @@
+{
+  "results": [
+    {
+      "width": 2738,
+      "page": "订单管理",
+      "rows": 14,
+      "overflow": [],
+      "detail_opens": true
+    },
+    {
+      "width": 2738,
+      "page": "售后审批",
+      "rows": 4,
+      "overflow": [],
+      "detail_opens": true
+    },
+    {
+      "width": 1440,
+      "page": "订单管理",
+      "rows": 14,
+      "overflow": [],
+      "detail_opens": true
+    },
+    {
+      "width": 1440,
+      "page": "售后审批",
+      "rows": 4,
+      "overflow": [],
+      "detail_opens": true
+    },
+    {
+      "width": 1101,
+      "page": "订单管理",
+      "rows": 14,
+      "overflow": [],
+      "detail_opens": true
+    },
+    {
+      "width": 1101,
+      "page": "售后审批",
+      "rows": 4,
+      "overflow": [],
+      "detail_opens": true
+    },
+    {
+      "width": 1024,
+      "page": "订单管理",
+      "rows": 14,
+      "overflow": [],
+      "detail_opens": true
+    },
+    {
+      "width": 1024,
+      "page": "售后审批",
+      "rows": 4,
+      "overflow": [],
+      "detail_opens": true
+    },
+    {
+      "width": 390,
+      "page": "订单管理",
+      "rows": 14,
+      "overflow": [],
+      "detail_opens": true
+    },
+    {
+      "width": 390,
+      "page": "售后审批",
+      "rows": 4,
+      "overflow": [],
+      "detail_opens": true
+    }
+  ],
+  "page_errors": [],
+  "packaged_ui_check": {
+    "java_health": "UP",
+    "css_matches_local_build": true,
+    "orders": 14,
+    "after_sales": 4
+  }
+}

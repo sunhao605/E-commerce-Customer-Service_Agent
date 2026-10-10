@@ -1,0 +1,43 @@
+{
+  "checks": [
+    "客户确认仅提交RETURN待审核，列表读取同一申请",
+    "后台同意需地址/联系人/电话、不可改金额，首次同意零入账",
+    "客户focus读退回地址，上传物流推进待验收仍零入账，手机无横向溢出",
+    "验收失败必须填原因，客户端可见且零入账",
+    "人工核验后勾选收货验收才能退200元，终态无重复资金按钮",
+    "列表、详情、订单支付履约终态一致并保留历史物流",
+    "售后记录展示同一真实终态和订单入口"
+  ],
+  "writes": [
+    {
+      "path": "/api/customer-service/chat",
+      "status": 200
+    },
+    {
+      "path": "/api/customer-service/resume",
+      "status": 200
+    },
+    {
+      "path": "/api/admin/after-sales/AS-20261009080909862-9b75ae8d/approve",
+      "status": 200
+    },
+    {
+      "path": "/api/shop/after-sales/AS-20261009080909862-9b75ae8d/return-shipment",
+      "status": 200
+    },
+    {
+      "path": "/api/admin/after-sales/AS-20261009080909862-9b75ae8d/return-inspection-failed",
+      "status": 200
+    },
+    {
+      "path": "/api/admin/after-sales/AS-20261009080909862-9b75ae8d/return-complete",
+      "status": 200
+    }
+  ],
+  "pageErrors": [],
+  "database": "isolated H2",
+  "api": "proxy to real Java; no synthetic business responses",
+  "model": "synthetic stub",
+  "existingMySQLWrites": 0,
+  "modelCalls": 0
+}

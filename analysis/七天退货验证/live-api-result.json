@@ -1,0 +1,13 @@
+{
+  "checks": [
+    "当前MySQL用户订单与已退款记录保持原结果，本人详情接口已部署",
+    "当前MySQL管理员登录与售后读取正常",
+    "已部署路由 /api/admin/after-sales/{requestNo}/return-complete",
+    "已部署路由 /api/admin/after-sales/{requestNo}/return-inspection-failed",
+    "已部署路由 /api/shop/after-sales/{requestNo}/return-shipment"
+  ],
+  "mode": "read-only business API; login creates sessions only",
+  "newApprovals": 0,
+  "newRefunds": 0,
+  "modelCalls": 0
+}

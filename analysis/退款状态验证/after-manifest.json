@@ -1,0 +1,11 @@
+{
+  "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/aftersale/AdminAfterSaleService.java": "eb8c3d323f236b89b6cc604e9a3d8d580fb06dec30016911f0627e0ecec2450c",
+  "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/aftersale/AfterSaleRequestRepository.java": "3ec3a7ea46595fb8494161f86bbde5b93b2201d513b4fd31eef56eb13856e3d4",
+  "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/order/OrderEntity.java": "03477829cd26ed5d8a7b6428ce11a42e8e462a0f5283f9f18784f256520559ee",
+  "ecommerce-backend/frontend/src/shop/App.tsx": "3ed28b0d296eb8710e2b6a027757ab0d72a62644834edb64c8be51c143b831f4",
+  "analysis/\u7f3a\u53e3\u4e00\u9a8c\u8bc1/CustomerRefundCheck.java": "66b05b8f90bfffddfcbe904ccaae66d5ade288d0dacea5d1a5bb235ff150fac9",
+  "analysis/\u7f3a\u53e3\u4e00\u9a8c\u8bc1/run_java_check.py": "651b697fb0788d04e92d189375c78d70a9c8b49bcdbdb3356491a8ca1a76f177",
+  "analysis/\u9000\u6b3e\u72b6\u6001\u9a8c\u8bc1/check_ui.py": "3d868dff3b8ee824edf6b5df3249e8c87a79bd4b92ad72be382c25dd4a47e19d",
+  "analysis/\u9000\u6b3e\u72b6\u6001\u9a8c\u8bc1/check_live.py": "16a79febccae9ba0062f3099765333e336e64c673c7739ac1d9c25877b27edbe",
+  "analysis/\u9000\u6b3e\u72b6\u6001\u9a8c\u8bc1/repair_test_order.sql": "79098a13b28320e147edb982c66f38beda78d133eb12701ab71ce696aa72c0af"
+}

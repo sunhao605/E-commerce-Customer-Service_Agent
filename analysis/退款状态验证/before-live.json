@@ -1,0 +1,67 @@
+{
+  "order": {
+    "orderNo": "SO20261009061332122-26971b7b",
+    "orderStatus": "PAID_PENDING_SHIPMENT",
+    "paymentStatus": "PAID",
+    "fulfillmentStatus": "UNSHIPPED",
+    "totalAmount": 199.0,
+    "itemSummary": "户外野餐垫 x1",
+    "remark": "2026-10-09 缺口一手测专用；未提交退款",
+    "items": [
+      {
+        "productId": 2,
+        "productName": "户外野餐垫",
+        "productImageUrl": "/products/picnic-mat.svg",
+        "unitPrice": 199.0,
+        "quantity": 1
+      }
+    ],
+    "afterSaleAvailable": true,
+    "availableAfterSaleTypes": [
+      "REFUND",
+      "CANCEL_ORDER",
+      "COMPENSATION"
+    ],
+    "createdAt": "2026-10-09T06:13:32.122978",
+    "paidAt": "2026-10-09T06:13:32.188904"
+  },
+  "afterSales": [
+    {
+      "requestNo": "AS-20261009062604598-17039d42",
+      "orderNo": "SO20261009061332122-26971b7b",
+      "type": "REFUND",
+      "status": "APPROVED",
+      "amount": 199.0,
+      "reason": "买错了",
+      "createdAt": "2026-10-09T06:26:04.598011"
+    }
+  ],
+  "balance": {
+    "userId": "U1001",
+    "availableBalance": 100000.0,
+    "updatedAt": "2026-10-09T06:27:02.977552"
+  },
+  "ledger": [
+    {
+      "transactionNo": "BT-AS-AS-20261009062604598-17039d42",
+      "type": "REFUND",
+      "amount": 199.0,
+      "balanceBefore": 99801.0,
+      "balanceAfter": 100000.0,
+      "orderNo": "SO20261009061332122-26971b7b",
+      "afterSaleNo": "AS-20261009062604598-17039d42",
+      "remark": "REFUND 审批入账：AS-20261009062604598-17039d42",
+      "createdAt": "2026-10-09T06:27:02.977552"
+    },
+    {
+      "transactionNo": "BT-20261009061332188-90619514",
+      "type": "PAYMENT",
+      "amount": -199.0,
+      "balanceBefore": 100000.0,
+      "balanceAfter": 99801.0,
+      "orderNo": "SO20261009061332122-26971b7b",
+      "remark": "模拟余额支付订单 SO20261009061332122-26971b7b",
+      "createdAt": "2026-10-09T06:13:32.188904"
+    }
+  ]
+}

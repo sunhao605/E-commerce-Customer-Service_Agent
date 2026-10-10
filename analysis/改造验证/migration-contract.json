@@ -1,0 +1,252 @@
+{
+  "source": "课程改造前快照；2026-10-07 提取的非品牌契约，不包含原始源码",
+  "product_facts": [
+    [
+      "SKU-AUD-101",
+      "599.00",
+      "520",
+      "true",
+      "true"
+    ],
+    [
+      "SKU-PWR-202",
+      "199.00",
+      "830",
+      "true",
+      "true"
+    ],
+    [
+      "SKU-AUD-303",
+      "299.00",
+      "360",
+      "true",
+      "true"
+    ],
+    [
+      "SKU-AUD-404",
+      "199.00",
+      "0",
+      "true",
+      "true"
+    ],
+    [
+      "SKU-CUS-501",
+      "899.00",
+      "25",
+      "true",
+      "false"
+    ],
+    [
+      "SKU-CAM-601",
+      "699.00",
+      "8",
+      "false",
+      "false"
+    ],
+    [
+      "SKU-PHN-618",
+      "2499.00",
+      "180",
+      "true",
+      "true"
+    ],
+    [
+      "SKU-TAB-618",
+      "1899.00",
+      "220",
+      "true",
+      "true"
+    ],
+    [
+      "SKU-VAC-618",
+      "2999.00",
+      "95",
+      "true",
+      "true"
+    ],
+    [
+      "SKU-AIR-618",
+      "3299.00",
+      "60",
+      "true",
+      "false"
+    ],
+    [
+      "SKU-DRY-618",
+      "799.00",
+      "260",
+      "true",
+      "true"
+    ],
+    [
+      "SKU-WAT-618",
+      "999.00",
+      "150",
+      "true",
+      "true"
+    ],
+    [
+      "SKU-COF-618",
+      "1599.00",
+      "88",
+      "true",
+      "true"
+    ],
+    [
+      "SKU-MON-618",
+      "1299.00",
+      "140",
+      "true",
+      "true"
+    ],
+    [
+      "SKU-AIRP-618",
+      "1199.00",
+      "110",
+      "true",
+      "true"
+    ],
+    [
+      "SKU-PPS-618",
+      "1899.00",
+      "75",
+      "true",
+      "false"
+    ],
+    [
+      "SKU-LOCK-618",
+      "1499.00",
+      "96",
+      "true",
+      "false"
+    ],
+    [
+      "SKU-CAM-618",
+      "1099.00",
+      "130",
+      "true",
+      "true"
+    ],
+    [
+      "SKU-AUD-101",
+      "599.00",
+      "520",
+      "true",
+      "true"
+    ],
+    [
+      "SKU-PWR-202",
+      "199.00",
+      "830",
+      "true",
+      "true"
+    ],
+    [
+      "SKU-AUD-303",
+      "299.00",
+      "360",
+      "true",
+      "true"
+    ],
+    [
+      "SKU-AUD-404",
+      "199.00",
+      "0",
+      "true",
+      "true"
+    ],
+    [
+      "SKU-CUS-501",
+      "899.00",
+      "25",
+      "true",
+      "false"
+    ],
+    [
+      "SKU-CAM-601",
+      "699.00",
+      "8",
+      "false",
+      "false"
+    ]
+  ],
+  "ast_sha256_without_text": {
+    "backend/workflows/after_sale_graph.py": "bdea8305567e130558d2a63ea34ad629a9458d224f674694a1f482c663cffcbf",
+    "backend/workflows/resume.py": "de7015d3a90152b2396b9713e0e2601d95cdc3d55cb1a375587d0c1ef839407c",
+    "backend/context/builder.py": "deee51c329c9d39af1f28f07bb7dc8e1579ebcc31dd55a817aec3e3bd06e93a0",
+    "backend/tools/tool_runtime.py": "67c59f06b72cbd0f454cd6c29a7401383dc49023aeac8ce03629ccb7be2d085a"
+  },
+  "features": {
+    "chat": true,
+    "memory": true,
+    "session_memory": true,
+    "memory_write_policy": true,
+    "memory_exclusion": true,
+    "runtime_context": true,
+    "context_builder": true,
+    "source_trust_level": true,
+    "fact_conflict_resolution": true,
+    "context_compression": true,
+    "sliding_window": true,
+    "context_relevance": true,
+    "real_llm_calling": true,
+    "langchain_runnable_sequence": true,
+    "llm_intent_router": true,
+    "llm_final_answer": true,
+    "reasoning_content": true,
+    "prompt_injection_defense": true,
+    "hooks": true,
+    "tool_calls": true,
+    "tool_calling": true,
+    "tool_schema": true,
+    "tool_clarification": true,
+    "tool_candidates": true,
+    "route_plan": true,
+    "route_planner": true,
+    "basic_rag": true,
+    "rag_citations": true,
+    "rag_quality_check": true,
+    "reranker": true,
+    "document_chunking": true,
+    "vector_retrieval": true,
+    "keyword_retrieval": true,
+    "pre_retrieval": true,
+    "query_rewrite": true,
+    "hybrid_rag": true,
+    "rag_index_cache": true,
+    "mcp": true,
+    "mcp_tools": true,
+    "mcp_resources": true,
+    "mcp_prompts": true,
+    "workflow": true,
+    "langgraph_state_graph": true,
+    "received_return_workflow": true,
+    "human_approval": true,
+    "chat_resume": true,
+    "checkpoint": true,
+    "idempotency": true,
+    "trace": true,
+    "public_trace_schema": true,
+    "hidden_cot_protection": true,
+    "evaluation": true,
+    "eval_report": true,
+    "fixed_cases": true,
+    "feedback_submit": true,
+    "failure_attribution": true,
+    "eval_case_backfill": true,
+    "cost_summary": true,
+    "cost_governance": true,
+    "light_heavy_path": true,
+    "common_hit_cache": true,
+    "observation_compression": true,
+    "degradation": true,
+    "low_confidence_fallback": true
+  },
+  "endpoints": {
+    "health": true,
+    "chat": true,
+    "chat_resume": true,
+    "trace": true,
+    "eval_run": true
+  }
+}

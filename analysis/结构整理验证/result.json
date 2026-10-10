@@ -1,0 +1,44 @@
+{
+  "date": "2026-10-07",
+  "python_unittests": {
+    "passed": 9,
+    "model_calls": 0
+  },
+  "frontend_builds": {
+    "workbench": "passed",
+    "shop_admin": "passed",
+    "vite_config_output_suppressed": true
+  },
+  "migration_contract": "passed",
+  "java_compile": {
+    "status": "passed",
+    "method": "javac --release 17，使用运行中服务 JAR 的依赖，断网临时容器",
+    "source_files": 153,
+    "generated_classes": 154,
+    "maven_package": "未完成；预热缓存缺 Spring Security，镜像下载超时"
+  },
+  "offline_eval": {
+    "total": 13,
+    "passed": 10,
+    "failed": 3,
+    "unchanged_failure_ids": [
+      "product-tool-rag-joint-answer",
+      "received-return-workflow",
+      "promotion-member-rag-path"
+    ],
+    "model_calls": 0
+  },
+  "image_ocr": {
+    "brand_images": [],
+    "scanned": 35
+  },
+  "scope": {
+    "database_changed": false,
+    "running_services_restarted": false,
+    "model_calls": 0,
+    "historical_baseline_display_text_sanitized": true,
+    "original_source_backup_removed": true
+  },
+  "structure_check": "structure-check.json",
+  "offline_eval_artifact": "offline-eval.json"
+}

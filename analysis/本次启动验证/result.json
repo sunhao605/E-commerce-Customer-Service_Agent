@@ -1,0 +1,60 @@
+{
+  "date": "2026-10-09",
+  "mode": "最新 Java/MySQL、真实商城浏览器、已启用在线模型的 Python；没有替换接口响应",
+  "fixture": {
+    "orderNo": "SO20261009061332122-26971b7b",
+    "product": "户外野餐垫",
+    "amount": 199.0,
+    "balanceBeforePayment": 100000.0,
+    "source": "本地演示库，真实下单及模拟余额支付接口"
+  },
+  "balanceAfterPayment": 99801.0,
+  "chatResponses": [
+    {
+      "status": 200,
+      "data": {
+        "answer": "请核对退款申请。确认后只登记为待审核，是否通过由管理员独立决定。",
+        "sessionId": "cs-90e7a53e-c5b5-48df-a152-a17f786b534e",
+        "confirmRequired": true,
+        "pendingAction": "CONFIRM_SUBMIT",
+        "confirmationTitle": "确认提交退款申请",
+        "confirmationSummary": "订单：SO20261009061332122-26971b7b；商品：户外野餐垫 x1；范围：整单退款；实付金额：199.00 元；原因：买错了；状态：等待本人确认，尚未提交。确认后等待审核，提交不代表退款成功。",
+        "relatedOrderNo": "SO20261009061332122-26971b7b",
+        "resumeToken": "2ab87b78-3622-474b-be3b-e8051396ee0a",
+        "actions": [
+          {
+            "code": "CONFIRM_SUBMIT",
+            "label": "确认提交申请"
+          },
+          {
+            "code": "CANCEL_SUBMIT",
+            "label": "取消本次申请"
+          }
+        ],
+        "fallback": false
+      }
+    },
+    {
+      "status": 200,
+      "data": {
+        "answer": "本次退款申请已取消，未提交。",
+        "sessionId": "cs-90e7a53e-c5b5-48df-a152-a17f786b534e",
+        "confirmRequired": false,
+        "pendingAction": "CANCELLED",
+        "relatedOrderNo": "SO20261009061332122-26971b7b",
+        "actions": [],
+        "fallback": false
+      }
+    }
+  ],
+  "pageErrors": [],
+  "checks": [
+    "健康及登录",
+    "下单及模拟支付流水",
+    "实际客服确认卡",
+    "取消无售后写入或退款余额变化",
+    "后台售后页面"
+  ],
+  "refundSubmissions": 0,
+  "adminApprovals": 0
+}

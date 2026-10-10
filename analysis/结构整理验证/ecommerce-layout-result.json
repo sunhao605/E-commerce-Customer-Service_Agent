@@ -1,0 +1,49 @@
+{
+  "date": "2026-10-07",
+  "java_source_files": 153,
+  "java_compile": "passed (Java 17, local dependency JARs, offline temporary container)",
+  "spring_components": 49,
+  "jpa_entities": 19,
+  "jpa_repositories": 19,
+  "java_packages": {
+    "aftersale": 33,
+    "order": 30,
+    "account": 34,
+    "catalog": 24,
+    "customer_service": 22,
+    "common": 3,
+    "config": 6
+  },
+  "java_body_comparison": "passed; only listed helper deletions allowed",
+  "frontend_build": "passed; TypeScript noUnusedLocals/noUnusedParameters enabled",
+  "frontend_browser_check": "ecommerce-ui-check.json (built preview; synthetic API fixture)",
+  "frontend_routes_unchanged": [
+    "/",
+    "/admin/"
+  ],
+  "removed_frontend_wrappers": [
+    "api.createAfterSale",
+    "api.afterSales",
+    "adminApi.adminMe"
+  ],
+  "removed_java_helpers": [
+    "seedExistingProductPromotions 转发层",
+    "未使用的 saveProductIfMissing",
+    "未使用的五参数 savePromotionIfMissing"
+  ],
+  "removed_files": [
+    "ecommerce-backend/run-ecommerce-local.cmd"
+  ],
+  "duplicate_types_merged": [
+    "CurrentAccount",
+    "BalanceTransaction",
+    "ApiResponse"
+  ],
+  "dependency_versions_changed": false,
+  "docker_or_maven_build": "not rerun; Java compilation and static build-path checks only",
+  "database_calls": 0,
+  "model_calls": 0,
+  "running_services_restarted": false,
+  "brand_and_links_check": "structure-check.json",
+  "package_and_entry_check": "ecommerce-layout-check.json"
+}

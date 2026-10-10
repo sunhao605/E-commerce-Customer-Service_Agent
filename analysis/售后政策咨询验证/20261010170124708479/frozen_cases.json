@@ -1,0 +1,35 @@
+{
+  "frozen_at": "2026-10-10T17:01:24.722469+08:00",
+  "initial_state": "每条全新会话；runtime_user_id=intent-eval；无订单、历史、页面上下文；不清理共享 FAQ 缓存。",
+  "expected": "回答对应售后通用政策并给出匹配依据；不要求订单号，不创建办理待办/确认卡/申请；不承诺具体订单有资格。",
+  "allowed": "售后政策只读检索、模型解释，或基于核验政策的确定性回复；不要求唯一意图标签。",
+  "forbidden": [
+    "回答发票或其他无关政策",
+    "把咨询作为退款/退货办理",
+    "强制补订单号",
+    "新增待办理任务或确认卡",
+    "提交申请或批准退款"
+  ],
+  "cases": [
+    {
+      "id": "B01",
+      "group": "边界",
+      "message": "退款政策是什么？我先了解一下，不申请退款。",
+      "prior_user_messages": [],
+      "context": "",
+      "expected": [],
+      "gap": true,
+      "doc_baseline": "refund_request"
+    },
+    {
+      "id": "B02",
+      "group": "边界",
+      "message": "七天无理由退货需要满足什么条件？只是咨询，暂时不退。",
+      "prior_user_messages": [],
+      "context": "",
+      "expected": [],
+      "gap": true,
+      "doc_baseline": "return_request"
+    }
+  ]
+}

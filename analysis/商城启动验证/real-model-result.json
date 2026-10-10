@@ -1,0 +1,96 @@
+{
+  "model": "deepseek-flash",
+  "direct_model_flags": {
+    "route_planner": {
+      "used_model": true,
+      "model_name": "deepseek-flash",
+      "fallback_reason": null,
+      "prompt_fragments": [
+        {
+          "name": "prompt_security",
+          "level": "global_policy",
+          "version": "v1",
+          "load": "always",
+          "priority": 100,
+          "phase": "route",
+          "estimated_tokens": 29
+        },
+        {
+          "name": "system_customer_service",
+          "level": "role",
+          "version": "v1",
+          "load": "always",
+          "priority": 90,
+          "phase": "route",
+          "estimated_tokens": 32
+        },
+        {
+          "name": "route_contract",
+          "level": "task_contract",
+          "version": "v1",
+          "load": "when_route",
+          "priority": 80,
+          "phase": "route",
+          "estimated_tokens": 207
+        }
+      ]
+    },
+    "final_answer": {
+      "used_model": true,
+      "model_name": "deepseek-flash",
+      "fallback_reason": null,
+      "prompt_fragments": [
+        {
+          "name": "prompt_security",
+          "level": "global_policy",
+          "version": "v1",
+          "load": "always",
+          "priority": 100,
+          "phase": "final_answer",
+          "estimated_tokens": 29
+        },
+        {
+          "name": "system_customer_service",
+          "level": "role",
+          "version": "v1",
+          "load": "always",
+          "priority": 90,
+          "phase": "final_answer",
+          "estimated_tokens": 32
+        },
+        {
+          "name": "tool_usage",
+          "level": "capability",
+          "version": "v1",
+          "load": "when_business_tool",
+          "priority": 70,
+          "phase": "final_answer",
+          "estimated_tokens": 54
+        },
+        {
+          "name": "final_answer_style",
+          "level": "response_contract",
+          "version": "v1",
+          "load": "when_final_answer",
+          "priority": 40,
+          "phase": "final_answer",
+          "estimated_tokens": 25
+        }
+      ]
+    }
+  },
+  "mall_chat": [
+    {
+      "status": 200,
+      "data": {
+        "answer": "您好，已为您查询订单 SO20260602103000009-a1000009：当前订单状态为已发货，物流状态为运输中，商品是户外野餐垫。\n\n目前暂无更多物流节点信息，建议您稍后再关注更新。如长时间未更新，我可以帮您转人工进一步核实。",
+        "sessionId": "cs-2898b90f-2d3d-4501-aa30-ec01e99d9096",
+        "confirmRequired": false,
+        "actions": [],
+        "fallback": false
+      }
+    }
+  ],
+  "page_errors": [],
+  "scope": "two real chat requests; live Java/MySQL facts; local policy embeddings"
+}

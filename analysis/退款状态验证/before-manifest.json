@@ -1,0 +1,8 @@
+{
+  "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/aftersale/AdminAfterSaleService.java": "5931a383a425ddd362f975c333cb05c70716355f9cdb5e39bc0fa9f60c69cf06",
+  "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/aftersale/AfterSaleRequestRepository.java": "d3938e7bddcdeefe9c5d308657bce5e7aa15c2710e00ba131572472276a12892",
+  "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/order/OrderEntity.java": "7f34af374d903df094608a3e316765e458cca7026fec49572db44cf677be00af",
+  "ecommerce-backend/frontend/src/shop/App.tsx": "f263698be9eeb1a3bf1b7a439b109f7713b7d979ec559a1c449f8954c1c10785",
+  "analysis/\u7f3a\u53e3\u4e00\u9a8c\u8bc1/CustomerRefundCheck.java": "77f361a73369e367912a9552f44bdc07c6f55071ba8832835c490900572c6d64",
+  "analysis/\u7f3a\u53e3\u4e00\u9a8c\u8bc1/run_java_check.py": "ed9387f7c4b2164cd499e1444997b7fc1d60016eb9c509d3c7b79b30b93ba828"
+}

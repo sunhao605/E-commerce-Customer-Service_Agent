@@ -1,0 +1,590 @@
+{
+  "checked_at": "2026-10-10T17:29:48.623709+08:00",
+  "type": "静态调用纯 RoutePlan 构造函数，非聊天评测，无模型或业务调用",
+  "labels": [
+    "general_chat",
+    "order_query",
+    "refund_status_query",
+    "refund_request",
+    "return_request",
+    "faq_query",
+    "promotion_query",
+    "product_query",
+    "low_confidence_query",
+    "degradation_request",
+    "security_request",
+    "unknown"
+  ],
+  "sources": {
+    "backend/api/schemas.py": "a1e137f50463f57816e51e1744b8becb759e782c483e6da019ceeb61ca2c780a",
+    "backend/agent/models/router_client.py": "13e67e5d7c90fa5007399fd6bb5c0cf87b14a050e46b1d52a6084901e462a086",
+    "backend/agent/tools/planning.py": "1caf0805c95a19cece2a81f63179a0bbec7a630fc7217262c372cd5e6211d08b",
+    "backend/agent/customer_service_agent.py": "5ad35278543e615b5849b9d31644de35ea2a4c76609354f015caa938967429c7",
+    "backend/resources/prompts/route_contract.md": "6e8c70c0c22fd9076d70eba62b5047794a0c9fc05c96ee7b42887c31fe1af176",
+    "backend/resources/prompts/prompt_registry.yml": "b28bb2d7528702dc3011d94a4464d210500a573d5f0a4093458f9264f1d21b39"
+  },
+  "route_plans": [
+    {
+      "intent": "general_chat",
+      "order_id": null,
+      "route_plan": {
+        "intent": "general_chat",
+        "needs_rag": false,
+        "needs_business_tools": false,
+        "required_tools": [],
+        "tool_candidates": [],
+        "knowledge_domains": [],
+        "entity_refs": [],
+        "risk_level": "low",
+        "requires_workflow": false,
+        "confidence": 0.9,
+        "source": "llm_with_policy_constraints",
+        "fallback_policy": "safe_deterministic_path"
+      }
+    },
+    {
+      "intent": "general_chat",
+      "order_id": "ORD1234",
+      "route_plan": {
+        "intent": "general_chat",
+        "needs_rag": false,
+        "needs_business_tools": false,
+        "required_tools": [],
+        "tool_candidates": [],
+        "knowledge_domains": [],
+        "entity_refs": [
+          "ORD1234"
+        ],
+        "risk_level": "low",
+        "requires_workflow": false,
+        "confidence": 0.9,
+        "source": "llm_with_policy_constraints",
+        "fallback_policy": "safe_deterministic_path"
+      }
+    },
+    {
+      "intent": "order_query",
+      "order_id": null,
+      "route_plan": {
+        "intent": "order_query",
+        "needs_rag": false,
+        "needs_business_tools": true,
+        "required_tools": [],
+        "tool_candidates": [
+          {
+            "name": "get_order_logistics",
+            "domain": "logistics",
+            "risk_level": "low",
+            "reason": "读取当前用户订单及物流状态。"
+          }
+        ],
+        "knowledge_domains": [],
+        "entity_refs": [],
+        "risk_level": "low",
+        "requires_workflow": false,
+        "confidence": 0.9,
+        "source": "llm_with_policy_constraints",
+        "fallback_policy": "ask_order_id"
+      }
+    },
+    {
+      "intent": "order_query",
+      "order_id": "ORD1234",
+      "route_plan": {
+        "intent": "order_query",
+        "needs_rag": false,
+        "needs_business_tools": true,
+        "required_tools": [
+          "get_order_logistics"
+        ],
+        "tool_candidates": [
+          {
+            "name": "get_order_logistics",
+            "domain": "logistics",
+            "risk_level": "low",
+            "reason": "读取当前用户订单及物流状态。"
+          }
+        ],
+        "knowledge_domains": [],
+        "entity_refs": [
+          "ORD1234"
+        ],
+        "risk_level": "low",
+        "requires_workflow": false,
+        "confidence": 0.9,
+        "source": "llm_with_policy_constraints",
+        "fallback_policy": "safe_deterministic_path"
+      }
+    },
+    {
+      "intent": "refund_status_query",
+      "order_id": null,
+      "route_plan": {
+        "intent": "refund_status_query",
+        "needs_rag": false,
+        "needs_business_tools": true,
+        "required_tools": [],
+        "tool_candidates": [
+          {
+            "name": "get_refund_status",
+            "domain": "after_sale",
+            "risk_level": "low",
+            "reason": "只读查询当前用户订单的售后申请状态，不创建退款申请。"
+          }
+        ],
+        "knowledge_domains": [],
+        "entity_refs": [],
+        "risk_level": "low",
+        "requires_workflow": false,
+        "confidence": 0.9,
+        "source": "llm_with_policy_constraints",
+        "fallback_policy": "ask_order_id"
+      }
+    },
+    {
+      "intent": "refund_status_query",
+      "order_id": "ORD1234",
+      "route_plan": {
+        "intent": "refund_status_query",
+        "needs_rag": false,
+        "needs_business_tools": true,
+        "required_tools": [
+          "get_refund_status"
+        ],
+        "tool_candidates": [
+          {
+            "name": "get_refund_status",
+            "domain": "after_sale",
+            "risk_level": "low",
+            "reason": "只读查询当前用户订单的售后申请状态，不创建退款申请。"
+          }
+        ],
+        "knowledge_domains": [],
+        "entity_refs": [
+          "ORD1234"
+        ],
+        "risk_level": "low",
+        "requires_workflow": false,
+        "confidence": 0.9,
+        "source": "llm_with_policy_constraints",
+        "fallback_policy": "safe_deterministic_path"
+      }
+    },
+    {
+      "intent": "refund_request",
+      "order_id": null,
+      "route_plan": {
+        "intent": "refund_request",
+        "needs_rag": true,
+        "needs_business_tools": true,
+        "required_tools": [],
+        "tool_candidates": [
+          {
+            "name": "get_order_detail",
+            "domain": "order",
+            "risk_level": "low",
+            "reason": "读取当前用户订单事实，不执行业务写操作。"
+          }
+        ],
+        "knowledge_domains": [
+          "after_sale_policy"
+        ],
+        "entity_refs": [],
+        "risk_level": "high",
+        "requires_workflow": true,
+        "confidence": 0.9,
+        "source": "llm_with_policy_constraints",
+        "fallback_policy": "ask_order_id"
+      }
+    },
+    {
+      "intent": "refund_request",
+      "order_id": "ORD1234",
+      "route_plan": {
+        "intent": "refund_request",
+        "needs_rag": true,
+        "needs_business_tools": true,
+        "required_tools": [
+          "get_order_detail"
+        ],
+        "tool_candidates": [
+          {
+            "name": "get_order_detail",
+            "domain": "order",
+            "risk_level": "low",
+            "reason": "读取当前用户订单事实，不执行业务写操作。"
+          }
+        ],
+        "knowledge_domains": [
+          "after_sale_policy"
+        ],
+        "entity_refs": [
+          "ORD1234"
+        ],
+        "risk_level": "high",
+        "requires_workflow": true,
+        "confidence": 0.9,
+        "source": "llm_with_policy_constraints",
+        "fallback_policy": "safe_deterministic_path"
+      }
+    },
+    {
+      "intent": "return_request",
+      "order_id": null,
+      "route_plan": {
+        "intent": "return_request",
+        "needs_rag": true,
+        "needs_business_tools": true,
+        "required_tools": [],
+        "tool_candidates": [
+          {
+            "name": "get_order_detail",
+            "domain": "order",
+            "risk_level": "low",
+            "reason": "读取当前用户订单事实，不执行业务写操作。"
+          }
+        ],
+        "knowledge_domains": [
+          "received_return_policy"
+        ],
+        "entity_refs": [],
+        "risk_level": "high",
+        "requires_workflow": true,
+        "confidence": 0.9,
+        "source": "llm_with_policy_constraints",
+        "fallback_policy": "ask_order_id"
+      }
+    },
+    {
+      "intent": "return_request",
+      "order_id": "ORD1234",
+      "route_plan": {
+        "intent": "return_request",
+        "needs_rag": true,
+        "needs_business_tools": true,
+        "required_tools": [
+          "get_order_detail"
+        ],
+        "tool_candidates": [
+          {
+            "name": "get_order_detail",
+            "domain": "order",
+            "risk_level": "low",
+            "reason": "读取当前用户订单事实，不执行业务写操作。"
+          }
+        ],
+        "knowledge_domains": [
+          "received_return_policy"
+        ],
+        "entity_refs": [
+          "ORD1234"
+        ],
+        "risk_level": "high",
+        "requires_workflow": true,
+        "confidence": 0.9,
+        "source": "llm_with_policy_constraints",
+        "fallback_policy": "safe_deterministic_path"
+      }
+    },
+    {
+      "intent": "faq_query",
+      "order_id": null,
+      "route_plan": {
+        "intent": "faq_query",
+        "needs_rag": true,
+        "needs_business_tools": false,
+        "required_tools": [],
+        "tool_candidates": [],
+        "knowledge_domains": [
+          "faq"
+        ],
+        "entity_refs": [],
+        "risk_level": "low",
+        "requires_workflow": false,
+        "confidence": 0.9,
+        "source": "llm_with_policy_constraints",
+        "fallback_policy": "safe_deterministic_path"
+      }
+    },
+    {
+      "intent": "faq_query",
+      "order_id": "ORD1234",
+      "route_plan": {
+        "intent": "faq_query",
+        "needs_rag": true,
+        "needs_business_tools": false,
+        "required_tools": [],
+        "tool_candidates": [],
+        "knowledge_domains": [
+          "faq"
+        ],
+        "entity_refs": [
+          "ORD1234"
+        ],
+        "risk_level": "low",
+        "requires_workflow": false,
+        "confidence": 0.9,
+        "source": "llm_with_policy_constraints",
+        "fallback_policy": "safe_deterministic_path"
+      }
+    },
+    {
+      "intent": "promotion_query",
+      "order_id": null,
+      "route_plan": {
+        "intent": "promotion_query",
+        "needs_rag": true,
+        "needs_business_tools": false,
+        "required_tools": [],
+        "tool_candidates": [],
+        "knowledge_domains": [
+          "promotion_and_member_policy"
+        ],
+        "entity_refs": [],
+        "risk_level": "low",
+        "requires_workflow": false,
+        "confidence": 0.9,
+        "source": "llm_with_policy_constraints",
+        "fallback_policy": "safe_deterministic_path"
+      }
+    },
+    {
+      "intent": "promotion_query",
+      "order_id": "ORD1234",
+      "route_plan": {
+        "intent": "promotion_query",
+        "needs_rag": true,
+        "needs_business_tools": false,
+        "required_tools": [],
+        "tool_candidates": [],
+        "knowledge_domains": [
+          "promotion_and_member_policy"
+        ],
+        "entity_refs": [
+          "ORD1234"
+        ],
+        "risk_level": "low",
+        "requires_workflow": false,
+        "confidence": 0.9,
+        "source": "llm_with_policy_constraints",
+        "fallback_policy": "safe_deterministic_path"
+      }
+    },
+    {
+      "intent": "product_query",
+      "order_id": null,
+      "route_plan": {
+        "intent": "product_query",
+        "needs_rag": true,
+        "needs_business_tools": true,
+        "required_tools": [
+          "search_products"
+        ],
+        "tool_candidates": [
+          {
+            "name": "search_products",
+            "domain": "product",
+            "risk_level": "low",
+            "reason": "查询商品价格、库存和活动等实时事实。"
+          }
+        ],
+        "knowledge_domains": [
+          "promotion_and_member_policy"
+        ],
+        "entity_refs": [],
+        "risk_level": "low",
+        "requires_workflow": false,
+        "confidence": 0.9,
+        "source": "llm_with_policy_constraints",
+        "fallback_policy": "safe_deterministic_path"
+      }
+    },
+    {
+      "intent": "product_query",
+      "order_id": "ORD1234",
+      "route_plan": {
+        "intent": "product_query",
+        "needs_rag": true,
+        "needs_business_tools": true,
+        "required_tools": [
+          "search_products"
+        ],
+        "tool_candidates": [
+          {
+            "name": "search_products",
+            "domain": "product",
+            "risk_level": "low",
+            "reason": "查询商品价格、库存和活动等实时事实。"
+          }
+        ],
+        "knowledge_domains": [
+          "promotion_and_member_policy"
+        ],
+        "entity_refs": [
+          "ORD1234"
+        ],
+        "risk_level": "low",
+        "requires_workflow": false,
+        "confidence": 0.9,
+        "source": "llm_with_policy_constraints",
+        "fallback_policy": "safe_deterministic_path"
+      }
+    },
+    {
+      "intent": "low_confidence_query",
+      "order_id": null,
+      "route_plan": {
+        "intent": "low_confidence_query",
+        "needs_rag": true,
+        "needs_business_tools": false,
+        "required_tools": [],
+        "tool_candidates": [],
+        "knowledge_domains": [
+          "promotion_and_member_policy"
+        ],
+        "entity_refs": [],
+        "risk_level": "low",
+        "requires_workflow": false,
+        "confidence": 0.9,
+        "source": "llm_with_policy_constraints",
+        "fallback_policy": "safe_deterministic_path"
+      }
+    },
+    {
+      "intent": "low_confidence_query",
+      "order_id": "ORD1234",
+      "route_plan": {
+        "intent": "low_confidence_query",
+        "needs_rag": true,
+        "needs_business_tools": false,
+        "required_tools": [],
+        "tool_candidates": [],
+        "knowledge_domains": [
+          "promotion_and_member_policy"
+        ],
+        "entity_refs": [
+          "ORD1234"
+        ],
+        "risk_level": "low",
+        "requires_workflow": false,
+        "confidence": 0.9,
+        "source": "llm_with_policy_constraints",
+        "fallback_policy": "safe_deterministic_path"
+      }
+    },
+    {
+      "intent": "degradation_request",
+      "order_id": null,
+      "route_plan": {
+        "intent": "degradation_request",
+        "needs_rag": false,
+        "needs_business_tools": false,
+        "required_tools": [],
+        "tool_candidates": [],
+        "knowledge_domains": [],
+        "entity_refs": [],
+        "risk_level": "medium",
+        "requires_workflow": false,
+        "confidence": 0.9,
+        "source": "llm_with_policy_constraints",
+        "fallback_policy": "safe_deterministic_path"
+      }
+    },
+    {
+      "intent": "degradation_request",
+      "order_id": "ORD1234",
+      "route_plan": {
+        "intent": "degradation_request",
+        "needs_rag": false,
+        "needs_business_tools": false,
+        "required_tools": [],
+        "tool_candidates": [],
+        "knowledge_domains": [],
+        "entity_refs": [
+          "ORD1234"
+        ],
+        "risk_level": "medium",
+        "requires_workflow": false,
+        "confidence": 0.9,
+        "source": "llm_with_policy_constraints",
+        "fallback_policy": "safe_deterministic_path"
+      }
+    },
+    {
+      "intent": "security_request",
+      "order_id": null,
+      "route_plan": {
+        "intent": "security_request",
+        "needs_rag": false,
+        "needs_business_tools": false,
+        "required_tools": [],
+        "tool_candidates": [],
+        "knowledge_domains": [],
+        "entity_refs": [],
+        "risk_level": "high",
+        "requires_workflow": false,
+        "confidence": 0.9,
+        "source": "llm_with_policy_constraints",
+        "fallback_policy": "safe_deterministic_path"
+      }
+    },
+    {
+      "intent": "security_request",
+      "order_id": "ORD1234",
+      "route_plan": {
+        "intent": "security_request",
+        "needs_rag": false,
+        "needs_business_tools": false,
+        "required_tools": [],
+        "tool_candidates": [],
+        "knowledge_domains": [],
+        "entity_refs": [
+          "ORD1234"
+        ],
+        "risk_level": "high",
+        "requires_workflow": false,
+        "confidence": 0.9,
+        "source": "llm_with_policy_constraints",
+        "fallback_policy": "safe_deterministic_path"
+      }
+    },
+    {
+      "intent": "unknown",
+      "order_id": null,
+      "route_plan": {
+        "intent": "unknown",
+        "needs_rag": false,
+        "needs_business_tools": false,
+        "required_tools": [],
+        "tool_candidates": [],
+        "knowledge_domains": [],
+        "entity_refs": [],
+        "risk_level": "low",
+        "requires_workflow": false,
+        "confidence": 0.9,
+        "source": "llm_with_policy_constraints",
+        "fallback_policy": "safe_deterministic_path"
+      }
+    },
+    {
+      "intent": "unknown",
+      "order_id": "ORD1234",
+      "route_plan": {
+        "intent": "unknown",
+        "needs_rag": false,
+        "needs_business_tools": false,
+        "required_tools": [],
+        "tool_candidates": [],
+        "knowledge_domains": [],
+        "entity_refs": [
+          "ORD1234"
+        ],
+        "risk_level": "low",
+        "requires_workflow": false,
+        "confidence": 0.9,
+        "source": "llm_with_policy_constraints",
+        "fallback_policy": "safe_deterministic_path"
+      }
+    }
+  ]
+}

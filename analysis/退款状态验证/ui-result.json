@@ -1,0 +1,33 @@
+{
+  "checks": [
+    "商城提交待审核后，后台实际批准",
+    "列表 focus 刷新和已退款筛选",
+    "详情 focus 刷新、订单/支付/履约与售后条件",
+    "手机宽度和无页面异常"
+  ],
+  "database": "isolated H2",
+  "model": "synthetic stub",
+  "api": "routing proxy to real Java, no synthetic business responses",
+  "approvals": [
+    {
+      "status": 200,
+      "body": {
+        "success": true,
+        "code": "OK",
+        "message": "success",
+        "data": {
+          "requestNo": "AS-20261009063933501-d238edfa",
+          "status": "APPROVED",
+          "approvalNo": "AR-1005",
+          "balanceTransactionNo": "BT-AS-AS-20261009063933501-d238edfa",
+          "amount": 200,
+          "reviewerUsername": "admin",
+          "reviewedAt": "2026-10-09T06:39:36.115120711"
+        }
+      }
+    }
+  ],
+  "pageErrors": [],
+  "existingMySQLWrites": 0,
+  "modelCalls": 0
+}

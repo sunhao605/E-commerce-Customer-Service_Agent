@@ -1,0 +1,12 @@
+{
+  "orderNo": "SO20261009061332122-26971b7b",
+  "checks": [
+    "实际订单列表显示已退款",
+    "已退款筛选命中",
+    "详情订单/支付已退款、履约已取消"
+  ],
+  "mode": "真实商城/Java/MySQL，没有替换接口响应",
+  "pageErrors": [],
+  "modelCalls": 0,
+  "refundOrApprovalWrites": 0
+}

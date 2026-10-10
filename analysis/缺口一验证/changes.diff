@@ -1,0 +1,1370 @@
+--- before/ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/CustomerServiceGatewayService.java
++++ after/ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/CustomerServiceGatewayService.java
+@@ -18,8 +18,6 @@
+ 
+ import com.teachdemo.ecommerce.customer_service.AgentChatRequest;
+ 
+-import com.teachdemo.ecommerce.customer_service.AgentResumeRequest;
+-
+ import com.teachdemo.ecommerce.customer_service.CustomerServiceActionResponse;
+ 
+ import com.teachdemo.ecommerce.customer_service.CustomerServiceChatRequest;
+@@ -39,6 +37,10 @@
+ import com.teachdemo.ecommerce.order.OrderEntity;
+ 
+ import com.teachdemo.ecommerce.order.OrderRepository;
++import com.teachdemo.ecommerce.order.ShopService;
++import com.teachdemo.ecommerce.order.ShopOrderResponse;
++import com.teachdemo.ecommerce.aftersale.ShopAfterSaleResponse;
++import com.teachdemo.ecommerce.common.BusinessException;
+ 
+ import java.time.LocalDateTime;
+ 
+@@ -53,6 +55,9 @@
+ import java.util.Set;
+ 
+ import java.util.UUID;
++import java.util.Objects;
++import java.util.regex.Matcher;
++import java.util.regex.Pattern;
+ 
+ import org.springframework.http.HttpStatus;
+ 
+@@ -75,6 +80,9 @@
+     private final AfterSaleRequestRepository afterSaleRequestRepository;
+     private final ProductRepository productRepository;
+     private final RuntimeOrderContextService runtimeOrderContextService;
++    private final ShopService shopService;
++    private static final Pattern ORDER_NO = Pattern.compile("\\b(?:SO[A-Za-z0-9_-]{6,}|ORD\\d{4,})\\b", Pattern.CASE_INSENSITIVE);
++    private static final Pattern REFUND_REASON = Pattern.compile("(?:退款原因|原因)\\s*[:：]\\s*(.+)|因为\\s*(.+)");
+ 
+     public CustomerServiceGatewayService(CustomerServiceAgentClient agentClient,
+                                          CustomerServiceSessionStore sessionStore,
+@@ -82,7 +90,8 @@
+                                          OrderRepository orderRepository,
+                                          AfterSaleRequestRepository afterSaleRequestRepository,
+                                          ProductRepository productRepository,
+-                                         RuntimeOrderContextService runtimeOrderContextService) {
++                                         RuntimeOrderContextService runtimeOrderContextService,
++                                         ShopService shopService) {
+         this.agentClient = agentClient;
+         this.sessionStore = sessionStore;
+         this.userProfileRepository = userProfileRepository;
+@@ -90,6 +99,7 @@
+         this.afterSaleRequestRepository = afterSaleRequestRepository;
+         this.productRepository = productRepository;
+         this.runtimeOrderContextService = runtimeOrderContextService;
++        this.shopService = shopService;
+     }
+ 
+     public CustomerServiceResponse chat(CustomerServiceChatRequest request, AccountPrincipal principal) {
+@@ -99,22 +109,37 @@
+             ? request.getSessionId().trim()
+             : "cs-" + UUID.randomUUID();
+         CustomerServiceSession session = sessionStore.getOrCreate(sessionId, profile.getUserId());
+-        assertSessionOwner(session, profile.getUserId());
+-        AgentChatRequest agentRequest = new AgentChatRequest(
+-            sessionId,
+-            profile.getUserId(),
+-            profile.getNickname(),
+-            profile.getMemberLevel(),
+-            profile.getRiskLevel(),
+-            buildAgentMessage(request.getMessage(), pageContext, profile.getUserId()),
+-            buildRuntimeContext(profile, pageContext)
+-        );
+-        try {
+-            JsonNode agentResponse = agentClient.chat(agentRequest);
+-            return sanitizeChatResponse(agentResponse, session, pageContext);
+-        } catch (RuntimeException ex) {
+-            sessionStore.save(session);
+-            return fallback(sessionId);
++        synchronized (session) {
++            assertSessionOwner(session, profile.getUserId());
++            String message = request.getMessage();
++            boolean continuingRefund = session.getPendingAction() != null && !session.isHandled();
++            boolean needsOrder = "REFUND_ORDER_REQUIRED".equals(session.getPendingAction());
++            String requestedOrder = extractOrderNo(message);
++            if (requestedOrder == null && pageContext != null) requestedOrder = trimToNull(pageContext.getOrderNo());
++            boolean changedOrder = requestedOrder != null && !Objects.equals(requestedOrder, session.getRelatedOrderNo());
++            CustomerServiceResponse followup = refundFollowup(session, message, pageContext, profile.getUserId());
++            if (followup != null) {
++                return followup;
++            }
++            if (continuingRefund && requestedOrder != null && (needsOrder || changedOrder)) {
++                message += "\n客户正在补充或更换未发货整单退款申请的订单号，尚未确认提交。";
++            }
++            AgentChatRequest agentRequest = new AgentChatRequest(
++                sessionId,
++                profile.getUserId(),
++                profile.getNickname(),
++                profile.getMemberLevel(),
++                profile.getRiskLevel(),
++                buildAgentMessage(message, pageContext, profile.getUserId()),
++                buildRuntimeContext(profile, pageContext)
++            );
++            try {
++                JsonNode agentResponse = agentClient.chat(agentRequest);
++                return sanitizeChatResponse(agentResponse, session, pageContext, profile.getUserId(), request.getMessage());
++            } catch (RuntimeException ex) {
++                sessionStore.save(session);
++                return fallback(sessionId);
++            }
+         }
+     }
+ 
+@@ -122,46 +147,41 @@
+         UserProfile profile = loadProfile(principal);
+         CustomerServiceSession session = sessionStore.find(request.getSessionId())
+             .orElseThrow(() -> new CustomerServiceException(HttpStatus.NOT_FOUND, "NOT_FOUND", "客服会话不存在"));
+-        assertSessionOwner(session, profile.getUserId());
+-        validateResumeSession(session, request);
+-        validateOrderOwnership(session.getRelatedOrderNo(), profile.getUserId());
+-        validateAfterSaleOwnership(session.getRelatedAfterSaleNo(), profile.getUserId());
+-
+-        String decision = request.getDecision().trim().toUpperCase(Locale.ROOT);
+-        if ("CANCEL_SUBMIT".equals(decision)) {
+-            session.setHandled(true);
+-            sessionStore.save(session);
+-            return new CustomerServiceResponse(
+-                cancelAnswer(session.getActionType()),
+-                session.getSessionId(),
+-                false,
+-                null,
+-                null,
+-                null,
+-                session.getRelatedOrderNo(),
+-                session.getRelatedAfterSaleNo(),
+-                null,
+-                List.of(),
+-                false
+-            );
+-        }
+-        if (!"CONFIRM_SUBMIT".equals(decision)) {
+-            throw new CustomerServiceException(HttpStatus.BAD_REQUEST, "BAD_REQUEST", "decision 只支持 CONFIRM_SUBMIT 或 CANCEL_SUBMIT");
+-        }
+-
+-        try {
+-            JsonNode agentResponse = agentClient.resume(new AgentResumeRequest(
+-                session.getSessionId(),
+-                session.getWorkflowId(),
+-                session.getResumeToken(),
+-                "approved",
+-                "用户已在荒野户外商城客服入口确认提交申请"
+-            ));
+-            session.setHandled(true);
+-            sessionStore.save(session);
+-            return sanitizeResumeResponse(agentResponse, session);
+-        } catch (RuntimeException ex) {
+-            return fallback(session.getSessionId());
++        synchronized (session) {
++            assertSessionOwner(session, profile.getUserId());
++            String decision = request.getDecision().trim().toUpperCase(Locale.ROOT);
++            if (!Set.of("CONFIRM_SUBMIT", "CANCEL_SUBMIT").contains(decision)) {
++                throw new CustomerServiceException(HttpStatus.BAD_REQUEST, "BAD_REQUEST", "decision 只支持 CONFIRM_SUBMIT 或 CANCEL_SUBMIT");
++            }
++            validateResumeSession(session, request);
++            if (session.isHandled()) {
++                if ("CONFIRM_SUBMIT".equals(decision) && session.getRelatedAfterSaleNo() != null) {
++                    AfterSaleRequest existing = afterSaleRequestRepository
++                        .findByRequestIdAndUserId(session.getRelatedAfterSaleNo(), profile.getUserId())
++                        .orElseThrow(() -> new CustomerServiceException(HttpStatus.NOT_FOUND, "NOT_FOUND", "申请记录暂时无法核实"));
++                    return submittedResponse(session, existing.getRequestId(), existing.getStatus());
++                }
++                throw new CustomerServiceException(HttpStatus.CONFLICT, "CONFLICT", "本次确认已处理，旧卡不可用");
++            }
++            if ("CANCEL_SUBMIT".equals(decision)) {
++                session.setHandled(true);
++                sessionStore.save(session);
++                return plainResponse(session, "本次退款申请已取消，未提交。", "CANCELLED");
++            }
++            try {
++                ShopAfterSaleResponse application = shopService.submitCustomerRefund(profile.getUserId(),
++                    session.getRelatedOrderNo(), session.getRefundReason(), session.getRefundAmount());
++                session.setRelatedAfterSaleNo(application.requestNo());
++                session.setHandled(true);
++                sessionStore.save(session);
++                return submittedResponse(session, application.requestNo(), application.status());
++            } catch (BusinessException ex) {
++                session.setHandled(true);
++                sessionStore.save(session);
++                throw ex;
++            } catch (RuntimeException ex) {
++                return fallback(session.getSessionId());
++            }
+         }
+     }
+ 
+@@ -294,70 +314,176 @@
+             .toList();
+     }
+ 
+-    private CustomerServiceResponse sanitizeChatResponse(JsonNode agentResponse, CustomerServiceSession session,
+-                                                         CustomerServicePageContextRequest pageContext) {
+-        if (agentResponse == null || !agentResponse.hasNonNull("answer")) {
+-            return fallback(session.getSessionId());
+-        }
+-        JsonNode workflow = workflowNode(agentResponse);
+-        String answer = text(agentResponse, "answer", FALLBACK_ANSWER);
+-        if (isApprovalRequired(workflow)) {
+-            String orderNo = firstText(workflow, "order_no", "orderNo");
+-            if (!StringUtils.hasText(orderNo) && pageContext != null) {
+-                orderNo = trimToNull(pageContext.getOrderNo());
+-            }
+-            String afterSaleNo = pageContext == null ? null : trimToNull(pageContext.getAfterSaleNo());
+-            String actionType = actionType(workflow);
+-            session.setWorkflowId(text(workflow, "workflow_id", null));
+-            session.setResumeToken(text(workflow, "resume_token", null));
+-            session.setPendingAction("CONFIRM_SUBMIT");
+-            session.setActionType(actionType);
++    private CustomerServiceResponse refundFollowup(CustomerServiceSession session, String message,
++                                                   CustomerServicePageContextRequest page, String userId) {
++        if (session.getPendingAction() == null || session.isHandled()) {
++            return null;
++        }
++        if (session.isExpired(LocalDateTime.now())) {
++            clearPendingRefund(session);
++            return plainResponse(session, "本次确认已过期，请重新提出退款诉求并核对申请。", "EXPIRED");
++        }
++        if (message.trim().matches("(?:取消本次申请|不退了|不申请了)[。！!]?")) {
++            session.setHandled(true);
++            return plainResponse(session, "本次退款申请已取消，未提交。", "CANCELLED");
++        }
++        String requestedOrder = extractOrderNo(message);
++        if (requestedOrder == null && page != null) {
++            requestedOrder = trimToNull(page.getOrderNo());
++        }
++        if (session.getRelatedOrderNo() != null && requestedOrder != null
++            && !requestedOrder.equals(session.getRelatedOrderNo())) {
++            clearPendingRefund(session);
++            return null;
++        }
++        if (session.getRelatedOrderNo() == null) {
++            String reason = extractRefundReason(message);
++            if (reason != null) {
++                session.setRefundReason(reason);
++                sessionStore.save(session);
++                if (requestedOrder == null) {
++                    return plainResponse(session, "退款原因已记录，请补充本人的订单号。本次尚未提交。", "REFUND_ORDER_REQUIRED");
++                }
++            }
++            return null;
++        }
++        String reason = extractRefundReason(message);
++        if (reason != null || message.matches(".*(?:金额|多少钱|多少|整单|审核|提交|原因|流程|政策|规则).*")) {
++            return prepareRefund(session, userId, session.getRelatedOrderNo(), reason,
++                "本次仅准备申请，尚未提交。提交后等待管理员审核，不代表退款成功。");
++        }
++        return null;
++    }
++
++    private CustomerServiceResponse prepareRefund(CustomerServiceSession session, String userId, String orderNo,
++                                                  String reason, String answer) {
++        try {
++            ShopOrderResponse order = shopService.getCustomerRefundOrder(userId, orderNo);
++            if (reason != null && (reason.isBlank() || reason.length() > 200)) {
++                clearPendingRefund(session);
++                return plainResponse(session, "请提供 1 至 200 字的退款原因，本次未提交。", "BLOCKED");
++            }
++            boolean newDraft = session.isHandled() || !Objects.equals(orderNo, session.getRelatedOrderNo())
++                || session.getResumeToken() == null;
++            boolean changed = newDraft || session.getRefundAmount() == null
++                || order.totalAmount().compareTo(session.getRefundAmount()) != 0
++                || !Objects.equals(order.itemSummary(), session.getRefundItemSummary())
++                || reason != null && !Objects.equals(reason, session.getRefundReason());
++            if (newDraft) {
++                session.setRefundReason(reason);
++                session.setRelatedAfterSaleNo(null);
++                session.setExpiresAt(LocalDateTime.now().plusMinutes(30));
++            } else if (reason != null) {
++                session.setRefundReason(reason);
++            }
++            if (changed) {
++                // 客户确认凭证独立于调试台审批凭证，内容变化后旧卡立即失效。
++                session.setResumeToken(UUID.randomUUID().toString());
++                session.setWorkflowId("customer-refund-" + UUID.randomUUID());
++            }
+             session.setRelatedOrderNo(orderNo);
+-            session.setRelatedAfterSaleNo(afterSaleNo);
+-            session.setExpiresAt(LocalDateTime.now().plusMinutes(30));
++            session.setRefundAmount(order.totalAmount());
++            session.setRefundItemSummary(order.itemSummary());
++            session.setActionType("REFUND");
+             session.setHandled(false);
++            session.setPendingAction(session.getRefundReason() == null ? "REFUND_REASON_REQUIRED" : "CONFIRM_SUBMIT");
+             sessionStore.save(session);
+-            return new CustomerServiceResponse(
+-                answer,
+-                session.getSessionId(),
+-                true,
+-                "CONFIRM_SUBMIT",
+-                confirmationTitle(actionType),
+-                confirmationSummary(actionType, orderNo, text(workflow, "risk_summary", null)),
+-                orderNo,
+-                afterSaleNo,
+-                session.getResumeToken(),
+-                confirmationActions(),
+-                false
+-            );
+-        }
++            return pendingRefundResponse(session, answer);
++        } catch (BusinessException ex) {
++            clearPendingRefund(session);
++            return plainResponse(session, ex.getMessage(), "BLOCKED");
++        }
++    }
++
++    private CustomerServiceResponse pendingRefundResponse(CustomerServiceSession session, String answer) {
++        if (!StringUtils.hasText(session.getRefundReason())) {
++            return plainResponse(session, "订单 " + session.getRelatedOrderNo() + " 的整单实付金额为 "
++                + session.getRefundAmount().toPlainString() + " 元。请补充退款原因，例如“原因：买错了”。本次尚未提交。",
++                "REFUND_REASON_REQUIRED");
++        }
++        String summary = "订单：" + session.getRelatedOrderNo() + "；商品：" + session.getRefundItemSummary()
++            + "；范围：整单退款；实付金额：" + session.getRefundAmount().toPlainString()
++            + " 元；原因：" + session.getRefundReason() + "；状态：等待本人确认，尚未提交。确认后等待审核，提交不代表退款成功。";
++        return new CustomerServiceResponse(answer, session.getSessionId(), true, "CONFIRM_SUBMIT",
++            "确认提交退款申请", summary, session.getRelatedOrderNo(), null,
++            session.getResumeToken(), confirmationActions(), false);
++    }
++
++    private CustomerServiceResponse submittedResponse(CustomerServiceSession session, String requestNo, String status) {
++        String label = switch (status) {
++            case "PENDING_REVIEW" -> "待审核";
++            case "NEED_MORE_INFO" -> "待补充材料";
++            case "APPROVED" -> "已通过";
++            case "REJECTED" -> "未通过";
++            default -> status;
++        };
++        return new CustomerServiceResponse("退款申请已登记，申请号：" + requestNo + "；当前状态：" + label
++            + "。可在售后记录中查看，提交不代表退款成功。", session.getSessionId(), false, "SUBMITTED",
++            "已提交，" + label, null, session.getRelatedOrderNo(), requestNo, null, List.of(), false);
++    }
++
++    private CustomerServiceResponse plainResponse(CustomerServiceSession session, String answer, String action) {
++        sessionStore.save(session);
++        return new CustomerServiceResponse(answer, session.getSessionId(), false, action, null, null,
++            session.getRelatedOrderNo(), session.getRelatedAfterSaleNo(), null, List.of(), false);
++    }
++
++    private void clearPendingRefund(CustomerServiceSession session) {
+         session.setPendingAction(null);
+         session.setResumeToken(null);
+         session.setWorkflowId(null);
++        session.setRefundReason(null);
++        session.setRefundAmount(null);
++        session.setRefundItemSummary(null);
++        session.setRelatedOrderNo(null);
++        session.setRelatedAfterSaleNo(null);
+         session.setHandled(false);
++        session.setExpiresAt(null);
+         sessionStore.save(session);
++    }
++
++    private CustomerServiceResponse sanitizeChatResponse(JsonNode agentResponse, CustomerServiceSession session,
++                                                         CustomerServicePageContextRequest pageContext, String userId,
++                                                         String userMessage) {
++        if (agentResponse == null || !agentResponse.hasNonNull("answer")) {
++            return fallback(session.getSessionId());
++        }
++        JsonNode workflow = workflowNode(agentResponse);
++        String answer = text(agentResponse, "answer", FALLBACK_ANSWER);
++        if (isApprovalRequired(workflow) && "unshipped_refund".equals(text(workflow, "workflow_type", null))
++            && !userMessage.matches(".*(?:不申请|不提交|只了解|先了解).*")) {
++            String orderNo = firstText(workflow, "order_id", "order_no");
++            if (!StringUtils.hasText(orderNo)) {
++                return plainResponse(session, "尚未核实本人的订单号，本次未提交，请补充订单号。", "REFUND_ORDER_REQUIRED");
++            }
++            String reason = extractRefundReason(userMessage);
++            if (reason == null && "REFUND_ORDER_REQUIRED".equals(session.getPendingAction())) {
++                reason = session.getRefundReason();
++            }
++            return prepareRefund(session, userId, orderNo, reason,
++                "请核对退款申请。确认后只登记为待审核，是否通过由管理员独立决定。");
++        }
++        if (isApprovalRequired(workflow)) {
++            clearPendingRefund(session);
++            return plainResponse(session, "首版客服只支持已支付、未发货的整单退款申请，本次未提交。", "BLOCKED");
++        }
++        if (session.getRelatedOrderNo() != null && !session.isHandled() && session.getPendingAction() != null) {
++            return pendingRefundResponse(session, answer + " 本次待确认申请尚未提交。");
++        }
++        if ("refund_request".equals(agentResponse.path("session_state").path("intent").asText())
++            && "order_id".equals(agentResponse.path("clarification").path("clarification_field").asText())) {
++            session.setPendingAction("REFUND_ORDER_REQUIRED");
++            session.setRefundReason(extractRefundReason(userMessage));
++            session.setExpiresAt(LocalDateTime.now().plusMinutes(30));
++            sessionStore.save(session);
++        }
+         return new CustomerServiceResponse(answer, session.getSessionId(), false, null, null, null,
+             pageContext == null ? null : trimToNull(pageContext.getOrderNo()),
+             pageContext == null ? null : trimToNull(pageContext.getAfterSaleNo()),
+             null, List.of(), false);
+     }
+ 
+-    private CustomerServiceResponse sanitizeResumeResponse(JsonNode agentResponse, CustomerServiceSession session) {
+-        if (agentResponse == null) {
+-            return fallback(session.getSessionId());
+-        }
+-        String answer = firstText(agentResponse, "answer", "message");
+-        if (!StringUtils.hasText(answer)) {
+-            answer = "已收到您的确认，申请已继续提交处理。";
+-        }
+-        return new CustomerServiceResponse(answer, session.getSessionId(), false, null, null, null,
+-            session.getRelatedOrderNo(), session.getRelatedAfterSaleNo(), null, List.of(), false);
+-    }
+-
+     private void validateResumeSession(CustomerServiceSession session, CustomerServiceResumeRequest request) {
+-        if (session.isHandled()) {
+-            throw new CustomerServiceException(HttpStatus.CONFLICT, "CONFLICT", "本次确认已处理，请勿重复提交");
+-        }
+         if (session.isExpired(LocalDateTime.now())) {
+             throw new CustomerServiceException(HttpStatus.CONFLICT, "CONFLICT", "本次确认已过期，请重新发起咨询");
+         }
+@@ -369,7 +495,8 @@
+             && !session.getRelatedOrderNo().equals(request.getRelatedOrderNo())) {
+             throw new CustomerServiceException(HttpStatus.FORBIDDEN, "FORBIDDEN", "关联订单不匹配");
+         }
+-        if (!StringUtils.hasText(session.getWorkflowId())) {
++        if (!"CONFIRM_SUBMIT".equals(session.getPendingAction()) || !StringUtils.hasText(session.getRefundReason())
++            || !StringUtils.hasText(session.getRelatedOrderNo())) {
+             throw new CustomerServiceException(HttpStatus.CONFLICT, "CONFLICT", "当前会话没有待确认申请");
+         }
+     }
+@@ -404,55 +531,32 @@
+             && StringUtils.hasText(text(workflow, "workflow_id", null));
+     }
+ 
+-    private static String actionType(JsonNode workflow) {
+-        String workflowType = text(workflow, "workflow_type", "").toLowerCase(Locale.ROOT);
+-        if (workflowType.contains("return")) {
+-            return "RETURN";
+-        }
+-        if (workflowType.contains("cancel")) {
+-            return "CANCEL_ORDER";
+-        }
+-        if (workflowType.contains("compensation")) {
+-            return "COMPENSATION";
+-        }
+-        return "REFUND";
+-    }
+-
+-    private static String actionLabel(String actionType) {
+-        return switch (String.valueOf(actionType)) {
+-            case "RETURN" -> "退货";
+-            case "CANCEL_ORDER" -> "取消订单";
+-            case "COMPENSATION" -> "申请补偿";
+-            default -> "退款";
+-        };
+-    }
+-
+-    private static String confirmationTitle(String actionType) {
+-        return "确认提交" + actionLabel(actionType) + "申请";
+-    }
+-
+-    private static String confirmationSummary(String actionType, String orderNo, String riskSummary) {
+-        String label = actionLabel(actionType);
+-        StringBuilder summary = new StringBuilder("申请类型：").append(label);
+-        if (StringUtils.hasText(orderNo)) {
+-            summary.append("；关联订单：").append(orderNo);
+-        }
+-        if (StringUtils.hasText(riskSummary)) {
+-            summary.append("；说明：").append(riskSummary);
+-        }
+-        summary.append("。确认前不会正式提交申请。");
+-        return summary.toString();
+-    }
+-
+     private static List<CustomerServiceActionResponse> confirmationActions() {
+         return List.of(
+             new CustomerServiceActionResponse("CONFIRM_SUBMIT", "确认提交申请"),
+-            new CustomerServiceActionResponse("CANCEL_SUBMIT", "暂不提交")
++            new CustomerServiceActionResponse("CANCEL_SUBMIT", "取消本次申请")
+         );
+     }
+ 
+-    private static String cancelAnswer(String actionType) {
+-        return "确认您暂时不打算" + actionLabel(actionType) + "，本次不会提交申请。后续需要帮助时可以继续告诉我。";
++    private static String extractOrderNo(String message) {
++        Matcher match = ORDER_NO.matcher(message);
++        return match.find() ? match.group() : null;
++    }
++
++    private static String extractRefundReason(String message) {
++        if (message.contains("？") || message.contains("?")) {
++            return null;
++        }
++        Matcher match = REFUND_REASON.matcher(message);
++        if (match.find()) {
++            return (match.group(1) == null ? match.group(2) : match.group(1)).trim();
++        }
++        for (String term : List.of("买错", "不想要", "不需要", "重复购买", "重复下单", "行程取消", "计划取消")) {
++            if (message.contains(term)) {
++                return message.trim();
++            }
++        }
++        return null;
+     }
+ 
+     private static String text(JsonNode node, String field, String defaultValue) {
+--- before/ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/CustomerServiceSession.java
++++ after/ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/CustomerServiceSession.java
+@@ -1,6 +1,7 @@
+ package com.teachdemo.ecommerce.customer_service;
+ 
+ import java.time.LocalDateTime;
++import java.math.BigDecimal;
+ 
+ public class CustomerServiceSession {
+ 
+@@ -19,6 +20,11 @@
+     private String relatedOrderNo;
+ 
+     private String relatedAfterSaleNo;
++
++    // ponytail: 草稿仅驻留本进程，重启需重新确认；已提交申请保存到业务数据库。
++    private String refundReason;
++    private BigDecimal refundAmount;
++    private String refundItemSummary;
+ 
+     private LocalDateTime expiresAt;
+ 
+@@ -88,6 +94,13 @@
+         this.relatedAfterSaleNo = relatedAfterSaleNo;
+     }
+ 
++    public String getRefundReason() { return refundReason; }
++    public void setRefundReason(String refundReason) { this.refundReason = refundReason; }
++    public BigDecimal getRefundAmount() { return refundAmount; }
++    public void setRefundAmount(BigDecimal refundAmount) { this.refundAmount = refundAmount; }
++    public String getRefundItemSummary() { return refundItemSummary; }
++    public void setRefundItemSummary(String refundItemSummary) { this.refundItemSummary = refundItemSummary; }
++
+     public LocalDateTime getExpiresAt() {
+         return expiresAt;
+     }
+--- before/ecommerce-backend/src/main/java/com/teachdemo/ecommerce/order/ShopService.java
++++ after/ecommerce-backend/src/main/java/com/teachdemo/ecommerce/order/ShopService.java
+@@ -314,14 +314,20 @@
+ 
+     @Transactional
+     public ShopAfterSaleResponse createAfterSale(String userId, ShopAfterSaleCreateRequest request) {
+-        OrderEntity order = findOwnOrder(userId, request.orderNo());
++        OrderEntity order = orderRepository.findOwnOrderForUpdate(request.orderNo(), userId)
++            .orElseThrow(() -> BusinessException.notFound("ORDER_NOT_FOUND", "订单不存在"));
++        return createAfterSale(order, userId, request);
++    }
++
++    private ShopAfterSaleResponse createAfterSale(OrderEntity order, String userId, ShopAfterSaleCreateRequest request) {
+         String type = request.type().toUpperCase();
+         if (!AFTER_SALE_TYPES.contains(type)) {
+             throw BusinessException.badRequest("AFTER_SALE_NOT_ALLOWED", "售后类型不支持");
+         }
+         validateAfterSale(order, type, request.amount());
+-        if (afterSaleRequestRepository.existsByOrderNoAndUserIdAndRequestTypeAndStatus(
+-            request.orderNo(), userId, type, "PENDING_REVIEW")) {
++        if (afterSaleRequestRepository.findByOrderNo(request.orderNo()).stream()
++            .anyMatch(item -> userId.equals(item.getUserId()) && type.equals(item.getRequestType())
++                && Set.of("PENDING_REVIEW", "NEED_MORE_INFO").contains(item.getStatus()))) {
+             throw BusinessException.badRequest("AFTER_SALE_DUPLICATED", "同一订单同一类型已有待审批申请");
+         }
+         LocalDateTime now = LocalDateTime.now();
+@@ -331,6 +337,62 @@
+         afterSaleRequestRepository.save(entity);
+         order.markAfterSaleRequested();
+         return toAfterSaleResponse(entity);
++    }
++
++    public ShopOrderResponse getCustomerRefundOrder(String userId, String orderNo) {
++        OrderEntity order = findOwnOrder(userId, orderNo);
++        customerRefundAmount(order, userId);
++        return toOrderResponse(order);
++    }
++
++    @Transactional
++    public ShopAfterSaleResponse submitCustomerRefund(String userId, String orderNo, String reason,
++                                                       BigDecimal confirmedAmount) {
++        OrderEntity order = orderRepository.findOwnOrderForUpdate(orderNo, userId)
++            .orElseThrow(() -> BusinessException.notFound("ORDER_NOT_FOUND", "订单不存在"));
++        List<AfterSaleRequest> requests = afterSaleRequestRepository.findByOrderNo(orderNo).stream()
++            .filter(item -> userId.equals(item.getUserId()))
++            .filter(item -> Set.of("REFUND", "CANCEL_ORDER").contains(item.getRequestType()))
++            .toList();
++        for (AfterSaleRequest existing : requests) {
++            if (Set.of("PENDING_REVIEW", "NEED_MORE_INFO").contains(existing.getStatus())) {
++                if ("REFUND".equals(existing.getRequestType())) {
++                    return toAfterSaleResponse(existing);
++                }
++                throw BusinessException.conflict("AFTER_SALE_DUPLICATED", "该订单已有待处理的取消订单申请，请查看现有申请进度");
++            }
++            if ("APPROVED".equals(existing.getStatus())) {
++                throw BusinessException.conflict("AFTER_SALE_DUPLICATED", "该订单已有审核通过的退款申请，不能重复提交整单退款");
++            }
++        }
++        BigDecimal amount = customerRefundAmount(order, userId);
++        if (confirmedAmount == null || amount.compareTo(confirmedAmount) != 0) {
++            throw BusinessException.conflict("REFUND_AMOUNT_CHANGED", "实付金额发生变化，请重新核对并确认申请");
++        }
++        if (!StringUtils.hasText(reason) || reason.length() > 200) {
++            throw BusinessException.badRequest("REFUND_REASON_REQUIRED", "请提供 1 至 200 字的退款原因");
++        }
++        return createAfterSale(order, userId, new ShopAfterSaleCreateRequest(orderNo, "REFUND", amount, reason.trim()));
++    }
++
++    private BigDecimal customerRefundAmount(OrderEntity order, String userId) {
++        if (!"PAID".equals(order.getPaymentStatus())
++            || !Set.of("PAID_PENDING_SHIPMENT", "PENDING_SHIPMENT").contains(String.valueOf(order.getStatus()))
++            || !"UNSHIPPED".equals(order.getFulfillmentStatus())
++            || order.getShippedAt() != null || order.getDeliveredAt() != null || StringUtils.hasText(order.getLogisticsNo())) {
++            throw BusinessException.badRequest("CUSTOMER_REFUND_NOT_ALLOWED", "首版只支持已支付、未发货的整单退款申请；本次未提交");
++        }
++        List<BalanceTransaction> payments = balanceTransactionRepository.findByUserIdAndTypeOrderByCreatedAtDesc(userId, "PAYMENT")
++            .stream().filter(item -> order.getOrderNo().equals(item.getOrderNo())).toList();
++        BigDecimal amount = payments.size() == 1 && payments.get(0).getAmount() != null
++            ? payments.get(0).getAmount().negate() : null;
++        boolean alreadyRefunded = balanceTransactionRepository.findByUserIdAndTypeOrderByCreatedAtDesc(userId, "REFUND")
++            .stream().anyMatch(item -> order.getOrderNo().equals(item.getOrderNo()));
++        if (alreadyRefunded || amount == null || amount.signum() <= 0 || order.getTotalAmount() == null
++            || amount.compareTo(order.getTotalAmount()) != 0) {
++            throw BusinessException.conflict("REFUND_PAYMENT_UNVERIFIED", "暂时无法核实可退的整单实付金额，本次未提交，请联系人工核验");
++        }
++        return amount;
+     }
+ 
+     public List<ShopAfterSaleResponse> listAfterSales(String userId) {
+--- before/ecommerce-backend/src/main/java/com/teachdemo/ecommerce/order/OrderRepository.java
++++ after/ecommerce-backend/src/main/java/com/teachdemo/ecommerce/order/OrderRepository.java
+@@ -7,6 +7,10 @@
+ import java.util.Optional;
+ 
+ import org.springframework.data.jpa.repository.JpaRepository;
++import org.springframework.data.jpa.repository.Lock;
++import org.springframework.data.jpa.repository.Query;
++import org.springframework.data.repository.query.Param;
++import jakarta.persistence.LockModeType;
+ 
+ public interface OrderRepository extends JpaRepository<OrderEntity, Long> {
+ 
+@@ -14,6 +18,10 @@
+ 
+     Optional<OrderEntity> findByOrderNoAndUserId(String orderNo, String userId);
+ 
++    @Lock(LockModeType.PESSIMISTIC_WRITE)
++    @Query("select o from OrderEntity o where o.orderNo = :orderNo and o.userId = :userId")
++    Optional<OrderEntity> findOwnOrderForUpdate(@Param("orderNo") String orderNo, @Param("userId") String userId);
++
+     List<OrderEntity> findByUserIdOrderByCreatedAtDesc(String userId);
+ 
+     List<OrderEntity> findByUserIdAndStatusOrderByCreatedAtDesc(String userId, String status);
+--- before/ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/RuntimeOrderSummaryResponse.java
++++ after/ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/RuntimeOrderSummaryResponse.java
+@@ -15,6 +15,7 @@
+  */
+ public record RuntimeOrderSummaryResponse(
+     String orderNo,
++    String userId,
+     String status,
+     String paymentStatus,
+     String fulfillmentStatus,
+--- before/ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/RuntimeOrderContextService.java
++++ after/ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/RuntimeOrderContextService.java
+@@ -65,6 +65,7 @@
+                     .toList();
+                 return new RuntimeOrderSummaryResponse(
+                     order.getOrderNo(),
++                    order.getUserId(),
+                     order.getStatus(),
+                     order.getPaymentStatus(),
+                     order.getFulfillmentStatus(),
+--- before/ecommerce-backend/frontend/src/shop/App.tsx
++++ after/ecommerce-backend/frontend/src/shop/App.tsx
+@@ -32,6 +32,7 @@
+   text: string;
+   contextTag?: string;
+   response?: CustomerServiceResponse;
++  confirmationResult?: CustomerServiceResponse;
+ };
+ 
+ const money = (value?: number | null) => `¥${Number(value ?? 0).toFixed(2)}`;
+@@ -1020,8 +1021,13 @@
+   ]);
+   const [input, setInput] = useState("");
+   const [sessionId, setSessionId] = useState<string | undefined>();
++  const [activeConfirmationToken, setActiveConfirmationToken] = useState<string | null>(null);
+   const [loading, setLoading] = useState(false);
+   const busyRef = useRef(false);
++  const messagesEndRef = useRef<HTMLDivElement>(null);
++  useEffect(() => {
++    if (open) messagesEndRef.current?.scrollIntoView({ block: "nearest" });
++  }, [messages, loading, open]);
+   if (!open) return null;
+ 
+   function contextTagForMessage(pageContext: CustomerServicePageContext) {
+@@ -1041,6 +1047,7 @@
+     try {
+       const response = await api.chat({ message: text, sessionId, pageContext: context });
+       setSessionId(response.sessionId);
++      if (!response.fallback) setActiveConfirmationToken(response.confirmRequired ? response.resumeToken : null);
+       setMessages((prev) => [...prev, { from: "agent", text: response.answer, response }]);
+     } catch (err) {
+       setMessages((prev) => [...prev, { from: "system", text: onError(err) || "客服繁忙，请稍后再试。" }]);
+@@ -1050,13 +1057,9 @@
+     }
+   }
+ 
+-  async function decide(response: CustomerServiceResponse, decision: "APPROVED" | "REJECTED") {
++  async function decide(response: CustomerServiceResponse, decision: "CONFIRM_SUBMIT" | "CANCEL_SUBMIT") {
+     if (busyRef.current) return;
+-    if (decision === "REJECTED") {
+-      setMessages((prev) => [...prev, { from: "system", text: "确认您暂时不打算提交申请，荒野户外客服不会继续执行该操作。" }]);
+-      return;
+-    }
+-    if (!response.resumeToken) return;
++    if (!response.resumeToken || response.resumeToken !== activeConfirmationToken) return;
+     busyRef.current = true;
+     setLoading(true);
+     try {
+@@ -1068,14 +1071,23 @@
+         relatedAfterSaleNo: response.relatedAfterSaleNo
+       });
+       setSessionId(next.sessionId);
+-      setMessages((prev) => [...prev, { from: "agent", text: next.answer, response: next }]);
++      if (!next.fallback) setActiveConfirmationToken(next.confirmRequired ? next.resumeToken : null);
++      setMessages((prev) => [
++        ...prev.map((message) => message.response === response && !next.fallback
++          ? { ...message, confirmationResult: next } : message),
++        { from: "agent", text: next.answer, response: next }
++      ]);
+     } catch (err) {
++      if (err instanceof ApiError && [400, 403, 404, 409].includes(err.status)) setActiveConfirmationToken(null);
+       setMessages((prev) => [...prev, { from: "system", text: onError(err) || "客服繁忙，请稍后再试。" }]);
+     } finally {
+       busyRef.current = false;
+       setLoading(false);
+     }
+   }
++
++  const latestConfirmationIndex = messages.reduce((latest, message, index) =>
++    message.response?.confirmRequired && message.response.resumeToken === activeConfirmationToken ? index : latest, -1);
+ 
+   return (
+     <aside className="service-drawer">
+@@ -1090,15 +1102,18 @@
+             {message.contextTag && <span className="message-context-tag">{message.contextTag}</span>}
+             {message.response?.confirmRequired && (
+               <div className="confirm-card">
+-                <b>{message.response.confirmationTitle ?? "需要确认"}</b>
+-                <span>{message.response.confirmationSummary}</span>
+-                <button className="primary" disabled={loading} onClick={() => decide(message.response!, "APPROVED")}>确认提交申请</button>
+-                <button disabled={loading} onClick={() => decide(message.response!, "REJECTED")}>暂不提交</button>
++                <b>{message.confirmationResult?.confirmationTitle
++                  ?? (message.confirmationResult?.pendingAction === "CANCELLED" ? "本次申请已取消" : message.response.confirmationTitle ?? "需要确认")}</b>
++                <span>{message.confirmationResult?.answer ?? message.response.confirmationSummary}</span>
++                {!message.confirmationResult && index !== latestConfirmationIndex && <span>此确认卡已失效，请以最新回复为准。</span>}
++                <button className="primary" disabled={loading || index !== latestConfirmationIndex} onClick={() => decide(message.response!, "CONFIRM_SUBMIT")}>确认提交申请</button>
++                <button disabled={loading || index !== latestConfirmationIndex} onClick={() => decide(message.response!, "CANCEL_SUBMIT")}>取消本次申请</button>
+               </div>
+             )}
+           </div>
+         ))}
+         {loading && <div className="message system"><p>荒野客服正在处理，请稍候...</p></div>}
++        <div ref={messagesEndRef} />
+       </div>
+       <div className="drawer-input">
+         <input
+--- before/frontend/src/components/TracePanel.tsx
++++ after/frontend/src/components/TracePanel.tsx
+@@ -52,7 +52,7 @@
+   onClarificationCandidateSelect,
+   onResumeWorkflow,
+ }: TracePanelProps) {
+-  const [reviewerNote, setReviewerNote] = useState("模拟审批：人工确认后提交模拟业务申请");
++  const [reviewerNote, setReviewerNote] = useState("模拟审核：仅记录演示结果，不改变商城申请或余额");
+   const reasoningView = selectedReasoningView;
+   const visibleTraces = traces.slice(-10);
+   const hookEvents = [
+@@ -802,12 +802,12 @@
+ 
+   return (
+     <div className="trace-section">
+-      <h3>人工确认</h3>
++      <h3>模拟人工审核</h3>
+       {canResume ? (
+         <div className="trace-card approval-card">
+           <strong>待审核 · 模拟售后申请</strong>
+           <span>
+-            请先核对这次暂停的订单和售后状态；审批通过后也只是提交模拟退款 / 售后申请，不代表真实资金或仓储动作完成。
++            当前操作者正在模拟审核员。审核结果只用于本工作台演示，不改变商城的售后申请或余额。
+           </span>
+           <MetaList
+             items={[
+@@ -825,13 +825,13 @@
+           <textarea value={reviewerNote} onChange={(event) => onReviewerNoteChange(event.target.value)} rows={3} />
+           <div className="approval-actions">
+             <button type="button" disabled={isResuming} onClick={() => onResumeWorkflow("approved", reviewerNote)}>
+-              批准
++              模拟批准
+             </button>
+             <button type="button" disabled={isResuming} onClick={() => onResumeWorkflow("rejected", reviewerNote)}>
+-              拒绝
++              模拟拒绝
+             </button>
+             <button type="button" disabled={isResuming} onClick={() => onResumeWorkflow("needs_more_info", reviewerNote)}>
+-              补充信息
++              模拟要求补充信息
+             </button>
+           </div>
+         </div>
+--- before/backend/agent/tools/tool_runtime.py
++++ after/backend/agent/tools/tool_runtime.py
+@@ -103,7 +103,7 @@
+     )
+     request_id = str(latest.get("requestId") or latest.get("requestNo") or "未知申请号")
+     status = str(latest.get("status") or "UNKNOWN").upper()
+-    status_label = {"PENDING": "待处理", "REVIEWING": "审核中", "APPROVED": "已通过", "REJECTED": "未通过", "COMPLETED": "已完成"}.get(status, status)
++    status_label = {"PENDING": "待处理", "PENDING_REVIEW": "待审核", "NEED_MORE_INFO": "待补充材料", "REVIEWING": "审核中", "APPROVED": "已通过", "REJECTED": "未通过", "COMPLETED": "已完成"}.get(status, status)
+     return ToolCallTrace(
+         tool_name="get_refund_status",
+         arguments={"order_id": order_no(order), "fact_source": latest.get("_fact_source", "business_api")},
+--- before/backend/agent/workflows/after_sale_graph.py
++++ after/backend/agent/workflows/after_sale_graph.py
+@@ -77,7 +77,7 @@
+         payment_status = str(order.get("paymentStatus") or order.get("payment_status") or "").upper()
+         fulfillment = order_status(order).upper()
+         logistics = logistics_status_from_order(order).upper()
+-        if payment_status and payment_status != "PAID":
++        if payment_status != "PAID":
+             return False, "payment_not_paid"
+         if fulfillment not in {"PAID_PENDING_SHIPMENT", "PENDING_SHIPMENT"} or logistics not in {"NOT_SHIPPED", "UNKNOWN"}:
+             return False, "order_already_shipped_or_not_eligible"
+--- before/backend/tests/test_refund_submission_boundary.py
++++ after/backend/tests/test_refund_submission_boundary.py
+@@ -0,0 +1,67 @@
++"""退款资格、业务进度和独立模拟审核的回归；不调用模型或业务 HTTP。"""
++import os
++import unittest
++from unittest.mock import patch
++
++from api.schemas import ChatRequest, ChatResumeRequest
++from agent.customer_service_agent import Lesson41Agent
++from agent.state import WORKFLOW_CHECKPOINTS, SUBMITTED_ACTIONS
++
++
++class RefundSubmissionBoundaryTest(unittest.TestCase):
++    def setUp(self):
++        environment = patch.dict(os.environ, AGENT_COURSE_DISABLE_LLM='1', AGENT_COURSE_OFFLINE_RAG='1',
++                                 AGENT_COURSE_OFFLINE_FACTS='0', AGENT_COURSE_ENV='/tmp/huangye-refund-test.env')
++        environment.start()
++        self.addCleanup(environment.stop)
++        self.agent = Lesson41Agent()
++        self.order = {'orderNo': 'ORD9401', 'userId': 'U1001', 'status': 'PAID_PENDING_SHIPMENT',
++                      'paymentStatus': 'PAID', 'fulfillmentStatus': 'UNSHIPPED', 'totalAmount': 200,
++                      'items': [{'productName': '合成露营椅', 'quantity': 1, 'returnable': True}]}
++
++    def chat(self, session, message):
++        return self.agent.chat(ChatRequest(session_id=session, runtime_user_id='U1001', user_message=message,
++            runtime_context={'userId': 'U1001', 'currentUserOrders': [self.order]}))
++
++    def test_missing_payment_stops_refund_workflow(self):
++        self.order.pop('paymentStatus')
++        with patch('httpx.Client.request', side_effect=AssertionError('business network forbidden')) as network:
++            response = self.chat('refund-no-payment', 'ORD9401 我要退款')
++        self.assertIsNone(response.session_state['workflow'])
++        self.assertFalse(network.called)
++        self.assertFalse(any(key[0] == 'refund-no-payment' for key in WORKFLOW_CHECKPOINTS))
++
++    def test_progress_reads_existing_business_status(self):
++        for status, label in [('PENDING_REVIEW', '待审核'), ('NEED_MORE_INFO', '待补充材料')]:
++            with patch('httpx.Client.request', side_effect=AssertionError('business network forbidden')), \
++                 patch('agent.tools.tool_runtime.after_sale_requests_from_ecommerce', return_value=[
++                     {'requestId': 'AS-existing', 'requestType': 'REFUND', 'status': status}]):
++                response = self.chat('refund-progress-' + status, 'ORD9401 退款进度怎么样？')
++            self.assertIn('AS-existing', response.answer)
++            self.assertIn(label, response.answer)
++            self.assertIsNone(response.session_state['workflow'])
++
++    def test_workbench_approval_is_independent_simulation(self):
++        with patch('httpx.Client.request', side_effect=AssertionError('business network forbidden')) as network, \
++             patch('agent.workflows.resume.order_fact_from_ecommerce', return_value=self.order):
++            response = self.chat('refund-simulation', 'ORD9401 我要退款')
++            workflow = response.session_state['workflow']
++            resumed = self.agent.resume(ChatResumeRequest(session_id='refund-simulation',
++                workflow_id=workflow['workflow_id'], resume_token=workflow['resume_token'],
++                reviewer_id='course-reviewer-001', reviewer_role='after_sale_manager', decision='approved'))
++        self.assertEqual(resumed.status, 'completed')
++        self.assertIn('模拟', resumed.answer)
++        self.assertIn('不执行真实资金退款', resumed.answer)
++        self.assertIn(workflow['idempotency_key'], SUBMITTED_ACTIONS)
++        self.assertFalse(network.called)
++
++    def test_eligible_seven_day_return_stops_before_submission(self):
++        self.order.update(status='DELIVERED', fulfillmentStatus='DELIVERED', deliveredAt='2026-07-14T10:00:00', returnable=True)
++        with patch('httpx.Client.request', side_effect=AssertionError('business network forbidden')):
++            response = self.chat('return-still-consultation', 'ORD9401 已签收，七天无理由退货')
++        self.assertNotEqual(response.session_state['workflow']['pending_action'], 'require_approval')
++        self.assertFalse(any(key[0] == 'return-still-consultation' for key in WORKFLOW_CHECKPOINTS))
++
++
++if __name__ == '__main__':
++    unittest.main()
+--- before/analysis/缺口一验证/CustomerRefundCheck.java
++++ after/analysis/缺口一验证/CustomerRefundCheck.java
+@@ -0,0 +1,289 @@
++package com.teachdemo.ecommerce.customer_service;
++
++import com.fasterxml.jackson.databind.JsonNode;
++import com.fasterxml.jackson.databind.ObjectMapper;
++import com.fasterxml.jackson.databind.node.ObjectNode;
++import com.teachdemo.ecommerce.EcommerceBackendApplication;
++import com.teachdemo.ecommerce.account.*;
++import com.teachdemo.ecommerce.aftersale.*;
++import com.teachdemo.ecommerce.order.*;
++import java.math.BigDecimal;
++import java.net.CookieManager;
++import java.net.URI;
++import java.net.http.*;
++import java.time.LocalDateTime;
++import java.util.*;
++import java.util.concurrent.*;
++import java.util.regex.Pattern;
++import org.springframework.boot.builder.SpringApplicationBuilder;
++import org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext;
++import org.springframework.context.annotation.*;
++import org.springframework.jdbc.core.JdbcTemplate;
++
++/** 隔离 H2 + 真实 HTTP/认证/事务；只替换模型入口，不执行管理员批准。 */
++public class CustomerRefundCheck {
++    private static final ObjectMapper JSON = new ObjectMapper();
++    private static final List<String> PASSED = new ArrayList<>();
++    private static String base;
++    private static ServletWebServerApplicationContext context;
++    private static HttpClient customer;
++    private static HttpClient admin;
++    private static OrderRepository orders;
++    private static AfterSaleRequestRepository applications;
++    private static BalanceTransactionRepository transactions;
++    private static CustomerServiceSessionStore sessions;
++
++    @Configuration(proxyBeanMethods = false)
++    static class AgentConfig {
++        @Bean @Primary StubAgent isolatedAgent() { return new StubAgent(); }
++    }
++
++    static class StubAgent implements CustomerServiceAgentClient {
++        int resumes;
++        boolean failChat;
++        public JsonNode chat(AgentChatRequest request) {
++            if (failChat) throw new IllegalStateException("synthetic agent failure");
++            ObjectNode response = JSON.createObjectNode().put("answer", "这是隔离模型返回的咨询回复。");
++            var matcher = Pattern.compile("\\b(?:ORD\\d{4,}|SO[A-Za-z0-9_-]{6,})\\b").matcher(request.getUserMessage());
++            String order = matcher.find() ? matcher.group() : (String) request.getRuntimeContext().get("relatedOrderNo");
++            if (request.getUserMessage().contains("退款")) {
++                response.putObject("session_state").put("intent", "refund_request");
++                if (order == null) {
++                    response.putObject("clarification").put("clarification_field", "order_id");
++                } else {
++                    response.withObject("/session_state").putObject("workflow")
++                        .put("workflow_id", "mock-workflow").put("workflow_type", "unshipped_refund")
++                        .put("order_id", order).put("status", "paused").put("pending_action", "require_approval")
++                        .put("resume_token", "mock-reviewer-token");
++                }
++            }
++            return response;
++        }
++        public JsonNode resume(AgentResumeRequest request) {
++            resumes++;
++            throw new AssertionError("商城不能调用模拟审核入口");
++        }
++    }
++
++    public static void main(String[] args) throws Exception {
++        boolean ui = Arrays.asList(args).contains("--ui");
++        context = (ServletWebServerApplicationContext) new SpringApplicationBuilder(EcommerceBackendApplication.class)
++            .sources(AgentConfig.class).run(ui ? "--server.port=8081" : "--server.port=0",
++                "--spring.datasource.url=jdbc:h2:mem:gap_one;MODE=MySQL;DB_CLOSE_DELAY=-1;LOCK_TIMEOUT=10000",
++                "--spring.datasource.driver-class-name=org.h2.Driver", "--spring.datasource.username=sa",
++                "--spring.datasource.password=", "--spring.jpa.hibernate.ddl-auto=create-drop",
++                "--spring.jpa.show-sql=false", "--logging.level.root=WARN", "--spring.main.banner-mode=off");
++        try {
++            base = "http://127.0.0.1:" + context.getWebServer().getPort();
++            orders = context.getBean(OrderRepository.class);
++            applications = context.getBean(AfterSaleRequestRepository.class);
++            transactions = context.getBean(BalanceTransactionRepository.class);
++            sessions = context.getBean(CustomerServiceSessionStore.class);
++            if (ui) {
++                fixture("ORD9200", "U1001"); fixture("ORD9201", "U1001");
++                System.out.println("UI_READY isolated H2; real HTTP/auth; synthetic Agent");
++                new CountDownLatch(1).await();
++                return;
++            }
++            customer = login("zhangsan", "123456");
++            admin = login("admin", "admin123456");
++            BigDecimal balance = context.getBean(BalanceAccountRepository.class).findByUserId("U1001").orElseThrow().getAvailableBalance();
++            long refunds = transactions.findByUserIdAndTypeOrderByCreatedAtDesc("U1001", "REFUND").size();
++            long approvals = context.getBean(ApprovalRecordRepository.class).count();
++
++            fixture("ORD9100", "U1001");
++            JsonNode missing = chat("normal", "ORD9100 我要退款");
++            check(!missing.path("confirmRequired").asBoolean() && count("ORD9100") == 0, "缺少原因时只追问，不提交");
++            JsonNode amount = chat("normal", "能退多少钱？");
++            check(amount.path("answer").asText().contains("200.00") && count("ORD9100") == 0, "金额提问只回答可信实付金额");
++            JsonNode card = chat("normal", "原因：买错了");
++            check(card.path("confirmRequired").asBoolean() && card.path("confirmationSummary").asText().contains("整单退款")
++                && !card.path("resumeToken").asText().equals("mock-reviewer-token"), "确认卡完整且不使用模拟审批凭证");
++            JsonNode same = chat("normal", "审核是什么流程？");
++            check(card.path("resumeToken").equals(same.path("resumeToken")) && count("ORD9100") == 0, "提问保留草稿和确认凭证");
++            JsonNode submitted = decision(card, "CONFIRM_SUBMIT", 200);
++            String requestNo = submitted.path("relatedAfterSaleNo").asText();
++            check(count("ORD9100") == 1 && applications.findByRequestId(requestNo).orElseThrow().getStatus().equals("PENDING_REVIEW"), "确认后只保存一笔待审核记录");
++            check(decision(card, "CONFIRM_SUBMIT", 200).path("relatedAfterSaleNo").asText().equals(requestNo), "重复点击返回同一笔申请");
++            check(data(call(admin, "GET", "/api/admin/after-sales/" + requestNo, null), 200).path("requestNo").asText().equals(requestNo), "已有管理后台可见同一记录");
++            sessions.clear();
++            check(data(call(customer, "GET", "/api/shop/after-sales", null), 200).toString().contains(requestNo), "会话结束后本人业务记录仍可查");
++            decision(card, "CONFIRM_SUBMIT", 404);
++            JsonNode otherSession = chat("replay", "ORD9100 我要退款，原因：重复下单");
++            check(decision(otherSession, "CONFIRM_SUBMIT", 200).path("relatedAfterSaleNo").asText().equals(requestNo)
++                && count("ORD9100") == 1, "换会话不会新增待处理退款");
++
++            fixture("ORD9101", "U1001");
++            JsonNode cancelled = chat("cancel", "ORD9101 我要退款，原因：行程取消");
++            check(decision(cancelled, "CANCEL_SUBMIT", 200).path("pendingAction").asText().equals("CANCELLED"), "取消写回后端");
++            decision(cancelled, "CONFIRM_SUBMIT", 409);
++            check(count("ORD9101") == 0, "取消后旧卡不能提交");
++
++            fixture("ORD9102", "U1001");
++            JsonNode before = chat("change", "ORD9102 我要退款，原因：买错了");
++            JsonNode changed = chat("change", "原因：行程取消");
++            check(!before.path("resumeToken").equals(changed.path("resumeToken")), "修改原因生成新确认凭证");
++            decision(before, "CONFIRM_SUBMIT", 403);
++            JsonNode changedResult = decision(changed, "CONFIRM_SUBMIT", 200);
++            check(applications.findByRequestId(changedResult.path("relatedAfterSaleNo").asText()).orElseThrow().getReason().equals("行程取消"), "新卡保存客户明确修改的原因");
++
++            fixture("ORD9103", "U1001"); fixture("ORD9104", "U1001");
++            JsonNode oldOrder = chat("order-change", "ORD9103 我要退款，原因：买错了");
++            JsonNode newOrder = chat("order-change", "ORD9104");
++            check(newOrder.path("relatedOrderNo").asText().equals("ORD9104") && !newOrder.path("confirmRequired").asBoolean(), "更换订单不沿用旧原因");
++            decision(oldOrder, "CONFIRM_SUBMIT", 403);
++            decision(chat("order-change", "原因：重复下单"), "CONFIRM_SUBMIT", 200);
++            check(count("ORD9103") == 0 && count("ORD9104") == 1, "只提交新选择的订单");
++
++            fixture("ORD9105", "U1001");
++            JsonNode drift = chat("shipped", "ORD9105 我要退款，原因：买错了");
++            ship("ORD9105", "SHIPPED");
++            decision(drift, "CONFIRM_SUBMIT", 400);
++            check(count("ORD9105") == 0, "确认前发货会阻断提交");
++            check(!chat("shipped-fresh", "ORD9105 我要退款，原因：买错了").path("confirmRequired").asBoolean(), "已发货订单不生成提交卡");
++            fixture("ORD9106", "U1001"); ship("ORD9106", "DELIVERED");
++            check(!chat("signed", "ORD9106 我要退款，原因：七天无理由").path("confirmRequired").asBoolean()
++                && count("ORD9106") == 0, "已签收七天无理由不纳入首版提交");
++
++            fixture("ORD9107", "U1001");
++            JsonNode moneyDrift = chat("money-change", "ORD9107 我要退款，原因：买错了");
++            JdbcTemplate jdbc = context.getBean(JdbcTemplate.class);
++            jdbc.update("update order_header set total_amount=210 where order_no='ORD9107'");
++            jdbc.update("update balance_transaction set amount=-210 where order_no='ORD9107' and type='PAYMENT'");
++            decision(moneyDrift, "CONFIRM_SUBMIT", 409);
++            check(count("ORD9107") == 0, "实付金额变化要求重新确认");
++            check(chat("money-new", "ORD9107 我要退款，原因：买错了").path("confirmationSummary").asText().contains("210"), "新卡显示最新金额");
++
++            fixture("ORD9108", "U1001");
++            transactions.deleteAll(transactions.findByUserIdAndTypeOrderByCreatedAtDesc("U1001", "PAYMENT").stream()
++                .filter(item -> "ORD9108".equals(item.getOrderNo())).toList());
++            check(!chat("payment-missing", "ORD9108 我要退款，原因：买错了").path("confirmRequired").asBoolean()
++                && count("ORD9108") == 0, "没有可信支付记录不能放行");
++            fixture("ORD9109", "U1001");
++            jdbc.update("update order_header set payment_status=null where order_no='ORD9109'");
++            check(!chat("payment-state", "ORD9109 我要退款，原因：买错了").path("confirmRequired").asBoolean(), "支付状态缺失不能放行");
++
++            fixture("ORD9110", "U1001");
++            JsonNode expiry = chat("expired", "ORD9110 我要退款，原因：买错了");
++            sessions.expire("expired"); decision(expiry, "CONFIRM_SUBMIT", 409);
++            check(count("ORD9110") == 0, "过期卡不能提交");
++            JsonNode agentFailure;
++            context.getBean(StubAgent.class).failChat = true;
++            try { agentFailure = chat("agent-fault", "ORD9110 我要退款，原因：买错了"); }
++            finally { context.getBean(StubAgent.class).failChat = false; }
++            check(agentFailure.path("fallback").asBoolean() && !agentFailure.path("confirmRequired").asBoolean(), "Agent 故障不虚报成功");
++
++            fixture("ORD9111", "U1001");
++            JsonNode databaseFault = chat("db-fault", "ORD9111 我要退款，原因：买错了");
++            jdbc.execute("alter table after_sale_request add constraint gap_one_fault check (order_no <> 'ORD9111')");
++            try {
++                check(decision(databaseFault, "CONFIRM_SUBMIT", 200).path("fallback").asBoolean()
++                    && count("ORD9111") == 0 && !Boolean.TRUE.equals(orders.findByOrderNo("ORD9111").orElseThrow().getHasAfterSaleRequest()),
++                    "保存失败回滚申请和订单标记，不虚报成功");
++            } finally { jdbc.execute("alter table after_sale_request drop constraint gap_one_fault"); }
++            decision(databaseFault, "CONFIRM_SUBMIT", 200);
++            check(count("ORD9111") == 1, "失败后重试只保存一笔申请");
++
++            fixture("ORD9114", "U1001");
++            JsonNode noOrder = chat("waiting-order", "我要退款");
++            check(!noOrder.path("confirmRequired").asBoolean(), "缺订单号时不生成提交卡");
++            chat("waiting-order", "原因：行程取消");
++            JsonNode suppliedOrder = chat("waiting-order", "ORD9114");
++            check(suppliedOrder.path("confirmRequired").asBoolean()
++                && suppliedOrder.path("confirmationSummary").asText().contains("行程取消"), "补订单号续接退款，保留已明确的原因");
++
++            fixture("ORD9115", "U1001");
++            JsonNode readFault = chat("read-fault", "ORD9115 我要退款，原因：买错了");
++            jdbc.execute("alter table balance_transaction rename to gap_one_payments_unavailable");
++            try {
++                check(decision(readFault, "CONFIRM_SUBMIT", 200).path("fallback").asBoolean()
++                    && count("ORD9115") == 0, "最新支付事实查询失败不回旧快照放行");
++            } finally { jdbc.execute("alter table gap_one_payments_unavailable rename to balance_transaction"); }
++            decision(readFault, "CONFIRM_SUBMIT", 200);
++            check(count("ORD9115") == 1, "事实查询恢复后仍需客户确认，重试只登记一次");
++
++            fixture("ORD9112", "U1002");
++            check(!chat("wrong-owner", "ORD9112 我要退款，原因：买错了").path("confirmRequired").asBoolean()
++                && count("ORD9112") == 0, "不能提交别人订单");
++            check(call(HttpClient.newHttpClient(), "POST", "/api/customer-service/chat", Map.of("message", "退款")).statusCode() == 401,
++                "未登录客户不能访问提交链路");
++            JsonNode noApproval = chat("no-approval", "ORD9110 我要退款，原因：买错了");
++            decision(noApproval, "APPROVED", 400);
++            check(call(customer, "POST", "/api/admin/after-sales/" + requestNo + "/approve", Map.of()).statusCode() == 403,
++                "客户不能调用管理员批准入口");
++            HttpClient otherCustomer = login("lisi", "123456");
++            check(call(otherCustomer, "POST", "/api/customer-service/resume", decisionBody(noApproval, "CONFIRM_SUBMIT")).statusCode() == 403,
++                "确认凭证不能跨客户使用");
++
++            fixture("ORD9113", "U1001");
++            JsonNode concurrentA = chat("parallel-a", "ORD9113 我要退款，原因：买错了");
++            JsonNode concurrentB = chat("parallel-b", "ORD9113 我要退款，原因：买错了");
++            ExecutorService executor = Executors.newFixedThreadPool(2);
++            CountDownLatch start = new CountDownLatch(1);
++            try {
++                Future<JsonNode> a = executor.submit(() -> { start.await(); return decision(concurrentA, "CONFIRM_SUBMIT", 200); });
++                Future<JsonNode> b = executor.submit(() -> { start.await(); return decision(concurrentB, "CONFIRM_SUBMIT", 200); });
++                start.countDown();
++                check(a.get(15, TimeUnit.SECONDS).path("relatedAfterSaleNo").equals(b.get(15, TimeUnit.SECONDS).path("relatedAfterSaleNo"))
++                    && count("ORD9113") == 1, "跨会话并发提交由订单行锁防重");
++            } finally { executor.shutdownNow(); }
++            AfterSaleRequest needsInfo = applications.findByOrderNo("ORD9113").get(0);
++            needsInfo.updateReview("NEED_MORE_INFO", null, "合成待补充状态", LocalDateTime.now()); applications.save(needsInfo);
++            check(decision(chat("needs-info", "ORD9113 我要退款，原因：买错了"), "CONFIRM_SUBMIT", 200).path("answer").asText().contains("待补充材料")
++                && count("ORD9113") == 1, "待补充材料仍复用现有申请");
++            check(call(customer, "POST", "/api/shop/after-sales", Map.of("orderNo", "ORD9113", "type", "REFUND", "amount", 200, "reason", "重复申请")).statusCode() == 400
++                && count("ORD9113") == 1, "商城其他创建入口共享防重规则");
++
++            check(context.getBean(StubAgent.class).resumes == 0, "商城从未调用 Python 模拟审批恢复");
++            check(context.getBean(BalanceAccountRepository.class).findByUserId("U1001").orElseThrow().getAvailableBalance().compareTo(balance) == 0
++                && transactions.findByUserIdAndTypeOrderByCreatedAtDesc("U1001", "REFUND").size() == refunds
++                && context.getBean(ApprovalRecordRepository.class).count() == approvals, "全过程余额、退款流水和审核记录未变化");
++            System.out.println("GAP_ONE_RESULT " + JSON.writeValueAsString(Map.of("passed", PASSED.size(), "checks", PASSED,
++                "database", "isolated in-memory H2", "agent", "synthetic stub; no model calls", "actual_http_and_security", true)));
++        } finally { context.close(); }
++    }
++
++    private static void fixture(String orderNo, String userId) {
++        LocalDateTime now = LocalDateTime.now();
++        BigDecimal amount = new BigDecimal("200.00");
++        OrderEntity order = new OrderEntity(orderNo, "合成客户", "PAID_PENDING_SHIPMENT", "PAID", amount, now,
++            userId, false, true, "隔离退款验收");
++        order.markPaid(now); orders.save(order);
++        context.getBean(OrderItemRepository.class).save(new OrderItem(order, 1L, "合成露营椅", 1, amount, true));
++        transactions.save(new BalanceTransaction("TEST-PAY-" + orderNo, userId, orderNo, null, "PAYMENT", amount.negate(),
++            new BigDecimal("1000"), new BigDecimal("800"), "合成支付事实，不修改余额", now));
++    }
++    private static void ship(String orderNo, String status) {
++        OrderEntity order = orders.findByOrderNo(orderNo).orElseThrow();
++        order.updateAdminFields(status, status, "TEST-LOGISTICS", "合成状态变化", LocalDateTime.now()); orders.save(order);
++    }
++    private static long count(String orderNo) { return applications.findByOrderNo(orderNo).size(); }
++    private static void check(boolean success, String name) {
++        if (!success) throw new AssertionError(name);
++        PASSED.add(name);
++    }
++    private static HttpClient login(String name, String password) throws Exception {
++        HttpClient client = HttpClient.newBuilder().cookieHandler(new CookieManager()).build();
++        data(call(client, "POST", "/api/auth/login", Map.of("username", name, "password", password)), 200);
++        return client;
++    }
++    private static HttpResponse<String> call(HttpClient client, String method, String path, Object body) throws Exception {
++        HttpRequest.Builder request = HttpRequest.newBuilder(URI.create(base + path)).header("Content-Type", "application/json");
++        request.method(method, body == null ? HttpRequest.BodyPublishers.noBody() : HttpRequest.BodyPublishers.ofString(JSON.writeValueAsString(body)));
++        return client.send(request.build(), HttpResponse.BodyHandlers.ofString());
++    }
++    private static JsonNode data(HttpResponse<String> response, int status) throws Exception {
++        if (response.statusCode() != status) throw new AssertionError("HTTP " + status + " expected; got " + response.statusCode() + ": " + response.body());
++        return JSON.readTree(response.body()).path("data");
++    }
++    private static JsonNode chat(String session, String message) throws Exception {
++        return data(call(customer, "POST", "/api/customer-service/chat", Map.of("sessionId", session, "message", message)), 200);
++    }
++    private static Map<String, Object> decisionBody(JsonNode card, String decision) {
++        return Map.of("sessionId", card.path("sessionId").asText(), "resumeToken", card.path("resumeToken").asText(),
++            "relatedOrderNo", card.path("relatedOrderNo").asText(), "decision", decision);
++    }
++    private static JsonNode decision(JsonNode card, String decision, int status) throws Exception {
++        return data(call(customer, "POST", "/api/customer-service/resume", decisionBody(card, decision)), status);
++    }
++}
+--- before/analysis/缺口一验证/run_java_check.py
++++ after/analysis/缺口一验证/run_java_check.py
+@@ -0,0 +1,50 @@
++"""使用已有镜像依赖编译全部 Java 源码，运行隔离 H2/HTTP 退款检查。无模型、无外部业务网络。"""
++import json
++from pathlib import Path
++import shutil
++import subprocess
++import tarfile
++import zipfile
++
++out = Path(__file__).resolve().parent
++root = out.parents[1]
++runtime = out / '.runtime'
++runtime.mkdir(exist_ok=True)
++jar = runtime / 'runtime.jar'
++if not jar.exists():
++    container = subprocess.check_output(['docker', 'create', '--network', 'none', 'huangye-outdoor-ecommerce:latest'], text=True).strip()
++    try:
++        subprocess.run(['docker', 'cp', f'{container}:/app/app.jar', str(jar)], check=True)
++    finally:
++        subprocess.run(['docker', 'rm', container], check=True, stdout=subprocess.DEVNULL)
++lib = runtime / 'lib'
++lib.mkdir(exist_ok=True)
++with zipfile.ZipFile(jar) as archive:
++    for name in archive.namelist():
++        if name.startswith('BOOT-INF/lib/') and name.endswith('.jar'):
++            (lib / Path(name).name).write_bytes(archive.read(name))
++with tarfile.open(root / 'ecommerce-backend/docker/m2-cache.tar.gz') as archive:
++    name = next(member.name for member in archive.getmembers() if member.name.endswith('/h2-2.2.224.jar'))
++    (lib / 'h2-2.2.224.jar').write_bytes(archive.extractfile(name).read())
++classes = runtime / 'classes'
++if classes.exists():
++    shutil.rmtree(classes)
++shutil.copytree(root / 'ecommerce-backend/src/main/resources', classes)
++sources = sorted((root / 'ecommerce-backend/src/main/java').rglob('*.java'))
++sources.append(out / 'CustomerRefundCheck.java')
++(runtime / 'sources.txt').write_text('\n'.join('/workspace/' + str(path.relative_to(root)) for path in sources) + '\n')
++command = ['docker', 'run', '--rm', '--network', 'none', '-v', f'{root}:/workspace:ro', '-v', f'{runtime}:/check',
++           '-w', '/check', 'maven:3.9.6-eclipse-temurin-17', 'bash', '-c',
++           'javac --release 17 -parameters -encoding UTF-8 -cp "/check/lib/*" -d /check/classes @/check/sources.txt && '
++           'java -cp "/check/classes:/check/lib/*" com.teachdemo.ecommerce.customer_service.CustomerRefundCheck']
++with (out / 'java-check.log').open('w') as log:
++    result = subprocess.run(command, stdout=log, stderr=subprocess.STDOUT)
++text = (out / 'java-check.log').read_text()
++if result.returncode:
++    print(text[-14000:])
++    raise SystemExit(result.returncode)
++payload = next(line.removeprefix('GAP_ONE_RESULT ') for line in text.splitlines() if line.startswith('GAP_ONE_RESULT '))
++result = json.loads(payload)
++result.update(java_sources_compiled=len(sources)-1, compiler='javac --release 17; dependencies from existing application image; not Maven package')
++(out / 'java-result.json').write_text(json.dumps(result, ensure_ascii=False, indent=2) + '\n')
++print(json.dumps(result, ensure_ascii=False, indent=2))
+--- before/analysis/缺口一验证/check_ui.py
++++ after/analysis/缺口一验证/check_ui.py
+@@ -0,0 +1,114 @@
++"""真实浏览器 → 隔离 Java/H2；仅替换 Agent 模型入口，/api 拦截仅转发到隔离端口。"""
++import json
++import time
++import httpx
++from pathlib import Path
++from urllib.parse import urlparse
++from playwright.sync_api import sync_playwright
++
++out = Path(__file__).resolve().parent
++backend = 'http://127.0.0.1:18191'
++for attempt in range(60):
++    try:
++        if httpx.get(backend + '/actuator/health', timeout=2).json().get('status') == 'UP':
++            break
++    except (httpx.HTTPError, ValueError):
++        pass
++    time.sleep(0.5)
++else:
++    raise RuntimeError('隔离后端未就绪')
++requests, chat_responses, errors, checks = [], [], [], []
++with sync_playwright() as pw:
++    browser = pw.chromium.launch(headless=True, channel='chrome')
++    context = browser.new_context(viewport={'width': 1440, 'height': 1000})
++    page = context.new_page()
++
++    def forward(route):
++        url = urlparse(route.request.url)
++        target = backend + url.path + ('?' + url.query if url.query else '')
++        response = route.fetch(url=target)
++        if url.path.endswith('/chat'):
++            chat_responses.append(response.json()['data'])
++        if url.path.endswith('/resume'):
++            requests.append(route.request.post_data_json)
++        route.fulfill(response=response)
++
++    page.route('**/api/**', forward)
++    page.on('pageerror', lambda error: errors.append(str(error)))
++    try:
++        page.goto('http://127.0.0.1:6184/')
++        page.wait_for_load_state('networkidle')
++        assert any('密码' in label for label in page.locator('label').all_inner_texts())
++        page.get_by_label('账号', exact=True).fill('zhangsan')
++        page.get_by_label('密码', exact=True).fill('123456')
++        page.get_by_role('button', name='登录商城', exact=True).click()
++        page.get_by_role('heading', name='把周末，交给旷野。', exact=True).wait_for()
++        page.wait_for_load_state('networkidle')
++        balance_before = context.request.get(backend + '/api/shop/balance').json()['data']['availableBalance']
++        page.get_by_role('button', name='咨询客服', exact=True).click()
++        drawer = page.locator('.service-drawer')
++
++        def send(message):
++            count = len(chat_responses)
++            page.get_by_placeholder('请输入您的问题', exact=True).fill(message)
++            page.get_by_role('button', name='发送', exact=True).click()
++            page.get_by_placeholder('请输入您的问题', exact=True).wait_for()
++            assert len(chat_responses) == count + 1
++            return chat_responses[-1]
++
++        missing = send('ORD9200 我要退款')
++        assert not missing['confirmRequired'] and '原因' in missing['answer']
++        assert drawer.locator('.confirm-card').count() == 0
++        amount = send('能退多少钱？')
++        assert '200.00' in amount['answer'] and not amount['confirmRequired']
++        card = send('原因：买错了')
++        cards = drawer.locator('.confirm-card')
++        assert all(term in cards.last.inner_text() for term in ['ORD9200', '整单退款', '200.00', '买错了', '尚未提交'])
++        assert cards.last.get_by_role('button', name='确认提交申请', exact=True).is_enabled()
++        checks.append('缺少原因只追问；补齐后显示订单、范围、实付金额和未提交状态')
++        same = send('审核是什么流程？')
++        assert same['resumeToken'] == card['resumeToken']
++        assert cards.first.get_by_role('button', name='确认提交申请', exact=True).is_disabled()
++        assert cards.last.get_by_role('button', name='确认提交申请', exact=True).is_enabled()
++        checks.append('继续提问保留待确认；仅最新卡可操作')
++        changed = send('原因：行程取消')
++        assert changed['resumeToken'] != card['resumeToken']
++        assert '行程取消' in cards.last.inner_text()
++        cards.last.scroll_into_view_if_needed()
++        page.screenshot(path=str(out / '确认卡.png'))
++        checks.append('修改原因后旧卡失效，新卡内容正确')
++        cards.last.get_by_role('button', name='确认提交申请', exact=True).click()
++        drawer.get_by_text('退款申请已登记', exact=False).last.wait_for()
++        assert all(button.is_disabled() for button in cards.get_by_role('button', name='确认提交申请', exact=True).all())
++        records = context.request.get(backend + '/api/shop/after-sales').json()['data']
++        own = [item for item in records if item['orderNo'] == 'ORD9200']
++        assert len(own) == 1 and own[0]['status'] == 'PENDING_REVIEW' and own[0]['reason'] == '行程取消'
++        assert requests[-1]['decision'] == 'CONFIRM_SUBMIT'
++        assert '已提交，待审核' in cards.last.inner_text() and own[0]['requestNo'] in cards.last.inner_text()
++        cards.last.scroll_into_view_if_needed()
++        page.screenshot(path=str(out / '提交待审核.png'))
++        checks.append('页面提交结果与实际待审核记录一致，按钮失效')
++        cancelled = send('ORD9201 我要退款，原因：买错了')
++        assert cancelled['confirmRequired']
++        cards.last.get_by_role('button', name='取消本次申请', exact=True).click()
++        drawer.get_by_text('本次退款申请已取消，未提交。', exact=True).last.wait_for()
++        assert requests[-1]['decision'] == 'CANCEL_SUBMIT'
++        assert cards.last.get_by_role('button', name='确认提交申请', exact=True).is_disabled()
++        retry = context.request.post(backend + '/api/customer-service/resume', data={
++            'sessionId': cancelled['sessionId'], 'resumeToken': cancelled['resumeToken'],
++            'relatedOrderNo': cancelled['relatedOrderNo'], 'decision': 'CONFIRM_SUBMIT'})
++        assert retry.status == 409
++        records = context.request.get(backend + '/api/shop/after-sales').json()['data']
++        assert not any(item['orderNo'] == 'ORD9201' for item in records)
++        assert context.request.get(backend + '/api/shop/balance').json()['data']['availableBalance'] == balance_before
++        checks.append('取消实际写回后端、无新申请，旧卡重放被拒绝；余额不变')
++        page.set_viewport_size({'width': 390, 'height': 900})
++        assert page.evaluate('document.documentElement.scrollWidth <= window.innerWidth')
++        assert not errors, errors
++        checks.append('桌面和手机宽度无横向溢出、无页面异常')
++    finally:
++        browser.close()
++result = {'mode': 'real browser and Java HTTP/auth + isolated H2; API routing proxy; synthetic Agent',
++          'checks': checks, 'decision_requests': requests, 'page_errors': errors, 'model_calls': 0}
++(out / 'ui-result.json').write_text(json.dumps(result, ensure_ascii=False, indent=2) + '\n')
++print(json.dumps(result, ensure_ascii=False, indent=2))

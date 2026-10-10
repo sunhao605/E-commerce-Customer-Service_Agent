@@ -1,0 +1,123 @@
+{
+  "date": "2026-10-07",
+  "mode": "isolated_function_probes_with_synthetic_data",
+  "model_calls": 0,
+  "business_http_calls": 0,
+  "database_writes": 0,
+  "boundary": "记录现状缺口，不是修复验收或真实模型/商城端到端评测",
+  "source_sha256": {
+    "backend/agent/customer_service_agent.py": "f8474838f8140e2d6a319837e6c78ee6a9dbf772453ff593601245ef83ada270",
+    "backend/agent/context.py": "80a676ddb95866bb4e5b4883348c7e696edcc4e3d261dff112357f84387b623e",
+    "backend/agent/tools/planning.py": "6fc0d0d404df6e9bffaf0bb3497da6e721cfe3c50f0252eedc6b433450d6577f",
+    "backend/agent/tools/tool_runtime.py": "771b05f5bc6281912921bb7041b16b8a7c10bca86f0775a362faba9df99f322b",
+    "backend/agent/ecommerce_client.py": "4cf9025daca46cc08fe8635f71a0c7719e53c200b664973c9a0465b3b00f1326",
+    "backend/agent/workflows/resume.py": "6edc5acd8ff40677eabf07e8e001990f69e7bc6fa1b53cc2b32adf1d345f736b",
+    "backend/agent/workflows/after_sale_graph.py": "fccc0b83d5be2442135c642efa1d539a81b618306dd06df1c968038d754578c6",
+    "backend/evals/runner.py": "d916720972111a137087b3d9c0e5a14674ca0f70dbdf8c5cbd72292df5911ad3",
+    "backend/api/schemas.py": "a1e137f50463f57816e51e1744b8becb759e782c483e6da019ceeb61ca2c780a",
+    "ecommerce-backend/frontend/src/shop/App.tsx": "cff3a754ad35e6b7a0476ee12cb6a373eacc7478f0271ea2140ddf00f74f38f4",
+    "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/CustomerServiceGatewayService.java": "589d1ee69a14fe34629f8a4794f7949b45ffc5ab8e791fa66fdc32626b9cf82c"
+  },
+  "records": [
+    {
+      "probe": "policy_consultation_route",
+      "expected_product_behavior": "咨询规则，不创建申请流程",
+      "observed_current_behavior": {
+        "input": "退款政策是什么？我先了解一下，不申请退款。",
+        "rule_intent": "refund_request",
+        "guarded_intent": "refund_request"
+      }
+    },
+    {
+      "probe": "clarification_followup_route",
+      "expected_product_behavior": "补订单号后继续上一轮退款任务",
+      "observed_current_behavior": {
+        "input": "ORD1234",
+        "current_message_only_intent": "general_chat"
+      }
+    },
+    {
+      "probe": "multiple_products",
+      "expected_product_behavior": "列出候选或先明确商品，不能默选第一条",
+      "observed_current_behavior": {
+        "returned_count": 2,
+        "summary": "家庭帐篷 商品标价 599 元，库存 3 件。",
+        "next_action": "answer_user",
+        "candidates": []
+      }
+    },
+    {
+      "probe": "empty_vs_unavailable",
+      "expected_product_behavior": "无匹配与系统故障使用不同结果",
+      "observed_current_behavior": [
+        {
+          "injected": "empty_search",
+          "error_type": "product_not_found",
+          "fact_source": "business_api_unavailable"
+        },
+        {
+          "injected": "service_timeout",
+          "error_type": "product_not_found",
+          "fact_source": "business_api_unavailable"
+        }
+      ]
+    },
+    {
+      "probe": "java_order_summary_without_owner",
+      "expected_product_behavior": "可信列表契约一致，候选可显示且归属可验证",
+      "observed_current_behavior": {
+        "order_read_status": "success",
+        "order_returned": true,
+        "clarification_candidate_count": 0
+      }
+    },
+    {
+      "probe": "missing_payment_status",
+      "expected_product_behavior": "缺少已支付证据时阻断退款资格",
+      "observed_current_behavior": {
+        "eligibility": [
+          true,
+          "eligible"
+        ]
+      }
+    },
+    {
+      "probe": "recheck_unavailable",
+      "expected_product_behavior": "最新事实不可得则 passed=false",
+      "observed_current_behavior": {
+        "passed": true,
+        "reason": null,
+        "mismatches": {}
+      }
+    },
+    {
+      "probe": "reviewer_and_terminal_state",
+      "expected_product_behavior": "普通客户不能审批；已批准结果不能反向改为拒绝",
+      "observed_current_behavior": {
+        "customer_role_result": "completed",
+        "later_rejected_result": "rejected",
+        "stored_checkpoint_status": "paused",
+        "simulated_submission_count": 1
+      }
+    },
+    {
+      "probe": "java_resume_payload",
+      "expected_product_behavior": "网关请求应符合 Python 契约且不伪造审批身份",
+      "observed_current_behavior": {
+        "missing_fields": [
+          "reviewer_id",
+          "reviewer_role"
+        ]
+      }
+    },
+    {
+      "probe": "answer_matcher_boundary",
+      "expected_product_behavior": "人工复核应识别为正向审核边界",
+      "observed_current_behavior": {
+        "answer": "可以准备退货申请；当前还不是退货成功，仍需人工复核。",
+        "normalized": "可以准备退货申请当前还不是退货成功仍需人工复核。",
+        "human_review_matches": false
+      }
+    }
+  ]
+}

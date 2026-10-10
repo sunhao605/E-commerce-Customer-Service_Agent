@@ -1,0 +1,37 @@
+{
+  "date": "2026-10-06",
+  "brand": "荒野户外",
+  "workbench": "荒野户外 · 评测工作台",
+  "original_cases": 13,
+  "baseline_passed": 10,
+  "migrated_passed": 10,
+  "unchanged_failures": {
+    "product-tool-rag-joint-answer": [
+      "answer_semantic_missing"
+    ],
+    "received-return-workflow": [
+      "answer_semantic_missing"
+    ],
+    "promotion-member-rag-path": [
+      "answer_semantic_missing"
+    ]
+  },
+  "python_unittests_passed": 8,
+  "frontend_builds": [
+    "huangye-eval-workbench",
+    "huangye-ecommerce-frontend (shop/admin)"
+  ],
+  "dependency_lock_version_changes": 0,
+  "model_requests": 0,
+  "ui_result": "ui-result.json",
+  "limits": [
+    "Java 未编译/启动",
+    "MySQL 未连接/迁移",
+    "商城/后台 API 使用 fixture",
+    "Python Agent 使用实际离线运行",
+    "未验证真实模型或生产审批"
+  ],
+  "source_files_changed": 83,
+  "current_theme": "cartoon_camping_blue_yellow_coral",
+  "latest_ui_result": "../卡通风格验证/ui-result.json"
+}

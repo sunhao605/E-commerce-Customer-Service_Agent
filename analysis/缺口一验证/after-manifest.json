@@ -1,0 +1,16 @@
+{
+  "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/CustomerServiceGatewayService.java": "74fe25531bacbf7f8761af1764ff69977c075c9668f8e13f131cfbfdf9332e59",
+  "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/CustomerServiceSession.java": "b0f00716089d61aabfd10d0684f1cd8a6775898238a1eb43a949cb5a3e58e997",
+  "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/order/ShopService.java": "0be420348551f76c7d40e576412561ba37290b33d565f84b74b113db02b5377c",
+  "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/order/OrderRepository.java": "70aaf194eddf08348e4a6251f1e4c2498b99143b643bebccd8fd12c0ef34c912",
+  "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/RuntimeOrderSummaryResponse.java": "e88e8d1b5fac214fdf1352f782c860f8989b1cb6d48f1b1ccd6f7d235bbddeaa",
+  "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/RuntimeOrderContextService.java": "e3a24ffa91b1d1302520447be67fcbc1e04fe4fa2d60c1ca4262d13e9649813b",
+  "ecommerce-backend/frontend/src/shop/App.tsx": "f263698be9eeb1a3bf1b7a439b109f7713b7d979ec559a1c449f8954c1c10785",
+  "frontend/src/components/TracePanel.tsx": "b004d56a500aa7ab6062fb54f4203b549f4e4b94b87217c365ecfe41b5201d47",
+  "backend/agent/tools/tool_runtime.py": "9d20a81a63cd19aa22c7f15664f2c20c814a519fd8726565ec82a76b6d2f8be3",
+  "backend/agent/workflows/after_sale_graph.py": "0b35e596fb2ca6a14ebd09203506ddadc068c030c4d68a103d291a6595cdc516",
+  "backend/tests/test_refund_submission_boundary.py": "4e851feec05e546fe9d2d3230fc922ce8f561fafaa0221fa0ab6d4b5f5626855",
+  "analysis/缺口一验证/CustomerRefundCheck.java": "77f361a73369e367912a9552f44bdc07c6f55071ba8832835c490900572c6d64",
+  "analysis/缺口一验证/run_java_check.py": "ed9387f7c4b2164cd499e1444997b7fc1d60016eb9c509d3c7b79b30b93ba828",
+  "analysis/缺口一验证/check_ui.py": "ab1e6475c7c460fd2a25fc942f522faea8f2dc98f5b728b10f7cc7fa1da1af95"
+}

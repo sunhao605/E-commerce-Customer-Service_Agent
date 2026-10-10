@@ -1,0 +1,127 @@
+[
+  {
+    "path": "ecommerce-backend/frontend/admin/styles.css",
+    "kind": "modified",
+    "sha256": "57bfdfabe5a2f5743d94d5749941f30608bd66095616b4e2befad14f140dd461"
+  },
+  {
+    "path": "ecommerce-backend/frontend/public/cartoon-camp.svg",
+    "kind": "added",
+    "sha256": "2df3b963f874709079b7b2cdaf350d4594a4ce0b9a488a691877d1e740a1e91f"
+  },
+  {
+    "path": "ecommerce-backend/frontend/public/products/camp-cabinet.svg",
+    "kind": "modified",
+    "sha256": "3fe770d5bc037c42d7d8ba1c0f5e1f7bf7f5c6f5a6e4362220164d8300ce61ba"
+  },
+  {
+    "path": "ecommerce-backend/frontend/public/products/camp-canopy.svg",
+    "kind": "modified",
+    "sha256": "0d68224f33c8d606003519c18daa47c1f100ad01942b01fc40a0801127ad119f"
+  },
+  {
+    "path": "ecommerce-backend/frontend/public/products/camp-chair.svg",
+    "kind": "modified",
+    "sha256": "9612318f2e734f8d504634d510fe4b8a246493b759e07df911995decaa96fabd"
+  },
+  {
+    "path": "ecommerce-backend/frontend/public/products/camp-cookware.svg",
+    "kind": "modified",
+    "sha256": "9cd9a439250340940bb002064ef8aed5d1fd3eb307046e288c536c17bfd0008d"
+  },
+  {
+    "path": "ecommerce-backend/frontend/public/products/camp-lantern.svg",
+    "kind": "modified",
+    "sha256": "c1f974743e90c858f3f173fd20c24274bcb4f7e3dfa719d2c323d3858ab9273a"
+  },
+  {
+    "path": "ecommerce-backend/frontend/public/products/camp-signs.svg",
+    "kind": "modified",
+    "sha256": "f8199127faa4e792db1f3065d9ff93d1cbeac3eea6945277759b423be86ae28f"
+  },
+  {
+    "path": "ecommerce-backend/frontend/public/products/camp-sleeping-bag.svg",
+    "kind": "modified",
+    "sha256": "7b732d4efa0759599f536a9cadca7a6c985415b7ff963a86af69f26557f220e3"
+  },
+  {
+    "path": "ecommerce-backend/frontend/public/products/camp-table.svg",
+    "kind": "modified",
+    "sha256": "4f1d5800875a31c1c81641af94255a2bc7310b1dc598a891f11e3880e685ddd1"
+  },
+  {
+    "path": "ecommerce-backend/frontend/public/products/camp-wagon.svg",
+    "kind": "modified",
+    "sha256": "088229a33194ff49795a959c11eff0e7336ca51f7a3c72a113a703d8a158723a"
+  },
+  {
+    "path": "ecommerce-backend/frontend/public/products/custom-flag.svg",
+    "kind": "modified",
+    "sha256": "975c8322c9ffc922d14921d9f95f37553302a4c9b6e6c876eafc6c8122deb546"
+  },
+  {
+    "path": "ecommerce-backend/frontend/public/products/dry-bags.svg",
+    "kind": "modified",
+    "sha256": "33f9efecaa471f23769f841b230943d5cf8e249ee2cc6efb8a18d8c85e2b3e47"
+  },
+  {
+    "path": "ecommerce-backend/frontend/public/products/family-tent.svg",
+    "kind": "modified",
+    "sha256": "7ed7353d567699230345b8f1bd2820be97a6f4deb5ffc3361ea1f1ae3b25d0a3"
+  },
+  {
+    "path": "ecommerce-backend/frontend/public/products/hiking-pack.svg",
+    "kind": "modified",
+    "sha256": "1fa49b60a0e14911062cb098e6620b36049eef0f7a81dcf4278373660e5f28e9"
+  },
+  {
+    "path": "ecommerce-backend/frontend/public/products/large-tent.svg",
+    "kind": "modified",
+    "sha256": "33c0cc345ad3bb0d2fec40d892e46fce913c1b9532aa7c47ea44ec4948116923"
+  },
+  {
+    "path": "ecommerce-backend/frontend/public/products/light-chair.svg",
+    "kind": "modified",
+    "sha256": "661f8762881d57f2b37661237309cd611423a8cdd9f916e90e0a319f91cbe828"
+  },
+  {
+    "path": "ecommerce-backend/frontend/public/products/picnic-mat.svg",
+    "kind": "modified",
+    "sha256": "c7f9d39cdf051d48e442103268f606b1c5568328b389283d2845b6fdb0c10db3"
+  },
+  {
+    "path": "ecommerce-backend/frontend/public/products/retired-headlamp.svg",
+    "kind": "modified",
+    "sha256": "2a8121a998c6d621b5e486dc54c97fd643e16d7ec3059f614c8734addeb6199f"
+  },
+  {
+    "path": "ecommerce-backend/frontend/public/products/trekking-poles.svg",
+    "kind": "modified",
+    "sha256": "89316b04b2e3e1a1a34f3bbf00a28f7c706649e547b8dd34e341b2e3cc0e8013"
+  },
+  {
+    "path": "ecommerce-backend/frontend/shop/src/main.tsx",
+    "kind": "modified",
+    "sha256": "17a972f386a846e19eafedf8302ee8af1383c35d8ba7cdd94c8ed3c5fd02e493"
+  },
+  {
+    "path": "ecommerce-backend/frontend/shop/src/styles.css",
+    "kind": "modified",
+    "sha256": "35e1fe93a127c6b61a9033cfe965549cbfb3b78fbecafe7566472ebb151a78c5"
+  },
+  {
+    "path": "frontend/public/cartoon-camp.svg",
+    "kind": "added",
+    "sha256": "2df3b963f874709079b7b2cdaf350d4594a4ce0b9a488a691877d1e740a1e91f"
+  },
+  {
+    "path": "frontend/src/App.tsx",
+    "kind": "modified",
+    "sha256": "bdb4dbb3ab6be655942620f234d3b30933f683eae1b4e2090687341e11e054cb"
+  },
+  {
+    "path": "frontend/src/styles.css",
+    "kind": "modified",
+    "sha256": "91d4e44c456be0007cf6bcfcc5e37845d2a6aae6c151b7936227aa2bfb0def73"
+  }
+]

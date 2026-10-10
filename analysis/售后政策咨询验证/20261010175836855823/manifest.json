@@ -1,0 +1,221 @@
+{
+  "run_id": "20261010175836855823",
+  "started_at": "2026-10-10T17:58:36.855823+08:00",
+  "entry": "running_python_agent_chat",
+  "agent_url": "http://127.0.0.1:8000/chat",
+  "version_boundary": "本目录无独立 Git 提交；保存磁盘源码和政策/Prompt 指纹，运行进程身份另行核验。",
+  "sources": {
+    "backend/agent/__init__.py": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mtime": 1791361800.7148623
+    },
+    "backend/agent/context.py": {
+      "sha256": "5ac54989092ce88e52d25e990c84cf7f293afdc81dcb21b8b01614200a658218",
+      "mtime": 1791605417.9995465
+    },
+    "backend/agent/cost.py": {
+      "sha256": "ea1ef4e3a17bdc52fa970743ee22ab1c8d8573e83a34c9607b4874634e66f117",
+      "mtime": 1791361799.53806
+    },
+    "backend/agent/customer_service_agent.py": {
+      "sha256": "84088095ce0bb09fbbc8f408fd0ff299b307c00b61dc9557695c7e1bb93ecd3c",
+      "mtime": 1791626051.6222827
+    },
+    "backend/agent/ecommerce_client.py": {
+      "sha256": "4cf9025daca46cc08fe8635f71a0c7719e53c200b664973c9a0465b3b00f1326",
+      "mtime": 1791361799.5444033
+    },
+    "backend/agent/hooks.py": {
+      "sha256": "895108d573df33f575736eef5546f81f3aa9a96331aa480eeaa270ad7b2e832a",
+      "mtime": 1791361799.5030036
+    },
+    "backend/agent/mcp_catalog.py": {
+      "sha256": "bc10d8d1bc85d7f058ce9ed5b07c1d3f326f15c301c016f070c8815c23ccf60b",
+      "mtime": 1791361799.4961054
+    },
+    "backend/agent/models/__init__.py": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mtime": 1791361800.7150574
+    },
+    "backend/agent/models/answer_client.py": {
+      "sha256": "c2838be9fc4bf8b85f840fd269efa6ddf1cf6dc505bb6c90deb3248e02a8136f",
+      "mtime": 1791361800.6938481
+    },
+    "backend/agent/models/router_client.py": {
+      "sha256": "de87d9a96d8503b2e037cfe8fcb4c1e4ef966c5e05aec4c414d22a11ea430a77",
+      "mtime": 1791625731.0823615
+    },
+    "backend/agent/prompts.py": {
+      "sha256": "6317cd97c8482db38fce18f885ced91edd95a2172256fa41e3280be75279d425",
+      "mtime": 1791361800.71098
+    },
+    "backend/agent/source_guard.py": {
+      "sha256": "27b5fee4162ba5538c165cc243a4ba24838d13c620fe434aa7eb5cba3001c7a4",
+      "mtime": 1791361799.5014677
+    },
+    "backend/agent/state.py": {
+      "sha256": "084150d57ae8b2258b5105e3951ca16d13889e9c10612105049f71abc6247540",
+      "mtime": 1791361799.549819
+    },
+    "backend/agent/tools/__init__.py": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mtime": 1791361800.715138
+    },
+    "backend/agent/tools/langchain_runtime.py": {
+      "sha256": "6a4ac807078e2d65dd21c30cd3d7302584cb24680ac30f45479b4ed26c5f5966",
+      "mtime": 1791361799.7961771
+    },
+    "backend/agent/tools/planning.py": {
+      "sha256": "253557b6068edc677fb6509a640b53b8792f3e7bfa07bf82bf6cfedf7e3d65e1",
+      "mtime": 1791626051.6174154
+    },
+    "backend/agent/tools/runtime_context.py": {
+      "sha256": "4989622c79716c4505dffc6e3e26e507f09aab206590330c86d7d1c6077e6a88",
+      "mtime": 1791361799.800448
+    },
+    "backend/agent/tools/tool_runtime.py": {
+      "sha256": "9a0dc05a3d78ba2c98e278186041b5e445059634a59ca06e1a17b51d6130bc43",
+      "mtime": 1791532902.1982536
+    },
+    "backend/agent/trace.py": {
+      "sha256": "03099a40844b681edbd0e2c63b885838c34ecc445cb4b4fe431ff060995f5572",
+      "mtime": 1791361799.5007427
+    },
+    "backend/agent/workflows/__init__.py": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mtime": 1791361800.715224
+    },
+    "backend/agent/workflows/after_sale_graph.py": {
+      "sha256": "e99d407b35fbead3a9c9c75f8bc025730afee2d4b68ce46117a20034e6622019",
+      "mtime": 1791532824.7261384
+    },
+    "backend/agent/workflows/resume.py": {
+      "sha256": "ec0a188d3a0759af154b7f134aef63f37365c9a578d57bec44834aaa6a4f67f4",
+      "mtime": 1791549921.5407352
+    },
+    "backend/api/__init__.py": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mtime": 1791361799.6461525
+    },
+    "backend/api/routes.py": {
+      "sha256": "7b43f4201ea5b9a89dedb5eae09bcfc3c27e7a288f1726d94b86cf6a5cb877f4",
+      "mtime": 1791549921.531839
+    },
+    "backend/api/schemas.py": {
+      "sha256": "58a1b7d4b53b0e173789f42e28b4eb6cfa5c005159ef2625020d45b4c60f10a7",
+      "mtime": 1791626051.583467
+    },
+    "backend/evals/__init__.py": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mtime": 1791361799.4889076
+    },
+    "backend/evals/feedback.py": {
+      "sha256": "aa783e73616aa9f48e4b2c77eacc8868a5950579cae01533f6ba4bdbbdfd80dd",
+      "mtime": 1791361799.4887683
+    },
+    "backend/evals/runner.py": {
+      "sha256": "60a0b14e88f08c5deaf896fc19018ca5543dda53b13a3c7da5ddb5c6e46793e0",
+      "mtime": 1791549733.0009143
+    },
+    "backend/main.py": {
+      "sha256": "588e938575b8b1fbee8a92eae6fb62631be2084fa40b5de622c706f8950b45ce",
+      "mtime": 1791361799.4771073
+    },
+    "backend/retrieval/__init__.py": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mtime": 1791361800.7149653
+    },
+    "backend/retrieval/documents.py": {
+      "sha256": "70074de952c03f485b084d77285fae4e8fb10e0e4c49619537dbf9b8d54581f8",
+      "mtime": 1791361800.7111044
+    },
+    "backend/retrieval/hybrid_retrieval.py": {
+      "sha256": "719f12e0eda56cb2e0fba3ea76397c194f38edfb219972c37ed488bceee3f48b",
+      "mtime": 1791626051.5929976
+    },
+    "backend/retrieval/knowledge.py": {
+      "sha256": "6735ef6b6f87d3b00737043136aa32f4487ddd1b9862e94695308079334d3315",
+      "mtime": 1791626051.583491
+    },
+    "backend/settings.py": {
+      "sha256": "15467fc842ec2aa47709c3aaa5c4b8631f95fc9a7c8bbab2e5426ebe03da6630",
+      "mtime": 1791361800.710829
+    },
+    "backend/tests/__init__.py": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mtime": 1791361799.4907475
+    },
+    "backend/tests/test_deepseek_config.py": {
+      "sha256": "ab99fcc05a2cbb1692377d4cf52291bb20296f07a834822ff690c52fc66e9f16",
+      "mtime": 1791361799.4904113
+    },
+    "backend/tests/test_eval_contract.py": {
+      "sha256": "1465660ffb97cd56ec1b5fca8afa32317f3de555205427ab78c5ad0c3beb0315",
+      "mtime": 1791361799.4931345
+    },
+    "backend/tests/test_outdoor_scenario.py": {
+      "sha256": "ce3ba152ec0beb24119200855ca819a25da708c60946361d215193c1091b0546",
+      "mtime": 1791361799.494568
+    },
+    "backend/tests/test_refund_submission_boundary.py": {
+      "sha256": "7665c5a54f8d1450cd96c313fc45eb55d217d0d36283e793ae9ba6be2e7fa01f",
+      "mtime": 1791549733.0008852
+    },
+    "backend/tests/test_resume_guard.py": {
+      "sha256": "4116919e7b7bde947d5626e35e1b5d6b89530ee22de6950f108af99e25c23f25",
+      "mtime": 1791549921.6036284
+    },
+    "backend/tests/test_route_priority.py": {
+      "sha256": "aafaf04757862d83b4d27bafb08a84eff7edbc5f746d908b4575978b927a8785",
+      "mtime": 1791626062.7760694
+    },
+    "backend/resources/knowledge/after_sale_policy.md": {
+      "sha256": "8276827322e0caee0578ff7a939d1f872b946e78f0f38f71356dd2866713a836",
+      "mtime": 1791286636.1719742
+    },
+    "backend/resources/knowledge/member_coupon_policy.md": {
+      "sha256": "988e7bf0c7f0c120b0fbebcbe3d77124386cce392ba66ce91ff46f851ca51fbc",
+      "mtime": 1791286636.1713428
+    },
+    "backend/resources/knowledge/payment_invoice_policy.md": {
+      "sha256": "43c05e34f33ccffcbd0a26706eb101382685805ec89593fc0ad36a3e5e31f23e",
+      "mtime": 1791286636.170878
+    },
+    "backend/resources/knowledge/promotion_policy.md": {
+      "sha256": "5fcea1ca207956e4a40c905197f794cc83550d4feeeda14c926bb88694b0d835",
+      "mtime": 1791287549.1805007
+    },
+    "backend/resources/knowledge/received_return_policy.md": {
+      "sha256": "3efdbf7f5fdb0a46f49b30fd8570f7807b62cf1c82d2b3cda85cae926b37c00c",
+      "mtime": 1791286636.171111
+    },
+    "backend/resources/prompts/final_answer_style.md": {
+      "sha256": "75e0fb68d3f9e3728b1ca49bdf1ba25fb708a66d098e630b4c8cee9f046a7a54",
+      "mtime": 1786267275.5362153
+    },
+    "backend/resources/prompts/high_risk_after_sale.md": {
+      "sha256": "ea3f62c63e62339cee771306c16fd04911102d6886a205b943b61f6ab43c90c3",
+      "mtime": 1786267275.536295
+    },
+    "backend/resources/prompts/prompt_security.md": {
+      "sha256": "c417374e77ea6c49fcd5674bbeae4daa0d84b1dd565ed843835df119c434c3e2",
+      "mtime": 1791286636.1741836
+    },
+    "backend/resources/prompts/rag_answering.md": {
+      "sha256": "95db19c4951e065995a3166da363d1491fb75c490c8a8013ebc1040a52c74922",
+      "mtime": 1791286636.1746387
+    },
+    "backend/resources/prompts/route_contract.md": {
+      "sha256": "5bb29a6b117542eca4c6bd338f71fb67c33c2763882e25c972cd5187662cbd32",
+      "mtime": 1791626051.583461
+    },
+    "backend/resources/prompts/system_customer_service.md": {
+      "sha256": "24dde154a0106f06dbbe6e759536d1b676e081ad816697e68bda8c9196166949",
+      "mtime": 1791286636.1744208
+    },
+    "backend/resources/prompts/tool_usage.md": {
+      "sha256": "904cffc8998db7c2438e18f20a34fe8de6e4d0be622b79e9759a6f4206e0ff9b",
+      "mtime": 1786267275.5369368
+    }
+  }
+}

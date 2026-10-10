@@ -1,0 +1,312 @@
+{
+  "run_id": "20261010180912346367",
+  "health": {
+    "status": "ok",
+    "lesson": "41"
+  },
+  "results": [
+    {
+      "id": "B02",
+      "input": "七天无理由退货需要满足什么条件？只是咨询，暂时不退。",
+      "session_id": "policy-eval-20261010180912346367-B02",
+      "http_status": 200,
+      "elapsed_ms": 2717,
+      "rule_fallback": "return_policy_query",
+      "intent": "return_policy_query",
+      "answer": "您好，七天无理由退货一般需要同时满足这几个条件：\n\n1. 订单已经支付并签收；\n2. 提交申请时仍在签收后的七天窗口内；\n3. 整单商品在购买时都支持七天无理由退货。\n\n另外，七天无理由是一种申请类型，您不需要额外填写退货理由。提交后申请会进入待审核，管理员同意退货并提供退回地址后，您再寄回并填写退回物流；商家收到商品并验收通过后才会退款，所以“同意退货”不等于退款已经完成。\n\n如果商品本身不支持七天无理由、超出七天窗口，或资格信息缺失，就不走这条无理由退货流程。质量问题等其他售后需要说明具体情况再另行核实，并不是一律无法办理。\n\n具体到某一笔订单是否符合条件，还需要以订单实际信息和商品页、结算页的说明为准。您只是咨询的话，可以先对照以上条件看看；如果之后需要申请，我可以帮您进一步核实。",
+      "next_action": "answer_user",
+      "cache_hit": false,
+      "model": {
+        "route_planner": {
+          "used_model": true,
+          "model_name": "deepseek-flash",
+          "fallback_reason": null,
+          "prompt_fragments": [
+            {
+              "name": "prompt_security",
+              "level": "global_policy",
+              "version": "v1",
+              "load": "always",
+              "priority": 100,
+              "phase": "route",
+              "estimated_tokens": 29
+            },
+            {
+              "name": "system_customer_service",
+              "level": "role",
+              "version": "v1",
+              "load": "always",
+              "priority": 90,
+              "phase": "route",
+              "estimated_tokens": 32
+            },
+            {
+              "name": "route_contract",
+              "level": "task_contract",
+              "version": "v1",
+              "load": "when_route",
+              "priority": 80,
+              "phase": "route",
+              "estimated_tokens": 592
+            }
+          ]
+        },
+        "final_answer": {
+          "used_model": true,
+          "model_name": "deepseek-flash",
+          "fallback_reason": null,
+          "prompt_fragments": [
+            {
+              "name": "prompt_security",
+              "level": "global_policy",
+              "version": "v1",
+              "load": "always",
+              "priority": 100,
+              "phase": "final_answer",
+              "estimated_tokens": 29
+            },
+            {
+              "name": "system_customer_service",
+              "level": "role",
+              "version": "v1",
+              "load": "always",
+              "priority": 90,
+              "phase": "final_answer",
+              "estimated_tokens": 32
+            },
+            {
+              "name": "rag_answering",
+              "level": "capability",
+              "version": "v1",
+              "load": "when_rag",
+              "priority": 60,
+              "phase": "final_answer",
+              "estimated_tokens": 38
+            },
+            {
+              "name": "final_answer_style",
+              "level": "response_contract",
+              "version": "v1",
+              "load": "when_final_answer",
+              "priority": 40,
+              "phase": "final_answer",
+              "estimated_tokens": 25
+            }
+          ]
+        }
+      },
+      "route_plan": {
+        "intent": "return_policy_query",
+        "needs_rag": true,
+        "needs_business_tools": false,
+        "required_tools": [],
+        "tool_candidates": [],
+        "knowledge_domains": [
+          "received_return_policy"
+        ],
+        "entity_refs": [],
+        "risk_level": "low",
+        "requires_workflow": false,
+        "confidence": 0.9,
+        "source": "llm_with_policy_constraints",
+        "fallback_policy": "safe_deterministic_path"
+      },
+      "memory": {
+        "runtime_user_id": "intent-eval",
+        "last_order_id": null,
+        "last_product_name": null,
+        "recent_intent": "return_policy_query",
+        "open_task": null,
+        "low_risk_preferences": {},
+        "write_decisions": [],
+        "excluded_items": [],
+        "ttl": "session"
+      },
+      "cost_summary": {
+        "schema_version": "cost_summary_v1",
+        "cost_profile": "teaching",
+        "path_type": "light_react_agent",
+        "model_calls": {
+          "route_planner": 1,
+          "tool_agent": 0,
+          "final_answer": 1,
+          "extra_reasoning": 0
+        },
+        "frameworks": {
+          "langchain_runnable_sequence": true,
+          "langchain_create_agent": false,
+          "langgraph_state_graph": false,
+          "offline_deterministic_fallback": false
+        },
+        "tool_call_count": 0,
+        "business_tool_call_count": 0,
+        "rag": {
+          "needs_rag": true,
+          "hit_count": 1,
+          "pre_retrieval_count": 1,
+          "tool_retrieval_count": 0,
+          "retrieval_paths": [
+            "pre_retrieval"
+          ],
+          "cache_hit": false
+        },
+        "tokens": {
+          "context_estimated": 13,
+          "prompt_estimated": 777,
+          "answer_estimated": 174,
+          "total_estimated": 964,
+          "context_budget": 160
+        },
+        "prompt_fragments": {
+          "selected": [
+            "prompt_security",
+            "system_customer_service",
+            "route_contract",
+            "prompt_security",
+            "system_customer_service",
+            "rag_answering",
+            "final_answer_style"
+          ],
+          "selections": [
+            {
+              "name": "prompt_security",
+              "level": "global_policy",
+              "version": "v1",
+              "load": "always",
+              "priority": 100,
+              "phase": "route",
+              "estimated_tokens": 29
+            },
+            {
+              "name": "system_customer_service",
+              "level": "role",
+              "version": "v1",
+              "load": "always",
+              "priority": 90,
+              "phase": "route",
+              "estimated_tokens": 32
+            },
+            {
+              "name": "route_contract",
+              "level": "task_contract",
+              "version": "v1",
+              "load": "when_route",
+              "priority": 80,
+              "phase": "route",
+              "estimated_tokens": 592
+            },
+            {
+              "name": "prompt_security",
+              "level": "global_policy",
+              "version": "v1",
+              "load": "always",
+              "priority": 100,
+              "phase": "final_answer",
+              "estimated_tokens": 29
+            },
+            {
+              "name": "system_customer_service",
+              "level": "role",
+              "version": "v1",
+              "load": "always",
+              "priority": 90,
+              "phase": "final_answer",
+              "estimated_tokens": 32
+            },
+            {
+              "name": "rag_answering",
+              "level": "capability",
+              "version": "v1",
+              "load": "when_rag",
+              "priority": 60,
+              "phase": "final_answer",
+              "estimated_tokens": 38
+            },
+            {
+              "name": "final_answer_style",
+              "level": "response_contract",
+              "version": "v1",
+              "load": "when_final_answer",
+              "priority": 40,
+              "phase": "final_answer",
+              "estimated_tokens": 25
+            }
+          ],
+          "fragment_count": 7,
+          "fragmentized": true,
+          "source": "actual_model_invocations"
+        },
+        "cache": {
+          "common_hit_cache": false,
+          "cache_key": null,
+          "does_not_cache_high_risk_workflow": true
+        },
+        "observation_compression": {
+          "schema_version": "observation_compression_v1",
+          "original_tokens": 0,
+          "compressed_tokens": 0,
+          "saved_tokens": 0,
+          "strategy": "keep_status_next_action_and_risk_summary"
+        },
+        "workflow": {
+          "used_langgraph": false,
+          "workflow_id": null,
+          "workflow_type": null,
+          "graph_name": null,
+          "node_history": [],
+          "hitl_required": false,
+          "status": null
+        },
+        "degradation": {
+          "degraded": false,
+          "reason": null,
+          "cost_threshold_exceeded": true,
+          "warnings": [
+            "total_estimated_tokens_over_teaching_budget"
+          ]
+        },
+        "reasoning": {
+          "view": "default",
+          "thinking_requested": false,
+          "reasoning_content_returned": false,
+          "source": null
+        },
+        "safety_boundary": {
+          "cost_control_does_not_skip_business_facts": true,
+          "cost_control_does_not_skip_hitl": true,
+          "not_finops_or_billing_system": true
+        }
+      },
+      "citations": [
+        {
+          "source": "knowledge/received_return_policy.md",
+          "title": "荒野户外签收后退货 SOP",
+          "snippet": "七天无理由退货适用于已支付并签收、申请提交时仍在签收后七天窗口内，且整单商品在购买时均支持七天无理由退货的订单。七天无理由是申请类型，用户无需另外填写退货理由；具体订单是否符合条件仍需核验可信订单事实，不得自动承诺退货成功。\n\n用户核对并确认提交后，申请进入待审核；管理员同意退货并提供退回地址后，由用户寄回并填写退回物流。商家收到商品且验收通过后才退款，同意退货不等于退款已完成。\n\n商品不支持七天无理由、超出窗口或资格事实缺失时，不进入这条无理由退货流程；质量问题等其他售后需说明具体问题并另行核验，不能一律认定为无法办理任何售后。",
+          "score": 0.94,
+          "retrieval_stage": "pre_retrieval",
+          "metadata": {
+            "policy_id": "return_after_delivery",
+            "scene_key": "after_sale_return"
+          }
+        }
+      ],
+      "tool_calls": [],
+      "workflow": null,
+      "clarification": null,
+      "trace_events": [
+        "runtime_context_built",
+        "context_built",
+        "model_route_planned",
+        "route_plan_built",
+        "rag_pre_retrieved",
+        "context_source_safety_checked",
+        "model_answer_generated",
+        "mcp_binding_resolved",
+        "prompt_context_built",
+        "hook_executed",
+        "cost_recorded",
+        "final_answer_generated"
+      ]
+    }
+  ]
+}

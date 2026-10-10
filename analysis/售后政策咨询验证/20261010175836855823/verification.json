@@ -1,0 +1,35 @@
+{
+  "run_id": "20261010175836855823",
+  "checked_at": "2026-10-10T18:00:45.603879+08:00",
+  "process": {
+    "pid": 95232,
+    "started_at": "2026-10-10T17:58:26+08:00",
+    "cwd": "/Users/sunhao/Downloads/03_AIPMProject/0305_DianShang_Agent",
+    "restart_reason": "此前 PID56075 启动早于17:54源码修改；重启加载当前代码"
+  },
+  "source_count": 53,
+  "changed_sources_since_frozen": [],
+  "java_source": {
+    "path": "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/order/ShopService.java",
+    "sha256": "816d74d053e4a730280d41064685c4b4c24f949f15275b2a324f59153ca2ea6a"
+  },
+  "checks": [
+    {
+      "id": "B01",
+      "label_pass": true,
+      "read_only_path_pass": true,
+      "content_judgment_by_assistant": "基础回答通过，未验完整政策覆盖"
+    },
+    {
+      "id": "B02",
+      "label_pass": true,
+      "read_only_path_pass": true,
+      "content_judgment_by_assistant": "失败：额外退货原因要求与七天无理由实现不一致，流程说明不完整"
+    }
+  ],
+  "label_pass_count": 2,
+  "read_only_path_pass_count": 2,
+  "basic_content_pass_count": 1,
+  "complete_policy_coverage_tested": false,
+  "judgment_method": "状态断言加助手逐条内容核对，未运行模型Judge；不等同于人工用户复核"
+}

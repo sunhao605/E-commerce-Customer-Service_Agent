@@ -1,0 +1,18 @@
+{
+  "scanned_files": 16978,
+  "archive_entries": 92544,
+  "brand_residual_paths": [],
+  "checked_links": 92,
+  "broken_links": [],
+  "layout_checks": "passed",
+  "backend_folders": [
+    "agent",
+    "api",
+    "evals",
+    "resources",
+    "retrieval",
+    "tests"
+  ],
+  "logic_files_checked": 27,
+  "resource_files_checked": 15
+}

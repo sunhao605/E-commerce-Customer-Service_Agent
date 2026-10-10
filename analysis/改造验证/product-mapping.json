@@ -1,0 +1,182 @@
+{
+  "SKU-AUD-101": {
+    "name": "露营折叠椅",
+    "category": "营地家具",
+    "description": "折叠收纳的营地休闲椅，配有扶手与收纳袋，适合周末露营。",
+    "highlights": "便携收纳；营地休闲；参加会员满减活动",
+    "afterSaleLimit": "配件齐全且不影响二次销售时支持 7 天无理由",
+    "tags": "折叠椅,露营椅,营地,露营",
+    "slug": "camp-chair",
+    "shape": "chair"
+  },
+  "SKU-PWR-202": {
+    "name": "户外野餐垫",
+    "category": "露营配件",
+    "description": "可折叠的户外野餐垫，配有提手，适合公园野餐与营地休息。",
+    "highlights": "便携铺展；收纳方便；支持 7 天无理由",
+    "afterSaleLimit": "包装和配件完整时支持 7 天无理由",
+    "tags": "野餐垫,露营,野餐",
+    "slug": "picnic-mat",
+    "shape": "mat"
+  },
+  "SKU-AUD-303": {
+    "name": "便携折叠桌",
+    "category": "营地家具",
+    "description": "可拆卸收纳的便携折叠桌，适合营地餐饮和户外休闲。",
+    "highlights": "户外便携；折叠收纳；配有收纳袋",
+    "afterSaleLimit": "外观划伤或使用损坏不支持无理由退货",
+    "tags": "折叠桌,露营,野餐",
+    "slug": "camp-table",
+    "shape": "table"
+  },
+  "SKU-AUD-404": {
+    "name": "轻量露营折叠椅",
+    "category": "营地家具",
+    "description": "轻量款折叠椅，适合简装出游与短途露营。",
+    "highlights": "轻量便携；当前无库存",
+    "afterSaleLimit": "配件齐全且不影响二次销售时支持 7 天无理由",
+    "tags": "折叠椅,轻量,露营",
+    "slug": "light-chair",
+    "shape": "chair"
+  },
+  "SKU-CUS-501": {
+    "name": "定制营地旗",
+    "category": "露营配件",
+    "description": "按用户选择的文字和图案制作的营地旗，搭配收纳袋。",
+    "highlights": "定制商品；制作后不可无理由退货",
+    "afterSaleLimit": "定制商品非质量问题不支持 7 天无理由",
+    "tags": "营地旗,定制,露营",
+    "slug": "custom-flag",
+    "shape": "flag"
+  },
+  "SKU-CAM-601": {
+    "name": "下架户外头灯",
+    "category": "露营照明",
+    "description": "旧款户外头灯，已停止销售，仅用于下架商品演示样例。",
+    "highlights": "已下架；不应推荐",
+    "afterSaleLimit": "下架商品不支持新订单售后承诺",
+    "tags": "头灯,下架,照明",
+    "slug": "retired-headlamp",
+    "shape": "lamp"
+  },
+  "SKU-PHN-618": {
+    "name": "山野四人帐篷",
+    "category": "帐篷天幕",
+    "description": "四人露营帐篷，配有外帐、支架与收纳袋，适合家庭周末露营。",
+    "highlights": "露营季帐篷专场；配件套装",
+    "afterSaleLimit": "完整收纳且配件齐全支持 7 天无理由，使用污损需人工复核",
+    "tags": "帐篷,家庭露营,露营季",
+    "slug": "family-tent",
+    "shape": "tent"
+  },
+  "SKU-TAB-618": {
+    "name": "轻旅方形天幕",
+    "category": "帐篷天幕",
+    "description": "方形营地天幕，配有支杆与拉绳，适合户外休憩。",
+    "highlights": "营地遮蔽；露营季会员权益",
+    "afterSaleLimit": "配件完整且不影响二次销售时支持 7 天无理由",
+    "tags": "天幕,营地,露营季",
+    "slug": "camp-canopy",
+    "shape": "canopy"
+  },
+  "SKU-VAC-618": {
+    "name": "全地形营地收纳车",
+    "category": "营地家具",
+    "description": "可折叠营地收纳车，用于搬运露营装备，附收纳袋。",
+    "highlights": "营地搬运；折叠收纳；露营季活动",
+    "afterSaleLimit": "车架和配件完整且不影响二次销售时可申请退货",
+    "tags": "收纳车,营地,搬运",
+    "slug": "camp-wagon",
+    "shape": "wagon"
+  },
+  "SKU-AIR-618": {
+    "name": "营地大型组装帐篷",
+    "category": "帐篷天幕",
+    "description": "需组装的大型营地帐篷，适合多人活动与长时间驻营。",
+    "highlights": "大型营地；多人空间；配件套装",
+    "afterSaleLimit": "此演示商品非质量问题不支持无理由退货，未发货可申请取消",
+    "tags": "帐篷,大型营地,组装",
+    "slug": "large-tent",
+    "shape": "tent"
+  },
+  "SKU-DRY-618": {
+    "name": "暖光营地灯",
+    "category": "露营照明",
+    "description": "带提手的营地照明灯，适合桌面摆放或悬挂使用。",
+    "highlights": "营地照明；会员专享活动",
+    "afterSaleLimit": "保持外观与配件完整，使用损坏需人工复核",
+    "tags": "营地灯,照明,露营季",
+    "slug": "camp-lantern",
+    "shape": "lamp"
+  },
+  "SKU-WAT-618": {
+    "name": "轻量伸缩登山杖",
+    "category": "徒步装备",
+    "description": "伸缩式登山杖，配有腕带与脚垫，适合徒步出游。",
+    "highlights": "徒步装备；可收纳；露营季活动",
+    "afterSaleLimit": "杖体与配件齐全，使用磨损需人工复核",
+    "tags": "登山杖,徒步,露营季",
+    "slug": "trekking-poles",
+    "shape": "poles"
+  },
+  "SKU-COF-618": {
+    "name": "营地炊具套装",
+    "category": "露营配件",
+    "description": "可叠放收纳的营地炊具，适合野餐与营地料理。",
+    "highlights": "营地料理；套装收纳；露营季活动",
+    "afterSaleLimit": "食品接触类装备使用后非质量问题需人工复核，未使用且配件齐全可申请退货",
+    "tags": "炊具,料理,露营季",
+    "slug": "camp-cookware",
+    "shape": "cookware"
+  },
+  "SKU-MON-618": {
+    "name": "便携折叠收纳柜",
+    "category": "营地家具",
+    "description": "可折叠的营地收纳柜，配有层板和收纳袋，适合整理装备。",
+    "highlights": "营地收纳；分类整理；便携收纳",
+    "afterSaleLimit": "签收后请检查框架和配件，运输破损需保留照片和包装",
+    "tags": "收纳柜,营地家具,露营季",
+    "slug": "camp-cabinet",
+    "shape": "cabinet"
+  },
+  "SKU-AIRP-618": {
+    "name": "山径徒步背包",
+    "category": "徒步装备",
+    "description": "配有多层收纳空间的徒步背包，适合短途徒步与露营。",
+    "highlights": "徒步收纳；分区整理；露营季活动",
+    "afterSaleLimit": "外观和配件齐全且不影响二次销售时可申请退货",
+    "tags": "背包,徒步,露营季",
+    "slug": "hiking-pack",
+    "shape": "bag"
+  },
+  "SKU-PPS-618": {
+    "name": "贴身露营睡袋",
+    "category": "徒步装备",
+    "description": "带收纳袋的贴身露营睡袋，适合营地休息。",
+    "highlights": "营地休息；收纳方便；露营季活动",
+    "afterSaleLimit": "此演示商品拆封贴身使用后非质量问题不支持无理由退货",
+    "tags": "睡袋,露营,露营季",
+    "slug": "camp-sleeping-bag",
+    "shape": "sleeping"
+  },
+  "SKU-LOCK-618": {
+    "name": "定制营地标识套装",
+    "category": "露营配件",
+    "description": "按选定文字制作的营地标识套装，适合团队活动。",
+    "highlights": "营地标识；团队定制；个性图案",
+    "afterSaleLimit": "定制商品制作后非质量问题不支持无理由退货",
+    "tags": "营地标识,定制,露营季",
+    "slug": "camp-signs",
+    "shape": "flag"
+  },
+  "SKU-CAM-618": {
+    "name": "户外防水收纳袋套装",
+    "category": "露营配件",
+    "description": "不同容量的户外收纳袋套装，适合分类收纳衣物与装备。",
+    "highlights": "装备收纳；配件套装；露营季活动",
+    "afterSaleLimit": "保持袋体及配件完整，使用磨损或缺件需人工复核",
+    "tags": "防水袋,收纳,露营季",
+    "slug": "dry-bags",
+    "shape": "bag"
+  }
+}

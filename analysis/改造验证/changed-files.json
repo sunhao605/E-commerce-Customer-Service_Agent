@@ -1,0 +1,417 @@
+[
+  {
+    "path": ".gitignore",
+    "kind": "added",
+    "sha256": "b6ab79488eb8bda7ce9ec98fba813a64837de6bfec6b0090dac4315d2ed19d7c"
+  },
+  {
+    "path": "README.md",
+    "kind": "modified",
+    "sha256": "3f9833bc7dd407defd46ad01232d3e3d25ff7ac39c39b3fc677b5f9e0db7be42"
+  },
+  {
+    "path": "backend/agent_capabilities.json",
+    "kind": "modified",
+    "sha256": "f1a54926107b95904f794074101fb504cd5b3070995d658966a883dafdc89a7d"
+  },
+  {
+    "path": "backend/agents/customer_service_agent.py",
+    "kind": "modified",
+    "sha256": "ce18d141369ef08807ff0a0142e01a54b3c2597f63d9b5e26a0c1f1f44caf15d"
+  },
+  {
+    "path": "backend/api/routes.py",
+    "kind": "modified",
+    "sha256": "033df53b3bbbd3ed88c64934e08530cafe24b02bebc5cb3a236c27884b26a071"
+  },
+  {
+    "path": "backend/cases.yml",
+    "kind": "modified",
+    "sha256": "21fc0a95e136d216ea6f767d429e2620834309c5f32410605666d8303eaad680"
+  },
+  {
+    "path": "backend/config/settings.py",
+    "kind": "modified",
+    "sha256": "a42511148709f54459fb454b166dfa61af4960627c983f99bb6b4128f1e29070"
+  },
+  {
+    "path": "backend/evals/runner.py",
+    "kind": "modified",
+    "sha256": "791d38d33f529fa84d0f10cb0484a8fc7a18c8106ae81e5ae930a2300cc870b9"
+  },
+  {
+    "path": "backend/feedback/attribution.py",
+    "kind": "modified",
+    "sha256": "63f118bd99541f0d3cb3f1a4a05afd4af732194cf00cc11ccc59430f3d059da4"
+  },
+  {
+    "path": "backend/integrations/ecommerce_client.py",
+    "kind": "modified",
+    "sha256": "23567d6b6f81ae5649f286095eef0311a66be91ac5fd28b31b00ba095c16457c"
+  },
+  {
+    "path": "backend/knowledge/after_sale_policy.md",
+    "kind": "modified",
+    "sha256": "8276827322e0caee0578ff7a939d1f872b946e78f0f38f71356dd2866713a836"
+  },
+  {
+    "path": "backend/knowledge/member_coupon_policy.md",
+    "kind": "modified",
+    "sha256": "988e7bf0c7f0c120b0fbebcbe3d77124386cce392ba66ce91ff46f851ca51fbc"
+  },
+  {
+    "path": "backend/knowledge/payment_invoice_policy.md",
+    "kind": "modified",
+    "sha256": "43c05e34f33ccffcbd0a26706eb101382685805ec89593fc0ad36a3e5e31f23e"
+  },
+  {
+    "path": "backend/knowledge/promotion_policy.md",
+    "kind": "modified",
+    "sha256": "5fcea1ca207956e4a40c905197f794cc83550d4feeeda14c926bb88694b0d835"
+  },
+  {
+    "path": "backend/knowledge/received_return_policy.md",
+    "kind": "modified",
+    "sha256": "3efdbf7f5fdb0a46f49b30fd8570f7807b62cf1c82d2b3cda85cae926b37c00c"
+  },
+  {
+    "path": "backend/mcp_catalog/catalog.py",
+    "kind": "modified",
+    "sha256": "bc10d8d1bc85d7f058ce9ed5b07c1d3f326f15c301c016f070c8815c23ccf60b"
+  },
+  {
+    "path": "backend/prompts/prompt_registry.yml",
+    "kind": "modified",
+    "sha256": "b28bb2d7528702dc3011d94a4464d210500a573d5f0a4093458f9264f1d21b39"
+  },
+  {
+    "path": "backend/prompts/prompt_security.md",
+    "kind": "modified",
+    "sha256": "c417374e77ea6c49fcd5674bbeae4daa0d84b1dd565ed843835df119c434c3e2"
+  },
+  {
+    "path": "backend/prompts/rag_answering.md",
+    "kind": "modified",
+    "sha256": "95db19c4951e065995a3166da363d1491fb75c490c8a8013ebc1040a52c74922"
+  },
+  {
+    "path": "backend/prompts/route_contract.md",
+    "kind": "modified",
+    "sha256": "7243eb01fefe091d86c2962b1a49faca7bd4dcdb5f81984830784144a61fc47e"
+  },
+  {
+    "path": "backend/prompts/system_customer_service.md",
+    "kind": "modified",
+    "sha256": "24dde154a0106f06dbbe6e759536d1b676e081ad816697e68bda8c9196166949"
+  },
+  {
+    "path": "backend/rag/hybrid_retrieval.py",
+    "kind": "modified",
+    "sha256": "34dc6382780f4fbbb31c31789012dcbd82edb7a19b8bd67c03deb4dd288318a2"
+  },
+  {
+    "path": "backend/rag/knowledge.py",
+    "kind": "modified",
+    "sha256": "40b5adb1a4c566879e15c956d45aad35de2e8f115d50b65c65024b0d64c01464"
+  },
+  {
+    "path": "backend/tests/test_eval_contract.py",
+    "kind": "modified",
+    "sha256": "1465660ffb97cd56ec1b5fca8afa32317f3de555205427ab78c5ad0c3beb0315"
+  },
+  {
+    "path": "backend/tests/test_outdoor_scenario.py",
+    "kind": "added",
+    "sha256": "10b26b70d342e02daab10d72477f15382fdfcd206cc42e48e8d155db8d248136"
+  },
+  {
+    "path": "backend/tools/langchain_runtime.py",
+    "kind": "modified",
+    "sha256": "d3ed2089713583c3925b96bd2c4b12c6e41c79093f9016dce62b51a19fee3eee"
+  },
+  {
+    "path": "backend/tools/planning.py",
+    "kind": "modified",
+    "sha256": "6fc0d0d404df6e9bffaf0bb3497da6e721cfe3c50f0252eedc6b433450d6577f"
+  },
+  {
+    "path": "backend/tools/runtime_context.py",
+    "kind": "modified",
+    "sha256": "4989622c79716c4505dffc6e3e26e507f09aab206590330c86d7d1c6077e6a88"
+  },
+  {
+    "path": "backend/workflows/resume.py",
+    "kind": "modified",
+    "sha256": "672fdc9292433bfe7a2c3945fd994381b791ffe3f6b20e2a9479cf9f5df61d90"
+  },
+  {
+    "path": "ecommerce-backend/frontend/admin/App.tsx",
+    "kind": "modified",
+    "sha256": "5e190a7dd55132ee323872f8de2d0a67b9a76f4a036d15e89cba968ec88baf4b"
+  },
+  {
+    "path": "ecommerce-backend/frontend/admin/index.html",
+    "kind": "modified",
+    "sha256": "4425ac41bf93ff2a89bbd24f2c41a79b90f5694fa3d865eef73fa7652cfddf61"
+  },
+  {
+    "path": "ecommerce-backend/frontend/admin/styles.css",
+    "kind": "modified",
+    "sha256": "57bfdfabe5a2f5743d94d5749941f30608bd66095616b4e2befad14f140dd461"
+  },
+  {
+    "path": "ecommerce-backend/frontend/index.html",
+    "kind": "modified",
+    "sha256": "11e47148840d984d4bdc037bad39a69e4ac5912a996cc85fcaf2893eebd65608"
+  },
+  {
+    "path": "ecommerce-backend/frontend/package-lock.json",
+    "kind": "modified",
+    "sha256": "d180a9805bde29d163722e456950bafdadc66bff26f753c4e6960d223ff331e1"
+  },
+  {
+    "path": "ecommerce-backend/frontend/package.json",
+    "kind": "modified",
+    "sha256": "8067df0a20c5abd7f65893976d0296101b39bd11788f52305746572be56c3e63"
+  },
+  {
+    "path": "ecommerce-backend/frontend/public/cartoon-camp.svg",
+    "kind": "added",
+    "sha256": "2df3b963f874709079b7b2cdaf350d4594a4ce0b9a488a691877d1e740a1e91f"
+  },
+  {
+    "path": "ecommerce-backend/frontend/public/products/camp-cabinet.svg",
+    "kind": "added",
+    "sha256": "3fe770d5bc037c42d7d8ba1c0f5e1f7bf7f5c6f5a6e4362220164d8300ce61ba"
+  },
+  {
+    "path": "ecommerce-backend/frontend/public/products/camp-canopy.svg",
+    "kind": "added",
+    "sha256": "0d68224f33c8d606003519c18daa47c1f100ad01942b01fc40a0801127ad119f"
+  },
+  {
+    "path": "ecommerce-backend/frontend/public/products/camp-chair.svg",
+    "kind": "added",
+    "sha256": "9612318f2e734f8d504634d510fe4b8a246493b759e07df911995decaa96fabd"
+  },
+  {
+    "path": "ecommerce-backend/frontend/public/products/camp-cookware.svg",
+    "kind": "added",
+    "sha256": "9cd9a439250340940bb002064ef8aed5d1fd3eb307046e288c536c17bfd0008d"
+  },
+  {
+    "path": "ecommerce-backend/frontend/public/products/camp-lantern.svg",
+    "kind": "added",
+    "sha256": "c1f974743e90c858f3f173fd20c24274bcb4f7e3dfa719d2c323d3858ab9273a"
+  },
+  {
+    "path": "ecommerce-backend/frontend/public/products/camp-signs.svg",
+    "kind": "added",
+    "sha256": "f8199127faa4e792db1f3065d9ff93d1cbeac3eea6945277759b423be86ae28f"
+  },
+  {
+    "path": "ecommerce-backend/frontend/public/products/camp-sleeping-bag.svg",
+    "kind": "added",
+    "sha256": "7b732d4efa0759599f536a9cadca7a6c985415b7ff963a86af69f26557f220e3"
+  },
+  {
+    "path": "ecommerce-backend/frontend/public/products/camp-table.svg",
+    "kind": "added",
+    "sha256": "4f1d5800875a31c1c81641af94255a2bc7310b1dc598a891f11e3880e685ddd1"
+  },
+  {
+    "path": "ecommerce-backend/frontend/public/products/camp-wagon.svg",
+    "kind": "added",
+    "sha256": "088229a33194ff49795a959c11eff0e7336ca51f7a3c72a113a703d8a158723a"
+  },
+  {
+    "path": "ecommerce-backend/frontend/public/products/custom-flag.svg",
+    "kind": "added",
+    "sha256": "975c8322c9ffc922d14921d9f95f37553302a4c9b6e6c876eafc6c8122deb546"
+  },
+  {
+    "path": "ecommerce-backend/frontend/public/products/dry-bags.svg",
+    "kind": "added",
+    "sha256": "33f9efecaa471f23769f841b230943d5cf8e249ee2cc6efb8a18d8c85e2b3e47"
+  },
+  {
+    "path": "ecommerce-backend/frontend/public/products/family-tent.svg",
+    "kind": "added",
+    "sha256": "7ed7353d567699230345b8f1bd2820be97a6f4deb5ffc3361ea1f1ae3b25d0a3"
+  },
+  {
+    "path": "ecommerce-backend/frontend/public/products/hiking-pack.svg",
+    "kind": "added",
+    "sha256": "1fa49b60a0e14911062cb098e6620b36049eef0f7a81dcf4278373660e5f28e9"
+  },
+  {
+    "path": "ecommerce-backend/frontend/public/products/large-tent.svg",
+    "kind": "added",
+    "sha256": "33c0cc345ad3bb0d2fec40d892e46fce913c1b9532aa7c47ea44ec4948116923"
+  },
+  {
+    "path": "ecommerce-backend/frontend/public/products/light-chair.svg",
+    "kind": "added",
+    "sha256": "661f8762881d57f2b37661237309cd611423a8cdd9f916e90e0a319f91cbe828"
+  },
+  {
+    "path": "ecommerce-backend/frontend/public/products/picnic-mat.svg",
+    "kind": "added",
+    "sha256": "c7f9d39cdf051d48e442103268f606b1c5568328b389283d2845b6fdb0c10db3"
+  },
+  {
+    "path": "ecommerce-backend/frontend/public/products/retired-headlamp.svg",
+    "kind": "added",
+    "sha256": "2a8121a998c6d621b5e486dc54c97fd643e16d7ec3059f614c8734addeb6199f"
+  },
+  {
+    "path": "ecommerce-backend/frontend/public/products/trekking-poles.svg",
+    "kind": "added",
+    "sha256": "89316b04b2e3e1a1a34f3bbf00a28f7c706649e547b8dd34e341b2e3cc0e8013"
+  },
+  {
+    "path": "ecommerce-backend/frontend/shop/index.html",
+    "kind": "modified",
+    "sha256": "11e47148840d984d4bdc037bad39a69e4ac5912a996cc85fcaf2893eebd65608"
+  },
+  {
+    "path": "ecommerce-backend/frontend/shop/src/main.tsx",
+    "kind": "modified",
+    "sha256": "17a972f386a846e19eafedf8302ee8af1383c35d8ba7cdd94c8ed3c5fd02e493"
+  },
+  {
+    "path": "ecommerce-backend/frontend/shop/src/styles.css",
+    "kind": "modified",
+    "sha256": "35e1fe93a127c6b61a9033cfe965549cbfb3b78fbecafe7566472ebb151a78c5"
+  },
+  {
+    "path": "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/config/ApiDocumentationConfig.java",
+    "kind": "modified",
+    "sha256": "07af0c2a9d1fc14e14f7f5dac09a9d5c9db3c385d20768b35054814304cd2cb5"
+  },
+  {
+    "path": "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/config/DataInitializer.java",
+    "kind": "modified",
+    "sha256": "44199ae80873b1f87b2a18865122207101328092e3eccf57e6d4acd1f0016c2a"
+  },
+  {
+    "path": "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/controller/ApprovalController.java",
+    "kind": "modified",
+    "sha256": "0c97f4e095336c09257b9d272d1f2e2467756b9753a649a0db6668c94248e896"
+  },
+  {
+    "path": "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/controller/AuthController.java",
+    "kind": "modified",
+    "sha256": "e265b664709a68f9c2b67a66b4d46f1e5832efb03f9475e5369abb6a20d608cc"
+  },
+  {
+    "path": "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/controller/CustomerServiceController.java",
+    "kind": "modified",
+    "sha256": "f4bcf4a9d10f7e294e627684421c2584db3dc9d05e8a1a6681ba13ec172e3b74"
+  },
+  {
+    "path": "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/controller/OrderController.java",
+    "kind": "modified",
+    "sha256": "fb31ddb6012ea01579d88f93f51cdc0852576939ba3958da93583f2f041c8af4"
+  },
+  {
+    "path": "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/controller/ProductController.java",
+    "kind": "modified",
+    "sha256": "21ce1a54e5d0b89893949c76e9c6c54b944e47f9193f14f54b080e7062151e2d"
+  },
+  {
+    "path": "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/controller/RefundController.java",
+    "kind": "modified",
+    "sha256": "fed04b850f976675df69848432a29e1a754a812d8eebd0ce799fd3bfc3bbf422"
+  },
+  {
+    "path": "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/controller/ShopController.java",
+    "kind": "modified",
+    "sha256": "75cce7cca244add5097eaf71007f701729a720819c2e8384c511fe01be744d3d"
+  },
+  {
+    "path": "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/controller/UserController.java",
+    "kind": "modified",
+    "sha256": "b112919737a5dc91ddf4b6f941e0e85cfec8b63eedf35652f2a2ea15bdac94de"
+  },
+  {
+    "path": "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/dto/ProductPromotionResponse.java",
+    "kind": "modified",
+    "sha256": "e7c7d33514569d774747c8e636f0e153e1fadfa0fc7e1957a392697628f0acee"
+  },
+  {
+    "path": "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/dto/UserCouponResponse.java",
+    "kind": "modified",
+    "sha256": "458117e7f9b7ddc5a969ed9533aae92c98f4ec4bd717a98bf99eeef79fd4938b"
+  },
+  {
+    "path": "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/service/CustomerServiceGatewayService.java",
+    "kind": "modified",
+    "sha256": "d3d4270a07a1ce272f3f66b053fe633fd88347b1e94de6fe3f0f6f6ba45ead7a"
+  },
+  {
+    "path": "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/service/ShopService.java",
+    "kind": "modified",
+    "sha256": "ac8a9b1fc7e593731a67c8130fd735c8412571c26fa561b7e6b367b233980122"
+  },
+  {
+    "path": "ecommerce-backend/src/main/resources/application.yml",
+    "kind": "modified",
+    "sha256": "828c1a24ec7cfe87c9ce06620c300e1d40d28fd1c611817b0171f40af19a5e2c"
+  },
+  {
+    "path": "frontend/index.html",
+    "kind": "modified",
+    "sha256": "88da141b1af3ffec6a9f8d17a4451d4d8f33a9485c8b6c570dffe1f63e37aca2"
+  },
+  {
+    "path": "frontend/package-lock.json",
+    "kind": "modified",
+    "sha256": "f386d5e2b8aff0fbe4c4e4aefdc8367d8de1e393f164374ba8f65f99806f742e"
+  },
+  {
+    "path": "frontend/package.json",
+    "kind": "modified",
+    "sha256": "b4f431f9dc33d59bad4eadf4de477a722c44cda2a66b7ad88e87a6d08c5fe9e2"
+  },
+  {
+    "path": "frontend/public/cartoon-camp.svg",
+    "kind": "added",
+    "sha256": "2df3b963f874709079b7b2cdaf350d4594a4ce0b9a488a691877d1e740a1e91f"
+  },
+  {
+    "path": "frontend/src/App.tsx",
+    "kind": "modified",
+    "sha256": "bdb4dbb3ab6be655942620f234d3b30933f683eae1b4e2090687341e11e054cb"
+  },
+  {
+    "path": "frontend/src/components/EvaluationPanel.tsx",
+    "kind": "modified",
+    "sha256": "53ffbdd5dc9a027a1c71f0d7f6a66cc6e894a22af3d500e00abd2d0d86fa0918"
+  },
+  {
+    "path": "frontend/src/components/TracePanel.tsx",
+    "kind": "modified",
+    "sha256": "a2f26a2fb6a8ce7235fe531f03c9560653aebe228bfcd3dd77c8139be7d96c6b"
+  },
+  {
+    "path": "frontend/src/data/demoScenarios.ts",
+    "kind": "modified",
+    "sha256": "ab8709155b4936e8269126e80b5c6b18b4f26085c56195403dd37d0c0624c93d"
+  },
+  {
+    "path": "frontend/src/hooks/useAgentChat.ts",
+    "kind": "modified",
+    "sha256": "6fc081427e618bb9d1691da36634e682493bc3ac0d52e7c231b3430a1581bb4c"
+  },
+  {
+    "path": "frontend/src/styles.css",
+    "kind": "modified",
+    "sha256": "91d4e44c456be0007cf6bcfcc5e37845d2a6aae6c151b7936227aa2bfb0def73"
+  },
+  {
+    "path": "requirements.txt",
+    "kind": "added",
+    "sha256": "bc7c9e11936b5be81a2c6adf143fe0744a4ed63d4550d306899fe28f0b2c44a5"
+  }
+]

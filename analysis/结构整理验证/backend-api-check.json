@@ -1,0 +1,12 @@
+{
+  "modules_imported": 23,
+  "prompts_loaded": 7,
+  "knowledge_loaded": 5,
+  "endpoints": [
+    "health",
+    "capabilities",
+    "chat",
+    "trace"
+  ],
+  "model_calls": 0
+}

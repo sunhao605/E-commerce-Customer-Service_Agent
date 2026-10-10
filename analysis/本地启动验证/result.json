@@ -1,0 +1,992 @@
+{
+  "date": "2026-10-07",
+  "mode": "real HTTP and browser; models disabled; Java/MySQL business facts; no API interception",
+  "health": {
+    "status": "ok",
+    "lesson": "41"
+  },
+  "steps": [
+    "物流运输中",
+    "未发货退款暂停待审核",
+    "批准后模拟完成，明确无真实资金退款"
+  ],
+  "page_errors": [],
+  "responses": [
+    {
+      "url": "http://127.0.0.1:8000/chat",
+      "status": 200,
+      "data": {
+        "session_id": "session-U1001-4z9pqz2k",
+        "answer": "我帮你查到了，订单 SO20260602103000009-a1000009 目前已发货，物流状态是运输中。",
+        "citations": [],
+        "tool_calls": [
+          {
+            "tool_name": "get_order_detail",
+            "arguments": {
+              "order_id": "SO20260602103000009-a1000009",
+              "fact_source": "runtime_context"
+            },
+            "output_summary": "订单 SO20260602103000009-a1000009 当前状态为已发货，物流状态为运输中，商品 户外野餐垫。",
+            "status": "success",
+            "tool_source": "function",
+            "risk_level": "low",
+            "needs_human_approval": null,
+            "next_action": null,
+            "error_type": null,
+            "candidates": [],
+            "clarification_field": null,
+            "clarification_prompt": null
+          },
+          {
+            "tool_name": "get_order_logistics",
+            "arguments": {
+              "order_id": "SO20260602103000009-a1000009"
+            },
+            "output_summary": "物流状态为运输中，订单状态为已发货。",
+            "status": "success",
+            "tool_source": "function",
+            "risk_level": "low",
+            "needs_human_approval": null,
+            "next_action": "answer_user",
+            "error_type": null,
+            "candidates": [],
+            "clarification_field": null,
+            "clarification_prompt": null
+          }
+        ],
+        "clarification": null,
+        "reasoning_summary": [
+          "Trace 记录的是公开执行摘要：Runtime Context、Context、Tool、RAG、Workflow/HITL、Hooks 和 Cost。",
+          "tool_calls 与 citations 是可观察证据，不是 hidden CoT。",
+          "评测视图会尝试展示主链路最终模型返回的 reasoning_content；系统提示词、密钥、隐私原文和内部堆栈不会写入公开 trace。"
+        ],
+        "reasoning_content": null,
+        "session_state": {
+          "agent_version": "lesson-41-final-rehearsal",
+          "message_count": 1,
+          "intent": "order_query",
+          "model": {
+            "route_planner": {
+              "used_model": false,
+              "model_name": null,
+              "fallback_reason": "model_config_missing",
+              "prompt_fragments": []
+            },
+            "final_answer": {
+              "used_model": false,
+              "model_name": null,
+              "fallback_reason": "model_config_missing",
+              "prompt_fragments": []
+            }
+          },
+          "prompt_registry": {
+            "schema_version": "prompt_registry_v1",
+            "selected_fragments": [],
+            "selected_fragment_ids": [],
+            "prompt_body_exposed": false
+          },
+          "route_plan": {
+            "intent": "order_query",
+            "needs_rag": false,
+            "needs_business_tools": true,
+            "required_tools": [
+              "get_order_logistics"
+            ],
+            "tool_candidates": [
+              {
+                "name": "get_order_logistics",
+                "domain": "logistics",
+                "risk_level": "low",
+                "reason": "读取当前用户订单及物流状态。"
+              }
+            ],
+            "knowledge_domains": [],
+            "entity_refs": [
+              "SO20260602103000009-a1000009"
+            ],
+            "risk_level": "low",
+            "requires_workflow": false,
+            "confidence": 0.75,
+            "source": "deterministic_fallback",
+            "fallback_policy": "safe_deterministic_path"
+          },
+          "tool_calling": {
+            "create_agent": false,
+            "skip_reason": "model_config_missing",
+            "available_tools": [
+              "get_order_logistics"
+            ],
+            "selected_tools": [],
+            "message_types": [],
+            "tool_message_count": 0,
+            "fallback_used": true,
+            "clarification": null
+          },
+          "mcp": {
+            "tool_source": "mcp_catalog",
+            "selected_tool": "get_order_logistics",
+            "available_tools": [
+              "get_order_logistics",
+              "get_refund_status",
+              "search_products"
+            ],
+            "resources": [
+              "resource://huangye/tools/logistics-boundary"
+            ],
+            "prompts": [
+              "prompt://huangye/tool-observation"
+            ],
+            "boundary": "MCP 提供标准化目录；Tool Use、Hooks 和 Workflow 仍负责执行与安全治理。"
+          },
+          "frameworks": {
+            "langchain": {
+              "used": false,
+              "route_chain": null,
+              "final_answer_chain": null,
+              "prompt_registry": "prompts/prompt_registry.yml",
+              "selected_fragment_ids": [],
+              "create_agent": false
+            },
+            "langgraph": {
+              "used": false,
+              "graph_name": null,
+              "current_node": null,
+              "node_history": []
+            }
+          },
+          "risk_level": "low",
+          "next_action": "answer_user",
+          "needs_human_approval": false,
+          "runtime_context": {
+            "user_id": "U1001",
+            "nickname": "张三",
+            "member_level": "gold",
+            "risk_level": "low",
+            "trusted_for_model": {
+              "nickname": "张三",
+              "member_level": "gold"
+            },
+            "system_only": {
+              "user_id": "U1001",
+              "risk_level": "low"
+            },
+            "source": "request_runtime_context"
+          },
+          "memory": {
+            "runtime_user_id": "U1001",
+            "last_order_id": "SO20260602103000009-a1000009",
+            "last_product_name": null,
+            "recent_intent": "order_query",
+            "low_risk_preferences": {},
+            "write_decisions": [
+              {
+                "field": "last_order_id",
+                "accepted": true,
+                "reason": "verified_tool_fact"
+              }
+            ],
+            "excluded_items": [],
+            "ttl": "session"
+          },
+          "context_report": {
+            "schema_version": "context_build_report_v1",
+            "sources": [
+              "runtime_context",
+              "session_memory",
+              "history_messages",
+              "user_message"
+            ],
+            "trust_order": [
+              "runtime_context",
+              "verified_tool_fact",
+              "session_memory",
+              "history_messages",
+              "user_message"
+            ],
+            "chosen_order_id": "SO20260602103000009-a1000009",
+            "conflict_resolutions": [],
+            "model_context": [
+              "[runtime_context/trusted] member_level=gold, risk_level=low",
+              "[history/session] assistant: 欢迎来到荒野户外 · 评测工作台。可以咨询商品、查询物流或申请售后；这里会保留每轮答复的事实依据和执行记录。",
+              "[order_reference/session] chosen_order_id=SO20260602103000009-a1000009"
+            ],
+            "source_safety": {
+              "tainted": false,
+              "tainted_sources": [],
+              "reports": [
+                {
+                  "source": "user_message",
+                  "tainted": false,
+                  "categories": []
+                },
+                {
+                  "source": "history_messages",
+                  "tainted": false,
+                  "categories": []
+                },
+                {
+                  "source": "tool_result",
+                  "tainted": false,
+                  "categories": []
+                },
+                {
+                  "source": "tool_result",
+                  "tainted": false,
+                  "categories": []
+                }
+              ]
+            }
+          },
+          "compression_report": {
+            "schema_version": "context_compression_v1",
+            "recent_window_size": 4,
+            "token_budget": 80,
+            "input_count": 1,
+            "kept_count": 1,
+            "dropped_count": 0,
+            "kept_indexes": [
+              0
+            ],
+            "strategy": "recent_window_plus_order_relevance",
+            "relevance_score": {
+              "matching_order_reference": 100,
+              "recent_window": 80,
+              "older_history": 20
+            }
+          },
+          "hook_events": [
+            {
+              "hook_type": "pre_tool_call",
+              "target_name": "get_order_detail",
+              "action": "validate_arguments_and_runtime_identity",
+              "status": "allowed",
+              "argument_keys": [
+                "order_id"
+              ],
+              "runtime_user_id": "U1001",
+              "redacted": true
+            },
+            {
+              "hook_type": "post_tool_call",
+              "target_name": "get_order_detail",
+              "action": "sanitize_observation",
+              "status": "success",
+              "risk_level": "low",
+              "next_action": null,
+              "redacted": true
+            },
+            {
+              "hook_type": "pre_tool_call",
+              "target_name": "get_order_logistics",
+              "action": "validate_arguments_and_runtime_identity",
+              "status": "allowed",
+              "argument_keys": [
+                "order_id"
+              ],
+              "runtime_user_id": "U1001",
+              "redacted": true
+            },
+            {
+              "hook_type": "post_tool_call",
+              "target_name": "get_order_logistics",
+              "action": "sanitize_observation",
+              "status": "success",
+              "risk_level": "low",
+              "next_action": "answer_user",
+              "redacted": true
+            },
+            {
+              "hook_type": "on_completion",
+              "target_name": "chat_request",
+              "action": "summarize_tool_governance",
+              "status": "completed",
+              "risk_level": "low",
+              "next_action": "answer_user",
+              "degraded": false,
+              "redacted": true
+            }
+          ],
+          "hook_completion": {
+            "hook_count": 5,
+            "tool_count": 2,
+            "touched_tools": [
+              "get_order_detail",
+              "get_order_logistics"
+            ],
+            "degraded": false,
+            "redacted_count": 5,
+            "degraded_count": 0,
+            "risk_hit_count": 0
+          },
+          "workflow": null,
+          "rag": {
+            "low_confidence": false,
+            "hit_count": 0,
+            "citation_ids": [],
+            "rerank_mode": null,
+            "reranked_policy_ids": [],
+            "rerank_scores": {},
+            "rerank_reasons": {},
+            "retrieval_mode": null,
+            "rewritten_query": null,
+            "index_version": null,
+            "index_chunk_count": 0,
+            "index_cache_hit": false,
+            "retrieval_cache_hit": false,
+            "vector_policy_ids": [],
+            "keyword_policy_ids": [],
+            "source_scores": {},
+            "embedding": null
+          },
+          "degraded": false,
+          "cost_summary": {
+            "schema_version": "cost_summary_v1",
+            "cost_profile": "teaching",
+            "path_type": "light_react_agent",
+            "model_calls": {
+              "route_planner": 0,
+              "tool_agent": 0,
+              "final_answer": 0,
+              "extra_reasoning": 0
+            },
+            "frameworks": {
+              "langchain_runnable_sequence": false,
+              "langchain_create_agent": false,
+              "langgraph_state_graph": false,
+              "offline_deterministic_fallback": true
+            },
+            "tool_call_count": 2,
+            "business_tool_call_count": 2,
+            "rag": {
+              "needs_rag": false,
+              "hit_count": 0,
+              "pre_retrieval_count": 0,
+              "tool_retrieval_count": 0,
+              "retrieval_paths": [],
+              "cache_hit": false
+            },
+            "tokens": {
+              "context_estimated": 57,
+              "prompt_estimated": 0,
+              "answer_estimated": 27,
+              "total_estimated": 84,
+              "context_budget": 160
+            },
+            "prompt_fragments": {
+              "selected": [],
+              "selections": [],
+              "fragment_count": 0,
+              "fragmentized": false,
+              "source": "actual_model_invocations"
+            },
+            "cache": {
+              "common_hit_cache": false,
+              "cache_key": null,
+              "does_not_cache_high_risk_workflow": true
+            },
+            "observation_compression": {
+              "schema_version": "observation_compression_v1",
+              "original_tokens": 38,
+              "compressed_tokens": 21,
+              "saved_tokens": 17,
+              "strategy": "keep_status_next_action_and_risk_summary"
+            },
+            "workflow": {
+              "used_langgraph": false,
+              "workflow_id": null,
+              "workflow_type": null,
+              "graph_name": null,
+              "node_history": [],
+              "hitl_required": false,
+              "status": null
+            },
+            "degradation": {
+              "degraded": false,
+              "reason": null,
+              "cost_threshold_exceeded": false,
+              "warnings": []
+            },
+            "reasoning": {
+              "view": "off",
+              "thinking_requested": false,
+              "reasoning_content_returned": false,
+              "source": null
+            },
+            "safety_boundary": {
+              "cost_control_does_not_skip_business_facts": true,
+              "cost_control_does_not_skip_hitl": true,
+              "not_finops_or_billing_system": true
+            }
+          },
+          "trace": {
+            "schema_version": "trace_event_v1",
+            "event_count": 18,
+            "public_trace_only": true,
+            "hidden_cot_exposed": false
+          },
+          "next_gap": "第十幕用同一阶段 Agent 做大促总演习，并把证据整理成项目答辩表达。"
+        }
+      }
+    },
+    {
+      "url": "http://127.0.0.1:8000/chat",
+      "status": 200,
+      "data": {
+        "session_id": "session-U1001-4z9pqz2k",
+        "answer": "SO20260601090000008-a1000008 可以进入未发货退款申请判断，但资金动作必须等待人工审批。",
+        "citations": [
+          {
+            "source": "knowledge/after_sale_policy.md",
+            "title": "荒野户外未发货退款 SOP",
+            "snippet": "已支付且未出库、未发货的订单，可以发起退款申请；资金类动作必须进入售后审批。",
+            "score": 0.92,
+            "retrieval_stage": "pre_retrieval",
+            "metadata": {
+              "policy_id": "refund_before_shipping",
+              "scene_key": "after_sale_refund"
+            }
+          }
+        ],
+        "tool_calls": [
+          {
+            "tool_name": "get_order_detail",
+            "arguments": {
+              "order_id": "SO20260601090000008-a1000008",
+              "fact_source": "runtime_context"
+            },
+            "output_summary": "订单 SO20260601090000008-a1000008 当前状态为待发货，物流状态为暂未发货，商品 露营折叠椅。",
+            "status": "success",
+            "tool_source": "function",
+            "risk_level": "low",
+            "needs_human_approval": null,
+            "next_action": null,
+            "error_type": null,
+            "candidates": [],
+            "clarification_field": null,
+            "clarification_prompt": null
+          }
+        ],
+        "clarification": null,
+        "reasoning_summary": [
+          "Trace 记录的是公开执行摘要：Runtime Context、Context、Tool、RAG、Workflow/HITL、Hooks 和 Cost。",
+          "tool_calls 与 citations 是可观察证据，不是 hidden CoT。",
+          "评测视图会尝试展示主链路最终模型返回的 reasoning_content；系统提示词、密钥、隐私原文和内部堆栈不会写入公开 trace。"
+        ],
+        "reasoning_content": null,
+        "session_state": {
+          "agent_version": "lesson-41-final-rehearsal",
+          "message_count": 2,
+          "intent": "refund_request",
+          "model": {
+            "route_planner": {
+              "used_model": false,
+              "model_name": null,
+              "fallback_reason": "model_config_missing",
+              "prompt_fragments": []
+            },
+            "final_answer": {
+              "used_model": false,
+              "model_name": null,
+              "fallback_reason": "model_config_missing",
+              "prompt_fragments": []
+            }
+          },
+          "prompt_registry": {
+            "schema_version": "prompt_registry_v1",
+            "selected_fragments": [],
+            "selected_fragment_ids": [],
+            "prompt_body_exposed": false
+          },
+          "route_plan": {
+            "intent": "refund_request",
+            "needs_rag": true,
+            "needs_business_tools": true,
+            "required_tools": [
+              "get_order_detail"
+            ],
+            "tool_candidates": [
+              {
+                "name": "get_order_detail",
+                "domain": "order",
+                "risk_level": "low",
+                "reason": "读取当前用户订单事实，不执行业务写操作。"
+              }
+            ],
+            "knowledge_domains": [
+              "after_sale_policy"
+            ],
+            "entity_refs": [
+              "SO20260601090000008-a1000008"
+            ],
+            "risk_level": "high",
+            "requires_workflow": true,
+            "confidence": 0.75,
+            "source": "deterministic_fallback",
+            "fallback_policy": "safe_deterministic_path"
+          },
+          "tool_calling": {
+            "create_agent": false,
+            "skip_reason": "model_config_missing",
+            "available_tools": [
+              "get_order_detail"
+            ],
+            "selected_tools": [],
+            "message_types": [],
+            "tool_message_count": 0,
+            "fallback_used": true,
+            "clarification": null
+          },
+          "mcp": {
+            "tool_source": "mcp_catalog",
+            "selected_tool": "get_order_detail",
+            "available_tools": [
+              "get_order_logistics",
+              "get_refund_status",
+              "search_products"
+            ],
+            "resources": [
+              "resource://huangye/high_risk_boundary"
+            ],
+            "prompts": [
+              "prompt://huangye/handoff-boundary"
+            ],
+            "boundary": "MCP 提供标准化目录；Tool Use、Hooks 和 Workflow 仍负责执行与安全治理。"
+          },
+          "frameworks": {
+            "langchain": {
+              "used": false,
+              "route_chain": null,
+              "final_answer_chain": null,
+              "prompt_registry": "prompts/prompt_registry.yml",
+              "selected_fragment_ids": [],
+              "create_agent": false
+            },
+            "langgraph": {
+              "used": true,
+              "graph_name": "lesson41_refund_approval_graph",
+              "current_node": "pause_for_human_approval",
+              "node_history": [
+                "validate_order_fact",
+                "attach_refund_policy",
+                "pause_for_human_approval"
+              ]
+            }
+          },
+          "risk_level": "high",
+          "next_action": "transfer_to_human",
+          "needs_human_approval": true,
+          "runtime_context": {
+            "user_id": "U1001",
+            "nickname": "张三",
+            "member_level": "gold",
+            "risk_level": "low",
+            "trusted_for_model": {
+              "nickname": "张三",
+              "member_level": "gold"
+            },
+            "system_only": {
+              "user_id": "U1001",
+              "risk_level": "low"
+            },
+            "source": "request_runtime_context"
+          },
+          "memory": {
+            "runtime_user_id": "U1001",
+            "last_order_id": "SO20260601090000008-a1000008",
+            "last_product_name": null,
+            "recent_intent": "refund_request",
+            "low_risk_preferences": {},
+            "write_decisions": [
+              {
+                "field": "last_order_id",
+                "accepted": true,
+                "reason": "verified_tool_fact"
+              }
+            ],
+            "excluded_items": [],
+            "ttl": "session"
+          },
+          "context_report": {
+            "schema_version": "context_build_report_v1",
+            "sources": [
+              "runtime_context",
+              "session_memory",
+              "history_messages",
+              "user_message"
+            ],
+            "trust_order": [
+              "runtime_context",
+              "verified_tool_fact",
+              "session_memory",
+              "history_messages",
+              "user_message"
+            ],
+            "chosen_order_id": "SO20260601090000008-a1000008",
+            "conflict_resolutions": [],
+            "model_context": [
+              "[runtime_context/trusted] member_level=gold, risk_level=low",
+              "[history/session] assistant: 欢迎来到荒野户外 · 评测工作台。可以咨询商品、查询物流或申请售后；这里会保留每轮答复的事实依据和执行记录。",
+              "[history/session] user: 请帮我查一下 SO20260602103000009-a1000009 的物流",
+              "[history/session] assistant: 我帮你查到了，订单 SO20260602103000009-a1000009 目前已发货，物流状态是运输中。",
+              "[order_reference/session] chosen_order_id=SO20260601090000008-a1000008"
+            ],
+            "source_safety": {
+              "tainted": false,
+              "tainted_sources": [],
+              "reports": [
+                {
+                  "source": "user_message",
+                  "tainted": false,
+                  "categories": []
+                },
+                {
+                  "source": "history_messages",
+                  "tainted": false,
+                  "categories": []
+                },
+                {
+                  "source": "history_messages",
+                  "tainted": false,
+                  "categories": []
+                },
+                {
+                  "source": "history_messages",
+                  "tainted": false,
+                  "categories": []
+                },
+                {
+                  "source": "tool_result",
+                  "tainted": false,
+                  "categories": []
+                },
+                {
+                  "source": "rag_document",
+                  "tainted": false,
+                  "categories": []
+                }
+              ]
+            }
+          },
+          "compression_report": {
+            "schema_version": "context_compression_v1",
+            "recent_window_size": 4,
+            "token_budget": 80,
+            "input_count": 3,
+            "kept_count": 3,
+            "dropped_count": 0,
+            "kept_indexes": [
+              0,
+              1,
+              2
+            ],
+            "strategy": "recent_window_plus_order_relevance",
+            "relevance_score": {
+              "matching_order_reference": 100,
+              "recent_window": 80,
+              "older_history": 20
+            }
+          },
+          "hook_events": [
+            {
+              "hook_type": "pre_tool_call",
+              "target_name": "get_order_detail",
+              "action": "validate_arguments_and_runtime_identity",
+              "status": "allowed",
+              "argument_keys": [
+                "order_id"
+              ],
+              "runtime_user_id": "U1001",
+              "redacted": true
+            },
+            {
+              "hook_type": "post_tool_call",
+              "target_name": "get_order_detail",
+              "action": "sanitize_observation",
+              "status": "success",
+              "risk_level": "low",
+              "next_action": null,
+              "redacted": true
+            },
+            {
+              "hook_type": "on_completion",
+              "target_name": "chat_request",
+              "action": "summarize_tool_governance",
+              "status": "completed",
+              "risk_level": "high",
+              "next_action": "transfer_to_human",
+              "degraded": false,
+              "redacted": true
+            }
+          ],
+          "hook_completion": {
+            "hook_count": 3,
+            "tool_count": 1,
+            "touched_tools": [
+              "get_order_detail"
+            ],
+            "degraded": false,
+            "redacted_count": 3,
+            "degraded_count": 0,
+            "risk_hit_count": 1
+          },
+          "workflow": {
+            "workflow_id": "wf-session-U1001-4z9pqz2k",
+            "workflow_type": "unshipped_refund",
+            "status": "paused",
+            "pending_action": "require_approval",
+            "order_id": "SO20260601090000008-a1000008",
+            "resume_token": "resume-session-U1001-4z9pqz2k-wf-session-U1001-4z9pqz2k-SO20260601090000008-a1000008",
+            "approval_id": "appr-session-U1001-4z9pqz2k",
+            "idempotency_key": "hitl:session-U1001-4z9pqz2k:SO20260601090000008-a1000008",
+            "frozen_fields": {
+              "runtime_user_id": "U1001",
+              "order_id": "SO20260601090000008-a1000008",
+              "order_status": "PENDING_SHIPMENT",
+              "logistics_status": "NOT_SHIPPED"
+            },
+            "used_langgraph": true,
+            "graph_name": "lesson41_refund_approval_graph",
+            "current_node": "pause_for_human_approval",
+            "node_history": [
+              "validate_order_fact",
+              "attach_refund_policy",
+              "pause_for_human_approval"
+            ],
+            "order_fact_status": "verified",
+            "policy_ids": [
+              "refund_before_shipping"
+            ]
+          },
+          "rag": {
+            "low_confidence": false,
+            "hit_count": 1,
+            "citation_ids": [
+              "refund_before_shipping"
+            ],
+            "rerank_mode": null,
+            "reranked_policy_ids": [],
+            "rerank_scores": {},
+            "rerank_reasons": {},
+            "retrieval_mode": null,
+            "rewritten_query": null,
+            "index_version": null,
+            "index_chunk_count": 0,
+            "index_cache_hit": false,
+            "retrieval_cache_hit": false,
+            "vector_policy_ids": [],
+            "keyword_policy_ids": [],
+            "source_scores": {},
+            "embedding": null
+          },
+          "degraded": false,
+          "cost_summary": {
+            "schema_version": "cost_summary_v1",
+            "cost_profile": "teaching",
+            "path_type": "langgraph_after_sale_workflow",
+            "model_calls": {
+              "route_planner": 0,
+              "tool_agent": 0,
+              "final_answer": 0,
+              "extra_reasoning": 0
+            },
+            "frameworks": {
+              "langchain_runnable_sequence": false,
+              "langchain_create_agent": false,
+              "langgraph_state_graph": true,
+              "offline_deterministic_fallback": false
+            },
+            "tool_call_count": 1,
+            "business_tool_call_count": 1,
+            "rag": {
+              "needs_rag": true,
+              "hit_count": 1,
+              "pre_retrieval_count": 1,
+              "tool_retrieval_count": 0,
+              "retrieval_paths": [
+                "pre_retrieval"
+              ],
+              "cache_hit": false
+            },
+            "tokens": {
+              "context_estimated": 50,
+              "prompt_estimated": 0,
+              "answer_estimated": 28,
+              "total_estimated": 78,
+              "context_budget": 160
+            },
+            "prompt_fragments": {
+              "selected": [],
+              "selections": [],
+              "fragment_count": 0,
+              "fragmentized": false,
+              "source": "actual_model_invocations"
+            },
+            "cache": {
+              "common_hit_cache": false,
+              "cache_key": null,
+              "does_not_cache_high_risk_workflow": true
+            },
+            "observation_compression": {
+              "schema_version": "observation_compression_v1",
+              "original_tokens": 30,
+              "compressed_tokens": 12,
+              "saved_tokens": 18,
+              "strategy": "keep_status_next_action_and_risk_summary"
+            },
+            "workflow": {
+              "used_langgraph": true,
+              "workflow_id": "wf-session-U1001-4z9pqz2k",
+              "workflow_type": "unshipped_refund",
+              "graph_name": "lesson41_refund_approval_graph",
+              "node_history": [
+                "validate_order_fact",
+                "attach_refund_policy",
+                "pause_for_human_approval"
+              ],
+              "hitl_required": true,
+              "status": "paused"
+            },
+            "degradation": {
+              "degraded": false,
+              "reason": null,
+              "cost_threshold_exceeded": false,
+              "warnings": []
+            },
+            "reasoning": {
+              "view": "off",
+              "thinking_requested": false,
+              "reasoning_content_returned": false,
+              "source": null
+            },
+            "safety_boundary": {
+              "cost_control_does_not_skip_business_facts": true,
+              "cost_control_does_not_skip_hitl": true,
+              "not_finops_or_billing_system": true
+            }
+          },
+          "trace": {
+            "schema_version": "trace_event_v1",
+            "event_count": 39,
+            "public_trace_only": true,
+            "hidden_cot_exposed": false
+          },
+          "next_gap": "第十幕用同一阶段 Agent 做大促总演习，并把证据整理成项目答辩表达。"
+        }
+      }
+    },
+    {
+      "url": "http://127.0.0.1:8000/chat/resume",
+      "status": 200,
+      "data": {
+        "session_id": "session-U1001-4z9pqz2k",
+        "workflow_id": "wf-session-U1001-4z9pqz2k",
+        "status": "completed",
+        "answer": "售后审核员已批准模拟退款申请，系统记录审批通过；本演示环境不执行真实资金退款。",
+        "resume_result": {
+          "accepted": true,
+          "decision": "approved",
+          "idempotent_replay": false,
+          "request_id": "refund-wf-session-U1001-4z9pqz2k",
+          "reason": "approval_recorded"
+        },
+        "workflow": {
+          "workflow_id": "wf-session-U1001-4z9pqz2k",
+          "workflow_type": "unshipped_refund",
+          "status": "completed",
+          "pending_action": "approval_accepted",
+          "order_id": "SO20260601090000008-a1000008",
+          "resume_token": "resume-session-U1001-4z9pqz2k-wf-session-U1001-4z9pqz2k-SO20260601090000008-a1000008",
+          "approval_id": "appr-session-U1001-4z9pqz2k",
+          "idempotency_key": "hitl:session-U1001-4z9pqz2k:SO20260601090000008-a1000008",
+          "frozen_fields": {
+            "runtime_user_id": "U1001",
+            "order_id": "SO20260601090000008-a1000008",
+            "order_status": "PENDING_SHIPMENT",
+            "logistics_status": "NOT_SHIPPED"
+          },
+          "used_langgraph": true,
+          "graph_name": "lesson41_refund_approval_graph",
+          "current_node": "pause_for_human_approval",
+          "node_history": [
+            "validate_order_fact",
+            "attach_refund_policy",
+            "pause_for_human_approval"
+          ],
+          "order_fact_status": "verified",
+          "policy_ids": [
+            "refund_before_shipping"
+          ]
+        },
+        "business_recheck": {
+          "passed": true,
+          "reason": null,
+          "mismatches": {}
+        },
+        "session_state": {
+          "agent_version": "lesson-41-final-rehearsal",
+          "workflow": {
+            "workflow_id": "wf-session-U1001-4z9pqz2k",
+            "workflow_type": "unshipped_refund",
+            "status": "completed",
+            "pending_action": "approval_accepted",
+            "order_id": "SO20260601090000008-a1000008",
+            "resume_token": "resume-session-U1001-4z9pqz2k-wf-session-U1001-4z9pqz2k-SO20260601090000008-a1000008",
+            "approval_id": "appr-session-U1001-4z9pqz2k",
+            "idempotency_key": "hitl:session-U1001-4z9pqz2k:SO20260601090000008-a1000008",
+            "frozen_fields": {
+              "runtime_user_id": "U1001",
+              "order_id": "SO20260601090000008-a1000008",
+              "order_status": "PENDING_SHIPMENT",
+              "logistics_status": "NOT_SHIPPED"
+            },
+            "used_langgraph": true,
+            "graph_name": "lesson41_refund_approval_graph",
+            "current_node": "pause_for_human_approval",
+            "node_history": [
+              "validate_order_fact",
+              "attach_refund_policy",
+              "pause_for_human_approval"
+            ],
+            "order_fact_status": "verified",
+            "policy_ids": [
+              "refund_before_shipping"
+            ]
+          },
+          "cost_summary": {
+            "schema_version": "cost_summary_v1",
+            "path_type": "hitl_resume_path",
+            "model_calls": {
+              "route_planner": 0,
+              "final_answer": 0,
+              "extra_reasoning": 0
+            },
+            "tool_call_count": 0,
+            "business_tool_call_count": 0,
+            "rag": {
+              "needs_rag": false,
+              "hit_count": 0,
+              "cache_hit": false
+            },
+            "workflow": {
+              "used_langgraph": true,
+              "workflow_id": "wf-session-U1001-4z9pqz2k",
+              "hitl_required": false,
+              "status": "completed"
+            },
+            "safety_boundary": {
+              "cost_control_does_not_skip_business_facts": true,
+              "cost_control_does_not_skip_hitl": true,
+              "not_finops_or_billing_system": true
+            }
+          },
+          "trace": {
+            "schema_version": "trace_event_v1",
+            "event_count": 42,
+            "public_trace_only": true,
+            "hidden_cot_exposed": false
+          }
+        }
+      }
+    }
+  ]
+}

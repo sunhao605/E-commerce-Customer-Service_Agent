@@ -1,0 +1,48 @@
+{
+  "mode": "browser_local_api_fixture",
+  "database_calls": 0,
+  "model_calls": 0,
+  "pages": [
+    {
+      "role": "USER",
+      "entry": "/",
+      "checks": [
+        "entry",
+        "login",
+        "product",
+        "logout"
+      ],
+      "requests": [
+        "GET /api/auth/me",
+        "GET /api/shop/products",
+        "POST /api/auth/login",
+        "GET /api/shop/products",
+        "GET /api/shop/cart",
+        "GET /api/shop/balance",
+        "POST /api/auth/logout"
+      ],
+      "page_errors": [],
+      "missing_assets": []
+    },
+    {
+      "role": "ADMIN",
+      "entry": "/admin/",
+      "checks": [
+        "entry",
+        "login",
+        "product",
+        "logout"
+      ],
+      "requests": [
+        "GET /api/auth/me",
+        "POST /api/auth/login",
+        "GET /api/auth/me",
+        "GET /api/admin/products",
+        "GET /api/admin/orders",
+        "POST /api/auth/logout"
+      ],
+      "page_errors": [],
+      "missing_assets": []
+    }
+  ]
+}
