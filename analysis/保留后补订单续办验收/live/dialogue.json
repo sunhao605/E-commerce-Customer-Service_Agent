@@ -1,0 +1,111 @@
+[
+  {
+    "scene": "正常续办",
+    "input": "帮我退款。",
+    "button": false,
+    "response": {
+      "answer": "你要退款哪一个订单？请选择订单号，或直接补充订单号。 当前账号下可选订单：SO20261010124526218-b60d3f08（户外野餐垫）；SO20261010124526068-3c464bb6（户外野餐垫）；SO20261009082850446-6df1a10e（露营折叠椅）；SO20261009061332122-26971b7b（户外野餐垫）；SO20260712090000010-a1000010（露营折叠椅）；SO20260605103000012-a1000012（定制营地旗）；SO20260603110000010-a1000010（露营折叠椅）；SO20260602103000009-a1000009（户外野餐垫）；SO20260601090000008-a1000008（露营折叠椅）；SO20260525093000011-a1000011（户外野餐垫）。",
+      "sessionId": "cs-10dca99b-4dc1-4291-b516-ffefa7e3ea77",
+      "confirmRequired": false,
+      "actions": [],
+      "fallback": false
+    },
+    "screenshot": "对话截图/01-正常续办.png"
+  },
+  {
+    "scene": "正常续办",
+    "input": "我想了想，还是不退了",
+    "button": false,
+    "response": {
+      "answer": "是否停止本次尚未提交的退款申请？",
+      "sessionId": "cs-10dca99b-4dc1-4291-b516-ffefa7e3ea77",
+      "confirmRequired": true,
+      "pendingAction": "REFUND_ORDER_REQUIRED",
+      "confirmationTitle": "请选择是否保留办理",
+      "confirmationSummary": "结束这次未提交的退款办理。当前还没有订单号。",
+      "resumeToken": "ff6e19a8-078e-4aa2-b0db-d665d46a1b6c",
+      "actions": [
+        {
+          "code": "KEEP",
+          "label": "保留当前办理"
+        },
+        {
+          "code": "CANCEL_DRAFT",
+          "label": "结束这次未提交的退款办理"
+        }
+      ],
+      "fallback": false
+    },
+    "screenshot": "对话截图/02-正常续办.png"
+  },
+  {
+    "scene": "正常续办",
+    "input": "保留当前办理",
+    "button": true,
+    "response": {
+      "answer": "继续办理本次售后申请。",
+      "sessionId": "cs-10dca99b-4dc1-4291-b516-ffefa7e3ea77",
+      "confirmRequired": false,
+      "pendingAction": "KEEP",
+      "actions": [],
+      "fallback": false
+    },
+    "screenshot": "对话截图/03-正常续办.png"
+  },
+  {
+    "scene": "正常续办",
+    "input": "SO20261010124526218-b60d3f08",
+    "button": false,
+    "response": {
+      "answer": "订单 SO20261010124526218-b60d3f08 的整单实付金额为 199.00 元。请补充退款原因，例如“原因：买错了”。本次尚未提交。",
+      "sessionId": "cs-10dca99b-4dc1-4291-b516-ffefa7e3ea77",
+      "confirmRequired": false,
+      "pendingAction": "REFUND_REASON_REQUIRED",
+      "relatedOrderNo": "SO20261010124526218-b60d3f08",
+      "actions": [],
+      "fallback": false
+    },
+    "screenshot": "对话截图/04-正常续办.png"
+  },
+  {
+    "scene": "正常续办",
+    "input": "请结束当前这份尚未提交的退款申请。",
+    "button": false,
+    "response": {
+      "answer": "是否停止本次尚未提交的退款申请？",
+      "sessionId": "cs-10dca99b-4dc1-4291-b516-ffefa7e3ea77",
+      "confirmRequired": true,
+      "pendingAction": "REFUND_REASON_REQUIRED",
+      "confirmationTitle": "请选择是否保留办理",
+      "confirmationSummary": "订单：SO20261010124526218-b60d3f08；商品：户外野餐垫 x1；售后类型：退款。请选择保留当前办理，或取消这次尚未提交的售后申请。",
+      "relatedOrderNo": "SO20261010124526218-b60d3f08",
+      "resumeToken": "ee30fbd9-2717-4ddf-a15c-3a18e17ccd5c",
+      "actions": [
+        {
+          "code": "KEEP",
+          "label": "保留当前办理"
+        },
+        {
+          "code": "CANCEL_DRAFT",
+          "label": "取消这次尚未提交的售后申请"
+        }
+      ],
+      "fallback": false
+    },
+    "screenshot": "对话截图/05-正常续办.png"
+  },
+  {
+    "scene": "正常续办",
+    "input": "取消这次尚未提交的售后申请",
+    "button": true,
+    "response": {
+      "answer": "本次售后申请已取消，未提交。",
+      "sessionId": "cs-10dca99b-4dc1-4291-b516-ffefa7e3ea77",
+      "confirmRequired": false,
+      "pendingAction": "CANCELLED",
+      "actions": [],
+      "fallback": false
+    },
+    "screenshot": "对话截图/06-正常续办.png"
+  }
+]

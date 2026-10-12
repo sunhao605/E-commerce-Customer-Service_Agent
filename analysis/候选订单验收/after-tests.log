@@ -1,0 +1,27 @@
+test_dialogue_binds_tool_workflow_and_memory_to_first_order (backend.tests.test_candidate_selection.CandidateSelectionTest.test_dialogue_binds_tool_workflow_and_memory_to_first_order) ... ok
+test_explicit_switch_keeps_model_intent_and_explicit_order (backend.tests.test_candidate_selection.CandidateSelectionTest.test_explicit_switch_keeps_model_intent_and_explicit_order) ... ok
+test_gateway_page_text_cannot_override_the_original_selection (backend.tests.test_candidate_selection.CandidateSelectionTest.test_gateway_page_text_cannot_override_the_original_selection) ... ok
+test_missing_invalid_and_other_session_never_fall_back_to_old_order (backend.tests.test_candidate_selection.CandidateSelectionTest.test_missing_invalid_and_other_session_never_fall_back_to_old_order) ... ok
+test_selection_uses_shown_order_even_when_current_list_is_reversed (backend.tests.test_candidate_selection.CandidateSelectionTest.test_selection_uses_shown_order_even_when_current_list_is_reversed) ... ok
+test_chat_keeps_a_valid_model_label_when_the_rule_disagrees (backend.tests.test_route_priority.RoutePriorityTest.test_chat_keeps_a_valid_model_label_when_the_rule_disagrees) ... ok
+test_collecting_turn_passes_the_open_task_and_keeps_a_model_switch (backend.tests.test_route_priority.RoutePriorityTest.test_collecting_turn_passes_the_open_task_and_keeps_a_model_switch) ... ok
+test_course_fault_injection_still_states_the_service_is_unavailable (backend.tests.test_route_priority.RoutePriorityTest.test_course_fault_injection_still_states_the_service_is_unavailable) ... ok
+test_invalid_or_disabled_model_still_uses_the_rule (backend.tests.test_route_priority.RoutePriorityTest.test_invalid_or_disabled_model_still_uses_the_rule) ... ok
+test_model_failure_keeps_the_open_task_for_a_slot_reply (backend.tests.test_route_priority.RoutePriorityTest.test_model_failure_keeps_the_open_task_for_a_slot_reply) ... ok
+test_policy_queries_stay_read_only_and_invoice_stays_invoice (backend.tests.test_route_priority.RoutePriorityTest.test_policy_queries_stay_read_only_and_invoice_stays_invoice) ... FAIL
+test_reported_fault_is_not_treated_as_a_verified_outage (backend.tests.test_route_priority.RoutePriorityTest.test_reported_fault_is_not_treated_as_a_verified_outage) ... ok
+test_unclear_order_task_asks_instead_of_looking_up (backend.tests.test_route_priority.RoutePriorityTest.test_unclear_order_task_asks_instead_of_looking_up) ... ok
+
+======================================================================
+FAIL: test_policy_queries_stay_read_only_and_invoice_stays_invoice (backend.tests.test_route_priority.RoutePriorityTest.test_policy_queries_stay_read_only_and_invoice_stays_invoice)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_DianShang_Agent/backend/tests/test_route_priority.py", line 248, in test_policy_queries_stay_read_only_and_invoice_stays_invoice
+    self.assertIn("7 天", returned.answer)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '7 天' not found in '七天无理由退货适用于已支付并签收、申请提交时仍在签收后七天窗口内，且整单商品在购买时均支持七天无理由退货的订单。七天无理由是申请类型，用户无需另外填写退货理由；具体订单是否符合条件仍需核验可信订单事实，不得自动承诺退货成功。\n\n用户核对并确认提交后，申请进入待审核；管理员同意退货并提供退回地址后，由用户寄回并填写退回物流。商家收到商品且验收通过后才退款，同意退货不等于退款已完成。\n\n商品不支持七天无理由、超出窗口或资格事实缺失时，不进入这条无理由退货流程；质量问题等其他售后需说明具体问题并另行核验，不能一律认定为无法办理任何售后。'
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.042s
+
+FAILED (failures=1)

@@ -1,0 +1,36 @@
+{
+  "image": "sha256:498818e6b592df512d8d12993468285edd8ede8917f4a9f82808c840f32c1992",
+  "java_health": {
+    "status": "UP"
+  },
+  "java_cancel_execute": "unset(default off)",
+  "python": {
+    "mode": "default",
+    "old_pid": 11248,
+    "new_pid": 18480,
+    "health": {
+      "status": "ok",
+      "lesson": "41"
+    },
+    "cancel_execute": "0",
+    "score_min": "0.9"
+  },
+  "business_unchanged": true,
+  "source": {
+    "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/CustomerServiceGatewayService.java": "cff23c44aefcc1b35751e51619ee4605b136c19c08c9a58cc76eda4dd4c872e1"
+  },
+  "isolated": {
+    "passed": true,
+    "checks": 13,
+    "screenshots": 10,
+    "failed": [],
+    "online_models": false
+  },
+  "live": {
+    "passed": true,
+    "checks": 6,
+    "screenshots": 6,
+    "failed": [],
+    "online_models": true
+  }
+}

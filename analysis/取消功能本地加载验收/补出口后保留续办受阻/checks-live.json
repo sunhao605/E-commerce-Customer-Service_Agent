@@ -1,0 +1,469 @@
+[
+  {
+    "check": "还没确定退款订单-取消：进入原来缺信息的场景",
+    "passed": true
+  },
+  {
+    "check": "还没确定退款订单-取消：对象不明确先追问，不自动取消",
+    "passed": true,
+    "judgment": {
+      "status": "observed",
+      "reason": "object",
+      "executed": false,
+      "action": "ask_object",
+      "cancel_structurally_allowed": false,
+      "contract": "cancel-p0-2026-10-11",
+      "model": "jev-1.13.0",
+      "draft_stage": "choosing_order",
+      "draft_version": "1",
+      "order_id": null,
+      "elapsed_ms": 508.338,
+      "path_type": "observed",
+      "pending_action": "ask_object",
+      "target_type": "cancellation",
+      "target_name": "choosing_order",
+      "components": {
+        "decision": "stop",
+        "target": "current",
+        "extra_task": "no"
+      },
+      "scores": {
+        "decision": 0.7,
+        "target": 0.85,
+        "extra_task": 0.98
+      },
+      "usage": {
+        "input_tokens": 2085,
+        "output_tokens": 115
+      },
+      "fact": null,
+      "reply": "你要结束这次未提交的退款办理，还是取消某一笔订单？可以说退款办理、订单本身、第几笔或订单号。",
+      "object_wait": {
+        "kind": "object",
+        "draft_version": "1",
+        "draft_order": null,
+        "decision": "stop",
+        "decision_score": 0.7,
+        "extra_task": "no",
+        "candidates": [
+          "SO20261010124526218-b60d3f08",
+          "SO20261010124526068-3c464bb6",
+          "SO20261009082850446-6df1a10e",
+          "SO20261009061332122-26971b7b",
+          "SO20260712090000010-a1000010",
+          "SO20260605103000012-a1000012",
+          "SO20260603110000010-a1000010",
+          "SO20260602103000009-a1000009",
+          "SO20260601090000008-a1000008",
+          "SO20260525093000011-a1000011"
+        ]
+      },
+      "probabilities": {
+        "decision": {
+          "uncertain": 0.0,
+          "stop": 0.8,
+          "continue": 0.2
+        },
+        "target": {
+          "other": 0.03,
+          "current": 0.9,
+          "ambiguous": 0.07
+        },
+        "extra_task": {
+          "uncertain": 0.0,
+          "yes": 0.01,
+          "no": 0.99
+        }
+      }
+    }
+  },
+  {
+    "check": "还没确定退款订单-取消：真实模型进入低分保留分支",
+    "passed": true,
+    "judgment": {
+      "status": "resolved",
+      "reason": "below_threshold",
+      "executed": false,
+      "action": "object_noted",
+      "cancel_structurally_allowed": false,
+      "contract": "cancel-p0-2026-10-11",
+      "model": "jev-1.13.0",
+      "draft_stage": "choosing_order",
+      "draft_version": "1",
+      "order_id": null,
+      "elapsed_ms": 0.022,
+      "path_type": "resolved",
+      "pending_action": "object_noted",
+      "target_type": "cancellation",
+      "target_name": "choosing_order",
+      "components": {},
+      "scores": {},
+      "usage": {},
+      "fact": null,
+      "reply": "对象已记为当前售后。这次还不会取消，办理先留着。"
+    }
+  },
+  {
+    "check": "还没确定退款订单-取消：页面提供保留和取消，不提供提交",
+    "passed": true
+  },
+  {
+    "check": "还没确定退款订单-取消：点击取消后结束办理",
+    "passed": true
+  },
+  {
+    "check": "还没确定退款订单-取消：取消后回复序号不重发申请确认卡",
+    "passed": true
+  },
+  {
+    "check": "还没确定退款订单-取消：旧选择卡不能重复操作",
+    "passed": true,
+    "status": 409
+  },
+  {
+    "check": "还没确定退款订单-保留：进入原来缺信息的场景",
+    "passed": true
+  },
+  {
+    "check": "还没确定退款订单-保留：对象不明确先追问，不自动取消",
+    "passed": true,
+    "judgment": {
+      "status": "observed",
+      "reason": "object",
+      "executed": false,
+      "action": "ask_object",
+      "cancel_structurally_allowed": false,
+      "contract": "cancel-p0-2026-10-11",
+      "model": "jev-1.13.0",
+      "draft_stage": "choosing_order",
+      "draft_version": "1",
+      "order_id": null,
+      "elapsed_ms": 556.824,
+      "path_type": "observed",
+      "pending_action": "ask_object",
+      "target_type": "cancellation",
+      "target_name": "choosing_order",
+      "components": {
+        "decision": "stop",
+        "target": "current",
+        "extra_task": "no"
+      },
+      "scores": {
+        "decision": 0.61,
+        "target": 0.83,
+        "extra_task": 0.98
+      },
+      "usage": {
+        "input_tokens": 2085,
+        "output_tokens": 115
+      },
+      "fact": null,
+      "reply": "你要结束这次未提交的退款办理，还是取消某一笔订单？可以说退款办理、订单本身、第几笔或订单号。",
+      "object_wait": {
+        "kind": "object",
+        "draft_version": "1",
+        "draft_order": null,
+        "decision": "stop",
+        "decision_score": 0.61,
+        "extra_task": "no",
+        "candidates": [
+          "SO20261010124526218-b60d3f08",
+          "SO20261010124526068-3c464bb6",
+          "SO20261009082850446-6df1a10e",
+          "SO20261009061332122-26971b7b",
+          "SO20260712090000010-a1000010",
+          "SO20260605103000012-a1000012",
+          "SO20260603110000010-a1000010",
+          "SO20260602103000009-a1000009",
+          "SO20260601090000008-a1000008",
+          "SO20260525093000011-a1000011"
+        ]
+      },
+      "probabilities": {
+        "decision": {
+          "uncertain": 0.01,
+          "stop": 0.74,
+          "continue": 0.25
+        },
+        "target": {
+          "other": 0.03,
+          "current": 0.89,
+          "ambiguous": 0.08
+        },
+        "extra_task": {
+          "uncertain": 0.0,
+          "yes": 0.01,
+          "no": 0.99
+        }
+      }
+    }
+  },
+  {
+    "check": "还没确定退款订单-保留：真实模型进入低分保留分支",
+    "passed": true,
+    "judgment": {
+      "status": "resolved",
+      "reason": "below_threshold",
+      "executed": false,
+      "action": "object_noted",
+      "cancel_structurally_allowed": false,
+      "contract": "cancel-p0-2026-10-11",
+      "model": "jev-1.13.0",
+      "draft_stage": "choosing_order",
+      "draft_version": "1",
+      "order_id": null,
+      "elapsed_ms": 0.022,
+      "path_type": "resolved",
+      "pending_action": "object_noted",
+      "target_type": "cancellation",
+      "target_name": "choosing_order",
+      "components": {},
+      "scores": {},
+      "usage": {},
+      "fact": null,
+      "reply": "对象已记为当前售后。这次还不会取消，办理先留着。"
+    }
+  },
+  {
+    "check": "还没确定退款订单-保留：页面提供保留和取消，不提供提交",
+    "passed": true
+  },
+  {
+    "check": "还没确定退款订单-保留：保留后仍等待原来的信息",
+    "passed": false
+  },
+  {
+    "check": "还没确定退款订单-保留：补信息后正常继续",
+    "passed": false
+  },
+  {
+    "check": "还没确定退款订单-保留：旧选择卡不能重复操作",
+    "passed": true,
+    "status": 403
+  },
+  {
+    "check": "还没说明退款原因-取消：进入原来缺信息的场景",
+    "passed": true
+  },
+  {
+    "check": "还没说明退款原因-取消：对象不明确先追问，不自动取消",
+    "passed": true,
+    "judgment": {
+      "status": "observed",
+      "reason": "object",
+      "executed": false,
+      "action": "ask_object",
+      "cancel_structurally_allowed": false,
+      "contract": "cancel-p0-2026-10-11",
+      "model": "jev-1.13.0",
+      "draft_stage": "awaiting_reason",
+      "draft_version": "1",
+      "order_id": "SO20261010124526218-b60d3f08",
+      "elapsed_ms": 400.32,
+      "path_type": "observed",
+      "pending_action": "ask_object",
+      "target_type": "cancellation",
+      "target_name": "awaiting_reason",
+      "components": {
+        "decision": "stop",
+        "target": "current",
+        "extra_task": "no"
+      },
+      "scores": {
+        "decision": 0.45,
+        "target": 0.86,
+        "extra_task": 0.98
+      },
+      "usage": {
+        "input_tokens": 1403,
+        "output_tokens": 115
+      },
+      "fact": null,
+      "reply": "你要取消订单本身，还是刚才的退款申请？请说明订单号。当前售后是SO20261010124526218-b60d3f08。",
+      "object_wait": {
+        "kind": "object",
+        "draft_version": "1",
+        "draft_order": "SO20261010124526218-b60d3f08",
+        "decision": "stop",
+        "decision_score": 0.45,
+        "extra_task": "no",
+        "candidates": []
+      },
+      "probabilities": {
+        "decision": {
+          "uncertain": 0.01,
+          "stop": 0.63,
+          "continue": 0.36
+        },
+        "target": {
+          "other": 0.06,
+          "current": 0.91,
+          "ambiguous": 0.03
+        },
+        "extra_task": {
+          "uncertain": 0.0,
+          "yes": 0.01,
+          "no": 0.99
+        }
+      }
+    }
+  },
+  {
+    "check": "还没说明退款原因-取消：真实模型进入低分保留分支",
+    "passed": true,
+    "judgment": {
+      "status": "resolved",
+      "reason": "below_threshold",
+      "executed": false,
+      "action": "object_noted",
+      "cancel_structurally_allowed": false,
+      "contract": "cancel-p0-2026-10-11",
+      "model": "jev-1.13.0",
+      "draft_stage": "awaiting_reason",
+      "draft_version": "1",
+      "order_id": "SO20261010124526218-b60d3f08",
+      "elapsed_ms": 0.03,
+      "path_type": "resolved",
+      "pending_action": "object_noted",
+      "target_type": "cancellation",
+      "target_name": "awaiting_reason",
+      "components": {},
+      "scores": {},
+      "usage": {},
+      "fact": null,
+      "reply": "对象已记为当前售后。这次还不会取消，办理先留着。"
+    }
+  },
+  {
+    "check": "还没说明退款原因-取消：页面提供保留和取消，不提供提交",
+    "passed": true
+  },
+  {
+    "check": "还没说明退款原因-取消：点击取消后结束办理",
+    "passed": true
+  },
+  {
+    "check": "还没说明退款原因-取消：取消后回复序号不重发申请确认卡",
+    "passed": true
+  },
+  {
+    "check": "还没说明退款原因-取消：旧选择卡不能重复操作",
+    "passed": true,
+    "status": 409
+  },
+  {
+    "check": "还没说明退款原因-保留：进入原来缺信息的场景",
+    "passed": true
+  },
+  {
+    "check": "还没说明退款原因-保留：对象不明确先追问，不自动取消",
+    "passed": true,
+    "judgment": {
+      "status": "observed",
+      "reason": "object",
+      "executed": false,
+      "action": "ask_object",
+      "cancel_structurally_allowed": false,
+      "contract": "cancel-p0-2026-10-11",
+      "model": "jev-1.13.0",
+      "draft_stage": "awaiting_reason",
+      "draft_version": "1",
+      "order_id": "SO20261010124526218-b60d3f08",
+      "elapsed_ms": 481.662,
+      "path_type": "observed",
+      "pending_action": "ask_object",
+      "target_type": "cancellation",
+      "target_name": "awaiting_reason",
+      "components": {
+        "decision": "stop",
+        "target": "current",
+        "extra_task": "no"
+      },
+      "scores": {
+        "decision": 0.41,
+        "target": 0.86,
+        "extra_task": 0.98
+      },
+      "usage": {
+        "input_tokens": 1403,
+        "output_tokens": 115
+      },
+      "fact": null,
+      "reply": "你要取消订单本身，还是刚才的退款申请？请说明订单号。当前售后是SO20261010124526218-b60d3f08。",
+      "object_wait": {
+        "kind": "object",
+        "draft_version": "1",
+        "draft_order": "SO20261010124526218-b60d3f08",
+        "decision": "stop",
+        "decision_score": 0.41,
+        "extra_task": "no",
+        "candidates": []
+      },
+      "probabilities": {
+        "decision": {
+          "uncertain": 0.01,
+          "stop": 0.61,
+          "continue": 0.38
+        },
+        "target": {
+          "other": 0.06,
+          "current": 0.91,
+          "ambiguous": 0.03
+        },
+        "extra_task": {
+          "uncertain": 0.0,
+          "yes": 0.01,
+          "no": 0.99
+        }
+      }
+    }
+  },
+  {
+    "check": "还没说明退款原因-保留：真实模型进入低分保留分支",
+    "passed": true,
+    "judgment": {
+      "status": "resolved",
+      "reason": "below_threshold",
+      "executed": false,
+      "action": "object_noted",
+      "cancel_structurally_allowed": false,
+      "contract": "cancel-p0-2026-10-11",
+      "model": "jev-1.13.0",
+      "draft_stage": "awaiting_reason",
+      "draft_version": "1",
+      "order_id": "SO20261010124526218-b60d3f08",
+      "elapsed_ms": 0.023,
+      "path_type": "resolved",
+      "pending_action": "object_noted",
+      "target_type": "cancellation",
+      "target_name": "awaiting_reason",
+      "components": {},
+      "scores": {},
+      "usage": {},
+      "fact": null,
+      "reply": "对象已记为当前售后。这次还不会取消，办理先留着。"
+    }
+  },
+  {
+    "check": "还没说明退款原因-保留：页面提供保留和取消，不提供提交",
+    "passed": true
+  },
+  {
+    "check": "还没说明退款原因-保留：保留后仍等待原来的信息",
+    "passed": false
+  },
+  {
+    "check": "还没说明退款原因-保留：补信息后正常继续",
+    "passed": false
+  },
+  {
+    "check": "还没说明退款原因-保留：旧选择卡不能重复操作",
+    "passed": true,
+    "status": 403
+  },
+  {
+    "check": "页面无JavaScript异常",
+    "passed": true,
+    "errors": []
+  }
+]

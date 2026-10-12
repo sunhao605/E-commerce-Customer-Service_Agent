@@ -1,0 +1,21 @@
+--- ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/CustomerServiceGatewayService.java (修改前)
++++ ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/CustomerServiceGatewayService.java (修改后)
+@@ -360,7 +360,9 @@
+         if ("confirm".equals(action)) {
+             return conflictCard(session, StringUtils.hasText(reply) ? reply : "请选择保留当前办理，或取消这次尚未提交的售后申请。");
+         }
+-        if ("score_low".equals(action)) {
++        if ("score_low".equals(action) || ("object_noted".equals(action)
++            && "below_threshold".equals(judgment.path("reason").asText()))) {
++            session.setObjectWait(null);
+             String text = StringUtils.hasText(reply) ? reply : "这句还不够确定，当前办理仍保留。要取消请点「取消本次申请」，或再说清楚一次。";
+             if ("CONFIRM_SUBMIT".equals(session.getPendingAction()) && StringUtils.hasText(session.getResumeToken())) {
+                 return pendingRefundResponse(session, text);
+@@ -428,6 +430,7 @@
+         }
+         session.setConflictToken(null);
+         if ("KEEP".equals(decision)) {
++            rememberTurn(session, "客户点击「保留当前办理」", "客户选择继续办理，尚未提交。");
+             if ("CONFIRM_SUBMIT".equals(session.getPendingAction())) {
+                 session.setResumeToken(UUID.randomUUID().toString());
+                 sessionStore.save(session);

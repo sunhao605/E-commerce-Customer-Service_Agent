@@ -1,0 +1,16 @@
+{
+  "recorded_after_test_preparation": true,
+  "files": {
+    "analysis/取消语义对比/frozen.json": "34e1b091d4c39e14a8cbdfa8347cfc8bce3c3a441b596cb3a8c01d3c6e839f16",
+    "analysis/取消语义对比/run_compare.py": "b547cbc56a2c9e8ee5ea503721241c73ba94db249d6444dfeace31a065d42829",
+    "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/CustomerServiceGatewayService.java": "ba805cfed2314c37b66c0acbb187f8eb561752bab30ac8164d4dcbca7598a103"
+  },
+  "services": "未调用商城、数据库或更改服务配置",
+  "credentials": "测试准备时Jev Key缺失；随后本地配置具备TYPESAFE_API_KEY，完成60次Jev调用；无密钥写入结果",
+  "completed_providers": [
+    "rules",
+    "deepseek",
+    "jev"
+  ],
+  "live_model_calls": 120
+}

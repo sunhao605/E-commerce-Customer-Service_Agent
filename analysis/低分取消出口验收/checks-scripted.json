@@ -1,0 +1,256 @@
+[
+  {
+    "check": "还没确定退款订单：低分不自动取消，办理内容和版本保留",
+    "passed": true
+  },
+  {
+    "check": "还没确定退款订单：页面提供保留和取消按钮，不提供提交",
+    "passed": true
+  },
+  {
+    "check": "还没确定退款订单：提示与实际取消按钮对应",
+    "passed": true
+  },
+  {
+    "check": "还没确定退款订单：这张选择卡不能提交申请",
+    "passed": true
+  },
+  {
+    "check": "还没确定退款订单：客户点击取消后结束办理并清除凭证",
+    "passed": true
+  },
+  {
+    "check": "还没确定退款订单：取消后旧按钮重复请求被拒绝",
+    "passed": true
+  },
+  {
+    "check": "还没确定退款订单：取消后旧候选或待办不恢复",
+    "passed": true
+  },
+  {
+    "check": "还没确定退款订单：低分不自动取消，办理内容和版本保留",
+    "passed": true
+  },
+  {
+    "check": "还没确定退款订单：页面提供保留和取消按钮，不提供提交",
+    "passed": true
+  },
+  {
+    "check": "还没确定退款订单：提示与实际取消按钮对应",
+    "passed": true
+  },
+  {
+    "check": "还没确定退款订单：这张选择卡不能提交申请",
+    "passed": true
+  },
+  {
+    "check": "还没确定退款订单：客户点保留后仍等待原来的信息",
+    "passed": true
+  },
+  {
+    "check": "还没确定退款订单：保留后旧选择卡不能再次操作",
+    "passed": true
+  },
+  {
+    "check": "还没确定退款订单：补充原来缺少的信息后可继续正常办理",
+    "passed": true
+  },
+  {
+    "check": "还没确定退款订单：低分不自动取消，办理内容和版本保留",
+    "passed": true
+  },
+  {
+    "check": "还没确定退款订单：页面提供保留和取消按钮，不提供提交",
+    "passed": true
+  },
+  {
+    "check": "还没确定退款订单：提示与实际取消按钮对应",
+    "passed": true
+  },
+  {
+    "check": "还没确定退款订单：这张选择卡不能提交申请",
+    "passed": true
+  },
+  {
+    "check": "还没确定退款订单：办理内容变化后旧选择卡不能取消新的办理",
+    "passed": true
+  },
+  {
+    "check": "还没说明退款原因：低分不自动取消，办理内容和版本保留",
+    "passed": true
+  },
+  {
+    "check": "还没说明退款原因：页面提供保留和取消按钮，不提供提交",
+    "passed": true
+  },
+  {
+    "check": "还没说明退款原因：提示与实际取消按钮对应",
+    "passed": true
+  },
+  {
+    "check": "还没说明退款原因：这张选择卡不能提交申请",
+    "passed": true
+  },
+  {
+    "check": "还没说明退款原因：客户点击取消后结束办理并清除凭证",
+    "passed": true
+  },
+  {
+    "check": "还没说明退款原因：取消后旧按钮重复请求被拒绝",
+    "passed": true
+  },
+  {
+    "check": "还没说明退款原因：取消后旧候选或待办不恢复",
+    "passed": true
+  },
+  {
+    "check": "还没说明退款原因：低分不自动取消，办理内容和版本保留",
+    "passed": true
+  },
+  {
+    "check": "还没说明退款原因：页面提供保留和取消按钮，不提供提交",
+    "passed": true
+  },
+  {
+    "check": "还没说明退款原因：提示与实际取消按钮对应",
+    "passed": true
+  },
+  {
+    "check": "还没说明退款原因：这张选择卡不能提交申请",
+    "passed": true
+  },
+  {
+    "check": "还没说明退款原因：客户点保留后仍等待原来的信息",
+    "passed": true
+  },
+  {
+    "check": "还没说明退款原因：保留后旧选择卡不能再次操作",
+    "passed": true
+  },
+  {
+    "check": "还没说明退款原因：补充原来缺少的信息后可继续正常办理",
+    "passed": true
+  },
+  {
+    "check": "还没说明退款原因：低分不自动取消，办理内容和版本保留",
+    "passed": true
+  },
+  {
+    "check": "还没说明退款原因：页面提供保留和取消按钮，不提供提交",
+    "passed": true
+  },
+  {
+    "check": "还没说明退款原因：提示与实际取消按钮对应",
+    "passed": true
+  },
+  {
+    "check": "还没说明退款原因：这张选择卡不能提交申请",
+    "passed": true
+  },
+  {
+    "check": "还没说明退款原因：办理内容变化后旧选择卡不能取消新的办理",
+    "passed": true
+  },
+  {
+    "check": "新增场景：无JavaScript异常",
+    "passed": true,
+    "errors": []
+  },
+  {
+    "check": "页面：低分重发原卡和原凭证",
+    "passed": true
+  },
+  {
+    "check": "页面：点击原卡取消成功",
+    "passed": true
+  },
+  {
+    "check": "页面：取消后旧卡提交返回409",
+    "passed": true
+  },
+  {
+    "check": "页面：取消后历史卡所有按钮禁用",
+    "passed": true
+  },
+  {
+    "check": "页面：取消后序号不恢复办理，Python待办为空",
+    "passed": true
+  },
+  {
+    "check": "页面：冲突卡只有保留和取消，无提交动作",
+    "passed": true
+  },
+  {
+    "check": "页面：冲突凭证不能伪装成提交",
+    "passed": true
+  },
+  {
+    "check": "页面：保留不取消草稿",
+    "passed": true
+  },
+  {
+    "check": "页面：保留后重复点击旧冲突卡被拒绝",
+    "passed": true
+  },
+  {
+    "check": "页面：保留后可继续使用当前申请确认卡",
+    "passed": true
+  },
+  {
+    "check": "页面：保留后新凭证与草稿一致，旧冲突凭证不复用",
+    "passed": true
+  },
+  {
+    "check": "页面：冲突卡取消后草稿终止、凭证清空",
+    "passed": true
+  },
+  {
+    "check": "页面：冲突卡取消后重复请求返回409",
+    "passed": true
+  },
+  {
+    "check": "页面：冲突取消后原提交卡不可用",
+    "passed": true
+  },
+  {
+    "check": "页面：修改原因递增草稿版本并重发提交卡",
+    "passed": true
+  },
+  {
+    "check": "页面：草稿变化后旧冲突卡禁用且后端拒绝",
+    "passed": true
+  },
+  {
+    "check": "页面：选单阶段展示候选但不显示提交卡",
+    "passed": true
+  },
+  {
+    "check": "页面：取消选单后旧候选不复活",
+    "passed": true
+  },
+  {
+    "check": "页面：保留REFUND_ORDER_REQUIRED仍需补信息，不能提交",
+    "passed": true
+  },
+  {
+    "check": "页面：保留REFUND_REASON_REQUIRED仍需补信息，不能提交",
+    "passed": true
+  },
+  {
+    "check": "页面：退货退款保留后重发正确类型确认卡",
+    "passed": true
+  },
+  {
+    "check": "页面：退货退款保留后的新卡也可取消",
+    "passed": true
+  },
+  {
+    "check": "页面：无JavaScript异常",
+    "passed": true,
+    "errors": []
+  },
+  {
+    "check": "八张业务表行数与内容哈希完全不变",
+    "passed": true
+  }
+]

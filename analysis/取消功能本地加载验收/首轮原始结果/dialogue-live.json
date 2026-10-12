@@ -1,0 +1,82 @@
+[
+  {
+    "scene": "还没确定退款订单-取消",
+    "message": "帮我退款。",
+    "response": {
+      "answer": "你要退款哪一个订单？请选择订单号，或直接补充订单号。 当前账号下可选订单：SO20261010124526218-b60d3f08（户外野餐垫）；SO20261010124526068-3c464bb6（户外野餐垫）；SO20261009082850446-6df1a10e（露营折叠椅）；SO20261009061332122-26971b7b（户外野餐垫）；SO20260712090000010-a1000010（露营折叠椅）；SO20260605103000012-a1000012（定制营地旗）；SO20260603110000010-a1000010（露营折叠椅）；SO20260602103000009-a1000009（户外野餐垫）；SO20260601090000008-a1000008（露营折叠椅）；SO20260525093000011-a1000011（户外野餐垫）。",
+      "sessionId": "cs-96bfb5b7-02a5-496c-a58c-d4d6813716c0",
+      "confirmRequired": false,
+      "actions": [],
+      "fallback": false
+    },
+    "screenshot": "对话截图/01-还没确定退款订单-取消.png"
+  },
+  {
+    "scene": "还没确定退款订单-保留",
+    "message": "帮我退款。",
+    "response": {
+      "answer": "你要退款哪一个订单？请选择订单号，或直接补充订单号。 当前账号下可选订单：SO20261010124526218-b60d3f08（户外野餐垫）；SO20261010124526068-3c464bb6（户外野餐垫）；SO20261009082850446-6df1a10e（露营折叠椅）；SO20261009061332122-26971b7b（户外野餐垫）；SO20260712090000010-a1000010（露营折叠椅）；SO20260605103000012-a1000012（定制营地旗）；SO20260603110000010-a1000010（露营折叠椅）；SO20260602103000009-a1000009（户外野餐垫）；SO20260601090000008-a1000008（露营折叠椅）；SO20260525093000011-a1000011（户外野餐垫）。",
+      "sessionId": "cs-99c4a070-b0e1-4b97-a407-95d5b1010d35",
+      "confirmRequired": false,
+      "actions": [],
+      "fallback": false
+    },
+    "screenshot": "对话截图/02-还没确定退款订单-保留.png"
+  },
+  {
+    "scene": "还没说明退款原因-取消",
+    "message": "SO20261010124526218-b60d3f08 我要退款。",
+    "response": {
+      "answer": "订单 SO20261010124526218-b60d3f08 的整单实付金额为 199.00 元。请补充退款原因，例如“原因：买错了”。本次尚未提交。",
+      "sessionId": "cs-fe32e816-f65e-47d1-9438-3f860c65b4c1",
+      "confirmRequired": false,
+      "pendingAction": "REFUND_REASON_REQUIRED",
+      "relatedOrderNo": "SO20261010124526218-b60d3f08",
+      "actions": [],
+      "fallback": false
+    },
+    "screenshot": "对话截图/03-还没说明退款原因-取消.png"
+  },
+  {
+    "scene": "还没说明退款原因-取消",
+    "message": "我想了想，还是不退了",
+    "response": {
+      "answer": "你要取消订单本身，还是刚才的退款申请？请说明订单号。当前售后是SO20261010124526218-b60d3f08。",
+      "sessionId": "cs-fe32e816-f65e-47d1-9438-3f860c65b4c1",
+      "confirmRequired": false,
+      "pendingAction": "ASK_OBJECT",
+      "relatedOrderNo": "SO20261010124526218-b60d3f08",
+      "actions": [],
+      "fallback": false
+    },
+    "screenshot": "对话截图/04-还没说明退款原因-取消.png"
+  },
+  {
+    "scene": "还没说明退款原因-保留",
+    "message": "SO20261010124526218-b60d3f08 我要退款。",
+    "response": {
+      "answer": "订单 SO20261010124526218-b60d3f08 的整单实付金额为 199.00 元。请补充退款原因，例如“原因：买错了”。本次尚未提交。",
+      "sessionId": "cs-ee1055a5-b277-43f6-8112-7bd5a268f1bd",
+      "confirmRequired": false,
+      "pendingAction": "REFUND_REASON_REQUIRED",
+      "relatedOrderNo": "SO20261010124526218-b60d3f08",
+      "actions": [],
+      "fallback": false
+    },
+    "screenshot": "对话截图/05-还没说明退款原因-保留.png"
+  },
+  {
+    "scene": "还没说明退款原因-保留",
+    "message": "我想了想，还是不退了",
+    "response": {
+      "answer": "你要取消订单本身，还是刚才的退款申请？请说明订单号。当前售后是SO20261010124526218-b60d3f08。",
+      "sessionId": "cs-ee1055a5-b277-43f6-8112-7bd5a268f1bd",
+      "confirmRequired": false,
+      "pendingAction": "ASK_OBJECT",
+      "relatedOrderNo": "SO20261010124526218-b60d3f08",
+      "actions": [],
+      "fallback": false
+    },
+    "screenshot": "对话截图/06-还没说明退款原因-保留.png"
+  }
+]

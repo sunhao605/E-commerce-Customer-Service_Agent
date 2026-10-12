@@ -1,0 +1,487 @@
+[
+  {
+    "check": "还没确定退款订单-取消：进入预定场景",
+    "passed": true
+  },
+  {
+    "check": "还没确定退款订单-取消：当前申请对象低分，不自动取消",
+    "passed": true,
+    "judgment": {
+      "status": "observed",
+      "reason": "below_threshold",
+      "executed": false,
+      "action": "score_low",
+      "cancel_structurally_allowed": false,
+      "contract": "cancel-p0-2026-10-11",
+      "model": "scripted-jev",
+      "draft_stage": "choosing_order",
+      "draft_version": "1",
+      "order_id": null,
+      "elapsed_ms": 0.438,
+      "path_type": "observed",
+      "pending_action": "score_low",
+      "target_type": "cancellation",
+      "target_name": "choosing_order",
+      "components": {
+        "decision": "stop",
+        "target": "current",
+        "extra_task": "no"
+      },
+      "scores": {
+        "decision": 0.41,
+        "target": 0.85,
+        "extra_task": 0.99
+      },
+      "usage": {},
+      "fact": null,
+      "reply": "是否停止本次尚未提交的退款申请？",
+      "probabilities": {}
+    }
+  },
+  {
+    "check": "还没确定退款订单-取消：直接确认本次申请，只提供保留和取消",
+    "passed": true
+  },
+  {
+    "check": "还没确定退款订单-取消：没有订单二选一或额外说明",
+    "passed": true
+  },
+  {
+    "check": "还没确定退款订单-取消：点击后结束办理",
+    "passed": true
+  },
+  {
+    "check": "还没确定退款订单-取消：旧停止确认卡不能重复操作",
+    "passed": true,
+    "status": 409
+  },
+  {
+    "check": "还没确定退款订单-保留：进入预定场景",
+    "passed": true
+  },
+  {
+    "check": "还没确定退款订单-保留：当前申请对象低分，不自动取消",
+    "passed": true,
+    "judgment": {
+      "status": "observed",
+      "reason": "below_threshold",
+      "executed": false,
+      "action": "score_low",
+      "cancel_structurally_allowed": false,
+      "contract": "cancel-p0-2026-10-11",
+      "model": "scripted-jev",
+      "draft_stage": "choosing_order",
+      "draft_version": "1",
+      "order_id": null,
+      "elapsed_ms": 0.289,
+      "path_type": "observed",
+      "pending_action": "score_low",
+      "target_type": "cancellation",
+      "target_name": "choosing_order",
+      "components": {
+        "decision": "stop",
+        "target": "current",
+        "extra_task": "no"
+      },
+      "scores": {
+        "decision": 0.41,
+        "target": 0.85,
+        "extra_task": 0.99
+      },
+      "usage": {},
+      "fact": null,
+      "reply": "是否停止本次尚未提交的退款申请？",
+      "probabilities": {}
+    }
+  },
+  {
+    "check": "还没确定退款订单-保留：直接确认本次申请，只提供保留和取消",
+    "passed": true
+  },
+  {
+    "check": "还没确定退款订单-保留：没有订单二选一或额外说明",
+    "passed": true
+  },
+  {
+    "check": "还没确定退款订单-保留：保留后恢复原办理状态",
+    "passed": true
+  },
+  {
+    "check": "还没确定退款订单-保留：补信息后正常继续",
+    "passed": true
+  },
+  {
+    "check": "还没确定退款订单-保留：旧停止确认卡不能重复操作",
+    "passed": true,
+    "status": 403
+  },
+  {
+    "check": "还没说明退款原因-取消：进入预定场景",
+    "passed": true
+  },
+  {
+    "check": "还没说明退款原因-取消：当前申请对象低分，不自动取消",
+    "passed": true,
+    "judgment": {
+      "status": "observed",
+      "reason": "below_threshold",
+      "executed": false,
+      "action": "score_low",
+      "cancel_structurally_allowed": false,
+      "contract": "cancel-p0-2026-10-11",
+      "model": "scripted-jev",
+      "draft_stage": "awaiting_reason",
+      "draft_version": "1",
+      "order_id": "ORD9801",
+      "elapsed_ms": 0.204,
+      "path_type": "observed",
+      "pending_action": "score_low",
+      "target_type": "cancellation",
+      "target_name": "awaiting_reason",
+      "components": {
+        "decision": "stop",
+        "target": "current",
+        "extra_task": "no"
+      },
+      "scores": {
+        "decision": 0.41,
+        "target": 0.85,
+        "extra_task": 0.99
+      },
+      "usage": {},
+      "fact": null,
+      "reply": "是否停止本次尚未提交的退款申请？",
+      "probabilities": {}
+    }
+  },
+  {
+    "check": "还没说明退款原因-取消：直接确认本次申请，只提供保留和取消",
+    "passed": true
+  },
+  {
+    "check": "还没说明退款原因-取消：没有订单二选一或额外说明",
+    "passed": true
+  },
+  {
+    "check": "还没说明退款原因-取消：点击后结束办理",
+    "passed": true
+  },
+  {
+    "check": "还没说明退款原因-取消：旧停止确认卡不能重复操作",
+    "passed": true,
+    "status": 409
+  },
+  {
+    "check": "还没说明退款原因-保留：进入预定场景",
+    "passed": true
+  },
+  {
+    "check": "还没说明退款原因-保留：当前申请对象低分，不自动取消",
+    "passed": true,
+    "judgment": {
+      "status": "observed",
+      "reason": "below_threshold",
+      "executed": false,
+      "action": "score_low",
+      "cancel_structurally_allowed": false,
+      "contract": "cancel-p0-2026-10-11",
+      "model": "scripted-jev",
+      "draft_stage": "awaiting_reason",
+      "draft_version": "1",
+      "order_id": "ORD9801",
+      "elapsed_ms": 0.3,
+      "path_type": "observed",
+      "pending_action": "score_low",
+      "target_type": "cancellation",
+      "target_name": "awaiting_reason",
+      "components": {
+        "decision": "stop",
+        "target": "current",
+        "extra_task": "no"
+      },
+      "scores": {
+        "decision": 0.41,
+        "target": 0.85,
+        "extra_task": 0.99
+      },
+      "usage": {},
+      "fact": null,
+      "reply": "是否停止本次尚未提交的退款申请？",
+      "probabilities": {}
+    }
+  },
+  {
+    "check": "还没说明退款原因-保留：直接确认本次申请，只提供保留和取消",
+    "passed": true
+  },
+  {
+    "check": "还没说明退款原因-保留：没有订单二选一或额外说明",
+    "passed": true
+  },
+  {
+    "check": "还没说明退款原因-保留：保留后恢复原办理状态",
+    "passed": true
+  },
+  {
+    "check": "还没说明退款原因-保留：补信息后正常继续",
+    "passed": true
+  },
+  {
+    "check": "还没说明退款原因-保留：旧停止确认卡不能重复操作",
+    "passed": true,
+    "status": 409
+  },
+  {
+    "check": "退款等待提交确认-取消：进入预定场景",
+    "passed": true
+  },
+  {
+    "check": "退款等待提交确认-取消：当前申请对象低分，不自动取消",
+    "passed": true,
+    "judgment": {
+      "status": "observed",
+      "reason": "below_threshold",
+      "executed": false,
+      "action": "score_low",
+      "cancel_structurally_allowed": false,
+      "contract": "cancel-p0-2026-10-11",
+      "model": "scripted-jev",
+      "draft_stage": "draft",
+      "draft_version": "1",
+      "order_id": "ORD9801",
+      "elapsed_ms": 0.381,
+      "path_type": "observed",
+      "pending_action": "score_low",
+      "target_type": "cancellation",
+      "target_name": "draft",
+      "components": {
+        "decision": "stop",
+        "target": "current",
+        "extra_task": "no"
+      },
+      "scores": {
+        "decision": 0.41,
+        "target": 0.85,
+        "extra_task": 0.99
+      },
+      "usage": {},
+      "fact": null,
+      "reply": "是否停止本次尚未提交的退款申请？",
+      "probabilities": {}
+    }
+  },
+  {
+    "check": "退款等待提交确认-取消：直接确认本次申请，只提供保留和取消",
+    "passed": true
+  },
+  {
+    "check": "退款等待提交确认-取消：没有订单二选一或额外说明",
+    "passed": true
+  },
+  {
+    "check": "退款等待提交确认-取消：原提交卡失效",
+    "passed": true,
+    "status": 403
+  },
+  {
+    "check": "退款等待提交确认-取消：点击后结束办理",
+    "passed": true
+  },
+  {
+    "check": "退款等待提交确认-取消：旧停止确认卡不能重复操作",
+    "passed": true,
+    "status": 409
+  },
+  {
+    "check": "退款等待提交确认-保留：进入预定场景",
+    "passed": true
+  },
+  {
+    "check": "退款等待提交确认-保留：当前申请对象低分，不自动取消",
+    "passed": true,
+    "judgment": {
+      "status": "observed",
+      "reason": "below_threshold",
+      "executed": false,
+      "action": "score_low",
+      "cancel_structurally_allowed": false,
+      "contract": "cancel-p0-2026-10-11",
+      "model": "scripted-jev",
+      "draft_stage": "draft",
+      "draft_version": "1",
+      "order_id": "ORD9801",
+      "elapsed_ms": 0.188,
+      "path_type": "observed",
+      "pending_action": "score_low",
+      "target_type": "cancellation",
+      "target_name": "draft",
+      "components": {
+        "decision": "stop",
+        "target": "current",
+        "extra_task": "no"
+      },
+      "scores": {
+        "decision": 0.41,
+        "target": 0.85,
+        "extra_task": 0.99
+      },
+      "usage": {},
+      "fact": null,
+      "reply": "是否停止本次尚未提交的退款申请？",
+      "probabilities": {}
+    }
+  },
+  {
+    "check": "退款等待提交确认-保留：直接确认本次申请，只提供保留和取消",
+    "passed": true
+  },
+  {
+    "check": "退款等待提交确认-保留：没有订单二选一或额外说明",
+    "passed": true
+  },
+  {
+    "check": "退款等待提交确认-保留：原提交卡失效",
+    "passed": true,
+    "status": 403
+  },
+  {
+    "check": "退款等待提交确认-保留：保留后恢复原办理状态",
+    "passed": true
+  },
+  {
+    "check": "退款等待提交确认-保留：旧停止确认卡不能重复操作",
+    "passed": true,
+    "status": 409
+  },
+  {
+    "check": "退货退款等待提交确认-取消：进入预定场景",
+    "passed": true
+  },
+  {
+    "check": "退货退款等待提交确认-取消：当前申请对象低分，不自动取消",
+    "passed": true,
+    "judgment": {
+      "status": "observed",
+      "reason": "below_threshold",
+      "executed": false,
+      "action": "score_low",
+      "cancel_structurally_allowed": false,
+      "contract": "cancel-p0-2026-10-11",
+      "model": "scripted-jev",
+      "draft_stage": "draft",
+      "draft_version": "1",
+      "order_id": "ORD9803",
+      "elapsed_ms": 0.215,
+      "path_type": "observed",
+      "pending_action": "score_low",
+      "target_type": "cancellation",
+      "target_name": "draft",
+      "components": {
+        "decision": "stop",
+        "target": "current",
+        "extra_task": "no"
+      },
+      "scores": {
+        "decision": 0.41,
+        "target": 0.85,
+        "extra_task": 0.99
+      },
+      "usage": {},
+      "fact": null,
+      "reply": "是否停止本次尚未提交的退货退款申请？",
+      "probabilities": {}
+    }
+  },
+  {
+    "check": "退货退款等待提交确认-取消：直接确认本次申请，只提供保留和取消",
+    "passed": true
+  },
+  {
+    "check": "退货退款等待提交确认-取消：没有订单二选一或额外说明",
+    "passed": true
+  },
+  {
+    "check": "退货退款等待提交确认-取消：原提交卡失效",
+    "passed": true,
+    "status": 403
+  },
+  {
+    "check": "退货退款等待提交确认-取消：点击后结束办理",
+    "passed": true
+  },
+  {
+    "check": "退货退款等待提交确认-取消：旧停止确认卡不能重复操作",
+    "passed": true,
+    "status": 409
+  },
+  {
+    "check": "退货退款等待提交确认-保留：进入预定场景",
+    "passed": true
+  },
+  {
+    "check": "退货退款等待提交确认-保留：当前申请对象低分，不自动取消",
+    "passed": true,
+    "judgment": {
+      "status": "observed",
+      "reason": "below_threshold",
+      "executed": false,
+      "action": "score_low",
+      "cancel_structurally_allowed": false,
+      "contract": "cancel-p0-2026-10-11",
+      "model": "scripted-jev",
+      "draft_stage": "draft",
+      "draft_version": "1",
+      "order_id": "ORD9803",
+      "elapsed_ms": 0.244,
+      "path_type": "observed",
+      "pending_action": "score_low",
+      "target_type": "cancellation",
+      "target_name": "draft",
+      "components": {
+        "decision": "stop",
+        "target": "current",
+        "extra_task": "no"
+      },
+      "scores": {
+        "decision": 0.41,
+        "target": 0.85,
+        "extra_task": 0.99
+      },
+      "usage": {},
+      "fact": null,
+      "reply": "是否停止本次尚未提交的退货退款申请？",
+      "probabilities": {}
+    }
+  },
+  {
+    "check": "退货退款等待提交确认-保留：直接确认本次申请，只提供保留和取消",
+    "passed": true
+  },
+  {
+    "check": "退货退款等待提交确认-保留：没有订单二选一或额外说明",
+    "passed": true
+  },
+  {
+    "check": "退货退款等待提交确认-保留：原提交卡失效",
+    "passed": true,
+    "status": 403
+  },
+  {
+    "check": "退货退款等待提交确认-保留：保留后恢复原办理状态",
+    "passed": true
+  },
+  {
+    "check": "退货退款等待提交确认-保留：旧停止确认卡不能重复操作",
+    "passed": true,
+    "status": 409
+  },
+  {
+    "check": "页面无JavaScript异常",
+    "passed": true,
+    "errors": []
+  },
+  {
+    "check": "8张隔离业务表内容完全一致",
+    "passed": true
+  }
+]

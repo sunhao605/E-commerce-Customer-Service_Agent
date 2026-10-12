@@ -1,0 +1,70 @@
+{
+  "before": {
+    "order_header": {
+      "rows": 20,
+      "sha256": "2eb7185b24c165ca58c2f0d7f39e1f5944b62592dfe08fc73505f9fd40f5a69f"
+    },
+    "order_item": {
+      "rows": 20,
+      "sha256": "7bb909038c8055766ec5f21411df046f5999143212179f4148b7cfd3b0978c10"
+    },
+    "balance_account": {
+      "rows": 3,
+      "sha256": "f67946b57c92bb4fba3231c14220e9a3d1fdf2e026e6621405190d57137386e2"
+    },
+    "balance_transaction": {
+      "rows": 6,
+      "sha256": "2f08272ee967f554d2ff40aff1a0c2cbe1c6f0b0e9f465e6d34eb08d06037b1e"
+    },
+    "after_sale_request": {
+      "rows": 4,
+      "sha256": "b40fbccaedbe87b2e06ecf768ae73b7cf7d4e2c53ad1be2197d8af8285ec16a9"
+    },
+    "approval_record": {
+      "rows": 4,
+      "sha256": "1babf8263ba212a1c8981dd6ae07bceee49436a9f1b9659242af9bc3040933ad"
+    },
+    "logistics_info": {
+      "rows": 10,
+      "sha256": "83f1386ef8160080762bc1159ebd816f6875c2a15317a4e804f2acac41951f86"
+    },
+    "logistics_event": {
+      "rows": 13,
+      "sha256": "4c5d1e83be3ad5aa4fc5e82125504f682a84ef3cfa19972fb6257a3d418d9263"
+    }
+  },
+  "after": {
+    "order_header": {
+      "rows": 20,
+      "sha256": "2eb7185b24c165ca58c2f0d7f39e1f5944b62592dfe08fc73505f9fd40f5a69f"
+    },
+    "order_item": {
+      "rows": 20,
+      "sha256": "7bb909038c8055766ec5f21411df046f5999143212179f4148b7cfd3b0978c10"
+    },
+    "balance_account": {
+      "rows": 3,
+      "sha256": "f67946b57c92bb4fba3231c14220e9a3d1fdf2e026e6621405190d57137386e2"
+    },
+    "balance_transaction": {
+      "rows": 6,
+      "sha256": "2f08272ee967f554d2ff40aff1a0c2cbe1c6f0b0e9f465e6d34eb08d06037b1e"
+    },
+    "after_sale_request": {
+      "rows": 4,
+      "sha256": "b40fbccaedbe87b2e06ecf768ae73b7cf7d4e2c53ad1be2197d8af8285ec16a9"
+    },
+    "approval_record": {
+      "rows": 4,
+      "sha256": "1babf8263ba212a1c8981dd6ae07bceee49436a9f1b9659242af9bc3040933ad"
+    },
+    "logistics_info": {
+      "rows": 10,
+      "sha256": "83f1386ef8160080762bc1159ebd816f6875c2a15317a4e804f2acac41951f86"
+    },
+    "logistics_event": {
+      "rows": 13,
+      "sha256": "4c5d1e83be3ad5aa4fc5e82125504f682a84ef3cfa19972fb6257a3d418d9263"
+    }
+  }
+}

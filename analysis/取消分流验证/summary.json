@@ -1,0 +1,133 @@
+{
+  "version": "CANCEL-ROUTE-003/003B",
+  "original_new24": {
+    "runs": 48,
+    "correct": 43,
+    "false_cancel": 0,
+    "review_calls": 32,
+    "online_calls": 80,
+    "unknown_usage_calls": 0,
+    "cost_estimate_usd_range": [
+      0.0037846649999999983,
+      0.005389278000000003
+    ],
+    "p50_ms": 1117.097,
+    "p95_ms": 1695.362,
+    "actions": {
+      "ask_object": 8,
+      "cancel": 6,
+      "confirm_cancel": 5,
+      "denied": 2,
+      "keep": 10,
+      "lookup_fact": 8,
+      "not_cancellable": 4,
+      "plan_tasks": 5
+    },
+    "failures": [
+      {
+        "id": "H16",
+        "repeat": 1,
+        "action": "confirm_cancel"
+      },
+      {
+        "id": "H17",
+        "repeat": 1,
+        "action": "confirm_cancel"
+      },
+      {
+        "id": "H19",
+        "repeat": 1,
+        "action": "ask_object"
+      },
+      {
+        "id": "H19",
+        "repeat": 2,
+        "action": "ask_object"
+      },
+      {
+        "id": "H16",
+        "repeat": 2,
+        "action": "confirm_cancel"
+      }
+    ]
+  },
+  "original_regression3": {
+    "runs": 6,
+    "correct": 4,
+    "false_cancel": 2,
+    "review_calls": 6,
+    "online_calls": 6,
+    "unknown_usage_calls": 0,
+    "cost_estimate_usd_range": [
+      0.00038795999999999997,
+      0.0007759199999999999
+    ],
+    "p50_ms": 660.903,
+    "p95_ms": 930.175,
+    "actions": {
+      "cancel": 2,
+      "confirm_cancel": 2,
+      "lookup_fact": 2
+    },
+    "failures": [
+      {
+        "id": "A05",
+        "repeat": 1,
+        "action": "cancel"
+      },
+      {
+        "id": "A05",
+        "repeat": 2,
+        "action": "cancel"
+      }
+    ]
+  },
+  "revised_new12": {
+    "runs": 24,
+    "correct": 24,
+    "false_cancel": 0,
+    "review_calls": 20,
+    "online_calls": 44,
+    "unknown_usage_calls": 0,
+    "cost_estimate_usd_range": [
+      0.0023105639999999998,
+      0.003529715999999999
+    ],
+    "p50_ms": 1303.658,
+    "p95_ms": 1545.944,
+    "actions": {
+      "ask_decision": 2,
+      "ask_object": 4,
+      "cancel": 2,
+      "keep": 4,
+      "lookup_fact": 4,
+      "plan_tasks": 8
+    },
+    "failures": []
+  },
+  "posthoc_replay": {
+    "runs": 54,
+    "correct_original_criteria": 51,
+    "false_cancel": 0,
+    "online_calls": 0,
+    "pending_compound_confirmation_not_original_auto_success": [
+      "H16",
+      "H17",
+      "H16"
+    ]
+  },
+  "mock_button_checks": 5,
+  "all_real_model_calls": 130,
+  "cost_not_account_bill": true,
+  "original_pass": false,
+  "revised_new12_success": true,
+  "limits": [
+    "人工合成同作者样本，不外推真实用户成功率",
+    "0.85仍为候选阈值，未正式校准",
+    "003B同时改策略与复核Prompt，无法分离贡献",
+    "两模型高置信同错仍可能绕过复核",
+    "政策查询、任务执行和按钮仅Mock，未接商城/MySQL",
+    "003B新增样本没有触发冲突确认，冲突路径以旧回复重放及Mock自检验证",
+    "复核比例来自边界样本，非线上比例，未对照DeepSeek单独方案的端到端费用速度"
+  ]
+}

@@ -6,6 +6,8 @@ import com.teachdemo.ecommerce.customer_service.AgentChatRequest;
 
 import com.teachdemo.ecommerce.customer_service.AgentResumeRequest;
 
+import java.util.Map;
+
 import org.springframework.stereotype.Service;
 
 import org.springframework.web.client.RestClient;
@@ -23,6 +25,15 @@ public class RestCustomerServiceAgentClient implements CustomerServiceAgentClien
     public JsonNode chat(AgentChatRequest request) {
         return customerServiceAgentRestClient.post()
             .uri("/chat")
+            .body(request)
+            .retrieve()
+            .body(JsonNode.class);
+    }
+
+    @Override
+    public JsonNode judgeCancellation(Map<String, Object> request) {
+        return customerServiceAgentRestClient.post()
+            .uri("/cancellation/judge")
             .body(request)
             .retrieve()
             .body(JsonNode.class);

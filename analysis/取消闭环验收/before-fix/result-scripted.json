@@ -1,0 +1,12 @@
+{
+  "passed": false,
+  "mode": "scripted",
+  "score_min": 0.9,
+  "checks": 12,
+  "failed": [
+    "页面：保留后可继续使用当前申请确认卡",
+    "验收执行中断"
+  ],
+  "model_calls": 6,
+  "error": "KeyError: 'token'"
+}

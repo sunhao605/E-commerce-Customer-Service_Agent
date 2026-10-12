@@ -1,0 +1,65 @@
+INFO:     Started server process [31031]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8013 (Press CTRL+C to quit)
+INFO:     127.0.0.1:57466 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57466 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57466 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57466 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57466 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57466 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57466 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57466 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57466 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57466 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57466 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57466 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57466 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57566 - "GET /sessions/m07-1791639482362-0/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57567 - "GET /sessions/m07-1791639482362-4/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57568 - "GET /sessions/m07-1791639482362-5/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57569 - "GET /sessions/m07-1791639482362-button/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57570 - "GET /sessions/m07-1791639482362-fresh/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57571 - "GET /sessions/m07-1791639482362-reason/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57572 - "GET /sessions/m07-1791639482362-waiting/trace HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [31031]
+INFO:     Started server process [32113]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8013 (Press CTRL+C to quit)
+INFO:     127.0.0.1:57798 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57798 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57798 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57798 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57798 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57798 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57798 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57798 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57798 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57798 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57798 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57798 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57798 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57798 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57798 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57798 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57798 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57798 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57798 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57913 - "GET /sessions/m07-1791639694415-0/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57914 - "GET /sessions/m07-1791639694415-10/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57915 - "GET /sessions/m07-1791639694415-5/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57916 - "GET /sessions/m07-1791639694415-button/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57917 - "GET /sessions/m07-1791639694415-fresh/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57918 - "GET /sessions/m07-1791639694415-question/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57919 - "GET /sessions/m07-1791639694415-reason/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57920 - "GET /sessions/m07-1791639694415-return/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57921 - "GET /sessions/m07-1791639694415-submitted/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57922 - "GET /sessions/m07-1791639694415-waiting/trace HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [32113]

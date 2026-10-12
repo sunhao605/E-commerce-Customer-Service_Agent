@@ -1,0 +1,41 @@
+{
+  "health": {
+    "agent": {
+      "status": "ok",
+      "lesson": "41"
+    },
+    "java": {
+      "status": "UP"
+    }
+  },
+  "java_cancel_execute": "unset(default off)",
+  "image": "sha256:2679c0a98a32939fbef8072b01d8b52a794b2f21d1d758589f7f5ad59dba7eb9",
+  "old_image": "sha256:686b8736231ec4c608251e44d0f97f21b9b086d0cfed2ccd39167b4ba0131bdd",
+  "python": {
+    "mode": "default",
+    "old_pid": 1980,
+    "new_pid": 2378,
+    "health": {
+      "status": "ok",
+      "lesson": "41"
+    },
+    "cancel_execute": "0",
+    "score_min": "0.9"
+  },
+  "own_order_count": 13,
+  "page_errors": [],
+  "checks": [
+    "8000/8081健康",
+    "5174实际登录",
+    "已有演示订单可读取",
+    "双端执行关闭",
+    "新镜像和旧镜像留存"
+  ],
+  "online_model_calls": 0,
+  "real_model_test": "blocked_before_execution_by_auto_review",
+  "source": {
+    "backend/agent/cancellation.py": "67afd5959052e1746d6c10547ed0ce8d25577e16e28d2b2d63f497d19f31d661",
+    "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/CustomerServiceGatewayService.java": "c35b3146a3b9020bc609a989f970cf76db576c103b89f2974763059d813ea5ef",
+    "ecommerce-backend/frontend/src/shop/App.tsx": "5eed9e11f8bcb6a892e272e2f88afacc6387dd21fda776bc7bf39677c3d80509"
+  }
+}

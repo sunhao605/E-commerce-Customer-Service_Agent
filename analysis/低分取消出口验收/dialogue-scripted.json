@@ -1,0 +1,1184 @@
+[
+  {
+    "path": "/api/auth/login",
+    "request": {
+      "username": "zhangsan",
+      "password": "123456"
+    },
+    "status": 200,
+    "response": {
+      "success": true,
+      "code": "OK",
+      "message": "success",
+      "data": {
+        "accountId": 1,
+        "username": "zhangsan",
+        "role": "USER",
+        "userId": "U1001",
+        "nickname": "张三",
+        "mobile": "13800001001",
+        "memberLevel": "gold",
+        "redirectPath": "/"
+      }
+    }
+  },
+  {
+    "browser": true,
+    "message": "帮我退款。",
+    "response": {
+      "answer": "你要退款哪一个订单？请选择订单号，或直接补充订单号。 当前账号下可选订单：ORD9801（隔离露营椅）；ORD9802（隔离露营椅）。",
+      "sessionId": "cs-f6e021c2-2cc6-47a6-803b-456eb749ce0e",
+      "confirmRequired": false,
+      "actions": [],
+      "fallback": false
+    }
+  },
+  {
+    "browser": true,
+    "message": "我想了想，还是不退了",
+    "response": {
+      "answer": "这句还不够确定，当前办理仍保留。请在下方选择保留办理，或取消这次尚未提交的办理。",
+      "sessionId": "cs-f6e021c2-2cc6-47a6-803b-456eb749ce0e",
+      "confirmRequired": true,
+      "pendingAction": "REFUND_ORDER_REQUIRED",
+      "confirmationTitle": "请选择是否保留办理",
+      "confirmationSummary": "结束这次未提交的退款办理。当前还没有订单号。",
+      "resumeToken": "82f78606-4b7d-4450-9f8d-a95370072434",
+      "actions": [
+        {
+          "code": "KEEP",
+          "label": "保留当前办理"
+        },
+        {
+          "code": "CANCEL_DRAFT",
+          "label": "结束这次未提交的退款办理"
+        }
+      ],
+      "fallback": false
+    }
+  },
+  {
+    "path": "/api/customer-service/resume",
+    "request": {
+      "sessionId": "cs-f6e021c2-2cc6-47a6-803b-456eb749ce0e",
+      "resumeToken": "82f78606-4b7d-4450-9f8d-a95370072434",
+      "relatedOrderNo": null,
+      "decision": "CONFIRM_SUBMIT"
+    },
+    "status": 400,
+    "response": {
+      "success": false,
+      "code": "BAD_REQUEST",
+      "message": "这张卡片不能提交申请"
+    }
+  },
+  {
+    "browser": true,
+    "click": "结束这次未提交的退款办理",
+    "response": {
+      "answer": "本次售后申请已取消，未提交。",
+      "sessionId": "cs-f6e021c2-2cc6-47a6-803b-456eb749ce0e",
+      "confirmRequired": false,
+      "pendingAction": "CANCELLED",
+      "actions": [],
+      "fallback": false
+    }
+  },
+  {
+    "path": "/api/customer-service/resume",
+    "request": {
+      "sessionId": "cs-f6e021c2-2cc6-47a6-803b-456eb749ce0e",
+      "resumeToken": "82f78606-4b7d-4450-9f8d-a95370072434",
+      "relatedOrderNo": null,
+      "decision": "CANCEL_DRAFT"
+    },
+    "status": 409,
+    "response": {
+      "success": false,
+      "code": "CONFLICT",
+      "message": "本次确认已处理，旧卡不可用"
+    }
+  },
+  {
+    "browser": true,
+    "message": "第一笔。",
+    "response": {
+      "answer": "你好，我是荒野户外的客服 Agent。你可以把订单号、物流问题、活动优惠或售后诉求发给我，我会优先根据荒野户外的订单事实和公开规则回答。",
+      "sessionId": "cs-f6e021c2-2cc6-47a6-803b-456eb749ce0e",
+      "confirmRequired": false,
+      "actions": [],
+      "fallback": false
+    }
+  },
+  {
+    "browser": true,
+    "message": "帮我退款。",
+    "response": {
+      "answer": "你要退款哪一个订单？请选择订单号，或直接补充订单号。 当前账号下可选订单：ORD9801（隔离露营椅）；ORD9802（隔离露营椅）。",
+      "sessionId": "cs-45333e5d-7502-4bd3-8544-72d4389dda2e",
+      "confirmRequired": false,
+      "actions": [],
+      "fallback": false
+    }
+  },
+  {
+    "browser": true,
+    "message": "我想了想，还是不退了",
+    "response": {
+      "answer": "这句还不够确定，当前办理仍保留。请在下方选择保留办理，或取消这次尚未提交的办理。",
+      "sessionId": "cs-45333e5d-7502-4bd3-8544-72d4389dda2e",
+      "confirmRequired": true,
+      "pendingAction": "REFUND_ORDER_REQUIRED",
+      "confirmationTitle": "请选择是否保留办理",
+      "confirmationSummary": "结束这次未提交的退款办理。当前还没有订单号。",
+      "resumeToken": "bc22bf16-8d1d-4188-a634-81391b8e8cc0",
+      "actions": [
+        {
+          "code": "KEEP",
+          "label": "保留当前办理"
+        },
+        {
+          "code": "CANCEL_DRAFT",
+          "label": "结束这次未提交的退款办理"
+        }
+      ],
+      "fallback": false
+    }
+  },
+  {
+    "path": "/api/customer-service/resume",
+    "request": {
+      "sessionId": "cs-45333e5d-7502-4bd3-8544-72d4389dda2e",
+      "resumeToken": "bc22bf16-8d1d-4188-a634-81391b8e8cc0",
+      "relatedOrderNo": null,
+      "decision": "CONFIRM_SUBMIT"
+    },
+    "status": 400,
+    "response": {
+      "success": false,
+      "code": "BAD_REQUEST",
+      "message": "这张卡片不能提交申请"
+    }
+  },
+  {
+    "browser": true,
+    "click": "保留当前办理",
+    "response": {
+      "answer": "继续保留这次办理。",
+      "sessionId": "cs-45333e5d-7502-4bd3-8544-72d4389dda2e",
+      "confirmRequired": false,
+      "pendingAction": "KEEP",
+      "actions": [],
+      "fallback": false
+    }
+  },
+  {
+    "path": "/api/customer-service/resume",
+    "request": {
+      "sessionId": "cs-45333e5d-7502-4bd3-8544-72d4389dda2e",
+      "resumeToken": "bc22bf16-8d1d-4188-a634-81391b8e8cc0",
+      "relatedOrderNo": null,
+      "decision": "KEEP"
+    },
+    "status": 403,
+    "response": {
+      "success": false,
+      "code": "FORBIDDEN",
+      "message": "恢复凭证不匹配"
+    }
+  },
+  {
+    "browser": true,
+    "message": "第一笔。",
+    "response": {
+      "answer": "订单 ORD9801 的整单实付金额为 200.00 元。请补充退款原因，例如“原因：买错了”。本次尚未提交。",
+      "sessionId": "cs-45333e5d-7502-4bd3-8544-72d4389dda2e",
+      "confirmRequired": false,
+      "pendingAction": "REFUND_REASON_REQUIRED",
+      "relatedOrderNo": "ORD9801",
+      "actions": [],
+      "fallback": false
+    }
+  },
+  {
+    "browser": true,
+    "message": "帮我退款。",
+    "response": {
+      "answer": "你要退款哪一个订单？请选择订单号，或直接补充订单号。 当前账号下可选订单：ORD9801（隔离露营椅）；ORD9802（隔离露营椅）。",
+      "sessionId": "cs-6bce1fc6-4f41-4491-934f-a15fd7d50bc3",
+      "confirmRequired": false,
+      "actions": [],
+      "fallback": false
+    }
+  },
+  {
+    "browser": true,
+    "message": "我想了想，还是不退了",
+    "response": {
+      "answer": "这句还不够确定，当前办理仍保留。请在下方选择保留办理，或取消这次尚未提交的办理。",
+      "sessionId": "cs-6bce1fc6-4f41-4491-934f-a15fd7d50bc3",
+      "confirmRequired": true,
+      "pendingAction": "REFUND_ORDER_REQUIRED",
+      "confirmationTitle": "请选择是否保留办理",
+      "confirmationSummary": "结束这次未提交的退款办理。当前还没有订单号。",
+      "resumeToken": "0cf06344-f2f9-43be-91fc-dd85b6d1b450",
+      "actions": [
+        {
+          "code": "KEEP",
+          "label": "保留当前办理"
+        },
+        {
+          "code": "CANCEL_DRAFT",
+          "label": "结束这次未提交的退款办理"
+        }
+      ],
+      "fallback": false
+    }
+  },
+  {
+    "path": "/api/customer-service/resume",
+    "request": {
+      "sessionId": "cs-6bce1fc6-4f41-4491-934f-a15fd7d50bc3",
+      "resumeToken": "0cf06344-f2f9-43be-91fc-dd85b6d1b450",
+      "relatedOrderNo": null,
+      "decision": "CONFIRM_SUBMIT"
+    },
+    "status": 400,
+    "response": {
+      "success": false,
+      "code": "BAD_REQUEST",
+      "message": "这张卡片不能提交申请"
+    }
+  },
+  {
+    "browser": true,
+    "message": "ORD9801",
+    "response": {
+      "answer": "订单 ORD9801 的整单实付金额为 200.00 元。请补充退款原因，例如“原因：买错了”。本次尚未提交。",
+      "sessionId": "cs-6bce1fc6-4f41-4491-934f-a15fd7d50bc3",
+      "confirmRequired": false,
+      "pendingAction": "REFUND_REASON_REQUIRED",
+      "relatedOrderNo": "ORD9801",
+      "actions": [],
+      "fallback": false
+    }
+  },
+  {
+    "path": "/api/customer-service/resume",
+    "request": {
+      "sessionId": "cs-6bce1fc6-4f41-4491-934f-a15fd7d50bc3",
+      "resumeToken": "0cf06344-f2f9-43be-91fc-dd85b6d1b450",
+      "relatedOrderNo": null,
+      "decision": "CANCEL_DRAFT"
+    },
+    "status": 403,
+    "response": {
+      "success": false,
+      "code": "FORBIDDEN",
+      "message": "恢复凭证不匹配"
+    }
+  },
+  {
+    "browser": true,
+    "message": "ORD9801 我要退款。",
+    "response": {
+      "answer": "订单 ORD9801 的整单实付金额为 200.00 元。请补充退款原因，例如“原因：买错了”。本次尚未提交。",
+      "sessionId": "cs-83acbe86-12a9-473f-8521-f9467b58ec3e",
+      "confirmRequired": false,
+      "pendingAction": "REFUND_REASON_REQUIRED",
+      "relatedOrderNo": "ORD9801",
+      "actions": [],
+      "fallback": false
+    }
+  },
+  {
+    "browser": true,
+    "message": "我想了想，还是不退了",
+    "response": {
+      "answer": "这句还不够确定，当前办理仍保留。请在下方选择保留办理，或取消这次尚未提交的办理。",
+      "sessionId": "cs-83acbe86-12a9-473f-8521-f9467b58ec3e",
+      "confirmRequired": true,
+      "pendingAction": "REFUND_REASON_REQUIRED",
+      "confirmationTitle": "请选择是否保留办理",
+      "confirmationSummary": "订单：ORD9801；商品：隔离露营椅 x1；售后类型：退款。请选择保留当前办理，或取消这次尚未提交的售后申请。",
+      "relatedOrderNo": "ORD9801",
+      "resumeToken": "e37949a0-e6be-4f24-a76b-bc81324e95eb",
+      "actions": [
+        {
+          "code": "KEEP",
+          "label": "保留当前办理"
+        },
+        {
+          "code": "CANCEL_DRAFT",
+          "label": "取消这次尚未提交的售后申请"
+        }
+      ],
+      "fallback": false
+    }
+  },
+  {
+    "path": "/api/customer-service/resume",
+    "request": {
+      "sessionId": "cs-83acbe86-12a9-473f-8521-f9467b58ec3e",
+      "resumeToken": "e37949a0-e6be-4f24-a76b-bc81324e95eb",
+      "relatedOrderNo": "ORD9801",
+      "decision": "CONFIRM_SUBMIT"
+    },
+    "status": 400,
+    "response": {
+      "success": false,
+      "code": "BAD_REQUEST",
+      "message": "这张卡片不能提交申请"
+    }
+  },
+  {
+    "browser": true,
+    "click": "取消这次尚未提交的售后申请",
+    "response": {
+      "answer": "本次售后申请已取消，未提交。",
+      "sessionId": "cs-83acbe86-12a9-473f-8521-f9467b58ec3e",
+      "confirmRequired": false,
+      "pendingAction": "CANCELLED",
+      "actions": [],
+      "fallback": false
+    }
+  },
+  {
+    "path": "/api/customer-service/resume",
+    "request": {
+      "sessionId": "cs-83acbe86-12a9-473f-8521-f9467b58ec3e",
+      "resumeToken": "e37949a0-e6be-4f24-a76b-bc81324e95eb",
+      "relatedOrderNo": "ORD9801",
+      "decision": "CANCEL_DRAFT"
+    },
+    "status": 409,
+    "response": {
+      "success": false,
+      "code": "CONFLICT",
+      "message": "本次确认已处理，旧卡不可用"
+    }
+  },
+  {
+    "browser": true,
+    "message": "第一笔。",
+    "response": {
+      "answer": "你好，我是荒野户外的客服 Agent。你可以把订单号、物流问题、活动优惠或售后诉求发给我，我会优先根据荒野户外的订单事实和公开规则回答。",
+      "sessionId": "cs-83acbe86-12a9-473f-8521-f9467b58ec3e",
+      "confirmRequired": false,
+      "actions": [],
+      "fallback": false
+    }
+  },
+  {
+    "browser": true,
+    "message": "ORD9801 我要退款。",
+    "response": {
+      "answer": "订单 ORD9801 的整单实付金额为 200.00 元。请补充退款原因，例如“原因：买错了”。本次尚未提交。",
+      "sessionId": "cs-32b289c7-a807-424a-ba5f-ef9659e70277",
+      "confirmRequired": false,
+      "pendingAction": "REFUND_REASON_REQUIRED",
+      "relatedOrderNo": "ORD9801",
+      "actions": [],
+      "fallback": false
+    }
+  },
+  {
+    "browser": true,
+    "message": "我想了想，还是不退了",
+    "response": {
+      "answer": "这句还不够确定，当前办理仍保留。请在下方选择保留办理，或取消这次尚未提交的办理。",
+      "sessionId": "cs-32b289c7-a807-424a-ba5f-ef9659e70277",
+      "confirmRequired": true,
+      "pendingAction": "REFUND_REASON_REQUIRED",
+      "confirmationTitle": "请选择是否保留办理",
+      "confirmationSummary": "订单：ORD9801；商品：隔离露营椅 x1；售后类型：退款。请选择保留当前办理，或取消这次尚未提交的售后申请。",
+      "relatedOrderNo": "ORD9801",
+      "resumeToken": "fa1d7641-d8f5-424d-aa60-5ca529ceffc5",
+      "actions": [
+        {
+          "code": "KEEP",
+          "label": "保留当前办理"
+        },
+        {
+          "code": "CANCEL_DRAFT",
+          "label": "取消这次尚未提交的售后申请"
+        }
+      ],
+      "fallback": false
+    }
+  },
+  {
+    "path": "/api/customer-service/resume",
+    "request": {
+      "sessionId": "cs-32b289c7-a807-424a-ba5f-ef9659e70277",
+      "resumeToken": "fa1d7641-d8f5-424d-aa60-5ca529ceffc5",
+      "relatedOrderNo": "ORD9801",
+      "decision": "CONFIRM_SUBMIT"
+    },
+    "status": 400,
+    "response": {
+      "success": false,
+      "code": "BAD_REQUEST",
+      "message": "这张卡片不能提交申请"
+    }
+  },
+  {
+    "browser": true,
+    "click": "保留当前办理",
+    "response": {
+      "answer": "继续保留这次办理。",
+      "sessionId": "cs-32b289c7-a807-424a-ba5f-ef9659e70277",
+      "confirmRequired": false,
+      "pendingAction": "KEEP",
+      "relatedOrderNo": "ORD9801",
+      "actions": [],
+      "fallback": false
+    }
+  },
+  {
+    "path": "/api/customer-service/resume",
+    "request": {
+      "sessionId": "cs-32b289c7-a807-424a-ba5f-ef9659e70277",
+      "resumeToken": "fa1d7641-d8f5-424d-aa60-5ca529ceffc5",
+      "relatedOrderNo": "ORD9801",
+      "decision": "KEEP"
+    },
+    "status": 403,
+    "response": {
+      "success": false,
+      "code": "FORBIDDEN",
+      "message": "恢复凭证不匹配"
+    }
+  },
+  {
+    "browser": true,
+    "message": "原因：买错了。",
+    "response": {
+      "answer": "本次仅准备申请，尚未提交。提交后等待管理员审核，不代表退款成功。",
+      "sessionId": "cs-32b289c7-a807-424a-ba5f-ef9659e70277",
+      "confirmRequired": true,
+      "pendingAction": "CONFIRM_SUBMIT",
+      "confirmationTitle": "确认提交退款申请",
+      "confirmationSummary": "订单：ORD9801；商品：隔离露营椅 x1；范围：整单退款；实付金额：200.00 元；原因：买错了。；状态：等待本人确认，尚未提交。确认后等待审核，提交不代表退款成功。",
+      "relatedOrderNo": "ORD9801",
+      "resumeToken": "a0389950-d2f0-4ec4-b9ad-973c374a1cfa",
+      "actions": [
+        {
+          "code": "CONFIRM_SUBMIT",
+          "label": "确认提交申请"
+        },
+        {
+          "code": "CANCEL_SUBMIT",
+          "label": "取消本次申请"
+        }
+      ],
+      "fallback": false
+    }
+  },
+  {
+    "browser": true,
+    "message": "ORD9801 我要退款。",
+    "response": {
+      "answer": "订单 ORD9801 的整单实付金额为 200.00 元。请补充退款原因，例如“原因：买错了”。本次尚未提交。",
+      "sessionId": "cs-f556fd39-7e13-465f-af98-4f84d292b62d",
+      "confirmRequired": false,
+      "pendingAction": "REFUND_REASON_REQUIRED",
+      "relatedOrderNo": "ORD9801",
+      "actions": [],
+      "fallback": false
+    }
+  },
+  {
+    "browser": true,
+    "message": "我想了想，还是不退了",
+    "response": {
+      "answer": "这句还不够确定，当前办理仍保留。请在下方选择保留办理，或取消这次尚未提交的办理。",
+      "sessionId": "cs-f556fd39-7e13-465f-af98-4f84d292b62d",
+      "confirmRequired": true,
+      "pendingAction": "REFUND_REASON_REQUIRED",
+      "confirmationTitle": "请选择是否保留办理",
+      "confirmationSummary": "订单：ORD9801；商品：隔离露营椅 x1；售后类型：退款。请选择保留当前办理，或取消这次尚未提交的售后申请。",
+      "relatedOrderNo": "ORD9801",
+      "resumeToken": "befe8e2b-87a0-499e-8fff-387331ac38be",
+      "actions": [
+        {
+          "code": "KEEP",
+          "label": "保留当前办理"
+        },
+        {
+          "code": "CANCEL_DRAFT",
+          "label": "取消这次尚未提交的售后申请"
+        }
+      ],
+      "fallback": false
+    }
+  },
+  {
+    "path": "/api/customer-service/resume",
+    "request": {
+      "sessionId": "cs-f556fd39-7e13-465f-af98-4f84d292b62d",
+      "resumeToken": "befe8e2b-87a0-499e-8fff-387331ac38be",
+      "relatedOrderNo": "ORD9801",
+      "decision": "CONFIRM_SUBMIT"
+    },
+    "status": 400,
+    "response": {
+      "success": false,
+      "code": "BAD_REQUEST",
+      "message": "这张卡片不能提交申请"
+    }
+  },
+  {
+    "browser": true,
+    "message": "原因：重复购买",
+    "response": {
+      "answer": "本次仅准备申请，尚未提交。提交后等待管理员审核，不代表退款成功。",
+      "sessionId": "cs-f556fd39-7e13-465f-af98-4f84d292b62d",
+      "confirmRequired": true,
+      "pendingAction": "CONFIRM_SUBMIT",
+      "confirmationTitle": "确认提交退款申请",
+      "confirmationSummary": "订单：ORD9801；商品：隔离露营椅 x1；范围：整单退款；实付金额：200.00 元；原因：重复购买；状态：等待本人确认，尚未提交。确认后等待审核，提交不代表退款成功。",
+      "relatedOrderNo": "ORD9801",
+      "resumeToken": "9cf95a99-6391-434e-a2b7-da999143c223",
+      "actions": [
+        {
+          "code": "CONFIRM_SUBMIT",
+          "label": "确认提交申请"
+        },
+        {
+          "code": "CANCEL_SUBMIT",
+          "label": "取消本次申请"
+        }
+      ],
+      "fallback": false
+    }
+  },
+  {
+    "path": "/api/customer-service/resume",
+    "request": {
+      "sessionId": "cs-f556fd39-7e13-465f-af98-4f84d292b62d",
+      "resumeToken": "befe8e2b-87a0-499e-8fff-387331ac38be",
+      "relatedOrderNo": "ORD9801",
+      "decision": "CANCEL_DRAFT"
+    },
+    "status": 403,
+    "response": {
+      "success": false,
+      "code": "FORBIDDEN",
+      "message": "恢复凭证不匹配"
+    }
+  },
+  {
+    "browser": true,
+    "message": "ORD9801 我要退款，原因：买错了。",
+    "response": {
+      "answer": "请核对退款申请。确认后只登记为待审核，是否通过由管理员独立决定。",
+      "sessionId": "cs-bea36f8c-1f96-4af8-8b0e-a87b03ec46a8",
+      "confirmRequired": true,
+      "pendingAction": "CONFIRM_SUBMIT",
+      "confirmationTitle": "确认提交退款申请",
+      "confirmationSummary": "订单：ORD9801；商品：隔离露营椅 x1；范围：整单退款；实付金额：200.00 元；原因：买错了。；状态：等待本人确认，尚未提交。确认后等待审核，提交不代表退款成功。",
+      "relatedOrderNo": "ORD9801",
+      "resumeToken": "8851059a-28fe-422b-ae76-35548f29b0e5",
+      "actions": [
+        {
+          "code": "CONFIRM_SUBMIT",
+          "label": "确认提交申请"
+        },
+        {
+          "code": "CANCEL_SUBMIT",
+          "label": "取消本次申请"
+        }
+      ],
+      "fallback": false
+    }
+  },
+  {
+    "browser": true,
+    "message": "我想了想，还是不退了",
+    "response": {
+      "answer": "这句还不够确定，当前办理仍保留。要取消请点「取消本次申请」，或再说清楚一次。",
+      "sessionId": "cs-bea36f8c-1f96-4af8-8b0e-a87b03ec46a8",
+      "confirmRequired": true,
+      "pendingAction": "CONFIRM_SUBMIT",
+      "confirmationTitle": "确认提交退款申请",
+      "confirmationSummary": "订单：ORD9801；商品：隔离露营椅 x1；范围：整单退款；实付金额：200.00 元；原因：买错了。；状态：等待本人确认，尚未提交。确认后等待审核，提交不代表退款成功。",
+      "relatedOrderNo": "ORD9801",
+      "resumeToken": "8851059a-28fe-422b-ae76-35548f29b0e5",
+      "actions": [
+        {
+          "code": "CONFIRM_SUBMIT",
+          "label": "确认提交申请"
+        },
+        {
+          "code": "CANCEL_SUBMIT",
+          "label": "取消本次申请"
+        }
+      ],
+      "fallback": false
+    }
+  },
+  {
+    "browser": true,
+    "click": "取消本次申请",
+    "status": 200,
+    "response": {
+      "answer": "本次售后申请已取消，未提交。",
+      "sessionId": "cs-bea36f8c-1f96-4af8-8b0e-a87b03ec46a8",
+      "confirmRequired": false,
+      "pendingAction": "CANCELLED",
+      "actions": [],
+      "fallback": false
+    }
+  },
+  {
+    "path": "/api/customer-service/resume",
+    "request": {
+      "sessionId": "cs-bea36f8c-1f96-4af8-8b0e-a87b03ec46a8",
+      "resumeToken": "8851059a-28fe-422b-ae76-35548f29b0e5",
+      "relatedOrderNo": "ORD9801",
+      "decision": "CONFIRM_SUBMIT"
+    },
+    "status": 409,
+    "response": {
+      "success": false,
+      "code": "CONFLICT",
+      "message": "本次申请已取消，旧卡不可用"
+    }
+  },
+  {
+    "browser": true,
+    "message": "第一笔。",
+    "response": {
+      "answer": "你好，我是荒野户外的客服 Agent。你可以把订单号、物流问题、活动优惠或售后诉求发给我，我会优先根据荒野户外的订单事实和公开规则回答。",
+      "sessionId": "cs-bea36f8c-1f96-4af8-8b0e-a87b03ec46a8",
+      "confirmRequired": false,
+      "actions": [],
+      "fallback": false
+    }
+  },
+  {
+    "browser": true,
+    "message": "ORD9801 我要退款，原因：买错了。",
+    "response": {
+      "answer": "请核对退款申请。确认后只登记为待审核，是否通过由管理员独立决定。",
+      "sessionId": "cs-b8c2ced8-c9e9-437f-abf7-764865ef2e6e",
+      "confirmRequired": true,
+      "pendingAction": "CONFIRM_SUBMIT",
+      "confirmationTitle": "确认提交退款申请",
+      "confirmationSummary": "订单：ORD9801；商品：隔离露营椅 x1；范围：整单退款；实付金额：200.00 元；原因：买错了。；状态：等待本人确认，尚未提交。确认后等待审核，提交不代表退款成功。",
+      "relatedOrderNo": "ORD9801",
+      "resumeToken": "9356ab4c-01de-4472-a733-a2eae1b43f96",
+      "actions": [
+        {
+          "code": "CONFIRM_SUBMIT",
+          "label": "确认提交申请"
+        },
+        {
+          "code": "CANCEL_SUBMIT",
+          "label": "取消本次申请"
+        }
+      ],
+      "fallback": false
+    }
+  },
+  {
+    "browser": true,
+    "message": "我有点想取消这单退款",
+    "response": {
+      "answer": "请选择保留当前办理，或取消这次尚未提交的售后申请。",
+      "sessionId": "cs-b8c2ced8-c9e9-437f-abf7-764865ef2e6e",
+      "confirmRequired": true,
+      "pendingAction": "CONFIRM_SUBMIT",
+      "confirmationTitle": "请选择是否保留办理",
+      "confirmationSummary": "订单：ORD9801；商品：隔离露营椅 x1；售后类型：退款。请选择保留当前办理，或取消这次尚未提交的售后申请。",
+      "relatedOrderNo": "ORD9801",
+      "resumeToken": "5f560c69-0ec7-43e6-b9df-033c059545a7",
+      "actions": [
+        {
+          "code": "KEEP",
+          "label": "保留当前办理"
+        },
+        {
+          "code": "CANCEL_DRAFT",
+          "label": "取消这次尚未提交的售后申请"
+        }
+      ],
+      "fallback": false
+    }
+  },
+  {
+    "path": "/api/customer-service/resume",
+    "request": {
+      "sessionId": "cs-b8c2ced8-c9e9-437f-abf7-764865ef2e6e",
+      "resumeToken": "5f560c69-0ec7-43e6-b9df-033c059545a7",
+      "relatedOrderNo": "ORD9801",
+      "decision": "CONFIRM_SUBMIT"
+    },
+    "status": 400,
+    "response": {
+      "success": false,
+      "code": "BAD_REQUEST",
+      "message": "这张卡片不能提交申请"
+    }
+  },
+  {
+    "browser": true,
+    "click": "保留当前办理",
+    "status": 200,
+    "response": {
+      "answer": "继续保留这次办理，尚未提交。",
+      "sessionId": "cs-b8c2ced8-c9e9-437f-abf7-764865ef2e6e",
+      "confirmRequired": true,
+      "pendingAction": "CONFIRM_SUBMIT",
+      "confirmationTitle": "确认提交退款申请",
+      "confirmationSummary": "订单：ORD9801；商品：隔离露营椅 x1；范围：整单退款；实付金额：200.00 元；原因：买错了。；状态：等待本人确认，尚未提交。确认后等待审核，提交不代表退款成功。",
+      "relatedOrderNo": "ORD9801",
+      "resumeToken": "ca476bb1-e69f-4c23-a676-815023ece867",
+      "actions": [
+        {
+          "code": "CONFIRM_SUBMIT",
+          "label": "确认提交申请"
+        },
+        {
+          "code": "CANCEL_SUBMIT",
+          "label": "取消本次申请"
+        }
+      ],
+      "fallback": false
+    }
+  },
+  {
+    "path": "/api/customer-service/resume",
+    "request": {
+      "sessionId": "cs-b8c2ced8-c9e9-437f-abf7-764865ef2e6e",
+      "resumeToken": "5f560c69-0ec7-43e6-b9df-033c059545a7",
+      "relatedOrderNo": "ORD9801",
+      "decision": "KEEP"
+    },
+    "status": 403,
+    "response": {
+      "success": false,
+      "code": "FORBIDDEN",
+      "message": "恢复凭证不匹配"
+    }
+  },
+  {
+    "browser": true,
+    "message": "ORD9801 我要退款，原因：买错了。",
+    "response": {
+      "answer": "请核对退款申请。确认后只登记为待审核，是否通过由管理员独立决定。",
+      "sessionId": "cs-8c71864c-d3a9-4ad2-82db-6767f87ce2c8",
+      "confirmRequired": true,
+      "pendingAction": "CONFIRM_SUBMIT",
+      "confirmationTitle": "确认提交退款申请",
+      "confirmationSummary": "订单：ORD9801；商品：隔离露营椅 x1；范围：整单退款；实付金额：200.00 元；原因：买错了。；状态：等待本人确认，尚未提交。确认后等待审核，提交不代表退款成功。",
+      "relatedOrderNo": "ORD9801",
+      "resumeToken": "3fed8fbd-0431-4e41-b91a-911020bc6cdb",
+      "actions": [
+        {
+          "code": "CONFIRM_SUBMIT",
+          "label": "确认提交申请"
+        },
+        {
+          "code": "CANCEL_SUBMIT",
+          "label": "取消本次申请"
+        }
+      ],
+      "fallback": false
+    }
+  },
+  {
+    "browser": true,
+    "message": "我有点想取消这单退款",
+    "response": {
+      "answer": "请选择保留当前办理，或取消这次尚未提交的售后申请。",
+      "sessionId": "cs-8c71864c-d3a9-4ad2-82db-6767f87ce2c8",
+      "confirmRequired": true,
+      "pendingAction": "CONFIRM_SUBMIT",
+      "confirmationTitle": "请选择是否保留办理",
+      "confirmationSummary": "订单：ORD9801；商品：隔离露营椅 x1；售后类型：退款。请选择保留当前办理，或取消这次尚未提交的售后申请。",
+      "relatedOrderNo": "ORD9801",
+      "resumeToken": "db558961-8132-4a2e-861e-cd1bfa50bcee",
+      "actions": [
+        {
+          "code": "KEEP",
+          "label": "保留当前办理"
+        },
+        {
+          "code": "CANCEL_DRAFT",
+          "label": "取消这次尚未提交的售后申请"
+        }
+      ],
+      "fallback": false
+    }
+  },
+  {
+    "browser": true,
+    "click": "取消这次尚未提交的售后申请",
+    "status": 200,
+    "response": {
+      "answer": "本次售后申请已取消，未提交。",
+      "sessionId": "cs-8c71864c-d3a9-4ad2-82db-6767f87ce2c8",
+      "confirmRequired": false,
+      "pendingAction": "CANCELLED",
+      "actions": [],
+      "fallback": false
+    }
+  },
+  {
+    "path": "/api/customer-service/resume",
+    "request": {
+      "sessionId": "cs-8c71864c-d3a9-4ad2-82db-6767f87ce2c8",
+      "resumeToken": "db558961-8132-4a2e-861e-cd1bfa50bcee",
+      "relatedOrderNo": "ORD9801",
+      "decision": "CANCEL_DRAFT"
+    },
+    "status": 409,
+    "response": {
+      "success": false,
+      "code": "CONFLICT",
+      "message": "本次确认已处理，旧卡不可用"
+    }
+  },
+  {
+    "path": "/api/customer-service/resume",
+    "request": {
+      "sessionId": "cs-8c71864c-d3a9-4ad2-82db-6767f87ce2c8",
+      "resumeToken": "3fed8fbd-0431-4e41-b91a-911020bc6cdb",
+      "relatedOrderNo": "ORD9801",
+      "decision": "CONFIRM_SUBMIT"
+    },
+    "status": 409,
+    "response": {
+      "success": false,
+      "code": "CONFLICT",
+      "message": "本次申请已取消，旧卡不可用"
+    }
+  },
+  {
+    "browser": true,
+    "message": "ORD9801 我要退款，原因：买错了。",
+    "response": {
+      "answer": "请核对退款申请。确认后只登记为待审核，是否通过由管理员独立决定。",
+      "sessionId": "cs-25a1f845-12c3-4c9b-884f-da1261430eeb",
+      "confirmRequired": true,
+      "pendingAction": "CONFIRM_SUBMIT",
+      "confirmationTitle": "确认提交退款申请",
+      "confirmationSummary": "订单：ORD9801；商品：隔离露营椅 x1；范围：整单退款；实付金额：200.00 元；原因：买错了。；状态：等待本人确认，尚未提交。确认后等待审核，提交不代表退款成功。",
+      "relatedOrderNo": "ORD9801",
+      "resumeToken": "29114178-704e-4f00-aa5d-cf79a6c50a54",
+      "actions": [
+        {
+          "code": "CONFIRM_SUBMIT",
+          "label": "确认提交申请"
+        },
+        {
+          "code": "CANCEL_SUBMIT",
+          "label": "取消本次申请"
+        }
+      ],
+      "fallback": false
+    }
+  },
+  {
+    "browser": true,
+    "message": "我有点想取消这单退款",
+    "response": {
+      "answer": "请选择保留当前办理，或取消这次尚未提交的售后申请。",
+      "sessionId": "cs-25a1f845-12c3-4c9b-884f-da1261430eeb",
+      "confirmRequired": true,
+      "pendingAction": "CONFIRM_SUBMIT",
+      "confirmationTitle": "请选择是否保留办理",
+      "confirmationSummary": "订单：ORD9801；商品：隔离露营椅 x1；售后类型：退款。请选择保留当前办理，或取消这次尚未提交的售后申请。",
+      "relatedOrderNo": "ORD9801",
+      "resumeToken": "6648bb20-db0b-4c1e-ad43-fefb33d3b0b2",
+      "actions": [
+        {
+          "code": "KEEP",
+          "label": "保留当前办理"
+        },
+        {
+          "code": "CANCEL_DRAFT",
+          "label": "取消这次尚未提交的售后申请"
+        }
+      ],
+      "fallback": false
+    }
+  },
+  {
+    "browser": true,
+    "message": "原因：重复购买",
+    "response": {
+      "answer": "本次仅准备申请，尚未提交。提交后等待管理员审核，不代表退款成功。",
+      "sessionId": "cs-25a1f845-12c3-4c9b-884f-da1261430eeb",
+      "confirmRequired": true,
+      "pendingAction": "CONFIRM_SUBMIT",
+      "confirmationTitle": "确认提交退款申请",
+      "confirmationSummary": "订单：ORD9801；商品：隔离露营椅 x1；范围：整单退款；实付金额：200.00 元；原因：重复购买；状态：等待本人确认，尚未提交。确认后等待审核，提交不代表退款成功。",
+      "relatedOrderNo": "ORD9801",
+      "resumeToken": "cc3babed-d437-4fa5-9285-4b735faad595",
+      "actions": [
+        {
+          "code": "CONFIRM_SUBMIT",
+          "label": "确认提交申请"
+        },
+        {
+          "code": "CANCEL_SUBMIT",
+          "label": "取消本次申请"
+        }
+      ],
+      "fallback": false
+    }
+  },
+  {
+    "path": "/api/customer-service/resume",
+    "request": {
+      "sessionId": "cs-25a1f845-12c3-4c9b-884f-da1261430eeb",
+      "resumeToken": "6648bb20-db0b-4c1e-ad43-fefb33d3b0b2",
+      "relatedOrderNo": "ORD9801",
+      "decision": "CANCEL_DRAFT"
+    },
+    "status": 403,
+    "response": {
+      "success": false,
+      "code": "FORBIDDEN",
+      "message": "恢复凭证不匹配"
+    }
+  },
+  {
+    "browser": true,
+    "message": "帮我退款。",
+    "response": {
+      "answer": "你要退款哪一个订单？请选择订单号，或直接补充订单号。 当前账号下可选订单：ORD9801（隔离露营椅）；ORD9802（隔离露营椅）。",
+      "sessionId": "cs-acff9bf8-629b-4662-8b79-230570c3218f",
+      "confirmRequired": false,
+      "actions": [],
+      "fallback": false
+    }
+  },
+  {
+    "browser": true,
+    "message": "取消订单吧",
+    "response": {
+      "answer": "你要结束这次未提交的退款办理，还是取消某一笔订单？可以说退款办理、订单本身、第几笔或订单号。",
+      "sessionId": "cs-acff9bf8-629b-4662-8b79-230570c3218f",
+      "confirmRequired": false,
+      "pendingAction": "ASK_OBJECT",
+      "actions": [],
+      "fallback": false
+    }
+  },
+  {
+    "browser": true,
+    "message": "结束这次",
+    "response": {
+      "answer": "本次售后申请已取消，未提交。",
+      "sessionId": "cs-acff9bf8-629b-4662-8b79-230570c3218f",
+      "confirmRequired": false,
+      "pendingAction": "CANCELLED",
+      "actions": [],
+      "fallback": false
+    }
+  },
+  {
+    "browser": true,
+    "message": "第一笔。",
+    "response": {
+      "answer": "你好，我是荒野户外的客服 Agent。你可以把订单号、物流问题、活动优惠或售后诉求发给我，我会优先根据荒野户外的订单事实和公开规则回答。",
+      "sessionId": "cs-acff9bf8-629b-4662-8b79-230570c3218f",
+      "confirmRequired": false,
+      "actions": [],
+      "fallback": false
+    }
+  },
+  {
+    "browser": true,
+    "message": "帮我退款。",
+    "response": {
+      "answer": "你要退款哪一个订单？请选择订单号，或直接补充订单号。 当前账号下可选订单：ORD9801（隔离露营椅）；ORD9802（隔离露营椅）。",
+      "sessionId": "cs-393fb05f-76c1-4a99-8a21-423b23a19aa0",
+      "confirmRequired": false,
+      "actions": [],
+      "fallback": false
+    }
+  },
+  {
+    "browser": true,
+    "message": "我有点想取消这单退款",
+    "response": {
+      "answer": "请选择保留当前办理，或取消这次尚未提交的售后申请。",
+      "sessionId": "cs-393fb05f-76c1-4a99-8a21-423b23a19aa0",
+      "confirmRequired": true,
+      "pendingAction": "REFUND_ORDER_REQUIRED",
+      "confirmationTitle": "请选择是否保留办理",
+      "confirmationSummary": "结束这次未提交的退款办理。当前还没有订单号。",
+      "resumeToken": "928b3ef4-33b1-4124-97a5-168e08738f63",
+      "actions": [
+        {
+          "code": "KEEP",
+          "label": "保留当前办理"
+        },
+        {
+          "code": "CANCEL_DRAFT",
+          "label": "结束这次未提交的退款办理"
+        }
+      ],
+      "fallback": false
+    }
+  },
+  {
+    "browser": true,
+    "click": "保留当前办理",
+    "status": 200,
+    "response": {
+      "answer": "继续保留这次办理。",
+      "sessionId": "cs-393fb05f-76c1-4a99-8a21-423b23a19aa0",
+      "confirmRequired": false,
+      "pendingAction": "KEEP",
+      "actions": [],
+      "fallback": false
+    }
+  },
+  {
+    "browser": true,
+    "message": "ORD9801 我要退款。",
+    "response": {
+      "answer": "订单 ORD9801 的整单实付金额为 200.00 元。请补充退款原因，例如“原因：买错了”。本次尚未提交。",
+      "sessionId": "cs-370d7f45-710b-4286-8885-2566f2e084ce",
+      "confirmRequired": false,
+      "pendingAction": "REFUND_REASON_REQUIRED",
+      "relatedOrderNo": "ORD9801",
+      "actions": [],
+      "fallback": false
+    }
+  },
+  {
+    "browser": true,
+    "message": "我有点想取消这单退款",
+    "response": {
+      "answer": "请选择保留当前办理，或取消这次尚未提交的售后申请。",
+      "sessionId": "cs-370d7f45-710b-4286-8885-2566f2e084ce",
+      "confirmRequired": true,
+      "pendingAction": "REFUND_REASON_REQUIRED",
+      "confirmationTitle": "请选择是否保留办理",
+      "confirmationSummary": "订单：ORD9801；商品：隔离露营椅 x1；售后类型：退款。请选择保留当前办理，或取消这次尚未提交的售后申请。",
+      "relatedOrderNo": "ORD9801",
+      "resumeToken": "31fa6829-c9c7-45f5-acf5-4dc188a74828",
+      "actions": [
+        {
+          "code": "KEEP",
+          "label": "保留当前办理"
+        },
+        {
+          "code": "CANCEL_DRAFT",
+          "label": "取消这次尚未提交的售后申请"
+        }
+      ],
+      "fallback": false
+    }
+  },
+  {
+    "browser": true,
+    "click": "保留当前办理",
+    "status": 200,
+    "response": {
+      "answer": "继续保留这次办理。",
+      "sessionId": "cs-370d7f45-710b-4286-8885-2566f2e084ce",
+      "confirmRequired": false,
+      "pendingAction": "KEEP",
+      "relatedOrderNo": "ORD9801",
+      "actions": [],
+      "fallback": false
+    }
+  },
+  {
+    "browser": true,
+    "message": "ORD9803 我要申请七天无理由退货。",
+    "response": {
+      "answer": "请核对退货退款申请。同意退货后先寄回，商家收到且验收通过才退款。",
+      "sessionId": "cs-3ac9e14b-ab5b-49fb-8845-f6947e0d57de",
+      "confirmRequired": true,
+      "pendingAction": "CONFIRM_SUBMIT",
+      "confirmationTitle": "确认提交退货退款申请",
+      "confirmationSummary": "订单：ORD9803；商品：隔离露营椅 x1；范围：整单退货退款；实付金额：200.00 元；原因：七天无理由退货；状态：等待本人确认，尚未提交。确认后等待审核，提交不代表退款成功。同意退货后按地址寄回商品、配件及赠品；请保持完好，商家实际收到且验收通过后才退款。",
+      "relatedOrderNo": "ORD9803",
+      "resumeToken": "cd274d1d-8ae0-4c0c-8ce2-0d3da8be2ea5",
+      "actions": [
+        {
+          "code": "CONFIRM_SUBMIT",
+          "label": "确认提交申请"
+        },
+        {
+          "code": "CANCEL_SUBMIT",
+          "label": "取消本次申请"
+        }
+      ],
+      "fallback": false
+    }
+  },
+  {
+    "browser": true,
+    "message": "我有点想取消这单退款",
+    "response": {
+      "answer": "请选择保留当前办理，或取消这次尚未提交的售后申请。",
+      "sessionId": "cs-3ac9e14b-ab5b-49fb-8845-f6947e0d57de",
+      "confirmRequired": true,
+      "pendingAction": "CONFIRM_SUBMIT",
+      "confirmationTitle": "请选择是否保留办理",
+      "confirmationSummary": "订单：ORD9803；商品：隔离露营椅 x1；售后类型：退货退款。请选择保留当前办理，或取消这次尚未提交的售后申请。",
+      "relatedOrderNo": "ORD9803",
+      "resumeToken": "3fe5af3f-9e96-4391-8a68-8a18e7cb4320",
+      "actions": [
+        {
+          "code": "KEEP",
+          "label": "保留当前办理"
+        },
+        {
+          "code": "CANCEL_DRAFT",
+          "label": "取消这次尚未提交的售后申请"
+        }
+      ],
+      "fallback": false
+    }
+  },
+  {
+    "browser": true,
+    "click": "保留当前办理",
+    "status": 200,
+    "response": {
+      "answer": "继续保留这次办理，尚未提交。",
+      "sessionId": "cs-3ac9e14b-ab5b-49fb-8845-f6947e0d57de",
+      "confirmRequired": true,
+      "pendingAction": "CONFIRM_SUBMIT",
+      "confirmationTitle": "确认提交退货退款申请",
+      "confirmationSummary": "订单：ORD9803；商品：隔离露营椅 x1；范围：整单退货退款；实付金额：200.00 元；原因：七天无理由退货；状态：等待本人确认，尚未提交。确认后等待审核，提交不代表退款成功。同意退货后按地址寄回商品、配件及赠品；请保持完好，商家实际收到且验收通过后才退款。",
+      "relatedOrderNo": "ORD9803",
+      "resumeToken": "4e16b210-32d7-4088-ba7d-61d34e20281b",
+      "actions": [
+        {
+          "code": "CONFIRM_SUBMIT",
+          "label": "确认提交申请"
+        },
+        {
+          "code": "CANCEL_SUBMIT",
+          "label": "取消本次申请"
+        }
+      ],
+      "fallback": false
+    }
+  },
+  {
+    "browser": true,
+    "click": "取消本次申请",
+    "status": 200,
+    "response": {
+      "answer": "本次售后申请已取消，未提交。",
+      "sessionId": "cs-3ac9e14b-ab5b-49fb-8845-f6947e0d57de",
+      "confirmRequired": false,
+      "pendingAction": "CANCELLED",
+      "actions": [],
+      "fallback": false
+    }
+  }
+]

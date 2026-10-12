@@ -19,7 +19,7 @@ from pydantic import BaseModel, Field
 from api.schemas import *
 
 _POLICY_CUES = ("政策", "规则", "条件", "流程", "怎么寄", "如何寄", "了解一下", "只是咨询", "只了解", "咨询一下", "寄回")
-_ELIGIBILITY_CUES = ("能退", "可退", "能否退", "能不能退", "还能退", "可以退")
+_ELIGIBILITY_CUES = ("能退", "可退", "能否退", "能不能退", "还能退", "可以退", "资格", "能申请退款", "能申请退货")
 _APPLY_NEGATIONS = ("不要申请", "先别申请", "暂不申请", "不申请", "别申请")
 
 
@@ -33,11 +33,11 @@ def _without_apply_negation(user_message: str) -> str:
 def _explicit_apply(user_message: str) -> bool:
     """明确要办理。否定申请（不申请、先别申请）不算。"""
     text = _without_apply_negation(user_message)
-    return any(term in text for term in ("帮我", "我要", "办理", "申请"))
+    return bool(re.search(r"(?:我要|我想|帮我|给我|现在|直接|那就)?(?:申请|办理|退款吧|退货吧)", text))
 
 
 def read_only_after_sale_intent(user_message: str) -> Intent | None:
-    """模型故障时把通用政策咨询留在只读标签。具体订单能不能退不在这里，避免误当成已经支持资格查询。"""
+    """模型故障时把通用政策咨询留在只读标签。"""
     if _explicit_apply(user_message) or is_specific_eligibility_question(user_message):
         return None
     policy = any(term in user_message for term in _POLICY_CUES)
@@ -54,12 +54,15 @@ def read_only_after_sale_intent(user_message: str) -> Intent | None:
 
 
 def is_specific_eligibility_question(user_message: str) -> bool:
-    """问的是某一笔能不能退。当前没有资格查询标签，不能当成办理。"""
-    if _explicit_apply(user_message) or not any(term in user_message for term in _ELIGIBILITY_CUES):
+    """资格问题及条件式办理先查资格，不把“帮我看看”当成申请。"""
+    if not any(term in user_message for term in _ELIGIBILITY_CUES):
         return False
-    return extract_order_id(user_message) is not None or any(
+    specific = extract_order_id(user_message) is not None or any(
         term in user_message for term in ("这笔", "这单", "这个订单", "这张订单")
-    )
+    ) or "如果" in user_message or bool(re.search(r"查.*(?:退款|退货).*资格", user_message))
+    return specific and (not _explicit_apply(user_message) or any(
+        term in user_message for term in (*_APPLY_NEGATIONS, "只查", "能不能", "能否", "如果", "吗")
+    ))
 
 
 def classify_intent(user_message: str) -> Intent:
@@ -71,7 +74,7 @@ def classify_intent(user_message: str) -> Intent:
     if any(term in user_message for term in ["退款", "退货"]) and any(term in user_message for term in ["进度", "状态", "处理到哪", "什么时候到账"]):
         return "refund_status_query"
     if is_specific_eligibility_question(user_message):
-        return "unknown"
+        return "after_sale_eligibility_query"
     read_only = read_only_after_sale_intent(user_message)
     if read_only:
         return read_only
@@ -159,6 +162,12 @@ def build_route_plan(
             risk_level="low",
             reason="只读查询当前用户订单的售后申请状态，不创建退款申请。",
         ),
+        "get_after_sale_eligibility": ToolCandidate(
+            name="get_after_sale_eligibility",
+            domain="after_sale",
+            risk_level="low",
+            reason="复用商城严格规则，只读核验本人订单的售后资格。",
+        ),
         "search_products": ToolCandidate(
             name="search_products",
             domain="product",
@@ -174,6 +183,8 @@ def build_route_plan(
         required_tools = ["get_order_logistics"]
     elif intent == "refund_status_query":
         required_tools = ["get_refund_status"]
+    elif intent == "after_sale_eligibility_query":
+        required_tools = ["get_after_sale_eligibility"]
     elif intent == "refund_request":
         required_tools = ["get_order_detail"]
         knowledge_domains = ["after_sale_policy"]
@@ -197,7 +208,7 @@ def build_route_plan(
         risk_level = "high" if intent == "security_request" else "medium"
 
     # 缺少订单号时保留候选工具，但不允许模型凭空生成参数并执行。
-    order_bound_tools = {"get_order_detail", "get_order_logistics", "get_refund_status"}
+    order_bound_tools = {"get_order_detail", "get_order_logistics", "get_refund_status", "get_after_sale_eligibility"}
     executable_tools = required_tools if order_id or not any(name in order_bound_tools for name in required_tools) else []
     return RoutePlan(
         intent=intent,

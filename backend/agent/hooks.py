@@ -19,9 +19,11 @@ class HookManager:
             "get_order_detail": "order_id",
             "get_order_logistics": "order_id",
             "get_refund_status": "order_id",
-            "search_products": "keyword",
         }.get(tool_name)
-        arguments_valid = bool(arguments.get(required_argument)) if required_argument else bool(arguments)
+        # 商品工具支持关键词或受控编号两种调用，任一存在即通过必填校验。
+        arguments_valid = bool(arguments.get("keyword") or arguments.get("product_id")) if tool_name == "search_products" else (
+            bool(arguments.get(required_argument)) if required_argument else bool(arguments)
+        )
         self.touched_tools.append(tool_name)
         self.events.append(
             {

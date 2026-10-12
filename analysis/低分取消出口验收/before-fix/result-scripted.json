@@ -1,0 +1,12 @@
+{
+  "passed": false,
+  "mode": "scripted",
+  "score_min": 0.9,
+  "checks": 29,
+  "failed": [
+    "还没确定退款订单：页面提供保留和取消按钮，不提供提交",
+    "还没说明退款原因：页面提供保留和取消按钮，不提供提交"
+  ],
+  "model_calls": 20,
+  "error": null
+}

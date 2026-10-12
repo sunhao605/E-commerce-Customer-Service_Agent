@@ -1,0 +1,51 @@
+[
+  {
+    "check": "页面：低分重发原卡和原凭证",
+    "passed": true
+  },
+  {
+    "check": "页面：点击原卡取消成功",
+    "passed": true
+  },
+  {
+    "check": "页面：取消后旧卡提交返回409",
+    "passed": true
+  },
+  {
+    "check": "页面：取消后历史卡所有按钮禁用",
+    "passed": true
+  },
+  {
+    "check": "页面：取消后序号不恢复办理，Python待办为空",
+    "passed": true
+  },
+  {
+    "check": "页面：冲突卡只有保留和取消，无提交动作",
+    "passed": true
+  },
+  {
+    "check": "页面：冲突凭证不能伪装成提交",
+    "passed": true
+  },
+  {
+    "check": "页面：保留不取消草稿",
+    "passed": true
+  },
+  {
+    "check": "页面：保留后重复点击旧冲突卡被拒绝",
+    "passed": true
+  },
+  {
+    "check": "页面：保留后可继续使用当前申请确认卡",
+    "passed": false
+  },
+  {
+    "check": "验收执行中断",
+    "passed": false,
+    "error": "KeyError: 'token'"
+  },
+  {
+    "check": "八张业务表行数与内容哈希完全不变",
+    "passed": true
+  }
+]

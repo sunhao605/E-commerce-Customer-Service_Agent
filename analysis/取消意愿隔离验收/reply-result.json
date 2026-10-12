@@ -1,0 +1,13 @@
+{
+  "score_min" : "0.9",
+  "mode" : "isolated_h2_real_models_low_score_reply",
+  "checks" : [ {
+    "check" : "我想了想，还是不退了",
+    "status" : "pass",
+    "detail" : "pending=CONFIRM_SUBMIT answer=这句还不够确定，当前办理仍保留。要取消请点「取消本次申请」，或再说清楚一次。"
+  }, {
+    "check" : "假如商品降价我可能留下，不过现在继续退。",
+    "status" : "pass",
+    "detail" : "pending=CONFIRM_SUBMIT answer=没有查询到匹配商品，不能猜测库存或价格。 本次待确认申请尚未提交。"
+  } ]
+}

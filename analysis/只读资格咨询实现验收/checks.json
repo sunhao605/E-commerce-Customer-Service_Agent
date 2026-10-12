@@ -1,0 +1,90 @@
+[
+  {
+    "passed": true,
+    "check": "已支付未发货可申请退款"
+  },
+  {
+    "passed": true,
+    "check": "当前七天窗口内可申请退货"
+  },
+  {
+    "passed": true,
+    "check": "过期退货不符合条件"
+  },
+  {
+    "passed": true,
+    "check": "支付事实缺失保留未知"
+  },
+  {
+    "passed": true,
+    "check": "他人订单不可读取"
+  },
+  {
+    "check": "正常咨询无办理草稿",
+    "passed": true
+  },
+  {
+    "check": "页面返回严格核验后的类型和金额",
+    "passed": true
+  },
+  {
+    "check": "好的不代表申请",
+    "passed": true
+  },
+  {
+    "check": "明确申请沿用查询订单并询问原因",
+    "passed": true
+  },
+  {
+    "check": "复用原确认卡，停在提交前",
+    "passed": true
+  },
+  {
+    "check": "查询另一笔订单不修改旧草稿、版本或凭证",
+    "passed": true
+  },
+  {
+    "check": "历史确认卡仍可选择，查询不使原卡失效",
+    "passed": true
+  },
+  {
+    "check": "不符合条件的咨询无草稿",
+    "passed": true
+  },
+  {
+    "check": "页面说明超出七天窗口",
+    "passed": true
+  },
+  {
+    "check": "他人订单不泄露金额或客户信息",
+    "passed": true
+  },
+  {
+    "check": "支付事实缺失不会说成不符合条件",
+    "passed": true
+  },
+  {
+    "check": "选单只续接查询，不创建办理任务",
+    "passed": true
+  },
+  {
+    "check": "直接申请不额外问是否办理",
+    "passed": true
+  },
+  {
+    "check": "七天无理由退货不额外问原因",
+    "passed": true
+  },
+  {
+    "check": "查询与申请准备阶段8张业务表均未变",
+    "passed": true
+  },
+  {
+    "check": "查询后发货，申请重新核验并阻断",
+    "passed": true
+  },
+  {
+    "check": "测试发货后，阻断申请没有额外业务写入",
+    "passed": true
+  }
+]

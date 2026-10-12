@@ -1,0 +1,100 @@
+[
+  {
+    "input": "折叠椅多少钱，还有库存吗？",
+    "response": {
+      "answer": "找到多款折叠椅，请告诉我要咨询哪一款：\n1. 露营折叠椅\n2. 轻量露营折叠椅\n回复“第一款”或“第二款”即可，也可以直接补充完整商品名。",
+      "sessionId": "cs-da1c4293-9454-40ec-81e2-5fca92196810",
+      "confirmRequired": false,
+      "pendingAction": "PRODUCT_QUERY",
+      "actions": [],
+      "fallback": false
+    },
+    "screenshot": "对话截图/01.png"
+  },
+  {
+    "input": "第二款",
+    "response": {
+      "answer": "轻量露营折叠椅 商品标价 199.0 元，库存 0 件。",
+      "sessionId": "cs-da1c4293-9454-40ec-81e2-5fca92196810",
+      "confirmRequired": false,
+      "pendingAction": "PRODUCT_QUERY",
+      "actions": [],
+      "fallback": false
+    },
+    "screenshot": "对话截图/02.png"
+  },
+  {
+    "input": "ORD9801 我要申请退款，原因：买错了",
+    "response": {
+      "answer": "请核对申请，确认提交后等待后台审核。",
+      "sessionId": "cs-086d41a9-16c7-4a65-8d63-7747f9fb0cc1",
+      "confirmRequired": true,
+      "pendingAction": "CONFIRM_SUBMIT",
+      "confirmationTitle": "确认提交退款申请",
+      "confirmationSummary": "订单：ORD9801；商品：隔离露营椅 x1；范围：整单退款；实付金额：200.00 元；原因：买错了；状态：等待本人确认，尚未提交。确认后等待审核，提交不代表退款成功。",
+      "relatedOrderNo": "ORD9801",
+      "resumeToken": "dbca4dfc-2f15-4a93-ac0b-bf167a073166",
+      "actions": [
+        {
+          "code": "CONFIRM_SUBMIT",
+          "label": "确认提交申请"
+        },
+        {
+          "code": "CANCEL_SUBMIT",
+          "label": "取消本次申请"
+        }
+      ],
+      "fallback": false
+    },
+    "screenshot": "对话截图/03.png"
+  },
+  {
+    "input": "折叠椅多少钱？",
+    "response": {
+      "answer": "找到多款折叠椅，请告诉我要咨询哪一款：\n1. 露营折叠椅\n2. 轻量露营折叠椅\n回复“第一款”或“第二款”即可，也可以直接补充完整商品名。",
+      "sessionId": "cs-086d41a9-16c7-4a65-8d63-7747f9fb0cc1",
+      "confirmRequired": false,
+      "pendingAction": "PRODUCT_QUERY",
+      "actions": [],
+      "fallback": false
+    },
+    "screenshot": "对话截图/04.png"
+  },
+  {
+    "input": "第2款",
+    "response": {
+      "answer": "轻量露营折叠椅 商品标价 199.0 元，库存 0 件。",
+      "sessionId": "cs-086d41a9-16c7-4a65-8d63-7747f9fb0cc1",
+      "confirmRequired": false,
+      "pendingAction": "PRODUCT_QUERY",
+      "actions": [],
+      "fallback": false
+    },
+    "screenshot": "对话截图/05.png"
+  },
+  {
+    "input": "继续办理退款",
+    "response": {
+      "answer": "请核对申请，确认提交后等待后台审核。",
+      "sessionId": "cs-086d41a9-16c7-4a65-8d63-7747f9fb0cc1",
+      "confirmRequired": true,
+      "pendingAction": "CONFIRM_SUBMIT",
+      "confirmationTitle": "确认提交退款申请",
+      "confirmationSummary": "订单：ORD9801；商品：隔离露营椅 x1；范围：整单退款；实付金额：200.00 元；原因：买错了；状态：等待本人确认，尚未提交。确认后等待审核，提交不代表退款成功。",
+      "relatedOrderNo": "ORD9801",
+      "resumeToken": "dbca4dfc-2f15-4a93-ac0b-bf167a073166",
+      "actions": [
+        {
+          "code": "CONFIRM_SUBMIT",
+          "label": "确认提交申请"
+        },
+        {
+          "code": "CANCEL_SUBMIT",
+          "label": "取消本次申请"
+        }
+      ],
+      "fallback": false
+    },
+    "screenshot": "对话截图/06.png"
+  }
+]

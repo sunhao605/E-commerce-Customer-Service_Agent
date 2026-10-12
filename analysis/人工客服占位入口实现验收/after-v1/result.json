@@ -1,0 +1,11 @@
+{
+  "phase": "after",
+  "passed": true,
+  "checks": 42,
+  "failed": [],
+  "screenshots": 21,
+  "online_models": 0,
+  "database": "isolated H2",
+  "submitted": false,
+  "browser_resume_requests": []
+}

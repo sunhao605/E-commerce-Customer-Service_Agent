@@ -1,0 +1,14 @@
+{
+  "backend/agent/context.py": "8125e7b5aac0d8c15771016ac93821e824a08abe808586ef0460d1d53f7f491a",
+  "backend/agent/customer_service_agent.py": "364c7dd6e7f7f7fa409fb5782af466b691fe332342c291d7251c6e321fce15eb",
+  "backend/agent/ecommerce_client.py": "9ba2912457125ffe06722ff87e6d1b43c90329530d0bca67283f85e978349b55",
+  "backend/agent/hooks.py": "1ae64e2183a739073b44ea18d5a0052c382a59c19d3702502e4e00c532cbbfd0",
+  "backend/agent/product_query.py": "0fa6a02c02b7fc6b1dbee351d231b94b0be57340990b7950b4ed5f9c8a35cc71",
+  "backend/agent/tools/langchain_runtime.py": "023236123dc1712a5f1e59dac148cd5f991e374049db6b6ab0fd8ac7a574b9ce",
+  "backend/agent/tools/tool_runtime.py": "f7cdff3a15840579356495f44493f5c464d1c52883f20174c4f366bf415b25e3",
+  "backend/resources/prompts/route_contract.md": "e524b61c63d92641298e875f0691bfaa9db0e181ceb9d00b1b1d31bedfcc7010",
+  "backend/resources/prompts/tool_usage.md": "93df0d7b67a90212bf550ec24bcd74e2752a706100af012d1a03c6776a2acf3b",
+  "backend/tests/test_product_query.py": "972df188f58bece2f74550ce6d6a936929564a94da1aab6a65382c003174cc0b",
+  "ecommerce-backend/frontend/src/shop/App.tsx": "07a97df66121218db13b28613fd6ebecf1adc1d071aa7fe89a4ccc74f98cc148",
+  "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/CustomerServiceGatewayService.java": "db15a93ab7247adb89bcccc6fc6a1e3a8a5e62be4b374f8d42bbc03b34eeb313"
+}

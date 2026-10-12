@@ -1,0 +1,149 @@
+--- before/ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/CustomerServiceGatewayService.java
++++ after/ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/CustomerServiceGatewayService.java
+@@ -83,6 +83,8 @@
+     private final ShopService shopService;
+     private static final Pattern ORDER_NO = Pattern.compile("\\b(?:SO[A-Za-z0-9_-]{6,}|ORD\\d{4,})\\b", Pattern.CASE_INSENSITIVE);
+     private static final Pattern REFUND_REASON = Pattern.compile("(?:退款原因|原因)\\s*[:：]\\s*(.+)|因为\\s*(.+)");
++    // shortcut: 只接收独立、明确的取消句；复合请求需要另行定义取消对象和新任务。
++    private static final Pattern CANCEL_DRAFT = Pattern.compile("(?:算了[，,\\s]*)?(?:取消本次申请|不退了|不申请了|先不退了|不退款了|不退货了|不提交了)[。！!\\s]*");
+ 
+     public CustomerServiceGatewayService(CustomerServiceAgentClient agentClient,
+                                          CustomerServiceSessionStore sessionStore,
+@@ -125,6 +127,8 @@
+             if (continuingRefund && requestedOrder != null && (needsOrder || changedOrder)) {
+                 message += "\n客户正在补充或更换" + ("RETURN".equals(continuingType) ? "七天无理由退货退款" : "未发货整单退款") + "申请的订单号，尚未确认提交。";
+             }
++            Map<String, Object> runtimeContext = buildRuntimeContext(profile, pageContext, request.getMessage());
++            runtimeContext.put("cancelledAfterSaleDraft", "CANCELLED".equals(session.getPendingAction()));
+             AgentChatRequest agentRequest = new AgentChatRequest(
+                 sessionId,
+                 profile.getUserId(),
+@@ -132,7 +136,7 @@
+                 profile.getMemberLevel(),
+                 profile.getRiskLevel(),
+                 buildAgentMessage(message, pageContext, profile.getUserId()),
+-                buildRuntimeContext(profile, pageContext, request.getMessage())
++                runtimeContext
+             );
+             try {
+                 JsonNode agentResponse = agentClient.chat(agentRequest);
+@@ -165,9 +169,7 @@
+                 throw new CustomerServiceException(HttpStatus.CONFLICT, "CONFLICT", "本次确认已处理，旧卡不可用");
+             }
+             if ("CANCEL_SUBMIT".equals(decision)) {
+-                session.setHandled(true);
+-                sessionStore.save(session);
+-                return plainResponse(session, "本次售后申请已取消，未提交。", "CANCELLED");
++                return cancelPendingRefund(session);
+             }
+             try {
+                 ShopAfterSaleResponse application = "RETURN".equals(session.getActionType())
+@@ -321,16 +323,19 @@
+ 
+     private CustomerServiceResponse refundFollowup(CustomerServiceSession session, String message,
+                                                    CustomerServicePageContextRequest page, String userId) {
++        boolean cancelling = CANCEL_DRAFT.matcher(message.trim()).matches();
+         if (session.getPendingAction() == null || session.isHandled()) {
++            if (cancelling) {
++                return plainResponse(session, "当前没有可取消的未提交售后办理。本次未撤销任何已提交申请。", "NO_PENDING_APPLICATION");
++            }
+             return null;
+         }
+         if (session.isExpired(LocalDateTime.now())) {
+             clearPendingRefund(session);
+             return plainResponse(session, "本次确认已过期，请重新提出退款诉求并核对申请。", "EXPIRED");
+         }
+-        if (message.trim().matches("(?:取消本次申请|不退了|不申请了)[。！!]?")) {
+-            session.setHandled(true);
+-            return plainResponse(session, "本次售后申请已取消，未提交。", "CANCELLED");
++        if (cancelling) {
++            return cancelPendingRefund(session);
+         }
+         if ("RETURN".equals(session.getActionType()) && isOtherReturnReason(message)) {
+             clearPendingRefund(session);
+@@ -447,6 +452,13 @@
+             session.getRelatedOrderNo(), session.getRelatedAfterSaleNo(), null, List.of(), false);
+     }
+ 
++    private CustomerServiceResponse cancelPendingRefund(CustomerServiceSession session) {
++        clearPendingRefund(session);
++        session.setHandled(true);
++        session.setPendingAction("CANCELLED");
++        return plainResponse(session, "本次售后申请已取消，未提交。", "CANCELLED");
++    }
++
+     private void clearPendingRefund(CustomerServiceSession session) {
+         session.setActionType(null);
+         session.setPendingAction(null);
+@@ -516,6 +528,7 @@
+         }
+         if (Set.of("refund_request", "return_request").contains(agentResponse.path("session_state").path("intent").asText())
+             && "order_id".equals(agentResponse.path("clarification").path("clarification_field").asText())) {
++            session.setHandled(false);
+             session.setActionType("return_request".equals(agentResponse.path("session_state").path("intent").asText()) ? "RETURN" : "REFUND");
+             session.setPendingAction("REFUND_ORDER_REQUIRED");
+             session.setRefundReason("RETURN".equals(session.getActionType()) ? "七天无理由退货" : extractRefundReason(userMessage));
+@@ -535,6 +548,9 @@
+     private void validateResumeSession(CustomerServiceSession session, CustomerServiceResumeRequest request) {
+         if (session.isExpired(LocalDateTime.now())) {
+             throw new CustomerServiceException(HttpStatus.CONFLICT, "CONFLICT", "本次确认已过期，请重新发起咨询");
++        }
++        if ("CANCELLED".equals(session.getPendingAction())) {
++            throw new CustomerServiceException(HttpStatus.CONFLICT, "CONFLICT", "本次申请已取消，旧卡不可用");
+         }
+         if (!StringUtils.hasText(session.getResumeToken()) || !session.getResumeToken().equals(request.getResumeToken())) {
+             throw new CustomerServiceException(HttpStatus.FORBIDDEN, "FORBIDDEN", "恢复凭证不匹配");
+--- before/backend/agent/customer_service_agent.py
++++ after/backend/agent/customer_service_agent.py
+@@ -63,7 +63,11 @@
+         load_course_env()
+         MESSAGE_COUNT_BY_SESSION[request.session_id] = MESSAGE_COUNT_BY_SESSION.get(request.session_id, 0) + 1
+         message_count = MESSAGE_COUNT_BY_SESSION[request.session_id]
+-        open_task = current_memory(request.session_id, request.runtime_user_id).get("open_task")
++        memory = current_memory(request.session_id, request.runtime_user_id)
++        # 商城在网关取消草稿；下一轮先清理Python待办，避免旧候选复活。
++        if (request.runtime_context or {}).get("cancelledAfterSaleDraft") is True:
++            memory["open_task"] = None
++        open_task = memory.get("open_task")
+         selection_message = (request.runtime_context or {}).get("userMessage") or request.user_message
+         task_note = format_open_task(open_task)
+         fallback_intent = classify_intent(request.user_message)
+--- before/ecommerce-backend/src/main/java/com/teachdemo/ecommerce/config/DataInitializer.java
++++ after/ecommerce-backend/src/main/java/com/teachdemo/ecommerce/config/DataInitializer.java
+@@ -386,9 +386,9 @@
+     }
+ 
+     private void seedBalances() {
+-        saveBalanceAtLeast("U1001", new BigDecimal("100000.00"));
+-        saveBalanceAtLeast("U1002", new BigDecimal("100000.00"));
+-        saveBalanceAtLeast("U1003", new BigDecimal("100000.00"));
++        saveBalanceIfMissing("U1001", new BigDecimal("100000.00"));
++        saveBalanceIfMissing("U1002", new BigDecimal("100000.00"));
++        saveBalanceIfMissing("U1003", new BigDecimal("100000.00"));
+         if (balanceTransactionRepository.count() > 0) {
+             return;
+         }
+@@ -402,18 +402,11 @@
+         ));
+     }
+ 
+-    private void saveBalanceAtLeast(String userId, BigDecimal availableBalance) {
+-        balanceAccountRepository.findByUserId(userId).ifPresentOrElse(account -> {
+-            if (account.getAvailableBalance().compareTo(availableBalance) < 0) {
+-                account.updateBalance(availableBalance, LocalDateTime.now());
+-                balanceAccountRepository.save(account);
+-            }
+-        }, () -> balanceAccountRepository.save(new BalanceAccount(
+-            userId,
+-            availableBalance,
+-            LocalDateTime.now(),
+-            LocalDateTime.now()
+-        )));
++    private void saveBalanceIfMissing(String userId, BigDecimal availableBalance) {
++        if (balanceAccountRepository.findByUserId(userId).isEmpty()) {
++            balanceAccountRepository.save(new BalanceAccount(
++                userId, availableBalance, LocalDateTime.now(), LocalDateTime.now()));
++        }
+     }
+ 
+     private void seedCartItems() {

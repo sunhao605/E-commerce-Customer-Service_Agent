@@ -1,0 +1,41 @@
+{
+  "image": "sha256:2e28f6ab0b3f1e7c42cdb61316915a0ec300587f4d86196e7fd7e3b7b6db2edd",
+  "java_cancel_execute": "unset(default off)",
+  "python": {
+    "mode": "default",
+    "old_pid": 4006,
+    "new_pid": 6526,
+    "health": {
+      "status": "ok",
+      "lesson": "41"
+    },
+    "cancel_execute": "0",
+    "score_min": "0.9"
+  },
+  "health": {
+    "python": {
+      "status": "ok",
+      "lesson": "41"
+    },
+    "java": {
+      "status": "UP"
+    }
+  },
+  "source": {
+    "backend/agent/cancellation.py": "67afd5959052e1746d6c10547ed0ce8d25577e16e28d2b2d63f497d19f31d661",
+    "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/CustomerServiceGatewayService.java": "c0c9c4d00ab43137027a16c07ab5a3b75ba9fecc9d85f58b82b86e13a8031eb7",
+    "ecommerce-backend/frontend/src/shop/App.tsx": "5eed9e11f8bcb6a892e272e2f88afacc6387dd21fda776bc7bf39677c3d80509"
+  },
+  "result": {
+    "passed": true,
+    "checks": 29,
+    "failed": [],
+    "online_models": true,
+    "refund_submissions": 0,
+    "admin_approvals": 0,
+    "new_orders": 0,
+    "payments": 0
+  },
+  "business_unchanged": true,
+  "latest_screenshot_count": 21
+}

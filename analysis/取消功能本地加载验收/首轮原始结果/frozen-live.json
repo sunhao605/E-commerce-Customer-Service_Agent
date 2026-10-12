@@ -1,0 +1,27 @@
+{
+  "score_min": 0.9,
+  "low_sentence": "我想了想，还是不退了",
+  "scenes": [
+    [
+      "还没确定退款订单",
+      "帮我退款。",
+      "REFUND_ORDER_REQUIRED",
+      "结束这次未提交的退款办理",
+      "SO20261010124526218-b60d3f08",
+      "REFUND_REASON_REQUIRED"
+    ],
+    [
+      "还没说明退款原因",
+      "SO20261010124526218-b60d3f08 我要退款。",
+      "REFUND_REASON_REQUIRED",
+      "取消这次尚未提交的售后申请",
+      "原因：买错了。",
+      "CONFIRM_SUBMIT"
+    ]
+  ],
+  "choices_per_scene": [
+    "取消",
+    "保留"
+  ],
+  "expected_action": "score_low"
+}

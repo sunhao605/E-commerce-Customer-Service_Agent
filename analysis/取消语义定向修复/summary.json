@@ -1,0 +1,645 @@
+{
+  "fixture_sha256": "b921a9146233806792b83667f660e11895dc8eb376c3719a1890a4ccbd348d5a",
+  "arms": {
+    "rules": {
+      "runs": 40,
+      "valid": 40,
+      "correct": 12,
+      "false_cancel": 0,
+      "non_cancel_runs": 28,
+      "missed_cancel": 12,
+      "cancel_runs": 12,
+      "p50_ms": 0.746,
+      "p95_ms": 2.038,
+      "cost_estimate_usd_range": [
+        0.0,
+        0.0
+      ],
+      "repeat_disagreements": [],
+      "mismatches": [
+        {
+          "id": "N01",
+          "repeat": 1,
+          "expected": "cancel",
+          "actual": "keep",
+          "components": null
+        },
+        {
+          "id": "N02",
+          "repeat": 1,
+          "expected": "cancel",
+          "actual": "keep",
+          "components": null
+        },
+        {
+          "id": "N03",
+          "repeat": 1,
+          "expected": "cancel",
+          "actual": "keep",
+          "components": null
+        },
+        {
+          "id": "N04",
+          "repeat": 1,
+          "expected": "cancel",
+          "actual": "keep",
+          "components": null
+        },
+        {
+          "id": "N05",
+          "repeat": 1,
+          "expected": "cancel",
+          "actual": "keep",
+          "components": null
+        },
+        {
+          "id": "N06",
+          "repeat": 1,
+          "expected": "cancel",
+          "actual": "keep",
+          "components": null
+        },
+        {
+          "id": "N13",
+          "repeat": 1,
+          "expected": "clarify",
+          "actual": "keep",
+          "components": null
+        },
+        {
+          "id": "N14",
+          "repeat": 1,
+          "expected": "clarify",
+          "actual": "keep",
+          "components": null
+        },
+        {
+          "id": "N15",
+          "repeat": 1,
+          "expected": "clarify",
+          "actual": "keep",
+          "components": null
+        },
+        {
+          "id": "N16",
+          "repeat": 1,
+          "expected": "clarify",
+          "actual": "keep",
+          "components": null
+        },
+        {
+          "id": "N17",
+          "repeat": 1,
+          "expected": "clarify",
+          "actual": "keep",
+          "components": null
+        },
+        {
+          "id": "N18",
+          "repeat": 1,
+          "expected": "clarify",
+          "actual": "keep",
+          "components": null
+        },
+        {
+          "id": "N19",
+          "repeat": 1,
+          "expected": "clarify",
+          "actual": "keep",
+          "components": null
+        },
+        {
+          "id": "N20",
+          "repeat": 1,
+          "expected": "clarify",
+          "actual": "keep",
+          "components": null
+        },
+        {
+          "id": "N20",
+          "repeat": 2,
+          "expected": "clarify",
+          "actual": "keep",
+          "components": null
+        },
+        {
+          "id": "N19",
+          "repeat": 2,
+          "expected": "clarify",
+          "actual": "keep",
+          "components": null
+        },
+        {
+          "id": "N18",
+          "repeat": 2,
+          "expected": "clarify",
+          "actual": "keep",
+          "components": null
+        },
+        {
+          "id": "N17",
+          "repeat": 2,
+          "expected": "clarify",
+          "actual": "keep",
+          "components": null
+        },
+        {
+          "id": "N16",
+          "repeat": 2,
+          "expected": "clarify",
+          "actual": "keep",
+          "components": null
+        },
+        {
+          "id": "N15",
+          "repeat": 2,
+          "expected": "clarify",
+          "actual": "keep",
+          "components": null
+        },
+        {
+          "id": "N14",
+          "repeat": 2,
+          "expected": "clarify",
+          "actual": "keep",
+          "components": null
+        },
+        {
+          "id": "N13",
+          "repeat": 2,
+          "expected": "clarify",
+          "actual": "keep",
+          "components": null
+        },
+        {
+          "id": "N06",
+          "repeat": 2,
+          "expected": "cancel",
+          "actual": "keep",
+          "components": null
+        },
+        {
+          "id": "N05",
+          "repeat": 2,
+          "expected": "cancel",
+          "actual": "keep",
+          "components": null
+        },
+        {
+          "id": "N04",
+          "repeat": 2,
+          "expected": "cancel",
+          "actual": "keep",
+          "components": null
+        },
+        {
+          "id": "N03",
+          "repeat": 2,
+          "expected": "cancel",
+          "actual": "keep",
+          "components": null
+        },
+        {
+          "id": "N02",
+          "repeat": 2,
+          "expected": "cancel",
+          "actual": "keep",
+          "components": null
+        },
+        {
+          "id": "N01",
+          "repeat": 2,
+          "expected": "cancel",
+          "actual": "keep",
+          "components": null
+        }
+      ]
+    },
+    "single_deepseek": {
+      "runs": 40,
+      "valid": 40,
+      "correct": 34,
+      "false_cancel": 6,
+      "non_cancel_runs": 28,
+      "missed_cancel": 0,
+      "cancel_runs": 12,
+      "p50_ms": 692.018,
+      "p95_ms": 972.351,
+      "cost_estimate_usd_range": [
+        0.0016597799999999996,
+        0.003319559999999999
+      ],
+      "repeat_disagreements": [],
+      "mismatches": [
+        {
+          "id": "N14",
+          "repeat": 1,
+          "expected": "clarify",
+          "actual": "cancel",
+          "components": null
+        },
+        {
+          "id": "N17",
+          "repeat": 1,
+          "expected": "clarify",
+          "actual": "cancel",
+          "components": null
+        },
+        {
+          "id": "N18",
+          "repeat": 1,
+          "expected": "clarify",
+          "actual": "cancel",
+          "components": null
+        },
+        {
+          "id": "N18",
+          "repeat": 2,
+          "expected": "clarify",
+          "actual": "cancel",
+          "components": null
+        },
+        {
+          "id": "N17",
+          "repeat": 2,
+          "expected": "clarify",
+          "actual": "cancel",
+          "components": null
+        },
+        {
+          "id": "N14",
+          "repeat": 2,
+          "expected": "clarify",
+          "actual": "cancel",
+          "components": null
+        }
+      ]
+    },
+    "split_deepseek": {
+      "runs": 40,
+      "valid": 38,
+      "correct": 36,
+      "false_cancel": 2,
+      "non_cancel_runs": 28,
+      "missed_cancel": 1,
+      "cancel_runs": 12,
+      "p50_ms": 729.198,
+      "p95_ms": 1429.481,
+      "cost_estimate_usd_range": [
+        0.00199554,
+        0.00399108
+      ],
+      "repeat_disagreements": [
+        "N03",
+        "N13"
+      ],
+      "mismatches": [
+        {
+          "id": "N03",
+          "repeat": 1,
+          "expected": "cancel",
+          "actual": "invalid",
+          "components": null
+        },
+        {
+          "id": "N13",
+          "repeat": 1,
+          "expected": "clarify",
+          "actual": "invalid",
+          "components": null
+        },
+        {
+          "id": "N14",
+          "repeat": 1,
+          "expected": "clarify",
+          "actual": "cancel",
+          "components": {
+            "decision": {
+              "type": "stop"
+            },
+            "target": {
+              "type": "current"
+            },
+            "extra_task": {
+              "type": "no"
+            }
+          }
+        },
+        {
+          "id": "N14",
+          "repeat": 2,
+          "expected": "clarify",
+          "actual": "cancel",
+          "components": {
+            "decision": {
+              "type": "stop"
+            },
+            "target": {
+              "type": "current"
+            },
+            "extra_task": {
+              "type": "no"
+            }
+          }
+        }
+      ]
+    },
+    "single_jev": {
+      "runs": 40,
+      "valid": 40,
+      "correct": 26,
+      "false_cancel": 12,
+      "non_cancel_runs": 28,
+      "missed_cancel": 0,
+      "cancel_runs": 12,
+      "p50_ms": 449.791,
+      "p95_ms": 780.487,
+      "cost_estimate_usd_range": [
+        0.0012054,
+        0.0012054
+      ],
+      "repeat_disagreements": [],
+      "mismatches": [
+        {
+          "id": "N13",
+          "repeat": 1,
+          "expected": "clarify",
+          "actual": "cancel",
+          "components": null
+        },
+        {
+          "id": "N14",
+          "repeat": 1,
+          "expected": "clarify",
+          "actual": "cancel",
+          "components": null
+        },
+        {
+          "id": "N15",
+          "repeat": 1,
+          "expected": "clarify",
+          "actual": "cancel",
+          "components": null
+        },
+        {
+          "id": "N16",
+          "repeat": 1,
+          "expected": "clarify",
+          "actual": "cancel",
+          "components": null
+        },
+        {
+          "id": "N17",
+          "repeat": 1,
+          "expected": "clarify",
+          "actual": "cancel",
+          "components": null
+        },
+        {
+          "id": "N18",
+          "repeat": 1,
+          "expected": "clarify",
+          "actual": "cancel",
+          "components": null
+        },
+        {
+          "id": "N20",
+          "repeat": 1,
+          "expected": "clarify",
+          "actual": "keep",
+          "components": null
+        },
+        {
+          "id": "N20",
+          "repeat": 2,
+          "expected": "clarify",
+          "actual": "keep",
+          "components": null
+        },
+        {
+          "id": "N18",
+          "repeat": 2,
+          "expected": "clarify",
+          "actual": "cancel",
+          "components": null
+        },
+        {
+          "id": "N17",
+          "repeat": 2,
+          "expected": "clarify",
+          "actual": "cancel",
+          "components": null
+        },
+        {
+          "id": "N16",
+          "repeat": 2,
+          "expected": "clarify",
+          "actual": "cancel",
+          "components": null
+        },
+        {
+          "id": "N15",
+          "repeat": 2,
+          "expected": "clarify",
+          "actual": "cancel",
+          "components": null
+        },
+        {
+          "id": "N14",
+          "repeat": 2,
+          "expected": "clarify",
+          "actual": "cancel",
+          "components": null
+        },
+        {
+          "id": "N13",
+          "repeat": 2,
+          "expected": "clarify",
+          "actual": "cancel",
+          "components": null
+        }
+      ]
+    },
+    "split_jev": {
+      "runs": 40,
+      "valid": 40,
+      "correct": 32,
+      "false_cancel": 8,
+      "non_cancel_runs": 28,
+      "missed_cancel": 0,
+      "cancel_runs": 12,
+      "p50_ms": 463.363,
+      "p95_ms": 892.517,
+      "cost_estimate_usd_range": [
+        0.002173080000000001,
+        0.002173080000000001
+      ],
+      "repeat_disagreements": [],
+      "mismatches": [
+        {
+          "id": "N10",
+          "repeat": 1,
+          "expected": "keep",
+          "actual": "cancel",
+          "components": {
+            "decision": "stop",
+            "target": "current",
+            "extra_task": "no"
+          }
+        },
+        {
+          "id": "N14",
+          "repeat": 1,
+          "expected": "clarify",
+          "actual": "cancel",
+          "components": {
+            "decision": "stop",
+            "target": "current",
+            "extra_task": "no"
+          }
+        },
+        {
+          "id": "N17",
+          "repeat": 1,
+          "expected": "clarify",
+          "actual": "cancel",
+          "components": {
+            "decision": "stop",
+            "target": "current",
+            "extra_task": "no"
+          }
+        },
+        {
+          "id": "N18",
+          "repeat": 1,
+          "expected": "clarify",
+          "actual": "cancel",
+          "components": {
+            "decision": "stop",
+            "target": "current",
+            "extra_task": "no"
+          }
+        },
+        {
+          "id": "N18",
+          "repeat": 2,
+          "expected": "clarify",
+          "actual": "cancel",
+          "components": {
+            "decision": "stop",
+            "target": "current",
+            "extra_task": "no"
+          }
+        },
+        {
+          "id": "N17",
+          "repeat": 2,
+          "expected": "clarify",
+          "actual": "cancel",
+          "components": {
+            "decision": "stop",
+            "target": "current",
+            "extra_task": "no"
+          }
+        },
+        {
+          "id": "N14",
+          "repeat": 2,
+          "expected": "clarify",
+          "actual": "cancel",
+          "components": {
+            "decision": "stop",
+            "target": "current",
+            "extra_task": "no"
+          }
+        },
+        {
+          "id": "N10",
+          "repeat": 2,
+          "expected": "keep",
+          "actual": "cancel",
+          "components": {
+            "decision": "stop",
+            "target": "current",
+            "extra_task": "no"
+          }
+        }
+      ]
+    },
+    "regression_split_jev": {
+      "runs": 60,
+      "valid": 60,
+      "correct": 55,
+      "false_cancel": 4,
+      "non_cancel_runs": 36,
+      "missed_cancel": 1,
+      "cancel_runs": 24,
+      "p50_ms": 456.012,
+      "p95_ms": 971.092,
+      "cost_estimate_usd_range": [
+        0.0032727240000000016,
+        0.0032727240000000016
+      ],
+      "repeat_disagreements": [
+        "C10"
+      ],
+      "mismatches": [
+        {
+          "id": "A05",
+          "repeat": 1,
+          "expected": "clarify",
+          "actual": "cancel",
+          "components": {
+            "decision": "stop",
+            "target": "current",
+            "extra_task": "no"
+          }
+        },
+        {
+          "id": "A08",
+          "repeat": 1,
+          "expected": "clarify",
+          "actual": "cancel",
+          "components": {
+            "decision": "stop",
+            "target": "current",
+            "extra_task": "no"
+          }
+        },
+        {
+          "id": "A08",
+          "repeat": 2,
+          "expected": "clarify",
+          "actual": "cancel",
+          "components": {
+            "decision": "stop",
+            "target": "current",
+            "extra_task": "no"
+          }
+        },
+        {
+          "id": "A05",
+          "repeat": 2,
+          "expected": "clarify",
+          "actual": "cancel",
+          "components": {
+            "decision": "stop",
+            "target": "current",
+            "extra_task": "no"
+          }
+        },
+        {
+          "id": "C10",
+          "repeat": 2,
+          "expected": "cancel",
+          "actual": "clarify",
+          "components": {
+            "decision": "stop",
+            "target": "ambiguous",
+            "extra_task": "no"
+          }
+        }
+      ]
+    }
+  }
+}

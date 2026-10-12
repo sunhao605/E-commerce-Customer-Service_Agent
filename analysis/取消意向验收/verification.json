@@ -1,0 +1,76 @@
+{
+  "verified_at": "2026-10-10T21:50:55.602506+08:00",
+  "health": {
+    "agent": {
+      "status": "ok",
+      "lesson": "41"
+    },
+    "java": {
+      "status": "UP"
+    }
+  },
+  "image": "sha256:686b8736231ec4c608251e44d0f97f21b9b086d0cfed2ccd39167b4ba0131bdd",
+  "prompt_unchanged": true,
+  "baseline": {
+    "checks": 14,
+    "passed": 10,
+    "failed": [
+      "确认卡后聊天取消：算了，不退了。",
+      "确认卡后聊天取消：先不退了。",
+      "取消后第一笔不复活旧待办",
+      "补原因前自然取消"
+    ]
+  },
+  "after_live": {
+    "checks": 28,
+    "turns": 39,
+    "passed": true
+  },
+  "browser": {
+    "groups": 2,
+    "checks": 10,
+    "turns": 9,
+    "passed": true
+  },
+  "python": {
+    "targeted_passed": 10,
+    "regression_total": 48,
+    "regression_passed": 47,
+    "existing_failure": "7 天/七天文字断言"
+  },
+  "java_regression_passed": 99,
+  "model_routes": {
+    "before-live": {
+      "routes": 13,
+      "used_model": 13,
+      "model_names": [
+        "deepseek-flash"
+      ]
+    },
+    "after-live": {
+      "routes": 19,
+      "used_model": 19,
+      "model_names": [
+        "deepseek-flash"
+      ]
+    },
+    "live": {
+      "routes": 6,
+      "used_model": 6,
+      "model_names": [
+        "deepseek-flash"
+      ]
+    }
+  },
+  "database_final_matches_original": true,
+  "startup_side_effect": {
+    "restored": true,
+    "balance": "99602.00",
+    "before_hash_matched": true,
+    "rows_changed": 1,
+    "business_transactions_added": 0,
+    "reason": "回滚本次启动初始化自动补款"
+  },
+  "production_deploy": false,
+  "external_refunds": 0
+}

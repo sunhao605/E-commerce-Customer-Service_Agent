@@ -1,0 +1,15 @@
+--- ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/CustomerServiceGatewayService.java (修改前)
++++ ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/CustomerServiceGatewayService.java (修改后)
+@@ -552,6 +552,12 @@
+             clearPendingRefund(session);
+             return plainResponse(session, "本次确认已过期，请重新提出退款诉求并核对申请。", "EXPIRED");
+         }
++        // 补订单是已知办理的输入，不让旧取消对话覆盖；未决确认仍先处理。
++        if ("REFUND_ORDER_REQUIRED".equals(session.getPendingAction()) && session.getConflictToken() == null
++            && session.getObjectWait() == null && ORDER_NO.matcher(message.trim()).matches()) {
++            return prepareRefund(session, userId, message.trim(), session.getRefundReason(),
++                "本次仅准备申请，尚未提交。", session.getActionType());
++        }
+         JsonNode judgment = cancellationJudgment(session, message);
+         CustomerServiceResponse clarification = clarificationReply(session, judgment, exactCancel);
+         if (clarification != null) {

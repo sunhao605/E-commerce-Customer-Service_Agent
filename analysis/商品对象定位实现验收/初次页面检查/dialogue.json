@@ -1,0 +1,26 @@
+[
+  {
+    "input": "折叠椅多少钱，还有库存吗？",
+    "response": {
+      "answer": "找到多款折叠椅，请告诉我要咨询哪一款：\n1. 露营折叠椅\n2. 轻量露营折叠椅\n回复“第一款”或“第二款”即可，也可以直接补充完整商品名。",
+      "sessionId": "cs-dc90ab1a-9c7b-4887-a546-39611aef81b6",
+      "confirmRequired": false,
+      "pendingAction": "PRODUCT_QUERY",
+      "actions": [],
+      "fallback": false
+    },
+    "screenshot": "对话截图/01.png"
+  },
+  {
+    "input": "第二款",
+    "response": {
+      "answer": "轻量露营折叠椅 商品标价 199.0 元，库存 0 件。",
+      "sessionId": "cs-dc90ab1a-9c7b-4887-a546-39611aef81b6",
+      "confirmRequired": false,
+      "pendingAction": "PRODUCT_QUERY",
+      "actions": [],
+      "fallback": false
+    },
+    "screenshot": "对话截图/02.png"
+  }
+]

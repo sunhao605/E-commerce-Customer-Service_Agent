@@ -1,0 +1,15 @@
+test_policy_queries_stay_read_only_and_invoice_stays_invoice (tests.test_route_priority.RoutePriorityTest.test_policy_queries_stay_read_only_and_invoice_stays_invoice) ... FAIL
+
+======================================================================
+FAIL: test_policy_queries_stay_read_only_and_invoice_stays_invoice (tests.test_route_priority.RoutePriorityTest.test_policy_queries_stay_read_only_and_invoice_stays_invoice)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/var/folders/x6/3w41bnkd37123jz189gg1hyr0000gn/T/m06-baseline-tm6ehz65/backend/tests/test_route_priority.py", line 248, in test_policy_queries_stay_read_only_and_invoice_stays_invoice
+    self.assertIn("7 天", returned.answer)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '7 天' not found in '七天无理由退货适用于已支付并签收、申请提交时仍在签收后七天窗口内，且整单商品在购买时均支持七天无理由退货的订单。七天无理由是申请类型，用户无需另外填写退货理由；具体订单是否符合条件仍需核验可信订单事实，不得自动承诺退货成功。\n\n用户核对并确认提交后，申请进入待审核；管理员同意退货并提供退回地址后，由用户寄回并填写退回物流。商家收到商品且验收通过后才退款，同意退货不等于退款已完成。\n\n商品不支持七天无理由、超出窗口或资格事实缺失时，不进入这条无理由退货流程；质量问题等其他售后需说明具体问题并另行核验，不能一律认定为无法办理任何售后。'
+
+----------------------------------------------------------------------
+Ran 1 test in 0.004s
+
+FAILED (failures=1)

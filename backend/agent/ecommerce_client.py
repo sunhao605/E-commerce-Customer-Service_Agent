@@ -154,30 +154,94 @@ def order_fact_from_ecommerce(target_order_no: str, current_user_id: str) -> dic
     return _with_fact_source(mirror, "course_seed_mirror") if mirror else None
 
 
-def products_from_ecommerce(keyword: str) -> list[dict[str, Any]]:
-    """查询实时商品事实；课程离线演练只回退到固定、可识别的商品样例。"""
+def _detail_confirms_missing(exc: httpx.HTTPStatusError) -> bool:
+    """只有详情接口 404 且业务码 NOT_FOUND 才表示这个编号不存在。"""
+    if exc.response.status_code != 404:
+        return False
+    try:
+        body = exc.response.json()
+    except Exception:
+        return False
+    return isinstance(body, dict) and body.get("code") == "NOT_FOUND"
+
+
+def _named_product(product: Any, product_id: int | str) -> dict[str, Any] | None:
+    if not isinstance(product, dict) or str(product.get("id")) != str(product_id):
+        return None
+    if not str(product.get("name") or product.get("productName") or "").strip():
+        return None
+    return product
+
+
+def products_from_ecommerce(keyword: str) -> tuple[list[dict[str, Any]] | None, str]:
+    """查询实时商品。(列表, business_api|course_seed_mirror) 成功，空列表是零匹配；(None, timeout|unavailable) 是读取失败。"""
+    products: Any = None
+    error: str | None = None
     try:
         query_keyword = product_query_keyword(keyword)
         products = ecommerce_get(f"/api/products?{httpx.QueryParams({'keyword': query_keyword})}")
+    except httpx.TimeoutException:
+        error = "timeout"
     except Exception:
-        products = None
-    if isinstance(products, list):
-        return [_with_fact_source(item, "business_api") for item in products if isinstance(item, dict)]
+        error = "unavailable"
+    if error is None:
+        rows = [item for item in products if isinstance(item, dict)] if isinstance(products, list) else None
+        if rows is not None and (not products or rows):
+            return [_with_fact_source(item, "business_api") for item in rows], "business_api"
+        error = "unavailable"
     if not course_seed_mirror_enabled():
-        return []
+        return None, error
     normalized = keyword.replace(" ", "")
     return [
         _with_fact_source(item, "course_seed_mirror")
         for item in COURSE_SEED_PRODUCT_MIRRORS
         if any(term in normalized for term in ("折叠椅", "露营椅")) and "折叠椅" in str(item.get("name"))
-    ]
+    ], "course_seed_mirror"
+
+
+def product_detail_from_ecommerce(product_id: int | str) -> tuple[dict[str, Any] | None, str | None]:
+    """按编号读取详情。(商品, None) 成功；(None, not_found|timeout|unavailable) 区分不存在与读取失败。"""
+    product: Any = None
+    error: str | None = None
+    try:
+        product = ecommerce_get(f"/api/products/{product_id}")
+    except httpx.TimeoutException:
+        error = "timeout"
+    except httpx.HTTPStatusError as exc:
+        error = "not_found" if _detail_confirms_missing(exc) else "unavailable"
+    except Exception:
+        error = "unavailable"
+    if error is None:
+        named = _named_product(product, product_id)
+        if named is not None:
+            return _with_fact_source(named, "business_api"), None
+        error = "unavailable"
+    if error != "not_found" and course_seed_mirror_enabled():
+        mirror = next((item for item in COURSE_SEED_PRODUCT_MIRRORS if str(item.get("id")) == str(product_id)), None)
+        if mirror:
+            return _with_fact_source(mirror, "course_seed_mirror"), None
+    return None, error
+
+
+PRODUCT_TERMS = ("露营折叠椅", "露营椅", "折叠椅", "折叠桌", "野餐垫", "帐篷", "天幕", "营地灯", "背包", "登山杖", "睡袋", "收纳车", "收纳柜", "炊具", "防水袋", "头灯", "营地旗", "营地标识")
+
+
+def has_product_term(user_message: str) -> bool:
+    """客户原句是否带有明确商品名称或类别词，用于区分新对象与追问。"""
+    return any(term in user_message for term in PRODUCT_TERMS)
 
 
 def product_query_keyword(user_message: str) -> str:
-    """把自然语言商品咨询收窄成业务后端可搜索的关键词。"""
-    for term in ("露营折叠椅", "露营椅", "折叠椅", "折叠桌", "野餐垫", "帐篷", "天幕", "营地灯", "背包", "登山杖", "睡袋", "收纳车", "收纳柜", "炊具", "防水袋", "头灯", "营地旗", "营地标识"):
+    """提取商品名称，保留款式区别；仅类别别名规范为搜索词。"""
+    for term in PRODUCT_TERMS:
         if term in user_message:
-            return "折叠椅" if term in {"露营折叠椅", "露营椅"} else term
+            start = user_message.index(term)
+            prefix = re.split(r"[\n，,。；;！？!?]", user_message[:start])[-1]
+            # shortcut: 只裁掉常见询问前缀，复杂描述无法匹配时澄清，不删款式兜底。
+            prefix = re.sub(r"^.*(?:请问|帮我查一下|查一下|查询|看看|看一下|我要问|我想问|我想买|咨询|了解|换看|查)", "", prefix)
+            prefix = re.sub(r"^(?:这件|这款|这个|那件|那款|商品|一款|一个|的|\s)+", "", prefix)
+            name = (prefix + term).strip()
+            return "折叠椅" if name in {"露营折叠椅", "露营椅"} else name
     return user_message.strip()
 
 

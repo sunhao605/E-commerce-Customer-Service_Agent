@@ -1,0 +1,33 @@
+{
+  "session_id": "m06-20261010202923",
+  "runtime_user_id": "m06-isolated",
+  "user_message": "第一笔。",
+  "runtime_context": {
+    "currentUserOrders": [
+      {
+        "orderNo": "ORD9801",
+        "userId": "m06-isolated",
+        "paymentStatus": "PAID",
+        "fulfillmentStatus": "UNSHIPPED",
+        "totalAmount": 201,
+        "items": [
+          {
+            "productName": "验收露营椅1"
+          }
+        ]
+      },
+      {
+        "orderNo": "ORD9802",
+        "userId": "m06-isolated",
+        "paymentStatus": "PAID",
+        "fulfillmentStatus": "UNSHIPPED",
+        "totalAmount": 202,
+        "items": [
+          {
+            "productName": "验收露营椅2"
+          }
+        ]
+      }
+    ]
+  }
+}

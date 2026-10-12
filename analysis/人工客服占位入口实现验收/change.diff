@@ -1,0 +1,195 @@
+--- ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/CustomerServiceGatewayService.java (before)
++++ ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/CustomerServiceGatewayService.java (after)
+@@ -116,6 +116,15 @@
+             assertSessionOwner(session, profile.getUserId());
+             session.setCancellationJudged(false);
+             String message = request.getMessage();
++            String unsupported = unsupportedServiceReason(message);
++            if (unsupported != null || wantsHumanSupport(message)) {
++                boolean replaceDraft = unsupported != null && !isServicePolicyQuestion(message);
++                CustomerServiceResponse response = humanSupportResponse(session,
++                    unsupported == null ? "你希望联系人工客服。" : "你希望咨询或办理" + unsupported + "，当前客服助手暂不能办理这类业务。",
++                    replaceDraft);
++                rememberTurn(session, message, response.getAnswer());
++                return response;
++            }
+             if (session.getAfterSaleQuery() != null && message.trim().matches("(?:好的|好|可以|知道了|先不办|暂时不办)[。！!\\s]*")) {
+                 if (message.contains("不办")) session.setAfterSaleQuery(null);
+                 CustomerServiceResponse response = new CustomerServiceResponse("好的，这次只咨询，没有准备新的申请。需要办理时请明确提出申请。",
+@@ -158,6 +167,13 @@
+             );
+             try {
+                 JsonNode agentResponse = agentClient.chat(agentRequest);
++                if (agentResponse != null && "transfer_to_human".equals(agentResponse.path("next_action").asText())
++                    && !isApprovalRequired(workflowNode(agentResponse))) {
++                    CustomerServiceResponse response = humanSupportResponse(session,
++                        text(agentResponse, "answer", "当前问题需要人工进一步核验。"), false);
++                    rememberTurn(session, message, response.getAnswer());
++                    return response;
++                }
+                 if (agentResponse != null && "after_sale_eligibility_query".equals(agentResponse.path("session_state").path("intent").asText())) {
+                     CustomerServiceResponse response = eligibilityQueryResponse(agentResponse, session);
+                     rememberTurn(session, message, response.getAnswer());
+@@ -728,6 +744,44 @@
+             session.getRelatedOrderNo(), session.getRelatedAfterSaleNo(), null, List.of(), false);
+     }
+ 
++    private CustomerServiceResponse humanSupportResponse(CustomerServiceSession session, String answer, boolean replaceDraft) {
++        boolean hadDraft = replaceDraft && session.getPendingAction() != null && !session.isHandled();
++        if (replaceDraft) {
++            if (hadDraft) clearPendingRefund(session);
++            session.setAfterSaleQuery(null);
++        }
++        sessionStore.save(session);
++        String token = session.isHandled() ? null : session.getResumeToken();
++        return new CustomerServiceResponse(answer + (hadDraft ? " 原未提交申请的确认卡已失效。" : "")
++            + " 人工客服功能开发中，确认后仅前往说明页面，暂时无法接入真人客服。本次未新增售后申请。",
++            session.getSessionId(), true, "HUMAN_SUPPORT", "是否前往人工客服入口？",
++            "人工客服功能开发中；进入说明页面不会转接真人或提交售后申请。",
++            session.getRelatedOrderNo(), session.getRelatedAfterSaleNo(), token,
++            List.of(new CustomerServiceActionResponse("OPEN_HUMAN_SUPPORT", "确认前往"),
++                new CustomerServiceActionResponse("STAY_WITH_AGENT", "暂不前往")), false);
++    }
++
++    // shortcut: 首版覆盖明确业务词及其直接否定；复杂组合售后需另行定义目标和顺序。
++    private static String unsupportedServiceReason(String message) {
++        String text = message.replaceAll("(?:不是|不要|不用|无需|不需要|不想要|不想|别|不)(?:再)?(?:给我|帮我)?(?:换货|换一件|换新|换一个|维修|修理|返修|修一下|保修|补发|部分(?:订单)?退款|部分退货)", "")
++            .replaceAll("(?:非|没有|不是)质量问题", "");
++        if (text.matches("(?s).*(?:部分(?:订单)?退款|部分退货|退一部分|退部分|(?:只|仅)退(?:其中)?(?:一|1|两|2)件|(?:只|仅)退(?:这|那|其中的)(?:一)?(?:件|个|款)|退款.*部分金额).*")) return "部分退款或部分退货";
++        if (text.matches("(?s).*(?:换货|换一件|换新|换一个).*")) return "换货";
++        if (text.matches("(?s).*(?:维修|修理|返修|修一下|保修).*")) return "维修";
++        if (text.contains("补发")) return "补发";
++        if (text.matches("(?s).*(?:质量问题|商品破损|发错货|少件|与描述不符|收到.{0,8}(?:破了|坏了)).*")) return "质量问题售后";
++        return null;
++    }
++
++    private static boolean wantsHumanSupport(String message) {
++        String text = message.replaceAll("(?:不要|不用|不需要|别|不)(?:再)?(?:给我|帮我)?(?:转(?:接)?人工|人工客服|真人客服)", "");
++        return text.matches("(?s).*(?:转(?:接)?人工|人工客服|真人客服|找人工).*");
++    }
++
++    private static boolean isServicePolicyQuestion(String message) {
++        return message.matches("(?s).*(?:政策|规则|条件|流程|怎么|如何|能否|能不能|可以.*吗|支持.*吗|[？?]).*");
++    }
++
+     private CustomerServiceResponse cancelPendingRefund(CustomerServiceSession session) {
+         clearPendingRefund(session);
+         session.setHandled(true);
+--- ecommerce-backend/frontend/src/shop/App.tsx (before)
++++ ecommerce-backend/frontend/src/shop/App.tsx (after)
+@@ -26,7 +26,8 @@
+   | { name: "order"; orderNo: string }
+   | { name: "after-sales" }
+   | { name: "balance" }
+-  | { name: "policies" };
++  | { name: "policies" }
++  | { name: "human-support" };
+ 
+ type Toast = { tone: "ok" | "error"; text: string } | null;
+ type CsMessage = {
+@@ -35,6 +36,7 @@
+   contextTag?: string;
+   response?: CustomerServiceResponse;
+   confirmationResult?: CustomerServiceResponse;
++  humanSupportDecision?: string;
+ };
+ 
+ const money = (value?: number | null) => `¥${Number(value ?? 0).toFixed(2)}`;
+@@ -73,6 +75,7 @@
+   if (path === "/after-sales") return { name: "after-sales" };
+   if (path === "/balance") return { name: "balance" };
+   if (path === "/policies") return { name: "policies" };
++  if (path === "/human-support") return { name: "human-support" };
+   return { name: "home" };
+ }
+ 
+@@ -185,6 +188,7 @@
+           context={csContext}
+           onClose={() => setCsOpen(false)}
+           onError={handleError}
++          onHumanSupport={() => { setCsOpen(false); go("/human-support"); }}
+         />
+       )}
+     </div>
+@@ -274,6 +278,7 @@
+   if (route.name === "after-sales") return <AfterSalesPage {...props} />;
+   if (route.name === "balance") return <BalancePage {...props} />;
+   if (route.name === "policies") return <PoliciesPage handleError={props.handleError} />;
++  if (route.name === "human-support") return <HumanSupportPage go={props.go} openService={props.openService} />;
+   return <HomePage {...props} />;
+ }
+ 
+@@ -1101,11 +1106,22 @@
+   );
+ }
+ 
+-function CustomerServiceDrawer({ open, context, onClose, onError }: {
++function HumanSupportPage({ go, openService }: Pick<PageProps, "go" | "openService">) {
++  return (
++    <section className="state-block">
++      <h1>人工客服功能开发中</h1>
++      <p>当前尚未接入真人客服，本次没有转接、登记人工服务请求或提交售后申请。</p>
++      <button className="primary" onClick={() => { go("/"); openService({ type: "HOME" }); }}>返回客服助手</button>
++    </section>
++  );
++}
++
++function CustomerServiceDrawer({ open, context, onClose, onError, onHumanSupport }: {
+   open: boolean;
+   context: CustomerServicePageContext;
+   onClose: () => void;
+   onError: (error: unknown) => string;
++  onHumanSupport: () => void;
+ }) {
+   const [messages, setMessages] = useState<CsMessage[]>([
+     { from: "agent", text: "您好，我是荒野户外的客服助手，请问有什么可以帮您？" }
+@@ -1180,7 +1196,17 @@
+   }
+ 
+   const latestConfirmationIndex = messages.reduce((latest, message, index) =>
+-    message.response?.confirmRequired && message.response.resumeToken === activeConfirmationToken ? index : latest, -1);
++    message.response?.confirmRequired && message.response.pendingAction !== "HUMAN_SUPPORT"
++      && message.response.resumeToken === activeConfirmationToken ? index : latest, -1);
++  const latestHumanSupportIndex = messages.reduce((latest, message, index) =>
++    message.from === "agent" ? (message.response?.pendingAction === "HUMAN_SUPPORT" ? index : -1) : latest, -1);
++
++  function chooseHumanSupport(index: number, code: string) {
++    if (loading || index !== latestHumanSupportIndex || messages[index].humanSupportDecision) return;
++    setMessages((prev) => prev.map((message, current) => current === index
++      ? { ...message, humanSupportDecision: code === "OPEN_HUMAN_SUPPORT" ? "已打开人工客服说明页面" : "已留在客服助手" } : message));
++    if (code === "OPEN_HUMAN_SUPPORT") onHumanSupport();
++  }
+ 
+   return (
+     <aside className="service-drawer">
+@@ -1193,7 +1219,19 @@
+           <div className={`message ${message.from}`} key={index}>
+             <p>{message.text}</p>
+             {message.contextTag && <span className="message-context-tag">{message.contextTag}</span>}
+-            {message.response?.confirmRequired && (
++            {message.response?.pendingAction === "HUMAN_SUPPORT" && (
++              <div className="confirm-card" role="group" aria-label="人工客服入口确认">
++                <b>{message.response.confirmationTitle}</b>
++                <span>{message.humanSupportDecision ?? message.response.confirmationSummary}</span>
++                {!message.humanSupportDecision && index !== latestHumanSupportIndex && <span>请以最新回复中的入口为准。</span>}
++                {message.response.actions.map((action) => (
++                  <button key={action.code} className={action.code === "OPEN_HUMAN_SUPPORT" ? "primary" : undefined}
++                    disabled={loading || index !== latestHumanSupportIndex || !!message.humanSupportDecision}
++                    onClick={() => chooseHumanSupport(index, action.code)}>{action.label}</button>
++                ))}
++              </div>
++            )}
++            {message.response?.confirmRequired && message.response.pendingAction !== "HUMAN_SUPPORT" && (
+               <div className="confirm-card">
+                 <b>{message.confirmationResult?.confirmationTitle
+                   ?? (message.confirmationResult?.pendingAction === "CANCELLED" ? "本次申请已取消" : message.response.confirmationTitle ?? "需要确认")}</b>
+--- ecommerce-backend/src/main/java/com/teachdemo/ecommerce/config/SpaForwardController.java (before)
++++ ecommerce-backend/src/main/java/com/teachdemo/ecommerce/config/SpaForwardController.java (after)
+@@ -15,6 +15,7 @@
+         "/orders",
+         "/balance",
+         "/policies",
++        "/human-support",
+         "/products/{path:[^\\.]*}",
+         "/pay/{path:[^\\.]*}",
+         "/orders/{path:[^\\.]*}"

@@ -16,6 +16,7 @@ from api.schemas import ChatRequest, Intent, ToolCallTrace
 from settings import api_key_is_missing, deepseek_extra_body, load_course_env, openai_base_url, openai_model_name
 from agent.hooks import HookManager
 from agent.ecommerce_client import product_query_keyword
+from agent.product_query import normalize_product_text
 from agent.prompts import PromptManager, prompt_manager
 from agent.tools.tool_runtime import get_order_detail, get_order_logistics, get_refund_status, search_products
 
@@ -25,7 +26,7 @@ class OrderIdInput(BaseModel):
 
 
 class ProductQueryInput(BaseModel):
-    keyword: str = Field(..., description="用户明确提到的商品关键词，例如折叠椅")
+    keyword: str = Field(..., description="客户原句中的完整商品名称或类别词，必须保留款式、容量等限定词，不得只写类别词或编造名称")
 
 
 @dataclass
@@ -90,13 +91,22 @@ class LangChainToolRunner:
             captured_calls.append(call)
             return call
 
+        original_message = str((request.runtime_context or {}).get("userMessage") or request.user_message)
+
         def product_route_plan_mismatch(keyword: str) -> ToolCallTrace | None:
-            if expected_product_keyword is None or product_query_keyword(keyword) == product_query_keyword(expected_product_keyword):
+            """模型关键词必须来自客户原句且类别一致，不能只凭“都含折叠椅”放行。"""
+            reasons: list[str] = []
+            normalized_keyword = normalize_product_text(keyword)
+            if not normalized_keyword or normalized_keyword not in normalize_product_text(original_message):
+                reasons.append("keyword_not_in_user_message")
+            if expected_product_keyword is not None and product_query_keyword(keyword) != product_query_keyword(expected_product_keyword):
+                reasons.append("category_mismatch")
+            if not reasons:
                 return None
             call = ToolCallTrace(
                 tool_name="search_products",
-                arguments={"keyword": keyword, "expected_keyword": expected_product_keyword},
-                output_summary="模型工具参数与受控 RoutePlan 的商品关键词不一致，已阻止执行。",
+                arguments={"keyword": keyword, "expected_keyword": expected_product_keyword, "mismatch_reasons": reasons},
+                output_summary="模型工具参数与客户原句的商品表达不一致，已阻止执行。",
                 status="error",
                 risk_level="medium",
                 next_action="ask_clarification",
@@ -167,7 +177,7 @@ class LangChainToolRunner:
             if mismatch:
                 return json.dumps({"status": "error", "summary": mismatch.output_summary}, ensure_ascii=False)
             hooks.pre_tool_call("search_products", {"keyword": keyword}, request.runtime_user_id)
-            captured_products, call = search_products(keyword)
+            captured_products, call = search_products(keyword, match_text=original_message)
             hooks.post_tool_call(call)
             captured_calls.append(call)
             return json.dumps({"status": call.status, "summary": call.output_summary}, ensure_ascii=False)
@@ -194,7 +204,7 @@ class LangChainToolRunner:
             "search_products": StructuredTool.from_function(
                 func=query_products,
                 name="search_products",
-                description="按商品关键词查询荒野户外实时价格、库存和商品活动事实。",
+                description="按商品关键词查询荒野户外实时价格、库存和商品活动事实。关键词要保留客户说的完整商品名称；返回多款候选时不得自行选定。",
                 args_schema=ProductQueryInput,
             ),
         }
@@ -216,7 +226,7 @@ class LangChainToolRunner:
             if expected_order_id:
                 controlled_user_message += f"\n\n受控 RoutePlan 已确认订单号：{expected_order_id}"
             if expected_product_keyword:
-                controlled_user_message += f"\n\n受控 RoutePlan 已确认商品查询词：{expected_product_keyword}"
+                controlled_user_message += f"\n\n受控 RoutePlan 商品召回词：{expected_product_keyword}；调用商品 Tool 时 keyword 必须取自用户原句并保留完整商品名称（含款式限定词）。"
             result = agent.invoke(
                 {"messages": [{"role": "user", "content": controlled_user_message}]},
                 config={"recursion_limit": 4},

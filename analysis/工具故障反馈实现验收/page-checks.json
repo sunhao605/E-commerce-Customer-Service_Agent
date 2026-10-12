@@ -1,0 +1,38 @@
+[
+  {
+    "check": "失败前退款确认卡存在，停在提交前",
+    "passed": true
+  },
+  {
+    "check": "先读到这款商品的实时价格",
+    "passed": true
+  },
+  {
+    "check": "成功查询不改变退款草稿",
+    "passed": true
+  },
+  {
+    "check": "详情读取失败时说明这次查询没有成功",
+    "passed": true
+  },
+  {
+    "check": "失败回复不说缺货、不存在，也不重报旧价格",
+    "passed": true
+  },
+  {
+    "check": "失败回复不重发确认卡，草稿不变",
+    "passed": true
+  },
+  {
+    "check": "恢复后仍查原商品并读到当前价格",
+    "passed": true
+  },
+  {
+    "check": "恢复后再查询仍不改变退款草稿",
+    "passed": true
+  },
+  {
+    "check": "失败和恢复期间8张H2业务表未变",
+    "passed": true
+  }
+]

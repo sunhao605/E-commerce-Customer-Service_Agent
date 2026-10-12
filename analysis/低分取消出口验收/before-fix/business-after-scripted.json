@@ -1,0 +1,34 @@
+{
+  "order_header": {
+    "rows": 17,
+    "sha256": "b3a08a321e455d5386208b3605fe56edd034579d5da735efa597b1bb5c37995d"
+  },
+  "order_item": {
+    "rows": 18,
+    "sha256": "c1bf0009d3c275110e73d9b631b00cda69c15a39c19fb8a129a1f0f36cf0baf6"
+  },
+  "balance_account": {
+    "rows": 3,
+    "sha256": "1a5878dc95324d3b1b4754c826d56d8338fcef2a9a62f5ec41230a93e02a3ae5"
+  },
+  "balance_transaction": {
+    "rows": 5,
+    "sha256": "7ef3c150800819393d737220008a3feb2f01004c47651fd8fc8f74edaa36cbe9"
+  },
+  "after_sale_request": {
+    "rows": 4,
+    "sha256": "b40fbccaedbe87b2e06ecf768ae73b7cf7d4e2c53ad1be2197d8af8285ec16a9"
+  },
+  "approval_record": {
+    "rows": 4,
+    "sha256": "1babf8263ba212a1c8981dd6ae07bceee49436a9f1b9659242af9bc3040933ad"
+  },
+  "logistics_info": {
+    "rows": 10,
+    "sha256": "83f1386ef8160080762bc1159ebd816f6875c2a15317a4e804f2acac41951f86"
+  },
+  "logistics_event": {
+    "rows": 13,
+    "sha256": "4c5d1e83be3ad5aa4fc5e82125504f682a84ef3cfa19972fb6257a3d418d9263"
+  }
+}

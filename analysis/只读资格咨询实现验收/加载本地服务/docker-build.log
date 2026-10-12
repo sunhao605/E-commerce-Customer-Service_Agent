@@ -1,0 +1,122 @@
+ Image huangye-outdoor-ecommerce Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 634B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 1.86kB 0.1s done
+#2 DONE 0.1s
+
+#3 resolve image config for docker-image://docker.io/docker/dockerfile:1.6
+#3 DONE 2.0s
+
+#4 docker-image://docker.io/docker/dockerfile:1.6@sha256:ac85f380a63b13dfcefa89046420e1781752bab202122f8f50032edf31be0021
+#4 resolve docker.io/docker/dockerfile:1.6@sha256:ac85f380a63b13dfcefa89046420e1781752bab202122f8f50032edf31be0021 0.0s done
+#4 CACHED
+
+#5 [internal] load metadata for docker.io/library/maven:3.9.6-eclipse-temurin-17
+#5 DONE 0.0s
+
+#6 [internal] load metadata for docker.io/library/node:22-bookworm-slim
+#6 DONE 0.0s
+
+#7 [internal] load metadata for docker.io/library/eclipse-temurin:17-jre
+#7 DONE 1.6s
+
+#8 [internal] load .dockerignore
+#8 transferring context: 187B done
+#8 DONE 0.0s
+
+#9 [frontend-builder 1/6] FROM docker.io/library/node:22-bookworm-slim@sha256:d649c27dae7ba0137b3cef5dd75baa422c08dc3d9e3fc0c23dfb172dc3cc6436
+#9 resolve docker.io/library/node:22-bookworm-slim@sha256:d649c27dae7ba0137b3cef5dd75baa422c08dc3d9e3fc0c23dfb172dc3cc6436 0.0s done
+#9 DONE 0.0s
+
+#10 [builder 1/9] FROM docker.io/library/maven:3.9.6-eclipse-temurin-17@sha256:29a1658b1f3078e07c2b17f7b519b45eb47f65d9628e887eac45a8c5c8f939d4
+#10 resolve docker.io/library/maven:3.9.6-eclipse-temurin-17@sha256:29a1658b1f3078e07c2b17f7b519b45eb47f65d9628e887eac45a8c5c8f939d4 0.0s done
+#10 DONE 0.0s
+
+#11 [stage-2 1/3] FROM docker.io/library/eclipse-temurin:17-jre@sha256:207ecae0b2b104dfc6dfa763d1e9cd2041cb344800a180e24cb1a28ed533ff90
+#11 resolve docker.io/library/eclipse-temurin:17-jre@sha256:207ecae0b2b104dfc6dfa763d1e9cd2041cb344800a180e24cb1a28ed533ff90 0.0s done
+#11 DONE 0.0s
+
+#12 [internal] load build context
+#12 transferring context: 178.75kB 0.0s done
+#12 DONE 0.0s
+
+#13 [frontend-builder 2/6] WORKDIR /workspace/frontend
+#13 CACHED
+
+#14 [frontend-builder 3/6] COPY frontend/package*.json ./
+#14 CACHED
+
+#15 [builder 2/9] WORKDIR /workspace
+#15 CACHED
+
+#16 [builder 5/9] COPY pom.xml .
+#16 CACHED
+
+#17 [builder 3/9] COPY docker ./docker
+#17 CACHED
+
+#18 [builder 4/9] RUN mkdir -p /root/.m2     && cp docker/maven-settings.xml /root/.m2/settings.xml
+#18 CACHED
+
+#19 [frontend-builder 4/6] RUN npm ci --no-audit --no-fund --loglevel=warn
+#19 CACHED
+
+#20 [builder 6/9] RUN --mount=type=cache,target=/root/.m2/repository     mkdir -p /root/.m2/repository     && if [ -f docker/m2-cache.tar.gz ]; then tar -xzf docker/m2-cache.tar.gz -C /root/.m2/repository; fi     && find /root/.m2/repository ( -name '*.lastUpdated' -o -name 'resolver-status.properties' ) -delete     && if [ -f docker/m2-cache.tar.gz ]; then         mvn -o -s /root/.m2/settings.xml -q -DskipTests dependency:go-offline         || mvn -s /root/.m2/settings.xml -q -DskipTests dependency:go-offline;     else         mvn -s /root/.m2/settings.xml -q -DskipTests dependency:go-offline;     fi
+#20 CACHED
+
+#21 [frontend-builder 5/6] COPY frontend ./
+#21 DONE 0.1s
+
+#22 [builder 7/9] COPY src ./src
+#22 DONE 0.1s
+
+#23 [frontend-builder 6/6] RUN npm run build
+#23 1.084 
+#23 1.084 > huangye-ecommerce-frontend@0.1.0 build
+#23 1.084 > tsc -b && vite build
+#23 1.084 
+#23 4.150 vite v7.3.5 building client environment for production...
+#23 4.201 transforming...
+#23 6.017 ✓ 1692 modules transformed.
+#23 6.108 rendering chunks...
+#23 6.163 computing gzip size...
+#23 6.175 dist/index.html                   0.48 kB │ gzip:  0.32 kB
+#23 6.175 dist/admin/index.html             0.49 kB │ gzip:  0.33 kB
+#23 6.175 dist/assets/admin-Bnqw43Ho.css    8.53 kB │ gzip:  2.55 kB
+#23 6.175 dist/assets/shop-PfOLhjrN.css    19.02 kB │ gzip:  4.51 kB
+#23 6.175 dist/assets/shop-BiOqbddP.js     35.26 kB │ gzip: 10.95 kB
+#23 6.175 dist/assets/admin-CNgT7m05.js    38.70 kB │ gzip: 10.94 kB
+#23 6.175 dist/assets/api-HFfHoR9q.js     195.18 kB │ gzip: 61.52 kB
+#23 6.176 ✓ built in 2.00s
+#23 DONE 6.2s
+
+#24 [builder 8/9] COPY --from=frontend-builder /workspace/frontend/dist ./frontend/dist
+#24 DONE 0.0s
+
+#25 [builder 9/9] RUN --mount=type=cache,target=/root/.m2/repository     mvn -s /root/.m2/settings.xml -q -DskipTests package
+#25 DONE 5.1s
+
+#26 [stage-2 2/3] WORKDIR /app
+#26 CACHED
+
+#27 [stage-2 3/3] COPY --from=builder /workspace/target/ecommerce-backend-0.0.1-SNAPSHOT.jar app.jar
+#27 DONE 0.1s
+
+#28 exporting to image
+#28 exporting layers
+#28 exporting layers 1.2s done
+#28 exporting manifest sha256:967028a148d8d87ad43050f290dfd151ae4c1a7309745f56273671dde1179fc5 0.0s done
+#28 exporting config sha256:4f94512084e3fdd2347ce7a0f47a4b59a2d253c08857b1cbbb294b6a1a023dc2 done
+#28 exporting attestation manifest sha256:2bed4cba52a7428695861ff3c4d509fa858c4a00c7de982c1128e4764e4a0ac4 done
+#28 exporting manifest list sha256:3e0b6d526a97f773fd8d7f496f072f71bd7c616c01f0ef027c234b419a12e57b done
+#28 naming to docker.io/library/huangye-outdoor-ecommerce:latest done
+#28 unpacking to docker.io/library/huangye-outdoor-ecommerce:latest
+#28 unpacking to docker.io/library/huangye-outdoor-ecommerce:latest 0.8s done
+#28 DONE 2.0s
+
+#29 resolving provenance for metadata file
+#29 DONE 0.1s
+ Image huangye-outdoor-ecommerce Built 

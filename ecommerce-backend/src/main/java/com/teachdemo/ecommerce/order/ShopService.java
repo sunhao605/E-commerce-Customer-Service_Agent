@@ -353,6 +353,37 @@ public class ShopService {
         return toOrderResponse(order);
     }
 
+    @Transactional(readOnly = true)
+    public AfterSaleEligibilityResponse getAfterSaleEligibility(String userId, String orderNo) {
+        OrderEntity order = findOwnOrder(userId, orderNo);
+        if (!StringUtils.hasText(order.getStatus()) || !StringUtils.hasText(order.getPaymentStatus())
+            || !StringUtils.hasText(order.getFulfillmentStatus())) {
+            return new AfterSaleEligibilityResponse(orderNo, "UNKNOWN", null, null, "缺少可信订单、支付或履约状态，请联系人工核验。");
+        }
+        if (afterSaleRequestRepository.findByOrderNo(orderNo).stream().anyMatch(this::isActiveMoneyApplication)) {
+            return new AfterSaleEligibilityResponse(orderNo, "INELIGIBLE", null, null,
+                "该订单已有售后申请，请查看原申请进度，不要重复申请。");
+        }
+        String type = Set.of("DELIVERED", "SIGNED", "COMPLETED").contains(String.valueOf(order.getStatus()))
+            ? "RETURN" : "REFUND";
+        try {
+            BigDecimal amount = "RETURN".equals(type) ? customerReturnAmount(order, returnNow())
+                : customerRefundAmount(order, userId);
+            String reason = "RETURN".equals(type) ? "已支付并签收、在七天窗口内，整单商品购买时均支持无理由退货，实付金额已核实。"
+                : "已支付且未发货，整单实付金额已核实。";
+            return new AfterSaleEligibilityResponse(orderNo, "ELIGIBLE", type, amount, reason);
+        } catch (BusinessException ex) {
+            boolean unknown = Set.of("REFUND_PAYMENT_UNVERIFIED", "RETURN_SIGNED_TIME_MISSING", "RETURNABILITY_UNVERIFIED")
+                .contains(ex.getCode()) || "RETURN_WINDOW_INVALID".equals(ex.getCode())
+                && order.getDeliveredAt() != null && order.getDeliveredAt().isAfter(returnNow());
+            String reason = ex.getMessage().replace("；本次未提交", "").replace("，本次未提交", "");
+            if ("CUSTOMER_REFUND_NOT_ALLOWED".equals(ex.getCode()) && "SHIPPED".equals(order.getFulfillmentStatus())) {
+                reason = "订单已发货，不满足未发货退款或已签收七天无理由退货条件；拦截等其他处理请联系人工核验。";
+            }
+            return new AfterSaleEligibilityResponse(orderNo, unknown ? "UNKNOWN" : "INELIGIBLE", type, null, reason);
+        }
+    }
+
     @Transactional
     public ShopAfterSaleResponse submitCustomerRefund(String userId, String orderNo, String reason,
                                                        BigDecimal confirmedAmount) {

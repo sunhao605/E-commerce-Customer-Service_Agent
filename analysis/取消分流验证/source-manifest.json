@@ -1,0 +1,8 @@
+{
+  "analysis/取消语义对比/frozen.json": "34e1b091d4c39e14a8cbdfa8347cfc8bce3c3a441b596cb3a8c01d3c6e839f16",
+  "analysis/取消语义定向修复/english-scope/frozen.json": "b218e9c89f5759561190c1e3d321601fcf6a6ef4275df94c3321bd4564f8ac1c",
+  "backend/agent/customer_service_agent.py": "b7cc4c69ed369f13ca651499b23e8c0ff432e8be17cbc1990d1dde2440b5fdcc",
+  "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/CustomerServiceGatewayService.java": "ba805cfed2314c37b66c0acbb187f8eb561752bab30ac8164d4dcbca7598a103",
+  "analysis/取消分流验证/run_routing.py": "441355e6fe99ff365e6ea57eb4117d250af79e3880322d61f3221dda3da188b2",
+  "analysis/取消分流验证/frozen.json": "bfc0f130a3b70e7f3cecee0bec4f768cbb5916ddc659c4ffed3b33fd0c34bd0f"
+}

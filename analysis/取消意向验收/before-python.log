@@ -1,0 +1,26 @@
+test_cancellation_does_not_prevent_a_new_refund_request (backend.tests.test_cancelled_draft.CancelledDraftTest.test_cancellation_does_not_prevent_a_new_refund_request) ... FAIL
+test_gateway_cancellation_removes_old_candidates_before_routing (backend.tests.test_cancelled_draft.CancelledDraftTest.test_gateway_cancellation_removes_old_candidates_before_routing) ... FAIL
+test_without_cancellation_keeps_the_pending_selection (backend.tests.test_cancelled_draft.CancelledDraftTest.test_without_cancellation_keeps_the_pending_selection) ... ok
+
+======================================================================
+FAIL: test_cancellation_does_not_prevent_a_new_refund_request (backend.tests.test_cancelled_draft.CancelledDraftTest.test_cancellation_does_not_prevent_a_new_refund_request)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_DianShang_Agent/backend/tests/test_cancelled_draft.py", line 46, in test_cancellation_does_not_prevent_a_new_refund_request
+    self.assertIsNone(route.call_args.kwargs['task_note'])
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '未完成待办（系统状态，不是用户原话）：\n任务：refund_request\n缺少：order_id\n已展示候选：1. ORD9801' is not None
+
+======================================================================
+FAIL: test_gateway_cancellation_removes_old_candidates_before_routing (backend.tests.test_cancelled_draft.CancelledDraftTest.test_gateway_cancellation_removes_old_candidates_before_routing)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_DianShang_Agent/backend/tests/test_cancelled_draft.py", line 26, in test_gateway_cancellation_removes_old_candidates_before_routing
+    self.assertIsNone(route.call_args.kwargs['task_note'])
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '未完成待办（系统状态，不是用户原话）：\n任务：refund_request\n缺少：order_id\n已展示候选：1. ORD9801' is not None
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.025s
+
+FAILED (failures=2)

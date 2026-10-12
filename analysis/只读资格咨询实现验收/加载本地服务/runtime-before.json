@@ -1,0 +1,18 @@
+{
+  "java_image": "sha256:498818e6b592df512d8d12993468285edd8ede8917f4a9f82808c840f32c1992",
+  "java_env_sha256": "50859b21a4aa212e905f33665d9b70bfe7065cb68186e8edb3183c7a3c385cdf",
+  "java_cancel_execute": "unset(default off)",
+  "python_pid": 18480,
+  "python_config": {
+    "CANCEL_INTENT_EXECUTE": "0",
+    "CANCEL_INTENT_OBSERVE": "0",
+    "CANCEL_SCORE_MIN": "0.9",
+    "AGENT_COURSE_ENV": "/Users/sunhao/Downloads/03_AIPMProject/0305_DianShang_Agent/.env.model.local",
+    "AGENT_COURSE_DISABLE_LLM": "0",
+    "AGENT_COURSE_OFFLINE_RAG": "1",
+    "AGENT_COURSE_OFFLINE_FACTS": "0",
+    "LANGCHAIN_TRACING_V2": "false",
+    "LANGSMITH_TRACING": "false"
+  },
+  "model_config_file_sha256": "5e07f7ae4c38029312e617c7415a933e7dfba3ef6b863ce6185e9008d2978823"
+}

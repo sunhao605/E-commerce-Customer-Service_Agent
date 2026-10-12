@@ -1,0 +1,105 @@
+ Image huangye-outdoor-ecommerce Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 634B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 1.86kB 0.0s done
+#2 DONE 0.0s
+
+#3 resolve image config for docker-image://docker.io/docker/dockerfile:1.6
+#3 DONE 2.3s
+
+#4 docker-image://docker.io/docker/dockerfile:1.6@sha256:ac85f380a63b13dfcefa89046420e1781752bab202122f8f50032edf31be0021
+#4 resolve docker.io/docker/dockerfile:1.6@sha256:ac85f380a63b13dfcefa89046420e1781752bab202122f8f50032edf31be0021 0.0s done
+#4 CACHED
+
+#5 [internal] load metadata for docker.io/library/node:22-bookworm-slim
+#5 DONE 0.0s
+
+#6 [internal] load metadata for docker.io/library/maven:3.9.6-eclipse-temurin-17
+#6 DONE 0.0s
+
+#7 [internal] load metadata for docker.io/library/eclipse-temurin:17-jre
+#7 DONE 1.9s
+
+#8 [internal] load .dockerignore
+#8 transferring context: 187B done
+#8 DONE 0.0s
+
+#9 [builder 1/9] FROM docker.io/library/maven:3.9.6-eclipse-temurin-17@sha256:29a1658b1f3078e07c2b17f7b519b45eb47f65d9628e887eac45a8c5c8f939d4
+#9 resolve docker.io/library/maven:3.9.6-eclipse-temurin-17@sha256:29a1658b1f3078e07c2b17f7b519b45eb47f65d9628e887eac45a8c5c8f939d4 0.0s done
+#9 DONE 0.0s
+
+#10 [stage-2 1/3] FROM docker.io/library/eclipse-temurin:17-jre@sha256:207ecae0b2b104dfc6dfa763d1e9cd2041cb344800a180e24cb1a28ed533ff90
+#10 resolve docker.io/library/eclipse-temurin:17-jre@sha256:207ecae0b2b104dfc6dfa763d1e9cd2041cb344800a180e24cb1a28ed533ff90 0.0s done
+#10 DONE 0.0s
+
+#11 [frontend-builder 1/6] FROM docker.io/library/node:22-bookworm-slim@sha256:d649c27dae7ba0137b3cef5dd75baa422c08dc3d9e3fc0c23dfb172dc3cc6436
+#11 resolve docker.io/library/node:22-bookworm-slim@sha256:d649c27dae7ba0137b3cef5dd75baa422c08dc3d9e3fc0c23dfb172dc3cc6436 0.0s done
+#11 DONE 0.0s
+
+#12 [internal] load build context
+#12 transferring context: 77.32kB 0.0s done
+#12 DONE 0.0s
+
+#13 [frontend-builder 3/6] COPY frontend/package*.json ./
+#13 CACHED
+
+#14 [frontend-builder 5/6] COPY frontend ./
+#14 CACHED
+
+#15 [frontend-builder 4/6] RUN npm ci --no-audit --no-fund --loglevel=warn
+#15 CACHED
+
+#16 [frontend-builder 2/6] WORKDIR /workspace/frontend
+#16 CACHED
+
+#17 [builder 3/9] COPY docker ./docker
+#17 CACHED
+
+#18 [builder 4/9] RUN mkdir -p /root/.m2     && cp docker/maven-settings.xml /root/.m2/settings.xml
+#18 CACHED
+
+#19 [builder 5/9] COPY pom.xml .
+#19 CACHED
+
+#20 [builder 2/9] WORKDIR /workspace
+#20 CACHED
+
+#21 [frontend-builder 6/6] RUN npm run build
+#21 CACHED
+
+#22 [builder 6/9] RUN --mount=type=cache,target=/root/.m2/repository     mkdir -p /root/.m2/repository     && if [ -f docker/m2-cache.tar.gz ]; then tar -xzf docker/m2-cache.tar.gz -C /root/.m2/repository; fi     && find /root/.m2/repository ( -name '*.lastUpdated' -o -name 'resolver-status.properties' ) -delete     && if [ -f docker/m2-cache.tar.gz ]; then         mvn -o -s /root/.m2/settings.xml -q -DskipTests dependency:go-offline         || mvn -s /root/.m2/settings.xml -q -DskipTests dependency:go-offline;     else         mvn -s /root/.m2/settings.xml -q -DskipTests dependency:go-offline;     fi
+#22 CACHED
+
+#23 [builder 7/9] COPY src ./src
+#23 DONE 0.1s
+
+#24 [builder 8/9] COPY --from=frontend-builder /workspace/frontend/dist ./frontend/dist
+#24 DONE 0.0s
+
+#25 [builder 9/9] RUN --mount=type=cache,target=/root/.m2/repository     mvn -s /root/.m2/settings.xml -q -DskipTests package
+#25 DONE 8.3s
+
+#26 [stage-2 2/3] WORKDIR /app
+#26 CACHED
+
+#27 [stage-2 3/3] COPY --from=builder /workspace/target/ecommerce-backend-0.0.1-SNAPSHOT.jar app.jar
+#27 DONE 0.2s
+
+#28 exporting to image
+#28 exporting layers
+#28 exporting layers 1.8s done
+#28 exporting manifest sha256:d02d193289af43d12104a0ea5e42e463b16b6ab3c3b7d21e3c5677c0f439002c done
+#28 exporting config sha256:9e1a8e5f986890e9dcf8ab7647adbeda3f56177ac833196a569cc6e74bf944f9 done
+#28 exporting attestation manifest sha256:51e32fd316bbf1443914f578008e203af1fb5fedad5cd750c6875f48580c2fae done
+#28 exporting manifest list sha256:686b8736231ec4c608251e44d0f97f21b9b086d0cfed2ccd39167b4ba0131bdd done
+#28 naming to docker.io/library/huangye-outdoor-ecommerce:latest done
+#28 unpacking to docker.io/library/huangye-outdoor-ecommerce:latest
+#28 unpacking to docker.io/library/huangye-outdoor-ecommerce:latest 0.5s done
+#28 DONE 2.4s
+
+#29 resolving provenance for metadata file
+#29 DONE 0.0s
+ Image huangye-outdoor-ecommerce Built 

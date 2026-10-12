@@ -1,0 +1,23 @@
+{
+  "claude_implementation_files": [
+    "backend/agent/context.py",
+    "backend/agent/customer_service_agent.py",
+    "backend/agent/ecommerce_client.py",
+    "backend/agent/hooks.py",
+    "backend/agent/product_query.py",
+    "backend/agent/tools/langchain_runtime.py",
+    "backend/agent/tools/tool_runtime.py",
+    "backend/resources/prompts/route_contract.md",
+    "backend/resources/prompts/tool_usage.md",
+    "backend/tests/test_product_query.py",
+    "ecommerce-backend/frontend/src/shop/App.tsx",
+    "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/CustomerServiceGatewayService.java"
+  ],
+  "resumption_changed_files": [
+    "backend/agent/customer_service_agent.py",
+    "backend/agent/ecommerce_client.py",
+    "backend/agent/product_query.py",
+    "backend/agent/tools/tool_runtime.py",
+    "backend/tests/test_product_query.py"
+  ]
+}

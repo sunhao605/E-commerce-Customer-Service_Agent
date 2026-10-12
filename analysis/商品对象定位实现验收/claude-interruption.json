@@ -1,0 +1,20 @@
+{
+  "session_id": "200672c0-42de-4224-a5d4-1729e529edde",
+  "interrupted_at": "2026-10-12 11:51:08 Asia/Shanghai",
+  "last_edit": "backend/tests/test_product_query.py: limit misrouting mock to selection turn, product id assertion uses string",
+  "last_test": "13 tests, selection Chinese and numeric subcases IndexError; last edit not rerun",
+  "claude_touched_files": [
+    "backend/agent/context.py",
+    "backend/agent/customer_service_agent.py",
+    "backend/agent/ecommerce_client.py",
+    "backend/agent/hooks.py",
+    "backend/agent/product_query.py",
+    "backend/agent/tools/langchain_runtime.py",
+    "backend/agent/tools/tool_runtime.py",
+    "backend/resources/prompts/route_contract.md",
+    "backend/resources/prompts/tool_usage.md",
+    "backend/tests/test_product_query.py",
+    "ecommerce-backend/frontend/src/shop/App.tsx",
+    "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/CustomerServiceGatewayService.java"
+  ]
+}

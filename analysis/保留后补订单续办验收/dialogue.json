@@ -1,0 +1,177 @@
+[
+  {
+    "scene": "正常续办",
+    "input": "帮我退款。",
+    "button": false,
+    "response": {
+      "answer": "你要退款哪一个订单？请选择订单号，或直接补充订单号。 当前账号下可选订单：ORD9801（隔离露营椅）；ORD9802（隔离露营椅）。",
+      "sessionId": "cs-7c3070f7-7b6a-40ce-b1a6-30910f6f9e7d",
+      "confirmRequired": false,
+      "actions": [],
+      "fallback": false
+    },
+    "screenshot": "对话截图/01-正常续办.png"
+  },
+  {
+    "scene": "正常续办",
+    "input": "我想了想，还是不退了",
+    "button": false,
+    "response": {
+      "answer": "是否停止本次尚未提交的退款申请？",
+      "sessionId": "cs-7c3070f7-7b6a-40ce-b1a6-30910f6f9e7d",
+      "confirmRequired": true,
+      "pendingAction": "REFUND_ORDER_REQUIRED",
+      "confirmationTitle": "请选择是否保留办理",
+      "confirmationSummary": "结束这次未提交的退款办理。当前还没有订单号。",
+      "resumeToken": "b6ad9610-8c4c-4816-9e2e-73593f9f611c",
+      "actions": [
+        {
+          "code": "KEEP",
+          "label": "保留当前办理"
+        },
+        {
+          "code": "CANCEL_DRAFT",
+          "label": "结束这次未提交的退款办理"
+        }
+      ],
+      "fallback": false
+    },
+    "screenshot": "对话截图/02-正常续办.png"
+  },
+  {
+    "scene": "正常续办",
+    "input": "保留当前办理",
+    "button": true,
+    "response": {
+      "answer": "继续办理本次售后申请。",
+      "sessionId": "cs-7c3070f7-7b6a-40ce-b1a6-30910f6f9e7d",
+      "confirmRequired": false,
+      "pendingAction": "KEEP",
+      "actions": [],
+      "fallback": false
+    },
+    "screenshot": "对话截图/03-正常续办.png"
+  },
+  {
+    "scene": "正常续办",
+    "input": "ORD9801",
+    "button": false,
+    "response": {
+      "answer": "订单 ORD9801 的整单实付金额为 200.00 元。请补充退款原因，例如“原因：买错了”。本次尚未提交。",
+      "sessionId": "cs-7c3070f7-7b6a-40ce-b1a6-30910f6f9e7d",
+      "confirmRequired": false,
+      "pendingAction": "REFUND_REASON_REQUIRED",
+      "relatedOrderNo": "ORD9801",
+      "actions": [],
+      "fallback": false
+    },
+    "screenshot": "对话截图/04-正常续办.png"
+  },
+  {
+    "scene": "正常续办",
+    "input": "请结束当前这份尚未提交的退款申请。",
+    "button": false,
+    "response": {
+      "answer": "本次售后申请已取消，未提交。",
+      "sessionId": "cs-7c3070f7-7b6a-40ce-b1a6-30910f6f9e7d",
+      "confirmRequired": false,
+      "pendingAction": "CANCELLED",
+      "actions": [],
+      "fallback": false
+    },
+    "screenshot": "对话截图/05-正常续办.png"
+  },
+  {
+    "scene": "未决确认与不存在订单",
+    "input": "帮我退款。",
+    "button": false,
+    "response": {
+      "answer": "你要退款哪一个订单？请选择订单号，或直接补充订单号。 当前账号下可选订单：ORD9801（隔离露营椅）；ORD9802（隔离露营椅）。",
+      "sessionId": "cs-682d6394-6309-4277-b48f-f578a00e2a93",
+      "confirmRequired": false,
+      "actions": [],
+      "fallback": false
+    },
+    "screenshot": "对话截图/06-未决确认与不存在订单.png"
+  },
+  {
+    "scene": "未决确认与不存在订单",
+    "input": "我想了想，还是不退了",
+    "button": false,
+    "response": {
+      "answer": "是否停止本次尚未提交的退款申请？",
+      "sessionId": "cs-682d6394-6309-4277-b48f-f578a00e2a93",
+      "confirmRequired": true,
+      "pendingAction": "REFUND_ORDER_REQUIRED",
+      "confirmationTitle": "请选择是否保留办理",
+      "confirmationSummary": "结束这次未提交的退款办理。当前还没有订单号。",
+      "resumeToken": "159bf605-19d2-46a4-abf5-3a89183b7586",
+      "actions": [
+        {
+          "code": "KEEP",
+          "label": "保留当前办理"
+        },
+        {
+          "code": "CANCEL_DRAFT",
+          "label": "结束这次未提交的退款办理"
+        }
+      ],
+      "fallback": false
+    },
+    "screenshot": "对话截图/07-未决确认与不存在订单.png"
+  },
+  {
+    "scene": "未决确认与不存在订单",
+    "input": "ORD9801",
+    "button": false,
+    "response": {
+      "answer": "是否停止本次尚未提交的退款申请？",
+      "sessionId": "cs-682d6394-6309-4277-b48f-f578a00e2a93",
+      "confirmRequired": true,
+      "pendingAction": "REFUND_ORDER_REQUIRED",
+      "confirmationTitle": "请选择是否保留办理",
+      "confirmationSummary": "结束这次未提交的退款办理。当前还没有订单号。",
+      "resumeToken": "3b6ef4ec-279d-4ebd-8908-3677bdbf3409",
+      "actions": [
+        {
+          "code": "KEEP",
+          "label": "保留当前办理"
+        },
+        {
+          "code": "CANCEL_DRAFT",
+          "label": "结束这次未提交的退款办理"
+        }
+      ],
+      "fallback": false
+    },
+    "screenshot": "对话截图/08-未决确认与不存在订单.png"
+  },
+  {
+    "scene": "未决确认与不存在订单",
+    "input": "保留当前办理",
+    "button": true,
+    "response": {
+      "answer": "继续办理本次售后申请。",
+      "sessionId": "cs-682d6394-6309-4277-b48f-f578a00e2a93",
+      "confirmRequired": false,
+      "pendingAction": "KEEP",
+      "actions": [],
+      "fallback": false
+    },
+    "screenshot": "对话截图/09-未决确认与不存在订单.png"
+  },
+  {
+    "scene": "未决确认与不存在订单",
+    "input": "ORD9999",
+    "button": false,
+    "response": {
+      "answer": "订单不存在",
+      "sessionId": "cs-682d6394-6309-4277-b48f-f578a00e2a93",
+      "confirmRequired": false,
+      "pendingAction": "BLOCKED",
+      "actions": [],
+      "fallback": false
+    },
+    "screenshot": "对话截图/10-未决确认与不存在订单.png"
+  }
+]

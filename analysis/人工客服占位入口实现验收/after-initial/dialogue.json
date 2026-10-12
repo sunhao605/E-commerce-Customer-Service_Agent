@@ -1,0 +1,26 @@
+[
+  {
+    "input_or_action": "ORD9801 收到时就破了，我只要换一件，不要退款。",
+    "response": {
+      "answer": "你希望咨询或办理换货，当前客服助手暂不能办理这类业务。 人工客服功能开发中，确认后仅前往说明页面，暂时无法接入真人客服。本次未新增售后申请。",
+      "sessionId": "cs-6aaaa202-5052-4204-8124-3b789a89498d",
+      "confirmRequired": true,
+      "pendingAction": "HUMAN_SUPPORT",
+      "confirmationTitle": "是否前往人工客服入口？",
+      "confirmationSummary": "人工客服功能开发中；进入说明页面不会转接真人或提交售后申请。",
+      "actions": [
+        {
+          "code": "OPEN_HUMAN_SUPPORT",
+          "label": "确认前往"
+        },
+        {
+          "code": "STAY_WITH_AGENT",
+          "label": "暂不前往"
+        }
+      ],
+      "fallback": false
+    },
+    "url": "http://127.0.0.1:18303/",
+    "screenshot": "截图/01.png"
+  }
+]

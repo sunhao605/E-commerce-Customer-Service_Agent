@@ -1,0 +1,72 @@
+[
+  {
+    "input_or_action": "ORD9801 收到时就破了，我只要换一件，不要退款。",
+    "response": {
+      "answer": "订单 ORD9801 的整单实付金额为 200.00 元。请补充退款原因，例如“原因：买错了”。本次尚未提交。",
+      "sessionId": "cs-c0e43075-1cf5-4a14-882f-bf62022b59a5",
+      "confirmRequired": false,
+      "pendingAction": "REFUND_REASON_REQUIRED",
+      "relatedOrderNo": "ORD9801",
+      "actions": [],
+      "fallback": false
+    },
+    "url": "http://127.0.0.1:18303/",
+    "screenshot": "截图/01.png"
+  },
+  {
+    "input_or_action": "ORD9801 两件里只退一件，给我部分退款。",
+    "response": {
+      "answer": "订单 ORD9801 的整单实付金额为 200.00 元。请补充退款原因，例如“原因：买错了”。本次尚未提交。",
+      "sessionId": "cs-456be4cb-c9a1-4220-8a05-1d7ba51e3152",
+      "confirmRequired": false,
+      "pendingAction": "REFUND_REASON_REQUIRED",
+      "relatedOrderNo": "ORD9801",
+      "actions": [],
+      "fallback": false
+    },
+    "url": "http://127.0.0.1:18303/",
+    "screenshot": "截图/02.png"
+  },
+  {
+    "input_or_action": "ORD9801 的椅子坏了，帮我维修。",
+    "response": {
+      "answer": "订单 ORD9801 的整单实付金额为 200.00 元。请补充退款原因，例如“原因：买错了”。本次尚未提交。",
+      "sessionId": "cs-64b62adc-caae-4f23-a172-670e5a07035d",
+      "confirmRequired": false,
+      "pendingAction": "REFUND_REASON_REQUIRED",
+      "relatedOrderNo": "ORD9801",
+      "actions": [],
+      "fallback": false
+    },
+    "url": "http://127.0.0.1:18303/",
+    "screenshot": "截图/03.png"
+  },
+  {
+    "input_or_action": "ORD9801 少件了，帮我补发。",
+    "response": {
+      "answer": "订单 ORD9801 的整单实付金额为 200.00 元。请补充退款原因，例如“原因：买错了”。本次尚未提交。",
+      "sessionId": "cs-9d327b25-14b2-4e91-863f-89f0887d7437",
+      "confirmRequired": false,
+      "pendingAction": "REFUND_REASON_REQUIRED",
+      "relatedOrderNo": "ORD9801",
+      "actions": [],
+      "fallback": false
+    },
+    "url": "http://127.0.0.1:18303/",
+    "screenshot": "截图/04.png"
+  },
+  {
+    "input_or_action": "ORD9801 商品破损，请处理质量问题。",
+    "response": {
+      "answer": "订单 ORD9801 的整单实付金额为 200.00 元。请补充退款原因，例如“原因：买错了”。本次尚未提交。",
+      "sessionId": "cs-a9bd2151-6547-47a0-8cc5-e319484bd101",
+      "confirmRequired": false,
+      "pendingAction": "REFUND_REASON_REQUIRED",
+      "relatedOrderNo": "ORD9801",
+      "actions": [],
+      "fallback": false
+    },
+    "url": "http://127.0.0.1:18303/",
+    "screenshot": "截图/05.png"
+  }
+]

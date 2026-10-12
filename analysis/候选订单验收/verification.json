@@ -1,0 +1,21 @@
+{
+  "git_commit": "78e903053bbd2e81e2cf003e6ebcad898bfa6789",
+  "sources": {
+    "backend/agent/context.py": "0b80c4719fb6b64735eef6bf696252a52ffcb009308bc4cebf090a46117e5ba4",
+    "backend/agent/customer_service_agent.py": "904284755693980170df0bb1fa04047eb94c2d44b9ed06151989d22945a1c550",
+    "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/CustomerServiceGatewayService.java": "472018fbd246a39e2175741c9283e3971cb3883a608c4921403e9bcfbdde9d86"
+  },
+  "boundary": "HEAD + 本目录 change.diff；运行后仅更正 context.py 注释中的默认候选数量措辞，无行为修改。",
+  "mall_sessions": [
+    "m06-mall-1791635645376",
+    "m06-mall-1791635645376-second",
+    "m06-mall-1791635645376-page",
+    "m06-mall-1791635645376-invalid",
+    "m06-mall-1791635645376-fresh",
+    "m06-mall-1791635645376-switch"
+  ],
+  "mall_turns": 12,
+  "python_service": "独立8012，已授权DeepSeek；OFFLINE_RAG=1，OFFLINE_FACTS=0；业务指向隔离18192",
+  "database": "独立H2；有合成PAYMENT流水；不连接现有MySQL",
+  "model_config_secret": "未保存密钥"
+}

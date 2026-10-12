@@ -1,0 +1,56 @@
+{
+  "passed" : true,
+  "mode" : "isolated_h2_scripted_models",
+  "checks" : [ {
+    "passed" : true,
+    "check" : "自然改口取消未提交草稿并清掉凭证"
+  }, {
+    "passed" : true,
+    "check" : "自然改口后旧确认卡不能提交"
+  }, {
+    "passed" : true,
+    "check" : "取消后下一句不恢复确认卡"
+  }, {
+    "passed" : true,
+    "check" : "明确继续不取消，原确认卡还在"
+  }, {
+    "passed" : true,
+    "check" : "运费条件未核实不取消"
+  }, {
+    "passed" : true,
+    "check" : "选单阶段先有待办、没有确认卡"
+  }, {
+    "passed" : true,
+    "check" : "对象不清时追问，不取消选单"
+  }, {
+    "passed" : true,
+    "check" : "第一笔不把选单待办当成当前售后取消"
+  }, {
+    "passed" : true,
+    "check" : "补明是这次办理后才取消选单"
+  }, {
+    "passed" : true,
+    "check" : "取消后第一笔不复活旧待办"
+  }, {
+    "passed" : true,
+    "check" : "冲突时展示保留和取消未提交办理，不直接取消"
+  }, {
+    "passed" : true,
+    "check" : "选择保留不取消草稿"
+  }, {
+    "passed" : true,
+    "check" : "保留后旧冲突卡不能再点"
+  }, {
+    "passed" : true,
+    "check" : "冲突卡不能提交申请，也不产生售后记录"
+  }, {
+    "passed" : true,
+    "check" : "冲突卡确认取消后清草稿和凭证"
+  }, {
+    "passed" : true,
+    "check" : "取消后重复点击旧卡被拒绝"
+  }, {
+    "passed" : true,
+    "check" : "整组对话没有新增售后、流水或余额变化"
+  } ]
+}

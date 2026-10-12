@@ -386,9 +386,9 @@ public class DataInitializer implements CommandLineRunner {
     }
 
     private void seedBalances() {
-        saveBalanceAtLeast("U1001", new BigDecimal("100000.00"));
-        saveBalanceAtLeast("U1002", new BigDecimal("100000.00"));
-        saveBalanceAtLeast("U1003", new BigDecimal("100000.00"));
+        saveBalanceIfMissing("U1001", new BigDecimal("100000.00"));
+        saveBalanceIfMissing("U1002", new BigDecimal("100000.00"));
+        saveBalanceIfMissing("U1003", new BigDecimal("100000.00"));
         if (balanceTransactionRepository.count() > 0) {
             return;
         }
@@ -402,18 +402,11 @@ public class DataInitializer implements CommandLineRunner {
         ));
     }
 
-    private void saveBalanceAtLeast(String userId, BigDecimal availableBalance) {
-        balanceAccountRepository.findByUserId(userId).ifPresentOrElse(account -> {
-            if (account.getAvailableBalance().compareTo(availableBalance) < 0) {
-                account.updateBalance(availableBalance, LocalDateTime.now());
-                balanceAccountRepository.save(account);
-            }
-        }, () -> balanceAccountRepository.save(new BalanceAccount(
-            userId,
-            availableBalance,
-            LocalDateTime.now(),
-            LocalDateTime.now()
-        )));
+    private void saveBalanceIfMissing(String userId, BigDecimal availableBalance) {
+        if (balanceAccountRepository.findByUserId(userId).isEmpty()) {
+            balanceAccountRepository.save(new BalanceAccount(
+                userId, availableBalance, LocalDateTime.now(), LocalDateTime.now()));
+        }
     }
 
     private void seedCartItems() {

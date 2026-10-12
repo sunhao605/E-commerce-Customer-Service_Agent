@@ -1,0 +1,40 @@
+split_deepseek N01 1 invalid {'decision': {'type': 'stop'}, 'target': {'type': 'current'}, 'extra_task': {'type': 'no'}} 1067.909
+split_deepseek N02 1 cancel {'decision': 'stop', 'target': 'current', 'extra_task': 'no'} 806.465
+split_deepseek N03 1 invalid None 948.78
+split_deepseek N04 1 cancel {'decision': 'stop', 'target': 'current', 'extra_task': 'no'} 873.392
+split_deepseek N05 1 cancel {'decision': 'stop', 'target': 'current', 'extra_task': 'no'} 1014.479
+split_deepseek N06 1 cancel {'decision': 'stop', 'target': 'current', 'extra_task': 'no'} 532.354
+split_deepseek N07 1 invalid {'decision': {'type': 'continue'}, 'target': {'type': 'ambiguous'}, 'extra_task': {'type': 'no'}} 688.195
+split_deepseek N08 1 invalid {'decision': {'type': 'continue'}, 'target': {'type': 'ambiguous'}, 'extra_task': {'type': 'no'}} 827.056
+split_deepseek N09 1 invalid {'decision': {'type': 'continue'}, 'target': {'type': 'current'}, 'extra_task': {'type': 'no'}} 646.529
+split_deepseek N10 1 keep {'decision': 'continue', 'target': 'current', 'extra_task': 'no'} 419.965
+split_deepseek N11 1 invalid {'decision': {'type': 'continue'}, 'target': {'type': 'ambiguous'}, 'extra_task': {'type': 'no'}} 1023.383
+split_deepseek N12 1 invalid {'decision': {'type': 'continue'}, 'target': {'type': 'ambiguous'}, 'extra_task': {'type': 'no'}} 675.685
+split_deepseek N13 1 invalid None 962.368
+split_deepseek N14 1 invalid {'decision': {'type': 'stop'}, 'target': {'type': 'current'}, 'extra_task': {'type': 'no'}} 732.033
+split_deepseek N15 1 invalid {'decision': {'type': 'stop'}, 'target': {'type': 'current'}, 'extra_task': {'type': 'yes'}} 550.616
+split_deepseek N16 1 clarify {'decision': 'stop', 'target': 'current', 'extra_task': 'yes'} 564.261
+split_deepseek N17 1 invalid {'decision': {'type': 'stop'}, 'target': {'type': 'other'}, 'extra_task': {'type': 'no'}} 557.858
+split_deepseek N18 1 clarify {'decision': 'uncertain', 'target': 'current', 'extra_task': 'no'} 729.198
+split_deepseek N19 1 invalid {'decision': {'type': 'uncertain'}, 'target': {'type': 'ambiguous'}, 'extra_task': {'type': 'no'}} 788.073
+split_deepseek N20 1 invalid {'decision': {'type': 'stop'}, 'target': {'type': 'other'}, 'extra_task': {'type': 'no'}} 802.576
+split_deepseek N20 2 invalid {'decision': {'type': 'stop'}, 'target': {'type': 'other'}, 'extra_task': {'type': 'no'}} 1012.404
+split_deepseek N19 2 invalid {'decision': {'type': 'uncertain'}, 'target': {'type': 'ambiguous'}, 'extra_task': {'type': 'no'}} 834.861
+split_deepseek N18 2 invalid {'decision': {'type': 'uncertain'}, 'target': {'type': 'current'}, 'extra_task': {'type': 'no'}} 496.991
+split_deepseek N17 2 invalid {'decision': {'type': 'stop'}, 'target': {'type': 'other'}, 'extra_task': {'type': 'no'}} 785.963
+split_deepseek N16 2 clarify {'decision': 'stop', 'target': 'current', 'extra_task': 'yes'} 527.526
+split_deepseek N15 2 invalid {'decision': {'type': 'stop'}, 'target': {'type': 'current'}, 'extra_task': {'type': 'yes'}} 687.167
+split_deepseek N14 2 invalid {'decision': {'type': 'stop'}, 'target': {'type': 'current'}, 'extra_task': {'type': 'no'}} 705.413
+split_deepseek N13 2 invalid {'decision': {'type': 'stop'}, 'target': {'type': 'ambiguous'}, 'extra_task': {'type': 'no'}} 529.167
+split_deepseek N12 2 invalid {'decision': {'type': 'continue'}, 'target': {'type': 'ambiguous'}, 'extra_task': {'type': 'no'}} 1516.887
+split_deepseek N11 2 invalid {'decision': {'type': 'continue'}, 'target': {'type': 'ambiguous'}, 'extra_task': {'type': 'no'}} 743.911
+split_deepseek N10 2 invalid {'decision': {'type': 'continue'}, 'target': {'type': 'current'}, 'extra_task': {'type': 'no'}} 776.865
+split_deepseek N09 2 keep {'decision': 'continue', 'target': 'current', 'extra_task': 'no'} 856.952
+split_deepseek N08 2 invalid {'decision': {'type': 'continue'}, 'target': {'type': 'ambiguous'}, 'extra_task': {'type': 'no'}} 643.645
+split_deepseek N07 2 invalid {'decision': {'type': 'continue', 'reason': '用户仅询问撤销退款后的后果，未作出结束办理的决定。'}, 'target': {'type': 'ambiguous', 'reason': '用户未明确表达取消对象，仅询问撤销退款后的可能性。'}, 'extra_task': {'type': 'no', 'reason': '用户仅询问撤销退款后的后果，没有要求执行另一项独立任务。'}} 1368.495
+split_deepseek N06 2 cancel {'decision': 'stop', 'target': 'current', 'extra_task': 'no'} 636.043
+split_deepseek N05 2 cancel {'decision': 'stop', 'target': 'current', 'extra_task': 'no'} 958.33
+split_deepseek N04 2 cancel {'decision': 'stop', 'target': 'current', 'extra_task': 'no'} 1429.481
+split_deepseek N03 2 invalid {'decision': {'type': 'stop'}, 'target': {'type': 'current'}, 'extra_task': {'type': 'no'}} 666.044
+split_deepseek N02 2 cancel {'decision': 'stop', 'target': 'current', 'extra_task': 'no'} 499.165
+split_deepseek N01 2 invalid {'decision': {'type': 'stop'}, 'target': {'type': 'current'}, 'extra_task': {'type': 'no'}} 617.079

@@ -1,0 +1,10 @@
+{
+  "old_pid": 22324,
+  "new_pid": 32857,
+  "health": {
+    "status": "ok",
+    "lesson": "41"
+  },
+  "config_source": ".env.model.local (not printed)",
+  "model_calls": 0
+}

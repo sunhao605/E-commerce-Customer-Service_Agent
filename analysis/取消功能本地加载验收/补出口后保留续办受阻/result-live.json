@@ -1,0 +1,15 @@
+{
+  "passed": false,
+  "checks": 29,
+  "failed": [
+    "还没确定退款订单-保留：保留后仍等待原来的信息",
+    "还没确定退款订单-保留：补信息后正常继续",
+    "还没说明退款原因-保留：保留后仍等待原来的信息",
+    "还没说明退款原因-保留：补信息后正常继续"
+  ],
+  "online_models": true,
+  "refund_submissions": 0,
+  "admin_approvals": 0,
+  "new_orders": 0,
+  "payments": 0
+}

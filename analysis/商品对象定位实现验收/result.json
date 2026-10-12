@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "checks": 15,
+  "screenshots": 6,
+  "online_models": false,
+  "submitted": false,
+  "database": "isolated H2",
+  "failed": [],
+  "python_tests": 43,
+  "product_tests": 19,
+  "java_business_sources": 156,
+  "java_analysis_sources": 2,
+  "frontend_build_passed": true,
+  "daily_services_restarted": false
+}

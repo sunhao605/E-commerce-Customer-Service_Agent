@@ -1,0 +1,172 @@
+[ {
+  "response" : {
+    "answer" : "你要退款哪一个订单？请选择订单号，或直接补充订单号。 当前账号下可选订单：ORD9801（M06露营椅）；ORD9802（M06露营椅）。",
+    "sessionId" : "m06-mall-1791635596560",
+    "confirmRequired" : false,
+    "actions" : [ ],
+    "fallback" : false
+  },
+  "request" : {
+    "pageContext" : {
+      "type" : "HOME"
+    },
+    "sessionId" : "m06-mall-1791635596560",
+    "message" : "帮我退款。"
+  }
+}, {
+  "response" : {
+    "answer" : "订单 ORD9801 的整单实付金额为 200.00 元。请补充退款原因，例如“原因：买错了”。本次尚未提交。",
+    "sessionId" : "m06-mall-1791635596560",
+    "confirmRequired" : false,
+    "pendingAction" : "REFUND_REASON_REQUIRED",
+    "relatedOrderNo" : "ORD9801",
+    "actions" : [ ],
+    "fallback" : false
+  },
+  "request" : {
+    "pageContext" : {
+      "type" : "HOME"
+    },
+    "sessionId" : "m06-mall-1791635596560",
+    "message" : "第一笔。"
+  }
+}, {
+  "response" : {
+    "answer" : "本次仅准备申请，尚未提交。提交后等待管理员审核，不代表退款成功。",
+    "sessionId" : "m06-mall-1791635596560",
+    "confirmRequired" : true,
+    "pendingAction" : "CONFIRM_SUBMIT",
+    "confirmationTitle" : "确认提交退款申请",
+    "confirmationSummary" : "订单：ORD9801；商品：M06露营椅 x1；范围：整单退款；实付金额：200.00 元；原因：买错了。；状态：等待本人确认，尚未提交。确认后等待审核，提交不代表退款成功。",
+    "relatedOrderNo" : "ORD9801",
+    "resumeToken" : "0fac790b-e52d-43c2-a60f-55c771fc43b3",
+    "actions" : [ {
+      "code" : "CONFIRM_SUBMIT",
+      "label" : "确认提交申请"
+    }, {
+      "code" : "CANCEL_SUBMIT",
+      "label" : "取消本次申请"
+    } ],
+    "fallback" : false
+  },
+  "request" : {
+    "pageContext" : {
+      "type" : "HOME"
+    },
+    "sessionId" : "m06-mall-1791635596560",
+    "message" : "原因：买错了。"
+  }
+}, {
+  "response" : {
+    "answer" : "你要退款哪一个订单？请选择订单号，或直接补充订单号。 当前账号下可选订单：ORD9801（M06露营椅）；ORD9802（M06露营椅）。",
+    "sessionId" : "m06-mall-1791635596560-second",
+    "confirmRequired" : false,
+    "actions" : [ ],
+    "fallback" : false
+  },
+  "request" : {
+    "pageContext" : {
+      "type" : "HOME"
+    },
+    "sessionId" : "m06-mall-1791635596560-second",
+    "message" : "帮我退款，原因：买错了。"
+  }
+}, {
+  "response" : {
+    "answer" : "请核对退款申请。确认后只登记为待审核，是否通过由管理员独立决定。",
+    "sessionId" : "m06-mall-1791635596560-second",
+    "confirmRequired" : true,
+    "pendingAction" : "CONFIRM_SUBMIT",
+    "confirmationTitle" : "确认提交退款申请",
+    "confirmationSummary" : "订单：ORD9802；商品：M06露营椅 x1；范围：整单退款；实付金额：200.00 元；原因：买错了。；状态：等待本人确认，尚未提交。确认后等待审核，提交不代表退款成功。",
+    "relatedOrderNo" : "ORD9802",
+    "resumeToken" : "a6026fcf-ede4-4865-afff-fd7098549054",
+    "actions" : [ {
+      "code" : "CONFIRM_SUBMIT",
+      "label" : "确认提交申请"
+    }, {
+      "code" : "CANCEL_SUBMIT",
+      "label" : "取消本次申请"
+    } ],
+    "fallback" : false
+  },
+  "request" : {
+    "pageContext" : {
+      "type" : "HOME"
+    },
+    "sessionId" : "m06-mall-1791635596560-second",
+    "message" : "第二笔。"
+  }
+}, {
+  "response" : {
+    "answer" : "你要退款哪一个订单？请选择订单号，或直接补充订单号。 当前账号下可选订单：ORD9801（M06露营椅）；ORD9802（M06露营椅）。",
+    "sessionId" : "m06-mall-1791635596560-page",
+    "confirmRequired" : false,
+    "actions" : [ ],
+    "fallback" : false
+  },
+  "request" : {
+    "pageContext" : {
+      "type" : "HOME"
+    },
+    "sessionId" : "m06-mall-1791635596560-page",
+    "message" : "帮我退款，原因：买错了。"
+  }
+}, {
+  "response" : {
+    "answer" : "请核对退款申请。确认后只登记为待审核，是否通过由管理员独立决定。",
+    "sessionId" : "m06-mall-1791635596560-page",
+    "confirmRequired" : true,
+    "pendingAction" : "CONFIRM_SUBMIT",
+    "confirmationTitle" : "确认提交退款申请",
+    "confirmationSummary" : "订单：ORD9801；商品：M06露营椅 x1；范围：整单退款；实付金额：200.00 元；原因：买错了。；状态：等待本人确认，尚未提交。确认后等待审核，提交不代表退款成功。",
+    "relatedOrderNo" : "ORD9801",
+    "resumeToken" : "fcb8131d-c18a-403c-be8c-5e160c04b4c2",
+    "actions" : [ {
+      "code" : "CONFIRM_SUBMIT",
+      "label" : "确认提交申请"
+    }, {
+      "code" : "CANCEL_SUBMIT",
+      "label" : "取消本次申请"
+    } ],
+    "fallback" : false
+  },
+  "request" : {
+    "pageContext" : {
+      "type" : "ORDER_DETAIL",
+      "orderNo" : "ORD9802"
+    },
+    "sessionId" : "m06-mall-1791635596560-page",
+    "message" : "第一笔。"
+  }
+}, {
+  "response" : {
+    "answer" : "你要退款哪一个订单？请选择订单号，或直接补充订单号。 当前账号下可选订单：ORD9801（M06露营椅）；ORD9802（M06露营椅）。",
+    "sessionId" : "m06-mall-1791635596560-invalid",
+    "confirmRequired" : false,
+    "actions" : [ ],
+    "fallback" : false
+  },
+  "request" : {
+    "pageContext" : {
+      "type" : "HOME"
+    },
+    "sessionId" : "m06-mall-1791635596560-invalid",
+    "message" : "帮我退款。"
+  }
+}, {
+  "response" : {
+    "answer" : "你要退款哪一个订单？请选择订单号，或直接补充订单号。 当前账号下可选订单：ORD9801（M06露营椅）；ORD9802（M06露营椅）。",
+    "sessionId" : "m06-mall-1791635596560-invalid",
+    "confirmRequired" : false,
+    "actions" : [ ],
+    "fallback" : false
+  },
+  "request" : {
+    "pageContext" : {
+      "type" : "HOME"
+    },
+    "sessionId" : "m06-mall-1791635596560-invalid",
+    "message" : "第三笔。"
+  }
+} ]

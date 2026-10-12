@@ -574,6 +574,16 @@ public class CustomerRefundCheck {
             && balances.findByUserId("U1001").orElseThrow().getAvailableBalance().compareTo(seedBefore) == 0,
             "再次启动初始化保留购买时属性和商品快照，不重建历史订单明细或改余额");
         check(context.getBean(StubAgent.class).resumes == 0, "完整退货始终不调用Python模拟审批");
+        var spentAccount = balances.findByUserId("U1001").orElseThrow();
+        var spentAt = LocalDateTime.of(2026, 10, 10, 12, 0);
+        spentAccount.updateBalance(new BigDecimal("99602.00"), spentAt);
+        balances.save(spentAccount);
+        long transactionCount = transactions.count();
+        context.getBean(com.teachdemo.ecommerce.config.DataInitializer.class).run();
+        var preserved = balances.findByUserId("U1001").orElseThrow();
+        check(preserved.getAvailableBalance().compareTo(new BigDecimal("99602.00")) == 0
+            && preserved.getUpdatedAt().equals(spentAt) && transactions.count() == transactionCount,
+            "重启初始化不补回已消费余额、不改时间或资金流水");
     }
 
     private static void fixture(String orderNo, String userId) {

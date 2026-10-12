@@ -1,0 +1,22 @@
+{
+  "services": {
+    "agent": {
+      "http": 200,
+      "body": {
+        "status": "ok",
+        "lesson": "41"
+      }
+    },
+    "ecommerce": {
+      "http": 200,
+      "body": {
+        "status": "UP"
+      }
+    },
+    "mall": {
+      "http": 200,
+      "body": "HTML"
+    }
+  },
+  "ecommerce_image": "sha256:00dee96aff52e29f6b1a7b76aebaa7c59913ff9523910a26f2eba0086ce3387c"
+}

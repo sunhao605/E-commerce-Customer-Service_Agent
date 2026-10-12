@@ -1,0 +1,36 @@
+{
+  "run_id": "20261010183405487420",
+  "checked_at": "2026-10-10T18:36:00+08:00",
+  "git_commit": "78e903053bbd2e81e2cf003e6ebcad898bfa6789",
+  "working_tree": "仅新增本目录和第一项未跟踪证据，业务源码未改",
+  "process_pid": 96857,
+  "process_started_at": "2026-10-10T18:09:03+08:00",
+  "process_cwd": "/Users/sunhao/Downloads/03_AIPMProject/0305_DianShang_Agent",
+  "same_version": "在线五组与第一项同一进程、同一 Git 提交；backend 源码、Prompt、政策指纹在运行后未变。模型故障兜底是随后启动并已关闭的 8011 进程，环境为 DISABLE_LLM=1、OFFLINE_FACTS=1，没有改 8000。",
+  "source_fingerprints_unchanged_during_run": true,
+  "judgment": "路由验收通过。明确申请进入办理路径；先咨询再申请能切到办理；发票和模型故障兜底的标签没有被改到政策或办理以外。ORD1234 查无此单，所以没有准备申请或确认卡。",
+  "cases": {
+    "live_apply_refund": "refund_request，RoutePlan 要工作流、风险高、调用 get_order_detail。工具 not_found。workflow 为空，needs_human_approval 为 false。回答说明查无 ORD1234，不能创建退款审批。",
+    "live_apply_return": "return_request，同样查无 ORD1234，没有退货工作流，也没有政策引用。回答要求核对订单号，并多问了手机号或账号。",
+    "live_switch_refund": "同一会话先答退款政策，open_task 为空；下一句「我现在要申请退款。」变为 refund_request，追问订单号，open_task 待补 order_id。",
+    "live_switch_return": "同一会话先答七天无理由政策；下一句「我现在要申请七天无理由退货。」变为 return_request，并留下退货待办。追问原文是「你要查询哪一个订单？」。",
+    "live_invoice": "invoice_query，知识域 invoice，引用 invoice_issue，无工具、无工作流、无待办。第一次未命中缓存；随后同句探测 cache_hit 为 true，最终回答走 common_hit_cache。",
+    "fallback": "8011 上五组标签与在线一致，路由 used_model 为 false，fallback_reason 为 model_config_missing，RoutePlan source 为 deterministic_fallback。"
+  },
+  "wording_notes": [
+    "缺订单号时，只有 refund_request 会说「退款」；return_request 落到「你要查询哪一个订单？」。这是 build_order_clarification 的现有文案，路由标签仍是 return_request。",
+    "模型关闭且订单不存在时，退款回答是「订单事实或支付状态没有通过退款资格校验」。工具记录仍是 not_found。在线模型把这句话改成了查无此单。",
+    "在线退货查无订单的回答额外要求提供手机号或账号。工具原文只说订单不存在。"
+  ],
+  "router_boundary": "第二句附带了两轮 history_messages，上下文压缩能看到这些历史。路由调用只接收当前这句话；政策回答后 open_task 为空，所以切换靠第二句本身是明确申请。",
+  "side_effects": [
+    "8000 进程内 faq:invoice_issue 已写入这次发票回答。未清理。政策咨询不读这个缓存。",
+    "8011 已关闭，它自己的发票缓存随之消失。",
+    "没有创建退款或退货申请，也没有确认卡。"
+  ],
+  "limitations": [
+    "只打了 Python /chat，没有走商城",
+    "runtime_user_id=intent-eval，ORD1234 不存在，不能用来证明资格通过后的确认卡",
+    "没有重跑 39 条意图集"
+  ]
+}

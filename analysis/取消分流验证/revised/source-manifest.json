@@ -1,0 +1,7 @@
+{
+  "parent_fixture_sha256": "bfc0f130a3b70e7f3cecee0bec4f768cbb5916ddc659c4ffed3b33fd0c34bd0f",
+  "runner_before_sha256": "441355e6fe99ff365e6ea57eb4117d250af79e3880322d61f3221dda3da188b2",
+  "runner_revised_sha256": "5332d341aa2d20e60f5f9c34720f8286fb764d4585f50b9a88d37c99c0aff590",
+  "fixture_sha256": "bab33d1d164b93957a0da33ef9e6229988faf7fa4218d35197704324d7b80c60",
+  "revision_frozen_before_new_calls": true
+}

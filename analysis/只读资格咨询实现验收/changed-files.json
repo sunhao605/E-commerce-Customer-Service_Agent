@@ -1,0 +1,17 @@
+[
+  "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/order/OrderController.java",
+  "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/order/ShopService.java",
+  "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/CustomerServiceSession.java",
+  "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/CustomerServiceGatewayService.java",
+  "ecommerce-backend/frontend/src/shop/App.tsx",
+  "backend/tests/test_route_priority.py",
+  "backend/agent/context.py",
+  "backend/agent/customer_service_agent.py",
+  "backend/api/schemas.py",
+  "backend/agent/tools/tool_runtime.py",
+  "backend/agent/tools/planning.py",
+  "backend/resources/prompts/route_contract.md",
+  "backend/agent/mcp_catalog.py",
+  "backend/tests/test_eligibility_query.py",
+  "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/order/AfterSaleEligibilityResponse.java"
+]

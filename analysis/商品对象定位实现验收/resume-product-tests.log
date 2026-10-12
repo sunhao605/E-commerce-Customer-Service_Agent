@@ -1,0 +1,18 @@
+test_category_query_lists_candidates_without_defaulting_to_first (tests.test_product_query.ProductTargetingTest.test_category_query_lists_candidates_without_defaulting_to_first) ... ok
+test_explicit_name_overrides_page_product (tests.test_product_query.ProductTargetingTest.test_explicit_name_overrides_page_product) ... ok
+test_failure_zero_match_and_deleted_object_are_distinct (tests.test_product_query.ProductTargetingTest.test_failure_zero_match_and_deleted_object_are_distinct) ... ok
+test_full_name_binds_unique_match_and_keeps_variant (tests.test_product_query.ProductTargetingTest.test_full_name_binds_unique_match_and_keeps_variant) ... ok
+test_inactive_product_is_stated_not_purchasable (tests.test_product_query.ProductTargetingTest.test_inactive_product_is_stated_not_purchasable) ... ok
+test_just_now_rereads_detail_and_sees_new_stock (tests.test_product_query.ProductTargetingTest.test_just_now_rereads_detail_and_sees_new_stock) ... ok
+test_model_keyword_mismatch_is_blocked_and_code_binds_original_name (tests.test_product_query.ProductTargetingTest.test_model_keyword_mismatch_is_blocked_and_code_binds_original_name) ... ok
+test_new_name_replaces_candidates_and_ok_selects_nothing (tests.test_product_query.ProductTargetingTest.test_new_name_replaces_candidates_and_ok_selects_nothing) ... ok
+test_out_of_range_and_fresh_session_selection_never_fall_back (tests.test_product_query.ProductTargetingTest.test_out_of_range_and_fresh_session_selection_never_fall_back) ... ok
+test_page_product_reads_detail_by_id_without_search (tests.test_product_query.ProductTargetingTest.test_page_product_reads_detail_by_id_without_search) ... ok
+test_product_pending_is_isolated_from_refund_open_task (tests.test_product_query.ProductTargetingTest.test_product_pending_is_isolated_from_refund_open_task) ... ok
+test_selection_binds_shown_snapshot_even_when_model_misroutes (tests.test_product_query.ProductTargetingTest.test_selection_binds_shown_snapshot_even_when_model_misroutes) ... ok
+test_selection_pattern_and_name_match_units (tests.test_product_query.ProductTargetingTest.test_selection_pattern_and_name_match_units) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.023s
+
+OK

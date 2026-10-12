@@ -1,0 +1,39 @@
+{
+  "java_image": "sha256:0505c3cfd4d926625ea3036f39fcf642dd94f9f3ae08e38eea432707bb01c994",
+  "java_env_sha256": "0f0f7f2c8326e1d1ce940ff649b1d34b55b953879027f0085a5e792a332fbf64",
+  "java_env_unchanged": false,
+  "java_compose_settings_match": true,
+  "java_cancel_execute": "unset",
+  "python_pid": 84233,
+  "python_config": {
+    "AGENT_COURSE_DISABLE_LLM": "0",
+    "AGENT_COURSE_OFFLINE_RAG": "1",
+    "AGENT_COURSE_OFFLINE_FACTS": "0",
+    "AGENT_COURSE_ENV": "/Users/sunhao/Downloads/03_AIPMProject/0305_DianShang_Agent/.env.model.local",
+    "LANGCHAIN_TRACING_V2": "false",
+    "LANGSMITH_TRACING": "false",
+    "CANCEL_INTENT_EXECUTE": "0",
+    "CANCEL_INTENT_OBSERVE": "0",
+    "CANCEL_SCORE_MIN": "0.9"
+  },
+  "python_config_unchanged": true,
+  "model_config_file_sha256": "5e07f7ae4c38029312e617c7415a933e7dfba3ef6b863ce6185e9008d2978823",
+  "model_configuration_unchanged": true,
+  "java_health": {
+    "status": "UP"
+  },
+  "python_health": {
+    "status": "ok",
+    "lesson": "41"
+  },
+  "mysql_started": "2026-10-11T11:32:15.540065883Z",
+  "mysql_not_restarted": true,
+  "mall_vite_pid": 2013,
+  "mall_page_has_human_support_notice": true,
+  "business_unchanged": true,
+  "product_facts_unchanged": true,
+  "old_image": "sha256:96edf93e8278defbf18b277c71623557d81373406ed6c4e00757d2c3efa996b1",
+  "rollback_tag": "huangye-outdoor-ecommerce:before-daily-reload-20261012",
+  "chat_calls": 0,
+  "fault_injection": false
+}

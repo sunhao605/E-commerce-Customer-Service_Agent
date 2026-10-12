@@ -1,0 +1,10 @@
+{
+  "started_utc": "2026-10-11T02:57:28.597357+00:00",
+  "mode": "holdout",
+  "fixture_sha256": "b218e9c89f5759561190c1e3d321601fcf6a6ef4275df94c3321bd4564f8ac1c",
+  "script_sha256": "0858e153b244225c0725951b55d4f090d03485ec2de022d814879f7fd7690a4f",
+  "baseline_script_sha256": "b547cbc56a2c9e8ee5ea503721241c73ba94db249d6444dfeace31a065d42829",
+  "rule_source_sha256": "ba805cfed2314c37b66c0acbb187f8eb561752bab30ac8164d4dcbca7598a103",
+  "retries": 0,
+  "timeout_seconds": 30
+}

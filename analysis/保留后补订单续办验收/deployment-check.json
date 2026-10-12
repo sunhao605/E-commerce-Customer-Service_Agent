@@ -1,0 +1,7 @@
+{
+  "health": {
+    "status": "UP"
+  },
+  "image": "sha256:498818e6b592df512d8d12993468285edd8ede8917f4a9f82808c840f32c1992",
+  "cancel_execute": "1 (临时验收)"
+}

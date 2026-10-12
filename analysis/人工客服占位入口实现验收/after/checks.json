@@ -1,0 +1,202 @@
+[
+  {
+    "check": "换货进入人工占位确认卡",
+    "passed": true
+  },
+  {
+    "check": "换货没有准备售后申请或提交凭证",
+    "passed": true
+  },
+  {
+    "check": "换货执行前阻断，不依赖固定Agent错误退款标签",
+    "passed": true
+  },
+  {
+    "check": "换货动作仅前往或暂不前往",
+    "passed": true
+  },
+  {
+    "check": "部分退款进入人工占位确认卡",
+    "passed": true
+  },
+  {
+    "check": "部分退款没有准备售后申请或提交凭证",
+    "passed": true
+  },
+  {
+    "check": "部分退款执行前阻断，不依赖固定Agent错误退款标签",
+    "passed": true
+  },
+  {
+    "check": "部分退款动作仅前往或暂不前往",
+    "passed": true
+  },
+  {
+    "check": "部分退款进入人工占位确认卡",
+    "passed": true
+  },
+  {
+    "check": "部分退款没有准备售后申请或提交凭证",
+    "passed": true
+  },
+  {
+    "check": "部分退款执行前阻断，不依赖固定Agent错误退款标签",
+    "passed": true
+  },
+  {
+    "check": "部分退款动作仅前往或暂不前往",
+    "passed": true
+  },
+  {
+    "check": "维修进入人工占位确认卡",
+    "passed": true
+  },
+  {
+    "check": "维修没有准备售后申请或提交凭证",
+    "passed": true
+  },
+  {
+    "check": "维修执行前阻断，不依赖固定Agent错误退款标签",
+    "passed": true
+  },
+  {
+    "check": "维修动作仅前往或暂不前往",
+    "passed": true
+  },
+  {
+    "check": "补发进入人工占位确认卡",
+    "passed": true
+  },
+  {
+    "check": "补发没有准备售后申请或提交凭证",
+    "passed": true
+  },
+  {
+    "check": "补发执行前阻断，不依赖固定Agent错误退款标签",
+    "passed": true
+  },
+  {
+    "check": "补发动作仅前往或暂不前往",
+    "passed": true
+  },
+  {
+    "check": "质量问题进入人工占位确认卡",
+    "passed": true
+  },
+  {
+    "check": "质量问题没有准备售后申请或提交凭证",
+    "passed": true
+  },
+  {
+    "check": "质量问题执行前阻断，不依赖固定Agent错误退款标签",
+    "passed": true
+  },
+  {
+    "check": "质量问题动作仅前往或暂不前往",
+    "passed": true
+  },
+  {
+    "check": "否定换货后正常整单退款仍可准备",
+    "passed": true
+  },
+  {
+    "check": "政策咨询展示入口但保留原草稿版本和凭证",
+    "passed": true
+  },
+  {
+    "check": "暂不前往显示选择结果且保持当前对话",
+    "passed": true
+  },
+  {
+    "check": "单独要求人工入口不取消原申请",
+    "passed": true
+  },
+  {
+    "check": "确认前往只跳转独立页面，没有调用售后resume",
+    "passed": true
+  },
+  {
+    "check": "人工入口支持直接路由和刷新",
+    "passed": true
+  },
+  {
+    "check": "390像素说明页面无横向溢出",
+    "passed": true
+  },
+  {
+    "check": "返回客服助手保留当前对话",
+    "passed": true
+  },
+  {
+    "check": "明确改换货说明旧未提交卡失效",
+    "passed": true
+  },
+  {
+    "check": "旧退款凭证及待办已清理",
+    "passed": true
+  },
+  {
+    "check": "旧凭证无法直接提交，服务端拒绝",
+    "passed": true
+  },
+  {
+    "check": "核验失败样本路由正确",
+    "passed": true
+  },
+  {
+    "check": "ORD9801 退款审批样本，原因：买错了路由正确",
+    "passed": true
+  },
+  {
+    "check": "受支持办理仍使用原本人确认卡",
+    "passed": true
+  },
+  {
+    "check": "ORD9803 申请七天无理由整单退货路由正确",
+    "passed": true
+  },
+  {
+    "check": "受支持办理仍使用原本人确认卡",
+    "passed": true
+  },
+  {
+    "check": "不要转人工，ORD9801 未发货，我要整单退款，原因：买错了路由正确",
+    "passed": true
+  },
+  {
+    "check": "受支持办理仍使用原本人确认卡",
+    "passed": true
+  },
+  {
+    "check": "不换货，不需要帮我转人工，ORD9801 未发货，我要整单退款，原因：买错了路由正确",
+    "passed": true
+  },
+  {
+    "check": "受支持办理仍使用原本人确认卡",
+    "passed": true
+  },
+  {
+    "check": "我只退款，不换货，ORD9801 这件商品未发货，我要申请整单退款，原因：买错了路由正确",
+    "passed": true
+  },
+  {
+    "check": "受支持办理仍使用原本人确认卡",
+    "passed": true
+  },
+  {
+    "check": "Java静态部署的新页面直达返回200",
+    "passed": true
+  },
+  {
+    "check": "Java静态部署的新页面刷新返回200",
+    "passed": true
+  },
+  {
+    "check": "已提交会话不因换货出口撤回或改变原状态（合成会话）",
+    "passed": true
+  },
+  {
+    "check": "申请准备、人工入口与旧卡拒绝后8张H2业务表未变",
+    "passed": true
+  }
+]

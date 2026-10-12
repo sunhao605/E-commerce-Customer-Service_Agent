@@ -1,0 +1,11 @@
+--- ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/CustomerServiceGatewayService.java (修改前)
++++ ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/CustomerServiceGatewayService.java (修改后)
+@@ -365,7 +365,7 @@
+             if ("CONFIRM_SUBMIT".equals(session.getPendingAction()) && StringUtils.hasText(session.getResumeToken())) {
+                 return pendingRefundResponse(session, text);
+             }
+-            return plainResponse(session, text, "SCORE_LOW");
++            return conflictCard(session, "这句还不够确定，当前办理仍保留。请在下方选择保留办理，或取消这次尚未提交的办理。");
+         }
+         boolean clarify = Set.of("ask_object", "ask_decision", "keep_other", "candidates_changed", "object_noted", "hold_review").contains(action);
+         if (!shipping && (exactCancel || !clarify)) {

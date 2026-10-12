@@ -36,11 +36,22 @@ import org.springframework.web.bind.annotation.RestController;
 public class OrderController {
 
     private final OrderService orderService;
+    private final ShopService shopService;
     private final RequestIdentityResolver requestIdentityResolver;
 
-    public OrderController(OrderService orderService, RequestIdentityResolver requestIdentityResolver) {
+    public OrderController(OrderService orderService, RequestIdentityResolver requestIdentityResolver, ShopService shopService) {
         this.orderService = orderService;
         this.requestIdentityResolver = requestIdentityResolver;
+        this.shopService = shopService;
+    }
+
+    @GetMapping("/{orderNo}/after-sale-eligibility")
+    public ApiResponse<AfterSaleEligibilityResponse> getAfterSaleEligibility(
+        @PathVariable String orderNo,
+        @RequestHeader(value = AgentServiceAuthenticationFilter.DELEGATED_USER_HEADER, required = false) String delegatedUserId,
+        Authentication authentication) {
+        String userId = requestIdentityResolver.currentUserId(authentication, delegatedUserId);
+        return ApiResponse.success(shopService.getAfterSaleEligibility(userId, orderNo));
     }
 
     @GetMapping("/{orderNo}")

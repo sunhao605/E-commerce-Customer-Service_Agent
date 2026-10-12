@@ -1,0 +1,8 @@
+{
+  "restored": true,
+  "balance": "99602.00",
+  "before_hash_matched": true,
+  "rows_changed": 1,
+  "business_transactions_added": 0,
+  "reason": "回滚本次启动初始化自动补款"
+}

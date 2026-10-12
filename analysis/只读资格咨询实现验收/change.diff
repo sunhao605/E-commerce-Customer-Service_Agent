@@ -1,0 +1,802 @@
+--- before/ecommerce-backend/src/main/java/com/teachdemo/ecommerce/order/OrderController.java
++++ after/ecommerce-backend/src/main/java/com/teachdemo/ecommerce/order/OrderController.java
+@@ -36,11 +36,22 @@
+ public class OrderController {
+ 
+     private final OrderService orderService;
++    private final ShopService shopService;
+     private final RequestIdentityResolver requestIdentityResolver;
+ 
+-    public OrderController(OrderService orderService, RequestIdentityResolver requestIdentityResolver) {
++    public OrderController(OrderService orderService, RequestIdentityResolver requestIdentityResolver, ShopService shopService) {
+         this.orderService = orderService;
+         this.requestIdentityResolver = requestIdentityResolver;
++        this.shopService = shopService;
++    }
++
++    @GetMapping("/{orderNo}/after-sale-eligibility")
++    public ApiResponse<AfterSaleEligibilityResponse> getAfterSaleEligibility(
++        @PathVariable String orderNo,
++        @RequestHeader(value = AgentServiceAuthenticationFilter.DELEGATED_USER_HEADER, required = false) String delegatedUserId,
++        Authentication authentication) {
++        String userId = requestIdentityResolver.currentUserId(authentication, delegatedUserId);
++        return ApiResponse.success(shopService.getAfterSaleEligibility(userId, orderNo));
+     }
+ 
+     @GetMapping("/{orderNo}")
+--- before/ecommerce-backend/src/main/java/com/teachdemo/ecommerce/order/ShopService.java
++++ after/ecommerce-backend/src/main/java/com/teachdemo/ecommerce/order/ShopService.java
+@@ -353,6 +353,37 @@
+         return toOrderResponse(order);
+     }
+ 
++    @Transactional(readOnly = true)
++    public AfterSaleEligibilityResponse getAfterSaleEligibility(String userId, String orderNo) {
++        OrderEntity order = findOwnOrder(userId, orderNo);
++        if (!StringUtils.hasText(order.getStatus()) || !StringUtils.hasText(order.getPaymentStatus())
++            || !StringUtils.hasText(order.getFulfillmentStatus())) {
++            return new AfterSaleEligibilityResponse(orderNo, "UNKNOWN", null, null, "缺少可信订单、支付或履约状态，请联系人工核验。");
++        }
++        if (afterSaleRequestRepository.findByOrderNo(orderNo).stream().anyMatch(this::isActiveMoneyApplication)) {
++            return new AfterSaleEligibilityResponse(orderNo, "INELIGIBLE", null, null,
++                "该订单已有售后申请，请查看原申请进度，不要重复申请。");
++        }
++        String type = Set.of("DELIVERED", "SIGNED", "COMPLETED").contains(String.valueOf(order.getStatus()))
++            ? "RETURN" : "REFUND";
++        try {
++            BigDecimal amount = "RETURN".equals(type) ? customerReturnAmount(order, returnNow())
++                : customerRefundAmount(order, userId);
++            String reason = "RETURN".equals(type) ? "已支付并签收、在七天窗口内，整单商品购买时均支持无理由退货，实付金额已核实。"
++                : "已支付且未发货，整单实付金额已核实。";
++            return new AfterSaleEligibilityResponse(orderNo, "ELIGIBLE", type, amount, reason);
++        } catch (BusinessException ex) {
++            boolean unknown = Set.of("REFUND_PAYMENT_UNVERIFIED", "RETURN_SIGNED_TIME_MISSING", "RETURNABILITY_UNVERIFIED")
++                .contains(ex.getCode()) || "RETURN_WINDOW_INVALID".equals(ex.getCode())
++                && order.getDeliveredAt() != null && order.getDeliveredAt().isAfter(returnNow());
++            String reason = ex.getMessage().replace("；本次未提交", "").replace("，本次未提交", "");
++            if ("CUSTOMER_REFUND_NOT_ALLOWED".equals(ex.getCode()) && "SHIPPED".equals(order.getFulfillmentStatus())) {
++                reason = "订单已发货，不满足未发货退款或已签收七天无理由退货条件；拦截等其他处理请联系人工核验。";
++            }
++            return new AfterSaleEligibilityResponse(orderNo, unknown ? "UNKNOWN" : "INELIGIBLE", type, null, reason);
++        }
++    }
++
+     @Transactional
+     public ShopAfterSaleResponse submitCustomerRefund(String userId, String orderNo, String reason,
+                                                        BigDecimal confirmedAmount) {
+--- before/ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/CustomerServiceSession.java
++++ after/ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/CustomerServiceSession.java
+@@ -43,6 +43,7 @@
+     private Map<String, Object> objectWait;
+     private String conflictToken;
+     private int conflictRevision;
++    private Map<String, Object> afterSaleQuery;
+ 
+     public CustomerServiceSession(String sessionId, String userId) {
+         this.sessionId = sessionId;
+@@ -188,6 +189,9 @@
+     public Map<String, Object> getObjectWait() {
+         return objectWait;
+     }
++
++    public Map<String, Object> getAfterSaleQuery() { return afterSaleQuery; }
++    public void setAfterSaleQuery(Map<String, Object> afterSaleQuery) { this.afterSaleQuery = afterSaleQuery; }
+ 
+     public void setObjectWait(Map<String, Object> objectWait) {
+         this.objectWait = objectWait;
+--- before/ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/CustomerServiceGatewayService.java
++++ after/ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/CustomerServiceGatewayService.java
+@@ -116,21 +116,29 @@
+             assertSessionOwner(session, profile.getUserId());
+             session.setCancellationJudged(false);
+             String message = request.getMessage();
+-            String continuingType = session.getActionType();
+-            boolean continuingRefund = session.getPendingAction() != null && !session.isHandled();
+-            boolean needsOrder = "REFUND_ORDER_REQUIRED".equals(session.getPendingAction());
+-            String requestedOrder = extractOrderNo(message);
+-            if (requestedOrder == null && pageContext != null) requestedOrder = trimToNull(pageContext.getOrderNo());
+-            boolean changedOrder = requestedOrder != null && !Objects.equals(requestedOrder, session.getRelatedOrderNo());
+-            CustomerServiceResponse followup = refundFollowup(session, message, pageContext, profile.getUserId());
+-            if (followup != null) {
+-                rememberTurn(session, request.getMessage(), followup.getAnswer());
+-                return followup;
+-            }
+-            if (continuingRefund && requestedOrder != null && (needsOrder || changedOrder)) {
+-                message += "\n客户正在补充或更换" + ("RETURN".equals(continuingType) ? "七天无理由退货退款" : "未发货整单退款") + "申请的订单号，尚未确认提交。";
++            if (session.getAfterSaleQuery() != null && message.trim().matches("(?:好的|好|可以|知道了|先不办|暂时不办)[。！!\\s]*")) {
++                if (message.contains("不办")) session.setAfterSaleQuery(null);
++                CustomerServiceResponse response = new CustomerServiceResponse("好的，这次只咨询，没有准备新的申请。需要办理时请明确提出申请。",
++                    sessionId, false, "ELIGIBILITY_QUERY", null, null, null, null, null, List.of(), false);
++                rememberTurn(session, message, response.getAnswer());
++                return response;
++            }
++            // 独立取消和已知办理的纯订单输入仍走原续接；查询选单不走办理续接。
++            if (CANCEL_DRAFT.matcher(message.trim()).matches() || session.getAfterSaleQuery() == null
++                && "REFUND_ORDER_REQUIRED".equals(session.getPendingAction()) && ORDER_NO.matcher(message.trim()).matches()) {
++                CustomerServiceResponse followup = refundFollowup(session, message, pageContext, profile.getUserId());
++                if (followup != null) {
++                    rememberTurn(session, message, followup.getAnswer());
++                    return followup;
++                }
+             }
+             Map<String, Object> runtimeContext = buildRuntimeContext(profile, pageContext, request.getMessage());
++            runtimeContext.put("mallAfterSaleRouting", true);
++            runtimeContext.put("afterSaleQuery", session.getAfterSaleQuery());
++            if (session.getPendingAction() != null && !session.isHandled()) {
++                runtimeContext.put("afterSaleOpenTask", Map.of("intent", "RETURN".equals(session.getActionType()) ? "return_request" : "refund_request",
++                    "pending_slot", "REFUND_ORDER_REQUIRED".equals(session.getPendingAction()) ? "order_id" : "reason"));
++            }
+             runtimeContext.put("cancelledAfterSaleDraft", "CANCELLED".equals(session.getPendingAction()));
+             runtimeContext.put("afterSaleDraft", afterSaleDraftSummary(session));
+             if (session.isCancellationJudged()) {
+@@ -150,6 +158,32 @@
+             );
+             try {
+                 JsonNode agentResponse = agentClient.chat(agentRequest);
++                if (agentResponse != null && "after_sale_eligibility_query".equals(agentResponse.path("session_state").path("intent").asText())) {
++                    CustomerServiceResponse response = eligibilityQueryResponse(agentResponse, session);
++                    rememberTurn(session, message, response.getAnswer());
++                    return response;
++                }
++                String followupMessage = message;
++                String selected = agentResponse == null ? null : text(agentResponse.path("session_state").path("context_report"), "chosen_order_id", null);
++                String intent = agentResponse == null ? null : text(agentResponse.path("session_state"), "intent", null);
++                if (Set.of("refund_request", "return_request").contains(intent == null ? "" : intent) && selected != null
++                    && extractOrderNo(message) == null) {
++                    followupMessage += " " + selected;
++                }
++                if (Set.of("refund_request", "return_request").contains(intent == null ? "" : intent)
++                    && session.getAfterSaleQuery() != null && extractOrderNo(message) == null && pageContext != null
++                    && pageContext.getOrderNo() != null && session.getAfterSaleQuery().get("order_id") != null
++                    && !Objects.equals(pageContext.getOrderNo(), session.getAfterSaleQuery().get("order_id"))) {
++                    CustomerServiceResponse response = new CustomerServiceResponse("当前页面订单与刚查询的订单不同，请明确要申请哪一笔订单。尚未准备新申请。",
++                        sessionId, false, "ELIGIBILITY_ORDER_REQUIRED", null, null, null, null, null, List.of(), false);
++                    rememberTurn(session, message, response.getAnswer());
++                    return response;
++                }
++                CustomerServiceResponse followup = refundFollowup(session, followupMessage, pageContext, profile.getUserId());
++                if (followup != null) {
++                    rememberTurn(session, message, followup.getAnswer());
++                    return followup;
++                }
+                 CustomerServiceResponse response = sanitizeChatResponse(agentResponse, session, pageContext, profile.getUserId(), request.getMessage());
+                 rememberTurn(session, request.getMessage(), response.getAnswer());
+                 return response;
+@@ -607,6 +641,7 @@
+             boolean returning = "RETURN".equals(actionType);
+             ShopOrderResponse order = returning ? shopService.getCustomerReturnOrder(userId, orderNo)
+                 : shopService.getCustomerRefundOrder(userId, orderNo);
++            session.setAfterSaleQuery(null);
+             if (returning) reason = "七天无理由退货";
+             if (reason != null && (reason.isBlank() || reason.length() > 200)) {
+                 clearPendingRefund(session);
+@@ -710,6 +745,25 @@
+         sessionStore.save(session);
+     }
+ 
++    private CustomerServiceResponse eligibilityQueryResponse(JsonNode agentResponse, CustomerServiceSession session) {
++        JsonNode query = agentResponse.path("session_state").path("eligibility_query");
++        Map<String, Object> context = new HashMap<>();
++        context.put("intent", "after_sale_eligibility_query");
++        context.put("order_id", text(query, "order_id", null));
++        context.put("application_type", text(query, "application_type", null));
++        context.put("pending_slot", text(query, "pending_slot", null));
++        List<Map<String, String>> candidates = new ArrayList<>();
++        for (JsonNode item : query.path("candidates")) {
++            candidates.add(Map.of("value", item.path("value").asText(), "label", item.path("label").asText()));
++        }
++        context.put("candidates", candidates);
++        session.setAfterSaleQuery(context);
++        sessionStore.save(session);
++        return new CustomerServiceResponse(text(agentResponse, "answer", FALLBACK_ANSWER), session.getSessionId(), false,
++            context.get("pending_slot") == null ? "ELIGIBILITY_QUERY" : "ELIGIBILITY_ORDER_REQUIRED",
++            null, null, (String) context.get("order_id"), null, null, List.of(), false);
++    }
++
+     private CustomerServiceResponse sanitizeChatResponse(JsonNode agentResponse, CustomerServiceSession session,
+                                                          CustomerServicePageContextRequest pageContext, String userId,
+                                                          String userMessage) {
+@@ -718,6 +772,28 @@
+         }
+         JsonNode workflow = workflowNode(agentResponse);
+         String answer = text(agentResponse, "answer", FALLBACK_ANSWER);
++        String intent = agentResponse.path("session_state").path("intent").asText();
++        if ((workflow.isMissingNode() || workflow.isNull()) && Set.of("refund_request", "return_request").contains(intent)) {
++            String type = "return_request".equals(intent) ? "RETURN" : "REFUND";
++            String orderNo = text(agentResponse.path("session_state").path("context_report"), "chosen_order_id", null);
++            if ("order_id".equals(agentResponse.path("clarification").path("clarification_field").asText())) orderNo = null;
++            session.setAfterSaleQuery(null);
++            if ("RETURN".equals(type) && isOtherReturnReason(userMessage)) {
++                return plainResponse(session, "质量问题等其他售后请联系人工核验，本次未准备无理由退货申请。", "RETURN_TYPE_REQUIRED");
++            }
++            if (orderNo != null) {
++                return prepareRefund(session, userId, orderNo, extractRefundReason(userMessage),
++                    "请核对申请，确认提交后等待后台审核。", type);
++            }
++            session.bumpDraftRevision();
++            session.setObjectWait(null);
++            session.setHandled(false);
++            session.setActionType(type);
++            session.setPendingAction("REFUND_ORDER_REQUIRED");
++            session.setRefundReason("RETURN".equals(type) ? "七天无理由退货" : extractRefundReason(userMessage));
++            session.setExpiresAt(LocalDateTime.now().plusMinutes(30));
++            return plainResponse(session, answer, "REFUND_ORDER_REQUIRED");
++        }
+         if (isOtherReturnReason(userMessage) && ("received_return".equals(text(workflow, "workflow_type", null))
+             || "return_request".equals(agentResponse.path("session_state").path("intent").asText()))) {
+             clearPendingRefund(session);
+--- before/ecommerce-backend/frontend/src/shop/App.tsx
++++ after/ecommerce-backend/frontend/src/shop/App.tsx
+@@ -1138,7 +1138,9 @@
+     try {
+       const response = await api.chat({ message: text, sessionId, pageContext: context });
+       setSessionId(response.sessionId);
+-      if (!response.fallback) setActiveConfirmationToken(response.confirmRequired ? response.resumeToken : null);
++      if (!response.fallback && !["ELIGIBILITY_QUERY", "ELIGIBILITY_ORDER_REQUIRED"].includes(response.pendingAction || "")) {
++        setActiveConfirmationToken(response.confirmRequired ? response.resumeToken : null);
++      }
+       setMessages((prev) => [...prev, { from: "agent", text: response.answer, response }]);
+     } catch (err) {
+       setMessages((prev) => [...prev, { from: "system", text: onError(err) || "客服繁忙，请稍后再试。" }]);
+--- before/backend/tests/test_route_priority.py
++++ after/backend/tests/test_route_priority.py
+@@ -1,4 +1,4 @@
+-"""模型给出合法标签后不被关键词规则改掉。不调用模型。"""
++"""通用模型路由不被规则覆盖；资格只读约束独立检查。不调用模型。"""
+ import inspect
+ import os
+ import unittest
+@@ -135,7 +135,7 @@
+         self.assertEqual(classify_intent("发票开具后在哪里下载？"), "invoice_query")
+         self.assertEqual(classify_intent("ORD1234 还没发货，我现在要申请退款。"), "refund_request")
+         self.assertEqual(classify_intent("ORD1234 已签收，我想申请七天无理由退货。"), "return_request")
+-        self.assertEqual(classify_intent("ORD1234 还能退吗？先别申请。"), "unknown")
++        self.assertEqual(classify_intent("ORD1234 还能退吗？先别申请。"), "after_sale_eligibility_query")
+         self.assertEqual(classify_intent("我不要退款，只查 ORD1234 的物流。"), "refund_request")
+         self.assertEqual(RouteModelClient._extract_intent('{"intent":"refund_policy_query"}'), "refund_policy_query")
+         self.assertEqual(RouteModelClient._extract_intent('{"intent":"return_policy_query"}'), "return_policy_query")
+@@ -177,7 +177,7 @@
+         try:
+             with patch.object(agent.route_model_client, "plan_intent", side_effect=use_fallback), patch.object(
+                 agent.answer_model_client, "can_call_model", return_value=False
+-            ):
++            ), patch("agent.tools.tool_runtime.ecommerce_get", return_value=None):
+                 refund = agent.chat(
+                     ChatRequest(
+                         session_id="t-refund-policy",
+@@ -245,21 +245,21 @@
+         self.assertEqual(refund.session_state["intent"], "refund_policy_query")
+         self.assertEqual(returned.session_state["intent"], "return_policy_query")
+         self.assertIn("未发货", refund.answer)
+-        self.assertIn("7 天", returned.answer)
++        self.assertIn("七天窗口", returned.answer)
+         self.assertEqual(invoice.session_state["intent"], "invoice_query")
+         self.assertEqual(invoice.answer, "发票缓存标记")
+         self.assertEqual(invoice.session_state["memory"]["open_task"], None)
+-        self.assertEqual(eligibility.session_state["intent"], "unknown")
++        self.assertEqual(eligibility.session_state["intent"], "after_sale_eligibility_query")
+         self.assertIsNone(eligibility.session_state["workflow"])
+         self.assertIsNone(eligibility.session_state["memory"]["open_task"])
+-        self.assertIn("不会准备申请", eligibility.answer)
++        self.assertIn("没有准备申请", eligibility.answer)
+         self.assertEqual(apply_refund.session_state["intent"], "refund_request")
+         self.assertEqual(apply_refund.session_state["memory"]["open_task"]["intent"], "refund_request")
+-        self.assertEqual(asked.session_state["intent"], "unknown")
+-        self.assertEqual(asked.tool_calls, [])
++        self.assertEqual(asked.session_state["intent"], "after_sale_eligibility_query")
++        self.assertEqual([call.tool_name for call in asked.tool_calls], ["get_after_sale_eligibility"])
+         self.assertIsNone(asked.session_state["workflow"])
+         self.assertIsNone(asked.session_state["memory"]["open_task"])
+-        self.assertIn("不会准备申请", asked.answer)
++        self.assertIn("没有准备申请", asked.answer)
+         self.assertEqual(kept.session_state["intent"], "refund_policy_query")
+         self.assertEqual(kept.tool_calls, [])
+         self.assertIsNone(kept.session_state["workflow"])
+--- before/backend/agent/context.py
++++ after/backend/agent/context.py
+@@ -38,19 +38,21 @@
+     return memory
+ 
+ 
+-def build_context(request: ChatRequest, explicit_order_id: str | None) -> tuple[str | None, dict[str, Any], dict[str, Any]]:
++def build_context(request: ChatRequest, explicit_order_id: str | None, *, query_task: dict[str, Any] | None = None,
++                  eligibility_query: bool = False) -> tuple[str | None, dict[str, Any], dict[str, Any]]:
+     """明确订单或候选选择优先；无效候选选择不得回落到页面或历史订单。"""
+     memory = current_memory(request.session_id, request.runtime_user_id)
+     page = request.runtime_context or {}
+     page_order_id = page.get("current_order_id") or page.get("relatedOrderNo")
+-    chosen_order_id = explicit_order_id or page_order_id or memory.get("last_order_id")
++    remembered_order = (query_task or {}).get("order_id") if eligibility_query else memory.get("last_order_id")
++    chosen_order_id = explicit_order_id or page_order_id or remembered_order
+     selection_message = page.get("userMessage") or request.user_message
+     selection = re.fullmatch(r"(?:我选择\s*)?第([0-9一二三四五六七八九十]{1,3})笔[。！!？?\s]*", selection_message.strip())
+     if selection:
+         numeral = selection.group(1)
+         # shortcut: 中文序号只支持一至十（商城默认展示十笔），扩容候选时再扩展。
+         index = int(numeral) if numeral.isascii() and numeral.isdigit() else {word: i for i, word in enumerate("一二三四五六七八九十", 1)}.get(numeral, 0)
+-        candidates = (memory.get("open_task") or {}).get("candidates") or []
++        candidates = ((query_task or {}) if eligibility_query else memory.get("open_task") or {}).get("candidates") or []
+         chosen_order_id = candidates[index - 1]["value"] if 1 <= index <= len(candidates) else None
+     conflicts: list[str] = []
+     if selection:
+--- before/backend/agent/customer_service_agent.py
++++ after/backend/agent/customer_service_agent.py
+@@ -47,7 +47,7 @@
+     runtime_context_summary,
+     runtime_identity_answer,
+ )
+-from agent.tools.tool_runtime import get_order_detail, get_order_logistics, get_refund_status, search_products
++from agent.tools.tool_runtime import get_after_sale_eligibility, get_order_detail, get_order_logistics, get_refund_status, search_products
+ from agent.workflows.after_sale_graph import RECEIVED_RETURN_GRAPH, REFUND_APPROVAL_GRAPH
+ from agent.workflows.resume import TrustedReviewer, resume_from_checkpoint
+ 
+@@ -69,24 +69,44 @@
+         if (request.runtime_context or {}).get("cancelledAfterSaleDraft") is True:
+             memory["open_task"] = None
+         open_task = memory.get("open_task")
+-        observation = observe_cancellation(request, open_task)
+-        if observation is not None:
+-            trace_store.add(request.session_id, "cancellation_intent_observed", observation)
++        runtime = request.runtime_context or {}
++        if runtime.get("mallAfterSaleRouting"):
++            open_task = runtime.get("afterSaleOpenTask")
++        query_task = runtime.get("afterSaleQuery") if "afterSaleQuery" in runtime else memory.get("eligibility_query")
+         selection_message = (request.runtime_context or {}).get("userMessage") or request.user_message
+-        task_note = format_open_task(open_task)
++        active_task = query_task if query_task and query_task.get("pending_slot") else open_task
++        task_note = format_open_task(active_task)
++        if query_task and query_task.get("order_id"):
++            task_note = (task_note or "") + f"\n上一轮只读资格查询的订单：{query_task['order_id']}，业务类型：{query_task.get('application_type') or '尚未核实'}。只有明确申请才办理，好的或知道了不算申请。"
+         fallback_intent = classify_intent(request.user_message)
+         route_result = self.route_model_client.plan_intent(
+             request.user_message,
+             fallback_intent=fallback_intent,
+             task_note=task_note,
+         )
+-        if not route_result.used_model and task_note and is_slot_reply(selection_message):
++        if not route_result.used_model and active_task and is_slot_reply(selection_message):
+             route_result = route_result.model_copy(
+-                update={"intent": open_task["intent"], "fallback_reason": "open_task_slot"}
++                update={"intent": active_task["intent"], "fallback_reason": "open_task_slot"}
+             )
+         intent = route_result.intent
++        if is_specific_eligibility_question(selection_message) or (
++            query_task and is_slot_reply(selection_message)
++        ):
++            intent = "after_sale_eligibility_query"
++            route_result = route_result.model_copy(update={"intent": intent})
++        if intent != "after_sale_eligibility_query" and not (request.runtime_context or {}).get("mallAfterSaleRouting"):
++            observation = observe_cancellation(request, open_task)
++            if observation is not None:
++                trace_store.add(request.session_id, "cancellation_intent_observed", observation)
+         explicit_order_id = extract_order_id(selection_message)
+-        order_id, context_report, compression_report = build_context(request, explicit_order_id)
++        order_id, context_report, compression_report = build_context(
++            request, explicit_order_id, query_task=query_task, eligibility_query=intent == "after_sale_eligibility_query"
++        )
++        if intent in {"refund_request", "return_request"} and query_task and query_task.get("order_id") and not explicit_order_id:
++            page_order = runtime.get("current_order_id") or runtime.get("relatedOrderNo")
++            if not page_order or page_order == query_task["order_id"]:
++                order_id = query_task["order_id"]
++                context_report["chosen_order_id"] = order_id
+         route_plan = build_route_plan(
+             intent=intent,
+             user_message=request.user_message,
+@@ -98,6 +118,7 @@
+         citations: list[Citation] = []
+         tool_calls: list[ToolCallTrace] = []
+         workflow: dict[str, Any] | None = None
++        eligibility: dict[str, Any] | None = None
+         cache_hit = False
+         degraded = False
+         degradation_reason: str | None = None
+@@ -247,6 +268,32 @@
+             risk_level = knowledge_result.risk_level
+             next_action = knowledge_result.next_action
+             needs_human_approval = knowledge_result.needs_human_approval
++        elif intent == "after_sale_eligibility_query":
++            if clarification:
++                answer = clarification.message + "这轮只查资格，不准备申请。"
++                if clarification.candidates:
++                    answer += "\n" + "\n".join(f"{index}. {item.label}（{item.hint}）" for index, item in enumerate(clarification.candidates, 1))
++                next_action = "ask_clarification"
++            else:
++                hooks.pre_tool_call("get_after_sale_eligibility", {"order_id": order_id}, request.runtime_user_id)
++                eligibility, call = get_after_sale_eligibility(order_id, request.runtime_user_id)
++                hooks.post_tool_call(call)
++                tool_calls.append(call)
++                answer = call.output_summary
++                next_action = "answer_user"
++                trace_store.add(request.session_id, "after_sale_eligibility_checked", {
++                    "session_id": request.session_id, "order_id": order_id,
++                    "status": eligibility.get("status") if eligibility else "UNKNOWN", "read_only": True,
++                    "error_type": call.error_type,
++                })
++            risk_level = "low"
++            needs_human_approval = False
++        elif (request.runtime_context or {}).get("mallAfterSaleRouting") and intent in {"refund_request", "return_request"}:
++            # 商城先分流，再由Java核验与准备；路由阶段不生成模拟审批草稿。
++            answer = clarification.message if clarification else "已识别申请诉求，待商城核验最新资格并准备确认。"
++            risk_level = "high"
++            next_action = "ask_clarification" if clarification else "answer_user"
++            needs_human_approval = False
+         elif intent == "return_request":
+             if clarification:
+                 answer = clarification.message
+@@ -575,18 +622,11 @@
+                 next_action = "ask_clarification" if detail_call.error_type == "missing_order_id" else "transfer_to_human"
+                 needs_human_approval = False
+         elif intent == "unknown":
+-            if is_specific_eligibility_question(request.user_message):
+-                answer = (
+-                    "你是在问具体订单能不能退，不是在办理。"
+-                    "我现在只能说明通用退款或退货规则，还不能只读核验这一笔的资格，也不会准备申请。"
+-                    "可以直接问退款政策或退货条件；如果要办理，请明确说申请退款或申请退货。"
+-                )
+-            else:
+-                answer = (
+-                    f"我收到了订单号 {order_id}，但你还没有说明要办什么。请告诉我是查物流、查进度，还是申请售后。在你说清楚之前，我不会替你选定，也不会查询这笔订单。"
+-                    if order_id
+-                    else "我还不知道你要办哪一件事。如果是订单物流、商品、活动规则或售后，请直接说具体需求。"
+-                )
++            answer = (
++                f"我收到了订单号 {order_id}，但你还没有说明要办什么。请告诉我是查物流、查进度，还是申请售后。在你说清楚之前，我不会替你选定，也不会查询这笔订单。"
++                if order_id
++                else "我还不知道你要办哪一件事。如果是订单物流、商品、活动规则或售后，请直接说具体需求。"
++            )
+             risk_level = "low"
+             next_action = "answer_user"
+             needs_human_approval = False
+@@ -657,7 +697,8 @@
+             workflow=workflow,
+             cache_hit=cache_hit,
+             degraded=degraded,
+-            skip_final_model=uses_runtime_identity,
++            skip_final_model=uses_runtime_identity or intent == "after_sale_eligibility_query"
++                or bool((request.runtime_context or {}).get("mallAfterSaleRouting") and intent in {"refund_request", "return_request"}),
+             enable_reasoning=request.reasoning_view == "teaching",
+             context_report=context_report,
+         )
+@@ -696,7 +737,15 @@
+             )
+ 
+         stored = current_memory(request.session_id, request.runtime_user_id)
+-        if next_action == "ask_clarification" and intent not in {"unknown", "general_chat"}:
++        if intent == "after_sale_eligibility_query":
++            queried = next((call for call in tool_calls if call.tool_name == "get_after_sale_eligibility" and call.status == "success"), None)
++            stored["eligibility_query"] = {
++                "intent": intent, "order_id": order_id if queried else None,
++                "application_type": eligibility.get("applicationType") if eligibility else None,
++                "pending_slot": "order_id" if clarification else None,
++                "candidates": [{"value": item.value, "label": item.label} for item in (clarification.candidates if clarification else [])],
++            }
++        elif next_action == "ask_clarification" and intent not in {"unknown", "general_chat"}:
+             stored["open_task"] = {
+                 "intent": intent,
+                 "pending_slot": clarification.clarification_field if clarification else "order_id",
+@@ -769,6 +818,7 @@
+                 "agent_version": "lesson-41-final-rehearsal",
+                 "message_count": message_count,
+                 "intent": intent,
++                "eligibility_query": stored.get("eligibility_query"),
+                 "model": {
+                     "route_planner": {
+                         "used_model": route_result.used_model,
+--- before/backend/api/schemas.py
++++ after/backend/api/schemas.py
+@@ -21,6 +21,7 @@
+     "general_chat",
+     "order_query",
+     "refund_status_query",
++    "after_sale_eligibility_query",
+     "refund_policy_query",
+     "refund_request",
+     "return_policy_query",
+--- before/backend/agent/tools/tool_runtime.py
++++ after/backend/agent/tools/tool_runtime.py
+@@ -17,8 +17,45 @@
+ from pydantic import BaseModel, Field
+ 
+ from api.schemas import *
+-from agent.ecommerce_client import after_sale_requests_from_ecommerce, order_fact_from_ecommerce, products_from_ecommerce
++from agent.ecommerce_client import after_sale_requests_from_ecommerce, ecommerce_get, order_fact_from_ecommerce, products_from_ecommerce
+ from agent.tools.runtime_context import *
++
++def get_after_sale_eligibility(order_id: str | None, runtime_user_id: str) -> tuple[dict[str, Any] | None, ToolCallTrace]:
++    """资格仅来自商城严格规则，不回退到课程镜像或页面摘要。"""
++    arguments = {"order_id": order_id, "fact_source": "business_api"}
++    result = None
++    error = "business_api_unavailable"
++    summary = "暂时无法核实这笔订单的售后资格，请稍后重试。本轮没有准备申请。"
++    if not order_id:
++        error, summary = "missing_order_id", "请补充本人的订单号，这轮只查询资格，不准备申请。"
++    else:
++        try:
++            result = ecommerce_get(f"/api/orders/{order_id}/after-sale-eligibility", delegated_user_id=runtime_user_id)
++            if not isinstance(result, dict) or result.get("orderNo") != order_id or result.get("status") not in {
++                "ELIGIBLE", "INELIGIBLE", "UNKNOWN"
++            }:
++                result = None
++        except httpx.HTTPStatusError as exc:
++            if exc.response.status_code in {403, 404}:
++                error, summary = "order_unavailable", "无法查询该订单，请确认订单号且订单属于当前账号。本轮没有准备申请。"
++        except (httpx.HTTPError, ValueError):
++            pass
++    if result:
++        state = result["status"]
++        if state == "ELIGIBLE" and result.get("applicationType") in {"REFUND", "RETURN"} and result.get("amount") is not None:
++            returning = result["applicationType"] == "RETURN"
++            label = "七天无理由整单退货退款" if returning else "未发货整单退款"
++            apply = "申请七天无理由退货" if returning else "申请退款"
++            summary = f"按当前查询结果，订单 {order_id} 可以申请{label}，金额 {result['amount']} 元。{result.get('reason') or ''}如需办理，请明确回复‘{apply}’。这轮只查资格，没有准备申请；可以申请不代表审核通过。"
++        else:
++            prefix = "暂时无法核实" if state in {"UNKNOWN", "ELIGIBLE"} else "不满足当前自助办理条件"
++            reason = str(result.get('reason') or '资格事实不完整，请稍后重试').rstrip('。；')
++            summary = f"订单 {order_id} {prefix}：{reason}。这轮只查资格，没有准备申请。"
++        return result, ToolCallTrace(tool_name="get_after_sale_eligibility", arguments=arguments,
++            output_summary=summary, status="success", risk_level="low", next_action="answer_user")
++    return None, ToolCallTrace(tool_name="get_after_sale_eligibility", arguments=arguments, output_summary=summary,
++        status="error", error_type=error, risk_level="low",
++        next_action="ask_clarification" if error == "missing_order_id" else "answer_user")
+ 
+ def get_order_detail(
+     order_id: str | None,
+--- before/backend/agent/tools/planning.py
++++ after/backend/agent/tools/planning.py
+@@ -19,7 +19,7 @@
+ from api.schemas import *
+ 
+ _POLICY_CUES = ("政策", "规则", "条件", "流程", "怎么寄", "如何寄", "了解一下", "只是咨询", "只了解", "咨询一下", "寄回")
+-_ELIGIBILITY_CUES = ("能退", "可退", "能否退", "能不能退", "还能退", "可以退")
++_ELIGIBILITY_CUES = ("能退", "可退", "能否退", "能不能退", "还能退", "可以退", "资格", "能申请退款", "能申请退货")
+ _APPLY_NEGATIONS = ("不要申请", "先别申请", "暂不申请", "不申请", "别申请")
+ 
+ 
+@@ -33,11 +33,11 @@
+ def _explicit_apply(user_message: str) -> bool:
+     """明确要办理。否定申请（不申请、先别申请）不算。"""
+     text = _without_apply_negation(user_message)
+-    return any(term in text for term in ("帮我", "我要", "办理", "申请"))
++    return bool(re.search(r"(?:我要|我想|帮我|给我|现在|直接|那就)?(?:申请|办理|退款吧|退货吧)", text))
+ 
+ 
+ def read_only_after_sale_intent(user_message: str) -> Intent | None:
+-    """模型故障时把通用政策咨询留在只读标签。具体订单能不能退不在这里，避免误当成已经支持资格查询。"""
++    """模型故障时把通用政策咨询留在只读标签。"""
+     if _explicit_apply(user_message) or is_specific_eligibility_question(user_message):
+         return None
+     policy = any(term in user_message for term in _POLICY_CUES)
+@@ -54,12 +54,15 @@
+ 
+ 
+ def is_specific_eligibility_question(user_message: str) -> bool:
+-    """问的是某一笔能不能退。当前没有资格查询标签，不能当成办理。"""
+-    if _explicit_apply(user_message) or not any(term in user_message for term in _ELIGIBILITY_CUES):
++    """资格问题及条件式办理先查资格，不把“帮我看看”当成申请。"""
++    if not any(term in user_message for term in _ELIGIBILITY_CUES):
+         return False
+-    return extract_order_id(user_message) is not None or any(
++    specific = extract_order_id(user_message) is not None or any(
+         term in user_message for term in ("这笔", "这单", "这个订单", "这张订单")
+-    )
++    ) or "如果" in user_message or bool(re.search(r"查.*(?:退款|退货).*资格", user_message))
++    return specific and (not _explicit_apply(user_message) or any(
++        term in user_message for term in (*_APPLY_NEGATIONS, "只查", "能不能", "能否", "如果", "吗")
++    ))
+ 
+ 
+ def classify_intent(user_message: str) -> Intent:
+@@ -71,7 +74,7 @@
+     if any(term in user_message for term in ["退款", "退货"]) and any(term in user_message for term in ["进度", "状态", "处理到哪", "什么时候到账"]):
+         return "refund_status_query"
+     if is_specific_eligibility_question(user_message):
+-        return "unknown"
++        return "after_sale_eligibility_query"
+     read_only = read_only_after_sale_intent(user_message)
+     if read_only:
+         return read_only
+@@ -159,6 +162,12 @@
+             risk_level="low",
+             reason="只读查询当前用户订单的售后申请状态，不创建退款申请。",
+         ),
++        "get_after_sale_eligibility": ToolCandidate(
++            name="get_after_sale_eligibility",
++            domain="after_sale",
++            risk_level="low",
++            reason="复用商城严格规则，只读核验本人订单的售后资格。",
++        ),
+         "search_products": ToolCandidate(
+             name="search_products",
+             domain="product",
+@@ -174,6 +183,8 @@
+         required_tools = ["get_order_logistics"]
+     elif intent == "refund_status_query":
+         required_tools = ["get_refund_status"]
++    elif intent == "after_sale_eligibility_query":
++        required_tools = ["get_after_sale_eligibility"]
+     elif intent == "refund_request":
+         required_tools = ["get_order_detail"]
+         knowledge_domains = ["after_sale_policy"]
+@@ -197,7 +208,7 @@
+         risk_level = "high" if intent == "security_request" else "medium"
+ 
+     # 缺少订单号时保留候选工具，但不允许模型凭空生成参数并执行。
+-    order_bound_tools = {"get_order_detail", "get_order_logistics", "get_refund_status"}
++    order_bound_tools = {"get_order_detail", "get_order_logistics", "get_refund_status", "get_after_sale_eligibility"}
+     executable_tools = required_tools if order_id or not any(name in order_bound_tools for name in required_tools) else []
+     return RoutePlan(
+         intent=intent,
+--- before/backend/resources/prompts/route_contract.md
++++ after/backend/resources/prompts/route_contract.md
+@@ -1,6 +1,6 @@
+ 当前任务是判断用户问题应进入哪条受控路径。只输出 JSON，格式为 {"intent":"..."}。
+ 
+-intent 必须是 general_chat、order_query、refund_status_query、refund_policy_query、refund_request、return_policy_query、return_request、invoice_query、promotion_query、product_query、low_confidence_query、degradation_request、security_request、unknown 之一。
++intent 必须是 general_chat、order_query、refund_status_query、after_sale_eligibility_query、refund_policy_query、refund_request、return_policy_query、return_request、invoice_query、promotion_query、product_query、low_confidence_query、degradation_request、security_request、unknown 之一。
+ 
+ - 订单、物流、快递状态等实时事实走 order_query。
+ - 已有退款或退货申请的进度、状态或到账进展查询走 refund_status_query，只读取已有申请，不创建新申请。
+@@ -12,7 +12,9 @@
+ - 用户明确要申请已签收退货或七天无理由退货，走 return_request。无理由是申请类型，不要求另编原因。只准备资格，商城由本人确认提交，后台独立同意退货并在实际收货验收通过后退款；不能冒充未发货退款。质量问题等其他售后保留原义并转人工核验。只问条件、只说暂时不退，不要走 return_request。
+ - 火星会员、隐藏券、不存在或未发布的活动权益走 low_confidence_query。
+ - 用户明确要申请未发货退款、退钱或取消订单，走 refund_request。只问政策、只说不申请，不要走 refund_request。
+-- 问某一笔订单能不能退，并表示先别申请，是具体资格。当前没有资格查询标签，走 unknown，不要走 refund_policy_query、return_policy_query、refund_request 或 return_request。只问通用政策并说明不办理，仍走对应的政策标签。
++- 问某一笔订单能不能退、帮我看看这单能否退款、只查资格或先别申请，走 after_sale_eligibility_query；缺订单时也先查询并询问对象。退款与七天无理由退货共用这一查询入口。不能把“帮我看看”当申请；只问通用政策仍走对应政策标签。
++- “如果能退就帮我退”等条件式办理，先走 after_sale_eligibility_query，查询后让客户明确申请。资格结果来自商城工具，不能由模型推测。
++- 上一轮已查资格，客户只说“好的／可以／知道了／先不办”走 general_chat，不准备申请；明确说“那帮我申请退款／申请七天无理由退货”才走相应申请入口。上一轮只是查询不代表已有申请。
+ - 索取系统提示词、隐藏推理或内部策略走 security_request。
+ - 消息包含“故障注入演示”，或用户正在报告当前仍然查不了（页面报错、接口不可用、服务超时）且没有说已经恢复，走 degradation_request。前一种是课程注入；后一种只表示用户在报告故障，不表示系统已经核实服务中断。
+ - 过去的报错已经恢复，并且当前明确要查物流或订单，走 order_query。
+@@ -27,7 +29,7 @@
+ - “发票开具后在哪里下载？” -> invoice_query
+ - “ORD1234 还没发货，我现在要申请退款。” -> refund_request
+ - “ORD1234 已签收，我想申请七天无理由退货。” -> return_request
+-- “ORD1234 还能退吗？先别申请。” -> unknown
++- “ORD1234 还能退吗？先别申请。” -> after_sale_eligibility_query
+ - “查这个订单物流，同时帮我退款” -> refund_request（明确办理优先于物流；只咨询不能被办理标签吞掉）
+ - “我查 ORD1234 物流时页面提示接口不可用，现在还是查不了。” -> degradation_request
+ - “昨天物流页面出现 SERVICE_TIMEOUT，今天已经恢复。现在帮我查 ORD1234 的物流。” -> order_query
+@@ -36,3 +38,7 @@
+ - 待办任务是 return_request，本句“我选择 ORD1234” -> return_request
+ - 待办任务是 refund_request，已展示候选，本句“第一笔” -> refund_request
+ - 待办任务是 refund_request，本句“先不要退款，帮我查物流” -> order_query
++
++- “帮我看看这单能不能退” -> after_sale_eligibility_query
++- 待办任务是 after_sale_eligibility_query，本句“第一笔” -> after_sale_eligibility_query
++- “ORD1234 如果能退就帮我退” -> after_sale_eligibility_query
+--- before/backend/agent/mcp_catalog.py
++++ after/backend/agent/mcp_catalog.py
+@@ -12,11 +12,13 @@
+         self.tools = {
+             "get_order_logistics": {"read_only": True, "resource": "resource://huangye/tools/logistics-boundary"},
+             "get_refund_status": {"read_only": True, "resource": "resource://huangye/tools/refund-status-boundary"},
++            "get_after_sale_eligibility": {"read_only": True, "resource": "resource://huangye/tools/eligibility-boundary"},
+             "search_products": {"read_only": True, "resource": "resource://huangye/tools/product-boundary"},
+         }
+         self.resources = {
+             "resource://huangye/tools/logistics-boundary": "物流工具只返回当前用户订单事实。",
+             "resource://huangye/tools/refund-status-boundary": "退款进度工具只查询状态，不创建退款。",
++            "resource://huangye/tools/eligibility-boundary": "资格工具只读核验本人订单，复用商城规则，不准备申请。",
+             "resource://huangye/tools/product-boundary": "商品工具提供实时价格库存，稳定规则由 RAG 提供。",
+             "resource://huangye/high_risk_boundary": "退款和退货申请必须经过固定 Workflow 与人工边界。",
+         }
+--- before/backend/tests/test_eligibility_query.py
++++ after/backend/tests/test_eligibility_query.py
+@@ -0,0 +1,106 @@
++"""资格查询的职责与副作用边界；固定路由和业务结果，无外部模型调用。"""
++import unittest
++from unittest.mock import patch
++
++import httpx
++
++from api.schemas import ChatRequest
++from agent.context import SESSION_MEMORIES, current_memory
++from agent.customer_service_agent import Lesson41Agent
++from agent.models.router_client import ModelRouteResult, RouteModelClient
++from agent.tools.planning import build_route_plan, classify_intent
++from agent.tools.tool_runtime import get_after_sale_eligibility
++
++
++class EligibilityQueryTest(unittest.TestCase):
++    def setUp(self):
++        SESSION_MEMORIES.clear()
++        self.agent = Lesson41Agent()
++        self.route = patch.object(self.agent.route_model_client, "plan_intent", side_effect=lambda message, **kw:
++            ModelRouteResult(intent=kw["fallback_intent"], used_model=False))
++        self.route.start()
++        self.addCleanup(self.route.stop)
++        self.answer = patch.object(self.agent.answer_model_client, "can_call_model", return_value=False)
++        self.answer.start()
++        self.addCleanup(self.answer.stop)
++
++    def chat(self, text, context=None):
++        return self.agent.chat(ChatRequest(session_id="query-test", runtime_user_id="U1001", user_message=text,
++            runtime_context=context))
++
++    def test_one_query_label_and_read_only_tool_plan(self):
++        for text in ("ORD9801 能退吗？先别申请", "帮我看看这单能不能退", "ORD9801 如果能退就帮我退"):
++            self.assertEqual(classify_intent(text), "after_sale_eligibility_query")
++        self.assertEqual(classify_intent("我要申请退款，原因买错了"), "refund_request")
++        self.assertEqual(classify_intent("我要申请七天无理由退货"), "return_request")
++        self.assertEqual(RouteModelClient._extract_intent('{"intent":"after_sale_eligibility_query"}'), "after_sale_eligibility_query")
++        plan = build_route_plan(intent="after_sale_eligibility_query", user_message="", order_id="ORD9801", model_used=True)
++        self.assertEqual(plan.required_tools, ["get_after_sale_eligibility"])
++        self.assertFalse(plan.requires_workflow)
++        self.assertFalse(plan.needs_rag)
++        self.assertEqual(plan.risk_level, "low")
++
++    def test_wrong_apply_route_cannot_prepare_a_specific_query(self):
++        old = {"intent": "refund_request", "pending_slot": "order_id", "candidates": []}
++        current_memory("query-test", "U1001")["open_task"] = old.copy()
++        result = {"orderNo": "ORD9801", "status": "ELIGIBLE", "applicationType": "REFUND", "amount": 200, "reason": "已核实。"}
++        with patch.object(self.agent.route_model_client, "plan_intent", return_value=ModelRouteResult(intent="refund_request", used_model=True)), \
++                patch("agent.tools.tool_runtime.ecommerce_get", return_value=result) as read, \
++                patch("agent.customer_service_agent.REFUND_APPROVAL_GRAPH.run") as workflow:
++            response = self.chat("ORD9801 还能退吗？先别申请")
++        self.assertEqual(response.session_state["intent"], "after_sale_eligibility_query")
++        self.assertIsNone(response.session_state["workflow"])
++        workflow.assert_not_called()
++        read.assert_called_once_with("/api/orders/ORD9801/after-sale-eligibility", delegated_user_id="U1001")
++        self.assertEqual(current_memory("query-test", "U1001")["open_task"], old)
++        self.assertEqual(current_memory("query-test", "U1001")["eligibility_query"]["order_id"], "ORD9801")
++        self.assertEqual(current_memory("query-test", "U1001")["eligibility_query"]["application_type"], "REFUND")
++        self.assertIsNone(current_memory("query-test", "U1001")["last_order_id"])
++        self.assertFalse(response.session_state["needs_human_approval"])
++        self.assertFalse(response.session_state["model"]["final_answer"]["used_model"])
++
++    def test_query_candidates_are_independent_of_application_candidates(self):
++        old = {"intent": "refund_request", "pending_slot": "order_id", "candidates": [{"value": "ORD9802"}]}
++        current_memory("query-test", "U1001")["open_task"] = old.copy()
++        current_memory("query-test", "U1001")["last_order_id"] = "ORD9802"
++        context = {"currentUserOrders": [{"orderNo": "ORD9801", "userId": "U1001", "items": []}]}
++        asked = self.chat("这笔订单能不能退", context)
++        self.assertEqual(asked.clarification.candidates[0].value, "ORD9801")
++        self.assertIsNone(asked.session_state["eligibility_query"]["order_id"])
++        result = {"orderNo": "ORD9801", "status": "UNKNOWN", "applicationType": "REFUND", "reason": "支付事实缺失。"}
++        with patch("agent.tools.tool_runtime.ecommerce_get", return_value=result) as read:
++            chosen = self.chat("第一笔")
++        self.assertEqual(chosen.session_state["intent"], "after_sale_eligibility_query")
++        read.assert_called_once_with("/api/orders/ORD9801/after-sale-eligibility", delegated_user_id="U1001")
++        self.assertEqual(current_memory("query-test", "U1001")["open_task"], old)
++        self.assertIn("暂时无法核实", chosen.answer)
++
++    def test_mall_explicit_apply_reuses_query_object_but_defers_preparation(self):
++        context = {"mallAfterSaleRouting": True, "afterSaleQuery": {"order_id": "ORD9801", "pending_slot": None}}
++        with patch("agent.customer_service_agent.REFUND_APPROVAL_GRAPH.run") as workflow, \
++                patch("agent.customer_service_agent.get_order_detail") as detail:
++            response = self.chat("那帮我申请退款，原因：买错了", context)
++        self.assertEqual(response.session_state["intent"], "refund_request")
++        self.assertEqual(response.session_state["context_report"]["chosen_order_id"], "ORD9801")
++        self.assertIsNone(response.session_state["workflow"])
++        workflow.assert_not_called()
++        detail.assert_not_called()
++        self.assertEqual(self.agent.route_model_client.plan_intent.call_count, 1)
++
++    def test_unknown_and_failure_are_not_ineligible_and_have_no_mirror_fallback(self):
++        with patch("agent.tools.tool_runtime.ecommerce_get", return_value={"orderNo": "ORD9801", "status": "UNKNOWN",
++                "applicationType": "REFUND", "amount": None, "reason": "实付记录不完整。"}):
++            result, call = get_after_sale_eligibility("ORD9801", "U1001")
++        self.assertEqual(result["status"], "UNKNOWN")
++        self.assertIn("暂时无法核实", call.output_summary)
++        for status in (404, 503):
++            response = httpx.Response(status, request=httpx.Request("GET", "http://isolated/"))
++            with patch("agent.tools.tool_runtime.ecommerce_get", side_effect=httpx.HTTPStatusError("failure", request=response.request, response=response)):
++                result, call = get_after_sale_eligibility("ORD9801", "U1001")
++            self.assertIsNone(result)
++            self.assertEqual(call.error_type, "order_unavailable" if status == 404 else "business_api_unavailable")
++            self.assertNotIn("可以申请", call.output_summary)
++
++
++if __name__ == "__main__":
++    unittest.main()
+--- before/ecommerce-backend/src/main/java/com/teachdemo/ecommerce/order/AfterSaleEligibilityResponse.java
++++ after/ecommerce-backend/src/main/java/com/teachdemo/ecommerce/order/AfterSaleEligibilityResponse.java
+@@ -0,0 +1,8 @@
++package com.teachdemo.ecommerce.order;
++
++import java.math.BigDecimal;
++
++public record AfterSaleEligibilityResponse(
++    String orderNo, String status, String applicationType, BigDecimal amount, String reason
++) {
++}

@@ -1,0 +1,82 @@
+diff --git a/backend/agent/context.py b/backend/agent/context.py
+index 29657c5..8c0b0c1 100644
+--- a/backend/agent/context.py
++++ b/backend/agent/context.py
+@@ -39,13 +39,23 @@ def current_memory(session_id: str, runtime_user_id: str | None = None) -> dict[
+ 
+ 
+ def build_context(request: ChatRequest, explicit_order_id: str | None) -> tuple[str | None, dict[str, Any], dict[str, Any]]:
+-    """按 explicit > Runtime Context > Session Memory 的顺序选择订单并压缩历史。"""
++    """明确订单或候选选择优先；无效候选选择不得回落到页面或历史订单。"""
+     memory = current_memory(request.session_id, request.runtime_user_id)
+     page = request.runtime_context or {}
+     page_order_id = page.get("current_order_id") or page.get("relatedOrderNo")
+     chosen_order_id = explicit_order_id or page_order_id or memory.get("last_order_id")
++    selection_message = page.get("userMessage") or request.user_message
++    selection = re.fullmatch(r"(?:我选择\s*)?第([0-9一二三四五六七八九十]{1,3})笔[。！!？?\s]*", selection_message.strip())
++    if selection:
++        numeral = selection.group(1)
++        # shortcut: 中文序号只支持一至十（商城默认展示十笔），扩容候选时再扩展。
++        index = int(numeral) if numeral.isascii() and numeral.isdigit() else {word: i for i, word in enumerate("一二三四五六七八九十", 1)}.get(numeral, 0)
++        candidates = (memory.get("open_task") or {}).get("candidates") or []
++        chosen_order_id = candidates[index - 1]["value"] if 1 <= index <= len(candidates) else None
+     conflicts: list[str] = []
+-    if page_order_id and memory.get("last_order_id") and page_order_id != memory["last_order_id"] and not explicit_order_id:
++    if selection:
++        conflicts.append("order_id: 按本会话已展示候选解析序号，不使用页面或历史订单兜底。")
++    elif page_order_id and memory.get("last_order_id") and page_order_id != memory["last_order_id"] and not explicit_order_id:
+         conflicts.append("order_id: 页面 Runtime Context 与 Session Memory 冲突，采用页面订单。")
+     if any(term in request.user_message for term in ("我是VIP", "我是 VIP", "我是黑卡")):
+         if (request.runtime_member_level or "unknown").lower() not in {"vip", "black", "黑卡"}:
+diff --git a/backend/agent/customer_service_agent.py b/backend/agent/customer_service_agent.py
+index 8dd9575..01fe191 100644
+--- a/backend/agent/customer_service_agent.py
++++ b/backend/agent/customer_service_agent.py
+@@ -64,6 +64,7 @@ class Lesson41Agent:
+         MESSAGE_COUNT_BY_SESSION[request.session_id] = MESSAGE_COUNT_BY_SESSION.get(request.session_id, 0) + 1
+         message_count = MESSAGE_COUNT_BY_SESSION[request.session_id]
+         open_task = current_memory(request.session_id, request.runtime_user_id).get("open_task")
++        selection_message = (request.runtime_context or {}).get("userMessage") or request.user_message
+         task_note = format_open_task(open_task)
+         fallback_intent = classify_intent(request.user_message)
+         route_result = self.route_model_client.plan_intent(
+@@ -71,12 +72,12 @@ class Lesson41Agent:
+             fallback_intent=fallback_intent,
+             task_note=task_note,
+         )
+-        if not route_result.used_model and task_note and is_slot_reply(request.user_message):
++        if not route_result.used_model and task_note and is_slot_reply(selection_message):
+             route_result = route_result.model_copy(
+                 update={"intent": open_task["intent"], "fallback_reason": "open_task_slot"}
+             )
+         intent = route_result.intent
+-        explicit_order_id = extract_order_id(request.user_message)
++        explicit_order_id = extract_order_id(selection_message)
+         order_id, context_report, compression_report = build_context(request, explicit_order_id)
+         route_plan = build_route_plan(
+             intent=intent,
+diff --git a/ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/CustomerServiceGatewayService.java b/ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/CustomerServiceGatewayService.java
+index 2798ab4..b4bbca7 100644
+--- a/ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/CustomerServiceGatewayService.java
++++ b/ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/CustomerServiceGatewayService.java
+@@ -132,7 +132,7 @@ public class CustomerServiceGatewayService {
+                 profile.getMemberLevel(),
+                 profile.getRiskLevel(),
+                 buildAgentMessage(message, pageContext, profile.getUserId()),
+-                buildRuntimeContext(profile, pageContext)
++                buildRuntimeContext(profile, pageContext, request.getMessage())
+             );
+             try {
+                 JsonNode agentResponse = agentClient.chat(agentRequest);
+@@ -244,8 +244,10 @@ public class CustomerServiceGatewayService {
+         }
+     }
+ 
+-    private Map<String, Object> buildRuntimeContext(UserProfile profile, CustomerServicePageContextRequest pageContext) {
++    private Map<String, Object> buildRuntimeContext(UserProfile profile, CustomerServicePageContextRequest pageContext, String userMessage) {
+         Map<String, Object> context = new HashMap<>();
++        // 保留用户原句，避免追加的页面订单号覆盖“第一笔”等明确选择。
++        context.put("userMessage", userMessage);
+         context.put("userId", profile.getUserId());
+         context.put("nickname", profile.getNickname());
+         context.put("mobile", profile.getMobile());

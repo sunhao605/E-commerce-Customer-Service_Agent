@@ -21,6 +21,7 @@ Intent = Literal[
     "general_chat",
     "order_query",
     "refund_status_query",
+    "after_sale_eligibility_query",
     "refund_policy_query",
     "refund_request",
     "return_policy_query",

@@ -1,4 +1,4 @@
-"""模型给出合法标签后不被关键词规则改掉。不调用模型。"""
+"""通用模型路由不被规则覆盖；资格只读约束独立检查。不调用模型。"""
 import inspect
 import os
 import unittest
@@ -135,7 +135,7 @@ class RoutePriorityTest(unittest.TestCase):
         self.assertEqual(classify_intent("发票开具后在哪里下载？"), "invoice_query")
         self.assertEqual(classify_intent("ORD1234 还没发货，我现在要申请退款。"), "refund_request")
         self.assertEqual(classify_intent("ORD1234 已签收，我想申请七天无理由退货。"), "return_request")
-        self.assertEqual(classify_intent("ORD1234 还能退吗？先别申请。"), "unknown")
+        self.assertEqual(classify_intent("ORD1234 还能退吗？先别申请。"), "after_sale_eligibility_query")
         self.assertEqual(classify_intent("我不要退款，只查 ORD1234 的物流。"), "refund_request")
         self.assertEqual(RouteModelClient._extract_intent('{"intent":"refund_policy_query"}'), "refund_policy_query")
         self.assertEqual(RouteModelClient._extract_intent('{"intent":"return_policy_query"}'), "return_policy_query")
@@ -177,7 +177,7 @@ class RoutePriorityTest(unittest.TestCase):
         try:
             with patch.object(agent.route_model_client, "plan_intent", side_effect=use_fallback), patch.object(
                 agent.answer_model_client, "can_call_model", return_value=False
-            ):
+            ), patch("agent.tools.tool_runtime.ecommerce_get", return_value=None):
                 refund = agent.chat(
                     ChatRequest(
                         session_id="t-refund-policy",
@@ -245,21 +245,21 @@ class RoutePriorityTest(unittest.TestCase):
         self.assertEqual(refund.session_state["intent"], "refund_policy_query")
         self.assertEqual(returned.session_state["intent"], "return_policy_query")
         self.assertIn("未发货", refund.answer)
-        self.assertIn("7 天", returned.answer)
+        self.assertIn("七天窗口", returned.answer)
         self.assertEqual(invoice.session_state["intent"], "invoice_query")
         self.assertEqual(invoice.answer, "发票缓存标记")
         self.assertEqual(invoice.session_state["memory"]["open_task"], None)
-        self.assertEqual(eligibility.session_state["intent"], "unknown")
+        self.assertEqual(eligibility.session_state["intent"], "after_sale_eligibility_query")
         self.assertIsNone(eligibility.session_state["workflow"])
         self.assertIsNone(eligibility.session_state["memory"]["open_task"])
-        self.assertIn("不会准备申请", eligibility.answer)
+        self.assertIn("没有准备申请", eligibility.answer)
         self.assertEqual(apply_refund.session_state["intent"], "refund_request")
         self.assertEqual(apply_refund.session_state["memory"]["open_task"]["intent"], "refund_request")
-        self.assertEqual(asked.session_state["intent"], "unknown")
-        self.assertEqual(asked.tool_calls, [])
+        self.assertEqual(asked.session_state["intent"], "after_sale_eligibility_query")
+        self.assertEqual([call.tool_name for call in asked.tool_calls], ["get_after_sale_eligibility"])
         self.assertIsNone(asked.session_state["workflow"])
         self.assertIsNone(asked.session_state["memory"]["open_task"])
-        self.assertIn("不会准备申请", asked.answer)
+        self.assertIn("没有准备申请", asked.answer)
         self.assertEqual(kept.session_state["intent"], "refund_policy_query")
         self.assertEqual(kept.tool_calls, [])
         self.assertIsNone(kept.session_state["workflow"])

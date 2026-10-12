@@ -1,0 +1,54 @@
+[
+  {
+    "check": "正常续办：出现停止选择卡",
+    "passed": true
+  },
+  {
+    "check": "正常续办：明确保留成功",
+    "passed": true
+  },
+  {
+    "check": "正常续办：纯订单号不重复调用取消判断",
+    "passed": true
+  },
+  {
+    "check": "保留后补本人订单正常询问退款原因，不再显示停止卡",
+    "passed": true
+  },
+  {
+    "check": "补订单后重新表达取消仍可取消",
+    "passed": true
+  },
+  {
+    "check": "正常续办：旧停止卡不可复用",
+    "passed": true
+  },
+  {
+    "check": "未决确认与不存在订单：出现停止选择卡",
+    "passed": true
+  },
+  {
+    "check": "未处理停止确认时补订单不能绕过选择",
+    "passed": true
+  },
+  {
+    "check": "未决确认与不存在订单：明确保留成功",
+    "passed": true
+  },
+  {
+    "check": "未决确认与不存在订单：纯订单号不重复调用取消判断",
+    "passed": true
+  },
+  {
+    "check": "不存在订单仍被业务校验拒绝",
+    "passed": true
+  },
+  {
+    "check": "未决确认与不存在订单：旧停止卡不可复用",
+    "passed": true
+  },
+  {
+    "check": "8张隔离业务表未变",
+    "passed": true
+  }
+]

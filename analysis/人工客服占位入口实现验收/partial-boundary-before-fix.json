@@ -1,0 +1,6 @@
+{
+  "input": "我只退款，不换货，ORD9801 这件商品未发货，我要申请整单退款，原因：买错了",
+  "observed_reason": "部分退款或部分退货",
+  "method": "当前已编译Java静态函数，未执行chat或业务写入",
+  "source_sha256": "a4fce918794e4ce9d6e3b4d6e3492210d6a2c919180c692fd8c7761b1d783f2f"
+}

@@ -1,0 +1,20 @@
+[
+  {
+    "input": {
+      "sessionId": "page-bound-api",
+      "message": "这件多少钱，还有货吗？",
+      "pageContext": {
+        "type": "PRODUCT_DETAIL",
+        "productId": 4
+      }
+    },
+    "response": {
+      "answer": "轻量露营折叠椅 商品标价 199.0 元，库存 0 件。",
+      "sessionId": "page-bound-api",
+      "confirmRequired": false,
+      "pendingAction": "PRODUCT_QUERY",
+      "actions": [],
+      "fallback": false
+    }
+  }
+]

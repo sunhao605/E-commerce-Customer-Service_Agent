@@ -1,0 +1,21 @@
+{
+  "run_id": "20261010182519400752",
+  "checked_at": "2026-10-10T18:26:00+08:00",
+  "git_commit": "78e903053bbd2e81e2cf003e6ebcad898bfa6789",
+  "working_tree": "clean",
+  "process_pid": 96857,
+  "process_started_at": "2026-10-10T18:09:03+08:00",
+  "process_cwd": "/Users/sunhao/Downloads/03_AIPMProject/0305_DianShang_Agent",
+  "same_version": "B01 与 B02 同一次运行、同一进程、同一 Git 提交；53 个 backend 源码/Prompt/政策指纹在运行后未变",
+  "source_fingerprints_unchanged_during_run": true,
+  "cases": ["B01", "B02"],
+  "label_pass": true,
+  "read_only_path_pass": true,
+  "content_pass": true,
+  "content_judgment": "助手对照当前政策文件核对，未运行模型 Judge，尚非用户逐条复核。B01 回答了已支付、未出库未发货、资金须审批，并引用 refund_before_shipping；多了一句商品页和结算页边界，退款政策原文没有这句。B02 覆盖支付签收、七天窗口、整单购买时支持无理由、无需另填理由、待审核、寄回、验收后才退款，并引用 return_after_delivery。",
+  "limitations": [
+    "仅 Python /chat 合成输入，未经过商城",
+    "未跑办理切换、发票或模型故障兜底",
+    "接口估算 Token 不是供应商计费数"
+  ]
+}

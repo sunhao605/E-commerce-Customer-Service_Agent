@@ -1,0 +1,183 @@
+[
+  {
+    "input": "SO20261010124526218-b60d3f08 我要退款，原因：买错了。",
+    "request": {
+      "message": "SO20261010124526218-b60d3f08 我要退款，原因：买错了。",
+      "pageContext": {
+        "type": "HOME"
+      }
+    },
+    "response": {
+      "answer": "请核对退款申请。确认后只登记为待审核，是否通过由管理员独立决定。",
+      "sessionId": "cs-73549f28-7c25-43e6-a673-b1214883e3bb",
+      "confirmRequired": true,
+      "pendingAction": "CONFIRM_SUBMIT",
+      "confirmationTitle": "确认提交退款申请",
+      "confirmationSummary": "订单：SO20261010124526218-b60d3f08；商品：户外野餐垫 x1；范围：整单退款；实付金额：199.00 元；原因：买错了。；状态：等待本人确认，尚未提交。确认后等待审核，提交不代表退款成功。",
+      "relatedOrderNo": "SO20261010124526218-b60d3f08",
+      "resumeToken": "cf5f60de-4ae9-4302-80c3-36116b28f5af",
+      "actions": [
+        {
+          "code": "CONFIRM_SUBMIT",
+          "label": "确认提交申请"
+        },
+        {
+          "code": "CANCEL_SUBMIT",
+          "label": "取消本次申请"
+        }
+      ],
+      "fallback": false
+    }
+  },
+  {
+    "input": "算了，不退了。",
+    "request": {
+      "message": "算了，不退了。",
+      "sessionId": "cs-73549f28-7c25-43e6-a673-b1214883e3bb",
+      "pageContext": {
+        "type": "HOME"
+      }
+    },
+    "response": {
+      "answer": "本次售后申请已取消，未提交。",
+      "sessionId": "cs-73549f28-7c25-43e6-a673-b1214883e3bb",
+      "confirmRequired": false,
+      "pendingAction": "CANCELLED",
+      "actions": [],
+      "fallback": false
+    }
+  },
+  {
+    "input": "查 SO20261010124526218-b60d3f08 的物流。",
+    "request": {
+      "message": "查 SO20261010124526218-b60d3f08 的物流。",
+      "sessionId": "cs-73549f28-7c25-43e6-a673-b1214883e3bb",
+      "pageContext": {
+        "type": "HOME"
+      }
+    },
+    "response": {
+      "answer": "您好，已为您查询订单 SO20261010124526218-b60d3f08：目前订单状态为待发货，物流状态为暂未发货，商品是户外野餐垫。\n\n建议您稍后再关注一下物流更新，发货后就能看到具体物流信息了。如果长时间未发货，我可以帮您进一步核实。",
+      "sessionId": "cs-73549f28-7c25-43e6-a673-b1214883e3bb",
+      "confirmRequired": false,
+      "actions": [],
+      "fallback": false
+    }
+  },
+  {
+    "input": "第一笔。",
+    "request": {
+      "message": "第一笔。",
+      "sessionId": "cs-73549f28-7c25-43e6-a673-b1214883e3bb",
+      "pageContext": {
+        "type": "HOME"
+      }
+    },
+    "response": {
+      "answer": "我还不知道你要办哪一件事。如果是订单物流、商品、活动规则或售后，请直接说具体需求。",
+      "sessionId": "cs-73549f28-7c25-43e6-a673-b1214883e3bb",
+      "confirmRequired": false,
+      "actions": [],
+      "fallback": false
+    }
+  },
+  {
+    "input": "SO20261010124526218-b60d3f08 我要退款，原因：买错了。",
+    "request": {
+      "message": "SO20261010124526218-b60d3f08 我要退款，原因：买错了。",
+      "sessionId": "cs-73549f28-7c25-43e6-a673-b1214883e3bb",
+      "pageContext": {
+        "type": "HOME"
+      }
+    },
+    "response": {
+      "answer": "请核对退款申请。确认后只登记为待审核，是否通过由管理员独立决定。",
+      "sessionId": "cs-73549f28-7c25-43e6-a673-b1214883e3bb",
+      "confirmRequired": true,
+      "pendingAction": "CONFIRM_SUBMIT",
+      "confirmationTitle": "确认提交退款申请",
+      "confirmationSummary": "订单：SO20261010124526218-b60d3f08；商品：户外野餐垫 x1；范围：整单退款；实付金额：199.00 元；原因：买错了。；状态：等待本人确认，尚未提交。确认后等待审核，提交不代表退款成功。",
+      "relatedOrderNo": "SO20261010124526218-b60d3f08",
+      "resumeToken": "1d093766-afea-4f4b-ab76-927aec32bb0e",
+      "actions": [
+        {
+          "code": "CONFIRM_SUBMIT",
+          "label": "确认提交申请"
+        },
+        {
+          "code": "CANCEL_SUBMIT",
+          "label": "取消本次申请"
+        }
+      ],
+      "fallback": false
+    }
+  },
+  {
+    "input": "点击取消本次申请",
+    "request": {
+      "sessionId": "cs-73549f28-7c25-43e6-a673-b1214883e3bb",
+      "resumeToken": "1d093766-afea-4f4b-ab76-927aec32bb0e",
+      "decision": "CANCEL_SUBMIT",
+      "relatedOrderNo": "SO20261010124526218-b60d3f08"
+    },
+    "response": {
+      "answer": "本次售后申请已取消，未提交。",
+      "sessionId": "cs-73549f28-7c25-43e6-a673-b1214883e3bb",
+      "confirmRequired": false,
+      "pendingAction": "CANCELLED",
+      "actions": [],
+      "fallback": false
+    }
+  },
+  {
+    "input": "帮我退款。",
+    "request": {
+      "message": "帮我退款。",
+      "pageContext": {
+        "type": "HOME"
+      }
+    },
+    "response": {
+      "answer": "你要退款哪一个订单？请选择订单号，或直接补充订单号。 当前账号下可选订单：SO20261010124526218-b60d3f08（户外野餐垫）；SO20261010124526068-3c464bb6（户外野餐垫）；SO20261009082850446-6df1a10e（露营折叠椅）；SO20261009061332122-26971b7b（户外野餐垫）；SO20260712090000010-a1000010（露营折叠椅）；SO20260605103000012-a1000012（定制营地旗）；SO20260603110000010-a1000010（露营折叠椅）；SO20260602103000009-a1000009（户外野餐垫）；SO20260601090000008-a1000008（露营折叠椅）；SO20260525093000011-a1000011（户外野餐垫）。",
+      "sessionId": "cs-45c768f1-f68d-4a42-9ab5-f9ee8e1d6688",
+      "confirmRequired": false,
+      "actions": [],
+      "fallback": false
+    }
+  },
+  {
+    "input": "取消本次申请。",
+    "request": {
+      "message": "取消本次申请。",
+      "sessionId": "cs-45c768f1-f68d-4a42-9ab5-f9ee8e1d6688",
+      "pageContext": {
+        "type": "HOME"
+      }
+    },
+    "response": {
+      "answer": "本次售后申请已取消，未提交。",
+      "sessionId": "cs-45c768f1-f68d-4a42-9ab5-f9ee8e1d6688",
+      "confirmRequired": false,
+      "pendingAction": "CANCELLED",
+      "actions": [],
+      "fallback": false
+    }
+  },
+  {
+    "input": "第一笔。",
+    "request": {
+      "message": "第一笔。",
+      "sessionId": "cs-45c768f1-f68d-4a42-9ab5-f9ee8e1d6688",
+      "pageContext": {
+        "type": "HOME"
+      }
+    },
+    "response": {
+      "answer": "我还不知道你要办哪一件事。如果是订单物流、商品、活动规则或售后，请直接说具体需求。",
+      "sessionId": "cs-45c768f1-f68d-4a42-9ab5-f9ee8e1d6688",
+      "confirmRequired": false,
+      "actions": [],
+      "fallback": false
+    }
+  }
+]

@@ -1,0 +1,103 @@
+{
+  "passed": false,
+  "results": [
+    {
+      "turn": 1,
+      "input": "帮我退款。",
+      "answer": "你要退款哪一个订单？请选择订单号，或直接补充订单号。 当前账号下可选订单：ORD9801（验收露营椅1）；ORD9802（验收露营椅2）。",
+      "intent": "refund_request",
+      "clarification": {
+        "clarification_field": "order_id",
+        "message": "你要退款哪一个订单？请选择订单号，或直接补充订单号。",
+        "candidates": [
+          {
+            "value": "ORD9801",
+            "label": "ORD9801",
+            "hint": "验收露营椅1"
+          },
+          {
+            "value": "ORD9802",
+            "label": "ORD9802",
+            "hint": "验收露营椅2"
+          }
+        ]
+      },
+      "tools": [],
+      "workflow": null,
+      "memory": {
+        "runtime_user_id": "m06-isolated",
+        "last_order_id": null,
+        "last_product_name": null,
+        "recent_intent": "refund_request",
+        "open_task": {
+          "intent": "refund_request",
+          "pending_slot": "order_id",
+          "candidates": [
+            {
+              "value": "ORD9801",
+              "label": "ORD9801"
+            },
+            {
+              "value": "ORD9802",
+              "label": "ORD9802"
+            }
+          ]
+        },
+        "low_risk_preferences": {},
+        "write_decisions": [],
+        "excluded_items": [],
+        "ttl": "session"
+      },
+      "next_action": "ask_clarification"
+    },
+    {
+      "turn": 2,
+      "input": "第一笔。",
+      "answer": "你要退款哪一个订单？请选择订单号，或直接补充订单号。 当前账号下可选订单：ORD9801（验收露营椅1）；ORD9802（验收露营椅2）。",
+      "intent": "refund_request",
+      "clarification": {
+        "clarification_field": "order_id",
+        "message": "你要退款哪一个订单？请选择订单号，或直接补充订单号。",
+        "candidates": [
+          {
+            "value": "ORD9801",
+            "label": "ORD9801",
+            "hint": "验收露营椅1"
+          },
+          {
+            "value": "ORD9802",
+            "label": "ORD9802",
+            "hint": "验收露营椅2"
+          }
+        ]
+      },
+      "tools": [],
+      "workflow": null,
+      "memory": {
+        "runtime_user_id": "m06-isolated",
+        "last_order_id": null,
+        "last_product_name": null,
+        "recent_intent": "refund_request",
+        "open_task": {
+          "intent": "refund_request",
+          "pending_slot": "order_id",
+          "candidates": [
+            {
+              "value": "ORD9801",
+              "label": "ORD9801"
+            },
+            {
+              "value": "ORD9802",
+              "label": "ORD9802"
+            }
+          ]
+        },
+        "low_risk_preferences": {},
+        "write_decisions": [],
+        "excluded_items": [],
+        "ttl": "session"
+      },
+      "next_action": "ask_clarification"
+    }
+  ]
+}

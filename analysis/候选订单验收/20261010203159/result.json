@@ -1,0 +1,126 @@
+{
+  "passed": true,
+  "results": [
+    {
+      "turn": 1,
+      "input": "帮我退款。",
+      "answer": "你要退款哪一个订单？请选择订单号，或直接补充订单号。 当前账号下可选订单：ORD9801（验收露营椅1）；ORD9802（验收露营椅2）。",
+      "intent": "refund_request",
+      "clarification": {
+        "clarification_field": "order_id",
+        "message": "你要退款哪一个订单？请选择订单号，或直接补充订单号。",
+        "candidates": [
+          {
+            "value": "ORD9801",
+            "label": "ORD9801",
+            "hint": "验收露营椅1"
+          },
+          {
+            "value": "ORD9802",
+            "label": "ORD9802",
+            "hint": "验收露营椅2"
+          }
+        ]
+      },
+      "tools": [],
+      "workflow": null,
+      "memory": {
+        "runtime_user_id": "m06-isolated",
+        "last_order_id": null,
+        "last_product_name": null,
+        "recent_intent": "refund_request",
+        "open_task": {
+          "intent": "refund_request",
+          "pending_slot": "order_id",
+          "candidates": [
+            {
+              "value": "ORD9801",
+              "label": "ORD9801"
+            },
+            {
+              "value": "ORD9802",
+              "label": "ORD9802"
+            }
+          ]
+        },
+        "low_risk_preferences": {},
+        "write_decisions": [],
+        "excluded_items": [],
+        "ttl": "session"
+      },
+      "next_action": "ask_clarification"
+    },
+    {
+      "turn": 2,
+      "input": "第一笔。",
+      "answer": "您好，关于您第一笔订单的退款申请，我帮您核实到以下情况：\n\n订单 ORD9801 目前状态为待发货，物流暂未发货，商品为验收露营椅1。根据未发货退款规则，已支付且未出库、未发货的订单可以发起退款申请，但资金类操作需要进入售后审批流程。\n\n目前这笔退款申请已进入审批环节，正在等待人工处理，尚未完成退款，也无法跳过审批。请您耐心等待审批结果，如有进展我们会及时同步。",
+      "intent": "refund_request",
+      "clarification": null,
+      "tools": [
+        {
+          "tool_name": "get_order_detail",
+          "arguments": {
+            "order_id": "ORD9801",
+            "fact_source": "runtime_context"
+          },
+          "output_summary": "订单 ORD9801 当前状态为待发货，物流状态为暂未发货，商品 验收露营椅1。",
+          "status": "success",
+          "tool_source": "function",
+          "risk_level": "low",
+          "needs_human_approval": null,
+          "next_action": null,
+          "error_type": null,
+          "candidates": [],
+          "clarification_field": null,
+          "clarification_prompt": null
+        }
+      ],
+      "workflow": {
+        "workflow_id": "wf-m06-20261010203159",
+        "workflow_type": "unshipped_refund",
+        "status": "paused",
+        "pending_action": "require_approval",
+        "order_id": "ORD9801",
+        "resume_token": "resume-m06-20261010203159-wf-m06-20261010203159-ORD9801",
+        "approval_id": "appr-m06-20261010203159",
+        "idempotency_key": "hitl:m06-20261010203159:ORD9801",
+        "frozen_fields": {
+          "runtime_user_id": "m06-isolated",
+          "order_id": "ORD9801",
+          "order_status": "PENDING_SHIPMENT",
+          "logistics_status": "NOT_SHIPPED"
+        },
+        "used_langgraph": true,
+        "graph_name": "lesson41_refund_approval_graph",
+        "current_node": "pause_for_human_approval",
+        "node_history": [
+          "validate_order_fact",
+          "attach_refund_policy",
+          "pause_for_human_approval"
+        ],
+        "order_fact_status": "verified",
+        "policy_ids": [
+          "refund_before_shipping"
+        ]
+      },
+      "memory": {
+        "runtime_user_id": "m06-isolated",
+        "last_order_id": "ORD9801",
+        "last_product_name": null,
+        "recent_intent": "refund_request",
+        "open_task": null,
+        "low_risk_preferences": {},
+        "write_decisions": [
+          {
+            "field": "last_order_id",
+            "accepted": true,
+            "reason": "verified_tool_fact"
+          }
+        ],
+        "excluded_items": [],
+        "ttl": "session"
+      },
+      "next_action": "transfer_to_human"
+    }
+  ]
+}

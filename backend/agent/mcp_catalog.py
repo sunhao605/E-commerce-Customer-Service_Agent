@@ -12,11 +12,13 @@ class MCPCatalog:
         self.tools = {
             "get_order_logistics": {"read_only": True, "resource": "resource://huangye/tools/logistics-boundary"},
             "get_refund_status": {"read_only": True, "resource": "resource://huangye/tools/refund-status-boundary"},
+            "get_after_sale_eligibility": {"read_only": True, "resource": "resource://huangye/tools/eligibility-boundary"},
             "search_products": {"read_only": True, "resource": "resource://huangye/tools/product-boundary"},
         }
         self.resources = {
             "resource://huangye/tools/logistics-boundary": "物流工具只返回当前用户订单事实。",
             "resource://huangye/tools/refund-status-boundary": "退款进度工具只查询状态，不创建退款。",
+            "resource://huangye/tools/eligibility-boundary": "资格工具只读核验本人订单，复用商城规则，不准备申请。",
             "resource://huangye/tools/product-boundary": "商品工具提供实时价格库存，稳定规则由 RAG 提供。",
             "resource://huangye/high_risk_boundary": "退款和退货申请必须经过固定 Workflow 与人工边界。",
         }

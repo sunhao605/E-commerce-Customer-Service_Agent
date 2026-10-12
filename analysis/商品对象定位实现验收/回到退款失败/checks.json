@@ -1,0 +1,50 @@
+[
+  {
+    "check": "P03 商品候选属于只读查询",
+    "passed": true
+  },
+  {
+    "check": "P03 页面多款澄清，不默选第一款",
+    "passed": true
+  },
+  {
+    "check": "P03 中文序号绑定已展示的第二款编号",
+    "passed": true
+  },
+  {
+    "check": "P03 第二款价格和库存来自同一商品",
+    "passed": true
+  },
+  {
+    "check": "P03 商品查询没有创建退款草稿",
+    "passed": true
+  },
+  {
+    "check": "P08 前置退款确认卡存在，停在提交前",
+    "passed": true
+  },
+  {
+    "check": "P08 商品澄清没有重发退款卡",
+    "passed": true
+  },
+  {
+    "check": "P08 商品澄清不改变原草稿、版本和凭证",
+    "passed": true
+  },
+  {
+    "check": "P08 数字序号仍选择第二款，不被旧退款任务吞掉",
+    "passed": true
+  },
+  {
+    "check": "P08 选择后原退款草稿仍不变",
+    "passed": true
+  },
+  {
+    "check": "P08 历史退款确认卡仍可点击",
+    "passed": true
+  },
+  {
+    "check": "P08 明确回到退款后续接原流程",
+    "passed": false
+  }
+]

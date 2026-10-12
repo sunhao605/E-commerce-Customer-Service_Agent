@@ -1,5 +1,13 @@
 # 荒野户外服务助手项目导读
 
+> 2026-10-12 商品读取：搜索空列表是零匹配，超时和其他读取失败分开；详情只有 404 且 `NOT_FOUND` 才表示该编号不存在。失败和部分事实不交给最终模型改写成缺货，也不改未提交退款草稿。定向验收见 [FAULT-001](../docs/项目评测记录.md#fault-0012026-10-12-工具故障反馈定向验收)。最新停点见 [项目交接](../docs/项目交接.md#唯一当前停点)。
+
+> 2026-10-10 M07收尾：商城明确取消未提交办理会清理草稿和确认凭证；后续Python在路由前清理旧待办候选，保留已核验订单事实。没有修改意图Prompt或增加标签；日常商城2组9轮通过，已提交申请不撤销。更新时发现启动自动补回演示余额，已改为仅创建缺失账户，并精确恢复为更新前8表哈希；证据与范围见 [M07-001与INIT-001](../docs/项目评测记录.md#m07-0012026-10-10-取消未提交售后意向修复与验收)。最新停点见 [项目交接](../docs/项目交接.md#唯一当前停点)。
+
+> 2026-10-10 M06收尾：用户说“第一笔/第二笔”已按同用户会话刚展示的候选顺序绑定订单，无效序号不回退页面或历史订单。日常本地8000/8081已更新，当前MySQL商城浏览器2组6轮生成正确确认卡，未提交售后；测试样本经用户授权扣398元演示余额，对话阶段无进一步业务写入。见 [M06-002](../docs/项目评测记录.md#m06-0022026-10-10-日常服务更新与商城浏览器收尾)；范围不扩大到全部自然语言指代或生产部署。
+
+> 2026-10-10 收尾更新：用户确认最新版本B01/B02、相关场景与商城入口三项验收完成，“政策咨询与办理分离”按约定范围已完成。见 [MANUAL-002](../docs/项目评测记录.md#manual-0022026-10-10-用户确认政策咨询三项验收完成)。以下局部验收限制是当时的助手证据边界，后续用户确认单独保留；其他意图任务仍独立排期。
+
 > 2026-10-10 意图更新：用户已新增退款/退货政策查询标签，并将发票标签改为 `invoice_query`，当前共14项。POLICY-002中 B01/B02 的标签和只读路径均通过；后续用户明确无理由无需填原因，政策已同步，POLICY-003仅B02复测通过。B01未在本次重跑，不能合并为同版本2/2。完整回复与局部验证边界见 [专项复测](../docs/B01-B02政策咨询修改后复测.md)；不继承旧版标签成绩为新版本全量成绩。
 
 > 2026-10-09 范围更新：商城现已支持本人已支付未发货整单退款，以及签收后七天无理由整单退货退款。新增退货主线是“客户确认登记待审核→管理员同意并提供退货地址→客户填写退回物流→管理员确认收货验收→退回本地模拟余额”；初审同意不退款，验收失败保留人工恢复路径。实现及隔离验收见 [GAP-003](../docs/项目评测记录.md#gap-0032026-10-09-签收七天无理由退货退款完整闭环)；源码入口为 `ShopService.java:393`、`AdminAfterSaleService.java:128`及`:141`。Python工作台仍为独立模拟入口。下列2026-10-08及更早内容按历史范围阅读，当前停点与服务状态见 [项目交接](../docs/项目交接.md)。
@@ -126,7 +134,7 @@ flowchart TD
 | get_order_detail | 模型 schema `{order_id: str}`；服务端附用户/context → 订单或 None + ToolCallTrace | 退款、退货；物流/退款进度包装器内部前置调用 | 缺 ID、无订单、owner 不符返回 error；只读；`tool_runtime.py:23` |
 | get_order_logistics | 模型 schema `{order_id: str}`；底层接已查订单 → ToolCallTrace | order_query；模型白名单只有物流包装器，包装器先查详情 | 参数不匹配拦截；订单不可读就返回详情错误；`langchain_runtime.py:125` |
 | get_refund_status | 模型 schema `{order_id: str}`；底层订单+用户 → ToolCallTrace | refund_status_query | 区分接口不可用与无申请；不会创建退款；`tool_runtime.py:77` |
-| search_products | `{keyword: str}` → 商品列表 + ToolCallTrace | product_query | 无匹配不猜价格库存；只用列表第一件组织摘要；`tool_runtime.py:117` |
+| search_products | `{keyword: str}` → 商品列表 + ToolCallTrace | product_query | 多结果列候选，不默选第一款。成功空列表是无匹配；超时与其他读取失败分开，缺字段只答已核实值。`tool_runtime.py:247`、`ecommerce_client.py:176` |
 
 Schema 定义见 `backend/agent/tools/langchain_runtime.py:23`；公开 ToolCallTrace 字段见 `backend/api/schemas.py:109`。政策检索是 Python 直接调用，不是注册给模型的 `retrieve_knowledge` 工具；当前注册目录只有上述四项。
 
@@ -150,7 +158,8 @@ Schema 定义见 `backend/agent/tools/langchain_runtime.py:23`；公开 ToolCall
 - **真实客服接管/工单系统：该项目无此设计。** `transfer_to_human` 是响应状态和提示语；源码没有分配坐席、建单、通知或后续客服消息接续。
 - **模拟人工审批：有设计。** 退款通过 `/chat/resume`，无检查点/错 token 拦截；业务事实漂移则 blocked。批准、拒绝、补信息见 `backend/agent/workflows/resume.py:105`。签收退货只有准备状态，没有对应恢复接口。
 - 路由模型调用出错或 JSON 无效回规则；只读工具 Agent 出错保留已发生的只读调用，否则走代码工具；最终模型出错回基础回复（`router_client.py:58`、`langchain_runtime.py:224`、`answer_client.py:145`）。
-- 业务 HTTP 错误多被适配层转 None/空列表，未统一区分权限失败、超时与不存在（`ecommerce_client.py:122`、`:157`）。故障演示会按消息中的关键词直接走降级，不能证明真实超时链路已验证（`planning.py:23`、`customer_service_agent.py:145`）。
+- 订单等通用 `ecommerce_get` 仍把非成功体收成 None，不区分超时、权限失败和不存在（`ecommerce_client.py:104`）。商品搜索和详情已分开：空列表是零匹配，超时是 `timeout`，其余读取失败是 `unavailable`；详情只有 404 且 `code=NOT_FOUND` 才是该编号不存在（`ecommerce_client.py:157`、`:176`、`:202`）。这类商品读取失败会把编排 `degraded` 设为真（`customer_service_agent.py:404`、`:993`）。
+- 客户消息里带“故障注入演示”，或客户自己报告页面查不了，仍走 `degradation_request`。这是课程演示或用户报告，不是已经核实的商品读取失败（`customer_service_agent.py:224`）。
 - 低置信活动回复不调用最终模型；规则关键词和证据门不等于通用置信度算法（`knowledge.py:100`）。
 - RAG 缺 Key 且未显式离线时抛 RuntimeError；检索调用周围没有统一兜底，真实 Embedding 失败是否形成 HTTP 500 [待验证]（`hybrid_retrieval.py:70`、`knowledge.py:107`）。
 - 审批复核失败回旧订单快照可能掩盖失去最新事实的问题，见 [BC-001](../docs/BadCase.md)。

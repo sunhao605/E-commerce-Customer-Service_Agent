@@ -1,0 +1,18 @@
+[
+  {
+    "check": "P03 商品候选属于只读查询",
+    "passed": true
+  },
+  {
+    "check": "P03 页面多款澄清，不默选第一款",
+    "passed": true
+  },
+  {
+    "check": "P03 中文序号绑定已展示的第二款编号",
+    "passed": true
+  },
+  {
+    "check": "P03 第二款价格和库存来自同一商品",
+    "passed": true
+  }
+]

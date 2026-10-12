@@ -1,0 +1,18 @@
+[
+  {"id":"S01","group":"stop","message":"这次售后退款我决定撤销，不用再帮我办理了。","allowed":["cancel","score_low","confirm"]},
+  {"id":"S02","group":"stop","message":"刚才申请的退款不要办了，我已经决定留下商品。","allowed":["cancel","score_low","confirm"]},
+  {"id":"S03","group":"stop","message":"请结束当前这份尚未提交的退款申请。","allowed":["cancel","score_low","confirm"]},
+  {"id":"K01","group":"continue","message":"我没有要撤销，刚才那笔退款照常继续办理。","allowed":["keep"]},
+  {"id":"K02","group":"continue","message":"取消是我朋友的想法，我自己的这次退款仍然要办。","allowed":["keep"]},
+  {"id":"K03","group":"continue","message":"即使商品明天降价，当前退款也继续，不要停止。","allowed":["keep"]},
+  {"id":"H01","group":"hesitation","message":"退款到底要不要撤销，我还没想好。","allowed":["ask_decision","confirm","score_low"]},
+  {"id":"H02","group":"hesitation","message":"先保留刚才的办理，我需要考虑一下再决定撤不撤。","allowed":["keep","ask_decision"]},
+  {"id":"C01","group":"condition","message":"如果这笔退货的运费必须我付，就不退了。","allowed":["keep_unknown_fact"]},
+  {"id":"C02","group":"condition","message":"假如商家不承担退货运费，那就取消这次售后。","allowed":["keep_unknown_fact"]},
+  {"id":"O01","group":"purchase","message":"我要关闭的是购买订单本身，不是这次退款申请。","allowed":["ask_object","keep_other","hold_review"]},
+  {"id":"O02","group":"purchase","message":"请取消我购买露营椅的订单，售后申请先留着。","allowed":["ask_object","keep_other","hold_review","keep"]},
+  {"id":"A01","group":"other","message":"要撤销的是 ORD9802 的售后，ORD9801 这次退款不动。","allowed":["ask_object","hold_review","keep_other","keep"]},
+  {"id":"A02","group":"other","message":"另一个订单的退款不办了，现在这份申请继续。","allowed":["ask_object","hold_review","keep_other","keep"]},
+  {"id":"M01","group":"compound","message":"把当前退款申请撤销，然后帮我查一下优惠券。","allowed":["hold_review"]},
+  {"id":"M02","group":"compound","message":"停止 ORD9801 的这次售后，再准备 ORD9802 的退款。","allowed":["hold_review","ask_object"]}
+]

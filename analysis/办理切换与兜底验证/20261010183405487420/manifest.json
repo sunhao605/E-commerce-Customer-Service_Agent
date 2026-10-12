@@ -1,0 +1,63 @@
+{
+  "run_id": "20261010183405487420",
+  "started_at": "2026-10-10T18:34:05.487420+08:00",
+  "git_commit": "78e903053bbd2e81e2cf003e6ebcad898bfa6789",
+  "live_pid": 96857,
+  "live_identity": {
+    "ps": "96857 Sat Oct 10 18:09:03 2026     .venv/bin/python -m uvicorn api.routes:app --host 127.0.0.1 --port 8000",
+    "flags": {
+      "AGENT_COURSE_DISABLE_LLM": "0",
+      "AGENT_COURSE_OFFLINE_RAG": "1",
+      "AGENT_COURSE_OFFLINE_FACTS": "0",
+      "AGENT_COURSE_ENV": "/Users/sunhao/Downloads/03_AIPMProject/0305_DianShang_Agent/.env.model.local"
+    },
+    "running": true
+  },
+  "live_health": {
+    "status": "ok",
+    "lesson": "41"
+  },
+  "source_fingerprint_count": 53,
+  "cases": [
+    {
+      "id": "apply-refund",
+      "expect": "refund_request",
+      "turns": [
+        "ORD1234 还没发货，我现在要申请退款。"
+      ]
+    },
+    {
+      "id": "apply-return",
+      "expect": "return_request",
+      "turns": [
+        "ORD1234 已签收，我想申请七天无理由退货。"
+      ]
+    },
+    {
+      "id": "switch-refund",
+      "expect": "refund_request",
+      "turns": [
+        "退款政策是什么？我先了解一下，不申请退款。",
+        "我现在要申请退款。"
+      ],
+      "first_expect": "refund_policy_query"
+    },
+    {
+      "id": "switch-return",
+      "expect": "return_request",
+      "turns": [
+        "七天无理由退货需要满足什么条件？只是咨询，暂时不退。",
+        "我现在要申请七天无理由退货。"
+      ],
+      "first_expect": "return_policy_query"
+    },
+    {
+      "id": "invoice",
+      "expect": "invoice_query",
+      "turns": [
+        "发票开具后在哪里下载？"
+      ]
+    }
+  ],
+  "boundary": "8000 保持原进程。8011 只用于 AGENT_COURSE_DISABLE_LLM=1 的兜底，结束后关闭。不清理共享发票缓存，不提交真实退款。"
+}

@@ -1,0 +1,112 @@
+INFO:     Started server process [1980]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:62304 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62336 - "GET /health HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [1980]
+INFO:     Started server process [4006]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:63339 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63407 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63418 - "GET /sessions/cs-96bfb5b7-02a5-496c-a58c-d4d6813716c0/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63407 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63448 - "GET /sessions/cs-99c4a070-b0e1-4b97-a407-95d5b1010d35/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63407 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63407 - "POST /cancellation/judge HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63491 - "GET /sessions/cs-fe32e816-f65e-47d1-9438-3f860c65b4c1/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63492 - "GET /sessions/cs-fe32e816-f65e-47d1-9438-3f860c65b4c1/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63407 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63407 - "POST /cancellation/judge HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63527 - "GET /sessions/cs-ee1055a5-b277-43f6-8112-7bd5a268f1bd/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63528 - "GET /sessions/cs-ee1055a5-b277-43f6-8112-7bd5a268f1bd/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63963 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63963 - "POST /cancellation/judge HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63976 - "GET /sessions/cs-8fd75ac6-a950-4ee3-a69e-94db7f100324/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63963 - "POST /cancellation/judge HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63979 - "GET /sessions/cs-8fd75ac6-a950-4ee3-a69e-94db7f100324/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63980 - "GET /sessions/cs-8fd75ac6-a950-4ee3-a69e-94db7f100324/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63963 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63963 - "POST /cancellation/judge HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64013 - "GET /sessions/cs-44e4e383-a5e8-4ec2-8eba-b070a1f5dab1/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63963 - "POST /cancellation/judge HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64016 - "GET /sessions/cs-44e4e383-a5e8-4ec2-8eba-b070a1f5dab1/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64017 - "GET /sessions/cs-44e4e383-a5e8-4ec2-8eba-b070a1f5dab1/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63963 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63963 - "POST /cancellation/judge HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64057 - "GET /sessions/cs-4498fff8-e34c-4390-a907-f4d685820adb/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63963 - "POST /cancellation/judge HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64060 - "GET /sessions/cs-4498fff8-e34c-4390-a907-f4d685820adb/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64061 - "GET /sessions/cs-4498fff8-e34c-4390-a907-f4d685820adb/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63963 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63963 - "POST /cancellation/judge HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64105 - "GET /sessions/cs-a5b61321-8f4a-4010-b28c-9e3a92da4a09/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63963 - "POST /cancellation/judge HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64108 - "GET /sessions/cs-a5b61321-8f4a-4010-b28c-9e3a92da4a09/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64109 - "GET /sessions/cs-a5b61321-8f4a-4010-b28c-9e3a92da4a09/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64614 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64614 - "POST /cancellation/judge HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64633 - "GET /sessions/cs-f3556be9-8c7b-4900-9737-ea5911c7efdd/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64614 - "POST /cancellation/judge HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64636 - "GET /sessions/cs-f3556be9-8c7b-4900-9737-ea5911c7efdd/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64614 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64656 - "GET /sessions/cs-f3556be9-8c7b-4900-9737-ea5911c7efdd/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64614 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64614 - "POST /cancellation/judge HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64691 - "GET /sessions/cs-0556d24a-8385-4c95-a5f3-0c5de003f4b9/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64614 - "POST /cancellation/judge HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64694 - "GET /sessions/cs-0556d24a-8385-4c95-a5f3-0c5de003f4b9/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64614 - "POST /cancellation/judge HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64718 - "GET /sessions/cs-0556d24a-8385-4c95-a5f3-0c5de003f4b9/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64614 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64614 - "POST /cancellation/judge HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64751 - "GET /sessions/cs-e633ee95-83a4-42a2-885d-429765559649/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64614 - "POST /cancellation/judge HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64754 - "GET /sessions/cs-e633ee95-83a4-42a2-885d-429765559649/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64614 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64764 - "GET /sessions/cs-e633ee95-83a4-42a2-885d-429765559649/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64614 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64614 - "POST /cancellation/judge HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64803 - "GET /sessions/cs-1518a2b6-be26-480b-ad54-7e8309526b98/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64614 - "POST /cancellation/judge HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64806 - "GET /sessions/cs-1518a2b6-be26-480b-ad54-7e8309526b98/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64614 - "POST /cancellation/judge HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64822 - "GET /sessions/cs-1518a2b6-be26-480b-ad54-7e8309526b98/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65313 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65313 - "POST /cancellation/judge HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65326 - "GET /sessions/cs-0d6476f3-8f6f-4d55-924c-f34a621b97ce/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65313 - "POST /cancellation/judge HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65329 - "GET /sessions/cs-0d6476f3-8f6f-4d55-924c-f34a621b97ce/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65313 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65339 - "GET /sessions/cs-0d6476f3-8f6f-4d55-924c-f34a621b97ce/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65313 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65313 - "POST /cancellation/judge HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65372 - "GET /sessions/cs-7d3e6d33-e43e-4d4c-b661-26a2427ef39b/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65313 - "POST /cancellation/judge HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65375 - "GET /sessions/cs-7d3e6d33-e43e-4d4c-b661-26a2427ef39b/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65313 - "POST /cancellation/judge HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65313 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65391 - "GET /sessions/cs-7d3e6d33-e43e-4d4c-b661-26a2427ef39b/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65313 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65313 - "POST /cancellation/judge HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65424 - "GET /sessions/cs-18334c03-7674-4df7-951d-8f61e729a436/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65313 - "POST /cancellation/judge HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65427 - "GET /sessions/cs-18334c03-7674-4df7-951d-8f61e729a436/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65313 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65437 - "GET /sessions/cs-18334c03-7674-4df7-951d-8f61e729a436/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65313 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65313 - "POST /cancellation/judge HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65489 - "GET /sessions/cs-c3a2cc0c-9cd9-4da0-9713-02e666473fce/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65313 - "POST /cancellation/judge HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65492 - "GET /sessions/cs-c3a2cc0c-9cd9-4da0-9713-02e666473fce/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65313 - "POST /cancellation/judge HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65509 - "GET /sessions/cs-c3a2cc0c-9cd9-4da0-9713-02e666473fce/trace HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [4006]

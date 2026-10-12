@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "mode": "real",
+  "score_min": 0.9,
+  "checks": 39,
+  "failed": [],
+  "model_calls": 42,
+  "error": null
+}

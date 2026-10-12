@@ -1,0 +1,5 @@
+{
+  "type": "business",
+  "reason": "continuing refund after product query asked for order again despite valid owner-verified Java draft; Python route did not bind that draft order",
+  "fix": "use valid owner-verified mall draft order only when no explicit/page/query object and not an order slot reply"
+}

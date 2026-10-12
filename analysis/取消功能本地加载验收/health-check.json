@@ -1,0 +1,19 @@
+{
+  "agent": {
+    "status": 200,
+    "json": {
+      "status": "ok",
+      "lesson": "41"
+    }
+  },
+  "java": {
+    "status": 200,
+    "json": {
+      "status": "UP"
+    }
+  },
+  "shop": {
+    "status": 200,
+    "json": null
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "scope": "用户授权的两笔本地模拟支付，最多398元；不提交售后",
+  "balance_before": 100000.0,
+  "orders": [
+    {
+      "order_no": "SO20261010124526068-3c464bb6",
+      "amount": 199.0,
+      "payment_transaction": "BT-20261010124526174-b87b7b23",
+      "payment_status": "PAID",
+      "fulfillment_status": "UNSHIPPED"
+    },
+    {
+      "order_no": "SO20261010124526218-b60d3f08",
+      "amount": 199.0,
+      "payment_transaction": "BT-20261010124526241-e0363f59",
+      "payment_status": "PAID",
+      "fulfillment_status": "UNSHIPPED"
+    }
+  ],
+  "balance_after": 99602.0,
+  "spent": 398.0,
+  "expected_first": "SO20261010124526218-b60d3f08",
+  "expected_second": "SO20261010124526068-3c464bb6"
+}

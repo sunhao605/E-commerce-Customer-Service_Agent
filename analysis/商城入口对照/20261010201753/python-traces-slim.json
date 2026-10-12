@@ -1,0 +1,2436 @@
+{
+  "home-policy-refund": {
+    "session_id": "cs-bb47ed9f-2b02-4058-99fe-ba2c32c19d5d",
+    "events": [
+      {
+        "event": "model_route_planned",
+        "payload": {
+          "session_id": "cs-bb47ed9f-2b02-4058-99fe-ba2c32c19d5d",
+          "intent": "refund_policy_query",
+          "used_model": true,
+          "model_name": "deepseek-flash",
+          "fallback_reason": null
+        },
+        "summary": {
+          "event_type": "model_route_planned",
+          "intent": "refund_policy_query"
+        }
+      },
+      {
+        "event": "route_plan_built",
+        "payload": {
+          "session_id": "cs-bb47ed9f-2b02-4058-99fe-ba2c32c19d5d",
+          "intent": "refund_policy_query",
+          "source": "llm_with_policy_constraints",
+          "required_tools": [],
+          "needs_rag": true,
+          "needs_business_tools": false,
+          "requires_workflow": false,
+          "risk_level": "low"
+        },
+        "summary": {
+          "event_type": "route_plan_built",
+          "intent": "refund_policy_query",
+          "risk_level": "low"
+        }
+      },
+      {
+        "event": "model_answer_generated",
+        "payload": {
+          "session_id": "cs-bb47ed9f-2b02-4058-99fe-ba2c32c19d5d",
+          "intent": "refund_policy_query",
+          "used_model": true,
+          "model_name": "deepseek-flash",
+          "fallback_reason": null
+        },
+        "summary": {
+          "event_type": "model_answer_generated",
+          "intent": "refund_policy_query"
+        }
+      },
+      {
+        "event": "cost_recorded",
+        "payload": {
+          "schema_version": "cost_summary_v1",
+          "cost_profile": "teaching",
+          "path_type": "light_react_agent",
+          "model_calls": {
+            "route_planner": 1,
+            "tool_agent": 0,
+            "final_answer": 1,
+            "extra_reasoning": 0
+          },
+          "frameworks": {
+            "langchain_runnable_sequence": true,
+            "langchain_create_agent": false,
+            "langgraph_state_graph": false,
+            "offline_deterministic_fallback": false
+          },
+          "tool_call_count": 0,
+          "business_tool_call_count": 0,
+          "rag": {
+            "needs_rag": true,
+            "hit_count": 1,
+            "pre_retrieval_count": 1,
+            "tool_retrieval_count": 0,
+            "retrieval_paths": [
+              "pre_retrieval"
+            ],
+            "cache_hit": false
+          },
+          "tokens": {
+            "context_estimated": 32,
+            "prompt_estimated": 777,
+            "answer_estimated": 67,
+            "total_estimated": 876,
+            "context_budget": 160
+          },
+          "prompt_fragments": {
+            "selected": [
+              "prompt_security",
+              "system_customer_service",
+              "route_contract",
+              "prompt_security",
+              "system_customer_service",
+              "rag_answering",
+              "final_answer_style"
+            ],
+            "selections": [
+              {
+                "name": "prompt_security",
+                "level": "global_policy",
+                "version": "v1",
+                "load": "always",
+                "priority": 100,
+                "phase": "route",
+                "estimated_tokens": 29
+              },
+              {
+                "name": "system_customer_service",
+                "level": "role",
+                "version": "v1",
+                "load": "always",
+                "priority": 90,
+                "phase": "route",
+                "estimated_tokens": 32
+              },
+              {
+                "name": "route_contract",
+                "level": "task_contract",
+                "version": "v1",
+                "load": "when_route",
+                "priority": 80,
+                "phase": "route",
+                "estimated_tokens": 592
+              },
+              {
+                "name": "prompt_security",
+                "level": "global_policy",
+                "version": "v1",
+                "load": "always",
+                "priority": 100,
+                "phase": "final_answer",
+                "estimated_tokens": 29
+              },
+              {
+                "name": "system_customer_service",
+                "level": "role",
+                "version": "v1",
+                "load": "always",
+                "priority": 90,
+                "phase": "final_answer",
+                "estimated_tokens": 32
+              },
+              {
+                "name": "rag_answering",
+                "level": "capability",
+                "version": "v1",
+                "load": "when_rag",
+                "priority": 60,
+                "phase": "final_answer",
+                "estimated_tokens": 38
+              },
+              {
+                "name": "final_answer_style",
+                "level": "response_contract",
+                "version": "v1",
+                "load": "when_final_answer",
+                "priority": 40,
+                "phase": "final_answer",
+                "estimated_tokens": 25
+              }
+            ],
+            "fragment_count": 7,
+            "fragmentized": true,
+            "source": "actual_model_invocations"
+          },
+          "cache": {
+            "common_hit_cache": false,
+            "cache_key": null,
+            "does_not_cache_high_risk_workflow": true
+          },
+          "observation_compression": {
+            "schema_version": "observation_compression_v1",
+            "original_tokens": 0,
+            "compressed_tokens": 0,
+            "saved_tokens": 0,
+            "strategy": "keep_status_next_action_and_risk_summary"
+          },
+          "workflow": {
+            "used_langgraph": false,
+            "workflow_id": null,
+            "workflow_type": null,
+            "graph_name": null,
+            "node_history": [],
+            "hitl_required": false,
+            "status": null
+          },
+          "degradation": {
+            "degraded": false,
+            "reason": null,
+            "cost_threshold_exceeded": true,
+            "warnings": [
+              "total_estimated_tokens_over_teaching_budget"
+            ]
+          },
+          "reasoning": {
+            "view": "off",
+            "thinking_requested": false,
+            "reasoning_content_returned": false,
+            "source": null
+          },
+          "safety_boundary": {
+            "cost_control_does_not_skip_business_facts": true,
+            "cost_control_does_not_skip_hitl": true,
+            "not_finops_or_billing_system": true
+          }
+        },
+        "summary": {
+          "event_type": "cost_recorded",
+          "path_type": "light_react_agent",
+          "tool_call_count": 0
+        }
+      },
+      {
+        "event": "final_answer_generated",
+        "payload": {
+          "session_id": "cs-bb47ed9f-2b02-4058-99fe-ba2c32c19d5d",
+          "intent": "refund_policy_query",
+          "status": "success",
+          "risk_level": "low",
+          "used_model": true,
+          "reasoning_content_returned": false
+        },
+        "summary": {
+          "event_type": "final_answer_generated",
+          "intent": "refund_policy_query",
+          "risk_level": "low"
+        }
+      }
+    ]
+  },
+  "home-policy-return": {
+    "session_id": "cs-82014a93-353f-4543-abc8-2481127927da",
+    "events": [
+      {
+        "event": "model_route_planned",
+        "payload": {
+          "session_id": "cs-82014a93-353f-4543-abc8-2481127927da",
+          "intent": "return_policy_query",
+          "used_model": true,
+          "model_name": "deepseek-flash",
+          "fallback_reason": null
+        },
+        "summary": {
+          "event_type": "model_route_planned",
+          "intent": "return_policy_query"
+        }
+      },
+      {
+        "event": "route_plan_built",
+        "payload": {
+          "session_id": "cs-82014a93-353f-4543-abc8-2481127927da",
+          "intent": "return_policy_query",
+          "source": "llm_with_policy_constraints",
+          "required_tools": [],
+          "needs_rag": true,
+          "needs_business_tools": false,
+          "requires_workflow": false,
+          "risk_level": "low"
+        },
+        "summary": {
+          "event_type": "route_plan_built",
+          "intent": "return_policy_query",
+          "risk_level": "low"
+        }
+      },
+      {
+        "event": "model_answer_generated",
+        "payload": {
+          "session_id": "cs-82014a93-353f-4543-abc8-2481127927da",
+          "intent": "return_policy_query",
+          "used_model": true,
+          "model_name": "deepseek-flash",
+          "fallback_reason": null
+        },
+        "summary": {
+          "event_type": "model_answer_generated",
+          "intent": "return_policy_query"
+        }
+      },
+      {
+        "event": "cost_recorded",
+        "payload": {
+          "schema_version": "cost_summary_v1",
+          "cost_profile": "teaching",
+          "path_type": "light_react_agent",
+          "model_calls": {
+            "route_planner": 1,
+            "tool_agent": 0,
+            "final_answer": 1,
+            "extra_reasoning": 0
+          },
+          "frameworks": {
+            "langchain_runnable_sequence": true,
+            "langchain_create_agent": false,
+            "langgraph_state_graph": false,
+            "offline_deterministic_fallback": false
+          },
+          "tool_call_count": 0,
+          "business_tool_call_count": 0,
+          "rag": {
+            "needs_rag": true,
+            "hit_count": 1,
+            "pre_retrieval_count": 1,
+            "tool_retrieval_count": 0,
+            "retrieval_paths": [
+              "pre_retrieval"
+            ],
+            "cache_hit": false
+          },
+          "tokens": {
+            "context_estimated": 34,
+            "prompt_estimated": 777,
+            "answer_estimated": 192,
+            "total_estimated": 1003,
+            "context_budget": 160
+          },
+          "prompt_fragments": {
+            "selected": [
+              "prompt_security",
+              "system_customer_service",
+              "route_contract",
+              "prompt_security",
+              "system_customer_service",
+              "rag_answering",
+              "final_answer_style"
+            ],
+            "selections": [
+              {
+                "name": "prompt_security",
+                "level": "global_policy",
+                "version": "v1",
+                "load": "always",
+                "priority": 100,
+                "phase": "route",
+                "estimated_tokens": 29
+              },
+              {
+                "name": "system_customer_service",
+                "level": "role",
+                "version": "v1",
+                "load": "always",
+                "priority": 90,
+                "phase": "route",
+                "estimated_tokens": 32
+              },
+              {
+                "name": "route_contract",
+                "level": "task_contract",
+                "version": "v1",
+                "load": "when_route",
+                "priority": 80,
+                "phase": "route",
+                "estimated_tokens": 592
+              },
+              {
+                "name": "prompt_security",
+                "level": "global_policy",
+                "version": "v1",
+                "load": "always",
+                "priority": 100,
+                "phase": "final_answer",
+                "estimated_tokens": 29
+              },
+              {
+                "name": "system_customer_service",
+                "level": "role",
+                "version": "v1",
+                "load": "always",
+                "priority": 90,
+                "phase": "final_answer",
+                "estimated_tokens": 32
+              },
+              {
+                "name": "rag_answering",
+                "level": "capability",
+                "version": "v1",
+                "load": "when_rag",
+                "priority": 60,
+                "phase": "final_answer",
+                "estimated_tokens": 38
+              },
+              {
+                "name": "final_answer_style",
+                "level": "response_contract",
+                "version": "v1",
+                "load": "when_final_answer",
+                "priority": 40,
+                "phase": "final_answer",
+                "estimated_tokens": 25
+              }
+            ],
+            "fragment_count": 7,
+            "fragmentized": true,
+            "source": "actual_model_invocations"
+          },
+          "cache": {
+            "common_hit_cache": false,
+            "cache_key": null,
+            "does_not_cache_high_risk_workflow": true
+          },
+          "observation_compression": {
+            "schema_version": "observation_compression_v1",
+            "original_tokens": 0,
+            "compressed_tokens": 0,
+            "saved_tokens": 0,
+            "strategy": "keep_status_next_action_and_risk_summary"
+          },
+          "workflow": {
+            "used_langgraph": false,
+            "workflow_id": null,
+            "workflow_type": null,
+            "graph_name": null,
+            "node_history": [],
+            "hitl_required": false,
+            "status": null
+          },
+          "degradation": {
+            "degraded": false,
+            "reason": null,
+            "cost_threshold_exceeded": true,
+            "warnings": [
+              "total_estimated_tokens_over_teaching_budget"
+            ]
+          },
+          "reasoning": {
+            "view": "off",
+            "thinking_requested": false,
+            "reasoning_content_returned": false,
+            "source": null
+          },
+          "safety_boundary": {
+            "cost_control_does_not_skip_business_facts": true,
+            "cost_control_does_not_skip_hitl": true,
+            "not_finops_or_billing_system": true
+          }
+        },
+        "summary": {
+          "event_type": "cost_recorded",
+          "path_type": "light_react_agent",
+          "tool_call_count": 0
+        }
+      },
+      {
+        "event": "final_answer_generated",
+        "payload": {
+          "session_id": "cs-82014a93-353f-4543-abc8-2481127927da",
+          "intent": "return_policy_query",
+          "status": "success",
+          "risk_level": "low",
+          "used_model": true,
+          "reasoning_content_returned": false
+        },
+        "summary": {
+          "event_type": "final_answer_generated",
+          "intent": "return_policy_query",
+          "risk_level": "low"
+        }
+      }
+    ]
+  },
+  "home-apply-refund-missing": {
+    "session_id": "cs-ff626082-b1ea-417a-a62d-eaa0983b3906",
+    "events": [
+      {
+        "event": "model_route_planned",
+        "payload": {
+          "session_id": "cs-ff626082-b1ea-417a-a62d-eaa0983b3906",
+          "intent": "refund_request",
+          "used_model": true,
+          "model_name": "deepseek-flash",
+          "fallback_reason": null
+        },
+        "summary": {
+          "event_type": "model_route_planned",
+          "intent": "refund_request"
+        }
+      },
+      {
+        "event": "route_plan_built",
+        "payload": {
+          "session_id": "cs-ff626082-b1ea-417a-a62d-eaa0983b3906",
+          "intent": "refund_request",
+          "source": "llm_with_policy_constraints",
+          "required_tools": [
+            "get_order_detail"
+          ],
+          "needs_rag": true,
+          "needs_business_tools": true,
+          "requires_workflow": true,
+          "risk_level": "high"
+        },
+        "summary": {
+          "event_type": "route_plan_built",
+          "intent": "refund_request",
+          "risk_level": "high"
+        }
+      },
+      {
+        "event": "tool_finished",
+        "payload": {
+          "session_id": "cs-ff626082-b1ea-417a-a62d-eaa0983b3906",
+          "tool_name": "get_order_detail",
+          "order_id": "ORD1234",
+          "status": "error",
+          "risk_level": "medium",
+          "next_action": "ask_clarification"
+        },
+        "summary": {
+          "event_type": "tool_finished",
+          "tool_name": "get_order_detail",
+          "risk_level": "medium"
+        }
+      },
+      {
+        "event": "model_answer_generated",
+        "payload": {
+          "session_id": "cs-ff626082-b1ea-417a-a62d-eaa0983b3906",
+          "intent": "refund_request",
+          "used_model": true,
+          "model_name": "deepseek-flash",
+          "fallback_reason": null
+        },
+        "summary": {
+          "event_type": "model_answer_generated",
+          "intent": "refund_request"
+        }
+      },
+      {
+        "event": "cost_recorded",
+        "payload": {
+          "schema_version": "cost_summary_v1",
+          "cost_profile": "teaching",
+          "path_type": "light_react_agent",
+          "model_calls": {
+            "route_planner": 1,
+            "tool_agent": 2,
+            "final_answer": 1,
+            "extra_reasoning": 0
+          },
+          "frameworks": {
+            "langchain_runnable_sequence": true,
+            "langchain_create_agent": true,
+            "langgraph_state_graph": false,
+            "offline_deterministic_fallback": false
+          },
+          "tool_call_count": 1,
+          "business_tool_call_count": 1,
+          "rag": {
+            "needs_rag": true,
+            "hit_count": 1,
+            "pre_retrieval_count": 1,
+            "tool_retrieval_count": 0,
+            "retrieval_paths": [
+              "pre_retrieval"
+            ],
+            "cache_hit": false
+          },
+          "tokens": {
+            "context_estimated": 46,
+            "prompt_estimated": 1075,
+            "answer_estimated": 98,
+            "total_estimated": 1219,
+            "context_budget": 160
+          },
+          "prompt_fragments": {
+            "selected": [
+              "prompt_security",
+              "system_customer_service",
+              "route_contract",
+              "prompt_security",
+              "system_customer_service",
+              "high_risk_after_sale",
+              "tool_usage",
+              "rag_answering",
+              "final_answer_style",
+              "prompt_security",
+              "system_customer_service",
+              "high_risk_after_sale",
+              "tool_usage",
+              "rag_answering",
+              "final_answer_style"
+            ],
+            "selections": [
+              {
+                "name": "prompt_security",
+                "level": "global_policy",
+                "version": "v1",
+                "load": "always",
+                "priority": 100,
+                "phase": "route",
+                "estimated_tokens": 29
+              },
+              {
+                "name": "system_customer_service",
+                "level": "role",
+                "version": "v1",
+                "load": "always",
+                "priority": 90,
+                "phase": "route",
+                "estimated_tokens": 32
+              },
+              {
+                "name": "route_contract",
+                "level": "task_contract",
+                "version": "v1",
+                "load": "when_route",
+                "priority": 80,
+                "phase": "route",
+                "estimated_tokens": 592
+              },
+              {
+                "name": "prompt_security",
+                "level": "global_policy",
+                "version": "v1",
+                "load": "always",
+                "priority": 100,
+                "phase": "tool_agent",
+                "estimated_tokens": 29
+              },
+              {
+                "name": "system_customer_service",
+                "level": "role",
+                "version": "v1",
+                "load": "always",
+                "priority": 90,
+                "phase": "tool_agent",
+                "estimated_tokens": 32
+              },
+              {
+                "name": "high_risk_after_sale",
+                "level": "risk_policy",
+                "version": "v1",
+                "load": "when_high_risk_after_sale",
+                "priority": 80,
+                "phase": "tool_agent",
+                "estimated_tokens": 33
+              },
+              {
+                "name": "tool_usage",
+                "level": "capability",
+                "version": "v1",
+                "load": "when_business_tool",
+                "priority": 70,
+                "phase": "tool_agent",
+                "estimated_tokens": 54
+              },
+              {
+                "name": "rag_answering",
+                "level": "capability",
+                "version": "v1",
+                "load": "when_rag",
+                "priority": 60,
+                "phase": "tool_agent",
+                "estimated_tokens": 38
+              },
+              {
+                "name": "final_answer_style",
+                "level": "response_contract",
+                "version": "v1",
+                "load": "when_final_answer",
+                "priority": 40,
+                "phase": "tool_agent",
+                "estimated_tokens": 25
+              },
+              {
+                "name": "prompt_security",
+                "level": "global_policy",
+                "version": "v1",
+                "load": "always",
+                "priority": 100,
+                "phase": "final_answer",
+                "estimated_tokens": 29
+              },
+              {
+                "name": "system_customer_service",
+                "level": "role",
+                "version": "v1",
+                "load": "always",
+                "priority": 90,
+                "phase": "final_answer",
+                "estimated_tokens": 32
+              },
+              {
+                "name": "high_risk_after_sale",
+                "level": "risk_policy",
+                "version": "v1",
+                "load": "when_high_risk_after_sale",
+                "priority": 80,
+                "phase": "final_answer",
+                "estimated_tokens": 33
+              },
+              {
+                "name": "tool_usage",
+                "level": "capability",
+                "version": "v1",
+                "load": "when_business_tool",
+                "priority": 70,
+                "phase": "final_answer",
+                "estimated_tokens": 54
+              },
+              {
+                "name": "rag_answering",
+                "level": "capability",
+                "version": "v1",
+                "load": "when_rag",
+                "priority": 60,
+                "phase": "final_answer",
+                "estimated_tokens": 38
+              },
+              {
+                "name": "final_answer_style",
+                "level": "response_contract",
+                "version": "v1",
+                "load": "when_final_answer",
+                "priority": 40,
+                "phase": "final_answer",
+                "estimated_tokens": 25
+              }
+            ],
+            "fragment_count": 15,
+            "fragmentized": true,
+            "source": "actual_model_invocations"
+          },
+          "cache": {
+            "common_hit_cache": false,
+            "cache_key": null,
+            "does_not_cache_high_risk_workflow": true
+          },
+          "observation_compression": {
+            "schema_version": "observation_compression_v1",
+            "original_tokens": 14,
+            "compressed_tokens": 12,
+            "saved_tokens": 2,
+            "strategy": "keep_status_next_action_and_risk_summary"
+          },
+          "workflow": {
+            "used_langgraph": false,
+            "workflow_id": null,
+            "workflow_type": null,
+            "graph_name": null,
+            "node_history": [],
+            "hitl_required": false,
+            "status": null
+          },
+          "degradation": {
+            "degraded": false,
+            "reason": null,
+            "cost_threshold_exceeded": true,
+            "warnings": [
+              "total_estimated_tokens_over_teaching_budget"
+            ]
+          },
+          "reasoning": {
+            "view": "off",
+            "thinking_requested": false,
+            "reasoning_content_returned": false,
+            "source": null
+          },
+          "safety_boundary": {
+            "cost_control_does_not_skip_business_facts": true,
+            "cost_control_does_not_skip_hitl": true,
+            "not_finops_or_billing_system": true
+          }
+        },
+        "summary": {
+          "event_type": "cost_recorded",
+          "path_type": "light_react_agent",
+          "tool_call_count": 1
+        }
+      },
+      {
+        "event": "final_answer_generated",
+        "payload": {
+          "session_id": "cs-ff626082-b1ea-417a-a62d-eaa0983b3906",
+          "intent": "refund_request",
+          "status": "success",
+          "risk_level": "high",
+          "used_model": true,
+          "reasoning_content_returned": false
+        },
+        "summary": {
+          "event_type": "final_answer_generated",
+          "intent": "refund_request",
+          "risk_level": "high"
+        }
+      }
+    ]
+  },
+  "home-apply-return-missing": {
+    "session_id": "cs-d66fdbd1-da91-4072-8c95-66bdbc3f34f3",
+    "events": [
+      {
+        "event": "model_route_planned",
+        "payload": {
+          "session_id": "cs-d66fdbd1-da91-4072-8c95-66bdbc3f34f3",
+          "intent": "return_request",
+          "used_model": true,
+          "model_name": "deepseek-flash",
+          "fallback_reason": null
+        },
+        "summary": {
+          "event_type": "model_route_planned",
+          "intent": "return_request"
+        }
+      },
+      {
+        "event": "route_plan_built",
+        "payload": {
+          "session_id": "cs-d66fdbd1-da91-4072-8c95-66bdbc3f34f3",
+          "intent": "return_request",
+          "source": "llm_with_policy_constraints",
+          "required_tools": [
+            "get_order_detail"
+          ],
+          "needs_rag": true,
+          "needs_business_tools": true,
+          "requires_workflow": true,
+          "risk_level": "high"
+        },
+        "summary": {
+          "event_type": "route_plan_built",
+          "intent": "return_request",
+          "risk_level": "high"
+        }
+      },
+      {
+        "event": "tool_finished",
+        "payload": {
+          "session_id": "cs-d66fdbd1-da91-4072-8c95-66bdbc3f34f3",
+          "tool_name": "get_order_detail",
+          "order_id": "ORD1234",
+          "status": "error",
+          "risk_level": "medium"
+        },
+        "summary": {
+          "event_type": "tool_finished",
+          "tool_name": "get_order_detail",
+          "risk_level": "medium"
+        }
+      },
+      {
+        "event": "model_answer_generated",
+        "payload": {
+          "session_id": "cs-d66fdbd1-da91-4072-8c95-66bdbc3f34f3",
+          "intent": "return_request",
+          "used_model": true,
+          "model_name": "deepseek-flash",
+          "fallback_reason": null
+        },
+        "summary": {
+          "event_type": "model_answer_generated",
+          "intent": "return_request"
+        }
+      },
+      {
+        "event": "cost_recorded",
+        "payload": {
+          "schema_version": "cost_summary_v1",
+          "cost_profile": "teaching",
+          "path_type": "light_react_agent",
+          "model_calls": {
+            "route_planner": 1,
+            "tool_agent": 0,
+            "final_answer": 1,
+            "extra_reasoning": 0
+          },
+          "frameworks": {
+            "langchain_runnable_sequence": true,
+            "langchain_create_agent": false,
+            "langgraph_state_graph": false,
+            "offline_deterministic_fallback": false
+          },
+          "tool_call_count": 1,
+          "business_tool_call_count": 1,
+          "rag": {
+            "needs_rag": false,
+            "hit_count": 0,
+            "pre_retrieval_count": 0,
+            "tool_retrieval_count": 0,
+            "retrieval_paths": [],
+            "cache_hit": false
+          },
+          "tokens": {
+            "context_estimated": 47,
+            "prompt_estimated": 826,
+            "answer_estimated": 101,
+            "total_estimated": 974,
+            "context_budget": 160
+          },
+          "prompt_fragments": {
+            "selected": [
+              "prompt_security",
+              "system_customer_service",
+              "route_contract",
+              "prompt_security",
+              "system_customer_service",
+              "high_risk_after_sale",
+              "tool_usage",
+              "final_answer_style"
+            ],
+            "selections": [
+              {
+                "name": "prompt_security",
+                "level": "global_policy",
+                "version": "v1",
+                "load": "always",
+                "priority": 100,
+                "phase": "route",
+                "estimated_tokens": 29
+              },
+              {
+                "name": "system_customer_service",
+                "level": "role",
+                "version": "v1",
+                "load": "always",
+                "priority": 90,
+                "phase": "route",
+                "estimated_tokens": 32
+              },
+              {
+                "name": "route_contract",
+                "level": "task_contract",
+                "version": "v1",
+                "load": "when_route",
+                "priority": 80,
+                "phase": "route",
+                "estimated_tokens": 592
+              },
+              {
+                "name": "prompt_security",
+                "level": "global_policy",
+                "version": "v1",
+                "load": "always",
+                "priority": 100,
+                "phase": "final_answer",
+                "estimated_tokens": 29
+              },
+              {
+                "name": "system_customer_service",
+                "level": "role",
+                "version": "v1",
+                "load": "always",
+                "priority": 90,
+                "phase": "final_answer",
+                "estimated_tokens": 32
+              },
+              {
+                "name": "high_risk_after_sale",
+                "level": "risk_policy",
+                "version": "v1",
+                "load": "when_high_risk_after_sale",
+                "priority": 80,
+                "phase": "final_answer",
+                "estimated_tokens": 33
+              },
+              {
+                "name": "tool_usage",
+                "level": "capability",
+                "version": "v1",
+                "load": "when_business_tool",
+                "priority": 70,
+                "phase": "final_answer",
+                "estimated_tokens": 54
+              },
+              {
+                "name": "final_answer_style",
+                "level": "response_contract",
+                "version": "v1",
+                "load": "when_final_answer",
+                "priority": 40,
+                "phase": "final_answer",
+                "estimated_tokens": 25
+              }
+            ],
+            "fragment_count": 8,
+            "fragmentized": true,
+            "source": "actual_model_invocations"
+          },
+          "cache": {
+            "common_hit_cache": false,
+            "cache_key": null,
+            "does_not_cache_high_risk_workflow": true
+          },
+          "observation_compression": {
+            "schema_version": "observation_compression_v1",
+            "original_tokens": 14,
+            "compressed_tokens": 12,
+            "saved_tokens": 2,
+            "strategy": "keep_status_next_action_and_risk_summary"
+          },
+          "workflow": {
+            "used_langgraph": false,
+            "workflow_id": null,
+            "workflow_type": null,
+            "graph_name": null,
+            "node_history": [],
+            "hitl_required": false,
+            "status": null
+          },
+          "degradation": {
+            "degraded": false,
+            "reason": null,
+            "cost_threshold_exceeded": true,
+            "warnings": [
+              "total_estimated_tokens_over_teaching_budget"
+            ]
+          },
+          "reasoning": {
+            "view": "off",
+            "thinking_requested": false,
+            "reasoning_content_returned": false,
+            "source": null
+          },
+          "safety_boundary": {
+            "cost_control_does_not_skip_business_facts": true,
+            "cost_control_does_not_skip_hitl": true,
+            "not_finops_or_billing_system": true
+          }
+        },
+        "summary": {
+          "event_type": "cost_recorded",
+          "path_type": "light_react_agent",
+          "tool_call_count": 1
+        }
+      },
+      {
+        "event": "final_answer_generated",
+        "payload": {
+          "session_id": "cs-d66fdbd1-da91-4072-8c95-66bdbc3f34f3",
+          "intent": "return_request",
+          "status": "success",
+          "risk_level": "high",
+          "used_model": true,
+          "reasoning_content_returned": false
+        },
+        "summary": {
+          "event_type": "final_answer_generated",
+          "intent": "return_request",
+          "risk_level": "high"
+        }
+      }
+    ]
+  },
+  "home-switch-refund": {
+    "session_id": "cs-7390d5b4-6b04-49da-9d04-4af5bfecfb87",
+    "events": [
+      {
+        "event": "model_route_planned",
+        "payload": {
+          "session_id": "cs-7390d5b4-6b04-49da-9d04-4af5bfecfb87",
+          "intent": "refund_policy_query",
+          "used_model": true,
+          "model_name": "deepseek-flash",
+          "fallback_reason": null
+        },
+        "summary": {
+          "event_type": "model_route_planned",
+          "intent": "refund_policy_query"
+        }
+      },
+      {
+        "event": "route_plan_built",
+        "payload": {
+          "session_id": "cs-7390d5b4-6b04-49da-9d04-4af5bfecfb87",
+          "intent": "refund_policy_query",
+          "source": "llm_with_policy_constraints",
+          "required_tools": [],
+          "needs_rag": true,
+          "needs_business_tools": false,
+          "requires_workflow": false,
+          "risk_level": "low"
+        },
+        "summary": {
+          "event_type": "route_plan_built",
+          "intent": "refund_policy_query",
+          "risk_level": "low"
+        }
+      },
+      {
+        "event": "model_answer_generated",
+        "payload": {
+          "session_id": "cs-7390d5b4-6b04-49da-9d04-4af5bfecfb87",
+          "intent": "refund_policy_query",
+          "used_model": true,
+          "model_name": "deepseek-flash",
+          "fallback_reason": null
+        },
+        "summary": {
+          "event_type": "model_answer_generated",
+          "intent": "refund_policy_query"
+        }
+      },
+      {
+        "event": "cost_recorded",
+        "payload": {
+          "schema_version": "cost_summary_v1",
+          "cost_profile": "teaching",
+          "path_type": "light_react_agent",
+          "model_calls": {
+            "route_planner": 1,
+            "tool_agent": 0,
+            "final_answer": 1,
+            "extra_reasoning": 0
+          },
+          "frameworks": {
+            "langchain_runnable_sequence": true,
+            "langchain_create_agent": false,
+            "langgraph_state_graph": false,
+            "offline_deterministic_fallback": false
+          },
+          "tool_call_count": 0,
+          "business_tool_call_count": 0,
+          "rag": {
+            "needs_rag": true,
+            "hit_count": 1,
+            "pre_retrieval_count": 1,
+            "tool_retrieval_count": 0,
+            "retrieval_paths": [
+              "pre_retrieval"
+            ],
+            "cache_hit": false
+          },
+          "tokens": {
+            "context_estimated": 32,
+            "prompt_estimated": 777,
+            "answer_estimated": 93,
+            "total_estimated": 902,
+            "context_budget": 160
+          },
+          "prompt_fragments": {
+            "selected": [
+              "prompt_security",
+              "system_customer_service",
+              "route_contract",
+              "prompt_security",
+              "system_customer_service",
+              "rag_answering",
+              "final_answer_style"
+            ],
+            "selections": [
+              {
+                "name": "prompt_security",
+                "level": "global_policy",
+                "version": "v1",
+                "load": "always",
+                "priority": 100,
+                "phase": "route",
+                "estimated_tokens": 29
+              },
+              {
+                "name": "system_customer_service",
+                "level": "role",
+                "version": "v1",
+                "load": "always",
+                "priority": 90,
+                "phase": "route",
+                "estimated_tokens": 32
+              },
+              {
+                "name": "route_contract",
+                "level": "task_contract",
+                "version": "v1",
+                "load": "when_route",
+                "priority": 80,
+                "phase": "route",
+                "estimated_tokens": 592
+              },
+              {
+                "name": "prompt_security",
+                "level": "global_policy",
+                "version": "v1",
+                "load": "always",
+                "priority": 100,
+                "phase": "final_answer",
+                "estimated_tokens": 29
+              },
+              {
+                "name": "system_customer_service",
+                "level": "role",
+                "version": "v1",
+                "load": "always",
+                "priority": 90,
+                "phase": "final_answer",
+                "estimated_tokens": 32
+              },
+              {
+                "name": "rag_answering",
+                "level": "capability",
+                "version": "v1",
+                "load": "when_rag",
+                "priority": 60,
+                "phase": "final_answer",
+                "estimated_tokens": 38
+              },
+              {
+                "name": "final_answer_style",
+                "level": "response_contract",
+                "version": "v1",
+                "load": "when_final_answer",
+                "priority": 40,
+                "phase": "final_answer",
+                "estimated_tokens": 25
+              }
+            ],
+            "fragment_count": 7,
+            "fragmentized": true,
+            "source": "actual_model_invocations"
+          },
+          "cache": {
+            "common_hit_cache": false,
+            "cache_key": null,
+            "does_not_cache_high_risk_workflow": true
+          },
+          "observation_compression": {
+            "schema_version": "observation_compression_v1",
+            "original_tokens": 0,
+            "compressed_tokens": 0,
+            "saved_tokens": 0,
+            "strategy": "keep_status_next_action_and_risk_summary"
+          },
+          "workflow": {
+            "used_langgraph": false,
+            "workflow_id": null,
+            "workflow_type": null,
+            "graph_name": null,
+            "node_history": [],
+            "hitl_required": false,
+            "status": null
+          },
+          "degradation": {
+            "degraded": false,
+            "reason": null,
+            "cost_threshold_exceeded": true,
+            "warnings": [
+              "total_estimated_tokens_over_teaching_budget"
+            ]
+          },
+          "reasoning": {
+            "view": "off",
+            "thinking_requested": false,
+            "reasoning_content_returned": false,
+            "source": null
+          },
+          "safety_boundary": {
+            "cost_control_does_not_skip_business_facts": true,
+            "cost_control_does_not_skip_hitl": true,
+            "not_finops_or_billing_system": true
+          }
+        },
+        "summary": {
+          "event_type": "cost_recorded",
+          "path_type": "light_react_agent",
+          "tool_call_count": 0
+        }
+      },
+      {
+        "event": "final_answer_generated",
+        "payload": {
+          "session_id": "cs-7390d5b4-6b04-49da-9d04-4af5bfecfb87",
+          "intent": "refund_policy_query",
+          "status": "success",
+          "risk_level": "low",
+          "used_model": true,
+          "reasoning_content_returned": false
+        },
+        "summary": {
+          "event_type": "final_answer_generated",
+          "intent": "refund_policy_query",
+          "risk_level": "low"
+        }
+      },
+      {
+        "event": "model_route_planned",
+        "payload": {
+          "session_id": "cs-7390d5b4-6b04-49da-9d04-4af5bfecfb87",
+          "intent": "refund_request",
+          "used_model": true,
+          "model_name": "deepseek-flash",
+          "fallback_reason": null
+        },
+        "summary": {
+          "event_type": "model_route_planned",
+          "intent": "refund_request"
+        }
+      },
+      {
+        "event": "route_plan_built",
+        "payload": {
+          "session_id": "cs-7390d5b4-6b04-49da-9d04-4af5bfecfb87",
+          "intent": "refund_request",
+          "source": "llm_with_policy_constraints",
+          "required_tools": [],
+          "needs_rag": true,
+          "needs_business_tools": true,
+          "requires_workflow": true,
+          "risk_level": "high"
+        },
+        "summary": {
+          "event_type": "route_plan_built",
+          "intent": "refund_request",
+          "risk_level": "high"
+        }
+      },
+      {
+        "event": "model_answer_skipped",
+        "payload": {
+          "session_id": "cs-7390d5b4-6b04-49da-9d04-4af5bfecfb87",
+          "intent": "refund_request",
+          "reason": "clarification_required"
+        },
+        "summary": {
+          "event_type": "model_answer_skipped",
+          "intent": "refund_request"
+        }
+      },
+      {
+        "event": "cost_recorded",
+        "payload": {
+          "schema_version": "cost_summary_v1",
+          "cost_profile": "teaching",
+          "path_type": "light_react_agent",
+          "model_calls": {
+            "route_planner": 1,
+            "tool_agent": 0,
+            "final_answer": 0,
+            "extra_reasoning": 0
+          },
+          "frameworks": {
+            "langchain_runnable_sequence": true,
+            "langchain_create_agent": false,
+            "langgraph_state_graph": false,
+            "offline_deterministic_fallback": false
+          },
+          "tool_call_count": 0,
+          "business_tool_call_count": 0,
+          "rag": {
+            "needs_rag": false,
+            "hit_count": 0,
+            "pre_retrieval_count": 0,
+            "tool_retrieval_count": 0,
+            "retrieval_paths": [],
+            "cache_hit": false
+          },
+          "tokens": {
+            "context_estimated": 26,
+            "prompt_estimated": 653,
+            "answer_estimated": 201,
+            "total_estimated": 880,
+            "context_budget": 160
+          },
+          "prompt_fragments": {
+            "selected": [
+              "prompt_security",
+              "system_customer_service",
+              "route_contract"
+            ],
+            "selections": [
+              {
+                "name": "prompt_security",
+                "level": "global_policy",
+                "version": "v1",
+                "load": "always",
+                "priority": 100,
+                "phase": "route",
+                "estimated_tokens": 29
+              },
+              {
+                "name": "system_customer_service",
+                "level": "role",
+                "version": "v1",
+                "load": "always",
+                "priority": 90,
+                "phase": "route",
+                "estimated_tokens": 32
+              },
+              {
+                "name": "route_contract",
+                "level": "task_contract",
+                "version": "v1",
+                "load": "when_route",
+                "priority": 80,
+                "phase": "route",
+                "estimated_tokens": 592
+              }
+            ],
+            "fragment_count": 3,
+            "fragmentized": true,
+            "source": "actual_model_invocations"
+          },
+          "cache": {
+            "common_hit_cache": false,
+            "cache_key": null,
+            "does_not_cache_high_risk_workflow": true
+          },
+          "observation_compression": {
+            "schema_version": "observation_compression_v1",
+            "original_tokens": 0,
+            "compressed_tokens": 0,
+            "saved_tokens": 0,
+            "strategy": "keep_status_next_action_and_risk_summary"
+          },
+          "workflow": {
+            "used_langgraph": false,
+            "workflow_id": null,
+            "workflow_type": null,
+            "graph_name": null,
+            "node_history": [],
+            "hitl_required": false,
+            "status": null
+          },
+          "degradation": {
+            "degraded": false,
+            "reason": null,
+            "cost_threshold_exceeded": true,
+            "warnings": [
+              "total_estimated_tokens_over_teaching_budget"
+            ]
+          },
+          "reasoning": {
+            "view": "off",
+            "thinking_requested": false,
+            "reasoning_content_returned": false,
+            "source": null
+          },
+          "safety_boundary": {
+            "cost_control_does_not_skip_business_facts": true,
+            "cost_control_does_not_skip_hitl": true,
+            "not_finops_or_billing_system": true
+          }
+        },
+        "summary": {
+          "event_type": "cost_recorded",
+          "path_type": "light_react_agent",
+          "tool_call_count": 0
+        }
+      },
+      {
+        "event": "final_answer_generated",
+        "payload": {
+          "session_id": "cs-7390d5b4-6b04-49da-9d04-4af5bfecfb87",
+          "intent": "refund_request",
+          "status": "success",
+          "risk_level": "medium",
+          "used_model": false,
+          "reasoning_content_returned": false
+        },
+        "summary": {
+          "event_type": "final_answer_generated",
+          "intent": "refund_request",
+          "risk_level": "medium"
+        }
+      }
+    ]
+  },
+  "home-switch-return": {
+    "session_id": "cs-5ce71bd3-a508-4593-a8e6-75fded1e9fda",
+    "events": [
+      {
+        "event": "model_route_planned",
+        "payload": {
+          "session_id": "cs-5ce71bd3-a508-4593-a8e6-75fded1e9fda",
+          "intent": "return_policy_query",
+          "used_model": true,
+          "model_name": "deepseek-flash",
+          "fallback_reason": null
+        },
+        "summary": {
+          "event_type": "model_route_planned",
+          "intent": "return_policy_query"
+        }
+      },
+      {
+        "event": "route_plan_built",
+        "payload": {
+          "session_id": "cs-5ce71bd3-a508-4593-a8e6-75fded1e9fda",
+          "intent": "return_policy_query",
+          "source": "llm_with_policy_constraints",
+          "required_tools": [],
+          "needs_rag": true,
+          "needs_business_tools": false,
+          "requires_workflow": false,
+          "risk_level": "low"
+        },
+        "summary": {
+          "event_type": "route_plan_built",
+          "intent": "return_policy_query",
+          "risk_level": "low"
+        }
+      },
+      {
+        "event": "model_answer_generated",
+        "payload": {
+          "session_id": "cs-5ce71bd3-a508-4593-a8e6-75fded1e9fda",
+          "intent": "return_policy_query",
+          "used_model": true,
+          "model_name": "deepseek-flash",
+          "fallback_reason": null
+        },
+        "summary": {
+          "event_type": "model_answer_generated",
+          "intent": "return_policy_query"
+        }
+      },
+      {
+        "event": "cost_recorded",
+        "payload": {
+          "schema_version": "cost_summary_v1",
+          "cost_profile": "teaching",
+          "path_type": "light_react_agent",
+          "model_calls": {
+            "route_planner": 1,
+            "tool_agent": 0,
+            "final_answer": 1,
+            "extra_reasoning": 0
+          },
+          "frameworks": {
+            "langchain_runnable_sequence": true,
+            "langchain_create_agent": false,
+            "langgraph_state_graph": false,
+            "offline_deterministic_fallback": false
+          },
+          "tool_call_count": 0,
+          "business_tool_call_count": 0,
+          "rag": {
+            "needs_rag": true,
+            "hit_count": 1,
+            "pre_retrieval_count": 1,
+            "tool_retrieval_count": 0,
+            "retrieval_paths": [
+              "pre_retrieval"
+            ],
+            "cache_hit": false
+          },
+          "tokens": {
+            "context_estimated": 34,
+            "prompt_estimated": 777,
+            "answer_estimated": 172,
+            "total_estimated": 983,
+            "context_budget": 160
+          },
+          "prompt_fragments": {
+            "selected": [
+              "prompt_security",
+              "system_customer_service",
+              "route_contract",
+              "prompt_security",
+              "system_customer_service",
+              "rag_answering",
+              "final_answer_style"
+            ],
+            "selections": [
+              {
+                "name": "prompt_security",
+                "level": "global_policy",
+                "version": "v1",
+                "load": "always",
+                "priority": 100,
+                "phase": "route",
+                "estimated_tokens": 29
+              },
+              {
+                "name": "system_customer_service",
+                "level": "role",
+                "version": "v1",
+                "load": "always",
+                "priority": 90,
+                "phase": "route",
+                "estimated_tokens": 32
+              },
+              {
+                "name": "route_contract",
+                "level": "task_contract",
+                "version": "v1",
+                "load": "when_route",
+                "priority": 80,
+                "phase": "route",
+                "estimated_tokens": 592
+              },
+              {
+                "name": "prompt_security",
+                "level": "global_policy",
+                "version": "v1",
+                "load": "always",
+                "priority": 100,
+                "phase": "final_answer",
+                "estimated_tokens": 29
+              },
+              {
+                "name": "system_customer_service",
+                "level": "role",
+                "version": "v1",
+                "load": "always",
+                "priority": 90,
+                "phase": "final_answer",
+                "estimated_tokens": 32
+              },
+              {
+                "name": "rag_answering",
+                "level": "capability",
+                "version": "v1",
+                "load": "when_rag",
+                "priority": 60,
+                "phase": "final_answer",
+                "estimated_tokens": 38
+              },
+              {
+                "name": "final_answer_style",
+                "level": "response_contract",
+                "version": "v1",
+                "load": "when_final_answer",
+                "priority": 40,
+                "phase": "final_answer",
+                "estimated_tokens": 25
+              }
+            ],
+            "fragment_count": 7,
+            "fragmentized": true,
+            "source": "actual_model_invocations"
+          },
+          "cache": {
+            "common_hit_cache": false,
+            "cache_key": null,
+            "does_not_cache_high_risk_workflow": true
+          },
+          "observation_compression": {
+            "schema_version": "observation_compression_v1",
+            "original_tokens": 0,
+            "compressed_tokens": 0,
+            "saved_tokens": 0,
+            "strategy": "keep_status_next_action_and_risk_summary"
+          },
+          "workflow": {
+            "used_langgraph": false,
+            "workflow_id": null,
+            "workflow_type": null,
+            "graph_name": null,
+            "node_history": [],
+            "hitl_required": false,
+            "status": null
+          },
+          "degradation": {
+            "degraded": false,
+            "reason": null,
+            "cost_threshold_exceeded": true,
+            "warnings": [
+              "total_estimated_tokens_over_teaching_budget"
+            ]
+          },
+          "reasoning": {
+            "view": "off",
+            "thinking_requested": false,
+            "reasoning_content_returned": false,
+            "source": null
+          },
+          "safety_boundary": {
+            "cost_control_does_not_skip_business_facts": true,
+            "cost_control_does_not_skip_hitl": true,
+            "not_finops_or_billing_system": true
+          }
+        },
+        "summary": {
+          "event_type": "cost_recorded",
+          "path_type": "light_react_agent",
+          "tool_call_count": 0
+        }
+      },
+      {
+        "event": "final_answer_generated",
+        "payload": {
+          "session_id": "cs-5ce71bd3-a508-4593-a8e6-75fded1e9fda",
+          "intent": "return_policy_query",
+          "status": "success",
+          "risk_level": "low",
+          "used_model": true,
+          "reasoning_content_returned": false
+        },
+        "summary": {
+          "event_type": "final_answer_generated",
+          "intent": "return_policy_query",
+          "risk_level": "low"
+        }
+      },
+      {
+        "event": "model_route_planned",
+        "payload": {
+          "session_id": "cs-5ce71bd3-a508-4593-a8e6-75fded1e9fda",
+          "intent": "return_request",
+          "used_model": true,
+          "model_name": "deepseek-flash",
+          "fallback_reason": null
+        },
+        "summary": {
+          "event_type": "model_route_planned",
+          "intent": "return_request"
+        }
+      },
+      {
+        "event": "route_plan_built",
+        "payload": {
+          "session_id": "cs-5ce71bd3-a508-4593-a8e6-75fded1e9fda",
+          "intent": "return_request",
+          "source": "llm_with_policy_constraints",
+          "required_tools": [],
+          "needs_rag": true,
+          "needs_business_tools": true,
+          "requires_workflow": true,
+          "risk_level": "high"
+        },
+        "summary": {
+          "event_type": "route_plan_built",
+          "intent": "return_request",
+          "risk_level": "high"
+        }
+      },
+      {
+        "event": "model_answer_skipped",
+        "payload": {
+          "session_id": "cs-5ce71bd3-a508-4593-a8e6-75fded1e9fda",
+          "intent": "return_request",
+          "reason": "clarification_required"
+        },
+        "summary": {
+          "event_type": "model_answer_skipped",
+          "intent": "return_request"
+        }
+      },
+      {
+        "event": "cost_recorded",
+        "payload": {
+          "schema_version": "cost_summary_v1",
+          "cost_profile": "teaching",
+          "path_type": "light_react_agent",
+          "model_calls": {
+            "route_planner": 1,
+            "tool_agent": 0,
+            "final_answer": 0,
+            "extra_reasoning": 0
+          },
+          "frameworks": {
+            "langchain_runnable_sequence": true,
+            "langchain_create_agent": false,
+            "langgraph_state_graph": false,
+            "offline_deterministic_fallback": false
+          },
+          "tool_call_count": 0,
+          "business_tool_call_count": 0,
+          "rag": {
+            "needs_rag": false,
+            "hit_count": 0,
+            "pre_retrieval_count": 0,
+            "tool_retrieval_count": 0,
+            "retrieval_paths": [],
+            "cache_hit": false
+          },
+          "tokens": {
+            "context_estimated": 28,
+            "prompt_estimated": 653,
+            "answer_estimated": 13,
+            "total_estimated": 694,
+            "context_budget": 160
+          },
+          "prompt_fragments": {
+            "selected": [
+              "prompt_security",
+              "system_customer_service",
+              "route_contract"
+            ],
+            "selections": [
+              {
+                "name": "prompt_security",
+                "level": "global_policy",
+                "version": "v1",
+                "load": "always",
+                "priority": 100,
+                "phase": "route",
+                "estimated_tokens": 29
+              },
+              {
+                "name": "system_customer_service",
+                "level": "role",
+                "version": "v1",
+                "load": "always",
+                "priority": 90,
+                "phase": "route",
+                "estimated_tokens": 32
+              },
+              {
+                "name": "route_contract",
+                "level": "task_contract",
+                "version": "v1",
+                "load": "when_route",
+                "priority": 80,
+                "phase": "route",
+                "estimated_tokens": 592
+              }
+            ],
+            "fragment_count": 3,
+            "fragmentized": true,
+            "source": "actual_model_invocations"
+          },
+          "cache": {
+            "common_hit_cache": false,
+            "cache_key": null,
+            "does_not_cache_high_risk_workflow": true
+          },
+          "observation_compression": {
+            "schema_version": "observation_compression_v1",
+            "original_tokens": 0,
+            "compressed_tokens": 0,
+            "saved_tokens": 0,
+            "strategy": "keep_status_next_action_and_risk_summary"
+          },
+          "workflow": {
+            "used_langgraph": false,
+            "workflow_id": null,
+            "workflow_type": null,
+            "graph_name": null,
+            "node_history": [],
+            "hitl_required": false,
+            "status": null
+          },
+          "degradation": {
+            "degraded": false,
+            "reason": null,
+            "cost_threshold_exceeded": true,
+            "warnings": [
+              "total_estimated_tokens_over_teaching_budget"
+            ]
+          },
+          "reasoning": {
+            "view": "off",
+            "thinking_requested": false,
+            "reasoning_content_returned": false,
+            "source": null
+          },
+          "safety_boundary": {
+            "cost_control_does_not_skip_business_facts": true,
+            "cost_control_does_not_skip_hitl": true,
+            "not_finops_or_billing_system": true
+          }
+        },
+        "summary": {
+          "event_type": "cost_recorded",
+          "path_type": "light_react_agent",
+          "tool_call_count": 0
+        }
+      },
+      {
+        "event": "final_answer_generated",
+        "payload": {
+          "session_id": "cs-5ce71bd3-a508-4593-a8e6-75fded1e9fda",
+          "intent": "return_request",
+          "status": "success",
+          "risk_level": "high",
+          "used_model": false,
+          "reasoning_content_returned": false
+        },
+        "summary": {
+          "event_type": "final_answer_generated",
+          "intent": "return_request",
+          "risk_level": "high"
+        }
+      }
+    ]
+  },
+  "home-invoice": {
+    "session_id": "cs-18fc550b-e641-4007-9bb6-711d19f0aef2",
+    "events": [
+      {
+        "event": "model_route_planned",
+        "payload": {
+          "session_id": "cs-18fc550b-e641-4007-9bb6-711d19f0aef2",
+          "intent": "invoice_query",
+          "used_model": true,
+          "model_name": "deepseek-flash",
+          "fallback_reason": null
+        },
+        "summary": {
+          "event_type": "model_route_planned",
+          "intent": "invoice_query"
+        }
+      },
+      {
+        "event": "route_plan_built",
+        "payload": {
+          "session_id": "cs-18fc550b-e641-4007-9bb6-711d19f0aef2",
+          "intent": "invoice_query",
+          "source": "llm_with_policy_constraints",
+          "required_tools": [],
+          "needs_rag": true,
+          "needs_business_tools": false,
+          "requires_workflow": false,
+          "risk_level": "low"
+        },
+        "summary": {
+          "event_type": "route_plan_built",
+          "intent": "invoice_query",
+          "risk_level": "low"
+        }
+      },
+      {
+        "event": "model_answer_skipped",
+        "payload": {
+          "session_id": "cs-18fc550b-e641-4007-9bb6-711d19f0aef2",
+          "intent": "invoice_query",
+          "reason": "common_hit_cache"
+        },
+        "summary": {
+          "event_type": "model_answer_skipped",
+          "intent": "invoice_query"
+        }
+      },
+      {
+        "event": "cost_recorded",
+        "payload": {
+          "schema_version": "cost_summary_v1",
+          "cost_profile": "teaching",
+          "path_type": "cached_faq_light_path",
+          "model_calls": {
+            "route_planner": 1,
+            "tool_agent": 0,
+            "final_answer": 0,
+            "extra_reasoning": 0
+          },
+          "frameworks": {
+            "langchain_runnable_sequence": true,
+            "langchain_create_agent": false,
+            "langgraph_state_graph": false,
+            "offline_deterministic_fallback": false
+          },
+          "tool_call_count": 0,
+          "business_tool_call_count": 0,
+          "rag": {
+            "needs_rag": true,
+            "hit_count": 1,
+            "pre_retrieval_count": 0,
+            "tool_retrieval_count": 0,
+            "retrieval_paths": [
+              "pre_retrieval"
+            ],
+            "cache_hit": true
+          },
+          "tokens": {
+            "context_estimated": 27,
+            "prompt_estimated": 217,
+            "answer_estimated": 19,
+            "total_estimated": 263,
+            "context_budget": 160
+          },
+          "prompt_fragments": {
+            "selected": [
+              "prompt_security",
+              "system_customer_service",
+              "route_contract"
+            ],
+            "selections": [
+              {
+                "name": "prompt_security",
+                "level": "global_policy",
+                "version": "v1",
+                "load": "always",
+                "priority": 100,
+                "phase": "route",
+                "estimated_tokens": 29
+              },
+              {
+                "name": "system_customer_service",
+                "level": "role",
+                "version": "v1",
+                "load": "always",
+                "priority": 90,
+                "phase": "route",
+                "estimated_tokens": 32
+              },
+              {
+                "name": "route_contract",
+                "level": "task_contract",
+                "version": "v1",
+                "load": "when_route",
+                "priority": 80,
+                "phase": "route",
+                "estimated_tokens": 592
+              }
+            ],
+            "fragment_count": 3,
+            "fragmentized": true,
+            "source": "actual_model_invocations"
+          },
+          "cache": {
+            "common_hit_cache": true,
+            "cache_key": "faq:invoice_issue",
+            "does_not_cache_high_risk_workflow": true
+          },
+          "observation_compression": {
+            "schema_version": "observation_compression_v1",
+            "original_tokens": 0,
+            "compressed_tokens": 0,
+            "saved_tokens": 0,
+            "strategy": "keep_status_next_action_and_risk_summary"
+          },
+          "workflow": {
+            "used_langgraph": false,
+            "workflow_id": null,
+            "workflow_type": null,
+            "graph_name": null,
+            "node_history": [],
+            "hitl_required": false,
+            "status": null
+          },
+          "degradation": {
+            "degraded": false,
+            "reason": null,
+            "cost_threshold_exceeded": true,
+            "warnings": [
+              "total_estimated_tokens_over_teaching_budget"
+            ]
+          },
+          "reasoning": {
+            "view": "off",
+            "thinking_requested": false,
+            "reasoning_content_returned": false,
+            "source": null
+          },
+          "safety_boundary": {
+            "cost_control_does_not_skip_business_facts": true,
+            "cost_control_does_not_skip_hitl": true,
+            "not_finops_or_billing_system": true
+          }
+        },
+        "summary": {
+          "event_type": "cost_recorded",
+          "path_type": "cached_faq_light_path",
+          "tool_call_count": 0
+        }
+      },
+      {
+        "event": "final_answer_generated",
+        "payload": {
+          "session_id": "cs-18fc550b-e641-4007-9bb6-711d19f0aef2",
+          "intent": "invoice_query",
+          "status": "success",
+          "risk_level": "low",
+          "used_model": false,
+          "reasoning_content_returned": false
+        },
+        "summary": {
+          "event_type": "final_answer_generated",
+          "intent": "invoice_query",
+          "risk_level": "low"
+        }
+      }
+    ]
+  },
+  "order-apply-refund": {
+    "session_id": "cs-32ec2c43-84ba-4208-8cda-0659ccb990f8",
+    "events": [
+      {
+        "event": "model_route_planned",
+        "payload": {
+          "session_id": "cs-32ec2c43-84ba-4208-8cda-0659ccb990f8",
+          "intent": "refund_request",
+          "used_model": true,
+          "model_name": "deepseek-flash",
+          "fallback_reason": null
+        },
+        "summary": {
+          "event_type": "model_route_planned",
+          "intent": "refund_request"
+        }
+      },
+      {
+        "event": "route_plan_built",
+        "payload": {
+          "session_id": "cs-32ec2c43-84ba-4208-8cda-0659ccb990f8",
+          "intent": "refund_request",
+          "source": "llm_with_policy_constraints",
+          "required_tools": [
+            "get_order_detail"
+          ],
+          "needs_rag": true,
+          "needs_business_tools": true,
+          "requires_workflow": true,
+          "risk_level": "high"
+        },
+        "summary": {
+          "event_type": "route_plan_built",
+          "intent": "refund_request",
+          "risk_level": "high"
+        }
+      },
+      {
+        "event": "tool_finished",
+        "payload": {
+          "session_id": "cs-32ec2c43-84ba-4208-8cda-0659ccb990f8",
+          "tool_name": "get_order_detail",
+          "order_id": "SO20260601090000008-a1000008",
+          "status": "success",
+          "risk_level": "low",
+          "next_action": null
+        },
+        "summary": {
+          "event_type": "tool_finished",
+          "tool_name": "get_order_detail",
+          "risk_level": "low"
+        }
+      },
+      {
+        "event": "workflow_completed",
+        "payload": {
+          "session_id": "cs-32ec2c43-84ba-4208-8cda-0659ccb990f8",
+          "workflow_id": "wf-cs-32ec2c43-84ba-4208-8cda-0659ccb990f8",
+          "workflow_type": "unshipped_refund",
+          "status": "paused",
+          "pending_action": "require_approval",
+          "order_id": "SO20260601090000008-a1000008",
+          "approval_id": "appr-cs-32ec2c43-84ba-4208-8cda-0659ccb990f8",
+          "idempotency_key": "hitl:cs-32ec2c43-84ba-4208-8cda-0659ccb990f8:SO20260601090000008-a1000008",
+          "used_langgraph": true,
+          "graph_name": "lesson41_refund_approval_graph",
+          "current_node": "pause_for_human_approval",
+          "node_history": [
+            "validate_order_fact",
+            "attach_refund_policy",
+            "pause_for_human_approval"
+          ],
+          "order_fact_status": "verified",
+          "policy_ids": [
+            "refund_before_shipping"
+          ],
+          "risk_level": "high",
+          "needs_human_approval": true
+        },
+        "summary": {
+          "event_type": "workflow_completed",
+          "risk_level": "high",
+          "needs_human_approval": true,
+          "pending_action": "require_approval"
+        }
+      },
+      {
+        "event": "human_approval_required",
+        "payload": {
+          "session_id": "cs-32ec2c43-84ba-4208-8cda-0659ccb990f8",
+          "workflow_id": "wf-cs-32ec2c43-84ba-4208-8cda-0659ccb990f8",
+          "pending_action": "require_approval",
+          "risk_level": "high",
+          "needs_human_approval": true
+        },
+        "summary": {
+          "event_type": "human_approval_required",
+          "risk_level": "high",
+          "needs_human_approval": true,
+          "pending_action": "require_approval"
+        }
+      },
+      {
+        "event": "model_answer_generated",
+        "payload": {
+          "session_id": "cs-32ec2c43-84ba-4208-8cda-0659ccb990f8",
+          "intent": "refund_request",
+          "used_model": true,
+          "model_name": "deepseek-flash",
+          "fallback_reason": null
+        },
+        "summary": {
+          "event_type": "model_answer_generated",
+          "intent": "refund_request"
+        }
+      },
+      {
+        "event": "cost_recorded",
+        "payload": {
+          "schema_version": "cost_summary_v1",
+          "cost_profile": "teaching",
+          "path_type": "langgraph_after_sale_workflow",
+          "model_calls": {
+            "route_planner": 1,
+            "tool_agent": 2,
+            "final_answer": 1,
+            "extra_reasoning": 0
+          },
+          "frameworks": {
+            "langchain_runnable_sequence": true,
+            "langchain_create_agent": true,
+            "langgraph_state_graph": true,
+            "offline_deterministic_fallback": false
+          },
+          "tool_call_count": 1,
+          "business_tool_call_count": 1,
+          "rag": {
+            "needs_rag": true,
+            "hit_count": 1,
+            "pre_retrieval_count": 1,
+            "tool_retrieval_count": 0,
+            "retrieval_paths": [
+              "pre_retrieval"
+            ],
+            "cache_hit": false
+          },
+          "tokens": {
+            "context_estimated": 78,
+            "prompt_estimated": 1075,
+            "answer_estimated": 112,
+            "total_estimated": 1265,
+            "context_budget": 160
+          },
+          "prompt_fragments": {
+            "selected": [
+              "prompt_security",
+              "system_customer_service",
+              "route_contract",
+              "prompt_security",
+              "system_customer_service",
+              "high_risk_after_sale",
+              "tool_usage",
+              "rag_answering",
+              "final_answer_style",
+              "prompt_security",
+              "system_customer_service",
+              "high_risk_after_sale",
+              "tool_usage",
+              "rag_answering",
+              "final_answer_style"
+            ],
+            "selections": [
+              {
+                "name": "prompt_security",
+                "level": "global_policy",
+                "version": "v1",
+                "load": "always",
+                "priority": 100,
+                "phase": "route",
+                "estimated_tokens": 29
+              },
+              {
+                "name": "system_customer_service",
+                "level": "role",
+                "version": "v1",
+                "load": "always",
+                "priority": 90,
+                "phase": "route",
+                "estimated_tokens": 32
+              },
+              {
+                "name": "route_contract",
+                "level": "task_contract",
+                "version": "v1",
+                "load": "when_route",
+                "priority": 80,
+                "phase": "route",
+                "estimated_tokens": 592
+              },
+              {
+                "name": "prompt_security",
+                "level": "global_policy",
+                "version": "v1",
+                "load": "always",
+                "priority": 100,
+                "phase": "tool_agent",
+                "estimated_tokens": 29
+              },
+              {
+                "name": "system_customer_service",
+                "level": "role",
+                "version": "v1",
+                "load": "always",
+                "priority": 90,
+                "phase": "tool_agent",
+                "estimated_tokens": 32
+              },
+              {
+                "name": "high_risk_after_sale",
+                "level": "risk_policy",
+                "version": "v1",
+                "load": "when_high_risk_after_sale",
+                "priority": 80,
+                "phase": "tool_agent",
+                "estimated_tokens": 33
+              },
+              {
+                "name": "tool_usage",
+                "level": "capability",
+                "version": "v1",
+                "load": "when_business_tool",
+                "priority": 70,
+                "phase": "tool_agent",
+                "estimated_tokens": 54
+              },
+              {
+                "name": "rag_answering",
+                "level": "capability",
+                "version": "v1",
+                "load": "when_rag",
+                "priority": 60,
+                "phase": "tool_agent",
+                "estimated_tokens": 38
+              },
+              {
+                "name": "final_answer_style",
+                "level": "response_contract",
+                "version": "v1",
+                "load": "when_final_answer",
+                "priority": 40,
+                "phase": "tool_agent",
+                "estimated_tokens": 25
+              },
+              {
+                "name": "prompt_security",
+                "level": "global_policy",
+                "version": "v1",
+                "load": "always",
+                "priority": 100,
+                "phase": "final_answer",
+                "estimated_tokens": 29
+              },
+              {
+                "name": "system_customer_service",
+                "level": "role",
+                "version": "v1",
+                "load": "always",
+                "priority": 90,
+                "phase": "final_answer",
+                "estimated_tokens": 32
+              },
+              {
+                "name": "high_risk_after_sale",
+                "level": "risk_policy",
+                "version": "v1",
+                "load": "when_high_risk_after_sale",
+                "priority": 80,
+                "phase": "final_answer",
+                "estimated_tokens": 33
+              },
+              {
+                "name": "tool_usage",
+                "level": "capability",
+                "version": "v1",
+                "load": "when_business_tool",
+                "priority": 70,
+                "phase": "final_answer",
+                "estimated_tokens": 54
+              },
+              {
+                "name": "rag_answering",
+                "level": "capability",
+                "version": "v1",
+                "load": "when_rag",
+                "priority": 60,
+                "phase": "final_answer",
+                "estimated_tokens": 38
+              },
+              {
+                "name": "final_answer_style",
+                "level": "response_contract",
+                "version": "v1",
+                "load": "when_final_answer",
+                "priority": 40,
+                "phase": "final_answer",
+                "estimated_tokens": 25
+              }
+            ],
+            "fragment_count": 15,
+            "fragmentized": true,
+            "source": "actual_model_invocations"
+          },
+          "cache": {
+            "common_hit_cache": false,
+            "cache_key": null,
+            "does_not_cache_high_risk_workflow": true
+          },
+          "observation_compression": {
+            "schema_version": "observation_compression_v1",
+            "original_tokens": 30,
+            "compressed_tokens": 12,
+            "saved_tokens": 18,
+            "strategy": "keep_status_next_action_and_risk_summary"
+          },
+          "workflow": {
+            "used_langgraph": true,
+            "workflow_id": "wf-cs-32ec2c43-84ba-4208-8cda-0659ccb990f8",
+            "workflow_type": "unshipped_refund",
+            "graph_name": "lesson41_refund_approval_graph",
+            "node_history": [
+              "validate_order_fact",
+              "attach_refund_policy",
+              "pause_for_human_approval"
+            ],
+            "hitl_required": true,
+            "status": "paused"
+          },
+          "degradation": {
+            "degraded": false,
+            "reason": null,
+            "cost_threshold_exceeded": true,
+            "warnings": [
+              "total_estimated_tokens_over_teaching_budget"
+            ]
+          },
+          "reasoning": {
+            "view": "off",
+            "thinking_requested": false,
+            "reasoning_content_returned": false,
+            "source": null
+          },
+          "safety_boundary": {
+            "cost_control_does_not_skip_business_facts": true,
+            "cost_control_does_not_skip_hitl": true,
+            "not_finops_or_billing_system": true
+          }
+        },
+        "summary": {
+          "event_type": "cost_recorded",
+          "path_type": "langgraph_after_sale_workflow",
+          "tool_call_count": 1
+        }
+      },
+      {
+        "event": "final_answer_generated",
+        "payload": {
+          "session_id": "cs-32ec2c43-84ba-4208-8cda-0659ccb990f8",
+          "intent": "refund_request",
+          "status": "success",
+          "risk_level": "high",
+          "used_model": true,
+          "reasoning_content_returned": false
+        },
+        "summary": {
+          "event_type": "final_answer_generated",
+          "intent": "refund_request",
+          "risk_level": "high"
+        }
+      }
+    ]
+  }
+}

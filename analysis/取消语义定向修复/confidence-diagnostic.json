@@ -1,0 +1,112 @@
+{
+  "type": "posthoc_offline_diagnostic",
+  "date": "2026-10-11",
+  "scope": "002B既有50条人工构造样本各2次，非新增调用；按三个问题最低confidence回看，阈值未冻结或独立验证；不改业务",
+  "eligible_correct_candidates": 28,
+  "wrong_candidates": [
+    {
+      "id": "A05",
+      "repeat": 1,
+      "text": "取消订单吧。",
+      "expected": "clarify",
+      "confidences": {
+        "decision": 0.97,
+        "target": 0.49,
+        "extra_task": 1.0
+      }
+    },
+    {
+      "id": "A05",
+      "repeat": 2,
+      "text": "取消订单吧。",
+      "expected": "clarify",
+      "confidences": {
+        "decision": 0.98,
+        "target": 0.46,
+        "extra_task": 1.0
+      }
+    },
+    {
+      "id": "N10",
+      "repeat": 1,
+      "text": "假如商品降价我可能留下，不过现在继续退。",
+      "expected": "keep",
+      "confidences": {
+        "decision": 0.82,
+        "target": 0.94,
+        "extra_task": 1.0
+      }
+    },
+    {
+      "id": "N18",
+      "repeat": 1,
+      "text": "要是退货运费得自己承担，那就别退了。",
+      "expected": "clarify",
+      "confidences": {
+        "decision": 0.45,
+        "target": 1.0,
+        "extra_task": 1.0
+      }
+    },
+    {
+      "id": "N18",
+      "repeat": 2,
+      "text": "要是退货运费得自己承担，那就别退了。",
+      "expected": "clarify",
+      "confidences": {
+        "decision": 0.43,
+        "target": 0.98,
+        "extra_task": 1.0
+      }
+    },
+    {
+      "id": "N10",
+      "repeat": 2,
+      "text": "假如商品降价我可能留下，不过现在继续退。",
+      "expected": "keep",
+      "confidences": {
+        "decision": 0.82,
+        "target": 0.95,
+        "extra_task": 1.0
+      }
+    }
+  ],
+  "thresholds": [
+    {
+      "minimum_confidence_threshold": 0,
+      "wrong_auto_cancel_retained": 6,
+      "correct_auto_cancel_retained": 28,
+      "correct_auto_cancel_blocked": 0
+    },
+    {
+      "minimum_confidence_threshold": 0.5,
+      "wrong_auto_cancel_retained": 2,
+      "correct_auto_cancel_retained": 27,
+      "correct_auto_cancel_blocked": 1
+    },
+    {
+      "minimum_confidence_threshold": 0.8,
+      "wrong_auto_cancel_retained": 2,
+      "correct_auto_cancel_retained": 23,
+      "correct_auto_cancel_blocked": 5
+    },
+    {
+      "minimum_confidence_threshold": 0.85,
+      "wrong_auto_cancel_retained": 0,
+      "correct_auto_cancel_retained": 20,
+      "correct_auto_cancel_blocked": 8
+    },
+    {
+      "minimum_confidence_threshold": 0.9,
+      "wrong_auto_cancel_retained": 0,
+      "correct_auto_cancel_retained": 19,
+      "correct_auto_cancel_blocked": 9
+    },
+    {
+      "minimum_confidence_threshold": 0.95,
+      "wrong_auto_cancel_retained": 0,
+      "correct_auto_cancel_retained": 16,
+      "correct_auto_cancel_blocked": 12
+    }
+  ]
+}

@@ -1,0 +1,278 @@
+- banner:
+  - button "荒 荒野户外商城 荒野户外":
+    - generic: 荒
+    - strong: 荒野户外商城
+    - generic: 荒野户外
+  - navigation:
+    - button "商品"
+    - button "购物车"
+    - button "我的订单"
+    - button "客服"
+  - button "张三":
+    - generic: 张三
+- main:
+  - generic: 荒野小分队 · 周末出发
+  - heading "把周末，交给旷野。" [level=1]
+  - paragraph: 营地家具、帐篷天幕与户外配件。查询价格库存，了解活动，随时咨询售后。
+  - button "咨询客服"
+  - generic: 荒野户外 · 露营季
+  - heading "下一站，去户外。" [level=2]
+  - paragraph: 从一把折叠椅到一套营地装备，露营季活动已开启。活动条件与会员权益以商品详情和结算页为准。
+  - generic: "15"
+  - generic: 款参与活动
+  - generic: 具体可享价格以会员等级、活动条件和结算页为准。
+  - button "上一个活动": ‹
+  - generic "活动轮播":
+    - button "切换到荒野户外 · 露营季"
+    - button "切换到营地装备精选会场"
+    - button "切换到帐篷天幕精选会场"
+    - button "切换到营地家具会员会场"
+    - button "切换到露营配件会员会场"
+    - button "切换到徒步装备满减会场"
+  - button "下一个活动": ›
+  - button "全部会场 查看所有 露营季商品":
+    - strong: 全部会场
+    - generic: 查看所有 露营季商品
+  - button "营地装备精选会场 4 款，¥999.00 起":
+    - strong: 营地装备精选会场
+    - generic: 4 款，¥999.00 起
+  - button "帐篷天幕精选会场 4 款，¥899.00 起":
+    - strong: 帐篷天幕精选会场
+    - generic: 4 款，¥899.00 起
+  - button "营地家具会员会场 3 款，¥199.00 起":
+    - strong: 营地家具会员会场
+    - generic: 3 款，¥199.00 起
+  - button "露营配件会员会场 2 款，¥699.00 起":
+    - strong: 露营配件会员会场
+    - generic: 2 款，¥699.00 起
+  - button "徒步装备满减会场 2 款，¥899.00 起":
+    - strong: 徒步装备满减会场
+    - generic: 2 款，¥899.00 起
+  - textbox "搜索商品名称或描述"
+  - combobox:
+    - option "全部分类" [selected]
+    - option "营地家具"
+    - option "露营配件"
+    - option "帐篷天幕"
+    - option "露营照明"
+    - option "徒步装备"
+  - button "筛选"
+  - article:
+    - img "露营折叠椅"
+    - generic: 营地家具
+    - heading "露营折叠椅" [level=3]
+    - paragraph: 折叠收纳的营地休闲椅，配有扶手与收纳袋，适合周末露营。
+    - generic: 营地家具会员会场
+    - generic: ¥529.00
+    - strong: ¥599.00
+    - generic: 支持 7 天无理由
+    - generic: 库存 519
+    - button "查看详情"
+    - button "加入购物车"
+  - article:
+    - img "户外野餐垫"
+    - generic: 露营配件
+    - heading "户外野餐垫" [level=3]
+    - paragraph: 可折叠的户外野餐垫，配有提手，适合公园野餐与营地休息。
+    - generic: 营地家具会员会场
+    - generic: ¥199.00
+    - strong: ¥199.00
+    - generic: 支持 7 天无理由
+    - generic: 库存 827
+    - button "查看详情"
+    - button "加入购物车"
+  - article:
+    - img "便携折叠桌"
+    - generic: 营地家具
+    - heading "便携折叠桌" [level=3]
+    - paragraph: 可拆卸收纳的便携折叠桌，适合营地餐饮和户外休闲。
+    - generic: 营地家具会员会场
+    - generic: ¥269.00
+    - strong: ¥299.00
+    - generic: 支持 7 天无理由
+    - generic: 库存 360
+    - button "查看详情"
+    - button "加入购物车"
+  - article:
+    - img "轻量露营折叠椅"
+    - generic: 营地家具
+    - heading "轻量露营折叠椅" [level=3]
+    - paragraph: 轻量款折叠椅，适合简装出游与短途露营。
+    - strong: ¥199.00
+    - generic: 支持 7 天无理由
+    - generic: 已售罄
+    - button "查看详情"
+    - button "暂不可买" [disabled]
+  - article:
+    - img "定制营地旗"
+    - generic: 露营配件
+    - heading "定制营地旗" [level=3]
+    - paragraph: 按用户选择的文字和图案制作的营地旗，搭配收纳袋。
+    - strong: ¥899.00
+    - generic: 特殊售后规则
+    - generic: 库存 25
+    - button "查看详情"
+    - button "加入购物车"
+  - article:
+    - img "山野四人帐篷"
+    - generic: 帐篷天幕
+    - heading "山野四人帐篷" [level=3]
+    - paragraph: 四人露营帐篷，配有外帐、支架与收纳袋，适合家庭周末露营。
+    - generic: 帐篷天幕精选会场
+    - generic: ¥1999.00
+    - strong: ¥2499.00
+    - generic: 支持 7 天无理由
+    - generic: 库存 180
+    - button "查看详情"
+    - button "加入购物车"
+  - article:
+    - img "轻旅方形天幕"
+    - generic: 帐篷天幕
+    - heading "轻旅方形天幕" [level=3]
+    - paragraph: 方形营地天幕，配有支杆与拉绳，适合户外休憩。
+    - generic: 帐篷天幕精选会场
+    - generic: ¥1749.00
+    - strong: ¥1899.00
+    - generic: 支持 7 天无理由
+    - generic: 库存 220
+    - button "查看详情"
+    - button "加入购物车"
+  - article:
+    - img "全地形营地收纳车"
+    - generic: 营地家具
+    - heading "全地形营地收纳车" [level=3]
+    - paragraph: 可折叠营地收纳车，用于搬运露营装备，附收纳袋。
+    - generic: 营地装备精选会场
+    - generic: ¥2399.00
+    - strong: ¥2999.00
+    - generic: 支持 7 天无理由
+    - generic: 库存 95
+    - button "查看详情"
+    - button "加入购物车"
+  - article:
+    - img "营地大型组装帐篷"
+    - generic: 帐篷天幕
+    - heading "营地大型组装帐篷" [level=3]
+    - paragraph: 需组装的大型营地帐篷，适合多人活动与长时间驻营。
+    - generic: 营地装备精选会场
+    - generic: ¥2799.00
+    - strong: ¥3299.00
+    - generic: 特殊售后规则
+    - generic: 库存 60
+    - button "查看详情"
+    - button "加入购物车"
+  - article:
+    - img "暖光营地灯"
+    - generic: 露营照明
+    - heading "暖光营地灯" [level=3]
+    - paragraph: 带提手的营地照明灯，适合桌面摆放或悬挂使用。
+    - generic: 露营配件会员会场
+    - generic: ¥699.00
+    - strong: ¥799.00
+    - generic: 支持 7 天无理由
+    - generic: 库存 260
+    - button "查看详情"
+    - button "加入购物车"
+  - article:
+    - img "轻量伸缩登山杖"
+    - generic: 徒步装备
+    - heading "轻量伸缩登山杖" [level=3]
+    - paragraph: 伸缩式登山杖，配有腕带与脚垫，适合徒步出游。
+    - generic: 徒步装备满减会场
+    - generic: ¥899.00
+    - strong: ¥999.00
+    - generic: 支持 7 天无理由
+    - generic: 库存 150
+    - button "查看详情"
+    - button "加入购物车"
+  - article:
+    - img "营地炊具套装"
+    - generic: 露营配件
+    - heading "营地炊具套装" [level=3]
+    - paragraph: 可叠放收纳的营地炊具，适合野餐与营地料理。
+    - generic: 露营配件会员会场
+    - generic: ¥1399.00
+    - strong: ¥1599.00
+    - generic: 支持 7 天无理由
+    - generic: 库存 88
+    - button "查看详情"
+    - button "加入购物车"
+  - article:
+    - img "便携折叠收纳柜"
+    - generic: 营地家具
+    - heading "便携折叠收纳柜" [level=3]
+    - paragraph: 可折叠的营地收纳柜，配有层板和收纳袋，适合整理装备。
+    - generic: 帐篷天幕精选会场
+    - generic: ¥1099.00
+    - strong: ¥1299.00
+    - generic: 支持 7 天无理由
+    - generic: 库存 140
+    - button "查看详情"
+    - button "加入购物车"
+  - article:
+    - img "山径徒步背包"
+    - generic: 徒步装备
+    - heading "山径徒步背包" [level=3]
+    - paragraph: 配有多层收纳空间的徒步背包，适合短途徒步与露营。
+    - generic: 营地装备精选会场
+    - generic: ¥999.00
+    - strong: ¥1199.00
+    - generic: 支持 7 天无理由
+    - generic: 库存 110
+    - button "查看详情"
+    - button "加入购物车"
+  - article:
+    - img "贴身露营睡袋"
+    - generic: 徒步装备
+    - heading "贴身露营睡袋" [level=3]
+    - paragraph: 带收纳袋的贴身露营睡袋，适合营地休息。
+    - generic: 徒步装备满减会场
+    - generic: ¥1699.00
+    - strong: ¥1899.00
+    - generic: 特殊售后规则
+    - generic: 库存 75
+    - button "查看详情"
+    - button "加入购物车"
+  - article:
+    - img "定制营地标识套装"
+    - generic: 露营配件
+    - heading "定制营地标识套装" [level=3]
+    - paragraph: 按选定文字制作的营地标识套装，适合团队活动。
+    - generic: 营地装备精选会场
+    - generic: ¥1299.00
+    - strong: ¥1499.00
+    - generic: 特殊售后规则
+    - generic: 库存 96
+    - button "查看详情"
+    - button "加入购物车"
+  - article:
+    - img "户外防水收纳袋套装"
+    - generic: 露营配件
+    - heading "户外防水收纳袋套装" [level=3]
+    - paragraph: 不同容量的户外收纳袋套装，适合分类收纳衣物与装备。
+    - generic: 帐篷天幕精选会场
+    - generic: ¥899.00
+    - strong: ¥1099.00
+    - generic: 支持 7 天无理由
+    - generic: 库存 130
+    - button "查看详情"
+    - button "加入购物车"
+- contentinfo:
+  - button "政策解读和FAQ"
+- complementary:
+  - generic: 荒野客服
+  - generic: 商品与售后咨询
+  - button "关闭"
+  - paragraph: 您好，我是荒野户外的客服助手，请问有什么可以帮您？
+  - paragraph: 帮我退款。
+  - paragraph: 你要退款哪一个订单？请选择订单号，或直接补充订单号。 当前账号下可选订单：SO20261010124526218-b60d3f08（户外野餐垫）；SO20261010124526068-3c464bb6（户外野餐垫）；SO20261009082850446-6df1a10e（露营折叠椅）；SO20261009061332122-26971b7b（户外野餐垫）；SO20260712090000010-a1000010（露营折叠椅）；SO20260605103000012-a1000012（定制营地旗）；SO20260603110000010-a1000010（露营折叠椅）；SO20260602103000009-a1000009（户外野餐垫）；SO20260601090000008-a1000008（露营折叠椅）；SO20260525093000011-a1000011（户外野餐垫）。
+  - paragraph: 第二笔。
+  - paragraph: 订单 SO20261010124526068-3c464bb6 的整单实付金额为 199.00 元。请补充退款原因，例如“原因：买错了”。本次尚未提交。
+  - paragraph: 原因：买错了。
+  - paragraph: 本次仅准备申请，尚未提交。提交后等待管理员审核，不代表退款成功。
+  - generic: 确认提交退款申请
+  - generic: 订单：SO20261010124526068-3c464bb6；商品：户外野餐垫 x1；范围：整单退款；实付金额：199.00 元；原因：买错了。；状态：等待本人确认，尚未提交。确认后等待审核，提交不代表退款成功。
+  - button "确认提交申请"
+  - button "取消本次申请"
+  - textbox "请输入您的问题"
+  - button "发送"

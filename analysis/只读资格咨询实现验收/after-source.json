@@ -1,0 +1,18 @@
+{
+  "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/order/OrderController.java": "00177630f0ddb87b96d37e738402ee02a0eaeb3f192c406bfd7cc30227a206de",
+  "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/order/ShopService.java": "69619564014f5a04074054963c1989598ad4e00e3391557d5daed5b35fccdfe1",
+  "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/CustomerServiceSession.java": "456eaa256fb20f536c9d701be43ee71cd7cc4e8b50211c0cf540c5412cd49273",
+  "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/CustomerServiceGatewayService.java": "231079991dc144a5d64dcb82921d619814880e046561815be49181db010d1ea5",
+  "ecommerce-backend/frontend/src/shop/App.tsx": "682b001c616bcc11189232043bf8db9d2e2bcaf63ae8be1bdb4947a4f22bc5dc",
+  "backend/tests/test_route_priority.py": "6830d0b011b5c3cde8a5f669b5f35cd1e3ff5463138d44bdd1bb5e230bddee56",
+  "backend/agent/cancellation.py": "f5f4fd7f3219c1e49f95c4a9f6475bc829d712867f274845f8fe328f22b42b6f",
+  "backend/agent/context.py": "bdde323e86884a301640a676a3e5d1922cbdc319dea3a27acf4ac11185ce3706",
+  "backend/agent/customer_service_agent.py": "14287b949cdb4f5f91b8b367dea0a70f3175b4c3b19e2b3015440d0c4f9412a6",
+  "backend/api/schemas.py": "143b27323352778563ce0d2463024a63d45f1000958b8fb0016c9f1ff45477da",
+  "backend/agent/tools/tool_runtime.py": "0e8bff7d24dde6446568ee73090d8ff6161482795da87137d94c871e5dc8f8a2",
+  "backend/agent/tools/planning.py": "42c0dc4caf1456ea7b6fed3d84750aa864d4876b722d313f6e5f4a1931d1c847",
+  "backend/resources/prompts/route_contract.md": "bedbd271d01c29f808507f94a2cd5dc32847428fd64cf78b4c9627ad88f0f47c",
+  "backend/agent/mcp_catalog.py": "153a2728a69d02bfb9cd5958293b34bf93ff4e0f903eeb86edd39bda143e4f7e",
+  "backend/tests/test_eligibility_query.py": "b1b18af9304502cf3458ff99f09d7c1655b9eb3687b5441b3168bef5cceac8e9",
+  "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/order/AfterSaleEligibilityResponse.java": "b9aa3ecfc084cb9e8b5f40b2c52f6600d77ee35c4e065bafb526f1e40e6a86d9"
+}

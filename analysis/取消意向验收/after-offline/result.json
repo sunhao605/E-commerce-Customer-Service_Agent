@@ -1,0 +1,91 @@
+{
+  "passed" : true,
+  "submitted_fixture" : "仅H2一笔PENDING_REVIEW，未审批或退款",
+  "turns" : 39,
+  "mode" : "synthetic_agent",
+  "checks" : [ {
+    "passed" : true,
+    "check" : "确认卡后聊天取消：取消本次申请。"
+  }, {
+    "passed" : true,
+    "check" : "取消清除服务端确认凭证：取消本次申请。"
+  }, {
+    "passed" : true,
+    "check" : "取消后旧卡提交被拒绝：取消本次申请。"
+  }, {
+    "passed" : true,
+    "check" : "取消后查物流不恢复确认卡：取消本次申请。"
+  }, {
+    "passed" : true,
+    "check" : "重新申请生成新凭证：取消本次申请。"
+  }, {
+    "passed" : true,
+    "check" : "确认卡后聊天取消：算了，不退了。"
+  }, {
+    "passed" : true,
+    "check" : "取消清除服务端确认凭证：算了，不退了。"
+  }, {
+    "passed" : true,
+    "check" : "取消后旧卡提交被拒绝：算了，不退了。"
+  }, {
+    "passed" : true,
+    "check" : "取消后查物流不恢复确认卡：算了，不退了。"
+  }, {
+    "passed" : true,
+    "check" : "重新申请生成新凭证：算了，不退了。"
+  }, {
+    "passed" : true,
+    "check" : "确认卡后聊天取消：先不退了。"
+  }, {
+    "passed" : true,
+    "check" : "取消清除服务端确认凭证：先不退了。"
+  }, {
+    "passed" : true,
+    "check" : "取消后旧卡提交被拒绝：先不退了。"
+  }, {
+    "passed" : true,
+    "check" : "取消后查物流不恢复确认卡：先不退了。"
+  }, {
+    "passed" : true,
+    "check" : "重新申请生成新凭证：先不退了。"
+  }, {
+    "passed" : true,
+    "check" : "按钮取消及旧卡失效"
+  }, {
+    "passed" : true,
+    "check" : "选单前尚未生成确认卡"
+  }, {
+    "passed" : true,
+    "check" : "等待选单时取消"
+  }, {
+    "passed" : true,
+    "check" : "取消后第一笔不复活旧待办"
+  }, {
+    "passed" : true,
+    "check" : "取消后新建选单待办仍可再次取消"
+  }, {
+    "passed" : true,
+    "check" : "等待补原因的前置状态"
+  }, {
+    "passed" : true,
+    "check" : "补原因前自然取消"
+  }, {
+    "passed" : true,
+    "check" : "无待办不虚报取消成功"
+  }, {
+    "passed" : true,
+    "check" : "询问怎么取消不直接取消"
+  }, {
+    "passed" : true,
+    "check" : "否定取消不触发取消动作"
+  }, {
+    "passed" : true,
+    "check" : "退货草稿复用取消并拒绝旧卡"
+  }, {
+    "passed" : true,
+    "check" : "取消对话无新增售后、资金流水或余额变化"
+  }, {
+    "passed" : true,
+    "check" : "已提交申请保持待审核、不被聊天撤销或退款"
+  } ]
+}

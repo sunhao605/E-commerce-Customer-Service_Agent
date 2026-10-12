@@ -1,0 +1,118 @@
+test_dialogue_binds_tool_workflow_and_memory_to_first_order (backend.tests.test_candidate_selection.CandidateSelectionTest.test_dialogue_binds_tool_workflow_and_memory_to_first_order) ... FAIL
+test_explicit_switch_keeps_model_intent_and_explicit_order (backend.tests.test_candidate_selection.CandidateSelectionTest.test_explicit_switch_keeps_model_intent_and_explicit_order) ... ok
+test_gateway_page_text_cannot_override_the_original_selection (backend.tests.test_candidate_selection.CandidateSelectionTest.test_gateway_page_text_cannot_override_the_original_selection) ... FAIL
+test_missing_invalid_and_other_session_never_fall_back_to_old_order (backend.tests.test_candidate_selection.CandidateSelectionTest.test_missing_invalid_and_other_session_never_fall_back_to_old_order) ... 
+  test_missing_invalid_and_other_session_never_fall_back_to_old_order (backend.tests.test_candidate_selection.CandidateSelectionTest.test_missing_invalid_and_other_session_never_fall_back_to_old_order) (message='第三笔', extra={}) ... FAIL
+  test_missing_invalid_and_other_session_never_fall_back_to_old_order (backend.tests.test_candidate_selection.CandidateSelectionTest.test_missing_invalid_and_other_session_never_fall_back_to_old_order) (message='第0笔', extra={}) ... FAIL
+  test_missing_invalid_and_other_session_never_fall_back_to_old_order (backend.tests.test_candidate_selection.CandidateSelectionTest.test_missing_invalid_and_other_session_never_fall_back_to_old_order) (message='第一笔', extra={'session_id': 'other'}) ... FAIL
+  test_missing_invalid_and_other_session_never_fall_back_to_old_order (backend.tests.test_candidate_selection.CandidateSelectionTest.test_missing_invalid_and_other_session_never_fall_back_to_old_order) (message='第一笔', extra={'runtime_user_id': 'u2'}) ... FAIL
+test_selection_uses_shown_order_even_when_current_list_is_reversed (backend.tests.test_candidate_selection.CandidateSelectionTest.test_selection_uses_shown_order_even_when_current_list_is_reversed) ... 
+  test_selection_uses_shown_order_even_when_current_list_is_reversed (backend.tests.test_candidate_selection.CandidateSelectionTest.test_selection_uses_shown_order_even_when_current_list_is_reversed) (message='第一笔。') ... FAIL
+  test_selection_uses_shown_order_even_when_current_list_is_reversed (backend.tests.test_candidate_selection.CandidateSelectionTest.test_selection_uses_shown_order_even_when_current_list_is_reversed) (message='第二笔') ... FAIL
+  test_selection_uses_shown_order_even_when_current_list_is_reversed (backend.tests.test_candidate_selection.CandidateSelectionTest.test_selection_uses_shown_order_even_when_current_list_is_reversed) (message='第2笔') ... FAIL
+
+======================================================================
+FAIL: test_dialogue_binds_tool_workflow_and_memory_to_first_order (backend.tests.test_candidate_selection.CandidateSelectionTest.test_dialogue_binds_tool_workflow_and_memory_to_first_order)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_DianShang_Agent/backend/tests/test_candidate_selection.py", line 47, in test_dialogue_binds_tool_workflow_and_memory_to_first_order
+    self.assertIsNone(second.clarification)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ClarificationRequest(clarification_field='order_id', message='你要退款哪一个订单？请选择订单号，或直接补充订单号。', candidates=[ClarificationCandidate(value='ORD9802', label='ORD9802', hint='验收露营椅'), ClarificationCandidate(value='ORD9801', label='ORD9801', hint='验收露营椅')]) is not None
+
+======================================================================
+FAIL: test_gateway_page_text_cannot_override_the_original_selection (backend.tests.test_candidate_selection.CandidateSelectionTest.test_gateway_page_text_cannot_override_the_original_selection)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_DianShang_Agent/backend/tests/test_candidate_selection.py", line 58, in test_gateway_page_text_cannot_override_the_original_selection
+    self.assertEqual(response.tool_calls[0].arguments['order_id'], 'ORD9801')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'ORD9802' != 'ORD9801'
+- ORD9802
+?       ^
++ ORD9801
+?       ^
+
+
+======================================================================
+FAIL: test_missing_invalid_and_other_session_never_fall_back_to_old_order (backend.tests.test_candidate_selection.CandidateSelectionTest.test_missing_invalid_and_other_session_never_fall_back_to_old_order) (message='第三笔', extra={})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_DianShang_Agent/backend/tests/test_candidate_selection.py", line 39, in test_missing_invalid_and_other_session_never_fall_back_to_old_order
+    self.assertIsNone(build_context(request, None)[0])
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'ORD9998' is not None
+
+======================================================================
+FAIL: test_missing_invalid_and_other_session_never_fall_back_to_old_order (backend.tests.test_candidate_selection.CandidateSelectionTest.test_missing_invalid_and_other_session_never_fall_back_to_old_order) (message='第0笔', extra={})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_DianShang_Agent/backend/tests/test_candidate_selection.py", line 39, in test_missing_invalid_and_other_session_never_fall_back_to_old_order
+    self.assertIsNone(build_context(request, None)[0])
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'ORD9998' is not None
+
+======================================================================
+FAIL: test_missing_invalid_and_other_session_never_fall_back_to_old_order (backend.tests.test_candidate_selection.CandidateSelectionTest.test_missing_invalid_and_other_session_never_fall_back_to_old_order) (message='第一笔', extra={'session_id': 'other'})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_DianShang_Agent/backend/tests/test_candidate_selection.py", line 39, in test_missing_invalid_and_other_session_never_fall_back_to_old_order
+    self.assertIsNone(build_context(request, None)[0])
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'ORD9998' is not None
+
+======================================================================
+FAIL: test_missing_invalid_and_other_session_never_fall_back_to_old_order (backend.tests.test_candidate_selection.CandidateSelectionTest.test_missing_invalid_and_other_session_never_fall_back_to_old_order) (message='第一笔', extra={'runtime_user_id': 'u2'})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_DianShang_Agent/backend/tests/test_candidate_selection.py", line 39, in test_missing_invalid_and_other_session_never_fall_back_to_old_order
+    self.assertIsNone(build_context(request, None)[0])
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'ORD9998' is not None
+
+======================================================================
+FAIL: test_selection_uses_shown_order_even_when_current_list_is_reversed (backend.tests.test_candidate_selection.CandidateSelectionTest.test_selection_uses_shown_order_even_when_current_list_is_reversed) (message='第一笔。')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_DianShang_Agent/backend/tests/test_candidate_selection.py", line 31, in test_selection_uses_shown_order_even_when_current_list_is_reversed
+    self.assertEqual(build_context(request, None)[0], expected)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'ORD9998' != 'ORD9801'
+- ORD9998
+?     --
++ ORD9801
+?      ++
+
+
+======================================================================
+FAIL: test_selection_uses_shown_order_even_when_current_list_is_reversed (backend.tests.test_candidate_selection.CandidateSelectionTest.test_selection_uses_shown_order_even_when_current_list_is_reversed) (message='第二笔')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_DianShang_Agent/backend/tests/test_candidate_selection.py", line 31, in test_selection_uses_shown_order_even_when_current_list_is_reversed
+    self.assertEqual(build_context(request, None)[0], expected)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'ORD9998' != 'ORD9802'
+- ORD9998
+?     --
++ ORD9802
+?      ++
+
+
+======================================================================
+FAIL: test_selection_uses_shown_order_even_when_current_list_is_reversed (backend.tests.test_candidate_selection.CandidateSelectionTest.test_selection_uses_shown_order_even_when_current_list_is_reversed) (message='第2笔')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_DianShang_Agent/backend/tests/test_candidate_selection.py", line 31, in test_selection_uses_shown_order_even_when_current_list_is_reversed
+    self.assertEqual(build_context(request, None)[0], expected)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'ORD9998' != 'ORD9802'
+- ORD9998
+?     --
++ ORD9802
+?      ++
+
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.009s
+
+FAILED (failures=9)

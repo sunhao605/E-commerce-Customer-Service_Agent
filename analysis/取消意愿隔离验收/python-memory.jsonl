@@ -1,0 +1,21 @@
+{"path": "/chat", "session_id": "cancel-1791706870840-natural", "message": "ORD9801 我要退款，原因：买错了。", "cancelledAfterSaleDraft": false, "open_task": null}
+{"path": "/cancellation/judge", "session_id": "cancel-1791706870840-natural", "message": "我想了想，还是不退了", "cancelledAfterSaleDraft": null, "open_task": null}
+{"path": "/chat", "session_id": "cancel-1791706870840-natural", "message": "查一下物流", "cancelledAfterSaleDraft": true, "open_task": null}
+{"path": "/chat", "session_id": "cancel-1791706870840-keep", "message": "ORD9801 我要退款，原因：买错了。", "cancelledAfterSaleDraft": false, "open_task": null}
+{"path": "/cancellation/judge", "session_id": "cancel-1791706870840-keep", "message": "这次退款我还要办，不能取消。", "cancelledAfterSaleDraft": null, "open_task": null}
+{"path": "/chat", "session_id": "cancel-1791706870840-keep", "message": "这次退款我还要办，不能取消。", "cancelledAfterSaleDraft": false, "open_task": null}
+{"path": "/chat", "session_id": "cancel-1791706870840-ship", "message": "ORD9801 我要退款，原因：买错了。", "cancelledAfterSaleDraft": false, "open_task": null}
+{"path": "/cancellation/judge", "session_id": "cancel-1791706870840-ship", "message": "要是退货运费得自己承担，那就别退了。", "cancelledAfterSaleDraft": null, "open_task": null}
+{"path": "/chat", "session_id": "cancel-1791706870840-ordinal", "message": "帮我退款。", "cancelledAfterSaleDraft": false, "open_task": {"intent": "refund_request", "candidates": [{"value": "ORD9801", "label": "ORD9801"}, {"value": "ORD9802", "label": "ORD9802"}]}}
+{"path": "/cancellation/judge", "session_id": "cancel-1791706870840-ordinal", "message": "取消订单吧", "cancelledAfterSaleDraft": null, "open_task": {"intent": "refund_request", "candidates": [{"value": "ORD9801", "label": "ORD9801"}, {"value": "ORD9802", "label": "ORD9802"}]}}
+{"path": "/cancellation/judge", "session_id": "cancel-1791706870840-ordinal", "message": "第一笔", "cancelledAfterSaleDraft": null, "open_task": {"intent": "refund_request", "candidates": [{"value": "ORD9801", "label": "ORD9801"}, {"value": "ORD9802", "label": "ORD9802"}]}}
+{"path": "/chat", "session_id": "cancel-1791706870840-ended", "message": "帮我退款。", "cancelledAfterSaleDraft": false, "open_task": {"intent": "refund_request", "candidates": [{"value": "ORD9801", "label": "ORD9801"}, {"value": "ORD9802", "label": "ORD9802"}]}}
+{"path": "/cancellation/judge", "session_id": "cancel-1791706870840-ended", "message": "取消订单吧", "cancelledAfterSaleDraft": null, "open_task": {"intent": "refund_request", "candidates": [{"value": "ORD9801", "label": "ORD9801"}, {"value": "ORD9802", "label": "ORD9802"}]}}
+{"path": "/cancellation/judge", "session_id": "cancel-1791706870840-ended", "message": "结束这次", "cancelledAfterSaleDraft": null, "open_task": {"intent": "refund_request", "candidates": [{"value": "ORD9801", "label": "ORD9801"}, {"value": "ORD9802", "label": "ORD9802"}]}}
+{"path": "/chat", "session_id": "cancel-1791706870840-ended", "message": "第一笔", "cancelledAfterSaleDraft": true, "open_task": null}
+{"path": "/chat", "session_id": "cancel-1791706870840-conflict", "message": "ORD9801 我要退款，原因：买错了。", "cancelledAfterSaleDraft": false, "open_task": null}
+{"path": "/cancellation/judge", "session_id": "cancel-1791706870840-conflict", "message": "我有点想取消这单退款", "cancelledAfterSaleDraft": null, "open_task": null}
+{"path": "/chat", "session_id": "cancel-1791706870840-submit", "message": "ORD9801 我要退款，原因：买错了。", "cancelledAfterSaleDraft": false, "open_task": null}
+{"path": "/cancellation/judge", "session_id": "cancel-1791706870840-submit", "message": "我有点想取消这单退款", "cancelledAfterSaleDraft": null, "open_task": null}
+{"path": "/chat", "session_id": "cancel-1791706870840-button", "message": "ORD9801 我要退款，原因：买错了。", "cancelledAfterSaleDraft": false, "open_task": null}
+{"path": "/cancellation/judge", "session_id": "cancel-1791706870840-button", "message": "我有点想取消这单退款", "cancelledAfterSaleDraft": null, "open_task": null}

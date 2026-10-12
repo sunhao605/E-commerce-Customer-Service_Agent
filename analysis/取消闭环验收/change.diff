@@ -1,0 +1,14 @@
+--- before/ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/CustomerServiceGatewayService.java
++++ after/ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/CustomerServiceGatewayService.java
+@@ -428,6 +428,11 @@
+         }
+         session.setConflictToken(null);
+         if ("KEEP".equals(decision)) {
++            if ("CONFIRM_SUBMIT".equals(session.getPendingAction())) {
++                session.setResumeToken(UUID.randomUUID().toString());
++                sessionStore.save(session);
++                return pendingRefundResponse(session, "继续保留这次办理，尚未提交。");
++            }
+             if (token.equals(session.getResumeToken())) {
+                 session.setResumeToken(null);
+             }

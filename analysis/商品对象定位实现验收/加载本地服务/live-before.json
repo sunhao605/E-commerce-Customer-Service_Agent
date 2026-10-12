@@ -1,0 +1,136 @@
+{
+  "mode": "read-only SQL",
+  "tables": {
+    "order_header": {
+      "columns": [
+        "id",
+        "cancel_allowed",
+        "created_at",
+        "customer_name",
+        "delivered_at",
+        "fulfillment_status",
+        "has_after_sale_request",
+        "logistics_no",
+        "order_no",
+        "paid_at",
+        "payment_status",
+        "remark",
+        "shipped_at",
+        "status",
+        "total_amount",
+        "user_id"
+      ],
+      "rows": 18,
+      "sha256": "54216fbb38a99c53253b9751f94b4eded2bca76ea745e600d0cfe98635b2476e"
+    },
+    "order_item": {
+      "columns": [
+        "id",
+        "product_id",
+        "product_name",
+        "quantity",
+        "returnable_at_purchase",
+        "unit_price",
+        "order_id"
+      ],
+      "rows": 19,
+      "sha256": "4574d1e5d83ec780ce6238bbd9bbb147d099d9f8ee9a0447427346448a47271d"
+    },
+    "balance_account": {
+      "columns": [
+        "id",
+        "available_balance",
+        "created_at",
+        "updated_at",
+        "user_id"
+      ],
+      "rows": 3,
+      "sha256": "4284036eede799cb97d3f6299ebcdaa3b0ddb127eda37a41e6302458763aeb60"
+    },
+    "balance_transaction": {
+      "columns": [
+        "id",
+        "after_sale_no",
+        "amount",
+        "balance_after",
+        "balance_before",
+        "created_at",
+        "order_no",
+        "remark",
+        "transaction_no",
+        "type",
+        "user_id"
+      ],
+      "rows": 8,
+      "sha256": "3dec641979f61c198c5007c61557528a811205be5a36cc42850ebe78399107fa"
+    },
+    "after_sale_request": {
+      "columns": [
+        "id",
+        "amount",
+        "approval_id",
+        "created_at",
+        "handling_note",
+        "order_no",
+        "reason",
+        "request_id",
+        "request_type",
+        "status",
+        "updated_at",
+        "user_confirmed",
+        "user_id",
+        "return_address",
+        "return_carrier",
+        "return_contact",
+        "return_eligible_at_submit",
+        "return_phone",
+        "return_received_at",
+        "return_sent_at",
+        "return_signed_at",
+        "return_tracking_no"
+      ],
+      "rows": 7,
+      "sha256": "538d2018164edb431d7849ff7c1cc0ad7e74ff99ac0cc2fb74ea54d9e7ffde98"
+    },
+    "approval_record": {
+      "columns": [
+        "id",
+        "approval_no",
+        "created_at",
+        "review_note",
+        "reviewed_at",
+        "reviewer_username",
+        "status",
+        "target_no",
+        "target_type"
+      ],
+      "rows": 8,
+      "sha256": "c73facf34d5d3d5c0f932e36ca8246ae0be9e77fa92cfc2d97ad18dc3b6b6be6"
+    },
+    "logistics_info": {
+      "columns": [
+        "id",
+        "company",
+        "delivered_at",
+        "estimated_delivery",
+        "exception_reason",
+        "latest_update",
+        "status",
+        "tracking_no",
+        "order_id"
+      ],
+      "rows": 10,
+      "sha256": "e69b9f99368a8e74ddab88476f59b7224139bcb4ca9a3562c7aa18ac8084ec0f"
+    },
+    "logistics_event": {
+      "columns": [
+        "id",
+        "content",
+        "occurred_at",
+        "logistics_id"
+      ],
+      "rows": 13,
+      "sha256": "2949b2783a2f58515cf0d9de8d6f852039d5ac3628e92db0852cf96fd7a9c56b"
+    }
+  }
+}

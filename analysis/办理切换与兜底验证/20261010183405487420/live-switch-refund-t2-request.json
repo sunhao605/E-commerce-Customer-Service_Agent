@@ -1,0 +1,16 @@
+{
+  "session_id": "item2-live-20261010183405487420-switch-refund",
+  "runtime_user_id": "intent-eval",
+  "user_message": "我现在要申请退款。",
+  "history_messages": [
+    {
+      "role": "user",
+      "content": "退款政策是什么？我先了解一下，不申请退款。"
+    },
+    {
+      "role": "assistant",
+      "content": "您好，先帮您说明一下退款政策：\n\n已支付且未出库、未发货的订单，可以发起退款申请；涉及资金的操作需要进入售后审批流程处理。\n\n如果您之后有具体订单需要退款，可以随时把订单信息发给我，我帮您核实订单状态并说明下一步。"
+    }
+  ],
+  "debug": false
+}

@@ -1,0 +1,32 @@
+INFO:     Started server process [17565]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8012 (Press CTRL+C to quit)
+INFO:     127.0.0.1:49186 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49193 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49212 - "GET /sessions/m06-20261010203159/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49366 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49366 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49366 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49366 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49366 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49366 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49366 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49366 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49515 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49515 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49515 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49515 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49515 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49515 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49515 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49515 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49515 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49515 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49515 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49874 - "GET /sessions/m06-mall-1791635645376/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49875 - "GET /sessions/m06-mall-1791635645376-second/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49876 - "GET /sessions/m06-mall-1791635645376-page/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49877 - "GET /sessions/m06-mall-1791635645376-invalid/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49878 - "GET /sessions/m06-mall-1791635645376-fresh/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49879 - "GET /sessions/m06-mall-1791635645376-switch/trace HTTP/1.1" 200 OK

@@ -15,6 +15,7 @@ public class SpaForwardController {
         "/orders",
         "/balance",
         "/policies",
+        "/human-support",
         "/products/{path:[^\\.]*}",
         "/pay/{path:[^\\.]*}",
         "/orders/{path:[^\\.]*}"

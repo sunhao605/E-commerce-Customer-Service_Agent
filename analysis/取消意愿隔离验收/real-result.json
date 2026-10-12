@@ -1,0 +1,28 @@
+{
+  "passed" : false,
+  "stopped_on_unauthorized_cancel" : false,
+  "score_min" : "0.9",
+  "mode" : "isolated_h2_real_models",
+  "checks" : [ {
+    "check" : "假如商品降价我可能留下，不过现在继续退。",
+    "passed" : true,
+    "detail" : "pending=CONFIRM_SUBMIT answer=没有查询到匹配商品，不能猜测库存或价格。 本次待确认申请尚未提交。 tokenKept=true asked=false"
+  }, {
+    "check" : "取消订单吧。",
+    "passed" : true,
+    "detail" : "pending=CONFIRM_SUBMIT answer=你要取消订单本身，还是刚才的退款申请？请说明订单号。当前售后是ORD9801。 tokenKept=true asked=true"
+  }, {
+    "check" : "把购买订单取消掉。",
+    "passed" : true,
+    "detail" : "pending=CONFIRM_SUBMIT answer=你要取消订单本身，还是刚才的退款申请？请说明订单号。当前售后是ORD9801。 tokenKept=true asked=true"
+  }, {
+    "check" : "撤销另一笔售后，这笔退款继续办。",
+    "passed" : true,
+    "detail" : "pending=CONFIRM_SUBMIT answer=你要取消订单本身，还是刚才的退款申请？请说明订单号。当前售后是ORD9801。 tokenKept=true asked=true"
+  }, {
+    "check" : "我想了想，还是不退了",
+    "passed" : false,
+    "detail" : "没有取消。pending=CONFIRM_SUBMIT answer=你好，我是荒野户外的客服 Agent。你可以把订单号、物流问题、活动优惠或售后诉求发给我，我会优先根据荒野户外的订单事实和公开规则回答。 本次待确认申请尚未提交。"
+  } ],
+  "sales_unchanged" : true
+}

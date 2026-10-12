@@ -1,0 +1,67 @@
+test_category_query_lists_candidates_without_defaulting_to_first (tests.test_product_query.ProductTargetingTest.test_category_query_lists_candidates_without_defaulting_to_first) ... ok
+test_explicit_name_overrides_page_product (tests.test_product_query.ProductTargetingTest.test_explicit_name_overrides_page_product) ... ok
+test_explicit_product_id_reads_only_that_object (tests.test_product_query.ProductTargetingTest.test_explicit_product_id_reads_only_that_object) ... FAIL
+test_failure_zero_match_and_deleted_object_are_distinct (tests.test_product_query.ProductTargetingTest.test_failure_zero_match_and_deleted_object_are_distinct) ... ok
+test_full_name_binds_unique_match_and_keeps_variant (tests.test_product_query.ProductTargetingTest.test_full_name_binds_unique_match_and_keeps_variant) ... ok
+test_inactive_product_is_stated_not_purchasable (tests.test_product_query.ProductTargetingTest.test_inactive_product_is_stated_not_purchasable) ... ok
+test_just_now_rereads_detail_and_sees_new_stock (tests.test_product_query.ProductTargetingTest.test_just_now_rereads_detail_and_sees_new_stock) ... ok
+test_model_keyword_mismatch_is_blocked_and_code_binds_original_name (tests.test_product_query.ProductTargetingTest.test_model_keyword_mismatch_is_blocked_and_code_binds_original_name) ... ok
+test_new_name_replaces_candidates_and_ok_selects_nothing (tests.test_product_query.ProductTargetingTest.test_new_name_replaces_candidates_and_ok_selects_nothing) ... ok
+test_other_business_invalidates_old_product_candidates (tests.test_product_query.ProductTargetingTest.test_other_business_invalidates_old_product_candidates) ... FAIL
+test_out_of_range_and_fresh_session_selection_never_fall_back (tests.test_product_query.ProductTargetingTest.test_out_of_range_and_fresh_session_selection_never_fall_back) ... ok
+test_page_product_reads_detail_by_id_without_search (tests.test_product_query.ProductTargetingTest.test_page_product_reads_detail_by_id_without_search) ... ok
+test_product_pending_is_isolated_from_refund_open_task (tests.test_product_query.ProductTargetingTest.test_product_pending_is_isolated_from_refund_open_task) ... ok
+test_selection_binds_shown_snapshot_even_when_model_misroutes (tests.test_product_query.ProductTargetingTest.test_selection_binds_shown_snapshot_even_when_model_misroutes) ... ok
+test_selection_continues_original_promotion_question (tests.test_product_query.ProductTargetingTest.test_selection_continues_original_promotion_question) ... FAIL
+test_selection_pattern_and_name_match_units (tests.test_product_query.ProductTargetingTest.test_selection_pattern_and_name_match_units) ... ok
+test_single_result_cannot_discard_requested_variant (tests.test_product_query.ProductTargetingTest.test_single_result_cannot_discard_requested_variant) ... FAIL
+
+======================================================================
+FAIL: test_explicit_product_id_reads_only_that_object (tests.test_product_query.ProductTargetingTest.test_explicit_product_id_reads_only_that_object)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_DianShang_Agent/backend/tests/test_product_query.py", line 82, in test_explicit_product_id_reads_only_that_object
+    self.detail_mock.assert_called_once_with("4")
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/Users/sunhao/.local/share/uv/python/cpython-3.14.7-macos-aarch64-none/lib/python3.14/unittest/mock.py", line 998, in assert_called_once_with
+    return self.assert_called_with(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/sunhao/.local/share/uv/python/cpython-3.14.7-macos-aarch64-none/lib/python3.14/unittest/mock.py", line 986, in assert_called_with
+    raise AssertionError(_error_message()) from cause
+AssertionError: expected call not found.
+Expected: product_detail_from_ecommerce('4')
+  Actual: product_detail_from_ecommerce(1)
+
+======================================================================
+FAIL: test_other_business_invalidates_old_product_candidates (tests.test_product_query.ProductTargetingTest.test_other_business_invalidates_old_product_candidates)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_DianShang_Agent/backend/tests/test_product_query.py", line 92, in test_other_business_invalidates_old_product_candidates
+    self.assertIn("没有生效的商品候选", response.answer)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '没有生效的商品候选' not found in '轻量露营折叠椅 商品标价 899.0 元，库存 36 件。'
+
+======================================================================
+FAIL: test_selection_continues_original_promotion_question (tests.test_product_query.ProductTargetingTest.test_selection_continues_original_promotion_question)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_DianShang_Agent/backend/tests/test_product_query.py", line 77, in test_selection_continues_original_promotion_question
+    policy.assert_called_once_with("product-test", original)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sunhao/.local/share/uv/python/cpython-3.14.7-macos-aarch64-none/lib/python3.14/unittest/mock.py", line 997, in assert_called_once_with
+    raise AssertionError(msg)
+AssertionError: Expected 'promotion_policy_result' to be called once. Called 0 times.
+
+======================================================================
+FAIL: test_single_result_cannot_discard_requested_variant (tests.test_product_query.ProductTargetingTest.test_single_result_cannot_discard_requested_variant)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_DianShang_Agent/backend/tests/test_product_query.py", line 66, in test_single_result_cannot_discard_requested_variant
+    self.assertNotIn("599", response.answer)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '599' unexpectedly found in '露营折叠椅 商品标价 599.0 元，库存 520 件。'
+
+----------------------------------------------------------------------
+Ran 17 tests in 0.032s
+
+FAILED (failures=4)

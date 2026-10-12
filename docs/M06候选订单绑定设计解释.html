@@ -1,0 +1,871 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="shadcn" data-mode="auto">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="Answer me with HTML 0.4.2">
+<title>M06：第一笔为什么现在能选对</title>
+<style>
+html[data-theme="blueprint"], html[data-theme="blueprint"][data-mode="light"] {
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "JetBrains Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  --radius: 0px;
+  --shadow: none;
+  --bw: 1.5px;
+  --head-font: var(--font-sans);
+  --bg: #f6f6f3;
+  --paper: #ffffff;
+  --ink: #16181d;
+  --ink-2: #4b5260;
+  --ink-3: #8b929e;
+  --line: #1d2026;
+  --line-2: #d6dae1;
+  --fill: #f3f5f8;
+  --accent: #1d5fbf;
+  --accent-bg: #e4ecf8;
+  --ok: #1d5fbf;
+  --ok-bg: #e4ecf8;
+  --err: #c62828;
+  --err-bg: #fbeaea;
+  --warn: #a8620a;
+  --warn-bg: #fdf3e2;
+  --head-bg: #16181d;
+  --head-fg: #ffffff;
+}
+html[data-theme="blueprint"][data-mode="dark"] {
+  --bg: #081322;
+  --paper: #0d1c31;
+  --ink: #e6edf7;
+  --ink-2: #a9b8cc;
+  --ink-3: #6b7f99;
+  --line: #c9d6e8;
+  --line-2: #23385a;
+  --fill: #12253f;
+  --accent: #6ea8ff;
+  --accent-bg: #16305a;
+  --ok: #6ea8ff;
+  --ok-bg: #16305a;
+  --err: #ff7070;
+  --err-bg: #3b1620;
+  --warn: #f0b14a;
+  --warn-bg: #3a2a10;
+  --head-bg: #e6edf7;
+  --head-fg: #081322;
+}
+@media (prefers-color-scheme: dark) {
+html[data-theme="blueprint"][data-mode="auto"] {
+  --bg: #081322;
+  --paper: #0d1c31;
+  --ink: #e6edf7;
+  --ink-2: #a9b8cc;
+  --ink-3: #6b7f99;
+  --line: #c9d6e8;
+  --line-2: #23385a;
+  --fill: #12253f;
+  --accent: #6ea8ff;
+  --accent-bg: #16305a;
+  --ok: #6ea8ff;
+  --ok-bg: #16305a;
+  --err: #ff7070;
+  --err-bg: #3b1620;
+  --warn: #f0b14a;
+  --warn-bg: #3a2a10;
+  --head-bg: #e6edf7;
+  --head-fg: #081322;
+}
+}
+
+html[data-theme="shadcn"], html[data-theme="shadcn"][data-mode="light"] {
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "JetBrains Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  --radius: 8px;
+  --shadow: 0 1px 2px 0 rgba(0,0,0,0.05);
+  --bw: 1px;
+  --head-font: var(--font-sans);
+  --bg: #fafafa;
+  --paper: #ffffff;
+  --ink: #09090b;
+  --ink-2: #71717a;
+  --ink-3: #a1a1aa;
+  --line: #e4e4e7;
+  --line-2: #f0f0f2;
+  --fill: #f4f4f5;
+  --accent: #2563eb;
+  --accent-bg: #eff6ff;
+  --ok: #16a34a;
+  --ok-bg: #f0fdf4;
+  --err: #dc2626;
+  --err-bg: #fef2f2;
+  --warn: #d97706;
+  --warn-bg: #fffbeb;
+  --head-bg: #18181b;
+  --head-fg: #fafafa;
+}
+html[data-theme="shadcn"][data-mode="dark"] {
+  --bg: #09090b;
+  --paper: #121215;
+  --ink: #fafafa;
+  --ink-2: #a1a1aa;
+  --ink-3: #71717a;
+  --line: #27272a;
+  --line-2: #1c1c1f;
+  --fill: #18181b;
+  --accent: #60a5fa;
+  --accent-bg: #172554;
+  --ok: #4ade80;
+  --ok-bg: #052e16;
+  --err: #f87171;
+  --err-bg: #450a0a;
+  --warn: #fbbf24;
+  --warn-bg: #451a03;
+  --head-bg: #fafafa;
+  --head-fg: #18181b;
+}
+@media (prefers-color-scheme: dark) {
+html[data-theme="shadcn"][data-mode="auto"] {
+  --bg: #09090b;
+  --paper: #121215;
+  --ink: #fafafa;
+  --ink-2: #a1a1aa;
+  --ink-3: #71717a;
+  --line: #27272a;
+  --line-2: #1c1c1f;
+  --fill: #18181b;
+  --accent: #60a5fa;
+  --accent-bg: #172554;
+  --ok: #4ade80;
+  --ok-bg: #052e16;
+  --err: #f87171;
+  --err-bg: #450a0a;
+  --warn: #fbbf24;
+  --warn-bg: #451a03;
+  --head-bg: #fafafa;
+  --head-fg: #18181b;
+}
+}
+
+/* Answer me with HTML base — 只引用主题变量，禁止写死颜色（主题 token 见 themes/index.js） */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: var(--font-sans); font-size: 14px; line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+code, pre, kbd { font-family: var(--font-mono); }
+
+/* ── 工具栏 ─────────────────────────────── */
+.am-toolbar {
+  position: fixed; top: 12px; right: 12px; z-index: 10; display: flex; gap: 6px;
+}
+.am-btn {
+  font: 12px/1 var(--font-sans); color: var(--ink); background: var(--paper);
+  border: 1px solid var(--line-2); border-radius: var(--radius); padding: 7px 10px; cursor: pointer;
+}
+.am-btn:hover { border-color: var(--ink-3); }
+.am-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* ── 页头 ───────────────────────────────── */
+.am-head { margin: 0 0 20px; padding-right: 260px; }
+.am-head h1 { margin: 0; font-size: 24px; line-height: 1.25; letter-spacing: -0.01em; }
+.am-sub { margin: 4px 0 0; color: var(--ink-2); }
+.am-head-meta { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 10px; font-size: 12px; color: var(--ink-2); }
+.am-head-meta b { font-family: var(--font-mono); font-weight: 400; color: var(--ink-3); margin-right: 6px; }
+.am-intro { margin-top: 12px; max-width: 80ch; }
+
+/* ── sheet 图纸板 ────────────────────────── */
+.am-sheet { max-width: 1680px; margin: 0 auto; padding: 32px 28px 40px; }
+.am-frame { position: relative; }
+.am-grid {
+  display: grid; grid-template-columns: repeat(var(--cols, 3), minmax(0, 1fr));
+  gap: 20px; align-items: start;
+}
+.am-ruler { display: none; }
+html[data-theme="blueprint"] .am-frame { border: 1px solid var(--line); padding: 30px; }
+html[data-theme="blueprint"] .am-frame::before {
+  content: ""; position: absolute; inset: 18px; border: 1px solid var(--line); pointer-events: none;
+}
+html[data-theme="blueprint"] .am-ruler {
+  display: flex; position: absolute; font: 10px/1 var(--font-mono); color: var(--ink-3);
+}
+.am-ruler span { flex: 1; display: flex; align-items: center; justify-content: center; }
+.am-ruler--top, .am-ruler--bottom { left: 18px; right: 18px; height: 18px; }
+.am-ruler--top { top: 0; }
+.am-ruler--bottom { bottom: 0; }
+.am-ruler--left, .am-ruler--right { top: 18px; bottom: 18px; width: 18px; flex-direction: column; }
+.am-ruler--left { left: 0; }
+.am-ruler--right { right: 0; }
+.am-ruler--top span + span, .am-ruler--bottom span + span { border-left: 1px solid var(--line); }
+.am-ruler--left span + span, .am-ruler--right span + span { border-top: 1px solid var(--line); }
+
+/* ── 面板 ───────────────────────────────── */
+.am-panel {
+  background: var(--paper); border: var(--bw) solid var(--line); border-radius: var(--radius);
+  box-shadow: var(--shadow); min-width: 0; overflow: hidden;
+}
+.am-panel-head {
+  display: flex; align-items: stretch; gap: 0; border-bottom: var(--bw) solid var(--line); min-height: 34px;
+}
+.am-panel-id {
+  display: flex; align-items: center; justify-content: center; min-width: 34px; padding: 0 8px;
+  background: var(--head-bg); color: var(--head-fg); font-weight: 600; font-size: 14px;
+}
+html[data-theme="shadcn"] .am-panel-id { border-radius: 6px; min-width: 24px; height: 24px; margin: 9px 0 9px 14px; font-size: 12px; }
+html[data-theme="shadcn"] .am-panel-head { border-bottom-width: 1px; }
+.am-panel-head h2 { margin: 0; padding: 7px 12px; font-size: 15px; font-weight: 600; flex: 1; display: flex; align-items: center; }
+.am-panel-meta { align-self: center; padding: 0 12px; font: 11px/1.3 var(--font-mono); color: var(--ink-2); text-align: right; }
+.am-panel-body { padding: 14px 16px 16px; }
+.am-panel-body > * + * { margin-top: 12px; }
+
+/* ── Markdown 正文 ───────────────────────── */
+.am-md > :first-child { margin-top: 0; }
+.am-md > :last-child { margin-bottom: 0; }
+.am-md p { margin: 0 0 8px; }
+.am-md ul, .am-md ol { margin: 0 0 8px; padding-left: 20px; }
+.am-md li + li { margin-top: 3px; }
+.am-md h3, .am-md h4 { margin: 14px 0 6px; font-size: 13px; }
+.am-md a { color: var(--accent); }
+.am-md blockquote { margin: 0 0 8px; padding: 2px 12px; border-left: 3px solid var(--line-2); color: var(--ink-2); }
+.am-md :not(pre) > code { font-size: 0.9em; background: var(--fill); padding: 1px 5px; border-radius: 4px; }
+.am-md hr { border: 0; border-top: 1px solid var(--line-2); margin: 12px 0; }
+.am-md table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.am-md th {
+  text-align: left; font: 11px/1.3 var(--font-mono); color: var(--ink-2); font-weight: 400;
+  padding: 6px 10px; border-bottom: 1px solid var(--line-2);
+}
+.am-md td { padding: 7px 10px; border-bottom: 1px solid var(--line-2); vertical-align: top; }
+.am-md tbody tr:nth-child(even) td { background: var(--fill); }
+.am-table-wrap { overflow-x: auto; }
+.am-code {
+  margin: 0; padding: 12px 14px; background: var(--fill); border: 1px solid var(--line-2);
+  border-radius: var(--radius); overflow-x: auto; font-size: 12.5px; line-height: 1.5;
+}
+
+/* ── 状态徽章 ok / no / warn ──────────────── */
+.am-status { white-space: nowrap; font-weight: 500; }
+.am-status--ok { color: var(--ok); }
+.am-status--no { color: var(--err); }
+.am-status--warn { color: var(--warn); }
+.am-status-icon { display: inline-block; width: 1.1em; font-weight: 700; }
+
+/* ── callout ─────────────────────────────── */
+.am-callout {
+  border: 1px solid var(--line-2); border-left: 3px solid var(--accent); background: var(--accent-bg);
+  padding: 10px 14px; border-radius: var(--radius);
+}
+.am-callout--ok { border-left-color: var(--ok); background: var(--ok-bg); }
+.am-callout--warn { border-left-color: var(--warn); background: var(--warn-bg); }
+.am-callout--err { border-left-color: var(--err); background: var(--err-bg); }
+.am-callout-title { font-weight: 600; margin-bottom: 4px; }
+
+/* ── kv 标题栏格 ─────────────────────────── */
+.am-kv {
+  display: grid; grid-template-columns: repeat(var(--kv-cols, 2), minmax(0, 1fr)); margin: 0;
+  border-top: var(--bw) solid var(--line); border-left: var(--bw) solid var(--line);
+}
+.am-kv-cell { border-right: var(--bw) solid var(--line); border-bottom: var(--bw) solid var(--line); padding: 6px 10px 8px; min-width: 0; }
+.am-kv-cell--wide { grid-column: 1 / -1; }
+.am-kv dt { font: 11px/1.4 var(--font-mono); color: var(--ink-2); }
+.am-kv dd { margin: 2px 0 0; font-size: 14px; font-weight: 500; overflow-wrap: anywhere; }
+.am-kv-cell--wide dd { font-size: 17px; font-weight: 600; }
+html[data-theme="shadcn"] .am-kv { border-color: var(--line); border-radius: var(--radius); overflow: hidden; }
+
+/* ── timeline ────────────────────────────── */
+.am-timeline { list-style: none; margin: 0; padding: 0; }
+.am-timeline--h { display: grid; grid-template-columns: repeat(var(--n, 1), minmax(0, 1fr)); padding-top: 4px; }
+.am-timeline--h li { position: relative; text-align: center; padding: 0 6px; }
+.am-timeline--h li::before {
+  content: ""; position: absolute; top: 31px; left: 0; right: 0; border-top: var(--bw) solid var(--line);
+}
+.am-timeline--h li:first-child::before { left: 50%; }
+.am-timeline--h li:last-child::before { right: 50%; }
+.am-tl-when { display: block; font-size: 15px; font-weight: 500; height: 24px; }
+.am-tl-dot {
+  position: relative; display: block; width: 11px; height: 11px; margin: 2px auto 8px;
+  border: var(--bw) solid var(--line); border-radius: 50%; background: var(--paper);
+}
+.am-tl-item--hi .am-tl-dot { background: var(--accent); border-color: var(--accent); }
+.am-tl-title { display: block; font-size: 12.5px; font-weight: 500; }
+.am-tl-text { display: block; font-size: 12px; color: var(--ink-2); line-height: 1.45; }
+.am-timeline--v li { position: relative; padding: 0 0 14px 22px; }
+.am-timeline--v li::before { content: ""; position: absolute; left: 5px; top: 6px; bottom: -6px; border-left: var(--bw) solid var(--line-2); }
+.am-timeline--v li:last-child::before { display: none; }
+.am-timeline--v .am-tl-dot { position: absolute; left: 0; top: 4px; margin: 0; }
+.am-timeline--v .am-tl-when { display: inline; height: auto; font: 12px var(--font-mono); color: var(--ink-2); margin-right: 8px; }
+.am-timeline--v .am-tl-title { display: inline; font-size: 14px; }
+.am-timeline--v .am-tl-text { margin-top: 2px; }
+
+/* ── annot 句子标注 ──────────────────────── */
+.am-annot + .am-annot { border-top: 1px solid var(--line-2); padding-top: 12px; }
+.am-annot-head { display: flex; justify-content: space-between; gap: 12px; font-size: 13px; font-weight: 600; margin-bottom: 8px; }
+.am-annot-meta { font: 11px var(--font-mono); font-weight: 400; color: var(--ink-2); }
+.am-annot-scroll { overflow-x: auto; }
+.am-annot-line {
+  position: relative; display: inline-block; white-space: pre; font: 14px/1.6 var(--font-mono);
+  padding-bottom: calc(var(--rows, 0) * 17px + 14px);
+}
+.am-annot-line--wrap { display: block; white-space: normal; padding-bottom: 10px; }
+.am-annot-line--wrap .am-seg { white-space: nowrap; }
+.am-seg { position: relative; }
+.am-seg::after {
+  content: ""; position: absolute; left: 1px; right: 1px; top: calc(100% + 1px); height: 5px;
+  border: 1px solid var(--accent); border-top: 0;
+}
+.am-seg-n {
+  position: absolute; left: 0; top: calc(100% + 8px + var(--row, 0) * 17px);
+  font: 11px/16px var(--font-sans); color: var(--accent); white-space: nowrap;
+}
+.am-seg--err { color: var(--err); }
+.am-seg--err::after { border-color: var(--err); }
+.am-seg--err .am-seg-n { color: var(--err); }
+.am-annot-caption { font-size: 12px; color: var(--ink-2); }
+
+/* ── limits 限值条 ───────────────────────── */
+.am-lim + .am-lim { margin-top: 14px; }
+.am-lim-head { display: flex; justify-content: space-between; gap: 12px; font-size: 13px; margin-bottom: 4px; }
+.am-lim-val { font: 12px var(--font-mono); color: var(--accent); white-space: nowrap; }
+.am-lim-track { position: relative; height: 12px; border: 1px solid var(--line-2); background: var(--fill); border-radius: calc(var(--radius) / 2); }
+.am-lim-fill { position: absolute; left: 0; top: 0; bottom: 0; background: var(--accent-bg); border-right: 1px solid var(--accent); }
+.am-lim-mark { position: absolute; top: -4px; bottom: -4px; border-left: 2px solid var(--accent); }
+.am-lim.is-over .am-lim-fill { background: var(--err-bg); border-right-color: var(--err); }
+.am-lim.is-over .am-lim-val { color: var(--err); }
+.am-lim-ticks { position: relative; height: 16px; font: 10px/16px var(--font-mono); color: var(--ink-3); }
+.am-lim-ticks span { position: absolute; transform: translateX(-50%); }
+.am-lim-ticks span:first-child { transform: none; }
+.am-lim-note { font-size: 11px; color: var(--ink-2); margin-left: 6px; }
+
+/* ── tree 结构树 ─────────────────────────── */
+.am-tree { font-size: 13px; }
+.am-tree-root { display: flex; justify-content: center; position: relative; padding-bottom: 18px; }
+.am-tree-root::after { content: ""; position: absolute; bottom: 0; left: 50%; height: 18px; border-left: var(--bw) solid var(--line); }
+.am-tree-root--solo { padding-bottom: 12px; }
+.am-tree-root--solo::after { display: none; }
+.am-tree-box {
+  border: var(--bw) solid var(--line); background: var(--paper); padding: 6px 14px; text-align: center;
+  border-radius: var(--radius); font-weight: 600;
+}
+.am-tree-box small { display: block; font-weight: 400; color: var(--ink-2); font-size: 12px; }
+.am-tree-box--root { background: var(--accent-bg); font-size: 15px; padding: 8px 28px; }
+.am-tree-cols { display: grid; grid-template-columns: repeat(var(--n, 1), minmax(0, 1fr)); }
+.am-tree-col { position: relative; padding: 18px 8px 0; min-width: 0; }
+.am-tree-col::before { content: ""; position: absolute; top: 0; left: 0; right: 0; border-top: var(--bw) solid var(--line); }
+.am-tree-col:first-child::before { left: 50%; }
+.am-tree-col:last-child::before { right: 50%; }
+.am-tree-col::after { content: ""; position: absolute; top: 0; left: 50%; height: 18px; border-left: var(--bw) solid var(--line); }
+.am-tree-list, .am-tree-list ul { list-style: none; margin: 0; padding: 0; }
+.am-tree-col > .am-tree-list { margin: 8px 0 0 14px; }
+.am-tree-list ul { margin-left: 16px; }
+.am-tree-list li { position: relative; padding: 3px 0 3px 18px; }
+.am-tree-list li::before { content: ""; position: absolute; left: 0; top: 0.95em; width: 12px; border-top: 1px solid var(--ink-3); }
+.am-tree-list li::after { content: ""; position: absolute; left: 0; top: 0; bottom: 0; border-left: 1px solid var(--ink-3); }
+.am-tree-list li:last-child::after { bottom: auto; height: 0.95em; }
+.am-tree-tag { font: 11px var(--font-mono); color: var(--ink-3); margin-right: 4px; }
+.am-tree code { font: 12px var(--font-mono); }
+.am-tree-sub { display: block; font-size: 11.5px; color: var(--ink-2); }
+.am-tree-hi > .am-tree-label { color: var(--accent); font-weight: 600; }
+
+/* ── 图（flow / sequence）───────────────── */
+.am-diagram { margin: 0; overflow-x: auto; text-align: center; }
+.am-diagram svg { max-width: 100%; height: auto; font-family: var(--font-sans); }
+.am-diagram text { fill: var(--ink); font-size: 13px; }
+.am-node-shape { fill: var(--paper); stroke: var(--line); stroke-width: var(--bw); }
+.am-node--hi .am-node-shape { fill: var(--accent-bg); stroke: var(--accent); }
+.am-node--hi text { fill: var(--accent); font-weight: 600; }
+.am-edge { fill: none; stroke: var(--ink-2); stroke-width: 1.3; }
+.am-edge--dashed { stroke-dasharray: 5 4; }
+.am-arrow { fill: var(--ink-2); }
+.am-edge-label rect { fill: var(--paper); }
+.am-diagram .am-edge-label text { fill: var(--accent); font-size: 11.5px; }
+.am-cluster { fill: var(--fill); stroke: var(--line-2); stroke-width: 1; stroke-dasharray: 4 3; }
+.am-diagram .am-cluster-label { fill: var(--ink-2); font: 11px var(--font-mono); }
+.am-lifeline { stroke: var(--ink-3); stroke-width: 1; stroke-dasharray: 4 4; }
+.am-actor { fill: var(--paper); stroke: var(--line); stroke-width: var(--bw); }
+.am-note { fill: var(--warn-bg); stroke: var(--warn); stroke-width: 1; }
+.am-diagram .am-step { fill: var(--ink-3); font: 10px var(--font-mono); }
+
+/* ── doc 线性讲解 ────────────────────────── */
+.am-doc { max-width: 1120px; margin: 0 auto; padding: 40px 28px 64px; }
+.am-doc-layout { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 32px; align-items: start; }
+.am-doc-layout--notoc { grid-template-columns: minmax(0, 1fr); max-width: 860px; }
+.am-toc { position: sticky; top: 24px; font-size: 13px; }
+.am-toc a { display: block; color: var(--ink-2); text-decoration: none; padding: 4px 0 4px 10px; border-left: 2px solid var(--line-2); }
+.am-toc a:hover { color: var(--ink); border-left-color: var(--accent); }
+.am-doc-body > .am-panel + .am-panel { margin-top: 20px; }
+
+/* ── 响应式与打印 ─────────────────────────── */
+@media (max-width: 1100px) {
+  .am-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .am-grid > .am-panel { grid-column: auto !important; }
+  .am-grid > .am-panel.am-span-wide { grid-column: 1 / -1 !important; }
+}
+@media (max-width: 760px) {
+  .am-sheet, .am-doc { padding: 56px 12px 24px; }
+  .am-head { padding-right: 0; }
+  .am-grid { grid-template-columns: minmax(0, 1fr); }
+  .am-grid > .am-panel.am-span-wide { grid-column: auto !important; }
+  html[data-theme="blueprint"] .am-frame { padding: 0; border: 0; }
+  html[data-theme="blueprint"] .am-frame::before, html[data-theme="blueprint"] .am-ruler { display: none; }
+  .am-doc-layout { grid-template-columns: minmax(0, 1fr); }
+  .am-toc { position: static; }
+  .am-timeline--h { grid-template-columns: minmax(0, 1fr); }
+  .am-tree-cols { grid-template-columns: minmax(0, 1fr); }
+}
+.am-colophon { text-align: center; padding: 0 0 28px; font: 11px var(--font-mono); color: var(--ink-3); }
+
+@media print {
+  .am-toolbar { display: none; }
+  body { background: var(--paper); }
+  .am-panel { break-inside: avoid; box-shadow: none; }
+}
+.am-panel--bare { border: 0; background: transparent; box-shadow: none; }
+.am-panel--bare > .am-panel-body { padding: 0; }
+.am-panel--bare .am-kv { background: var(--paper); }
+
+</style>
+</head>
+<body>
+<div class="am-toolbar">
+<button class="am-btn" type="button" data-am="theme" data-labels="{&quot;blueprint&quot;:&quot;主题：图纸&quot;,&quot;shadcn&quot;:&quot;主题：卡片&quot;}">主题：卡片</button>
+<button class="am-btn" type="button" data-am="mode" data-labels="{&quot;auto&quot;:&quot;明暗：跟随系统&quot;,&quot;light&quot;:&quot;明暗：亮&quot;,&quot;dark&quot;:&quot;明暗：暗&quot;}">明暗：跟随系统</button>
+<button class="am-btn" type="button" data-am="copy" data-done="已复制 ✓">复制源稿</button>
+</div>
+<main class="am-doc">
+<header class="am-head"><h1>M06：第一笔为什么现在能选对</h1><p class="am-sub">从看懂退款，到确定订单，再到核验和确认</p><div class="am-intro am-md"><div class="am-md"><p>本次修复增加了代码规则，没有修改提示词。
+规则从本会话刚展示的列表中取订单号。
+模型继续判断用户想办什么事。</p>
+</div></div></header>
+<div class="am-doc-layout">
+<nav class="am-toc" aria-label="目录"><a href="#panel-A">A · 先把问题拆开</a><a href="#panel-B">B · 原来为什么卡住</a><a href="#panel-C">C · 现在的规则怎么接上</a><a href="#panel-D">D · 为什么还要保留用户原句</a><a href="#panel-E">E · 每一层负责什么</a><a href="#panel-F">F · 从中能学到的产品设计思路</a><a href="#panel-G">G · 怎样证明做对，以及还没覆盖什么</a></nav><div class="am-doc-body">
+<section class="am-panel" id="panel-A">
+<header class="am-panel-head"><span class="am-panel-id">A</span><h2>先把问题拆开</h2></header>
+<div class="am-panel-body"><div class="am-md"><div class="am-table-wrap"><table>
+<thead>
+<tr>
+<th>系统要回答的问题</th>
+<th>原来做到什么</th>
+<th>本次改变</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>用户想办什么事？</td>
+<td>模型知道仍在办退款</td>
+<td>保留原有模型判断</td>
+</tr>
+<tr>
+<td>用户选的是哪笔？</td>
+<td>已保存候选，但选单代码未读取它</td>
+<td>把序号对应到候选订单号</td>
+</tr>
+<tr>
+<td>这笔是否能办退款？</td>
+<td>已有归属、状态和支付核验</td>
+<td>继续使用原有核验</td>
+</tr>
+</tbody></table></div>
+<p>模型只输出意图标签，例如“退款”。
+知道要退款，仍然需要确定具体订单。</p>
+</div></div>
+</section>
+<section class="am-panel" id="panel-B">
+<header class="am-panel-head"><span class="am-panel-id">B</span><h2>原来为什么卡住</h2></header>
+<div class="am-panel-body"><div class="am-md"><p>下面使用隔离复现中的合成订单 ORD9801、ORD9802。</p>
+<div class="am-table-wrap"><table>
+<thead>
+<tr>
+<th>对话步骤</th>
+<th>系统实际做了什么</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>用户说“帮我退款”</td>
+<td>展示 ORD9801、ORD9802，并保存这个顺序</td>
+</tr>
+<tr>
+<td>用户说“第一笔”</td>
+<td>模型判断用户仍在办退款</td>
+</tr>
+<tr>
+<td>程序选择订单</td>
+<td>只查本句订单号、页面订单或最近订单</td>
+</tr>
+<tr>
+<td>这些地方都没给出订单</td>
+<td>再次追问选哪笔，没有查询 ORD9801</td>
+</tr>
+</tbody></table></div>
+<p>旧系统已经保存了列表。
+它也把候选顺序交给模型判断意图。
+断点在后面：选单代码没有读取这份列表。
+因此，单改意图提示词无法补上这个断点。</p>
+</div></div>
+</section>
+<section class="am-panel" id="panel-C">
+<header class="am-panel-head"><span class="am-panel-id">C</span><h2>现在的规则怎么接上</h2></header>
+<div class="am-panel-body"><figure class="am-diagram am-flow"><svg viewBox="0 0 147 558" width="147" height="558" role="img" aria-label="流程图：用户说第一笔、读取本会话候选、取第一项订单号、核验当前订单、补充退款原因、展示对应确认卡" xmlns="http://www.w3.org/2000/svg"><defs><marker id="am1-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="am-arrow" d="M0,0 L10,5 L0,10 z"/></marker></defs><g></g><g><g data-step="0"><path class="am-edge" d="M73.5,49 L73.5,65 Q73.5,81 73.5,97 L73.5,113" marker-end="url(#am1-arrow)"/><g class="am-edge-label"><rect x="28.3" y="72" width="90.5" height="18" rx="3"/><text x="73.5" y="81" text-anchor="middle" dominant-baseline="central">取刚展示的顺序</text></g></g><g data-step="1"><path class="am-edge" d="M73.5,148 L73.5,164 Q73.5,180 73.5,196 L73.5,212" marker-end="url(#am1-arrow)"/><g class="am-edge-label"><rect x="41.8" y="171" width="63.4" height="18" rx="3"/><text x="73.5" y="180" text-anchor="middle" dominant-baseline="central">ORD9801</text></g></g><g data-step="2"><path class="am-edge" d="M73.5,247 L73.5,263 Q73.5,279 73.5,295 L73.5,311" marker-end="url(#am1-arrow)"/><g class="am-edge-label"><rect x="28.3" y="270" width="90.5" height="18" rx="3"/><text x="73.5" y="279" text-anchor="middle" dominant-baseline="central">本人和当前状态</text></g></g><g data-step="3"><path class="am-edge" d="M73.5,346 L73.5,362 Q73.5,378 73.5,394 L73.5,410" marker-end="url(#am1-arrow)"/><g class="am-edge-label"><rect x="34" y="369" width="79" height="18" rx="3"/><text x="73.5" y="378" text-anchor="middle" dominant-baseline="central">本次尚未提交</text></g></g><g data-step="4"><path class="am-edge" d="M73.5,445 L73.5,461 Q73.5,477 73.5,493 L73.5,509" marker-end="url(#am1-arrow)"/><g class="am-edge-label"><rect x="34" y="468" width="79" height="18" rx="3"/><text x="73.5" y="477" text-anchor="middle" dominant-baseline="central">等待本人确认</text></g></g></g><g><g class="am-node am-node--rect" data-key="用户说第一笔" data-step="0"><rect class="am-node-shape" x="20.5" y="14" width="106" height="35" rx="3"/><text x="73.5" y="31.5" text-anchor="middle" dominant-baseline="central">用户说第一笔</text></g><g class="am-node am-node--rect" data-key="读取本会话候选" data-step="0"><rect class="am-node-shape" x="14" y="113" width="119" height="35" rx="3"/><text x="73.5" y="130.5" text-anchor="middle" dominant-baseline="central">读取本会话候选</text></g><g class="am-node am-node--rect" data-key="取第一项订单号" data-step="1"><rect class="am-node-shape" x="14" y="212" width="119" height="35" rx="3"/><text x="73.5" y="229.5" text-anchor="middle" dominant-baseline="central">取第一项订单号</text></g><g class="am-node am-node--rect" data-key="核验当前订单" data-step="2"><rect class="am-node-shape" x="20.5" y="311" width="106" height="35" rx="3"/><text x="73.5" y="328.5" text-anchor="middle" dominant-baseline="central">核验当前订单</text></g><g class="am-node am-node--rect" data-key="补充退款原因" data-step="3"><rect class="am-node-shape" x="20.5" y="410" width="106" height="35" rx="3"/><text x="73.5" y="427.5" text-anchor="middle" dominant-baseline="central">补充退款原因</text></g><g class="am-node am-node--rect" data-key="展示对应确认卡" data-step="4"><rect class="am-node-shape" x="14" y="509" width="119" height="35" rx="3"/><text x="73.5" y="526.5" text-anchor="middle" dominant-baseline="central">展示对应确认卡</text></g></g></svg></figure>
+<div class="am-md"><div class="am-table-wrap"><table>
+<thead>
+<tr>
+<th>系统保存的对应关系</th>
+<th>用户选择</th>
+<th>程序取得的订单号</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1 → ORD9801，2 → ORD9802</td>
+<td>第一笔</td>
+<td>ORD9801</td>
+</tr>
+<tr>
+<td>1 → ORD9801，2 → ORD9802</td>
+<td>第二笔 / 第2笔</td>
+<td>ORD9802</td>
+</tr>
+<tr>
+<td>列表只有两笔</td>
+<td>第三笔</td>
+<td>没有有效订单，重新澄清</td>
+</tr>
+</tbody></table></div>
+<p>这份列表属于当前用户、当前会话。
+后来的订单排序变化不会改变这次选择。
+无候选或序号越界时，不回退到旧订单。</p>
+</div></div>
+</section>
+<section class="am-panel" id="panel-D">
+<header class="am-panel-head"><span class="am-panel-id">D</span><h2>为什么还要保留用户原句</h2></header>
+<div class="am-panel-body"><div class="am-md"><p>商城原来会把页面信息拼在用户消息后面。
+例如，用户说“第一笔”，页面还附带 ORD9802。
+程序可能把页面订单号当成用户指定的订单号。</p>
+<div class="am-table-wrap"><table>
+<thead>
+<tr>
+<th>信息</th>
+<th>原来如何传递</th>
+<th>现在如何处理</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>用户原句“第一笔”</td>
+<td>和页面文字合在一起</td>
+<td>另外保存原句，供选单代码读取</td>
+</tr>
+<tr>
+<td>页面附带 ORD9802</td>
+<td>出现在合并消息里</td>
+<td>保留作背景，不能覆盖本次序号选择</td>
+</tr>
+</tbody></table></div>
+<p>本次修改覆盖 Python 上下文、聊天入口和 Java 网关。
+没有新增意图标签，也没有修改模型提示词。
+旧版已复现的是重复追问，没有记录错退资金。</p>
+</div></div>
+</section>
+<section class="am-panel" id="panel-E">
+<header class="am-panel-head"><span class="am-panel-id">E</span><h2>每一层负责什么</h2></header>
+<div class="am-panel-body"><div class="am-md"><div class="am-table-wrap"><table>
+<thead>
+<tr>
+<th>参与者</th>
+<th>负责的问题</th>
+<th>本例中的输出</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>大模型</td>
+<td>用户现在要办什么事？</td>
+<td>退款意图</td>
+</tr>
+<tr>
+<td>选单代码</td>
+<td>用户选择列表里的哪一项？</td>
+<td>ORD9801</td>
+</tr>
+<tr>
+<td>业务后端</td>
+<td>是否本人订单，状态和实付是否允许？</td>
+<td>核验结果、缺少信息或确认卡</td>
+</tr>
+<tr>
+<td>用户</td>
+<td>是否提交这笔申请？</td>
+<td>明确确认后才提交</td>
+</tr>
+</tbody></table></div>
+<p>退款意图配上 ORD9801 后，代码安排订单查询和售后检查。
+这一步在程序中叫 RoutePlan，即本轮执行安排。
+“选中了订单”与“批准退款”仍是两个步骤。</p>
+<p>若用户改问另一笔物流，模型仍可切换任务。
+序号规则只负责选对象，不强行保留退款意图。</p>
+</div></div>
+</section>
+<section class="am-panel" id="panel-F">
+<header class="am-panel-head"><span class="am-panel-id">F</span><h2>从中能学到的产品设计思路</h2></header>
+<div class="am-panel-body"><div class="am-md"><p>这些是从本次修复总结的设计判断。</p>
+<div class="am-table-wrap"><table>
+<thead>
+<tr>
+<th>设计问题</th>
+<th>本次选择</th>
+<th>对用户的价值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>用户根据什么选择？</td>
+<td>绑定刚展示的列表顺序</td>
+<td>看到第一项，就能选中第一项</td>
+</tr>
+<tr>
+<td>多轮对话该记住什么？</td>
+<td>任务、缺少信息、已展示候选</td>
+<td>短回复能接上前一轮</td>
+</tr>
+<tr>
+<td>哪些判断适合确定规则？</td>
+<td>已有顺序的序号对应</td>
+<td>同一选择不会随机落到别的订单</td>
+</tr>
+<tr>
+<td>多个上下文冲突时听谁？</td>
+<td>明确序号选择优先于页面旧订单</td>
+<td>页面背景不能替用户作决定</td>
+</tr>
+<tr>
+<td>选不到时如何处理？</td>
+<td>重问，不猜测、不回退旧订单</td>
+<td>避免对错误对象继续办理</td>
+</tr>
+<tr>
+<td>选中后是否直接执行？</td>
+<td>再核验，展示确认卡，等待确认</td>
+<td>订单变化或错误选择仍可被阻止</td>
+</tr>
+</tbody></table></div>
+<p>最先需要判断的是，链路断在哪一步。
+先区分意图、对象、资格和提交，再选择修复方法。
+本次断在对象对应，因此采用代码规则。</p>
+</div></div>
+</section>
+<section class="am-panel" id="panel-G">
+<header class="am-panel-head"><span class="am-panel-id">G</span><h2>怎样证明做对，以及还没覆盖什么</h2></header>
+<div class="am-panel-body"><div class="am-md"><p>验收需要检查实际订单号，而不只检查“退款”标签。</p>
+<div class="am-table-wrap"><table>
+<thead>
+<tr>
+<th>检查</th>
+<th>证据与结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>第一笔、第二笔、排序变化</td>
+<td>离线检查核对实际选中的订单号</td>
+</tr>
+<tr>
+<td>越界、换用户、换会话</td>
+<td>离线检查确认不能借用旧候选</td>
+</tr>
+<tr>
+<td>页面干扰、改问物流、状态变化</td>
+<td>离线或隔离对话检查对应边界</td>
+</tr>
+<tr>
+<td>完整商城对话</td>
+<td>隔离环境6组12轮通过</td>
+</tr>
+<tr>
+<td>日常浏览器入口</td>
+<td>第一笔、第二笔共2组6轮通过</td>
+</tr>
+<tr>
+<td>生成确认卡但未提交</td>
+<td>对话前后8张业务表行哈希一致</td>
+</tr>
+</tbody></table></div>
+<p>日常验收另经用户授权准备了两笔199元订单。
+它们扣了398元演示余额，属于样本准备写入。
+之后的对话没有继续改变余额或新增售后。</p>
+<p>当前识别“第一笔”“第二笔”“第2笔”等纯序号。
+中文序号支持一至十，可带已有允许的句末标点。
+“第一单”“刚才便宜的那个”没有在本次加入规则。
+候选保存在进程内，服务重启后需要重新展示列表。
+本次说明不代表任意自然语言指代都已解决。</p>
+<p>依据：backend/agent/context.py 第41行；backend/agent/customer_service_agent.py 第64行及第689行。
+依据：CustomerServiceGatewayService.java 第132行及第247行；项目评测记录 M06-001、M06-002。</p>
+</div></div>
+</section>
+</div>
+</div>
+</main>
+<footer class="am-colophon">Generated by Answer me with HTML 0.4.2 · 2026-10-10 20:55</footer>
+<textarea id="am-source" hidden readonly aria-hidden="true">---
+title: M06：第一笔为什么现在能选对
+subtitle: 从看懂退款，到确定订单，再到核验和确认
+lang: zh
+template: doc
+theme: shadcn
+---
+本次修复增加了代码规则，没有修改提示词。
+规则从本会话刚展示的列表中取订单号。
+模型继续判断用户想办什么事。
+
+## A 先把问题拆开
+
+| 系统要回答的问题 | 原来做到什么 | 本次改变 |
+|---|---|---|
+| 用户想办什么事？ | 模型知道仍在办退款 | 保留原有模型判断 |
+| 用户选的是哪笔？ | 已保存候选，但选单代码未读取它 | 把序号对应到候选订单号 |
+| 这笔是否能办退款？ | 已有归属、状态和支付核验 | 继续使用原有核验 |
+
+模型只输出意图标签，例如“退款”。
+知道要退款，仍然需要确定具体订单。
+
+## B 原来为什么卡住
+
+下面使用隔离复现中的合成订单 ORD9801、ORD9802。
+
+| 对话步骤 | 系统实际做了什么 |
+|---|---|
+| 用户说“帮我退款” | 展示 ORD9801、ORD9802，并保存这个顺序 |
+| 用户说“第一笔” | 模型判断用户仍在办退款 |
+| 程序选择订单 | 只查本句订单号、页面订单或最近订单 |
+| 这些地方都没给出订单 | 再次追问选哪笔，没有查询 ORD9801 |
+
+旧系统已经保存了列表。
+它也把候选顺序交给模型判断意图。
+断点在后面：选单代码没有读取这份列表。
+因此，单改意图提示词无法补上这个断点。
+
+## C 现在的规则怎么接上
+
+```flow
+用户说第一笔 -&gt; 读取本会话候选: 取刚展示的顺序
+读取本会话候选 -&gt; 取第一项订单号: ORD9801
+取第一项订单号 -&gt; 核验当前订单: 本人和当前状态
+核验当前订单 -&gt; 补充退款原因: 本次尚未提交
+补充退款原因 -&gt; 展示对应确认卡: 等待本人确认
+```
+
+| 系统保存的对应关系 | 用户选择 | 程序取得的订单号 |
+|---|---|---|
+| 1 → ORD9801，2 → ORD9802 | 第一笔 | ORD9801 |
+| 1 → ORD9801，2 → ORD9802 | 第二笔 / 第2笔 | ORD9802 |
+| 列表只有两笔 | 第三笔 | 没有有效订单，重新澄清 |
+
+这份列表属于当前用户、当前会话。
+后来的订单排序变化不会改变这次选择。
+无候选或序号越界时，不回退到旧订单。
+
+## D 为什么还要保留用户原句
+
+商城原来会把页面信息拼在用户消息后面。
+例如，用户说“第一笔”，页面还附带 ORD9802。
+程序可能把页面订单号当成用户指定的订单号。
+
+| 信息 | 原来如何传递 | 现在如何处理 |
+|---|---|---|
+| 用户原句“第一笔” | 和页面文字合在一起 | 另外保存原句，供选单代码读取 |
+| 页面附带 ORD9802 | 出现在合并消息里 | 保留作背景，不能覆盖本次序号选择 |
+
+本次修改覆盖 Python 上下文、聊天入口和 Java 网关。
+没有新增意图标签，也没有修改模型提示词。
+旧版已复现的是重复追问，没有记录错退资金。
+
+## E 每一层负责什么
+
+| 参与者 | 负责的问题 | 本例中的输出 |
+|---|---|---|
+| 大模型 | 用户现在要办什么事？ | 退款意图 |
+| 选单代码 | 用户选择列表里的哪一项？ | ORD9801 |
+| 业务后端 | 是否本人订单，状态和实付是否允许？ | 核验结果、缺少信息或确认卡 |
+| 用户 | 是否提交这笔申请？ | 明确确认后才提交 |
+
+退款意图配上 ORD9801 后，代码安排订单查询和售后检查。
+这一步在程序中叫 RoutePlan，即本轮执行安排。
+“选中了订单”与“批准退款”仍是两个步骤。
+
+若用户改问另一笔物流，模型仍可切换任务。
+序号规则只负责选对象，不强行保留退款意图。
+
+## F 从中能学到的产品设计思路
+
+这些是从本次修复总结的设计判断。
+
+| 设计问题 | 本次选择 | 对用户的价值 |
+|---|---|---|
+| 用户根据什么选择？ | 绑定刚展示的列表顺序 | 看到第一项，就能选中第一项 |
+| 多轮对话该记住什么？ | 任务、缺少信息、已展示候选 | 短回复能接上前一轮 |
+| 哪些判断适合确定规则？ | 已有顺序的序号对应 | 同一选择不会随机落到别的订单 |
+| 多个上下文冲突时听谁？ | 明确序号选择优先于页面旧订单 | 页面背景不能替用户作决定 |
+| 选不到时如何处理？ | 重问，不猜测、不回退旧订单 | 避免对错误对象继续办理 |
+| 选中后是否直接执行？ | 再核验，展示确认卡，等待确认 | 订单变化或错误选择仍可被阻止 |
+
+最先需要判断的是，链路断在哪一步。
+先区分意图、对象、资格和提交，再选择修复方法。
+本次断在对象对应，因此采用代码规则。
+
+## G 怎样证明做对，以及还没覆盖什么
+
+验收需要检查实际订单号，而不只检查“退款”标签。
+
+| 检查 | 证据与结果 |
+|---|---|
+| 第一笔、第二笔、排序变化 | 离线检查核对实际选中的订单号 |
+| 越界、换用户、换会话 | 离线检查确认不能借用旧候选 |
+| 页面干扰、改问物流、状态变化 | 离线或隔离对话检查对应边界 |
+| 完整商城对话 | 隔离环境6组12轮通过 |
+| 日常浏览器入口 | 第一笔、第二笔共2组6轮通过 |
+| 生成确认卡但未提交 | 对话前后8张业务表行哈希一致 |
+
+日常验收另经用户授权准备了两笔199元订单。
+它们扣了398元演示余额，属于样本准备写入。
+之后的对话没有继续改变余额或新增售后。
+
+当前识别“第一笔”“第二笔”“第2笔”等纯序号。
+中文序号支持一至十，可带已有允许的句末标点。
+“第一单”“刚才便宜的那个”没有在本次加入规则。
+候选保存在进程内，服务重启后需要重新展示列表。
+本次说明不代表任意自然语言指代都已解决。
+
+依据：backend/agent/context.py 第41行；backend/agent/customer_service_agent.py 第64行及第689行。
+依据：CustomerServiceGatewayService.java 第132行及第247行；项目评测记录 M06-001、M06-002。
+</textarea>
+<script>
+(() => {
+  const root = document.documentElement;
+  const cycle = (list, cur) => list[(list.indexOf(cur) + 1) % list.length];
+  const label = (btn, value) => {
+    const map = JSON.parse(btn.dataset.labels || '{}');
+    btn.textContent = map[value] || value;
+  };
+  const bind = (name, attr, values) => {
+    const btn = document.querySelector(`[data-am="${name}"]`);
+    if (!btn) return;
+    label(btn, root.getAttribute(attr));
+    btn.addEventListener('click', () => {
+      const next = cycle(values, root.getAttribute(attr));
+      root.setAttribute(attr, next);
+      label(btn, next);
+    });
+  };
+  bind('theme', 'data-theme', ['blueprint', 'shadcn']);
+  bind('mode', 'data-mode', ['auto', 'light', 'dark']);
+
+  const copyBtn = document.querySelector('[data-am="copy"]');
+  copyBtn?.addEventListener('click', async () => {
+    const text = document.getElementById('am-source').value;
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch {
+      const ta = Object.assign(document.createElement('textarea'), { value: text });
+      document.body.append(ta);
+      ta.select();
+      document.execCommand('copy');
+      ta.remove();
+    }
+    const original = copyBtn.textContent;
+    copyBtn.textContent = copyBtn.dataset.done;
+    setTimeout(() => { copyBtn.textContent = original; }, 1400);
+  });
+})();
+</script>
+</body>
+</html>

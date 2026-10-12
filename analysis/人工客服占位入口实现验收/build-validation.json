@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-12",
+  "typescript": {
+    "command": "node node_modules/typescript/bin/tsc --noEmit",
+    "exit_code": 0
+  },
+  "vite": {
+    "command": "node node_modules/vite/bin/vite.js build --outDir ../../analysis/人工客服占位入口实现验收/frontend-build",
+    "exit_code": 0
+  },
+  "java": {
+    "compiler": "javac --release 17",
+    "exit_code": 0,
+    "log": "after/compile.log"
+  },
+  "daily_frontend_dist_overwritten": false
+}

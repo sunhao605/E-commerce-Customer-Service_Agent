@@ -1,0 +1,74 @@
+{
+  "fail_count" : 3,
+  "score_min" : "0.9",
+  "mode" : "isolated_h2_real_models_script_cases",
+  "checks" : [ {
+    "check" : "自然改口取消未提交草稿并清掉凭证",
+    "status" : "fail",
+    "detail" : "pending=CONFIRM_SUBMIT answer=你好，我是荒野户外的客服 Agent。你可以把订单号、物流问题、活动优惠或售后诉求发给我，我会优先根据荒野户外的订单事实和公开规则回答。 本次待确认申请尚未提交。"
+  }, {
+    "check" : "自然改口后旧确认卡不能提交",
+    "status" : "skipped",
+    "detail" : "草稿还在，没有点提交"
+  }, {
+    "check" : "取消后下一句不恢复确认卡",
+    "status" : "skipped",
+    "detail" : "这一轮没有取消"
+  }, {
+    "check" : "明确继续不取消，原确认卡还在",
+    "status" : "pass",
+    "detail" : "pending=CONFIRM_SUBMIT answer=请核对退款申请。确认后只登记为待审核，是否通过由管理员独立决定。"
+  }, {
+    "check" : "运费条件未核实不取消",
+    "status" : "pass",
+    "detail" : "pending=CONFIRM_SUBMIT answer=ORD9801的退货运费由谁承担，暂时没有这笔订单的事实，所以先保留办理，不会据此取消。"
+  }, {
+    "check" : "选单阶段先有待办、没有确认卡",
+    "status" : "pass",
+    "detail" : "pending=REFUND_ORDER_REQUIRED"
+  }, {
+    "check" : "对象不清时追问，不取消选单",
+    "status" : "pass",
+    "detail" : "pending=REFUND_ORDER_REQUIRED answer=你要结束这次未提交的退款办理，还是取消某一笔订单？可以说退款办理、订单本身、第几笔或订单号。"
+  }, {
+    "check" : "第一笔不把选单待办当成当前售后取消",
+    "status" : "pass",
+    "detail" : "pending=REFUND_ORDER_REQUIRED answer=当前退款办理仍保留。另一笔需要单独确认，这次没有取消。"
+  }, {
+    "check" : "补明是这次办理后才取消选单",
+    "status" : "fail",
+    "detail" : "pending=REFUND_ORDER_REQUIRED answer=对象已记为当前售后。这次还不会取消，办理先留着。"
+  }, {
+    "check" : "取消后第一笔不复活旧待办",
+    "status" : "skipped",
+    "detail" : "选单没有被取消"
+  }, {
+    "check" : "冲突时展示保留和取消未提交办理，不直接取消",
+    "status" : "fail",
+    "detail" : "pending=CONFIRM_SUBMIT answer=先保留当前办理。你决定继续还是取消后再操作。"
+  }, {
+    "check" : "选择保留不取消草稿",
+    "status" : "skipped",
+    "detail" : "没有出现冲突卡"
+  }, {
+    "check" : "保留后旧冲突卡不能再点",
+    "status" : "skipped",
+    "detail" : "没有出现冲突卡"
+  }, {
+    "check" : "冲突卡不能提交申请，也不产生售后记录",
+    "status" : "skipped",
+    "detail" : "没有出现冲突卡，没有点提交"
+  }, {
+    "check" : "冲突卡确认取消后清草稿和凭证",
+    "status" : "skipped",
+    "detail" : "没有出现冲突卡"
+  }, {
+    "check" : "取消后重复点击旧卡被拒绝",
+    "status" : "skipped",
+    "detail" : "没有出现冲突卡"
+  }, {
+    "check" : "整组对话没有新增售后、流水或余额变化",
+    "status" : "pass",
+    "detail" : "sales=4 transactions=4"
+  } ]
+}

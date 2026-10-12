@@ -1,0 +1,185 @@
+[
+  {
+    "input": {
+      "sessionId": "query-foreign",
+      "message": "ORD9899 能退吗？先别申请",
+      "pageContext": {
+        "type": "HOME"
+      }
+    },
+    "response": {
+      "answer": "无法查询该订单，请确认订单号且订单属于当前账号。本轮没有准备申请。",
+      "sessionId": "query-foreign",
+      "confirmRequired": false,
+      "pendingAction": "ELIGIBILITY_QUERY",
+      "actions": [],
+      "fallback": false
+    }
+  },
+  {
+    "input": {
+      "sessionId": "query-unknown",
+      "message": "ORD9813 能退吗？先别申请",
+      "pageContext": {
+        "type": "HOME"
+      }
+    },
+    "response": {
+      "answer": "订单 ORD9813 暂时无法核实：暂时无法核实可退的整单实付金额，请联系人工核验。这轮只查资格，没有准备申请。",
+      "sessionId": "query-unknown",
+      "confirmRequired": false,
+      "pendingAction": "ELIGIBILITY_QUERY",
+      "relatedOrderNo": "ORD9813",
+      "actions": [],
+      "fallback": false
+    }
+  },
+  {
+    "input": {
+      "sessionId": "query-select",
+      "message": "这笔订单能不能退？先别申请",
+      "pageContext": {
+        "type": "HOME"
+      }
+    },
+    "response": {
+      "answer": "你要查询哪一个订单？请选择订单号，或直接补充订单号。这轮只查资格，不准备申请。\n1. ORD9812（隔离露营椅）\n2. ORD9801（隔离露营椅）",
+      "sessionId": "query-select",
+      "confirmRequired": false,
+      "pendingAction": "ELIGIBILITY_ORDER_REQUIRED",
+      "actions": [],
+      "fallback": false
+    }
+  },
+  {
+    "input": {
+      "sessionId": "query-select",
+      "message": "第一笔",
+      "pageContext": {
+        "type": "HOME"
+      }
+    },
+    "response": {
+      "answer": "订单 ORD9812 不满足当前自助办理条件：签收时间异常或已超过七天无理由期限；其他售后请联系人工核验。这轮只查资格，没有准备申请。",
+      "sessionId": "query-select",
+      "confirmRequired": false,
+      "pendingAction": "ELIGIBILITY_QUERY",
+      "relatedOrderNo": "ORD9812",
+      "actions": [],
+      "fallback": false
+    }
+  },
+  {
+    "input": {
+      "sessionId": "query-direct",
+      "message": "ORD9801 我要申请退款，原因：买错了",
+      "pageContext": {
+        "type": "HOME"
+      }
+    },
+    "response": {
+      "answer": "请核对申请，确认提交后等待后台审核。",
+      "sessionId": "query-direct",
+      "confirmRequired": true,
+      "pendingAction": "CONFIRM_SUBMIT",
+      "confirmationTitle": "确认提交退款申请",
+      "confirmationSummary": "订单：ORD9801；商品：隔离露营椅 x1；范围：整单退款；实付金额：200.00 元；原因：买错了；状态：等待本人确认，尚未提交。确认后等待审核，提交不代表退款成功。",
+      "relatedOrderNo": "ORD9801",
+      "resumeToken": "509bde41-e6c1-46bb-94ff-258fdddd9f6e",
+      "actions": [
+        {
+          "code": "CONFIRM_SUBMIT",
+          "label": "确认提交申请"
+        },
+        {
+          "code": "CANCEL_SUBMIT",
+          "label": "取消本次申请"
+        }
+      ],
+      "fallback": false
+    }
+  },
+  {
+    "input": {
+      "sessionId": "query-return",
+      "message": "ORD9803 能退吗？先别申请",
+      "pageContext": {
+        "type": "HOME"
+      }
+    },
+    "response": {
+      "answer": "按当前查询结果，订单 ORD9803 可以申请七天无理由整单退货退款，金额 200.0 元。已支付并签收、在七天窗口内，整单商品购买时均支持无理由退货，实付金额已核实。如需办理，请明确回复‘申请七天无理由退货’。这轮只查资格，没有准备申请；可以申请不代表审核通过。",
+      "sessionId": "query-return",
+      "confirmRequired": false,
+      "pendingAction": "ELIGIBILITY_QUERY",
+      "relatedOrderNo": "ORD9803",
+      "actions": [],
+      "fallback": false
+    }
+  },
+  {
+    "input": {
+      "sessionId": "query-return",
+      "message": "那帮我申请七天无理由退货",
+      "pageContext": {
+        "type": "HOME"
+      }
+    },
+    "response": {
+      "answer": "请核对申请，确认提交后等待后台审核。",
+      "sessionId": "query-return",
+      "confirmRequired": true,
+      "pendingAction": "CONFIRM_SUBMIT",
+      "confirmationTitle": "确认提交退货退款申请",
+      "confirmationSummary": "订单：ORD9803；商品：隔离露营椅 x1；范围：整单退货退款；实付金额：200.00 元；原因：七天无理由退货；状态：等待本人确认，尚未提交。确认后等待审核，提交不代表退款成功。同意退货后按地址寄回商品、配件及赠品；请保持完好，商家实际收到且验收通过后才退款。",
+      "relatedOrderNo": "ORD9803",
+      "resumeToken": "d396d1bd-4e58-4e9f-92a5-be680569c0b4",
+      "actions": [
+        {
+          "code": "CONFIRM_SUBMIT",
+          "label": "确认提交申请"
+        },
+        {
+          "code": "CANCEL_SUBMIT",
+          "label": "取消本次申请"
+        }
+      ],
+      "fallback": false
+    }
+  },
+  {
+    "input": {
+      "sessionId": "query-changed",
+      "message": "ORD9802 能退吗？先别申请",
+      "pageContext": {
+        "type": "HOME"
+      }
+    },
+    "response": {
+      "answer": "按当前查询结果，订单 ORD9802 可以申请未发货整单退款，金额 200.0 元。已支付且未发货，整单实付金额已核实。如需办理，请明确回复‘申请退款’。这轮只查资格，没有准备申请；可以申请不代表审核通过。",
+      "sessionId": "query-changed",
+      "confirmRequired": false,
+      "pendingAction": "ELIGIBILITY_QUERY",
+      "relatedOrderNo": "ORD9802",
+      "actions": [],
+      "fallback": false
+    }
+  },
+  {
+    "input": {
+      "sessionId": "query-changed",
+      "message": "那帮我申请退款，原因：买错了",
+      "pageContext": {
+        "type": "HOME"
+      }
+    },
+    "response": {
+      "answer": "首版只支持已支付、未发货的整单退款申请；本次未提交",
+      "sessionId": "query-changed",
+      "confirmRequired": false,
+      "pendingAction": "BLOCKED",
+      "actions": [],
+      "fallback": false
+    }
+  }
+]

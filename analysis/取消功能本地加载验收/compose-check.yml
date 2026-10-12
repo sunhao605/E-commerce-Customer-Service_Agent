@@ -1,0 +1,5 @@
+services:
+  ecommerce:
+    environment:
+      CANCEL_INTENT_EXECUTE: "1"
+      CANCEL_SCORE_MIN: "0.9"

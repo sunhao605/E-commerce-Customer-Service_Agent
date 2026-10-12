@@ -1,0 +1,67 @@
+{
+  "date": "2026-10-12",
+  "mode": "existing_functions_with_mock_http",
+  "online_model_calls": 0,
+  "business_http_calls": 0,
+  "database_writes": 0,
+  "source_sha256": {
+    "backend/agent/ecommerce_client.py": "4cf9025daca46cc08fe8635f71a0c7719e53c200b664973c9a0465b3b00f1326",
+    "backend/agent/tools/tool_runtime.py": "0e8bff7d24dde6446568ee73090d8ff6161482795da87137d94c871e5dc8f8a2"
+  },
+  "records": [
+    {
+      "condition": "正常无匹配",
+      "product_count": 0,
+      "trace": {
+        "tool_name": "search_products",
+        "arguments": {
+          "keyword": "折叠椅多少钱，有库存吗？",
+          "fact_source": "business_api_unavailable"
+        },
+        "output_summary": "没有查询到匹配商品，不能猜测库存或价格。",
+        "status": "error",
+        "tool_source": "function",
+        "risk_level": "low",
+        "next_action": "ask_clarification",
+        "error_type": "product_not_found",
+        "candidates": []
+      }
+    },
+    {
+      "condition": "读取超时",
+      "product_count": 0,
+      "trace": {
+        "tool_name": "search_products",
+        "arguments": {
+          "keyword": "折叠椅多少钱，有库存吗？",
+          "fact_source": "business_api_unavailable"
+        },
+        "output_summary": "没有查询到匹配商品，不能猜测库存或价格。",
+        "status": "error",
+        "tool_source": "function",
+        "risk_level": "low",
+        "next_action": "ask_clarification",
+        "error_type": "product_not_found",
+        "candidates": []
+      }
+    },
+    {
+      "condition": "部分字段缺失",
+      "product_count": 1,
+      "trace": {
+        "tool_name": "search_products",
+        "arguments": {
+          "keyword": "折叠椅多少钱，有库存吗？",
+          "product_name": "核验用椅子",
+          "fact_source": "business_api"
+        },
+        "output_summary": "核验用椅子 商品标价 199 元，库存 None 件。",
+        "status": "success",
+        "tool_source": "function",
+        "risk_level": "low",
+        "next_action": "answer_user",
+        "candidates": []
+      }
+    }
+  ]
+}

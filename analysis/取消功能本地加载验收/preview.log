@@ -1,0 +1,47 @@
+127.0.0.1 - - [11/Oct/2026 19:55:38] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [11/Oct/2026 19:55:38] code 404, message File not found
+127.0.0.1 - - [11/Oct/2026 19:55:38] "GET /favicon.ico HTTP/1.1" 404 -
+127.0.0.1 - - [11/Oct/2026 19:58:25] "GET / HTTP/1.1" 200 -
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 49753)
+Traceback (most recent call last):
+  File "/Users/sunhao/.local/share/uv/python/cpython-3.14.7-macos-aarch64-none/lib/python3.14/socketserver.py", line 697, in process_request_thread
+    self.finish_request(request, client_address)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sunhao/.local/share/uv/python/cpython-3.14.7-macos-aarch64-none/lib/python3.14/http/server.py", line 1426, in finish_request
+    self.RequestHandlerClass(request, client_address, self,
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                             directory=args.directory)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sunhao/.local/share/uv/python/cpython-3.14.7-macos-aarch64-none/lib/python3.14/http/server.py", line 736, in __init__
+    super().__init__(*args, **kwargs)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/sunhao/.local/share/uv/python/cpython-3.14.7-macos-aarch64-none/lib/python3.14/socketserver.py", line 766, in __init__
+    self.handle()
+    ~~~~~~~~~~~^^
+  File "/Users/sunhao/.local/share/uv/python/cpython-3.14.7-macos-aarch64-none/lib/python3.14/http/server.py", line 500, in handle
+    self.handle_one_request()
+    ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/sunhao/.local/share/uv/python/cpython-3.14.7-macos-aarch64-none/lib/python3.14/http/server.py", line 488, in handle_one_request
+    method()
+    ~~~~~~^^
+  File "/Users/sunhao/.local/share/uv/python/cpython-3.14.7-macos-aarch64-none/lib/python3.14/http/server.py", line 743, in do_GET
+    self.copyfile(f, self.wfile)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/Users/sunhao/.local/share/uv/python/cpython-3.14.7-macos-aarch64-none/lib/python3.14/http/server.py", line 946, in copyfile
+    shutil.copyfileobj(source, outputfile)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sunhao/.local/share/uv/python/cpython-3.14.7-macos-aarch64-none/lib/python3.14/shutil.py", line 257, in copyfileobj
+    fdst_write(buf)
+    ~~~~~~~~~~^^^^^
+  File "/Users/sunhao/.local/share/uv/python/cpython-3.14.7-macos-aarch64-none/lib/python3.14/socketserver.py", line 845, in write
+    self._sock.sendall(b)
+    ~~~~~~~~~~~~~~~~~~^^^
+BrokenPipeError: [Errno 32] Broken pipe
+----------------------------------------
+127.0.0.1 - - [11/Oct/2026 19:58:26] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [11/Oct/2026 19:58:26] code 404, message File not found
+127.0.0.1 - - [11/Oct/2026 19:58:26] "GET /favicon.ico HTTP/1.1" 404 -
+127.0.0.1 - - [11/Oct/2026 20:04:58] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [11/Oct/2026 20:04:58] code 404, message File not found
+127.0.0.1 - - [11/Oct/2026 20:04:58] "GET /favicon.ico HTTP/1.1" 404 -

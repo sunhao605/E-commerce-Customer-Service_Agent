@@ -7,13 +7,21 @@ from typing import Any
 
 from api.schemas import *
 from settings import load_course_env
+from agent.cancellation import observe_cancellation
 from agent.context import SESSION_MEMORIES, build_context, current_memory, update_memory
 from agent.cost import build_cost_summary
 from agent.hooks import HookManager
-from agent.ecommerce_client import product_query_keyword
+from agent.ecommerce_client import has_product_term, product_query_keyword
 from agent.mcp_catalog import MCP_CATALOG
 from agent.models.answer_client import FinalAnswerModelClient, FinalAnswerModelResult
 from agent.models.router_client import RouteModelClient
+from agent.product_query import (
+    CLARIFY_MESSAGES,
+    STOP_PENDING_PATTERN,
+    candidate_prompt,
+    product_selection_index,
+    resolve_product_target,
+)
 from agent.trace import public_trace_summary, record_initial_chat_trace, record_trace_events, trace_store
 from retrieval.knowledge import (
     REFUND_POLICY,
@@ -46,7 +54,7 @@ from agent.tools.runtime_context import (
     runtime_context_summary,
     runtime_identity_answer,
 )
-from agent.tools.tool_runtime import get_order_detail, get_order_logistics, get_refund_status, search_products
+from agent.tools.tool_runtime import get_after_sale_eligibility, get_order_detail, get_order_logistics, get_refund_status, search_products
 from agent.workflows.after_sale_graph import RECEIVED_RETURN_GRAPH, REFUND_APPROVAL_GRAPH
 from agent.workflows.resume import TrustedReviewer, resume_from_checkpoint
 
@@ -63,21 +71,67 @@ class Lesson41Agent:
         load_course_env()
         MESSAGE_COUNT_BY_SESSION[request.session_id] = MESSAGE_COUNT_BY_SESSION.get(request.session_id, 0) + 1
         message_count = MESSAGE_COUNT_BY_SESSION[request.session_id]
-        open_task = current_memory(request.session_id, request.runtime_user_id).get("open_task")
-        task_note = format_open_task(open_task)
+        memory = current_memory(request.session_id, request.runtime_user_id)
+        # 商城在网关取消草稿；下一轮先清理Python待办，避免旧候选复活。
+        if (request.runtime_context or {}).get("cancelledAfterSaleDraft") is True:
+            memory["open_task"] = None
+        open_task = memory.get("open_task")
+        runtime = request.runtime_context or {}
+        if runtime.get("mallAfterSaleRouting"):
+            open_task = runtime.get("afterSaleOpenTask")
+        query_task = runtime.get("afterSaleQuery") if "afterSaleQuery" in runtime else memory.get("eligibility_query")
+        selection_message = (request.runtime_context or {}).get("userMessage") or request.user_message
+        active_task = query_task if query_task and query_task.get("pending_slot") else open_task
+        task_note = format_open_task(active_task)
+        if query_task and query_task.get("order_id"):
+            task_note = (task_note or "") + f"\n上一轮只读资格查询的订单：{query_task['order_id']}，业务类型：{query_task.get('application_type') or '尚未核实'}。只有明确申请才办理，好的或知道了不算申请。"
         fallback_intent = classify_intent(request.user_message)
         route_result = self.route_model_client.plan_intent(
             request.user_message,
             fallback_intent=fallback_intent,
             task_note=task_note,
         )
-        if not route_result.used_model and task_note and is_slot_reply(request.user_message):
+        if not route_result.used_model and active_task and is_slot_reply(selection_message):
             route_result = route_result.model_copy(
-                update={"intent": open_task["intent"], "fallback_reason": "open_task_slot"}
+                update={"intent": active_task["intent"], "fallback_reason": "open_task_slot"}
             )
         intent = route_result.intent
-        explicit_order_id = extract_order_id(request.user_message)
-        order_id, context_report, compression_report = build_context(request, explicit_order_id)
+        if is_specific_eligibility_question(selection_message) or (
+            query_task and is_slot_reply(selection_message)
+        ):
+            intent = "after_sale_eligibility_query"
+            route_result = route_result.model_copy(update={"intent": intent})
+        product_state = memory.get("product_query") or {}
+        # 商品待选期间的纯序号选择即使被模型判成闲聊也续接商品任务；“先不看了”只结束商品待选。
+        if intent != "product_query" and (
+            product_selection_index(selection_message) is not None
+            or (product_state.get("pending_candidates") and STOP_PENDING_PATTERN.fullmatch(selection_message.strip()))
+        ):
+            intent = "product_query"
+            route_result = route_result.model_copy(update={"intent": intent, "fallback_reason": "product_pending_selection"})
+        if intent not in {"product_query", "general_chat", "unknown"}:
+            product_state["pending_candidates"] = None
+            product_state["original_question"] = None
+        if intent != "after_sale_eligibility_query" and not (request.runtime_context or {}).get("mallAfterSaleRouting"):
+            observation = observe_cancellation(request, open_task)
+            if observation is not None:
+                trace_store.add(request.session_id, "cancellation_intent_observed", observation)
+        explicit_order_id = extract_order_id(selection_message)
+        order_id, context_report, compression_report = build_context(
+            request, explicit_order_id, query_task=query_task, eligibility_query=intent == "after_sale_eligibility_query"
+        )
+        if intent in {"refund_request", "return_request"} and query_task and query_task.get("order_id") and not explicit_order_id:
+            page_order = runtime.get("current_order_id") or runtime.get("relatedOrderNo")
+            if not page_order or page_order == query_task["order_id"]:
+                order_id = query_task["order_id"]
+                context_report["chosen_order_id"] = order_id
+        draft = runtime.get("afterSaleDraft") or {}
+        if runtime.get("mallAfterSaleRouting") and intent in {"refund_request", "return_request"} \
+                and not order_id and not query_task and not is_slot_reply(selection_message) \
+                and draft.get("valid") is True and draft.get("ownerVerified") is True and draft.get("order"):
+            order_id = str(draft["order"])
+            context_report["chosen_order_id"] = order_id
+            context_report["conflict_resolutions"].append("order_id: 续接商城已校验且有效的当前申请草稿。")
         route_plan = build_route_plan(
             intent=intent,
             user_message=request.user_message,
@@ -89,13 +143,16 @@ class Lesson41Agent:
         citations: list[Citation] = []
         tool_calls: list[ToolCallTrace] = []
         workflow: dict[str, Any] | None = None
+        eligibility: dict[str, Any] | None = None
         cache_hit = False
         degraded = False
         degradation_reason: str | None = None
+        preserve_product_wording = False
         rag_rerank: dict[str, Any] | None = None
         rag_retrieval: dict[str, Any] | None = None
         verified_order_id: str | None = None
         verified_product_name: str | None = None
+        verified_product_id: str | None = None
         clarification = build_order_clarification(request, route_plan)
         hooks = HookManager()
         tool_calling_state: dict[str, Any] = {
@@ -238,6 +295,32 @@ class Lesson41Agent:
             risk_level = knowledge_result.risk_level
             next_action = knowledge_result.next_action
             needs_human_approval = knowledge_result.needs_human_approval
+        elif intent == "after_sale_eligibility_query":
+            if clarification:
+                answer = clarification.message + "这轮只查资格，不准备申请。"
+                if clarification.candidates:
+                    answer += "\n" + "\n".join(f"{index}. {item.label}（{item.hint}）" for index, item in enumerate(clarification.candidates, 1))
+                next_action = "ask_clarification"
+            else:
+                hooks.pre_tool_call("get_after_sale_eligibility", {"order_id": order_id}, request.runtime_user_id)
+                eligibility, call = get_after_sale_eligibility(order_id, request.runtime_user_id)
+                hooks.post_tool_call(call)
+                tool_calls.append(call)
+                answer = call.output_summary
+                next_action = "answer_user"
+                trace_store.add(request.session_id, "after_sale_eligibility_checked", {
+                    "session_id": request.session_id, "order_id": order_id,
+                    "status": eligibility.get("status") if eligibility else "UNKNOWN", "read_only": True,
+                    "error_type": call.error_type,
+                })
+            risk_level = "low"
+            needs_human_approval = False
+        elif (request.runtime_context or {}).get("mallAfterSaleRouting") and intent in {"refund_request", "return_request"}:
+            # 商城先分流，再由Java核验与准备；路由阶段不生成模拟审批草稿。
+            answer = clarification.message if clarification else "已识别申请诉求，待商城核验最新资格并准备确认。"
+            risk_level = "high"
+            next_action = "ask_clarification" if clarification else "answer_user"
+            needs_human_approval = False
         elif intent == "return_request":
             if clarification:
                 answer = clarification.message
@@ -305,14 +388,43 @@ class Lesson41Agent:
                     next_action = "transfer_to_human" if eligible else "answer_user"
                     needs_human_approval = eligible
                     trace_store.add(request.session_id, "received_return_workflow_completed", {"session_id": request.session_id, **workflow})
-        elif intent in {"order_query", "refund_status_query", "refund_request", "product_query"}:
+        elif intent == "product_query":
+            outcome = self._run_product_query(request, memory, hooks)
+            tool_calls.extend(outcome["tool_calls"])
+            tool_calling_state = outcome["tool_calling_state"]
+            tool_agent_prompt_fragments = outcome["prompt_fragments"]
+            tool_agent_model_calls = outcome["model_calls"]
+            answer = outcome["answer"]
+            risk_level = outcome["risk_level"]
+            next_action = outcome["next_action"]
+            needs_human_approval = False
+            verified_product_id = outcome.get("verified_product_id")
+            verified_product_name = outcome.get("verified_product_name")
+            preserve_product_wording = bool(outcome.get("preserve_wording"))
+            if outcome.get("degraded"):
+                degraded = True
+                degradation_reason = outcome.get("degradation_reason")
+                trace_store.add(
+                    request.session_id,
+                    "degradation_triggered",
+                    {
+                        "session_id": request.session_id,
+                        "intent": intent,
+                        "degraded": True,
+                        "reason": degradation_reason,
+                        "source": "product_tool_read_failure",
+                    },
+                )
+            citations.extend(outcome["citations"])
+            rag_rerank = outcome.get("rag_rerank")
+            rag_retrieval = outcome.get("rag_retrieval")
+        elif intent in {"order_query", "refund_status_query", "refund_request"}:
             tool_result = self.langchain_tool_runner.run(
                 request=request,
                 intent=intent,
                 required_tools=route_plan.required_tools,
                 hooks=hooks,
                 expected_order_id=order_id,
-                expected_product_keyword=product_query_keyword(request.user_message) if intent == "product_query" else None,
             )
             tool_calling_state = tool_result.state
             tool_agent_prompt_fragments = tool_result.prompt_fragments
@@ -351,28 +463,6 @@ class Lesson41Agent:
                             "next_action": call.next_action,
                         },
                     )
-            elif clarification is None and intent == "product_query":
-                hooks.pre_tool_call("search_products", {"keyword": request.user_message}, request.runtime_user_id)
-                trace_store.add(
-                    request.session_id,
-                    "tool_started",
-                    {"session_id": request.session_id, "tool_name": "search_products"},
-                )
-                products, product_call = search_products(request.user_message)
-                tool_calls.append(product_call)
-                hooks.post_tool_call(product_call)
-                trace_store.add(
-                    request.session_id,
-                    "tool_finished",
-                    {
-                        "session_id": request.session_id,
-                        "tool_name": product_call.tool_name,
-                        "status": product_call.status,
-                        "risk_level": product_call.risk_level,
-                    },
-                )
-                order = None
-                detail_call = None
             elif clarification is None:
                 hooks.pre_tool_call("get_order_detail", {"order_id": order_id}, request.runtime_user_id)
                 trace_store.add(
@@ -460,31 +550,6 @@ class Lesson41Agent:
                 if status_call.status == "error":
                     degraded = True
                     degradation_reason = status_call.error_type or "refund_status_unavailable"
-            elif intent == "product_query":
-                product_call = next((call for call in tool_calls if call.tool_name == "search_products"), None)
-                if product_call is None:
-                    products, product_call = search_products(request.user_message)
-                    tool_calls.append(product_call)
-                if any(term in request.user_message for term in ["活动", "优惠", "满减", "会员"]):
-                    knowledge_result = promotion_policy_result(request.session_id, request.user_message)
-                    record_trace_events(request.session_id, knowledge_result.trace_events)
-                    citations = knowledge_result.citations
-                    rag_retrieval = knowledge_result.retrieval_debug
-                    rag_rerank = knowledge_result.rerank
-                    policy_answer = (
-                        f"平台通用规则：{knowledge_result.answer} "
-                        "这不代表该规则一定适用于当前商品活动，具体组合以商品页和结算页为准。"
-                        if citations
-                        else "活动规则请以商品页与结算页为准。"
-                    )
-                    answer = f"{product_call.output_summary} {policy_answer}"
-                else:
-                    answer = product_call.output_summary
-                risk_level = "low" if product_call.status == "success" else "medium"
-                next_action = product_call.next_action or "answer_user"
-                needs_human_approval = False
-                if product_call.status == "success":
-                    verified_product_name = str(product_call.arguments.get("product_name") or "") or None
             elif intent == "refund_request":
                 citations.append(REFUND_POLICY)
                 trace_store.add(
@@ -566,18 +631,11 @@ class Lesson41Agent:
                 next_action = "ask_clarification" if detail_call.error_type == "missing_order_id" else "transfer_to_human"
                 needs_human_approval = False
         elif intent == "unknown":
-            if is_specific_eligibility_question(request.user_message):
-                answer = (
-                    "你是在问具体订单能不能退，不是在办理。"
-                    "我现在只能说明通用退款或退货规则，还不能只读核验这一笔的资格，也不会准备申请。"
-                    "可以直接问退款政策或退货条件；如果要办理，请明确说申请退款或申请退货。"
-                )
-            else:
-                answer = (
-                    f"我收到了订单号 {order_id}，但你还没有说明要办什么。请告诉我是查物流、查进度，还是申请售后。在你说清楚之前，我不会替你选定，也不会查询这笔订单。"
-                    if order_id
-                    else "我还不知道你要办哪一件事。如果是订单物流、商品、活动规则或售后，请直接说具体需求。"
-                )
+            answer = (
+                f"我收到了订单号 {order_id}，但你还没有说明要办什么。请告诉我是查物流、查进度，还是申请售后。在你说清楚之前，我不会替你选定，也不会查询这笔订单。"
+                if order_id
+                else "我还不知道你要办哪一件事。如果是订单物流、商品、活动规则或售后，请直接说具体需求。"
+            )
             risk_level = "low"
             next_action = "answer_user"
             needs_human_approval = False
@@ -648,7 +706,9 @@ class Lesson41Agent:
             workflow=workflow,
             cache_hit=cache_hit,
             degraded=degraded,
-            skip_final_model=uses_runtime_identity,
+            skip_final_model=uses_runtime_identity or intent == "after_sale_eligibility_query"
+                or bool((request.runtime_context or {}).get("mallAfterSaleRouting") and intent in {"refund_request", "return_request"}),
+            preserve_tool_wording=preserve_product_wording,
             enable_reasoning=request.reasoning_view == "teaching",
             context_report=context_report,
         )
@@ -687,7 +747,18 @@ class Lesson41Agent:
             )
 
         stored = current_memory(request.session_id, request.runtime_user_id)
-        if next_action == "ask_clarification" and intent not in {"unknown", "general_chat"}:
+        if intent == "after_sale_eligibility_query":
+            queried = next((call for call in tool_calls if call.tool_name == "get_after_sale_eligibility" and call.status == "success"), None)
+            stored["eligibility_query"] = {
+                "intent": intent, "order_id": order_id if queried else None,
+                "application_type": eligibility.get("applicationType") if eligibility else None,
+                "pending_slot": "order_id" if clarification else None,
+                "candidates": [{"value": item.value, "label": item.label} for item in (clarification.candidates if clarification else [])],
+            }
+        elif intent == "product_query":
+            # 商品任务状态独立保存在 product_query，不新建、也不清掉退款待办。
+            pass
+        elif next_action == "ask_clarification" and intent not in {"unknown", "general_chat", "product_query"}:
             stored["open_task"] = {
                 "intent": intent,
                 "pending_slot": clarification.clarification_field if clarification else "order_id",
@@ -705,6 +776,7 @@ class Lesson41Agent:
             verified_order_id=verified_order_id,
             user_message=request.user_message,
             verified_product_name=verified_product_name,
+            verified_product_id=verified_product_id,
         )
         hook_completion = hooks.on_completion(risk_level=risk_level, next_action=next_action, degraded=degraded)
         for hook_event in hooks.events:
@@ -760,6 +832,8 @@ class Lesson41Agent:
                 "agent_version": "lesson-41-final-rehearsal",
                 "message_count": message_count,
                 "intent": intent,
+                "eligibility_query": stored.get("eligibility_query"),
+                "product_query": stored.get("product_query"),
                 "model": {
                     "route_planner": {
                         "used_model": route_result.used_model,
@@ -838,6 +912,217 @@ class Lesson41Agent:
             },
         )
 
+    def _call_product_tool(
+        self,
+        request: ChatRequest,
+        hooks: HookManager,
+        arguments: dict[str, Any],
+        *,
+        product_id: int | str | None = None,
+        keyword: str | None = None,
+        match_text: str | None = None,
+    ) -> ToolCallTrace:
+        """统一商品工具的 hooks 与 trace 记录，所有商品查询都经过这里。"""
+        hooks.pre_tool_call("search_products", arguments, request.runtime_user_id)
+        trace_store.add(
+            request.session_id,
+            "tool_started",
+            {"session_id": request.session_id, "tool_name": "search_products"},
+        )
+        _products, call = search_products(keyword, product_id=product_id, match_text=match_text)
+        hooks.post_tool_call(call)
+        trace_store.add(
+            request.session_id,
+            "tool_finished",
+            {
+                "session_id": request.session_id,
+                "tool_name": call.tool_name,
+                "status": call.status,
+                "risk_level": call.risk_level,
+                "next_action": call.next_action,
+            },
+        )
+        return call
+
+    def _run_product_query(self, request: ChatRequest, memory: dict[str, Any], hooks: HookManager) -> dict[str, Any]:
+        """商品对象定位：代码绑定编号，模型只在需要提取名称时参与搜索词生成。"""
+        runtime = request.runtime_context or {}
+        message = str(runtime.get("userMessage") or request.user_message)
+        pstate = memory.get("product_query") or {}
+        memory["product_query"] = pstate
+        for key in ("product_id", "product_name", "pending_candidates", "original_question"):
+            pstate.setdefault(key, None)
+        keyword_present = has_product_term(message)
+        model_available = self.langchain_tool_runner.can_call_model()
+        resolution = resolve_product_target(
+            message=message,
+            page_product_id=runtime.get("relatedProductId"),
+            product_state=pstate,
+            keyword_present=keyword_present,
+            model_available=model_available,
+        )
+        kind = resolution["kind"]
+        question = pstate.get("original_question") if resolution.get("source") == "candidate" else message
+        question = question or message
+        outcome: dict[str, Any] = {
+            "answer": "",
+            "risk_level": "low",
+            "next_action": "answer_user",
+            "tool_calls": [],
+            "citations": [],
+            "verified_product_id": None,
+            "verified_product_name": None,
+            "degraded": False,
+            "degradation_reason": None,
+            "preserve_wording": False,
+            "tool_calling_state": {
+                "create_agent": False,
+                "skip_reason": "code_bound_product_object",
+                "available_tools": ["search_products"],
+                "selected_tools": [],
+                "message_types": [],
+                "tool_message_count": 0,
+                "fallback_used": False,
+            },
+            "prompt_fragments": [],
+            "model_calls": 0,
+            "rag_rerank": None,
+            "rag_retrieval": None,
+        }
+
+        def _finish_product_call(call: ToolCallTrace) -> None:
+            if call.status == "error" and call.error_type in {"timeout", "business_api_unavailable"}:
+                outcome["degraded"] = True
+                outcome["degradation_reason"] = call.error_type
+            elif call.arguments.get("missing_fields"):
+                outcome["preserve_wording"] = True
+
+        status = "clarified"
+        if kind == "clarify":
+            outcome["answer"] = CLARIFY_MESSAGES[resolution["reason"]]
+            outcome["next_action"] = "ask_clarification"
+        elif kind == "end_pending":
+            pstate["pending_candidates"] = None
+            pstate["original_question"] = None
+            outcome["answer"] = "好的，已结束这次商品选择，没有为你选定任何商品。其他办理不受影响。"
+        elif kind == "reshow":
+            outcome["answer"] = candidate_prompt(pstate["pending_candidates"])
+            outcome["next_action"] = "ask_clarification"
+        elif kind == "detail":
+            product_id = resolution["product_id"]
+            call = self._call_product_tool(request, hooks, {"product_id": product_id}, product_id=product_id)
+            outcome["tool_calls"].append(call)
+            _finish_product_call(call)
+            if call.status == "success":
+                status = "answered"
+                pstate["pending_candidates"] = None
+                pstate["original_question"] = None
+                outcome["answer"] = call.output_summary
+                outcome["verified_product_id"] = str(product_id)
+                outcome["verified_product_name"] = str(call.arguments.get("product_name") or "") or None
+            else:
+                status = call.error_type or "error"
+                if call.error_type == "product_not_found":
+                    # 已选编号不存在时清掉失效对象，不能默选其他款兜底。
+                    pstate["pending_candidates"] = None
+                    pstate["original_question"] = None
+                    if pstate.get("product_id") is not None and str(pstate["product_id"]) == str(product_id):
+                        pstate["product_id"] = None
+                        pstate["product_name"] = None
+                outcome["answer"] = call.output_summary
+                outcome["next_action"] = call.next_action or "answer_user"
+                outcome["risk_level"] = "medium"
+        else:
+            # 新查询先作废旧候选，避免旧序号复活。
+            pstate["pending_candidates"] = None
+            pstate["original_question"] = None
+            call = None
+            if model_available:
+                tool_result = self.langchain_tool_runner.run(
+                    request=request,
+                    intent="product_query",
+                    required_tools=["search_products"],
+                    hooks=hooks,
+                    expected_product_keyword=product_query_keyword(message) if keyword_present else None,
+                )
+                outcome["tool_calling_state"] = tool_result.state
+                outcome["prompt_fragments"] = tool_result.prompt_fragments
+                outcome["model_calls"] = tool_result.model_calls
+                outcome["tool_calls"].extend(tool_result.tool_calls)
+                trace_store.add(
+                    request.session_id,
+                    "langchain_tool_agent_completed",
+                    {
+                        "session_id": request.session_id,
+                        "create_agent": tool_result.state.get("create_agent"),
+                        "selected_tools": tool_result.state.get("selected_tools", []),
+                        "message_types": tool_result.state.get("message_types", []),
+                        "fallback_used": tool_result.state.get("fallback_used"),
+                        "status": "success" if tool_result.executed else "fallback",
+                    },
+                )
+                call = next(
+                    (item for item in tool_result.tool_calls
+                     if item.tool_name == "search_products" and item.error_type != "route_plan_argument_mismatch"),
+                    None,
+                )
+            if call is None:
+                keyword = product_query_keyword(message)
+                call = self._call_product_tool(request, hooks, {"keyword": keyword}, keyword=keyword, match_text=message)
+                outcome["tool_calls"].append(call)
+            if call.status == "success" and call.candidates:
+                status = "candidates"
+                pstate["pending_candidates"] = [
+                    {"id": item["value"], "name": item["label"]} for item in call.candidates
+                ]
+                pstate["original_question"] = message
+                outcome["answer"] = call.clarification_prompt or call.output_summary
+                outcome["next_action"] = "ask_clarification"
+            elif call.status == "success" and call.next_action == "ask_clarification":
+                status = "no_match"
+                outcome["answer"] = call.output_summary
+                outcome["next_action"] = "ask_clarification"
+            elif call.status == "success":
+                status = "answered"
+                outcome["answer"] = call.output_summary
+                outcome["verified_product_id"] = str(call.arguments.get("product_id") or "") or None
+                outcome["verified_product_name"] = str(call.arguments.get("product_name") or "") or None
+            else:
+                status = call.error_type or "error"
+                outcome["answer"] = call.output_summary
+                outcome["next_action"] = call.next_action or "answer_user"
+                outcome["risk_level"] = "medium"
+            _finish_product_call(call)
+        # 单商品事实成立后活动类问题才补 RAG 通用规则；候选澄清阶段不补。
+        if status == "answered" and any(term in question for term in ["活动", "优惠", "满减", "会员"]):
+            knowledge_result = promotion_policy_result(request.session_id, question)
+            record_trace_events(request.session_id, knowledge_result.trace_events)
+            outcome["citations"] = knowledge_result.citations
+            outcome["rag_retrieval"] = knowledge_result.retrieval_debug
+            outcome["rag_rerank"] = knowledge_result.rerank
+            policy_answer = (
+                f"平台通用规则：{knowledge_result.answer} "
+                "这不代表该规则一定适用于当前商品活动，具体组合以商品页和结算页为准。"
+                if knowledge_result.citations
+                else "活动规则请以商品页与结算页为准。"
+            )
+            outcome["answer"] = f"{outcome['answer']} {policy_answer}"
+        trace_store.add(
+            request.session_id,
+            "product_target_resolved",
+            {
+                "session_id": request.session_id,
+                "resolution": kind,
+                "source": resolution.get("source"),
+                "product_id": outcome["verified_product_id"]
+                    or (str(resolution["product_id"]) if kind == "detail" else None),
+                "status": status,
+                "pending_candidates": [item["name"] for item in pstate.get("pending_candidates") or []],
+                "model_available": model_available,
+            },
+        )
+        return outcome
+
     def _compose_final_answer(
         self,
         *,
@@ -852,6 +1137,7 @@ class Lesson41Agent:
         cache_hit: bool,
         degraded: bool,
         skip_final_model: bool = False,
+        preserve_tool_wording: bool = False,
         enable_reasoning: bool = False,
         context_report: dict[str, Any],
     ) -> FinalAnswerModelResult:
@@ -859,14 +1145,16 @@ class Lesson41Agent:
         skip_reason: str | None = None
         if skip_final_model:
             skip_reason = "runtime_context_direct_answer"
+        elif degraded:
+            skip_reason = "degraded_path"
+        elif preserve_tool_wording:
+            skip_reason = "verified_tool_wording"
         elif next_action == "ask_clarification":
             skip_reason = "clarification_required"
         elif intent in {"security_request", "low_confidence_query"}:
             skip_reason = "safety_or_low_confidence_boundary"
         elif intent == "unknown":
             skip_reason = "unclear_task"
-        elif degraded:
-            skip_reason = "degraded_path"
         elif cache_hit:
             skip_reason = "common_hit_cache"
         if skip_reason:

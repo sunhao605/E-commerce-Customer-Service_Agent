@@ -1,0 +1,15 @@
+test_cancellation_does_not_prevent_a_new_refund_request (backend.tests.test_cancelled_draft.CancelledDraftTest.test_cancellation_does_not_prevent_a_new_refund_request) ... ok
+test_gateway_cancellation_removes_old_candidates_before_routing (backend.tests.test_cancelled_draft.CancelledDraftTest.test_gateway_cancellation_removes_old_candidates_before_routing) ... ok
+test_without_cancellation_keeps_the_pending_selection (backend.tests.test_cancelled_draft.CancelledDraftTest.test_without_cancellation_keeps_the_pending_selection) ... ok
+test_dialogue_binds_tool_workflow_and_memory_to_first_order (backend.tests.test_candidate_selection.CandidateSelectionTest.test_dialogue_binds_tool_workflow_and_memory_to_first_order) ... ok
+test_explicit_switch_keeps_model_intent_and_explicit_order (backend.tests.test_candidate_selection.CandidateSelectionTest.test_explicit_switch_keeps_model_intent_and_explicit_order) ... ok
+test_gateway_page_text_cannot_override_the_original_selection (backend.tests.test_candidate_selection.CandidateSelectionTest.test_gateway_page_text_cannot_override_the_original_selection) ... ok
+test_missing_invalid_and_other_session_never_fall_back_to_old_order (backend.tests.test_candidate_selection.CandidateSelectionTest.test_missing_invalid_and_other_session_never_fall_back_to_old_order) ... ok
+test_selected_order_still_requires_current_ownership (backend.tests.test_candidate_selection.CandidateSelectionTest.test_selected_order_still_requires_current_ownership) ... ok
+test_selected_order_uses_current_fulfillment_state (backend.tests.test_candidate_selection.CandidateSelectionTest.test_selected_order_uses_current_fulfillment_state) ... ok
+test_selection_uses_shown_order_even_when_current_list_is_reversed (backend.tests.test_candidate_selection.CandidateSelectionTest.test_selection_uses_shown_order_even_when_current_list_is_reversed) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.044s
+
+OK

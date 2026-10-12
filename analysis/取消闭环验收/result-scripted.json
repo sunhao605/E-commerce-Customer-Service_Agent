@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "mode": "scripted",
+  "score_min": 0.9,
+  "checks": 24,
+  "failed": [],
+  "model_calls": 16,
+  "error": null
+}

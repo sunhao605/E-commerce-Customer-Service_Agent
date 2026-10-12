@@ -1,0 +1,28 @@
+{
+  "username": "zhangsan",
+  "products": [
+    {
+      "id": 1,
+      "name": "露营折叠椅",
+      "price": 599.0,
+      "stock": 519,
+      "active": true
+    },
+    {
+      "id": 4,
+      "name": "轻量露营折叠椅",
+      "price": 199.0,
+      "stock": 0,
+      "active": true
+    }
+  ],
+  "manual_refund_order": {
+    "orderNo": "SO20261010124526068-3c464bb6",
+    "status": "ELIGIBLE",
+    "applicationType": "REFUND",
+    "amount": 199.0,
+    "reason": "已支付且未发货，整单实付金额已核实。"
+  },
+  "model_calls": 0,
+  "submission_calls": 0
+}

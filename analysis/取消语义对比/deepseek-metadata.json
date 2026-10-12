@@ -1,0 +1,9 @@
+{
+  "provider": "deepseek",
+  "started_utc": "2026-10-10T14:11:11.978367+00:00",
+  "fixture_sha256": "34e1b091d4c39e14a8cbdfa8347cfc8bce3c3a441b596cb3a8c01d3c6e839f16",
+  "rule_source_sha256": "ba805cfed2314c37b66c0acbb187f8eb561752bab30ac8164d4dcbca7598a103",
+  "retries": 0,
+  "timeout_seconds": 30,
+  "repeats": 2
+}

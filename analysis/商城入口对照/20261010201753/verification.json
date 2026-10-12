@@ -1,0 +1,30 @@
+{
+  "checked_at": "2026-10-10T20:17:53+08:00",
+  "git_commit": "78e903053bbd2e81e2cf003e6ebcad898bfa6789",
+  "python_pid": 96857,
+  "python_started_at": "2026-10-10T18:09:03+08:00",
+  "mall": "http://127.0.0.1:5174 的商城前端，登录 zhangsan，经 127.0.0.1:8081 的现有 Java 网关调用 host.docker.internal:8000。Java 镜像创建于 2026-10-09，未重建。没有点击确认提交。",
+  "judgment": "首页客服的政策咨询、查无订单的申请、咨询后切换和发票，用户看到的文字与 Python 当轮回答一致，也没有确认卡。订单详情里对真实未发货订单申请退款不一致：Python 已进入待审批，商城用金额核验失败盖掉了回答，没有确认卡，也没有提交。",
+  "home_drawer": {
+    "entry": "首页顶栏「客服」，页面上下文为 HOME",
+    "policy_refund": "用户看到退款政策说明。Python 意图 refund_policy_query，requires_workflow false。confirmRequired false，无确认卡。",
+    "policy_return": "用户看到已支付签收、七天窗口、整单购买时支持、无需另填理由、验收后才退款。Python 意图 return_policy_query。无确认卡。",
+    "apply_missing_order": "ORD1234 的退款和退货都进入 refund_request / return_request，并调用 get_order_detail，结果 not_found。用户看到查无订单、不能创建申请。无确认卡。",
+    "switch_refund": "同一抽屉先答退款政策，再说「我现在要申请退款。」后变成追问订单，并列出张三账号下 10 笔订单。Python 第二轮意图 refund_request，clarification_required。无确认卡。",
+    "switch_return": "同一抽屉先答退货政策，再说「我现在要申请七天无理由退货。」后显示「你要查询哪一个订单？」。Python 第二轮意图 return_request。无确认卡，也没有列出订单。",
+    "invoice": "用户看到第二项写入的发票缓存原文。Python 意图 invoice_query，最终回答因 common_hit_cache 跳过模型。无确认卡。"
+  },
+  "order_detail_mismatch": {
+    "entry": "订单详情「联系荒野客服」，页面已附带 SO20260601090000008-a1000008",
+    "user_message": "我现在要申请退款。",
+    "order_facts": "paymentStatus=PAID，fulfillmentStatus=UNSHIPPED，totalAmount=599，该订单的余额流水为空",
+    "python": "意图 refund_request，get_order_detail 成功，工作流 unshipped_refund 状态 paused、pending_action require_approval。确定性回答是这笔订单可以进入未发货退款判断，资金动作须等待人工审批；随后模型改写了这句话。",
+    "mall_ui": "没有显示 Python 的回答，也没有确认卡。用户看到「暂时无法核实可退的整单实付金额，本次未提交，请联系人工核验」，pendingAction=BLOCKED。",
+    "cause": "Python 认为已支付且未发货就可以进入审批。商城网关在此之后调用 ShopService.verifiedPaidAmount，要求恰好一笔支付流水且金额等于订单总额。这笔种子订单没有支付流水，网关捕获 REFUND_PAYMENT_UNVERIFIED 后用异常文案替换了 Python 回答。申请没有写入售后记录。"
+  },
+  "limitations": [
+    "没有点击确认提交，因此没有产生新的售后申请",
+    "没有从商城验证模型关闭兜底；线上商城连的是开着模型的 8000",
+    "发票命中的是第二项留在 8000 进程里的缓存"
+  ]
+}

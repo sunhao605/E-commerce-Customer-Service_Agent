@@ -26,7 +26,8 @@ type Route =
   | { name: "order"; orderNo: string }
   | { name: "after-sales" }
   | { name: "balance" }
-  | { name: "policies" };
+  | { name: "policies" }
+  | { name: "human-support" };
 
 type Toast = { tone: "ok" | "error"; text: string } | null;
 type CsMessage = {
@@ -35,6 +36,7 @@ type CsMessage = {
   contextTag?: string;
   response?: CustomerServiceResponse;
   confirmationResult?: CustomerServiceResponse;
+  humanSupportDecision?: string;
 };
 
 const money = (value?: number | null) => `¥${Number(value ?? 0).toFixed(2)}`;
@@ -73,6 +75,7 @@ function parseRoute(): Route {
   if (path === "/after-sales") return { name: "after-sales" };
   if (path === "/balance") return { name: "balance" };
   if (path === "/policies") return { name: "policies" };
+  if (path === "/human-support") return { name: "human-support" };
   return { name: "home" };
 }
 
@@ -185,6 +188,7 @@ export function App() {
           context={csContext}
           onClose={() => setCsOpen(false)}
           onError={handleError}
+          onHumanSupport={() => { setCsOpen(false); go("/human-support"); }}
         />
       )}
     </div>
@@ -274,6 +278,7 @@ function ShopRoutes(props: {
   if (route.name === "after-sales") return <AfterSalesPage {...props} />;
   if (route.name === "balance") return <BalancePage {...props} />;
   if (route.name === "policies") return <PoliciesPage handleError={props.handleError} />;
+  if (route.name === "human-support") return <HumanSupportPage go={props.go} openService={props.openService} />;
   return <HomePage {...props} />;
 }
 
@@ -1101,11 +1106,22 @@ function PoliciesPage({ handleError }: { handleError: (error: unknown) => string
   );
 }
 
-function CustomerServiceDrawer({ open, context, onClose, onError }: {
+function HumanSupportPage({ go, openService }: Pick<PageProps, "go" | "openService">) {
+  return (
+    <section className="state-block">
+      <h1>人工客服功能开发中</h1>
+      <p>当前尚未接入真人客服，本次没有转接、登记人工服务请求或提交售后申请。</p>
+      <button className="primary" onClick={() => { go("/"); openService({ type: "HOME" }); }}>返回客服助手</button>
+    </section>
+  );
+}
+
+function CustomerServiceDrawer({ open, context, onClose, onError, onHumanSupport }: {
   open: boolean;
   context: CustomerServicePageContext;
   onClose: () => void;
   onError: (error: unknown) => string;
+  onHumanSupport: () => void;
 }) {
   const [messages, setMessages] = useState<CsMessage[]>([
     { from: "agent", text: "您好，我是荒野户外的客服助手，请问有什么可以帮您？" }
@@ -1138,7 +1154,9 @@ function CustomerServiceDrawer({ open, context, onClose, onError }: {
     try {
       const response = await api.chat({ message: text, sessionId, pageContext: context });
       setSessionId(response.sessionId);
-      if (!response.fallback) setActiveConfirmationToken(response.confirmRequired ? response.resumeToken : null);
+      if (!response.fallback && !["ELIGIBILITY_QUERY", "ELIGIBILITY_ORDER_REQUIRED", "PRODUCT_QUERY"].includes(response.pendingAction || "")) {
+        setActiveConfirmationToken(response.confirmRequired ? response.resumeToken : null);
+      }
       setMessages((prev) => [...prev, { from: "agent", text: response.answer, response }]);
     } catch (err) {
       setMessages((prev) => [...prev, { from: "system", text: onError(err) || "客服繁忙，请稍后再试。" }]);
@@ -1148,7 +1166,7 @@ function CustomerServiceDrawer({ open, context, onClose, onError }: {
     }
   }
 
-  async function decide(response: CustomerServiceResponse, decision: "CONFIRM_SUBMIT" | "CANCEL_SUBMIT") {
+  async function decide(response: CustomerServiceResponse, decision: string) {
     if (busyRef.current) return;
     if (!response.resumeToken || response.resumeToken !== activeConfirmationToken) return;
     busyRef.current = true;
@@ -1178,7 +1196,17 @@ function CustomerServiceDrawer({ open, context, onClose, onError }: {
   }
 
   const latestConfirmationIndex = messages.reduce((latest, message, index) =>
-    message.response?.confirmRequired && message.response.resumeToken === activeConfirmationToken ? index : latest, -1);
+    message.response?.confirmRequired && message.response.pendingAction !== "HUMAN_SUPPORT"
+      && message.response.resumeToken === activeConfirmationToken ? index : latest, -1);
+  const latestHumanSupportIndex = messages.reduce((latest, message, index) =>
+    message.from === "agent" ? (message.response?.pendingAction === "HUMAN_SUPPORT" ? index : -1) : latest, -1);
+
+  function chooseHumanSupport(index: number, code: string) {
+    if (loading || index !== latestHumanSupportIndex || messages[index].humanSupportDecision) return;
+    setMessages((prev) => prev.map((message, current) => current === index
+      ? { ...message, humanSupportDecision: code === "OPEN_HUMAN_SUPPORT" ? "已前往人工客服" : "已留在客服助手" } : message));
+    if (code === "OPEN_HUMAN_SUPPORT") onHumanSupport();
+  }
 
   return (
     <aside className="service-drawer">
@@ -1191,14 +1219,35 @@ function CustomerServiceDrawer({ open, context, onClose, onError }: {
           <div className={`message ${message.from}`} key={index}>
             <p>{message.text}</p>
             {message.contextTag && <span className="message-context-tag">{message.contextTag}</span>}
-            {message.response?.confirmRequired && (
+            {message.response?.pendingAction === "HUMAN_SUPPORT" && (
+              <div className="confirm-card" role="group" aria-label="人工客服入口确认">
+                <b>{message.response.confirmationTitle}</b>
+                <span>{message.humanSupportDecision ?? message.response.confirmationSummary}</span>
+                {!message.humanSupportDecision && index !== latestHumanSupportIndex && <span>请以最新回复中的入口为准。</span>}
+                {message.response.actions.map((action) => (
+                  <button key={action.code} className={action.code === "OPEN_HUMAN_SUPPORT" ? "primary" : undefined}
+                    disabled={loading || index !== latestHumanSupportIndex || !!message.humanSupportDecision}
+                    onClick={() => chooseHumanSupport(index, action.code)}>{action.label}</button>
+                ))}
+              </div>
+            )}
+            {message.response?.confirmRequired && message.response.pendingAction !== "HUMAN_SUPPORT" && (
               <div className="confirm-card">
                 <b>{message.confirmationResult?.confirmationTitle
                   ?? (message.confirmationResult?.pendingAction === "CANCELLED" ? "本次申请已取消" : message.response.confirmationTitle ?? "需要确认")}</b>
                 <span>{message.confirmationResult?.answer ?? message.response.confirmationSummary}</span>
                 {!message.confirmationResult && index !== latestConfirmationIndex && <span>此确认卡已失效，请以最新回复为准。</span>}
-                <button className="primary" disabled={loading || index !== latestConfirmationIndex} onClick={() => decide(message.response!, "CONFIRM_SUBMIT")}>确认提交申请</button>
-                <button disabled={loading || index !== latestConfirmationIndex} onClick={() => decide(message.response!, "CANCEL_SUBMIT")}>取消本次申请</button>
+                {(message.response.actions?.length ? message.response.actions : [
+                  { code: "CONFIRM_SUBMIT", label: "确认提交申请" },
+                  { code: "CANCEL_SUBMIT", label: "取消本次申请" },
+                ]).map((action) => (
+                  <button
+                    key={action.code}
+                    className={action.code === "CONFIRM_SUBMIT" || action.code === "KEEP" ? "primary" : undefined}
+                    disabled={loading || index !== latestConfirmationIndex}
+                    onClick={() => decide(message.response!, action.code)}
+                  >{action.label}</button>
+                ))}
               </div>
             )}
           </div>

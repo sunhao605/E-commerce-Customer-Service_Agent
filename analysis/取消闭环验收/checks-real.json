@@ -1,0 +1,2525 @@
+[
+  {
+    "check": "新样本 R1-S01 stop",
+    "passed": true,
+    "safe": true,
+    "action_ok": true,
+    "cancellation_exit": true,
+    "draft_kept": false,
+    "message": "这次售后退款我决定撤销，不用再帮我办理了。",
+    "judgment": {
+      "status": "observed",
+      "reason": "simple_cancel",
+      "executed": true,
+      "action": "cancel",
+      "cancel_structurally_allowed": true,
+      "contract": "cancel-p0-2026-10-11",
+      "model": "jev-1.13.0",
+      "draft_stage": "draft",
+      "draft_version": "1",
+      "order_id": "ORD9801",
+      "elapsed_ms": 499.955,
+      "path_type": "observed",
+      "pending_action": "cancel",
+      "target_type": "cancellation",
+      "target_name": "draft",
+      "components": {
+        "decision": "stop",
+        "target": "current",
+        "extra_task": "no"
+      },
+      "scores": {
+        "decision": 1.0,
+        "target": 1.0,
+        "extra_task": 0.98
+      },
+      "usage": {
+        "input_tokens": 1338,
+        "output_tokens": 115
+      },
+      "fact": null,
+      "probabilities": {
+        "decision": {
+          "stop": 1.0,
+          "uncertain": 0.0,
+          "continue": 0.0
+        },
+        "target": {
+          "other": 0.0,
+          "current": 1.0,
+          "ambiguous": 0.0
+        },
+        "extra_task": {
+          "no": 0.99,
+          "yes": 0.01,
+          "uncertain": 0.0
+        }
+      }
+    },
+    "response": {
+      "answer": "本次售后申请已取消，未提交。",
+      "sessionId": "closure-1-S01",
+      "confirmRequired": false,
+      "pendingAction": "CANCELLED",
+      "actions": [],
+      "fallback": false
+    },
+    "state": {
+      "pending": "CANCELLED",
+      "handled": true,
+      "revision": 2
+    }
+  },
+  {
+    "check": "新样本 R1-S02 stop",
+    "passed": true,
+    "safe": true,
+    "action_ok": true,
+    "cancellation_exit": true,
+    "draft_kept": false,
+    "message": "刚才申请的退款不要办了，我已经决定留下商品。",
+    "judgment": {
+      "status": "observed",
+      "reason": "simple_cancel",
+      "executed": true,
+      "action": "cancel",
+      "cancel_structurally_allowed": true,
+      "contract": "cancel-p0-2026-10-11",
+      "model": "jev-1.13.0",
+      "draft_stage": "draft",
+      "draft_version": "1",
+      "order_id": "ORD9801",
+      "elapsed_ms": 510.011,
+      "path_type": "observed",
+      "pending_action": "cancel",
+      "target_type": "cancellation",
+      "target_name": "draft",
+      "components": {
+        "decision": "stop",
+        "target": "current",
+        "extra_task": "no"
+      },
+      "scores": {
+        "decision": 1.0,
+        "target": 1.0,
+        "extra_task": 0.97
+      },
+      "usage": {
+        "input_tokens": 1339,
+        "output_tokens": 115
+      },
+      "fact": null,
+      "probabilities": {
+        "decision": {
+          "stop": 1.0,
+          "uncertain": 0.0,
+          "continue": 0.0
+        },
+        "target": {
+          "other": 0.0,
+          "current": 1.0,
+          "ambiguous": 0.0
+        },
+        "extra_task": {
+          "no": 0.98,
+          "yes": 0.02,
+          "uncertain": 0.0
+        }
+      }
+    },
+    "response": {
+      "answer": "本次售后申请已取消，未提交。",
+      "sessionId": "closure-1-S02",
+      "confirmRequired": false,
+      "pendingAction": "CANCELLED",
+      "actions": [],
+      "fallback": false
+    },
+    "state": {
+      "pending": "CANCELLED",
+      "handled": true,
+      "revision": 2
+    }
+  },
+  {
+    "check": "新样本 R1-S03 stop",
+    "passed": true,
+    "safe": true,
+    "action_ok": true,
+    "cancellation_exit": true,
+    "draft_kept": false,
+    "message": "请结束当前这份尚未提交的退款申请。",
+    "judgment": {
+      "status": "observed",
+      "reason": "simple_cancel",
+      "executed": true,
+      "action": "cancel",
+      "cancel_structurally_allowed": true,
+      "contract": "cancel-p0-2026-10-11",
+      "model": "jev-1.13.0",
+      "draft_stage": "draft",
+      "draft_version": "1",
+      "order_id": "ORD9801",
+      "elapsed_ms": 481.509,
+      "path_type": "observed",
+      "pending_action": "cancel",
+      "target_type": "cancellation",
+      "target_name": "draft",
+      "components": {
+        "decision": "stop",
+        "target": "current",
+        "extra_task": "no"
+      },
+      "scores": {
+        "decision": 0.98,
+        "target": 1.0,
+        "extra_task": 0.97
+      },
+      "usage": {
+        "input_tokens": 1334,
+        "output_tokens": 115
+      },
+      "fact": null,
+      "probabilities": {
+        "decision": {
+          "stop": 0.99,
+          "uncertain": 0.0,
+          "continue": 0.01
+        },
+        "target": {
+          "other": 0.0,
+          "current": 1.0,
+          "ambiguous": 0.0
+        },
+        "extra_task": {
+          "no": 0.98,
+          "yes": 0.02,
+          "uncertain": 0.0
+        }
+      }
+    },
+    "response": {
+      "answer": "本次售后申请已取消，未提交。",
+      "sessionId": "closure-1-S03",
+      "confirmRequired": false,
+      "pendingAction": "CANCELLED",
+      "actions": [],
+      "fallback": false
+    },
+    "state": {
+      "pending": "CANCELLED",
+      "handled": true,
+      "revision": 2
+    }
+  },
+  {
+    "check": "新样本 R1-K01 continue",
+    "passed": true,
+    "safe": true,
+    "action_ok": true,
+    "cancellation_exit": true,
+    "draft_kept": true,
+    "message": "我没有要撤销，刚才那笔退款照常继续办理。",
+    "judgment": {
+      "status": "observed",
+      "reason": "continue",
+      "executed": false,
+      "action": "keep",
+      "cancel_structurally_allowed": false,
+      "contract": "cancel-p0-2026-10-11",
+      "model": "jev-1.13.0",
+      "draft_stage": "draft",
+      "draft_version": "1",
+      "order_id": "ORD9801",
+      "elapsed_ms": 450.514,
+      "path_type": "observed",
+      "pending_action": "keep",
+      "target_type": "cancellation",
+      "target_name": "draft",
+      "components": {
+        "decision": "continue",
+        "target": "current",
+        "extra_task": "no"
+      },
+      "scores": {
+        "decision": 1.0,
+        "target": 0.16,
+        "extra_task": 0.91
+      },
+      "usage": {
+        "input_tokens": 1337,
+        "output_tokens": 115
+      },
+      "fact": null,
+      "probabilities": {
+        "decision": {
+          "stop": 0.0,
+          "uncertain": 0.0,
+          "continue": 1.0
+        },
+        "target": {
+          "other": 0.26,
+          "current": 0.44,
+          "ambiguous": 0.3
+        },
+        "extra_task": {
+          "no": 0.9400000000000001,
+          "yes": 0.06,
+          "uncertain": 0.0
+        }
+      }
+    },
+    "response": {
+      "answer": "请核对退款申请。确认后只登记为待审核，是否通过由管理员独立决定。",
+      "sessionId": "closure-1-K01",
+      "confirmRequired": true,
+      "pendingAction": "CONFIRM_SUBMIT",
+      "confirmationTitle": "确认提交退款申请",
+      "confirmationSummary": "订单：ORD9801；商品：隔离露营椅 x1；范围：整单退款；实付金额：200.00 元；原因：买错了。；状态：等待本人确认，尚未提交。确认后等待审核，提交不代表退款成功。",
+      "relatedOrderNo": "ORD9801",
+      "resumeToken": "6229f294-7387-4c04-9fd5-639d195ac73a",
+      "actions": [
+        {
+          "code": "CONFIRM_SUBMIT",
+          "label": "确认提交申请"
+        },
+        {
+          "code": "CANCEL_SUBMIT",
+          "label": "取消本次申请"
+        }
+      ],
+      "fallback": false
+    },
+    "state": {
+      "pending": "CONFIRM_SUBMIT",
+      "handled": false,
+      "token": "6229f294-7387-4c04-9fd5-639d195ac73a",
+      "revision": 1,
+      "order": "ORD9801"
+    }
+  },
+  {
+    "check": "新样本 R1-K02 continue",
+    "passed": true,
+    "safe": true,
+    "action_ok": true,
+    "cancellation_exit": true,
+    "draft_kept": true,
+    "message": "取消是我朋友的想法，我自己的这次退款仍然要办。",
+    "judgment": {
+      "status": "observed",
+      "reason": "continue",
+      "executed": false,
+      "action": "keep",
+      "cancel_structurally_allowed": false,
+      "contract": "cancel-p0-2026-10-11",
+      "model": "jev-1.13.0",
+      "draft_stage": "draft",
+      "draft_version": "1",
+      "order_id": "ORD9801",
+      "elapsed_ms": 1318.086,
+      "path_type": "observed",
+      "pending_action": "keep",
+      "target_type": "cancellation",
+      "target_name": "draft",
+      "components": {
+        "decision": "continue",
+        "target": "other",
+        "extra_task": "no"
+      },
+      "scores": {
+        "decision": 0.94,
+        "target": 0.67,
+        "extra_task": 0.38
+      },
+      "usage": {
+        "input_tokens": 1340,
+        "output_tokens": 115
+      },
+      "fact": null,
+      "probabilities": {
+        "decision": {
+          "stop": 0.03,
+          "uncertain": 0.01,
+          "continue": 0.96
+        },
+        "target": {
+          "other": 0.78,
+          "current": 0.19,
+          "ambiguous": 0.03
+        },
+        "extra_task": {
+          "no": 0.59,
+          "yes": 0.4,
+          "uncertain": 0.01
+        }
+      }
+    },
+    "response": {
+      "answer": "请核对退款申请。确认后只登记为待审核，是否通过由管理员独立决定。",
+      "sessionId": "closure-1-K02",
+      "confirmRequired": true,
+      "pendingAction": "CONFIRM_SUBMIT",
+      "confirmationTitle": "确认提交退款申请",
+      "confirmationSummary": "订单：ORD9801；商品：隔离露营椅 x1；范围：整单退款；实付金额：200.00 元；原因：买错了。；状态：等待本人确认，尚未提交。确认后等待审核，提交不代表退款成功。",
+      "relatedOrderNo": "ORD9801",
+      "resumeToken": "3384514f-2882-41f0-98eb-217517ef56cf",
+      "actions": [
+        {
+          "code": "CONFIRM_SUBMIT",
+          "label": "确认提交申请"
+        },
+        {
+          "code": "CANCEL_SUBMIT",
+          "label": "取消本次申请"
+        }
+      ],
+      "fallback": false
+    },
+    "state": {
+      "pending": "CONFIRM_SUBMIT",
+      "handled": false,
+      "token": "3384514f-2882-41f0-98eb-217517ef56cf",
+      "revision": 1,
+      "order": "ORD9801"
+    }
+  },
+  {
+    "check": "新样本 R1-K03 continue",
+    "passed": true,
+    "safe": true,
+    "action_ok": true,
+    "cancellation_exit": true,
+    "draft_kept": true,
+    "message": "即使商品明天降价，当前退款也继续，不要停止。",
+    "judgment": {
+      "status": "observed",
+      "reason": "continue",
+      "executed": false,
+      "action": "keep",
+      "cancel_structurally_allowed": false,
+      "contract": "cancel-p0-2026-10-11",
+      "model": "jev-1.13.0",
+      "draft_stage": "draft",
+      "draft_version": "1",
+      "order_id": "ORD9801",
+      "elapsed_ms": 1106.198,
+      "path_type": "observed",
+      "pending_action": "keep",
+      "target_type": "cancellation",
+      "target_name": "draft",
+      "components": {
+        "decision": "continue",
+        "target": "ambiguous",
+        "extra_task": "no"
+      },
+      "scores": {
+        "decision": 0.97,
+        "target": 0.34,
+        "extra_task": 0.88
+      },
+      "usage": {
+        "input_tokens": 1339,
+        "output_tokens": 117
+      },
+      "fact": null,
+      "probabilities": {
+        "decision": {
+          "stop": 0.01,
+          "uncertain": 0.01,
+          "continue": 0.98
+        },
+        "target": {
+          "other": 0.1,
+          "current": 0.34,
+          "ambiguous": 0.56
+        },
+        "extra_task": {
+          "no": 0.92,
+          "yes": 0.07,
+          "uncertain": 0.01
+        }
+      }
+    },
+    "response": {
+      "answer": "请核对退款申请。确认后只登记为待审核，是否通过由管理员独立决定。",
+      "sessionId": "closure-1-K03",
+      "confirmRequired": true,
+      "pendingAction": "CONFIRM_SUBMIT",
+      "confirmationTitle": "确认提交退款申请",
+      "confirmationSummary": "订单：ORD9801；商品：隔离露营椅 x1；范围：整单退款；实付金额：200.00 元；原因：买错了。；状态：等待本人确认，尚未提交。确认后等待审核，提交不代表退款成功。",
+      "relatedOrderNo": "ORD9801",
+      "resumeToken": "39fd7d60-b90d-4c5a-a106-0b3697583c85",
+      "actions": [
+        {
+          "code": "CONFIRM_SUBMIT",
+          "label": "确认提交申请"
+        },
+        {
+          "code": "CANCEL_SUBMIT",
+          "label": "取消本次申请"
+        }
+      ],
+      "fallback": false
+    },
+    "state": {
+      "pending": "CONFIRM_SUBMIT",
+      "handled": false,
+      "token": "39fd7d60-b90d-4c5a-a106-0b3697583c85",
+      "revision": 1,
+      "order": "ORD9801"
+    }
+  },
+  {
+    "check": "新样本 R1-H01 hesitation",
+    "passed": true,
+    "safe": true,
+    "action_ok": true,
+    "cancellation_exit": false,
+    "draft_kept": true,
+    "message": "退款到底要不要撤销，我还没想好。",
+    "judgment": {
+      "status": "observed",
+      "reason": "undecided",
+      "executed": false,
+      "action": "ask_decision",
+      "cancel_structurally_allowed": false,
+      "contract": "cancel-p0-2026-10-11",
+      "model": "jev-1.13.0",
+      "draft_stage": "draft",
+      "draft_version": "1",
+      "order_id": "ORD9801",
+      "elapsed_ms": 1038.115,
+      "path_type": "observed",
+      "pending_action": "ask_decision",
+      "target_type": "cancellation",
+      "target_name": "draft",
+      "components": {
+        "decision": "uncertain",
+        "target": "current",
+        "extra_task": "no"
+      },
+      "scores": {
+        "decision": 0.98,
+        "target": 0.4,
+        "extra_task": 0.94
+      },
+      "usage": {
+        "input_tokens": 1333,
+        "output_tokens": 117
+      },
+      "fact": null,
+      "reply": "先保留当前办理。你决定继续还是取消后再操作。",
+      "probabilities": {
+        "decision": {
+          "stop": 0.0,
+          "uncertain": 0.99,
+          "continue": 0.01
+        },
+        "target": {
+          "other": 0.01,
+          "current": 0.6,
+          "ambiguous": 0.39
+        },
+        "extra_task": {
+          "no": 0.96,
+          "yes": 0.03,
+          "uncertain": 0.01
+        }
+      }
+    },
+    "response": {
+      "answer": "先保留当前办理。你决定继续还是取消后再操作。",
+      "sessionId": "closure-1-H01",
+      "confirmRequired": false,
+      "pendingAction": "ASK_DECISION",
+      "relatedOrderNo": "ORD9801",
+      "actions": [],
+      "fallback": false
+    },
+    "state": {
+      "pending": "CONFIRM_SUBMIT",
+      "handled": false,
+      "token": "d6015c3d-9090-4271-b2fa-0917e5914ecd",
+      "revision": 1,
+      "order": "ORD9801"
+    }
+  },
+  {
+    "check": "新样本 R1-H02 hesitation",
+    "passed": true,
+    "safe": true,
+    "action_ok": true,
+    "cancellation_exit": false,
+    "draft_kept": true,
+    "message": "先保留刚才的办理，我需要考虑一下再决定撤不撤。",
+    "judgment": {
+      "status": "observed",
+      "reason": "undecided",
+      "executed": false,
+      "action": "ask_decision",
+      "cancel_structurally_allowed": false,
+      "contract": "cancel-p0-2026-10-11",
+      "model": "jev-1.13.0",
+      "draft_stage": "draft",
+      "draft_version": "1",
+      "order_id": "ORD9801",
+      "elapsed_ms": 1516.475,
+      "path_type": "observed",
+      "pending_action": "ask_decision",
+      "target_type": "cancellation",
+      "target_name": "draft",
+      "components": {
+        "decision": "uncertain",
+        "target": "current",
+        "extra_task": "no"
+      },
+      "scores": {
+        "decision": 0.95,
+        "target": 0.58,
+        "extra_task": 0.89
+      },
+      "usage": {
+        "input_tokens": 1340,
+        "output_tokens": 117
+      },
+      "fact": null,
+      "reply": "先保留当前办理。你决定继续还是取消后再操作。",
+      "probabilities": {
+        "decision": {
+          "stop": 0.0,
+          "uncertain": 0.97,
+          "continue": 0.03
+        },
+        "target": {
+          "other": 0.03,
+          "current": 0.72,
+          "ambiguous": 0.25
+        },
+        "extra_task": {
+          "no": 0.93,
+          "yes": 0.06,
+          "uncertain": 0.01
+        }
+      }
+    },
+    "response": {
+      "answer": "先保留当前办理。你决定继续还是取消后再操作。",
+      "sessionId": "closure-1-H02",
+      "confirmRequired": false,
+      "pendingAction": "ASK_DECISION",
+      "relatedOrderNo": "ORD9801",
+      "actions": [],
+      "fallback": false
+    },
+    "state": {
+      "pending": "CONFIRM_SUBMIT",
+      "handled": false,
+      "token": "020e57a2-db91-4edb-a155-999092201cac",
+      "revision": 1,
+      "order": "ORD9801"
+    }
+  },
+  {
+    "check": "新样本 R1-C01 condition",
+    "passed": true,
+    "safe": true,
+    "action_ok": true,
+    "cancellation_exit": false,
+    "draft_kept": true,
+    "message": "如果这笔退货的运费必须我付，就不退了。",
+    "judgment": {
+      "status": "observed",
+      "reason": "condition",
+      "executed": false,
+      "action": "keep_unknown_fact",
+      "cancel_structurally_allowed": false,
+      "contract": "cancel-p0-2026-10-11",
+      "model": "jev-1.13.0",
+      "draft_stage": "draft",
+      "draft_version": "1",
+      "order_id": "ORD9801",
+      "elapsed_ms": 0.005,
+      "path_type": "observed",
+      "pending_action": "keep_unknown_fact",
+      "target_type": "cancellation",
+      "target_name": "draft",
+      "components": {},
+      "scores": {},
+      "usage": {},
+      "fact": {
+        "status": "unavailable",
+        "sufficient": false,
+        "payer": null,
+        "source": null
+      },
+      "reply": "ORD9801的退货运费由谁承担，暂时没有这笔订单的事实，所以先保留办理，不会据此取消。"
+    },
+    "response": {
+      "answer": "ORD9801的退货运费由谁承担，暂时没有这笔订单的事实，所以先保留办理，不会据此取消。",
+      "sessionId": "closure-1-C01",
+      "confirmRequired": false,
+      "pendingAction": "KEEP_UNKNOWN_FACT",
+      "relatedOrderNo": "ORD9801",
+      "actions": [],
+      "fallback": false
+    },
+    "state": {
+      "pending": "CONFIRM_SUBMIT",
+      "handled": false,
+      "token": "b46ecbe7-4b9c-4f58-a27b-68932d2ea8d3",
+      "revision": 1,
+      "order": "ORD9801"
+    }
+  },
+  {
+    "check": "新样本 R1-C02 condition",
+    "passed": true,
+    "safe": true,
+    "action_ok": true,
+    "cancellation_exit": false,
+    "draft_kept": true,
+    "message": "假如商家不承担退货运费，那就取消这次售后。",
+    "judgment": {
+      "status": "observed",
+      "reason": "condition",
+      "executed": false,
+      "action": "keep_unknown_fact",
+      "cancel_structurally_allowed": false,
+      "contract": "cancel-p0-2026-10-11",
+      "model": "jev-1.13.0",
+      "draft_stage": "draft",
+      "draft_version": "1",
+      "order_id": "ORD9801",
+      "elapsed_ms": 0.004,
+      "path_type": "observed",
+      "pending_action": "keep_unknown_fact",
+      "target_type": "cancellation",
+      "target_name": "draft",
+      "components": {},
+      "scores": {},
+      "usage": {},
+      "fact": {
+        "status": "unavailable",
+        "sufficient": false,
+        "payer": null,
+        "source": null
+      },
+      "reply": "ORD9801的退货运费由谁承担，暂时没有这笔订单的事实，所以先保留办理，不会据此取消。"
+    },
+    "response": {
+      "answer": "ORD9801的退货运费由谁承担，暂时没有这笔订单的事实，所以先保留办理，不会据此取消。",
+      "sessionId": "closure-1-C02",
+      "confirmRequired": false,
+      "pendingAction": "KEEP_UNKNOWN_FACT",
+      "relatedOrderNo": "ORD9801",
+      "actions": [],
+      "fallback": false
+    },
+    "state": {
+      "pending": "CONFIRM_SUBMIT",
+      "handled": false,
+      "token": "a165bf73-b13f-4f52-b661-629f451adc41",
+      "revision": 1,
+      "order": "ORD9801"
+    }
+  },
+  {
+    "check": "新样本 R1-O01 purchase",
+    "passed": true,
+    "safe": true,
+    "action_ok": true,
+    "cancellation_exit": false,
+    "draft_kept": true,
+    "message": "我要关闭的是购买订单本身，不是这次退款申请。",
+    "judgment": {
+      "status": "observed",
+      "reason": "extra_task",
+      "executed": false,
+      "action": "hold_review",
+      "cancel_structurally_allowed": false,
+      "contract": "cancel-p0-2026-10-11",
+      "model": "jev-1.13.0",
+      "draft_stage": "draft",
+      "draft_version": "1",
+      "order_id": "ORD9801",
+      "elapsed_ms": 1197.687,
+      "path_type": "observed",
+      "pending_action": "hold_review",
+      "target_type": "cancellation",
+      "target_name": "draft",
+      "components": {
+        "decision": "continue",
+        "target": "other",
+        "extra_task": "yes"
+      },
+      "scores": {
+        "decision": 0.28,
+        "target": 0.97,
+        "extra_task": 0.76
+      },
+      "usage": {
+        "input_tokens": 1339,
+        "output_tokens": 115
+      },
+      "fact": null,
+      "reply": "这句话里还有别的请求。当前办理先留着，这次不会直接取消。",
+      "probabilities": {
+        "decision": {
+          "stop": 0.36,
+          "uncertain": 0.12,
+          "continue": 0.52
+        },
+        "target": {
+          "other": 0.98,
+          "current": 0.02,
+          "ambiguous": 0.0
+        },
+        "extra_task": {
+          "no": 0.16,
+          "yes": 0.84,
+          "uncertain": 0.0
+        }
+      }
+    },
+    "response": {
+      "answer": "这句话里还有别的请求。当前办理先留着，这次不会直接取消。",
+      "sessionId": "closure-1-O01",
+      "confirmRequired": false,
+      "pendingAction": "HOLD_REVIEW",
+      "relatedOrderNo": "ORD9801",
+      "actions": [],
+      "fallback": false
+    },
+    "state": {
+      "pending": "CONFIRM_SUBMIT",
+      "handled": false,
+      "token": "3a866a50-0114-4543-ad11-a3e9a588d834",
+      "revision": 1,
+      "order": "ORD9801"
+    }
+  },
+  {
+    "check": "新样本 R1-O02 purchase",
+    "passed": true,
+    "safe": true,
+    "action_ok": true,
+    "cancellation_exit": false,
+    "draft_kept": true,
+    "message": "请取消我购买露营椅的订单，售后申请先留着。",
+    "judgment": {
+      "status": "observed",
+      "reason": "object",
+      "executed": false,
+      "action": "ask_object",
+      "cancel_structurally_allowed": false,
+      "contract": "cancel-p0-2026-10-11",
+      "model": "jev-1.13.0",
+      "draft_stage": "draft",
+      "draft_version": "1",
+      "order_id": "ORD9801",
+      "elapsed_ms": 418.579,
+      "path_type": "observed",
+      "pending_action": "ask_object",
+      "target_type": "cancellation",
+      "target_name": "draft",
+      "components": {
+        "decision": "stop",
+        "target": "other",
+        "extra_task": "yes"
+      },
+      "scores": {
+        "decision": 0.7,
+        "target": 0.97,
+        "extra_task": 0.41
+      },
+      "usage": {
+        "input_tokens": 1339,
+        "output_tokens": 115
+      },
+      "fact": null,
+      "reply": "你要取消订单本身，还是刚才的退款申请？请说明订单号。当前售后是ORD9801。",
+      "object_wait": {
+        "kind": "object",
+        "draft_version": "1",
+        "draft_order": "ORD9801",
+        "decision": "stop",
+        "decision_score": 0.7,
+        "extra_task": "yes",
+        "candidates": []
+      },
+      "probabilities": {
+        "decision": {
+          "stop": 0.8,
+          "uncertain": 0.04,
+          "continue": 0.16
+        },
+        "target": {
+          "other": 0.98,
+          "current": 0.02,
+          "ambiguous": 0.0
+        },
+        "extra_task": {
+          "no": 0.38,
+          "yes": 0.61,
+          "uncertain": 0.01
+        }
+      }
+    },
+    "response": {
+      "answer": "你要取消订单本身，还是刚才的退款申请？请说明订单号。当前售后是ORD9801。",
+      "sessionId": "closure-1-O02",
+      "confirmRequired": false,
+      "pendingAction": "ASK_OBJECT",
+      "relatedOrderNo": "ORD9801",
+      "actions": [],
+      "fallback": false
+    },
+    "state": {
+      "pending": "CONFIRM_SUBMIT",
+      "handled": false,
+      "token": "e861d209-973e-4532-926b-25b37ae94b12",
+      "revision": 1,
+      "objectWait": {
+        "draft_order": "ORD9801",
+        "candidates": [],
+        "decision": "stop",
+        "kind": "object",
+        "draft_version": "1",
+        "extra_task": "yes",
+        "decision_score": 0.7
+      },
+      "order": "ORD9801"
+    }
+  },
+  {
+    "check": "新样本 R1-A01 other",
+    "passed": true,
+    "safe": true,
+    "action_ok": true,
+    "cancellation_exit": false,
+    "draft_kept": true,
+    "message": "要撤销的是 ORD9802 的售后，ORD9801 这次退款不动。",
+    "judgment": {
+      "status": "observed",
+      "reason": "object",
+      "executed": false,
+      "action": "ask_object",
+      "cancel_structurally_allowed": false,
+      "contract": "cancel-p0-2026-10-11",
+      "model": "jev-1.13.0",
+      "draft_stage": "draft",
+      "draft_version": "1",
+      "order_id": "ORD9801",
+      "elapsed_ms": 474.677,
+      "path_type": "observed",
+      "pending_action": "ask_object",
+      "target_type": "cancellation",
+      "target_name": "draft",
+      "components": {
+        "decision": "stop",
+        "target": "other",
+        "extra_task": "yes"
+      },
+      "scores": {
+        "decision": 0.61,
+        "target": 0.95,
+        "extra_task": 0.82
+      },
+      "usage": {
+        "input_tokens": 1345,
+        "output_tokens": 115
+      },
+      "fact": null,
+      "reply": "你要取消订单本身，还是刚才的退款申请？请说明订单号。当前售后是ORD9801。",
+      "object_wait": {
+        "kind": "object",
+        "draft_version": "1",
+        "draft_order": "ORD9801",
+        "decision": "stop",
+        "decision_score": 0.61,
+        "extra_task": "yes",
+        "candidates": []
+      },
+      "probabilities": {
+        "decision": {
+          "stop": 0.74,
+          "uncertain": 0.04,
+          "continue": 0.22
+        },
+        "target": {
+          "other": 0.97,
+          "current": 0.02,
+          "ambiguous": 0.01
+        },
+        "extra_task": {
+          "no": 0.12,
+          "yes": 0.88,
+          "uncertain": 0.0
+        }
+      }
+    },
+    "response": {
+      "answer": "你要取消订单本身，还是刚才的退款申请？请说明订单号。当前售后是ORD9801。",
+      "sessionId": "closure-1-A01",
+      "confirmRequired": false,
+      "pendingAction": "ASK_OBJECT",
+      "relatedOrderNo": "ORD9801",
+      "actions": [],
+      "fallback": false
+    },
+    "state": {
+      "pending": "CONFIRM_SUBMIT",
+      "handled": false,
+      "token": "5693f800-b89a-47a3-9d23-f7bf90407843",
+      "revision": 1,
+      "objectWait": {
+        "draft_order": "ORD9801",
+        "candidates": [],
+        "decision": "stop",
+        "kind": "object",
+        "draft_version": "1",
+        "extra_task": "yes",
+        "decision_score": 0.61
+      },
+      "order": "ORD9801"
+    }
+  },
+  {
+    "check": "新样本 R1-A02 other",
+    "passed": true,
+    "safe": true,
+    "action_ok": true,
+    "cancellation_exit": false,
+    "draft_kept": true,
+    "message": "另一个订单的退款不办了，现在这份申请继续。",
+    "judgment": {
+      "status": "observed",
+      "reason": "object",
+      "executed": false,
+      "action": "ask_object",
+      "cancel_structurally_allowed": false,
+      "contract": "cancel-p0-2026-10-11",
+      "model": "jev-1.13.0",
+      "draft_stage": "draft",
+      "draft_version": "1",
+      "order_id": "ORD9801",
+      "elapsed_ms": 480.954,
+      "path_type": "observed",
+      "pending_action": "ask_object",
+      "target_type": "cancellation",
+      "target_name": "draft",
+      "components": {
+        "decision": "stop",
+        "target": "other",
+        "extra_task": "yes"
+      },
+      "scores": {
+        "decision": 0.7,
+        "target": 0.85,
+        "extra_task": 0.64
+      },
+      "usage": {
+        "input_tokens": 1338,
+        "output_tokens": 115
+      },
+      "fact": null,
+      "reply": "你要取消订单本身，还是刚才的退款申请？请说明订单号。当前售后是ORD9801。",
+      "object_wait": {
+        "kind": "object",
+        "draft_version": "1",
+        "draft_order": "ORD9801",
+        "decision": "stop",
+        "decision_score": 0.7,
+        "extra_task": "yes",
+        "candidates": []
+      },
+      "probabilities": {
+        "decision": {
+          "stop": 0.8,
+          "uncertain": 0.03,
+          "continue": 0.17
+        },
+        "target": {
+          "other": 0.9,
+          "current": 0.08,
+          "ambiguous": 0.02
+        },
+        "extra_task": {
+          "no": 0.23,
+          "yes": 0.76,
+          "uncertain": 0.01
+        }
+      }
+    },
+    "response": {
+      "answer": "你要取消订单本身，还是刚才的退款申请？请说明订单号。当前售后是ORD9801。",
+      "sessionId": "closure-1-A02",
+      "confirmRequired": false,
+      "pendingAction": "ASK_OBJECT",
+      "relatedOrderNo": "ORD9801",
+      "actions": [],
+      "fallback": false
+    },
+    "state": {
+      "pending": "CONFIRM_SUBMIT",
+      "handled": false,
+      "token": "e3e31c57-8970-4817-8fa9-932a159f0b9f",
+      "revision": 1,
+      "objectWait": {
+        "draft_order": "ORD9801",
+        "candidates": [],
+        "decision": "stop",
+        "kind": "object",
+        "draft_version": "1",
+        "extra_task": "yes",
+        "decision_score": 0.7
+      },
+      "order": "ORD9801"
+    }
+  },
+  {
+    "check": "新样本 R1-M01 compound",
+    "passed": true,
+    "safe": true,
+    "action_ok": true,
+    "cancellation_exit": false,
+    "draft_kept": true,
+    "message": "把当前退款申请撤销，然后帮我查一下优惠券。",
+    "judgment": {
+      "status": "observed",
+      "reason": "extra_task",
+      "executed": false,
+      "action": "hold_review",
+      "cancel_structurally_allowed": false,
+      "contract": "cancel-p0-2026-10-11",
+      "model": "jev-1.13.0",
+      "draft_stage": "draft",
+      "draft_version": "1",
+      "order_id": "ORD9801",
+      "elapsed_ms": 1091.441,
+      "path_type": "observed",
+      "pending_action": "hold_review",
+      "target_type": "cancellation",
+      "target_name": "draft",
+      "components": {
+        "decision": "stop",
+        "target": "current",
+        "extra_task": "yes"
+      },
+      "scores": {
+        "decision": 0.95,
+        "target": 1.0,
+        "extra_task": 1.0
+      },
+      "usage": {
+        "input_tokens": 1338,
+        "output_tokens": 115
+      },
+      "fact": null,
+      "reply": "这句话里还有别的请求。当前办理先留着，这次不会直接取消。",
+      "probabilities": {
+        "decision": {
+          "stop": 0.97,
+          "uncertain": 0.02,
+          "continue": 0.01
+        },
+        "target": {
+          "other": 0.0,
+          "current": 1.0,
+          "ambiguous": 0.0
+        },
+        "extra_task": {
+          "no": 0.0,
+          "yes": 1.0,
+          "uncertain": 0.0
+        }
+      }
+    },
+    "response": {
+      "answer": "这句话里还有别的请求。当前办理先留着，这次不会直接取消。",
+      "sessionId": "closure-1-M01",
+      "confirmRequired": false,
+      "pendingAction": "HOLD_REVIEW",
+      "relatedOrderNo": "ORD9801",
+      "actions": [],
+      "fallback": false
+    },
+    "state": {
+      "pending": "CONFIRM_SUBMIT",
+      "handled": false,
+      "token": "91a4976d-9874-4690-8129-37c4aa3861ac",
+      "revision": 1,
+      "order": "ORD9801"
+    }
+  },
+  {
+    "check": "新样本 R1-M02 compound",
+    "passed": true,
+    "safe": true,
+    "action_ok": true,
+    "cancellation_exit": false,
+    "draft_kept": true,
+    "message": "停止 ORD9801 的这次售后，再准备 ORD9802 的退款。",
+    "judgment": {
+      "status": "observed",
+      "reason": "object",
+      "executed": false,
+      "action": "ask_object",
+      "cancel_structurally_allowed": false,
+      "contract": "cancel-p0-2026-10-11",
+      "model": "jev-1.13.0",
+      "draft_stage": "draft",
+      "draft_version": "1",
+      "order_id": "ORD9801",
+      "elapsed_ms": 416.014,
+      "path_type": "observed",
+      "pending_action": "ask_object",
+      "target_type": "cancellation",
+      "target_name": "draft",
+      "components": {
+        "decision": "stop",
+        "target": "current",
+        "extra_task": "yes"
+      },
+      "scores": {
+        "decision": 0.92,
+        "target": 0.74,
+        "extra_task": 1.0
+      },
+      "usage": {
+        "input_tokens": 1343,
+        "output_tokens": 115
+      },
+      "fact": null,
+      "reply": "你要取消订单本身，还是刚才的退款申请？请说明订单号。当前售后是ORD9801。",
+      "object_wait": {
+        "kind": "object",
+        "draft_version": "1",
+        "draft_order": "ORD9801",
+        "decision": "stop",
+        "decision_score": 0.92,
+        "extra_task": "yes",
+        "candidates": []
+      },
+      "probabilities": {
+        "decision": {
+          "stop": 0.95,
+          "uncertain": 0.03,
+          "continue": 0.02
+        },
+        "target": {
+          "other": 0.15,
+          "current": 0.83,
+          "ambiguous": 0.02
+        },
+        "extra_task": {
+          "no": 0.0,
+          "yes": 1.0,
+          "uncertain": 0.0
+        }
+      }
+    },
+    "response": {
+      "answer": "你要取消订单本身，还是刚才的退款申请？请说明订单号。当前售后是ORD9801。",
+      "sessionId": "closure-1-M02",
+      "confirmRequired": false,
+      "pendingAction": "ASK_OBJECT",
+      "relatedOrderNo": "ORD9801",
+      "actions": [],
+      "fallback": false
+    },
+    "state": {
+      "pending": "CONFIRM_SUBMIT",
+      "handled": false,
+      "token": "e01ce714-87e6-46d4-b5b9-25b75cb1900d",
+      "revision": 1,
+      "objectWait": {
+        "draft_order": "ORD9801",
+        "candidates": [],
+        "decision": "stop",
+        "kind": "object",
+        "draft_version": "1",
+        "extra_task": "yes",
+        "decision_score": 0.92
+      },
+      "order": "ORD9801"
+    }
+  },
+  {
+    "check": "新样本 R2-S01 stop",
+    "passed": true,
+    "safe": true,
+    "action_ok": true,
+    "cancellation_exit": true,
+    "draft_kept": false,
+    "message": "这次售后退款我决定撤销，不用再帮我办理了。",
+    "judgment": {
+      "status": "observed",
+      "reason": "simple_cancel",
+      "executed": true,
+      "action": "cancel",
+      "cancel_structurally_allowed": true,
+      "contract": "cancel-p0-2026-10-11",
+      "model": "jev-1.13.0",
+      "draft_stage": "draft",
+      "draft_version": "1",
+      "order_id": "ORD9801",
+      "elapsed_ms": 479.124,
+      "path_type": "observed",
+      "pending_action": "cancel",
+      "target_type": "cancellation",
+      "target_name": "draft",
+      "components": {
+        "decision": "stop",
+        "target": "current",
+        "extra_task": "no"
+      },
+      "scores": {
+        "decision": 1.0,
+        "target": 1.0,
+        "extra_task": 0.98
+      },
+      "usage": {
+        "input_tokens": 1338,
+        "output_tokens": 115
+      },
+      "fact": null,
+      "probabilities": {
+        "decision": {
+          "stop": 1.0,
+          "uncertain": 0.0,
+          "continue": 0.0
+        },
+        "target": {
+          "other": 0.0,
+          "current": 1.0,
+          "ambiguous": 0.0
+        },
+        "extra_task": {
+          "no": 0.99,
+          "yes": 0.01,
+          "uncertain": 0.0
+        }
+      }
+    },
+    "response": {
+      "answer": "本次售后申请已取消，未提交。",
+      "sessionId": "closure-2-S01",
+      "confirmRequired": false,
+      "pendingAction": "CANCELLED",
+      "actions": [],
+      "fallback": false
+    },
+    "state": {
+      "pending": "CANCELLED",
+      "handled": true,
+      "revision": 2
+    }
+  },
+  {
+    "check": "新样本 R2-S02 stop",
+    "passed": true,
+    "safe": true,
+    "action_ok": true,
+    "cancellation_exit": true,
+    "draft_kept": false,
+    "message": "刚才申请的退款不要办了，我已经决定留下商品。",
+    "judgment": {
+      "status": "observed",
+      "reason": "simple_cancel",
+      "executed": true,
+      "action": "cancel",
+      "cancel_structurally_allowed": true,
+      "contract": "cancel-p0-2026-10-11",
+      "model": "jev-1.13.0",
+      "draft_stage": "draft",
+      "draft_version": "1",
+      "order_id": "ORD9801",
+      "elapsed_ms": 491.834,
+      "path_type": "observed",
+      "pending_action": "cancel",
+      "target_type": "cancellation",
+      "target_name": "draft",
+      "components": {
+        "decision": "stop",
+        "target": "current",
+        "extra_task": "no"
+      },
+      "scores": {
+        "decision": 1.0,
+        "target": 0.98,
+        "extra_task": 0.95
+      },
+      "usage": {
+        "input_tokens": 1339,
+        "output_tokens": 115
+      },
+      "fact": null,
+      "probabilities": {
+        "decision": {
+          "stop": 1.0,
+          "uncertain": 0.0,
+          "continue": 0.0
+        },
+        "target": {
+          "other": 0.01,
+          "current": 0.99,
+          "ambiguous": 0.0
+        },
+        "extra_task": {
+          "no": 0.97,
+          "yes": 0.03,
+          "uncertain": 0.0
+        }
+      }
+    },
+    "response": {
+      "answer": "本次售后申请已取消，未提交。",
+      "sessionId": "closure-2-S02",
+      "confirmRequired": false,
+      "pendingAction": "CANCELLED",
+      "actions": [],
+      "fallback": false
+    },
+    "state": {
+      "pending": "CANCELLED",
+      "handled": true,
+      "revision": 2
+    }
+  },
+  {
+    "check": "新样本 R2-S03 stop",
+    "passed": true,
+    "safe": true,
+    "action_ok": true,
+    "cancellation_exit": true,
+    "draft_kept": false,
+    "message": "请结束当前这份尚未提交的退款申请。",
+    "judgment": {
+      "status": "observed",
+      "reason": "simple_cancel",
+      "executed": true,
+      "action": "cancel",
+      "cancel_structurally_allowed": true,
+      "contract": "cancel-p0-2026-10-11",
+      "model": "jev-1.13.0",
+      "draft_stage": "draft",
+      "draft_version": "1",
+      "order_id": "ORD9801",
+      "elapsed_ms": 423.386,
+      "path_type": "observed",
+      "pending_action": "cancel",
+      "target_type": "cancellation",
+      "target_name": "draft",
+      "components": {
+        "decision": "stop",
+        "target": "current",
+        "extra_task": "no"
+      },
+      "scores": {
+        "decision": 1.0,
+        "target": 1.0,
+        "extra_task": 0.98
+      },
+      "usage": {
+        "input_tokens": 1334,
+        "output_tokens": 115
+      },
+      "fact": null,
+      "probabilities": {
+        "decision": {
+          "stop": 1.0,
+          "uncertain": 0.0,
+          "continue": 0.0
+        },
+        "target": {
+          "other": 0.0,
+          "current": 1.0,
+          "ambiguous": 0.0
+        },
+        "extra_task": {
+          "no": 0.99,
+          "yes": 0.01,
+          "uncertain": 0.0
+        }
+      }
+    },
+    "response": {
+      "answer": "本次售后申请已取消，未提交。",
+      "sessionId": "closure-2-S03",
+      "confirmRequired": false,
+      "pendingAction": "CANCELLED",
+      "actions": [],
+      "fallback": false
+    },
+    "state": {
+      "pending": "CANCELLED",
+      "handled": true,
+      "revision": 2
+    }
+  },
+  {
+    "check": "新样本 R2-K01 continue",
+    "passed": true,
+    "safe": true,
+    "action_ok": true,
+    "cancellation_exit": true,
+    "draft_kept": true,
+    "message": "我没有要撤销，刚才那笔退款照常继续办理。",
+    "judgment": {
+      "status": "observed",
+      "reason": "continue",
+      "executed": false,
+      "action": "keep",
+      "cancel_structurally_allowed": false,
+      "contract": "cancel-p0-2026-10-11",
+      "model": "jev-1.13.0",
+      "draft_stage": "draft",
+      "draft_version": "1",
+      "order_id": "ORD9801",
+      "elapsed_ms": 488.163,
+      "path_type": "observed",
+      "pending_action": "keep",
+      "target_type": "cancellation",
+      "target_name": "draft",
+      "components": {
+        "decision": "continue",
+        "target": "current",
+        "extra_task": "no"
+      },
+      "scores": {
+        "decision": 1.0,
+        "target": 0.23,
+        "extra_task": 0.91
+      },
+      "usage": {
+        "input_tokens": 1337,
+        "output_tokens": 115
+      },
+      "fact": null,
+      "probabilities": {
+        "decision": {
+          "stop": 0.0,
+          "uncertain": 0.0,
+          "continue": 1.0
+        },
+        "target": {
+          "other": 0.24,
+          "current": 0.49,
+          "ambiguous": 0.27
+        },
+        "extra_task": {
+          "no": 0.94,
+          "yes": 0.06,
+          "uncertain": 0.0
+        }
+      }
+    },
+    "response": {
+      "answer": "请核对退款申请。确认后只登记为待审核，是否通过由管理员独立决定。",
+      "sessionId": "closure-2-K01",
+      "confirmRequired": true,
+      "pendingAction": "CONFIRM_SUBMIT",
+      "confirmationTitle": "确认提交退款申请",
+      "confirmationSummary": "订单：ORD9801；商品：隔离露营椅 x1；范围：整单退款；实付金额：200.00 元；原因：买错了。；状态：等待本人确认，尚未提交。确认后等待审核，提交不代表退款成功。",
+      "relatedOrderNo": "ORD9801",
+      "resumeToken": "59097634-21c3-444f-be0c-bed237788b38",
+      "actions": [
+        {
+          "code": "CONFIRM_SUBMIT",
+          "label": "确认提交申请"
+        },
+        {
+          "code": "CANCEL_SUBMIT",
+          "label": "取消本次申请"
+        }
+      ],
+      "fallback": false
+    },
+    "state": {
+      "pending": "CONFIRM_SUBMIT",
+      "handled": false,
+      "token": "59097634-21c3-444f-be0c-bed237788b38",
+      "revision": 1,
+      "order": "ORD9801"
+    }
+  },
+  {
+    "check": "新样本 R2-K02 continue",
+    "passed": true,
+    "safe": true,
+    "action_ok": true,
+    "cancellation_exit": true,
+    "draft_kept": true,
+    "message": "取消是我朋友的想法，我自己的这次退款仍然要办。",
+    "judgment": {
+      "status": "observed",
+      "reason": "continue",
+      "executed": false,
+      "action": "keep",
+      "cancel_structurally_allowed": false,
+      "contract": "cancel-p0-2026-10-11",
+      "model": "jev-1.13.0",
+      "draft_stage": "draft",
+      "draft_version": "1",
+      "order_id": "ORD9801",
+      "elapsed_ms": 940.621,
+      "path_type": "observed",
+      "pending_action": "keep",
+      "target_type": "cancellation",
+      "target_name": "draft",
+      "components": {
+        "decision": "continue",
+        "target": "other",
+        "extra_task": "no"
+      },
+      "scores": {
+        "decision": 0.92,
+        "target": 0.73,
+        "extra_task": 0.51
+      },
+      "usage": {
+        "input_tokens": 1340,
+        "output_tokens": 115
+      },
+      "fact": null,
+      "probabilities": {
+        "decision": {
+          "stop": 0.04,
+          "uncertain": 0.01,
+          "continue": 0.95
+        },
+        "target": {
+          "other": 0.82,
+          "current": 0.15,
+          "ambiguous": 0.03
+        },
+        "extra_task": {
+          "no": 0.67,
+          "yes": 0.32,
+          "uncertain": 0.01
+        }
+      }
+    },
+    "response": {
+      "answer": "请核对退款申请。确认后只登记为待审核，是否通过由管理员独立决定。",
+      "sessionId": "closure-2-K02",
+      "confirmRequired": true,
+      "pendingAction": "CONFIRM_SUBMIT",
+      "confirmationTitle": "确认提交退款申请",
+      "confirmationSummary": "订单：ORD9801；商品：隔离露营椅 x1；范围：整单退款；实付金额：200.00 元；原因：买错了。；状态：等待本人确认，尚未提交。确认后等待审核，提交不代表退款成功。",
+      "relatedOrderNo": "ORD9801",
+      "resumeToken": "9ce2307c-e035-415d-9589-31c9a2680646",
+      "actions": [
+        {
+          "code": "CONFIRM_SUBMIT",
+          "label": "确认提交申请"
+        },
+        {
+          "code": "CANCEL_SUBMIT",
+          "label": "取消本次申请"
+        }
+      ],
+      "fallback": false
+    },
+    "state": {
+      "pending": "CONFIRM_SUBMIT",
+      "handled": false,
+      "token": "9ce2307c-e035-415d-9589-31c9a2680646",
+      "revision": 1,
+      "order": "ORD9801"
+    }
+  },
+  {
+    "check": "新样本 R2-K03 continue",
+    "passed": true,
+    "safe": true,
+    "action_ok": true,
+    "cancellation_exit": true,
+    "draft_kept": true,
+    "message": "即使商品明天降价，当前退款也继续，不要停止。",
+    "judgment": {
+      "status": "observed",
+      "reason": "continue",
+      "executed": false,
+      "action": "keep",
+      "cancel_structurally_allowed": false,
+      "contract": "cancel-p0-2026-10-11",
+      "model": "jev-1.13.0",
+      "draft_stage": "draft",
+      "draft_version": "1",
+      "order_id": "ORD9801",
+      "elapsed_ms": 983.275,
+      "path_type": "observed",
+      "pending_action": "keep",
+      "target_type": "cancellation",
+      "target_name": "draft",
+      "components": {
+        "decision": "continue",
+        "target": "ambiguous",
+        "extra_task": "no"
+      },
+      "scores": {
+        "decision": 0.97,
+        "target": 0.34,
+        "extra_task": 0.86
+      },
+      "usage": {
+        "input_tokens": 1339,
+        "output_tokens": 117
+      },
+      "fact": null,
+      "probabilities": {
+        "decision": {
+          "stop": 0.01,
+          "uncertain": 0.01,
+          "continue": 0.98
+        },
+        "target": {
+          "other": 0.1,
+          "current": 0.34,
+          "ambiguous": 0.56
+        },
+        "extra_task": {
+          "no": 0.91,
+          "yes": 0.08,
+          "uncertain": 0.01
+        }
+      }
+    },
+    "response": {
+      "answer": "请核对退款申请。确认后只登记为待审核，是否通过由管理员独立决定。",
+      "sessionId": "closure-2-K03",
+      "confirmRequired": true,
+      "pendingAction": "CONFIRM_SUBMIT",
+      "confirmationTitle": "确认提交退款申请",
+      "confirmationSummary": "订单：ORD9801；商品：隔离露营椅 x1；范围：整单退款；实付金额：200.00 元；原因：买错了。；状态：等待本人确认，尚未提交。确认后等待审核，提交不代表退款成功。",
+      "relatedOrderNo": "ORD9801",
+      "resumeToken": "61d73ed3-4feb-4a40-b250-d11d6c73c60e",
+      "actions": [
+        {
+          "code": "CONFIRM_SUBMIT",
+          "label": "确认提交申请"
+        },
+        {
+          "code": "CANCEL_SUBMIT",
+          "label": "取消本次申请"
+        }
+      ],
+      "fallback": false
+    },
+    "state": {
+      "pending": "CONFIRM_SUBMIT",
+      "handled": false,
+      "token": "61d73ed3-4feb-4a40-b250-d11d6c73c60e",
+      "revision": 1,
+      "order": "ORD9801"
+    }
+  },
+  {
+    "check": "新样本 R2-H01 hesitation",
+    "passed": true,
+    "safe": true,
+    "action_ok": true,
+    "cancellation_exit": false,
+    "draft_kept": true,
+    "message": "退款到底要不要撤销，我还没想好。",
+    "judgment": {
+      "status": "observed",
+      "reason": "undecided",
+      "executed": false,
+      "action": "ask_decision",
+      "cancel_structurally_allowed": false,
+      "contract": "cancel-p0-2026-10-11",
+      "model": "jev-1.13.0",
+      "draft_stage": "draft",
+      "draft_version": "1",
+      "order_id": "ORD9801",
+      "elapsed_ms": 931.783,
+      "path_type": "observed",
+      "pending_action": "ask_decision",
+      "target_type": "cancellation",
+      "target_name": "draft",
+      "components": {
+        "decision": "uncertain",
+        "target": "current",
+        "extra_task": "no"
+      },
+      "scores": {
+        "decision": 1.0,
+        "target": 0.37,
+        "extra_task": 0.94
+      },
+      "usage": {
+        "input_tokens": 1333,
+        "output_tokens": 117
+      },
+      "fact": null,
+      "reply": "先保留当前办理。你决定继续还是取消后再操作。",
+      "probabilities": {
+        "decision": {
+          "stop": 0.0,
+          "uncertain": 1.0,
+          "continue": 0.0
+        },
+        "target": {
+          "other": 0.01,
+          "current": 0.58,
+          "ambiguous": 0.41
+        },
+        "extra_task": {
+          "no": 0.96,
+          "yes": 0.03,
+          "uncertain": 0.01
+        }
+      }
+    },
+    "response": {
+      "answer": "先保留当前办理。你决定继续还是取消后再操作。",
+      "sessionId": "closure-2-H01",
+      "confirmRequired": false,
+      "pendingAction": "ASK_DECISION",
+      "relatedOrderNo": "ORD9801",
+      "actions": [],
+      "fallback": false
+    },
+    "state": {
+      "pending": "CONFIRM_SUBMIT",
+      "handled": false,
+      "token": "b9ffedc1-c7a1-440b-b3cc-073bb86d528f",
+      "revision": 1,
+      "order": "ORD9801"
+    }
+  },
+  {
+    "check": "新样本 R2-H02 hesitation",
+    "passed": true,
+    "safe": true,
+    "action_ok": true,
+    "cancellation_exit": false,
+    "draft_kept": true,
+    "message": "先保留刚才的办理，我需要考虑一下再决定撤不撤。",
+    "judgment": {
+      "status": "observed",
+      "reason": "undecided",
+      "executed": false,
+      "action": "ask_decision",
+      "cancel_structurally_allowed": false,
+      "contract": "cancel-p0-2026-10-11",
+      "model": "jev-1.13.0",
+      "draft_stage": "draft",
+      "draft_version": "1",
+      "order_id": "ORD9801",
+      "elapsed_ms": 972.377,
+      "path_type": "observed",
+      "pending_action": "ask_decision",
+      "target_type": "cancellation",
+      "target_name": "draft",
+      "components": {
+        "decision": "uncertain",
+        "target": "current",
+        "extra_task": "no"
+      },
+      "scores": {
+        "decision": 0.97,
+        "target": 0.59,
+        "extra_task": 0.8
+      },
+      "usage": {
+        "input_tokens": 1340,
+        "output_tokens": 117
+      },
+      "fact": null,
+      "reply": "先保留当前办理。你决定继续还是取消后再操作。",
+      "probabilities": {
+        "decision": {
+          "stop": 0.0,
+          "uncertain": 0.98,
+          "continue": 0.02
+        },
+        "target": {
+          "other": 0.03,
+          "current": 0.73,
+          "ambiguous": 0.24
+        },
+        "extra_task": {
+          "no": 0.87,
+          "yes": 0.12,
+          "uncertain": 0.01
+        }
+      }
+    },
+    "response": {
+      "answer": "先保留当前办理。你决定继续还是取消后再操作。",
+      "sessionId": "closure-2-H02",
+      "confirmRequired": false,
+      "pendingAction": "ASK_DECISION",
+      "relatedOrderNo": "ORD9801",
+      "actions": [],
+      "fallback": false
+    },
+    "state": {
+      "pending": "CONFIRM_SUBMIT",
+      "handled": false,
+      "token": "63bed3b6-3b83-4376-a783-462c754c598b",
+      "revision": 1,
+      "order": "ORD9801"
+    }
+  },
+  {
+    "check": "新样本 R2-C01 condition",
+    "passed": true,
+    "safe": true,
+    "action_ok": true,
+    "cancellation_exit": false,
+    "draft_kept": true,
+    "message": "如果这笔退货的运费必须我付，就不退了。",
+    "judgment": {
+      "status": "observed",
+      "reason": "condition",
+      "executed": false,
+      "action": "keep_unknown_fact",
+      "cancel_structurally_allowed": false,
+      "contract": "cancel-p0-2026-10-11",
+      "model": "jev-1.13.0",
+      "draft_stage": "draft",
+      "draft_version": "1",
+      "order_id": "ORD9801",
+      "elapsed_ms": 0.003,
+      "path_type": "observed",
+      "pending_action": "keep_unknown_fact",
+      "target_type": "cancellation",
+      "target_name": "draft",
+      "components": {},
+      "scores": {},
+      "usage": {},
+      "fact": {
+        "status": "unavailable",
+        "sufficient": false,
+        "payer": null,
+        "source": null
+      },
+      "reply": "ORD9801的退货运费由谁承担，暂时没有这笔订单的事实，所以先保留办理，不会据此取消。"
+    },
+    "response": {
+      "answer": "ORD9801的退货运费由谁承担，暂时没有这笔订单的事实，所以先保留办理，不会据此取消。",
+      "sessionId": "closure-2-C01",
+      "confirmRequired": false,
+      "pendingAction": "KEEP_UNKNOWN_FACT",
+      "relatedOrderNo": "ORD9801",
+      "actions": [],
+      "fallback": false
+    },
+    "state": {
+      "pending": "CONFIRM_SUBMIT",
+      "handled": false,
+      "token": "8f589c2b-955d-48b5-b032-b187008530a1",
+      "revision": 1,
+      "order": "ORD9801"
+    }
+  },
+  {
+    "check": "新样本 R2-C02 condition",
+    "passed": true,
+    "safe": true,
+    "action_ok": true,
+    "cancellation_exit": false,
+    "draft_kept": true,
+    "message": "假如商家不承担退货运费，那就取消这次售后。",
+    "judgment": {
+      "status": "observed",
+      "reason": "condition",
+      "executed": false,
+      "action": "keep_unknown_fact",
+      "cancel_structurally_allowed": false,
+      "contract": "cancel-p0-2026-10-11",
+      "model": "jev-1.13.0",
+      "draft_stage": "draft",
+      "draft_version": "1",
+      "order_id": "ORD9801",
+      "elapsed_ms": 0.003,
+      "path_type": "observed",
+      "pending_action": "keep_unknown_fact",
+      "target_type": "cancellation",
+      "target_name": "draft",
+      "components": {},
+      "scores": {},
+      "usage": {},
+      "fact": {
+        "status": "unavailable",
+        "sufficient": false,
+        "payer": null,
+        "source": null
+      },
+      "reply": "ORD9801的退货运费由谁承担，暂时没有这笔订单的事实，所以先保留办理，不会据此取消。"
+    },
+    "response": {
+      "answer": "ORD9801的退货运费由谁承担，暂时没有这笔订单的事实，所以先保留办理，不会据此取消。",
+      "sessionId": "closure-2-C02",
+      "confirmRequired": false,
+      "pendingAction": "KEEP_UNKNOWN_FACT",
+      "relatedOrderNo": "ORD9801",
+      "actions": [],
+      "fallback": false
+    },
+    "state": {
+      "pending": "CONFIRM_SUBMIT",
+      "handled": false,
+      "token": "39c0714c-c173-43a5-98a7-aea9cf8af5e9",
+      "revision": 1,
+      "order": "ORD9801"
+    }
+  },
+  {
+    "check": "新样本 R2-O01 purchase",
+    "passed": true,
+    "safe": true,
+    "action_ok": true,
+    "cancellation_exit": false,
+    "draft_kept": true,
+    "message": "我要关闭的是购买订单本身，不是这次退款申请。",
+    "judgment": {
+      "status": "observed",
+      "reason": "extra_task",
+      "executed": false,
+      "action": "hold_review",
+      "cancel_structurally_allowed": false,
+      "contract": "cancel-p0-2026-10-11",
+      "model": "jev-1.13.0",
+      "draft_stage": "draft",
+      "draft_version": "1",
+      "order_id": "ORD9801",
+      "elapsed_ms": 1123.323,
+      "path_type": "observed",
+      "pending_action": "hold_review",
+      "target_type": "cancellation",
+      "target_name": "draft",
+      "components": {
+        "decision": "continue",
+        "target": "other",
+        "extra_task": "yes"
+      },
+      "scores": {
+        "decision": 0.34,
+        "target": 0.98,
+        "extra_task": 0.73
+      },
+      "usage": {
+        "input_tokens": 1339,
+        "output_tokens": 115
+      },
+      "fact": null,
+      "reply": "这句话里还有别的请求。当前办理先留着，这次不会直接取消。",
+      "probabilities": {
+        "decision": {
+          "stop": 0.34,
+          "uncertain": 0.1,
+          "continue": 0.56
+        },
+        "target": {
+          "other": 0.99,
+          "current": 0.01,
+          "ambiguous": 0.0
+        },
+        "extra_task": {
+          "no": 0.18,
+          "yes": 0.82,
+          "uncertain": 0.0
+        }
+      }
+    },
+    "response": {
+      "answer": "这句话里还有别的请求。当前办理先留着，这次不会直接取消。",
+      "sessionId": "closure-2-O01",
+      "confirmRequired": false,
+      "pendingAction": "HOLD_REVIEW",
+      "relatedOrderNo": "ORD9801",
+      "actions": [],
+      "fallback": false
+    },
+    "state": {
+      "pending": "CONFIRM_SUBMIT",
+      "handled": false,
+      "token": "4b961b5e-7c4e-4b16-9e13-a4f3dbc02865",
+      "revision": 1,
+      "order": "ORD9801"
+    }
+  },
+  {
+    "check": "新样本 R2-O02 purchase",
+    "passed": true,
+    "safe": true,
+    "action_ok": true,
+    "cancellation_exit": false,
+    "draft_kept": true,
+    "message": "请取消我购买露营椅的订单，售后申请先留着。",
+    "judgment": {
+      "status": "observed",
+      "reason": "object",
+      "executed": false,
+      "action": "ask_object",
+      "cancel_structurally_allowed": false,
+      "contract": "cancel-p0-2026-10-11",
+      "model": "jev-1.13.0",
+      "draft_stage": "draft",
+      "draft_version": "1",
+      "order_id": "ORD9801",
+      "elapsed_ms": 444.947,
+      "path_type": "observed",
+      "pending_action": "ask_object",
+      "target_type": "cancellation",
+      "target_name": "draft",
+      "components": {
+        "decision": "stop",
+        "target": "other",
+        "extra_task": "yes"
+      },
+      "scores": {
+        "decision": 0.66,
+        "target": 0.97,
+        "extra_task": 0.41
+      },
+      "usage": {
+        "input_tokens": 1339,
+        "output_tokens": 115
+      },
+      "fact": null,
+      "reply": "你要取消订单本身，还是刚才的退款申请？请说明订单号。当前售后是ORD9801。",
+      "object_wait": {
+        "kind": "object",
+        "draft_version": "1",
+        "draft_order": "ORD9801",
+        "decision": "stop",
+        "decision_score": 0.66,
+        "extra_task": "yes",
+        "candidates": []
+      },
+      "probabilities": {
+        "decision": {
+          "stop": 0.77,
+          "uncertain": 0.05,
+          "continue": 0.18
+        },
+        "target": {
+          "other": 0.98,
+          "current": 0.02,
+          "ambiguous": 0.0
+        },
+        "extra_task": {
+          "no": 0.38,
+          "yes": 0.61,
+          "uncertain": 0.01
+        }
+      }
+    },
+    "response": {
+      "answer": "你要取消订单本身，还是刚才的退款申请？请说明订单号。当前售后是ORD9801。",
+      "sessionId": "closure-2-O02",
+      "confirmRequired": false,
+      "pendingAction": "ASK_OBJECT",
+      "relatedOrderNo": "ORD9801",
+      "actions": [],
+      "fallback": false
+    },
+    "state": {
+      "pending": "CONFIRM_SUBMIT",
+      "handled": false,
+      "token": "70bb4dda-69d2-427f-af34-9d3e14dcf70b",
+      "revision": 1,
+      "objectWait": {
+        "draft_order": "ORD9801",
+        "candidates": [],
+        "decision": "stop",
+        "kind": "object",
+        "draft_version": "1",
+        "extra_task": "yes",
+        "decision_score": 0.66
+      },
+      "order": "ORD9801"
+    }
+  },
+  {
+    "check": "新样本 R2-A01 other",
+    "passed": true,
+    "safe": true,
+    "action_ok": true,
+    "cancellation_exit": false,
+    "draft_kept": true,
+    "message": "要撤销的是 ORD9802 的售后，ORD9801 这次退款不动。",
+    "judgment": {
+      "status": "observed",
+      "reason": "object",
+      "executed": false,
+      "action": "ask_object",
+      "cancel_structurally_allowed": false,
+      "contract": "cancel-p0-2026-10-11",
+      "model": "jev-1.13.0",
+      "draft_stage": "draft",
+      "draft_version": "1",
+      "order_id": "ORD9801",
+      "elapsed_ms": 498.04,
+      "path_type": "observed",
+      "pending_action": "ask_object",
+      "target_type": "cancellation",
+      "target_name": "draft",
+      "components": {
+        "decision": "stop",
+        "target": "other",
+        "extra_task": "yes"
+      },
+      "scores": {
+        "decision": 0.62,
+        "target": 0.97,
+        "extra_task": 0.82
+      },
+      "usage": {
+        "input_tokens": 1345,
+        "output_tokens": 115
+      },
+      "fact": null,
+      "reply": "你要取消订单本身，还是刚才的退款申请？请说明订单号。当前售后是ORD9801。",
+      "object_wait": {
+        "kind": "object",
+        "draft_version": "1",
+        "draft_order": "ORD9801",
+        "decision": "stop",
+        "decision_score": 0.62,
+        "extra_task": "yes",
+        "candidates": []
+      },
+      "probabilities": {
+        "decision": {
+          "stop": 0.75,
+          "uncertain": 0.04,
+          "continue": 0.21
+        },
+        "target": {
+          "other": 0.98,
+          "current": 0.02,
+          "ambiguous": 0.0
+        },
+        "extra_task": {
+          "no": 0.12,
+          "yes": 0.88,
+          "uncertain": 0.0
+        }
+      }
+    },
+    "response": {
+      "answer": "你要取消订单本身，还是刚才的退款申请？请说明订单号。当前售后是ORD9801。",
+      "sessionId": "closure-2-A01",
+      "confirmRequired": false,
+      "pendingAction": "ASK_OBJECT",
+      "relatedOrderNo": "ORD9801",
+      "actions": [],
+      "fallback": false
+    },
+    "state": {
+      "pending": "CONFIRM_SUBMIT",
+      "handled": false,
+      "token": "70735f6e-672d-4cb8-85ac-128e81ccf17b",
+      "revision": 1,
+      "objectWait": {
+        "draft_order": "ORD9801",
+        "candidates": [],
+        "decision": "stop",
+        "kind": "object",
+        "draft_version": "1",
+        "extra_task": "yes",
+        "decision_score": 0.62
+      },
+      "order": "ORD9801"
+    }
+  },
+  {
+    "check": "新样本 R2-A02 other",
+    "passed": true,
+    "safe": true,
+    "action_ok": true,
+    "cancellation_exit": false,
+    "draft_kept": true,
+    "message": "另一个订单的退款不办了，现在这份申请继续。",
+    "judgment": {
+      "status": "observed",
+      "reason": "object",
+      "executed": false,
+      "action": "ask_object",
+      "cancel_structurally_allowed": false,
+      "contract": "cancel-p0-2026-10-11",
+      "model": "jev-1.13.0",
+      "draft_stage": "draft",
+      "draft_version": "1",
+      "order_id": "ORD9801",
+      "elapsed_ms": 415.966,
+      "path_type": "observed",
+      "pending_action": "ask_object",
+      "target_type": "cancellation",
+      "target_name": "draft",
+      "components": {
+        "decision": "stop",
+        "target": "other",
+        "extra_task": "yes"
+      },
+      "scores": {
+        "decision": 0.7,
+        "target": 0.82,
+        "extra_task": 0.56
+      },
+      "usage": {
+        "input_tokens": 1338,
+        "output_tokens": 115
+      },
+      "fact": null,
+      "reply": "你要取消订单本身，还是刚才的退款申请？请说明订单号。当前售后是ORD9801。",
+      "object_wait": {
+        "kind": "object",
+        "draft_version": "1",
+        "draft_order": "ORD9801",
+        "decision": "stop",
+        "decision_score": 0.7,
+        "extra_task": "yes",
+        "candidates": []
+      },
+      "probabilities": {
+        "decision": {
+          "stop": 0.8,
+          "uncertain": 0.03,
+          "continue": 0.17
+        },
+        "target": {
+          "other": 0.88,
+          "current": 0.08,
+          "ambiguous": 0.04
+        },
+        "extra_task": {
+          "no": 0.27,
+          "yes": 0.71,
+          "uncertain": 0.02
+        }
+      }
+    },
+    "response": {
+      "answer": "你要取消订单本身，还是刚才的退款申请？请说明订单号。当前售后是ORD9801。",
+      "sessionId": "closure-2-A02",
+      "confirmRequired": false,
+      "pendingAction": "ASK_OBJECT",
+      "relatedOrderNo": "ORD9801",
+      "actions": [],
+      "fallback": false
+    },
+    "state": {
+      "pending": "CONFIRM_SUBMIT",
+      "handled": false,
+      "token": "af780fbd-ce7e-482f-aacf-6268dbe80dc7",
+      "revision": 1,
+      "objectWait": {
+        "draft_order": "ORD9801",
+        "candidates": [],
+        "decision": "stop",
+        "kind": "object",
+        "draft_version": "1",
+        "extra_task": "yes",
+        "decision_score": 0.7
+      },
+      "order": "ORD9801"
+    }
+  },
+  {
+    "check": "新样本 R2-M01 compound",
+    "passed": true,
+    "safe": true,
+    "action_ok": true,
+    "cancellation_exit": false,
+    "draft_kept": true,
+    "message": "把当前退款申请撤销，然后帮我查一下优惠券。",
+    "judgment": {
+      "status": "observed",
+      "reason": "extra_task",
+      "executed": false,
+      "action": "hold_review",
+      "cancel_structurally_allowed": false,
+      "contract": "cancel-p0-2026-10-11",
+      "model": "jev-1.13.0",
+      "draft_stage": "draft",
+      "draft_version": "1",
+      "order_id": "ORD9801",
+      "elapsed_ms": 1277.365,
+      "path_type": "observed",
+      "pending_action": "hold_review",
+      "target_type": "cancellation",
+      "target_name": "draft",
+      "components": {
+        "decision": "stop",
+        "target": "current",
+        "extra_task": "yes"
+      },
+      "scores": {
+        "decision": 0.94,
+        "target": 1.0,
+        "extra_task": 1.0
+      },
+      "usage": {
+        "input_tokens": 1338,
+        "output_tokens": 115
+      },
+      "fact": null,
+      "reply": "这句话里还有别的请求。当前办理先留着，这次不会直接取消。",
+      "probabilities": {
+        "decision": {
+          "stop": 0.96,
+          "uncertain": 0.02,
+          "continue": 0.02
+        },
+        "target": {
+          "other": 0.0,
+          "current": 1.0,
+          "ambiguous": 0.0
+        },
+        "extra_task": {
+          "no": 0.0,
+          "yes": 1.0,
+          "uncertain": 0.0
+        }
+      }
+    },
+    "response": {
+      "answer": "这句话里还有别的请求。当前办理先留着，这次不会直接取消。",
+      "sessionId": "closure-2-M01",
+      "confirmRequired": false,
+      "pendingAction": "HOLD_REVIEW",
+      "relatedOrderNo": "ORD9801",
+      "actions": [],
+      "fallback": false
+    },
+    "state": {
+      "pending": "CONFIRM_SUBMIT",
+      "handled": false,
+      "token": "857df0c7-7473-4259-ae03-12e75e758c1c",
+      "revision": 1,
+      "order": "ORD9801"
+    }
+  },
+  {
+    "check": "新样本 R2-M02 compound",
+    "passed": true,
+    "safe": true,
+    "action_ok": true,
+    "cancellation_exit": false,
+    "draft_kept": true,
+    "message": "停止 ORD9801 的这次售后，再准备 ORD9802 的退款。",
+    "judgment": {
+      "status": "observed",
+      "reason": "object",
+      "executed": false,
+      "action": "ask_object",
+      "cancel_structurally_allowed": false,
+      "contract": "cancel-p0-2026-10-11",
+      "model": "jev-1.13.0",
+      "draft_stage": "draft",
+      "draft_version": "1",
+      "order_id": "ORD9801",
+      "elapsed_ms": 508.548,
+      "path_type": "observed",
+      "pending_action": "ask_object",
+      "target_type": "cancellation",
+      "target_name": "draft",
+      "components": {
+        "decision": "stop",
+        "target": "current",
+        "extra_task": "yes"
+      },
+      "scores": {
+        "decision": 0.92,
+        "target": 0.76,
+        "extra_task": 1.0
+      },
+      "usage": {
+        "input_tokens": 1343,
+        "output_tokens": 115
+      },
+      "fact": null,
+      "reply": "你要取消订单本身，还是刚才的退款申请？请说明订单号。当前售后是ORD9801。",
+      "object_wait": {
+        "kind": "object",
+        "draft_version": "1",
+        "draft_order": "ORD9801",
+        "decision": "stop",
+        "decision_score": 0.92,
+        "extra_task": "yes",
+        "candidates": []
+      },
+      "probabilities": {
+        "decision": {
+          "stop": 0.95,
+          "uncertain": 0.03,
+          "continue": 0.02
+        },
+        "target": {
+          "other": 0.14,
+          "current": 0.84,
+          "ambiguous": 0.02
+        },
+        "extra_task": {
+          "no": 0.0,
+          "yes": 1.0,
+          "uncertain": 0.0
+        }
+      }
+    },
+    "response": {
+      "answer": "你要取消订单本身，还是刚才的退款申请？请说明订单号。当前售后是ORD9801。",
+      "sessionId": "closure-2-M02",
+      "confirmRequired": false,
+      "pendingAction": "ASK_OBJECT",
+      "relatedOrderNo": "ORD9801",
+      "actions": [],
+      "fallback": false
+    },
+    "state": {
+      "pending": "CONFIRM_SUBMIT",
+      "handled": false,
+      "token": "f5b88276-6d75-4d3f-9901-a3838ba444aa",
+      "revision": 1,
+      "objectWait": {
+        "draft_order": "ORD9801",
+        "candidates": [],
+        "decision": "stop",
+        "kind": "object",
+        "draft_version": "1",
+        "extra_task": "yes",
+        "decision_score": 0.92
+      },
+      "order": "ORD9801"
+    }
+  },
+  {
+    "check": "页面：低分重发原卡和原凭证",
+    "passed": true
+  },
+  {
+    "check": "页面：点击原卡取消成功",
+    "passed": true
+  },
+  {
+    "check": "页面：取消后旧卡提交返回409",
+    "passed": true
+  },
+  {
+    "check": "页面：取消后历史卡所有按钮禁用",
+    "passed": true
+  },
+  {
+    "check": "页面：取消后序号不恢复办理，Python待办为空",
+    "passed": true
+  },
+  {
+    "check": "页面：无JavaScript异常",
+    "passed": true,
+    "errors": []
+  },
+  {
+    "check": "八张业务表行数与内容哈希完全不变",
+    "passed": true
+  }
+]

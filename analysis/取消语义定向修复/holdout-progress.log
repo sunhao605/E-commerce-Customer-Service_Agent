@@ -1,0 +1,200 @@
+rules N01 1 keep None 0.345
+single_deepseek N01 1 cancel None 514.932
+split_deepseek N01 1 error None 634.96
+single_jev N01 1 cancel None 490.014
+split_jev N01 1 cancel {'decision': 'stop', 'target': 'current', 'extra_task': 'no'} 460.689
+rules N02 1 keep None 0.977
+single_deepseek N02 1 cancel None 692.018
+split_deepseek N02 1 cancel {'decision': 'stop', 'target': 'current', 'extra_task': 'no'} 731.787
+single_jev N02 1 cancel None 499.114
+split_jev N02 1 cancel {'decision': 'stop', 'target': 'current', 'extra_task': 'no'} 448.715
+rules N03 1 keep None 0.757
+single_deepseek N03 1 cancel None 972.351
+split_deepseek N03 1 error None 510.688
+single_jev N03 1 cancel None 498.583
+split_jev N03 1 cancel {'decision': 'stop', 'target': 'current', 'extra_task': 'no'} 438.301
+rules N04 1 keep None 0.867
+single_deepseek N04 1 cancel None 945.524
+split_deepseek N04 1 error None 592.723
+single_jev N04 1 cancel None 455.14
+split_jev N04 1 cancel {'decision': 'stop', 'target': 'current', 'extra_task': 'no'} 465.594
+rules N05 1 keep None 0.832
+single_deepseek N05 1 cancel None 948.374
+split_deepseek N05 1 error None 787.474
+single_jev N05 1 cancel None 498.984
+split_jev N05 1 cancel {'decision': 'stop', 'target': 'current', 'extra_task': 'no'} 442.784
+rules N06 1 keep None 1.446
+single_deepseek N06 1 cancel None 900.196
+split_deepseek N06 1 cancel {'decision': 'stop', 'target': 'current', 'extra_task': 'no'} 805.782
+single_jev N06 1 cancel None 436.861
+split_jev N06 1 cancel {'decision': 'stop', 'target': 'current', 'extra_task': 'no'} 443.988
+rules N07 1 keep None 1.061
+single_deepseek N07 1 keep None 731.399
+split_deepseek N07 1 error None 688.79
+single_jev N07 1 keep None 449.791
+split_jev N07 1 keep {'decision': 'continue', 'target': 'current', 'extra_task': 'no'} 892.517
+rules N08 1 keep None 0.929
+single_deepseek N08 1 keep None 687.772
+split_deepseek N08 1 error None 684.623
+single_jev N08 1 keep None 421.912
+split_jev N08 1 keep {'decision': 'continue', 'target': 'current', 'extra_task': 'no'} 446.536
+rules N09 1 keep None 1.574
+single_deepseek N09 1 keep None 469.489
+split_deepseek N09 1 keep {'decision': 'continue', 'target': 'current', 'extra_task': 'no'} 611.394
+single_jev N09 1 keep None 436.231
+split_jev N09 1 keep {'decision': 'continue', 'target': 'current', 'extra_task': 'no'} 461.847
+rules N10 1 keep None 0.851
+single_deepseek N10 1 keep None 513.891
+split_deepseek N10 1 keep {'decision': 'continue', 'target': 'current', 'extra_task': 'no'} 709.774
+single_jev N10 1 keep None 438.272
+split_jev N10 1 cancel {'decision': 'stop', 'target': 'current', 'extra_task': 'no'} 431.775
+rules N11 1 keep None 0.489
+single_deepseek N11 1 keep None 589.795
+split_deepseek N11 1 error None 1211.698
+single_jev N11 1 keep None 515.604
+split_jev N11 1 keep {'decision': 'continue', 'target': 'current', 'extra_task': 'no'} 428.427
+rules N12 1 keep None 0.688
+single_deepseek N12 1 keep None 734.788
+split_deepseek N12 1 error None 778.422
+single_jev N12 1 keep None 419.453
+split_jev N12 1 keep {'decision': 'continue', 'target': 'current', 'extra_task': 'yes'} 463.363
+rules N13 1 keep None 0.395
+single_deepseek N13 1 clarify None 875.627
+split_deepseek N13 1 error None 1006.196
+single_jev N13 1 cancel None 534.686
+split_jev N13 1 clarify {'decision': 'stop', 'target': 'ambiguous', 'extra_task': 'no'} 499.139
+rules N14 1 keep None 0.467
+single_deepseek N14 1 cancel None 645.069
+split_deepseek N14 1 cancel {'decision': 'stop', 'target': 'current', 'extra_task': 'no'} 678.35
+single_jev N14 1 cancel None 404.773
+split_jev N14 1 cancel {'decision': 'stop', 'target': 'current', 'extra_task': 'no'} 457.962
+rules N15 1 keep None 0.389
+single_deepseek N15 1 clarify None 1169.557
+split_deepseek N15 1 error None 670.937
+single_jev N15 1 cancel None 424.393
+split_jev N15 1 clarify {'decision': 'stop', 'target': 'current', 'extra_task': 'yes'} 431.724
+rules N16 1 keep None 0.874
+single_deepseek N16 1 clarify None 795.772
+split_deepseek N16 1 error None 1690.105
+single_jev N16 1 cancel None 511.688
+split_jev N16 1 clarify {'decision': 'stop', 'target': 'current', 'extra_task': 'yes'} 684.674
+rules N17 1 keep None 0.386
+single_deepseek N17 1 cancel None 1140.71
+split_deepseek N17 1 error None 675.11
+single_jev N17 1 cancel None 544.347
+split_jev N17 1 cancel {'decision': 'stop', 'target': 'current', 'extra_task': 'no'} 493.037
+rules N18 1 keep None 0.893
+single_deepseek N18 1 cancel None 399.062
+split_deepseek N18 1 clarify {'decision': 'uncertain', 'target': 'current', 'extra_task': 'no'} 961.799
+single_jev N18 1 cancel None 837.214
+split_jev N18 1 cancel {'decision': 'stop', 'target': 'current', 'extra_task': 'no'} 416.029
+rules N19 1 keep None 0.665
+single_deepseek N19 1 clarify None 818.624
+split_deepseek N19 1 error None 419.923
+single_jev N19 1 clarify None 427.561
+split_jev N19 1 clarify {'decision': 'uncertain', 'target': 'current', 'extra_task': 'no'} 456.21
+rules N20 1 keep None 0.505
+single_deepseek N20 1 clarify None 615.846
+split_deepseek N20 1 error None 746.545
+single_jev N20 1 keep None 475.306
+split_jev N20 1 clarify {'decision': 'stop', 'target': 'other', 'extra_task': 'no'} 614.869
+split_jev N20 2 clarify {'decision': 'stop', 'target': 'other', 'extra_task': 'no'} 438.731
+single_jev N20 2 keep None 451.033
+split_deepseek N20 2 error None 593.362
+single_deepseek N20 2 clarify None 905.132
+rules N20 2 keep None 0.397
+split_jev N19 2 clarify {'decision': 'uncertain', 'target': 'current', 'extra_task': 'no'} 573.792
+single_jev N19 2 clarify None 448.191
+split_deepseek N19 2 error None 772.437
+single_deepseek N19 2 clarify None 578.823
+rules N19 2 keep None 0.867
+split_jev N18 2 cancel {'decision': 'stop', 'target': 'current', 'extra_task': 'no'} 424.063
+single_jev N18 2 cancel None 485.494
+split_deepseek N18 2 clarify {'decision': 'uncertain', 'target': 'current', 'extra_task': 'no'} 1059.839
+single_deepseek N18 2 cancel None 366.535
+rules N18 2 keep None 0.705
+split_jev N17 2 cancel {'decision': 'stop', 'target': 'current', 'extra_task': 'no'} 669.831
+single_jev N17 2 cancel None 402.096
+split_deepseek N17 2 error None 717.72
+single_deepseek N17 2 cancel None 557.345
+rules N17 2 keep None 5.737
+split_jev N16 2 clarify {'decision': 'stop', 'target': 'current', 'extra_task': 'yes'} 440.825
+single_jev N16 2 cancel None 418.571
+split_deepseek N16 2 clarify {'decision': 'stop', 'target': 'current', 'extra_task': 'yes'} 863.766
+single_deepseek N16 2 clarify None 783.348
+rules N16 2 keep None 1.122
+split_jev N15 2 clarify {'decision': 'stop', 'target': 'current', 'extra_task': 'yes'} 500.059
+single_jev N15 2 cancel None 445.094
+split_deepseek N15 2 error None 1151.088
+single_deepseek N15 2 clarify None 824.935
+rules N15 2 keep None 0.689
+split_jev N14 2 cancel {'decision': 'stop', 'target': 'current', 'extra_task': 'no'} 501.06
+single_jev N14 2 cancel None 440.477
+split_deepseek N14 2 error None 904.49
+single_deepseek N14 2 cancel None 755.016
+rules N14 2 keep None 0.618
+split_jev N13 2 clarify {'decision': 'stop', 'target': 'ambiguous', 'extra_task': 'no'} 485.255
+single_jev N13 2 cancel None 564.383
+split_deepseek N13 2 error None 472.043
+single_deepseek N13 2 clarify None 706.983
+rules N13 2 keep None 0.788
+split_jev N12 2 keep {'decision': 'continue', 'target': 'current', 'extra_task': 'yes'} 1022.021
+single_jev N12 2 keep None 416.222
+split_deepseek N12 2 error None 582.768
+single_deepseek N12 2 keep None 851.754
+rules N12 2 keep None 0.746
+split_jev N11 2 keep {'decision': 'continue', 'target': 'current', 'extra_task': 'no'} 465.612
+single_jev N11 2 keep None 456.668
+split_deepseek N11 2 error None 809.058
+single_deepseek N11 2 keep None 775.896
+rules N11 2 keep None 2.038
+split_jev N10 2 cancel {'decision': 'stop', 'target': 'current', 'extra_task': 'no'} 490.909
+single_jev N10 2 keep None 440.764
+split_deepseek N10 2 error None 818.224
+single_deepseek N10 2 keep None 478.041
+rules N10 2 keep None 0.726
+split_jev N09 2 keep {'decision': 'continue', 'target': 'current', 'extra_task': 'no'} 436.917
+single_jev N09 2 keep None 453.918
+split_deepseek N09 2 keep {'decision': 'continue', 'target': 'current', 'extra_task': 'no'} 656.372
+single_deepseek N09 2 keep None 628.797
+rules N09 2 keep None 1.678
+split_jev N08 2 keep {'decision': 'continue', 'target': 'current', 'extra_task': 'no'} 525.774
+single_jev N08 2 keep None 442.084
+split_deepseek N08 2 error None 844.017
+single_deepseek N08 2 keep None 964.348
+rules N08 2 keep None 0.712
+split_jev N07 2 keep {'decision': 'continue', 'target': 'current', 'extra_task': 'no'} 429.074
+single_jev N07 2 keep None 453.509
+split_deepseek N07 2 error None 1124.447
+single_deepseek N07 2 keep None 610.349
+rules N07 2 keep None 0.395
+split_jev N06 2 cancel {'decision': 'stop', 'target': 'current', 'extra_task': 'no'} 618.888
+single_jev N06 2 cancel None 427.606
+split_deepseek N06 2 cancel {'decision': 'stop', 'target': 'current', 'extra_task': 'no'} 802.798
+single_deepseek N06 2 cancel None 471.468
+rules N06 2 keep None 1.437
+split_jev N05 2 cancel {'decision': 'stop', 'target': 'current', 'extra_task': 'no'} 467.993
+single_jev N05 2 cancel None 853.559
+split_deepseek N05 2 cancel {'decision': 'stop', 'target': 'current', 'extra_task': 'no'} 526.552
+single_deepseek N05 2 cancel None 435.195
+rules N05 2 keep None 0.586
+split_jev N04 2 cancel {'decision': 'stop', 'target': 'current', 'extra_task': 'no'} 2167.334
+single_jev N04 2 cancel None 409.404
+split_deepseek N04 2 cancel {'decision': 'stop', 'target': 'current', 'extra_task': 'no'} 636.251
+single_deepseek N04 2 cancel None 684.187
+rules N04 2 keep None 3.851
+split_jev N03 2 cancel {'decision': 'stop', 'target': 'current', 'extra_task': 'no'} 569.745
+single_jev N03 2 cancel None 780.487
+split_deepseek N03 2 error None 747.58
+single_deepseek N03 2 cancel None 551.415
+rules N03 2 keep None 0.795
+split_jev N02 2 cancel {'decision': 'stop', 'target': 'current', 'extra_task': 'no'} 536.39
+single_jev N02 2 cancel None 428.712
+split_deepseek N02 2 cancel {'decision': 'stop', 'target': 'current', 'extra_task': 'no'} 754.296
+single_deepseek N02 2 cancel None 862.327
+rules N02 2 keep None 0.477
+split_jev N01 2 cancel {'decision': 'stop', 'target': 'current', 'extra_task': 'no'} 396.857
+single_jev N01 2 cancel None 473.454
+split_deepseek N01 2 error None 485.565
+single_deepseek N01 2 cancel None 322.314
+rules N01 2 keep None 0.375

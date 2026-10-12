@@ -1,0 +1,27 @@
+{
+  "java_image": "sha256:96edf93e8278defbf18b277c71623557d81373406ed6c4e00757d2c3efa996b1",
+  "java_env_sha256": "75c6221883ac999e52b19feee8f8aca60dbaeed3cab980f8040bd1545ada1e6b",
+  "java_cancel_execute": "unset",
+  "python_pid": 62692,
+  "python_config": {
+    "CANCEL_INTENT_EXECUTE": "0",
+    "CANCEL_INTENT_OBSERVE": "0",
+    "CANCEL_SCORE_MIN": "0.9",
+    "AGENT_COURSE_ENV": "/Users/sunhao/Downloads/03_AIPMProject/0305_DianShang_Agent/.env.model.local",
+    "AGENT_COURSE_DISABLE_LLM": "0",
+    "AGENT_COURSE_OFFLINE_RAG": "1",
+    "AGENT_COURSE_OFFLINE_FACTS": "0",
+    "LANGCHAIN_TRACING_V2": "false",
+    "LANGSMITH_TRACING": "false"
+  },
+  "model_config_file_sha256": "5e07f7ae4c38029312e617c7415a933e7dfba3ef6b863ce6185e9008d2978823",
+  "java_health": {
+    "status": "UP"
+  },
+  "python_health": {
+    "status": "ok",
+    "lesson": "41"
+  },
+  "mall_vite_pid": 2013,
+  "workbench_vite_pid": 66296
+}

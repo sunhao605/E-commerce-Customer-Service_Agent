@@ -1,0 +1,30 @@
+[
+  {
+    "input": "ORD9801 我要申请退款，原因：买错了",
+    "answer": "请核对申请，确认提交后等待后台审核。",
+    "confirmRequired": true,
+    "pendingAction": "CONFIRM_SUBMIT",
+    "screenshot": "对话截图/01.png"
+  },
+  {
+    "input": "轻量露营折叠椅多少钱？",
+    "answer": "轻量露营折叠椅 商品标价 199 元，当前无库存。",
+    "confirmRequired": false,
+    "pendingAction": "PRODUCT_QUERY",
+    "screenshot": "对话截图/02.png"
+  },
+  {
+    "input": "刚才那款还有货吗？",
+    "answer": "这次商品信息查询没有成功，暂时无法核实。请稍后重试。",
+    "confirmRequired": false,
+    "pendingAction": "PRODUCT_QUERY",
+    "screenshot": "对话截图/03.png"
+  },
+  {
+    "input": "刚才那款多少钱？",
+    "answer": "轻量露营折叠椅 商品标价 199 元，当前无库存。",
+    "confirmRequired": false,
+    "pendingAction": "PRODUCT_QUERY",
+    "screenshot": "对话截图/04.png"
+  }
+]

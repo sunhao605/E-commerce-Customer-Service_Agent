@@ -1,0 +1,5 @@
+{
+  "type": "test_script",
+  "reason": "null pending field omitted by JSON serialization; direct indexing raised KeyError after first two successful page turns",
+  "business_change": false
+}

@@ -1,0 +1,46 @@
+{
+  "type": "offline_mock_checks",
+  "checks": [
+    {
+      "id": "H16",
+      "repeat": 1,
+      "keep_preserves_draft": true,
+      "explicit_cancel_verified": true,
+      "task_order_preserved": true,
+      "repeated_and_stale_click_blocked": true
+    },
+    {
+      "id": "H17",
+      "repeat": 1,
+      "keep_preserves_draft": true,
+      "explicit_cancel_verified": true,
+      "task_order_preserved": true,
+      "repeated_and_stale_click_blocked": true
+    },
+    {
+      "id": "H16",
+      "repeat": 2,
+      "keep_preserves_draft": true,
+      "explicit_cancel_verified": true,
+      "task_order_preserved": true,
+      "repeated_and_stale_click_blocked": true
+    },
+    {
+      "id": "N10",
+      "repeat": 1,
+      "keep_preserves_draft": true,
+      "explicit_cancel_verified": true,
+      "task_order_preserved": true,
+      "repeated_and_stale_click_blocked": true
+    },
+    {
+      "id": "N10",
+      "repeat": 2,
+      "keep_preserves_draft": true,
+      "explicit_cancel_verified": true,
+      "task_order_preserved": true,
+      "repeated_and_stale_click_blocked": true
+    }
+  ],
+  "real_browser_or_business_write": false
+}

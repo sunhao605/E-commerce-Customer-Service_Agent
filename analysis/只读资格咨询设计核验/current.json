@@ -1,0 +1,201 @@
+{
+  "input": "SO20261010124526218-b60d3f08 还能退吗？先别申请。",
+  "response": {
+    "answer": "你是在问具体订单能不能退，不是在办理。我现在只能说明通用退款或退货规则，还不能只读核验这一笔的资格，也不会准备申请。可以直接问退款政策或退货条件；如果要办理，请明确说申请退款或申请退货。",
+    "sessionId": "cs-ddae9a7c-a193-4bcc-a86f-5db189f977dc",
+    "confirmRequired": false,
+    "actions": [],
+    "fallback": false
+  },
+  "same_business_reads": true,
+  "before": {
+    "after-sales": [
+      {
+        "requestNo": "AS-20261009084838920-9e38d43c",
+        "orderNo": "SO20261009082850446-6df1a10e",
+        "type": "RETURN",
+        "status": "REFUNDED",
+        "amount": 529.0,
+        "reason": "七天无理由退货",
+        "createdAt": "2026-10-09T16:48:38.916405",
+        "handlingNote": "tongguo",
+        "returnInfo": {
+          "signedAt": "2026-10-09T16:47:49.289507",
+          "eligibleAtSubmit": true,
+          "address": "shandongsheng",
+          "contact": "sunhao",
+          "phone": "178777777777",
+          "carrier": "shunfeng",
+          "trackingNo": "sf_0000001",
+          "sentAt": "2026-10-09T16:50:43.44293",
+          "receivedAt": "2026-10-09T16:51:36.881132"
+        }
+      },
+      {
+        "requestNo": "AS-20261009062604598-17039d42",
+        "orderNo": "SO20261009061332122-26971b7b",
+        "type": "REFUND",
+        "status": "APPROVED",
+        "amount": 199.0,
+        "reason": "买错了",
+        "createdAt": "2026-10-09T06:26:04.598011",
+        "handlingNote": "审批通过"
+      },
+      {
+        "requestNo": "AS-STORY-REFUND-0009",
+        "orderNo": "SO20260602103000009-a1000009",
+        "type": "refund",
+        "status": "reviewing",
+        "reason": "大促订单退款进度演示",
+        "createdAt": "2026-06-09T10:00:00",
+        "handlingNote": "售后专员正在审核。"
+      },
+      {
+        "requestNo": "AS-1003",
+        "orderNo": "SO20260418092000003-a1000003",
+        "type": "return",
+        "status": "need_more_info",
+        "reason": "退货材料不完整，等待补充照片",
+        "createdAt": "2026-04-25T09:00:00",
+        "handlingNote": "请补充商品外观和包装配件照片。",
+        "returnInfo": {}
+      },
+      {
+        "requestNo": "AS-1001",
+        "orderNo": "SO20260417154000006-a1000006",
+        "type": "exchange",
+        "status": "submitted",
+        "reason": "营地旗破损，申请换货",
+        "createdAt": "2026-04-21T10:00:00",
+        "handlingNote": "已收到质量问题凭证，等待客服复核。"
+      }
+    ],
+    "balance": {
+      "userId": "U1001",
+      "availableBalance": 99602.0,
+      "updatedAt": "2026-10-10T12:45:26.241702"
+    },
+    "orders/SO20261010124526218-b60d3f08": {
+      "orderNo": "SO20261010124526218-b60d3f08",
+      "orderStatus": "PAID_PENDING_SHIPMENT",
+      "paymentStatus": "PAID",
+      "fulfillmentStatus": "UNSHIPPED",
+      "totalAmount": 199.0,
+      "itemSummary": "户外野餐垫 x1",
+      "remark": "M06候选顺序验收",
+      "items": [
+        {
+          "productId": 2,
+          "productName": "户外野餐垫",
+          "productImageUrl": "/products/picnic-mat.svg",
+          "unitPrice": 199.0,
+          "quantity": 1
+        }
+      ],
+      "afterSaleAvailable": true,
+      "availableAfterSaleTypes": [
+        "REFUND",
+        "CANCEL_ORDER",
+        "COMPENSATION"
+      ],
+      "createdAt": "2026-10-10T12:45:26.21825",
+      "paidAt": "2026-10-10T12:45:26.241702"
+    }
+  },
+  "after": {
+    "after-sales": [
+      {
+        "requestNo": "AS-20261009084838920-9e38d43c",
+        "orderNo": "SO20261009082850446-6df1a10e",
+        "type": "RETURN",
+        "status": "REFUNDED",
+        "amount": 529.0,
+        "reason": "七天无理由退货",
+        "createdAt": "2026-10-09T16:48:38.916405",
+        "handlingNote": "tongguo",
+        "returnInfo": {
+          "signedAt": "2026-10-09T16:47:49.289507",
+          "eligibleAtSubmit": true,
+          "address": "shandongsheng",
+          "contact": "sunhao",
+          "phone": "178777777777",
+          "carrier": "shunfeng",
+          "trackingNo": "sf_0000001",
+          "sentAt": "2026-10-09T16:50:43.44293",
+          "receivedAt": "2026-10-09T16:51:36.881132"
+        }
+      },
+      {
+        "requestNo": "AS-20261009062604598-17039d42",
+        "orderNo": "SO20261009061332122-26971b7b",
+        "type": "REFUND",
+        "status": "APPROVED",
+        "amount": 199.0,
+        "reason": "买错了",
+        "createdAt": "2026-10-09T06:26:04.598011",
+        "handlingNote": "审批通过"
+      },
+      {
+        "requestNo": "AS-STORY-REFUND-0009",
+        "orderNo": "SO20260602103000009-a1000009",
+        "type": "refund",
+        "status": "reviewing",
+        "reason": "大促订单退款进度演示",
+        "createdAt": "2026-06-09T10:00:00",
+        "handlingNote": "售后专员正在审核。"
+      },
+      {
+        "requestNo": "AS-1003",
+        "orderNo": "SO20260418092000003-a1000003",
+        "type": "return",
+        "status": "need_more_info",
+        "reason": "退货材料不完整，等待补充照片",
+        "createdAt": "2026-04-25T09:00:00",
+        "handlingNote": "请补充商品外观和包装配件照片。",
+        "returnInfo": {}
+      },
+      {
+        "requestNo": "AS-1001",
+        "orderNo": "SO20260417154000006-a1000006",
+        "type": "exchange",
+        "status": "submitted",
+        "reason": "营地旗破损，申请换货",
+        "createdAt": "2026-04-21T10:00:00",
+        "handlingNote": "已收到质量问题凭证，等待客服复核。"
+      }
+    ],
+    "balance": {
+      "userId": "U1001",
+      "availableBalance": 99602.0,
+      "updatedAt": "2026-10-10T12:45:26.241702"
+    },
+    "orders/SO20261010124526218-b60d3f08": {
+      "orderNo": "SO20261010124526218-b60d3f08",
+      "orderStatus": "PAID_PENDING_SHIPMENT",
+      "paymentStatus": "PAID",
+      "fulfillmentStatus": "UNSHIPPED",
+      "totalAmount": 199.0,
+      "itemSummary": "户外野餐垫 x1",
+      "remark": "M06候选顺序验收",
+      "items": [
+        {
+          "productId": 2,
+          "productName": "户外野餐垫",
+          "productImageUrl": "/products/picnic-mat.svg",
+          "unitPrice": 199.0,
+          "quantity": 1
+        }
+      ],
+      "afterSaleAvailable": true,
+      "availableAfterSaleTypes": [
+        "REFUND",
+        "CANCEL_ORDER",
+        "COMPENSATION"
+      ],
+      "createdAt": "2026-10-10T12:45:26.21825",
+      "paidAt": "2026-10-10T12:45:26.241702"
+    }
+  },
+  "screenshot": "当前资格咨询.png",
+  "scope": "一条新会话的当前表现核验，不是MVP验收或完整模型评测"
+}

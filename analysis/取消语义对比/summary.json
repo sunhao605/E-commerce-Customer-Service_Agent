@@ -1,0 +1,393 @@
+{
+  "fixture_sha256": "34e1b091d4c39e14a8cbdfa8347cfc8bce3c3a441b596cb3a8c01d3c6e839f16",
+  "providers": {
+    "rules": {
+      "status": "complete",
+      "runs": 60,
+      "valid_responses": 60,
+      "correct": 28,
+      "false_cancel": 0,
+      "non_cancel_runs": 36,
+      "missed_cancel": 16,
+      "cancel_runs": 24,
+      "clarify_correct": 0,
+      "state_gate_correct": 46,
+      "p50_ms": 0.162,
+      "p95_ms": 0.279,
+      "repeat_disagreements": [],
+      "cost_estimate_usd_range": [
+        0.0,
+        0.0
+      ],
+      "errors": [],
+      "mismatches": [
+        {
+          "id": "C04",
+          "repeat": 1,
+          "expected": "cancel",
+          "actual": "keep"
+        },
+        {
+          "id": "C05",
+          "repeat": 1,
+          "expected": "cancel",
+          "actual": "keep"
+        },
+        {
+          "id": "C06",
+          "repeat": 1,
+          "expected": "cancel",
+          "actual": "keep"
+        },
+        {
+          "id": "C07",
+          "repeat": 1,
+          "expected": "cancel",
+          "actual": "keep"
+        },
+        {
+          "id": "C08",
+          "repeat": 1,
+          "expected": "cancel",
+          "actual": "keep"
+        },
+        {
+          "id": "C09",
+          "repeat": 1,
+          "expected": "cancel",
+          "actual": "keep"
+        },
+        {
+          "id": "C11",
+          "repeat": 1,
+          "expected": "cancel",
+          "actual": "keep"
+        },
+        {
+          "id": "C12",
+          "repeat": 1,
+          "expected": "cancel",
+          "actual": "keep"
+        },
+        {
+          "id": "A01",
+          "repeat": 1,
+          "expected": "clarify",
+          "actual": "keep"
+        },
+        {
+          "id": "A02",
+          "repeat": 1,
+          "expected": "clarify",
+          "actual": "keep"
+        },
+        {
+          "id": "A03",
+          "repeat": 1,
+          "expected": "clarify",
+          "actual": "keep"
+        },
+        {
+          "id": "A04",
+          "repeat": 1,
+          "expected": "clarify",
+          "actual": "keep"
+        },
+        {
+          "id": "A05",
+          "repeat": 1,
+          "expected": "clarify",
+          "actual": "keep"
+        },
+        {
+          "id": "A06",
+          "repeat": 1,
+          "expected": "clarify",
+          "actual": "keep"
+        },
+        {
+          "id": "A07",
+          "repeat": 1,
+          "expected": "clarify",
+          "actual": "keep"
+        },
+        {
+          "id": "A08",
+          "repeat": 1,
+          "expected": "clarify",
+          "actual": "keep"
+        },
+        {
+          "id": "A08",
+          "repeat": 2,
+          "expected": "clarify",
+          "actual": "keep"
+        },
+        {
+          "id": "A07",
+          "repeat": 2,
+          "expected": "clarify",
+          "actual": "keep"
+        },
+        {
+          "id": "A06",
+          "repeat": 2,
+          "expected": "clarify",
+          "actual": "keep"
+        },
+        {
+          "id": "A05",
+          "repeat": 2,
+          "expected": "clarify",
+          "actual": "keep"
+        },
+        {
+          "id": "A04",
+          "repeat": 2,
+          "expected": "clarify",
+          "actual": "keep"
+        },
+        {
+          "id": "A03",
+          "repeat": 2,
+          "expected": "clarify",
+          "actual": "keep"
+        },
+        {
+          "id": "A02",
+          "repeat": 2,
+          "expected": "clarify",
+          "actual": "keep"
+        },
+        {
+          "id": "A01",
+          "repeat": 2,
+          "expected": "clarify",
+          "actual": "keep"
+        },
+        {
+          "id": "C12",
+          "repeat": 2,
+          "expected": "cancel",
+          "actual": "keep"
+        },
+        {
+          "id": "C11",
+          "repeat": 2,
+          "expected": "cancel",
+          "actual": "keep"
+        },
+        {
+          "id": "C09",
+          "repeat": 2,
+          "expected": "cancel",
+          "actual": "keep"
+        },
+        {
+          "id": "C08",
+          "repeat": 2,
+          "expected": "cancel",
+          "actual": "keep"
+        },
+        {
+          "id": "C07",
+          "repeat": 2,
+          "expected": "cancel",
+          "actual": "keep"
+        },
+        {
+          "id": "C06",
+          "repeat": 2,
+          "expected": "cancel",
+          "actual": "keep"
+        },
+        {
+          "id": "C05",
+          "repeat": 2,
+          "expected": "cancel",
+          "actual": "keep"
+        },
+        {
+          "id": "C04",
+          "repeat": 2,
+          "expected": "cancel",
+          "actual": "keep"
+        }
+      ]
+    },
+    "deepseek": {
+      "status": "complete",
+      "runs": 60,
+      "valid_responses": 60,
+      "correct": 51,
+      "false_cancel": 8,
+      "non_cancel_runs": 36,
+      "missed_cancel": 1,
+      "cancel_runs": 24,
+      "clarify_correct": 9,
+      "state_gate_correct": 51,
+      "p50_ms": 532.437,
+      "p95_ms": 819.903,
+      "repeat_disagreements": [
+        "C04",
+        "K05",
+        "A06"
+      ],
+      "cost_estimate_usd_range": [
+        0.002486004,
+        0.004972008
+      ],
+      "errors": [],
+      "mismatches": [
+        {
+          "id": "A02",
+          "repeat": 1,
+          "expected": "clarify",
+          "actual": "cancel"
+        },
+        {
+          "id": "A05",
+          "repeat": 1,
+          "expected": "clarify",
+          "actual": "cancel"
+        },
+        {
+          "id": "A08",
+          "repeat": 1,
+          "expected": "clarify",
+          "actual": "cancel"
+        },
+        {
+          "id": "A08",
+          "repeat": 2,
+          "expected": "clarify",
+          "actual": "cancel"
+        },
+        {
+          "id": "A06",
+          "repeat": 2,
+          "expected": "clarify",
+          "actual": "cancel"
+        },
+        {
+          "id": "A05",
+          "repeat": 2,
+          "expected": "clarify",
+          "actual": "cancel"
+        },
+        {
+          "id": "A02",
+          "repeat": 2,
+          "expected": "clarify",
+          "actual": "cancel"
+        },
+        {
+          "id": "K05",
+          "repeat": 2,
+          "expected": "keep",
+          "actual": "cancel"
+        },
+        {
+          "id": "C04",
+          "repeat": 2,
+          "expected": "cancel",
+          "actual": "keep"
+        }
+      ]
+    },
+    "jev": {
+      "status": "complete",
+      "runs": 60,
+      "valid_responses": 60,
+      "correct": 48,
+      "false_cancel": 12,
+      "non_cancel_runs": 36,
+      "missed_cancel": 0,
+      "cancel_runs": 24,
+      "clarify_correct": 4,
+      "state_gate_correct": 48,
+      "p50_ms": 894.129,
+      "p95_ms": 2653.629,
+      "repeat_disagreements": [],
+      "cost_estimate_usd_range": [
+        0.001821204,
+        0.001821204
+      ],
+      "errors": [],
+      "mismatches": [
+        {
+          "id": "A02",
+          "repeat": 1,
+          "expected": "clarify",
+          "actual": "cancel"
+        },
+        {
+          "id": "A03",
+          "repeat": 1,
+          "expected": "clarify",
+          "actual": "cancel"
+        },
+        {
+          "id": "A04",
+          "repeat": 1,
+          "expected": "clarify",
+          "actual": "cancel"
+        },
+        {
+          "id": "A05",
+          "repeat": 1,
+          "expected": "clarify",
+          "actual": "cancel"
+        },
+        {
+          "id": "A06",
+          "repeat": 1,
+          "expected": "clarify",
+          "actual": "cancel"
+        },
+        {
+          "id": "A08",
+          "repeat": 1,
+          "expected": "clarify",
+          "actual": "cancel"
+        },
+        {
+          "id": "A08",
+          "repeat": 2,
+          "expected": "clarify",
+          "actual": "cancel"
+        },
+        {
+          "id": "A06",
+          "repeat": 2,
+          "expected": "clarify",
+          "actual": "cancel"
+        },
+        {
+          "id": "A05",
+          "repeat": 2,
+          "expected": "clarify",
+          "actual": "cancel"
+        },
+        {
+          "id": "A04",
+          "repeat": 2,
+          "expected": "clarify",
+          "actual": "cancel"
+        },
+        {
+          "id": "A03",
+          "repeat": 2,
+          "expected": "clarify",
+          "actual": "cancel"
+        },
+        {
+          "id": "A02",
+          "repeat": 2,
+          "expected": "clarify",
+          "actual": "cancel"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,91 @@
+[
+  {
+    "input": "ORD9801 还能退吗？先别申请",
+    "response": {
+      "answer": "按当前查询结果，订单 ORD9801 可以申请未发货整单退款，金额 200.0 元。已支付且未发货，整单实付金额已核实。如需办理，请明确回复‘申请退款’。这轮只查资格，没有准备申请；可以申请不代表审核通过。",
+      "sessionId": "cs-766bfaa0-0e9d-4b33-b296-b79e963329cf",
+      "confirmRequired": false,
+      "pendingAction": "ELIGIBILITY_QUERY",
+      "relatedOrderNo": "ORD9801",
+      "actions": [],
+      "fallback": false
+    },
+    "screenshot": "对话截图/01.png"
+  },
+  {
+    "input": "好的",
+    "response": {
+      "answer": "好的，这次只咨询，没有准备新的申请。需要办理时请明确提出申请。",
+      "sessionId": "cs-766bfaa0-0e9d-4b33-b296-b79e963329cf",
+      "confirmRequired": false,
+      "pendingAction": "ELIGIBILITY_QUERY",
+      "actions": [],
+      "fallback": false
+    },
+    "screenshot": "对话截图/02.png"
+  },
+  {
+    "input": "那帮我申请退款",
+    "response": {
+      "answer": "订单 ORD9801 的整单实付金额为 200.00 元。请补充退款原因，例如“原因：买错了”。本次尚未提交。",
+      "sessionId": "cs-766bfaa0-0e9d-4b33-b296-b79e963329cf",
+      "confirmRequired": false,
+      "pendingAction": "REFUND_REASON_REQUIRED",
+      "relatedOrderNo": "ORD9801",
+      "actions": [],
+      "fallback": false
+    },
+    "screenshot": "对话截图/03.png"
+  },
+  {
+    "input": "原因：买错了",
+    "response": {
+      "answer": "本次仅准备申请，尚未提交。提交后等待管理员审核，不代表退款成功。",
+      "sessionId": "cs-766bfaa0-0e9d-4b33-b296-b79e963329cf",
+      "confirmRequired": true,
+      "pendingAction": "CONFIRM_SUBMIT",
+      "confirmationTitle": "确认提交退款申请",
+      "confirmationSummary": "订单：ORD9801；商品：隔离露营椅 x1；范围：整单退款；实付金额：200.00 元；原因：买错了；状态：等待本人确认，尚未提交。确认后等待审核，提交不代表退款成功。",
+      "relatedOrderNo": "ORD9801",
+      "resumeToken": "3e87f7b2-29b6-4281-a338-f4b9e26e94a9",
+      "actions": [
+        {
+          "code": "CONFIRM_SUBMIT",
+          "label": "确认提交申请"
+        },
+        {
+          "code": "CANCEL_SUBMIT",
+          "label": "取消本次申请"
+        }
+      ],
+      "fallback": false
+    },
+    "screenshot": "对话截图/04.png"
+  },
+  {
+    "input": "ORD9812 还能退吗？只查资格",
+    "response": {
+      "answer": "订单 ORD9812 不满足当前自助办理条件：签收时间异常或已超过七天无理由期限；其他售后请联系人工核验。这轮只查资格，没有准备申请。",
+      "sessionId": "cs-766bfaa0-0e9d-4b33-b296-b79e963329cf",
+      "confirmRequired": false,
+      "pendingAction": "ELIGIBILITY_QUERY",
+      "relatedOrderNo": "ORD9812",
+      "actions": [],
+      "fallback": false
+    },
+    "screenshot": "对话截图/05.png"
+  },
+  {
+    "input": "ORD9812 还能退吗？先别申请",
+    "response": {
+      "answer": "订单 ORD9812 不满足当前自助办理条件：签收时间异常或已超过七天无理由期限；其他售后请联系人工核验。这轮只查资格，没有准备申请。",
+      "sessionId": "cs-9629b1e0-12af-42cb-8a4e-de46620356df",
+      "confirmRequired": false,
+      "pendingAction": "ELIGIBILITY_QUERY",
+      "relatedOrderNo": "ORD9812",
+      "actions": [],
+      "fallback": false
+    },
+    "screenshot": "对话截图/06.png"
+  }
+]

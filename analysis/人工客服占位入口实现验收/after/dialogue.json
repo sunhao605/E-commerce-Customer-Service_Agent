@@ -1,0 +1,496 @@
+[
+  {
+    "input_or_action": "ORD9801 收到时就破了，我只要换一件，不要退款。",
+    "response": {
+      "answer": "你希望咨询或办理换货，当前客服助手暂不能办理这类业务。 人工客服功能开发中，确认后仅前往说明页面，暂时无法接入真人客服。本次未新增售后申请。",
+      "sessionId": "cs-5ae4a2f1-7449-44a1-beb1-cdd773b0cc60",
+      "confirmRequired": true,
+      "pendingAction": "HUMAN_SUPPORT",
+      "confirmationTitle": "是否前往人工客服入口？",
+      "confirmationSummary": "人工客服功能开发中；进入说明页面不会转接真人或提交售后申请。",
+      "actions": [
+        {
+          "code": "OPEN_HUMAN_SUPPORT",
+          "label": "确认前往"
+        },
+        {
+          "code": "STAY_WITH_AGENT",
+          "label": "暂不前往"
+        }
+      ],
+      "fallback": false
+    },
+    "url": "http://127.0.0.1:18303/",
+    "screenshot": "截图/01.png"
+  },
+  {
+    "input_or_action": "ORD9801 两件里只退一件，给我部分退款。",
+    "response": {
+      "answer": "你希望咨询或办理部分退款或部分退货，当前客服助手暂不能办理这类业务。 人工客服功能开发中，确认后仅前往说明页面，暂时无法接入真人客服。本次未新增售后申请。",
+      "sessionId": "cs-d7342fa6-6bce-4090-be78-5a275c60db73",
+      "confirmRequired": true,
+      "pendingAction": "HUMAN_SUPPORT",
+      "confirmationTitle": "是否前往人工客服入口？",
+      "confirmationSummary": "人工客服功能开发中；进入说明页面不会转接真人或提交售后申请。",
+      "actions": [
+        {
+          "code": "OPEN_HUMAN_SUPPORT",
+          "label": "确认前往"
+        },
+        {
+          "code": "STAY_WITH_AGENT",
+          "label": "暂不前往"
+        }
+      ],
+      "fallback": false
+    },
+    "url": "http://127.0.0.1:18303/",
+    "screenshot": "截图/02.png"
+  },
+  {
+    "input_or_action": "ORD9801 只退这件商品，其他商品不退。",
+    "response": {
+      "answer": "你希望咨询或办理部分退款或部分退货，当前客服助手暂不能办理这类业务。 人工客服功能开发中，确认后仅前往说明页面，暂时无法接入真人客服。本次未新增售后申请。",
+      "sessionId": "cs-a9501859-59e3-47c5-9966-09fab79609c2",
+      "confirmRequired": true,
+      "pendingAction": "HUMAN_SUPPORT",
+      "confirmationTitle": "是否前往人工客服入口？",
+      "confirmationSummary": "人工客服功能开发中；进入说明页面不会转接真人或提交售后申请。",
+      "actions": [
+        {
+          "code": "OPEN_HUMAN_SUPPORT",
+          "label": "确认前往"
+        },
+        {
+          "code": "STAY_WITH_AGENT",
+          "label": "暂不前往"
+        }
+      ],
+      "fallback": false
+    },
+    "url": "http://127.0.0.1:18303/",
+    "screenshot": "截图/03.png"
+  },
+  {
+    "input_or_action": "ORD9801 的椅子坏了，帮我维修。",
+    "response": {
+      "answer": "你希望咨询或办理维修，当前客服助手暂不能办理这类业务。 人工客服功能开发中，确认后仅前往说明页面，暂时无法接入真人客服。本次未新增售后申请。",
+      "sessionId": "cs-65fad082-5ec0-4833-8487-b72cfa27d524",
+      "confirmRequired": true,
+      "pendingAction": "HUMAN_SUPPORT",
+      "confirmationTitle": "是否前往人工客服入口？",
+      "confirmationSummary": "人工客服功能开发中；进入说明页面不会转接真人或提交售后申请。",
+      "actions": [
+        {
+          "code": "OPEN_HUMAN_SUPPORT",
+          "label": "确认前往"
+        },
+        {
+          "code": "STAY_WITH_AGENT",
+          "label": "暂不前往"
+        }
+      ],
+      "fallback": false
+    },
+    "url": "http://127.0.0.1:18303/",
+    "screenshot": "截图/04.png"
+  },
+  {
+    "input_or_action": "ORD9801 少件了，帮我补发。",
+    "response": {
+      "answer": "你希望咨询或办理补发，当前客服助手暂不能办理这类业务。 人工客服功能开发中，确认后仅前往说明页面，暂时无法接入真人客服。本次未新增售后申请。",
+      "sessionId": "cs-a9ed7bf5-805d-495f-84a1-6575e154f01f",
+      "confirmRequired": true,
+      "pendingAction": "HUMAN_SUPPORT",
+      "confirmationTitle": "是否前往人工客服入口？",
+      "confirmationSummary": "人工客服功能开发中；进入说明页面不会转接真人或提交售后申请。",
+      "actions": [
+        {
+          "code": "OPEN_HUMAN_SUPPORT",
+          "label": "确认前往"
+        },
+        {
+          "code": "STAY_WITH_AGENT",
+          "label": "暂不前往"
+        }
+      ],
+      "fallback": false
+    },
+    "url": "http://127.0.0.1:18303/",
+    "screenshot": "截图/05.png"
+  },
+  {
+    "input_or_action": "ORD9801 商品破损，请处理质量问题。",
+    "response": {
+      "answer": "你希望咨询或办理质量问题售后，当前客服助手暂不能办理这类业务。 人工客服功能开发中，确认后仅前往说明页面，暂时无法接入真人客服。本次未新增售后申请。",
+      "sessionId": "cs-c50bf975-1a0c-430d-9c96-9413720aaf37",
+      "confirmRequired": true,
+      "pendingAction": "HUMAN_SUPPORT",
+      "confirmationTitle": "是否前往人工客服入口？",
+      "confirmationSummary": "人工客服功能开发中；进入说明页面不会转接真人或提交售后申请。",
+      "actions": [
+        {
+          "code": "OPEN_HUMAN_SUPPORT",
+          "label": "确认前往"
+        },
+        {
+          "code": "STAY_WITH_AGENT",
+          "label": "暂不前往"
+        }
+      ],
+      "fallback": false
+    },
+    "url": "http://127.0.0.1:18303/",
+    "screenshot": "截图/06.png"
+  },
+  {
+    "input_or_action": "不用换货，ORD9801 还没发货，我要整单退款，原因：买错了",
+    "response": {
+      "answer": "请核对申请，确认提交后等待后台审核。",
+      "sessionId": "cs-79f6e906-835c-4828-aab5-b97c3ea7b6cb",
+      "confirmRequired": true,
+      "pendingAction": "CONFIRM_SUBMIT",
+      "confirmationTitle": "确认提交退款申请",
+      "confirmationSummary": "订单：ORD9801；商品：隔离露营椅 x1；范围：整单退款；实付金额：200.00 元；原因：买错了；状态：等待本人确认，尚未提交。确认后等待审核，提交不代表退款成功。",
+      "relatedOrderNo": "ORD9801",
+      "resumeToken": "50250c33-8edd-4751-9291-578dc40a5658",
+      "actions": [
+        {
+          "code": "CONFIRM_SUBMIT",
+          "label": "确认提交申请"
+        },
+        {
+          "code": "CANCEL_SUBMIT",
+          "label": "取消本次申请"
+        }
+      ],
+      "fallback": false
+    },
+    "url": "http://127.0.0.1:18303/",
+    "screenshot": "截图/07.png"
+  },
+  {
+    "input_or_action": "换货政策是什么？",
+    "response": {
+      "answer": "你希望咨询或办理换货，当前客服助手暂不能办理这类业务。 人工客服功能开发中，确认后仅前往说明页面，暂时无法接入真人客服。本次未新增售后申请。",
+      "sessionId": "cs-79f6e906-835c-4828-aab5-b97c3ea7b6cb",
+      "confirmRequired": true,
+      "pendingAction": "HUMAN_SUPPORT",
+      "confirmationTitle": "是否前往人工客服入口？",
+      "confirmationSummary": "人工客服功能开发中；进入说明页面不会转接真人或提交售后申请。",
+      "relatedOrderNo": "ORD9801",
+      "resumeToken": "50250c33-8edd-4751-9291-578dc40a5658",
+      "actions": [
+        {
+          "code": "OPEN_HUMAN_SUPPORT",
+          "label": "确认前往"
+        },
+        {
+          "code": "STAY_WITH_AGENT",
+          "label": "暂不前往"
+        }
+      ],
+      "fallback": false
+    },
+    "url": "http://127.0.0.1:18303/",
+    "screenshot": "截图/08.png"
+  },
+  {
+    "input_or_action": "点击暂不前往",
+    "response": null,
+    "url": "http://127.0.0.1:18303/",
+    "screenshot": "截图/09.png"
+  },
+  {
+    "input_or_action": "请转人工客服",
+    "response": {
+      "answer": "你希望联系人工客服。 人工客服功能开发中，确认后仅前往说明页面，暂时无法接入真人客服。本次未新增售后申请。",
+      "sessionId": "cs-79f6e906-835c-4828-aab5-b97c3ea7b6cb",
+      "confirmRequired": true,
+      "pendingAction": "HUMAN_SUPPORT",
+      "confirmationTitle": "是否前往人工客服入口？",
+      "confirmationSummary": "人工客服功能开发中；进入说明页面不会转接真人或提交售后申请。",
+      "relatedOrderNo": "ORD9801",
+      "resumeToken": "50250c33-8edd-4751-9291-578dc40a5658",
+      "actions": [
+        {
+          "code": "OPEN_HUMAN_SUPPORT",
+          "label": "确认前往"
+        },
+        {
+          "code": "STAY_WITH_AGENT",
+          "label": "暂不前往"
+        }
+      ],
+      "fallback": false
+    },
+    "url": "http://127.0.0.1:18303/",
+    "screenshot": "截图/10.png"
+  },
+  {
+    "input_or_action": "确认前往说明页面",
+    "response": null,
+    "url": "http://127.0.0.1:18303/human-support",
+    "screenshot": "截图/11.png"
+  },
+  {
+    "input_or_action": "刷新说明页面",
+    "response": null,
+    "url": "http://127.0.0.1:18303/human-support",
+    "screenshot": "截图/12.png"
+  },
+  {
+    "input_or_action": "ORD9801 我要申请退款，原因：买错了",
+    "response": {
+      "answer": "请核对申请，确认提交后等待后台审核。",
+      "sessionId": "cs-64b915cf-92cd-4a30-ac62-f05c75935b17",
+      "confirmRequired": true,
+      "pendingAction": "CONFIRM_SUBMIT",
+      "confirmationTitle": "确认提交退款申请",
+      "confirmationSummary": "订单：ORD9801；商品：隔离露营椅 x1；范围：整单退款；实付金额：200.00 元；原因：买错了；状态：等待本人确认，尚未提交。确认后等待审核，提交不代表退款成功。",
+      "relatedOrderNo": "ORD9801",
+      "resumeToken": "431af151-a2a5-4c4d-808e-298fa4303421",
+      "actions": [
+        {
+          "code": "CONFIRM_SUBMIT",
+          "label": "确认提交申请"
+        },
+        {
+          "code": "CANCEL_SUBMIT",
+          "label": "取消本次申请"
+        }
+      ],
+      "fallback": false
+    },
+    "url": "http://127.0.0.1:18303/",
+    "screenshot": "截图/13.png"
+  },
+  {
+    "input_or_action": "找人工客服",
+    "response": {
+      "answer": "你希望联系人工客服。 人工客服功能开发中，确认后仅前往说明页面，暂时无法接入真人客服。本次未新增售后申请。",
+      "sessionId": "cs-64b915cf-92cd-4a30-ac62-f05c75935b17",
+      "confirmRequired": true,
+      "pendingAction": "HUMAN_SUPPORT",
+      "confirmationTitle": "是否前往人工客服入口？",
+      "confirmationSummary": "人工客服功能开发中；进入说明页面不会转接真人或提交售后申请。",
+      "relatedOrderNo": "ORD9801",
+      "resumeToken": "431af151-a2a5-4c4d-808e-298fa4303421",
+      "actions": [
+        {
+          "code": "OPEN_HUMAN_SUPPORT",
+          "label": "确认前往"
+        },
+        {
+          "code": "STAY_WITH_AGENT",
+          "label": "暂不前往"
+        }
+      ],
+      "fallback": false
+    },
+    "url": "http://127.0.0.1:18303/",
+    "screenshot": "截图/14.png"
+  },
+  {
+    "input_or_action": "手机前往说明页",
+    "response": null,
+    "url": "http://127.0.0.1:18303/human-support",
+    "screenshot": "截图/15.png"
+  },
+  {
+    "input_or_action": "返回原客服对话",
+    "response": null,
+    "url": "http://127.0.0.1:18303/",
+    "screenshot": "截图/16.png"
+  },
+  {
+    "input_or_action": "不要退款，改换货",
+    "response": {
+      "answer": "你希望咨询或办理换货，当前客服助手暂不能办理这类业务。 原未提交申请的确认卡已失效。 人工客服功能开发中，确认后仅前往说明页面，暂时无法接入真人客服。本次未新增售后申请。",
+      "sessionId": "cs-64b915cf-92cd-4a30-ac62-f05c75935b17",
+      "confirmRequired": true,
+      "pendingAction": "HUMAN_SUPPORT",
+      "confirmationTitle": "是否前往人工客服入口？",
+      "confirmationSummary": "人工客服功能开发中；进入说明页面不会转接真人或提交售后申请。",
+      "actions": [
+        {
+          "code": "OPEN_HUMAN_SUPPORT",
+          "label": "确认前往"
+        },
+        {
+          "code": "STAY_WITH_AGENT",
+          "label": "暂不前往"
+        }
+      ],
+      "fallback": false
+    },
+    "url": "http://127.0.0.1:18303/",
+    "screenshot": "截图/17.png"
+  },
+  {
+    "input_or_action": "核验失败样本",
+    "response": {
+      "answer": "这次信息暂时无法核实，请人工核验。 人工客服功能开发中，确认后仅前往说明页面，暂时无法接入真人客服。本次未新增售后申请。",
+      "sessionId": "cs-d96d4b05-e978-487a-8374-d61dc820f0a8",
+      "confirmRequired": true,
+      "pendingAction": "HUMAN_SUPPORT",
+      "confirmationTitle": "是否前往人工客服入口？",
+      "confirmationSummary": "人工客服功能开发中；进入说明页面不会转接真人或提交售后申请。",
+      "actions": [
+        {
+          "code": "OPEN_HUMAN_SUPPORT",
+          "label": "确认前往"
+        },
+        {
+          "code": "STAY_WITH_AGENT",
+          "label": "暂不前往"
+        }
+      ],
+      "fallback": false
+    },
+    "url": "http://127.0.0.1:18303/",
+    "screenshot": "截图/18.png"
+  },
+  {
+    "input_or_action": "ORD9801 退款审批样本，原因：买错了",
+    "response": {
+      "answer": "请核对退款申请。确认后只登记为待审核，是否通过由管理员独立决定。",
+      "sessionId": "cs-992f4d49-5a21-48ae-9c5b-da321a35fa84",
+      "confirmRequired": true,
+      "pendingAction": "CONFIRM_SUBMIT",
+      "confirmationTitle": "确认提交退款申请",
+      "confirmationSummary": "订单：ORD9801；商品：隔离露营椅 x1；范围：整单退款；实付金额：200.00 元；原因：买错了；状态：等待本人确认，尚未提交。确认后等待审核，提交不代表退款成功。",
+      "relatedOrderNo": "ORD9801",
+      "resumeToken": "d846027f-de0f-4da1-9ed9-4a5909f11893",
+      "actions": [
+        {
+          "code": "CONFIRM_SUBMIT",
+          "label": "确认提交申请"
+        },
+        {
+          "code": "CANCEL_SUBMIT",
+          "label": "取消本次申请"
+        }
+      ],
+      "fallback": false
+    },
+    "url": "http://127.0.0.1:18303/",
+    "screenshot": "截图/19.png"
+  },
+  {
+    "input_or_action": "ORD9803 申请七天无理由整单退货",
+    "response": {
+      "answer": "请核对申请，确认提交后等待后台审核。",
+      "sessionId": "cs-5dc8d257-63f5-4331-9c6d-0150c53a40b3",
+      "confirmRequired": true,
+      "pendingAction": "CONFIRM_SUBMIT",
+      "confirmationTitle": "确认提交退货退款申请",
+      "confirmationSummary": "订单：ORD9803；商品：隔离露营椅 x1；范围：整单退货退款；实付金额：200.00 元；原因：七天无理由退货；状态：等待本人确认，尚未提交。确认后等待审核，提交不代表退款成功。同意退货后按地址寄回商品、配件及赠品；请保持完好，商家实际收到且验收通过后才退款。",
+      "relatedOrderNo": "ORD9803",
+      "resumeToken": "9f126fc8-606e-4ae2-81e2-b3ceaef029c2",
+      "actions": [
+        {
+          "code": "CONFIRM_SUBMIT",
+          "label": "确认提交申请"
+        },
+        {
+          "code": "CANCEL_SUBMIT",
+          "label": "取消本次申请"
+        }
+      ],
+      "fallback": false
+    },
+    "url": "http://127.0.0.1:18303/",
+    "screenshot": "截图/20.png"
+  },
+  {
+    "input_or_action": "不要转人工，ORD9801 未发货，我要整单退款，原因：买错了",
+    "response": {
+      "answer": "请核对申请，确认提交后等待后台审核。",
+      "sessionId": "cs-67c96670-4e69-4c1a-8f5a-bc815135d6c5",
+      "confirmRequired": true,
+      "pendingAction": "CONFIRM_SUBMIT",
+      "confirmationTitle": "确认提交退款申请",
+      "confirmationSummary": "订单：ORD9801；商品：隔离露营椅 x1；范围：整单退款；实付金额：200.00 元；原因：买错了；状态：等待本人确认，尚未提交。确认后等待审核，提交不代表退款成功。",
+      "relatedOrderNo": "ORD9801",
+      "resumeToken": "57d2af68-f494-4186-8a22-c38b60651f16",
+      "actions": [
+        {
+          "code": "CONFIRM_SUBMIT",
+          "label": "确认提交申请"
+        },
+        {
+          "code": "CANCEL_SUBMIT",
+          "label": "取消本次申请"
+        }
+      ],
+      "fallback": false
+    },
+    "url": "http://127.0.0.1:18303/",
+    "screenshot": "截图/21.png"
+  },
+  {
+    "input_or_action": "不换货，不需要帮我转人工，ORD9801 未发货，我要整单退款，原因：买错了",
+    "response": {
+      "answer": "请核对申请，确认提交后等待后台审核。",
+      "sessionId": "cs-c229a8df-3da3-42f0-9e0e-8f7d7e07025c",
+      "confirmRequired": true,
+      "pendingAction": "CONFIRM_SUBMIT",
+      "confirmationTitle": "确认提交退款申请",
+      "confirmationSummary": "订单：ORD9801；商品：隔离露营椅 x1；范围：整单退款；实付金额：200.00 元；原因：买错了；状态：等待本人确认，尚未提交。确认后等待审核，提交不代表退款成功。",
+      "relatedOrderNo": "ORD9801",
+      "resumeToken": "fe5c97fd-41af-4bdf-b208-a6b68f9e5a02",
+      "actions": [
+        {
+          "code": "CONFIRM_SUBMIT",
+          "label": "确认提交申请"
+        },
+        {
+          "code": "CANCEL_SUBMIT",
+          "label": "取消本次申请"
+        }
+      ],
+      "fallback": false
+    },
+    "url": "http://127.0.0.1:18303/",
+    "screenshot": "截图/22.png"
+  },
+  {
+    "input_or_action": "我只退款，不换货，ORD9801 这件商品未发货，我要申请整单退款，原因：买错了",
+    "response": {
+      "answer": "请核对申请，确认提交后等待后台审核。",
+      "sessionId": "cs-8492b14b-18e7-4588-bd21-3eaf99168e0e",
+      "confirmRequired": true,
+      "pendingAction": "CONFIRM_SUBMIT",
+      "confirmationTitle": "确认提交退款申请",
+      "confirmationSummary": "订单：ORD9801；商品：隔离露营椅 x1；范围：整单退款；实付金额：200.00 元；原因：买错了；状态：等待本人确认，尚未提交。确认后等待审核，提交不代表退款成功。",
+      "relatedOrderNo": "ORD9801",
+      "resumeToken": "e9b5ae88-a94e-47b8-a903-b9933eab6d57",
+      "actions": [
+        {
+          "code": "CONFIRM_SUBMIT",
+          "label": "确认提交申请"
+        },
+        {
+          "code": "CANCEL_SUBMIT",
+          "label": "取消本次申请"
+        }
+      ],
+      "fallback": false
+    },
+    "url": "http://127.0.0.1:18303/",
+    "screenshot": "截图/23.png"
+  },
+  {
+    "input_or_action": "实际Java静态服务直达人工页",
+    "response": null,
+    "url": "http://127.0.0.1:18302/human-support",
+    "screenshot": "截图/24.png"
+  },
+  {
+    "input_or_action": "实际Java静态服务刷新人工页",
+    "response": null,
+    "url": "http://127.0.0.1:18302/human-support",
+    "screenshot": "截图/25.png"
+  }
+]

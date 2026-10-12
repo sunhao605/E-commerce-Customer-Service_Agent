@@ -1,0 +1,144 @@
+{
+  "date": "2026-10-12",
+  "scope": "current_function_behavior_not_end_to_end",
+  "online_model_calls": 0,
+  "business_http_calls": 0,
+  "business_database_writes": 0,
+  "cases": [
+    {
+      "id": "U01",
+      "input": "ORD1234 收到时就破了，我只要换一件，不要退款。",
+      "observed_intent": "refund_request",
+      "route_plan": {
+        "intent": "refund_request",
+        "needs_rag": true,
+        "needs_business_tools": true,
+        "required_tools": [
+          "get_order_detail"
+        ],
+        "tool_candidates": [
+          {
+            "name": "get_order_detail",
+            "domain": "order",
+            "risk_level": "low",
+            "reason": "读取当前用户订单事实，不执行业务写操作。"
+          }
+        ],
+        "knowledge_domains": [
+          "after_sale_policy"
+        ],
+        "entity_refs": [
+          "ORD1234"
+        ],
+        "risk_level": "high",
+        "requires_workflow": true,
+        "confidence": 0.75,
+        "source": "deterministic_fallback",
+        "fallback_policy": "safe_deterministic_path"
+      },
+      "kind": "isolated_function_probe"
+    },
+    {
+      "id": "U02",
+      "input": "ORD1234 两件里只退一件，给我部分退款。",
+      "observed_intent": "refund_request",
+      "route_plan": {
+        "intent": "refund_request",
+        "needs_rag": true,
+        "needs_business_tools": true,
+        "required_tools": [
+          "get_order_detail"
+        ],
+        "tool_candidates": [
+          {
+            "name": "get_order_detail",
+            "domain": "order",
+            "risk_level": "low",
+            "reason": "读取当前用户订单事实，不执行业务写操作。"
+          }
+        ],
+        "knowledge_domains": [
+          "after_sale_policy"
+        ],
+        "entity_refs": [
+          "ORD1234"
+        ],
+        "risk_level": "high",
+        "requires_workflow": true,
+        "confidence": 0.75,
+        "source": "deterministic_fallback",
+        "fallback_policy": "safe_deterministic_path"
+      },
+      "kind": "isolated_function_probe"
+    },
+    {
+      "id": "U03",
+      "input": "ORD1234 的椅子坏了，帮我维修。",
+      "observed_intent": "general_chat",
+      "route_plan": {
+        "intent": "general_chat",
+        "needs_rag": false,
+        "needs_business_tools": false,
+        "required_tools": [],
+        "tool_candidates": [],
+        "knowledge_domains": [],
+        "entity_refs": [
+          "ORD1234"
+        ],
+        "risk_level": "low",
+        "requires_workflow": false,
+        "confidence": 0.75,
+        "source": "deterministic_fallback",
+        "fallback_policy": "safe_deterministic_path"
+      },
+      "kind": "isolated_function_probe"
+    },
+    {
+      "id": "C01",
+      "input": "ORD1234 还没发货，我现在要申请整单退款。",
+      "observed_intent": "refund_request",
+      "route_plan": {
+        "intent": "refund_request",
+        "needs_rag": true,
+        "needs_business_tools": true,
+        "required_tools": [
+          "get_order_detail"
+        ],
+        "tool_candidates": [
+          {
+            "name": "get_order_detail",
+            "domain": "order",
+            "risk_level": "low",
+            "reason": "读取当前用户订单事实，不执行业务写操作。"
+          }
+        ],
+        "knowledge_domains": [
+          "after_sale_policy"
+        ],
+        "entity_refs": [
+          "ORD1234"
+        ],
+        "risk_level": "high",
+        "requires_workflow": true,
+        "confidence": 0.75,
+        "source": "deterministic_fallback",
+        "fallback_policy": "safe_deterministic_path"
+      },
+      "kind": "isolated_function_probe"
+    }
+  ],
+  "unaccepted_label": "unsupported_service",
+  "label_parse_result": null,
+  "B15_return_reason": null,
+  "general_chat_reply": "你好，我是荒野户外的客服 Agent。你可以把订单号、物流问题、活动优惠或售后诉求发给我，我会优先根据荒野户外的订单事实和公开规则回答。",
+  "source_sha256": {
+    "backend/agent/tools/planning.py": "42c0dc4caf1456ea7b6fed3d84750aa864d4876b722d313f6e5f4a1931d1c847",
+    "backend/agent/tools/runtime_context.py": "4989622c79716c4505dffc6e3e26e507f09aab206590330c86d7d1c6077e6a88",
+    "backend/agent/models/router_client.py": "de87d9a96d8503b2e037cfe8fcb4c1e4ef966c5e05aec4c414d22a11ea430a77",
+    "backend/api/schemas.py": "143b27323352778563ce0d2463024a63d45f1000958b8fb0016c9f1ff45477da",
+    "backend/resources/prompts/route_contract.md": "e524b61c63d92641298e875f0691bfaa9db0e181ceb9d00b1b1d31bedfcc7010",
+    "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/CustomerServiceGatewayService.java": "db15a93ab7247adb89bcccc6fc6a1e3a8a5e62be4b374f8d42bbc03b34eeb313",
+    "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/config/DataInitializer.java": "decb3d89de8caf5ccef5ec9eec386c65a85f99ab5cda11cc326db9381cd833f0",
+    "ecommerce-backend/frontend/src/shop/App.tsx": "07a97df66121218db13b28613fd6ebecf1adc1d071aa7fe89a4ccc74f98cc148"
+  }
+}

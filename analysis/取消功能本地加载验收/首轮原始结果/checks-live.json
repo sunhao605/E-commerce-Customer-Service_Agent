@@ -1,0 +1,169 @@
+[
+  {
+    "check": "还没确定退款订单-取消：进入原来缺信息的场景",
+    "passed": false
+  },
+  {
+    "check": "还没确定退款订单-取消：路径未完成",
+    "passed": false,
+    "error": ""
+  },
+  {
+    "check": "还没确定退款订单-保留：进入原来缺信息的场景",
+    "passed": false
+  },
+  {
+    "check": "还没确定退款订单-保留：路径未完成",
+    "passed": false,
+    "error": ""
+  },
+  {
+    "check": "还没说明退款原因-取消：进入原来缺信息的场景",
+    "passed": true
+  },
+  {
+    "check": "还没说明退款原因-取消：真实模型进入低分保留分支",
+    "passed": false,
+    "judgment": {
+      "status": "observed",
+      "reason": "object",
+      "executed": false,
+      "action": "ask_object",
+      "cancel_structurally_allowed": false,
+      "contract": "cancel-p0-2026-10-11",
+      "model": "jev-1.13.0",
+      "draft_stage": "awaiting_reason",
+      "draft_version": "1",
+      "order_id": "SO20261010124526218-b60d3f08",
+      "elapsed_ms": 720.756,
+      "path_type": "observed",
+      "pending_action": "ask_object",
+      "target_type": "cancellation",
+      "target_name": "awaiting_reason",
+      "components": {
+        "decision": "stop",
+        "target": "current",
+        "extra_task": "no"
+      },
+      "scores": {
+        "decision": 0.35,
+        "target": 0.86,
+        "extra_task": 0.98
+      },
+      "usage": {
+        "input_tokens": 1403,
+        "output_tokens": 115
+      },
+      "fact": null,
+      "reply": "你要取消订单本身，还是刚才的退款申请？请说明订单号。当前售后是SO20261010124526218-b60d3f08。",
+      "object_wait": {
+        "kind": "object",
+        "draft_version": "1",
+        "draft_order": "SO20261010124526218-b60d3f08",
+        "decision": "stop",
+        "decision_score": 0.35,
+        "extra_task": "no",
+        "candidates": []
+      },
+      "probabilities": {
+        "decision": {
+          "uncertain": 0.01,
+          "stop": 0.57,
+          "continue": 0.42
+        },
+        "target": {
+          "other": 0.06,
+          "current": 0.91,
+          "ambiguous": 0.03
+        },
+        "extra_task": {
+          "uncertain": 0.0,
+          "yes": 0.01,
+          "no": 0.99
+        }
+      }
+    }
+  },
+  {
+    "check": "还没说明退款原因-取消：路径未完成",
+    "passed": false,
+    "error": ""
+  },
+  {
+    "check": "还没说明退款原因-保留：进入原来缺信息的场景",
+    "passed": true
+  },
+  {
+    "check": "还没说明退款原因-保留：真实模型进入低分保留分支",
+    "passed": false,
+    "judgment": {
+      "status": "observed",
+      "reason": "object",
+      "executed": false,
+      "action": "ask_object",
+      "cancel_structurally_allowed": false,
+      "contract": "cancel-p0-2026-10-11",
+      "model": "jev-1.13.0",
+      "draft_stage": "awaiting_reason",
+      "draft_version": "1",
+      "order_id": "SO20261010124526218-b60d3f08",
+      "elapsed_ms": 618.098,
+      "path_type": "observed",
+      "pending_action": "ask_object",
+      "target_type": "cancellation",
+      "target_name": "awaiting_reason",
+      "components": {
+        "decision": "stop",
+        "target": "current",
+        "extra_task": "no"
+      },
+      "scores": {
+        "decision": 0.43,
+        "target": 0.86,
+        "extra_task": 0.98
+      },
+      "usage": {
+        "input_tokens": 1403,
+        "output_tokens": 115
+      },
+      "fact": null,
+      "reply": "你要取消订单本身，还是刚才的退款申请？请说明订单号。当前售后是SO20261010124526218-b60d3f08。",
+      "object_wait": {
+        "kind": "object",
+        "draft_version": "1",
+        "draft_order": "SO20261010124526218-b60d3f08",
+        "decision": "stop",
+        "decision_score": 0.43,
+        "extra_task": "no",
+        "candidates": []
+      },
+      "probabilities": {
+        "decision": {
+          "uncertain": 0.01,
+          "stop": 0.62,
+          "continue": 0.37
+        },
+        "target": {
+          "other": 0.06,
+          "current": 0.91,
+          "ambiguous": 0.03
+        },
+        "extra_task": {
+          "uncertain": 0.0,
+          "yes": 0.01,
+          "no": 0.99
+        }
+      }
+    }
+  },
+  {
+    "check": "还没说明退款原因-保留：路径未完成",
+    "passed": false,
+    "error": ""
+  },
+  {
+    "check": "页面无JavaScript异常",
+    "passed": true,
+    "errors": []
+  }
+]

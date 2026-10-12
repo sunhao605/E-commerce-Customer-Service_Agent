@@ -1,0 +1,380 @@
+[ {
+  "request" : {
+    "pageContext" : {
+      "type" : "HOME"
+    },
+    "sessionId" : "m07-1791639411311-0",
+    "message" : "ORD9801 我要退款，原因：买错了。"
+  },
+  "response" : {
+    "answer" : "请核对退款申请。确认后只登记为待审核，是否通过由管理员独立决定。",
+    "sessionId" : "m07-1791639411311-0",
+    "confirmRequired" : true,
+    "pendingAction" : "CONFIRM_SUBMIT",
+    "confirmationTitle" : "确认提交退款申请",
+    "confirmationSummary" : "订单：ORD9801；商品：M06露营椅 x1；范围：整单退款；实付金额：200.00 元；原因：买错了。；状态：等待本人确认，尚未提交。确认后等待审核，提交不代表退款成功。",
+    "relatedOrderNo" : "ORD9801",
+    "resumeToken" : "34dd1d6a-6e1a-4ff9-bc88-abf9c43fabdf",
+    "actions" : [ {
+      "code" : "CONFIRM_SUBMIT",
+      "label" : "确认提交申请"
+    }, {
+      "code" : "CANCEL_SUBMIT",
+      "label" : "取消本次申请"
+    } ],
+    "fallback" : false
+  }
+}, {
+  "request" : {
+    "pageContext" : {
+      "type" : "HOME"
+    },
+    "sessionId" : "m07-1791639411311-0",
+    "message" : "取消本次申请。"
+  },
+  "response" : {
+    "answer" : "本次售后申请已取消，未提交。",
+    "sessionId" : "m07-1791639411311-0",
+    "confirmRequired" : false,
+    "pendingAction" : "CANCELLED",
+    "relatedOrderNo" : "ORD9801",
+    "actions" : [ ],
+    "fallback" : false
+  }
+}, {
+  "status" : 409,
+  "response" : {
+    "success" : false,
+    "code" : "CONFLICT",
+    "message" : "本次确认已处理，旧卡不可用"
+  },
+  "request" : {
+    "decision" : "CONFIRM_SUBMIT",
+    "sessionId" : "m07-1791639411311-0",
+    "resumeToken" : "34dd1d6a-6e1a-4ff9-bc88-abf9c43fabdf",
+    "relatedOrderNo" : "ORD9801"
+  }
+}, {
+  "request" : {
+    "pageContext" : {
+      "type" : "HOME"
+    },
+    "sessionId" : "m07-1791639411311-0",
+    "message" : "查 ORD9802 的物流。"
+  },
+  "response" : {
+    "answer" : "隔离模型咨询回复。",
+    "sessionId" : "m07-1791639411311-0",
+    "confirmRequired" : false,
+    "actions" : [ ],
+    "fallback" : false
+  }
+}, {
+  "request" : {
+    "pageContext" : {
+      "type" : "HOME"
+    },
+    "sessionId" : "m07-1791639411311-0",
+    "message" : "ORD9801 我要退款，原因：买错了。"
+  },
+  "response" : {
+    "answer" : "请核对退款申请。确认后只登记为待审核，是否通过由管理员独立决定。",
+    "sessionId" : "m07-1791639411311-0",
+    "confirmRequired" : true,
+    "pendingAction" : "CONFIRM_SUBMIT",
+    "confirmationTitle" : "确认提交退款申请",
+    "confirmationSummary" : "订单：ORD9801；商品：M06露营椅 x1；范围：整单退款；实付金额：200.00 元；原因：买错了。；状态：等待本人确认，尚未提交。确认后等待审核，提交不代表退款成功。",
+    "relatedOrderNo" : "ORD9801",
+    "resumeToken" : "8e7b9756-bb13-4b2d-952c-3a919af78c88",
+    "actions" : [ {
+      "code" : "CONFIRM_SUBMIT",
+      "label" : "确认提交申请"
+    }, {
+      "code" : "CANCEL_SUBMIT",
+      "label" : "取消本次申请"
+    } ],
+    "fallback" : false
+  }
+}, {
+  "status" : 200,
+  "response" : {
+    "success" : true,
+    "code" : "OK",
+    "message" : "success",
+    "data" : {
+      "answer" : "本次售后申请已取消，未提交。",
+      "sessionId" : "m07-1791639411311-0",
+      "confirmRequired" : false,
+      "pendingAction" : "CANCELLED",
+      "relatedOrderNo" : "ORD9801",
+      "actions" : [ ],
+      "fallback" : false
+    }
+  },
+  "request" : {
+    "decision" : "CANCEL_SUBMIT",
+    "sessionId" : "m07-1791639411311-0",
+    "resumeToken" : "8e7b9756-bb13-4b2d-952c-3a919af78c88",
+    "relatedOrderNo" : "ORD9801"
+  }
+}, {
+  "request" : {
+    "pageContext" : {
+      "type" : "HOME"
+    },
+    "sessionId" : "m07-1791639411311-4",
+    "message" : "ORD9801 我要退款，原因：买错了。"
+  },
+  "response" : {
+    "answer" : "请核对退款申请。确认后只登记为待审核，是否通过由管理员独立决定。",
+    "sessionId" : "m07-1791639411311-4",
+    "confirmRequired" : true,
+    "pendingAction" : "CONFIRM_SUBMIT",
+    "confirmationTitle" : "确认提交退款申请",
+    "confirmationSummary" : "订单：ORD9801；商品：M06露营椅 x1；范围：整单退款；实付金额：200.00 元；原因：买错了。；状态：等待本人确认，尚未提交。确认后等待审核，提交不代表退款成功。",
+    "relatedOrderNo" : "ORD9801",
+    "resumeToken" : "723513b3-7464-4e19-8e4c-28467d88351a",
+    "actions" : [ {
+      "code" : "CONFIRM_SUBMIT",
+      "label" : "确认提交申请"
+    }, {
+      "code" : "CANCEL_SUBMIT",
+      "label" : "取消本次申请"
+    } ],
+    "fallback" : false
+  }
+}, {
+  "request" : {
+    "pageContext" : {
+      "type" : "HOME"
+    },
+    "sessionId" : "m07-1791639411311-4",
+    "message" : "算了，不退了。"
+  },
+  "response" : {
+    "answer" : "隔离模型咨询回复。 本次待确认申请尚未提交。",
+    "sessionId" : "m07-1791639411311-4",
+    "confirmRequired" : true,
+    "pendingAction" : "CONFIRM_SUBMIT",
+    "confirmationTitle" : "确认提交退款申请",
+    "confirmationSummary" : "订单：ORD9801；商品：M06露营椅 x1；范围：整单退款；实付金额：200.00 元；原因：买错了。；状态：等待本人确认，尚未提交。确认后等待审核，提交不代表退款成功。",
+    "relatedOrderNo" : "ORD9801",
+    "resumeToken" : "723513b3-7464-4e19-8e4c-28467d88351a",
+    "actions" : [ {
+      "code" : "CONFIRM_SUBMIT",
+      "label" : "确认提交申请"
+    }, {
+      "code" : "CANCEL_SUBMIT",
+      "label" : "取消本次申请"
+    } ],
+    "fallback" : false
+  }
+}, {
+  "request" : {
+    "pageContext" : {
+      "type" : "HOME"
+    },
+    "sessionId" : "m07-1791639411311-5",
+    "message" : "ORD9801 我要退款，原因：买错了。"
+  },
+  "response" : {
+    "answer" : "请核对退款申请。确认后只登记为待审核，是否通过由管理员独立决定。",
+    "sessionId" : "m07-1791639411311-5",
+    "confirmRequired" : true,
+    "pendingAction" : "CONFIRM_SUBMIT",
+    "confirmationTitle" : "确认提交退款申请",
+    "confirmationSummary" : "订单：ORD9801；商品：M06露营椅 x1；范围：整单退款；实付金额：200.00 元；原因：买错了。；状态：等待本人确认，尚未提交。确认后等待审核，提交不代表退款成功。",
+    "relatedOrderNo" : "ORD9801",
+    "resumeToken" : "084b2ad7-af6e-4f3d-85de-327308614189",
+    "actions" : [ {
+      "code" : "CONFIRM_SUBMIT",
+      "label" : "确认提交申请"
+    }, {
+      "code" : "CANCEL_SUBMIT",
+      "label" : "取消本次申请"
+    } ],
+    "fallback" : false
+  }
+}, {
+  "request" : {
+    "pageContext" : {
+      "type" : "HOME"
+    },
+    "sessionId" : "m07-1791639411311-5",
+    "message" : "先不退了。"
+  },
+  "response" : {
+    "answer" : "隔离模型咨询回复。 本次待确认申请尚未提交。",
+    "sessionId" : "m07-1791639411311-5",
+    "confirmRequired" : true,
+    "pendingAction" : "CONFIRM_SUBMIT",
+    "confirmationTitle" : "确认提交退款申请",
+    "confirmationSummary" : "订单：ORD9801；商品：M06露营椅 x1；范围：整单退款；实付金额：200.00 元；原因：买错了。；状态：等待本人确认，尚未提交。确认后等待审核，提交不代表退款成功。",
+    "relatedOrderNo" : "ORD9801",
+    "resumeToken" : "084b2ad7-af6e-4f3d-85de-327308614189",
+    "actions" : [ {
+      "code" : "CONFIRM_SUBMIT",
+      "label" : "确认提交申请"
+    }, {
+      "code" : "CANCEL_SUBMIT",
+      "label" : "取消本次申请"
+    } ],
+    "fallback" : false
+  }
+}, {
+  "request" : {
+    "pageContext" : {
+      "type" : "HOME"
+    },
+    "sessionId" : "m07-1791639411311-button",
+    "message" : "ORD9801 我要退款，原因：买错了。"
+  },
+  "response" : {
+    "answer" : "请核对退款申请。确认后只登记为待审核，是否通过由管理员独立决定。",
+    "sessionId" : "m07-1791639411311-button",
+    "confirmRequired" : true,
+    "pendingAction" : "CONFIRM_SUBMIT",
+    "confirmationTitle" : "确认提交退款申请",
+    "confirmationSummary" : "订单：ORD9801；商品：M06露营椅 x1；范围：整单退款；实付金额：200.00 元；原因：买错了。；状态：等待本人确认，尚未提交。确认后等待审核，提交不代表退款成功。",
+    "relatedOrderNo" : "ORD9801",
+    "resumeToken" : "a341f89f-98de-46cd-8366-f044ce2de2f4",
+    "actions" : [ {
+      "code" : "CONFIRM_SUBMIT",
+      "label" : "确认提交申请"
+    }, {
+      "code" : "CANCEL_SUBMIT",
+      "label" : "取消本次申请"
+    } ],
+    "fallback" : false
+  }
+}, {
+  "status" : 200,
+  "response" : {
+    "success" : true,
+    "code" : "OK",
+    "message" : "success",
+    "data" : {
+      "answer" : "本次售后申请已取消，未提交。",
+      "sessionId" : "m07-1791639411311-button",
+      "confirmRequired" : false,
+      "pendingAction" : "CANCELLED",
+      "relatedOrderNo" : "ORD9801",
+      "actions" : [ ],
+      "fallback" : false
+    }
+  },
+  "request" : {
+    "decision" : "CANCEL_SUBMIT",
+    "sessionId" : "m07-1791639411311-button",
+    "resumeToken" : "a341f89f-98de-46cd-8366-f044ce2de2f4",
+    "relatedOrderNo" : "ORD9801"
+  }
+}, {
+  "status" : 409,
+  "response" : {
+    "success" : false,
+    "code" : "CONFLICT",
+    "message" : "本次确认已处理，旧卡不可用"
+  },
+  "request" : {
+    "decision" : "CONFIRM_SUBMIT",
+    "sessionId" : "m07-1791639411311-button",
+    "resumeToken" : "a341f89f-98de-46cd-8366-f044ce2de2f4",
+    "relatedOrderNo" : "ORD9801"
+  }
+}, {
+  "request" : {
+    "pageContext" : {
+      "type" : "HOME"
+    },
+    "sessionId" : "m07-1791639411311-waiting",
+    "message" : "帮我退款。"
+  },
+  "response" : {
+    "answer" : "隔离模型咨询回复。",
+    "sessionId" : "m07-1791639411311-waiting",
+    "confirmRequired" : false,
+    "actions" : [ ],
+    "fallback" : false
+  }
+}, {
+  "request" : {
+    "pageContext" : {
+      "type" : "HOME"
+    },
+    "sessionId" : "m07-1791639411311-waiting",
+    "message" : "取消本次申请。"
+  },
+  "response" : {
+    "answer" : "本次售后申请已取消，未提交。",
+    "sessionId" : "m07-1791639411311-waiting",
+    "confirmRequired" : false,
+    "pendingAction" : "CANCELLED",
+    "actions" : [ ],
+    "fallback" : false
+  }
+}, {
+  "request" : {
+    "pageContext" : {
+      "type" : "HOME"
+    },
+    "sessionId" : "m07-1791639411311-waiting",
+    "message" : "第一笔。"
+  },
+  "response" : {
+    "answer" : "隔离模型咨询回复。",
+    "sessionId" : "m07-1791639411311-waiting",
+    "confirmRequired" : false,
+    "actions" : [ ],
+    "fallback" : false
+  }
+}, {
+  "request" : {
+    "pageContext" : {
+      "type" : "HOME"
+    },
+    "sessionId" : "m07-1791639411311-reason",
+    "message" : "ORD9801 我要退款。"
+  },
+  "response" : {
+    "answer" : "订单 ORD9801 的整单实付金额为 200.00 元。请补充退款原因，例如“原因：买错了”。本次尚未提交。",
+    "sessionId" : "m07-1791639411311-reason",
+    "confirmRequired" : false,
+    "pendingAction" : "REFUND_REASON_REQUIRED",
+    "relatedOrderNo" : "ORD9801",
+    "actions" : [ ],
+    "fallback" : false
+  }
+}, {
+  "request" : {
+    "pageContext" : {
+      "type" : "HOME"
+    },
+    "sessionId" : "m07-1791639411311-reason",
+    "message" : "算了，不退了。"
+  },
+  "response" : {
+    "answer" : "订单 ORD9801 的整单实付金额为 200.00 元。请补充退款原因，例如“原因：买错了”。本次尚未提交。",
+    "sessionId" : "m07-1791639411311-reason",
+    "confirmRequired" : false,
+    "pendingAction" : "REFUND_REASON_REQUIRED",
+    "relatedOrderNo" : "ORD9801",
+    "actions" : [ ],
+    "fallback" : false
+  }
+}, {
+  "request" : {
+    "pageContext" : {
+      "type" : "HOME"
+    },
+    "sessionId" : "m07-1791639411311-fresh",
+    "message" : "取消本次申请。"
+  },
+  "response" : {
+    "answer" : "隔离模型咨询回复。",
+    "sessionId" : "m07-1791639411311-fresh",
+    "confirmRequired" : false,
+    "actions" : [ ],
+    "fallback" : false
+  }
+} ]

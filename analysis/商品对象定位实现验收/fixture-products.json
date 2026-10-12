@@ -1,0 +1,41 @@
+[
+  {
+    "id": 1,
+    "code": "SKU-AUD-101",
+    "name": "露营折叠椅",
+    "category": "营地家具",
+    "description": "折叠收纳的营地休闲椅，配有扶手与收纳袋，适合周末露营。",
+    "price": 599.0,
+    "stock": 520,
+    "highlights": "便携收纳；营地休闲；参加会员满减活动",
+    "active": true,
+    "returnable": true,
+    "afterSaleLimit": "配件齐全且不影响二次销售时支持 7 天无理由",
+    "scenarioTags": "折叠椅,露营椅,营地,露营",
+    "promotion": {
+      "id": 1,
+      "promotionName": "营地家具会员会场",
+      "promotionType": "member_discount",
+      "discountSummary": "折叠椅、折叠桌和野餐垫进入露营季营地家具会场，活动价和会员条件以结算页为准。",
+      "promotionPrice": 529.0,
+      "requiredMemberLevel": "gold",
+      "conditionSummary": "山友会员专享",
+      "startAt": "2026-06-01T00:00:00",
+      "endAt": "2027-12-31T23:59:00"
+    }
+  },
+  {
+    "id": 4,
+    "code": "SKU-AUD-404",
+    "name": "轻量露营折叠椅",
+    "category": "营地家具",
+    "description": "轻量款折叠椅，适合简装出游与短途露营。",
+    "price": 199.0,
+    "stock": 0,
+    "highlights": "轻量便携；当前无库存",
+    "active": true,
+    "returnable": true,
+    "afterSaleLimit": "配件齐全且不影响二次销售时支持 7 天无理由",
+    "scenarioTags": "折叠椅,轻量,露营"
+  }
+]

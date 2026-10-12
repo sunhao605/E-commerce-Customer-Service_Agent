@@ -34,6 +34,7 @@ class TraceEventNormalizer:
         "rag_low_confidence_fallback": "rag",
         "degradation_triggered": "degradation",
         "model_route_planned": "model",
+        "cancellation_intent_observed": "model",
         "model_answer_generated": "model",
         "model_answer_skipped": "model",
         "langchain_tool_agent_completed": "tool",

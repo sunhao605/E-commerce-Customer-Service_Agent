@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-11",
+  "recorded_before_B_calls": true,
+  "files": {
+    "analysis/取消语义定向修复/frozen.json": "b921a9146233806792b83667f660e11895dc8eb376c3719a1890a4ccbd348d5a",
+    "analysis/取消语义定向修复/run_targeted.py": "0858e153b244225c0725951b55d4f090d03485ec2de022d814879f7fd7690a4f",
+    "analysis/取消语义定向修复/english-scope/frozen.json": "b218e9c89f5759561190c1e3d321601fcf6a6ef4275df94c3321bd4564f8ac1c",
+    "analysis/取消语义定向修复/english-scope/run_english.py": "ce7eb488c6ae21fb05cee3ec66ee07a7c90d829f3f69bc484c1184d734e27709",
+    "analysis/取消语义对比/frozen.json": "34e1b091d4c39e14a8cbdfa8347cfc8bce3c3a441b596cb3a8c01d3c6e839f16",
+    "analysis/取消语义对比/run_compare.py": "b547cbc56a2c9e8ee5ea503721241c73ba94db249d6444dfeace31a065d42829",
+    "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/CustomerServiceGatewayService.java": "ba805cfed2314c37b66c0acbb187f8eb561752bab30ac8164d4dcbca7598a103"
+  },
+  "scope": "只改实验问题描述与组合决策，不改商城业务；保留001所有结果",
+  "B_holdout_output_seen_before_freeze": false,
+  "model_call_plan": {
+    "A_regression_jev": 60,
+    "A_new20_four_arms": 160,
+    "B_regression_jev": 60,
+    "B_new20_two_arms": 80
+  },
+  "credential_handling": "从忽略的本地配置读取，不写入产物",
+  "harness_repair_final_sha256": "ace20a52ec5b61e63b67218fef2b0fc68bb3f4e27c6e18f28726a08518884aa5",
+  "actual_model_calls": 440,
+  "repairs": "原manifest代码hash为首次调用前版本；修复解析后当前hash另记，业务源和两版冻结输入不变"
+}

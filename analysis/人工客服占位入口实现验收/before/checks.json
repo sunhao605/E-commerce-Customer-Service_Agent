@@ -1,0 +1,46 @@
+[
+  {
+    "check": "换货进入人工占位确认卡",
+    "passed": false
+  },
+  {
+    "check": "换货没有准备售后申请或提交凭证",
+    "passed": false
+  },
+  {
+    "check": "部分退款进入人工占位确认卡",
+    "passed": false
+  },
+  {
+    "check": "部分退款没有准备售后申请或提交凭证",
+    "passed": false
+  },
+  {
+    "check": "维修进入人工占位确认卡",
+    "passed": false
+  },
+  {
+    "check": "维修没有准备售后申请或提交凭证",
+    "passed": false
+  },
+  {
+    "check": "补发进入人工占位确认卡",
+    "passed": false
+  },
+  {
+    "check": "补发没有准备售后申请或提交凭证",
+    "passed": false
+  },
+  {
+    "check": "质量问题进入人工占位确认卡",
+    "passed": false
+  },
+  {
+    "check": "质量问题没有准备售后申请或提交凭证",
+    "passed": false
+  },
+  {
+    "check": "申请准备、人工入口与旧卡拒绝后8张H2业务表未变",
+    "passed": true
+  }
+]

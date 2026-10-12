@@ -1,0 +1,40 @@
+split_deepseek N01 1 invalid {'decision': {'type': 'stop'}, 'target': {'type': 'current'}, 'extra_task': {'type': 'no'}} 884.753
+split_deepseek N02 1 invalid {'decision': {'type': 'stop'}, 'target': {'type': 'current'}, 'extra_task': {'type': 'no'}} 488.256
+split_deepseek N03 1 invalid None 883.648
+split_deepseek N04 1 cancel {'decision': 'stop', 'target': 'current', 'extra_task': 'no'} 374.885
+split_deepseek N05 1 cancel {'decision': {'type': 'choice', 'choice': 'stop'}, 'target': {'type': 'choice', 'choice': 'current'}, 'extra_task': {'type': 'choice', 'choice': 'no'}} 924.619
+split_deepseek N06 1 invalid {'decision': {'type': 'stop'}, 'target': {'type': 'current'}, 'extra_task': {'type': 'no'}} 783.46
+split_deepseek N07 1 invalid {'decision': {'type': 'continue'}, 'target': {'type': 'current'}, 'extra_task': {'type': 'no'}} 747.618
+split_deepseek N08 1 keep {'decision': 'continue', 'target': 'current', 'extra_task': 'no'} 725.695
+split_deepseek N09 1 invalid {'decision': {'type': 'continue'}, 'target': {'type': 'current'}, 'extra_task': {'type': 'no'}} 1208.423
+split_deepseek N10 1 keep {'decision': 'continue', 'target': 'current', 'extra_task': 'no'} 1196.697
+split_deepseek N11 1 invalid {'decision': {'type': 'continue'}, 'target': {'type': 'current'}, 'extra_task': {'type': 'no'}} 612.468
+split_deepseek N12 1 keep {'decision': 'continue', 'target': 'current', 'extra_task': 'no'} 643.229
+split_deepseek N13 1 invalid {'decision': {'type': 'stop'}, 'target': {'type': 'ambiguous'}, 'extra_task': {'type': 'no'}} 864.15
+split_deepseek N14 1 invalid {'decision': {'type': 'uncertain'}, 'target': {'type': 'ambiguous'}, 'extra_task': {'type': 'no'}} 716.764
+split_deepseek N15 1 invalid {'decision': {'type': 'stop'}, 'target': {'type': 'current'}, 'extra_task': {'type': 'yes'}} 839.102
+split_deepseek N16 1 invalid {'decision': {'type': 'stop'}, 'target': {'type': 'current'}, 'extra_task': {'type': 'yes'}} 722.811
+split_deepseek N17 1 invalid {'decision': {'type': 'stop'}, 'target': {'type': 'other'}, 'extra_task': {'type': 'no'}} 840.629
+split_deepseek N18 1 clarify {'decision': 'uncertain', 'target': 'current', 'extra_task': 'no'} 692.655
+split_deepseek N19 1 invalid {'decision': {'type': 'uncertain'}, 'target': {'type': 'current'}, 'extra_task': {'type': 'no'}} 571.412
+split_deepseek N20 1 invalid None 1061.558
+split_deepseek N20 2 invalid None 1127.781
+split_deepseek N19 2 invalid {'decision': {'type': 'uncertain'}, 'target': {'type': 'current'}, 'extra_task': {'type': 'no'}} 780.955
+split_deepseek N18 2 clarify {'decision': 'uncertain', 'target': 'current', 'extra_task': 'no'} 697.147
+split_deepseek N17 2 invalid {'decision': {'type': 'stop'}, 'target': {'type': 'other'}, 'extra_task': {'type': 'no'}} 853.398
+split_deepseek N16 2 invalid {'decision': {'type': 'stop'}, 'target': {'type': 'current'}, 'extra_task': {'type': 'yes'}} 726.784
+split_deepseek N15 2 invalid {'decision': {'type': 'stop'}, 'target': {'type': 'current'}, 'extra_task': {'type': 'yes'}} 1044.557
+split_deepseek N14 2 invalid {'decision': {'type': 'uncertain'}, 'target': {'type': 'ambiguous'}, 'extra_task': {'type': 'no'}} 854.283
+split_deepseek N13 2 invalid {'decision': {'type': 'stop'}, 'target': {'type': 'ambiguous'}, 'extra_task': {'type': 'no'}} 1659.324
+split_deepseek N12 2 keep {'decision': 'continue', 'target': 'current', 'extra_task': 'no'} 733.039
+split_deepseek N11 2 invalid {'decision': {'type': 'continue'}, 'target': {'type': 'current'}, 'extra_task': {'type': 'no'}} 424.225
+split_deepseek N10 2 keep {'decision': 'continue', 'target': 'current', 'extra_task': 'no'} 550.315
+split_deepseek N09 2 invalid {'decision': {'type': 'continue'}, 'target': {'type': 'current'}, 'extra_task': {'type': 'no'}} 680.386
+split_deepseek N08 2 keep {'decision': 'continue', 'target': 'current', 'extra_task': 'no'} 1238.043
+split_deepseek N07 2 invalid {'decision': {'type': 'continue'}, 'target': {'type': 'current'}, 'extra_task': {'type': 'no'}} 708.925
+split_deepseek N06 2 invalid {'decision': {'type': 'stop'}, 'target': {'type': 'current'}, 'extra_task': {'type': 'no'}} 538.245
+split_deepseek N05 2 cancel {'decision': {'type': 'choice', 'choice': 'stop'}, 'target': {'type': 'choice', 'choice': 'current'}, 'extra_task': {'type': 'choice', 'choice': 'no'}} 907.236
+split_deepseek N04 2 invalid {'decision': {'type': 'stop'}, 'target': {'type': 'current'}, 'extra_task': {'type': 'no'}} 933.078
+split_deepseek N03 2 invalid {'decision': {'type': 'stop'}, 'target': {'type': 'current'}, 'extra_task': {'type': 'no'}} 1304.15
+split_deepseek N02 2 invalid {'decision': {'type': 'stop'}, 'target': {'type': 'current'}, 'extra_task': {'type': 'no'}} 872.513
+split_deepseek N01 2 invalid {'decision': {'type': 'stop'}, 'target': {'type': 'current'}, 'extra_task': {'type': 'no'}} 608.717

@@ -1,0 +1,5 @@
+{
+  "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/CustomerServiceGatewayService.java": "db15a93ab7247adb89bcccc6fc6a1e3a8a5e62be4b374f8d42bbc03b34eeb313",
+  "ecommerce-backend/frontend/src/shop/App.tsx": "07a97df66121218db13b28613fd6ebecf1adc1d071aa7fe89a4ccc74f98cc148",
+  "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/config/SpaForwardController.java": "595e58c9ab30c199abe5e2948ef3f2b5e9178cf54b8abe5b2c8b040d0fc389d0"
+}

@@ -2,6 +2,10 @@ package com.teachdemo.ecommerce.customer_service;
 
 import java.time.LocalDateTime;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 public class CustomerServiceSession {
 
@@ -31,6 +35,15 @@ public class CustomerServiceSession {
     private boolean handled;
 
     private LocalDateTime updatedAt;
+
+    // ponytail: 只留最近 6 条、每条 500 字，供取消判断看上一句。更早的对话不保留。
+    private final List<Map<String, String>> recentDialogue = new ArrayList<>();
+    private boolean cancellationJudged;
+    private int draftRevision;
+    private Map<String, Object> objectWait;
+    private String conflictToken;
+    private int conflictRevision;
+    private Map<String, Object> afterSaleQuery;
 
     public CustomerServiceSession(String sessionId, String userId) {
         this.sessionId = sessionId;
@@ -127,5 +140,74 @@ public class CustomerServiceSession {
 
     public boolean isExpired(LocalDateTime now) {
         return expiresAt != null && expiresAt.isBefore(now);
+    }
+
+    public List<Map<String, String>> recentDialogue() {
+        List<Map<String, String>> copy = new ArrayList<>();
+        for (Map<String, String> turn : recentDialogue) {
+            copy.add(Map.copyOf(turn));
+        }
+        return copy;
+    }
+
+    public boolean isCancellationJudged() {
+        return cancellationJudged;
+    }
+
+    public void setCancellationJudged(boolean cancellationJudged) {
+        this.cancellationJudged = cancellationJudged;
+    }
+
+    public int getDraftRevision() {
+        return draftRevision;
+    }
+
+    public void bumpDraftRevision() {
+        this.draftRevision++;
+        if (conflictToken != null && conflictToken.equals(resumeToken)) {
+            this.resumeToken = null;
+        }
+        this.conflictToken = null;
+    }
+
+    public String getConflictToken() {
+        return conflictToken;
+    }
+
+    public void setConflictToken(String conflictToken) {
+        this.conflictToken = conflictToken;
+    }
+
+    public int getConflictRevision() {
+        return conflictRevision;
+    }
+
+    public void setConflictRevision(int conflictRevision) {
+        this.conflictRevision = conflictRevision;
+    }
+
+    public Map<String, Object> getObjectWait() {
+        return objectWait;
+    }
+
+    public Map<String, Object> getAfterSaleQuery() { return afterSaleQuery; }
+    public void setAfterSaleQuery(Map<String, Object> afterSaleQuery) { this.afterSaleQuery = afterSaleQuery; }
+
+    public void setObjectWait(Map<String, Object> objectWait) {
+        this.objectWait = objectWait;
+    }
+
+    public void appendDialogue(String role, String text) {
+        if (text == null || text.isBlank()) {
+            return;
+        }
+        String content = text.length() > 500 ? text.substring(0, 500) : text;
+        Map<String, String> turn = new LinkedHashMap<>();
+        turn.put("role", role);
+        turn.put("content", content);
+        recentDialogue.add(turn);
+        while (recentDialogue.size() > 6) {
+            recentDialogue.remove(0);
+        }
     }
 }

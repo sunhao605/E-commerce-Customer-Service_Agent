@@ -1,0 +1,39 @@
+{
+  "java_health": {
+    "status": "UP"
+  },
+  "python_health": {
+    "status": "ok",
+    "lesson": "41"
+  },
+  "image": "sha256:3e0b6d526a97f773fd8d7f496f072f71bd7c616c01f0ef027c234b419a12e57b",
+  "old_image": "sha256:498818e6b592df512d8d12993468285edd8ede8917f4a9f82808c840f32c1992",
+  "rollback_tag": "huangye-outdoor-ecommerce:before-eligibility-20261011",
+  "python_pid": 35032,
+  "java_configuration_unchanged": true,
+  "python_configuration_unchanged": true,
+  "model_config_file_unchanged": true,
+  "java_cancel_execute": "unset(default off)",
+  "python_cancel_execute": "0",
+  "cancel_score_min": "0.9",
+  "python_restarted_from_verified_source": true,
+  "python_load_evidence": "8000新PID与重启记录一致；PYTHONPATH及已编译源码指纹均匹配；未发送chat请求",
+  "new_endpoint_loaded": true,
+  "frontend_loaded": true,
+  "model_calls": 0,
+  "probe": {
+    "method": "GET",
+    "orderNo": "SO20261010124526218-b60d3f08",
+    "result": {
+      "orderNo": "SO20261010124526218-b60d3f08",
+      "status": "ELIGIBLE",
+      "applicationType": "REFUND",
+      "amount": 199.0,
+      "reason": "已支付且未发货，整单实付金额已核实。"
+    }
+  },
+  "submission_calls": 0,
+  "approval_calls": 0,
+  "business_unchanged": true,
+  "business_tables": 8
+}

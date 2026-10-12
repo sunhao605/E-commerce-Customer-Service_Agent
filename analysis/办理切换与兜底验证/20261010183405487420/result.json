@@ -1,0 +1,1312 @@
+{
+  "run_id": "20261010183405487420",
+  "finished_at": "2026-10-10T18:34:20.224207+08:00",
+  "live_health_after": {
+    "status": "ok",
+    "lesson": "41"
+  },
+  "live_identity_after": {
+    "ps": "96857 Sat Oct 10 18:09:03 2026     .venv/bin/python -m uvicorn api.routes:app --host 127.0.0.1 --port 8000",
+    "flags": {
+      "AGENT_COURSE_DISABLE_LLM": "0",
+      "AGENT_COURSE_OFFLINE_RAG": "1",
+      "AGENT_COURSE_OFFLINE_FACTS": "0",
+      "AGENT_COURSE_ENV": "/Users/sunhao/Downloads/03_AIPMProject/0305_DianShang_Agent/.env.model.local"
+    },
+    "running": true
+  },
+  "source_fingerprints_unchanged": true,
+  "fallback_pid": 653,
+  "fallback_stopped": true,
+  "live": [
+    {
+      "id": "apply-refund",
+      "mode": "live",
+      "turns": [
+        {
+          "input": "ORD1234 还没发货，我现在要申请退款。",
+          "history_count": 0,
+          "session_id": "item2-live-20261010183405487420-apply-refund",
+          "http_status": 200,
+          "elapsed_ms": 5033,
+          "message_count": 1,
+          "intent": "refund_request",
+          "answer": "您好，关于订单 ORD1234 的退款申请，我先为您核实一下。\n\n目前系统未能查询到该订单的有效信息（订单不存在或业务系统暂未返回），因此暂时无法确认它的发货状态和退款资格，也无法直接为您创建退款审批。\n\n根据未发货退款规则，已支付且未出库、未发货的订单可以发起退款申请，资金类操作需进入售后审批。但这一步需要先确认订单真实状态。\n\n建议您先核对一下订单号是否准确；如果确认无误，我会为您转接人工客服进一步核验处理。",
+          "next_action": "transfer_to_human",
+          "risk_level": "high",
+          "needs_human_approval": false,
+          "cache_hit": false,
+          "route_plan": {
+            "intent": "refund_request",
+            "needs_rag": true,
+            "needs_business_tools": true,
+            "required_tools": [
+              "get_order_detail"
+            ],
+            "tool_candidates": [
+              "get_order_detail"
+            ],
+            "knowledge_domains": [
+              "after_sale_policy"
+            ],
+            "entity_refs": [
+              "ORD1234"
+            ],
+            "risk_level": "high",
+            "requires_workflow": true,
+            "source": "llm_with_policy_constraints",
+            "fallback_policy": "safe_deterministic_path",
+            "confidence": 0.9
+          },
+          "route_model": {
+            "used_model": true,
+            "model_name": "deepseek-flash",
+            "fallback_reason": null
+          },
+          "final_answer_model": {
+            "used_model": true,
+            "model_name": "deepseek-flash",
+            "fallback_reason": null
+          },
+          "open_task": null,
+          "recent_intent": "refund_request",
+          "workflow": null,
+          "clarification": null,
+          "citations": [
+            {
+              "source": "knowledge/after_sale_policy.md",
+              "title": "荒野户外未发货退款 SOP",
+              "policy_id": "refund_before_shipping",
+              "snippet": "已支付且未出库、未发货的订单，可以发起退款申请；资金类动作必须进入售后审批。"
+            }
+          ],
+          "tool_calls": [
+            {
+              "tool_name": "get_order_detail",
+              "status": "error",
+              "error_type": "not_found",
+              "output_summary": "订单 ORD1234 不存在或当前业务系统暂未返回该订单。",
+              "next_action": "ask_clarification",
+              "arguments": {
+                "order_id": "ORD1234"
+              }
+            }
+          ],
+          "history_seen_by_context": {
+            "input_count": 0,
+            "kept_count": 0
+          },
+          "trace_events": [
+            "runtime_context_built",
+            "context_built",
+            "model_route_planned",
+            "route_plan_built",
+            "langchain_tool_agent_completed",
+            "tool_started",
+            "tool_finished",
+            "rag_pre_retrieved",
+            "refund_eligibility_blocked",
+            "context_source_safety_checked",
+            "model_answer_generated",
+            "mcp_binding_resolved",
+            "prompt_context_built",
+            "hook_executed",
+            "hook_executed",
+            "hook_executed",
+            "hook_executed",
+            "cost_recorded",
+            "final_answer_generated"
+          ]
+        }
+      ],
+      "check": {
+        "label_ok": true,
+        "model_path_ok": true,
+        "entered_apply": true,
+        "application_prepared": false,
+        "switch_ok": null,
+        "invoice_ok": null,
+        "notes": [
+          "办理路径已进入，但没有准备申请或确认卡。"
+        ]
+      }
+    },
+    {
+      "id": "apply-return",
+      "mode": "live",
+      "turns": [
+        {
+          "input": "ORD1234 已签收，我想申请七天无理由退货。",
+          "history_count": 0,
+          "session_id": "item2-live-20261010183405487420-apply-return",
+          "http_status": 200,
+          "elapsed_ms": 1666,
+          "message_count": 1,
+          "intent": "return_request",
+          "answer": "您好，关于您提出的 ORD1234 七天无理由退货申请，目前我这边暂时无法核实到该订单的信息，系统未返回该订单的有效记录。\n\n为了帮您进一步处理，麻烦您确认一下订单号是否准确，或者提供下单时使用的手机号/账号，我再帮您核实。如果确实查询不到，我会为您转接人工客服跟进处理，感谢您的理解。",
+          "next_action": "transfer_to_human",
+          "risk_level": "high",
+          "needs_human_approval": false,
+          "cache_hit": false,
+          "route_plan": {
+            "intent": "return_request",
+            "needs_rag": true,
+            "needs_business_tools": true,
+            "required_tools": [
+              "get_order_detail"
+            ],
+            "tool_candidates": [
+              "get_order_detail"
+            ],
+            "knowledge_domains": [
+              "received_return_policy"
+            ],
+            "entity_refs": [
+              "ORD1234"
+            ],
+            "risk_level": "high",
+            "requires_workflow": true,
+            "source": "llm_with_policy_constraints",
+            "fallback_policy": "safe_deterministic_path",
+            "confidence": 0.9
+          },
+          "route_model": {
+            "used_model": true,
+            "model_name": "deepseek-flash",
+            "fallback_reason": null
+          },
+          "final_answer_model": {
+            "used_model": true,
+            "model_name": "deepseek-flash",
+            "fallback_reason": null
+          },
+          "open_task": null,
+          "recent_intent": "return_request",
+          "workflow": null,
+          "clarification": null,
+          "citations": [],
+          "tool_calls": [
+            {
+              "tool_name": "get_order_detail",
+              "status": "error",
+              "error_type": "not_found",
+              "output_summary": "订单 ORD1234 不存在或当前业务系统暂未返回该订单。",
+              "next_action": "ask_clarification",
+              "arguments": {
+                "order_id": "ORD1234"
+              }
+            }
+          ],
+          "history_seen_by_context": {
+            "input_count": 0,
+            "kept_count": 0
+          },
+          "trace_events": [
+            "runtime_context_built",
+            "context_built",
+            "model_route_planned",
+            "route_plan_built",
+            "tool_started",
+            "tool_finished",
+            "context_source_safety_checked",
+            "model_answer_generated",
+            "mcp_binding_resolved",
+            "prompt_context_built",
+            "hook_executed",
+            "hook_executed",
+            "hook_executed",
+            "hook_executed",
+            "cost_recorded",
+            "final_answer_generated"
+          ]
+        }
+      ],
+      "check": {
+        "label_ok": true,
+        "model_path_ok": true,
+        "entered_apply": true,
+        "application_prepared": false,
+        "switch_ok": null,
+        "invoice_ok": null,
+        "notes": [
+          "办理路径已进入，但没有准备申请或确认卡。"
+        ]
+      }
+    },
+    {
+      "id": "switch-refund",
+      "mode": "live",
+      "turns": [
+        {
+          "input": "退款政策是什么？我先了解一下，不申请退款。",
+          "history_count": 0,
+          "session_id": "item2-live-20261010183405487420-switch-refund",
+          "http_status": 200,
+          "elapsed_ms": 1794,
+          "message_count": 1,
+          "intent": "refund_policy_query",
+          "answer": "您好，先帮您说明一下退款政策：\n\n已支付且未出库、未发货的订单，可以发起退款申请；涉及资金的操作需要进入售后审批流程处理。\n\n如果您之后有具体订单需要退款，可以随时把订单信息发给我，我帮您核实订单状态并说明下一步。",
+          "next_action": "answer_user",
+          "risk_level": "low",
+          "needs_human_approval": false,
+          "cache_hit": false,
+          "route_plan": {
+            "intent": "refund_policy_query",
+            "needs_rag": true,
+            "needs_business_tools": false,
+            "required_tools": [],
+            "tool_candidates": [],
+            "knowledge_domains": [
+              "after_sale_policy"
+            ],
+            "entity_refs": [],
+            "risk_level": "low",
+            "requires_workflow": false,
+            "source": "llm_with_policy_constraints",
+            "fallback_policy": "safe_deterministic_path",
+            "confidence": 0.9
+          },
+          "route_model": {
+            "used_model": true,
+            "model_name": "deepseek-flash",
+            "fallback_reason": null
+          },
+          "final_answer_model": {
+            "used_model": true,
+            "model_name": "deepseek-flash",
+            "fallback_reason": null
+          },
+          "open_task": null,
+          "recent_intent": "refund_policy_query",
+          "workflow": null,
+          "clarification": null,
+          "citations": [
+            {
+              "source": "knowledge/after_sale_policy.md",
+              "title": "荒野户外未发货退款 SOP",
+              "policy_id": "refund_before_shipping",
+              "snippet": "已支付且未出库、未发货的订单，可以发起退款申请；资金类动作必须进入售后审批。"
+            }
+          ],
+          "tool_calls": [],
+          "history_seen_by_context": {
+            "input_count": 0,
+            "kept_count": 0
+          },
+          "trace_events": [
+            "runtime_context_built",
+            "context_built",
+            "model_route_planned",
+            "route_plan_built",
+            "rag_pre_retrieved",
+            "context_source_safety_checked",
+            "model_answer_generated",
+            "mcp_binding_resolved",
+            "prompt_context_built",
+            "hook_executed",
+            "cost_recorded",
+            "final_answer_generated"
+          ]
+        },
+        {
+          "input": "我现在要申请退款。",
+          "history_count": 2,
+          "session_id": "item2-live-20261010183405487420-switch-refund",
+          "http_status": 200,
+          "elapsed_ms": 455,
+          "message_count": 2,
+          "intent": "refund_request",
+          "answer": "你要退款哪一个订单？请选择订单号，或直接补充订单号。",
+          "next_action": "ask_clarification",
+          "risk_level": "medium",
+          "needs_human_approval": false,
+          "cache_hit": false,
+          "route_plan": {
+            "intent": "refund_request",
+            "needs_rag": true,
+            "needs_business_tools": true,
+            "required_tools": [],
+            "tool_candidates": [
+              "get_order_detail"
+            ],
+            "knowledge_domains": [
+              "after_sale_policy"
+            ],
+            "entity_refs": [],
+            "risk_level": "high",
+            "requires_workflow": true,
+            "source": "llm_with_policy_constraints",
+            "fallback_policy": "ask_order_id",
+            "confidence": 0.9
+          },
+          "route_model": {
+            "used_model": true,
+            "model_name": "deepseek-flash",
+            "fallback_reason": null
+          },
+          "final_answer_model": {
+            "used_model": false,
+            "model_name": null,
+            "fallback_reason": "clarification_required"
+          },
+          "open_task": {
+            "intent": "refund_request",
+            "pending_slot": "order_id",
+            "candidates": []
+          },
+          "recent_intent": "refund_request",
+          "workflow": null,
+          "clarification": {
+            "clarification_field": "order_id",
+            "message": "你要退款哪一个订单？请选择订单号，或直接补充订单号。",
+            "candidates": []
+          },
+          "citations": [],
+          "tool_calls": [],
+          "history_seen_by_context": {
+            "input_count": 2,
+            "kept_count": 2
+          },
+          "trace_events": [
+            "runtime_context_built",
+            "context_built",
+            "model_route_planned",
+            "route_plan_built",
+            "rag_pre_retrieved",
+            "context_source_safety_checked",
+            "model_answer_generated",
+            "mcp_binding_resolved",
+            "prompt_context_built",
+            "hook_executed",
+            "cost_recorded",
+            "final_answer_generated",
+            "runtime_context_built",
+            "context_built",
+            "model_route_planned",
+            "route_plan_built",
+            "tool_clarification_required",
+            "langchain_tool_agent_completed",
+            "model_answer_skipped",
+            "mcp_binding_resolved",
+            "prompt_context_built",
+            "hook_executed",
+            "cost_recorded",
+            "final_answer_generated"
+          ]
+        }
+      ],
+      "check": {
+        "label_ok": true,
+        "model_path_ok": true,
+        "entered_apply": true,
+        "application_prepared": false,
+        "switch_ok": true,
+        "invoice_ok": null,
+        "notes": [
+          "办理路径已进入，但没有准备申请或确认卡。"
+        ]
+      }
+    },
+    {
+      "id": "switch-return",
+      "mode": "live",
+      "turns": [
+        {
+          "input": "七天无理由退货需要满足什么条件？只是咨询，暂时不退。",
+          "history_count": 0,
+          "session_id": "item2-live-20261010183405487420-switch-return",
+          "http_status": 200,
+          "elapsed_ms": 2335,
+          "message_count": 1,
+          "intent": "return_policy_query",
+          "answer": "您好，七天无理由退货一般需要同时满足这几个条件：\n\n1. 订单已支付并签收；\n2. 提交申请时仍在签收后的七天窗口内；\n3. 整单商品在购买时都支持七天无理由退货。\n\n另外说明几点：七天无理由是一种申请类型，申请时不需要另外填写退货理由；但具体订单是否符合条件，还需要以订单实际信息核验为准，不能直接承诺一定退货成功。\n\n流程上，您核对并确认提交后，申请会进入待审核；管理员同意退货并提供退回地址后，您再寄回并填写退回物流。商家收到商品并验收通过后才会退款，所以“同意退货”不等于“退款已完成”。\n\n如果商品本身不支持七天无理由、超出七天窗口，或资格信息缺失，就不走这条无理由退货流程；如果是质量问题等其他售后，需要说明具体问题后另行核验，并不是一律无法办理任何售后。\n\n您目前只是咨询，暂时不用操作。后续如果要申请，建议先确认订单签收时间和商品是否支持，再提交即可。",
+          "next_action": "answer_user",
+          "risk_level": "low",
+          "needs_human_approval": false,
+          "cache_hit": false,
+          "route_plan": {
+            "intent": "return_policy_query",
+            "needs_rag": true,
+            "needs_business_tools": false,
+            "required_tools": [],
+            "tool_candidates": [],
+            "knowledge_domains": [
+              "received_return_policy"
+            ],
+            "entity_refs": [],
+            "risk_level": "low",
+            "requires_workflow": false,
+            "source": "llm_with_policy_constraints",
+            "fallback_policy": "safe_deterministic_path",
+            "confidence": 0.9
+          },
+          "route_model": {
+            "used_model": true,
+            "model_name": "deepseek-flash",
+            "fallback_reason": null
+          },
+          "final_answer_model": {
+            "used_model": true,
+            "model_name": "deepseek-flash",
+            "fallback_reason": null
+          },
+          "open_task": null,
+          "recent_intent": "return_policy_query",
+          "workflow": null,
+          "clarification": null,
+          "citations": [
+            {
+              "source": "knowledge/received_return_policy.md",
+              "title": "荒野户外签收后退货 SOP",
+              "policy_id": "return_after_delivery",
+              "snippet": "七天无理由退货适用于已支付并签收、申请提交时仍在签收后七天窗口内，且整单商品在购买时均支持七天无理由退货的订单。七天无理由是申请类型，用户无需另外填写退货理由；具体订单是否符合条件仍需核验可信订单事实，不得自动承诺退货成功。\n\n用户核对并确认提交后，申请进入待审核；管理员同意退货并提供退回地址后，由用户寄回并填写退回物流。商家收到商品且验收通过后才退款，同意退货不等于退款已完成。\n\n商品不支持七天无理由、超出窗口或资格事实缺失时，不进入这条无理由退货流程；质量问题等其他售后需说明具体问题并另行核验，不能一律认定为无法办理任何售后。"
+            }
+          ],
+          "tool_calls": [],
+          "history_seen_by_context": {
+            "input_count": 0,
+            "kept_count": 0
+          },
+          "trace_events": [
+            "runtime_context_built",
+            "context_built",
+            "model_route_planned",
+            "route_plan_built",
+            "rag_pre_retrieved",
+            "context_source_safety_checked",
+            "model_answer_generated",
+            "mcp_binding_resolved",
+            "prompt_context_built",
+            "hook_executed",
+            "cost_recorded",
+            "final_answer_generated"
+          ]
+        },
+        {
+          "input": "我现在要申请七天无理由退货。",
+          "history_count": 2,
+          "session_id": "item2-live-20261010183405487420-switch-return",
+          "http_status": 200,
+          "elapsed_ms": 605,
+          "message_count": 2,
+          "intent": "return_request",
+          "answer": "你要查询哪一个订单？请选择订单号，或直接补充订单号。",
+          "next_action": "ask_clarification",
+          "risk_level": "high",
+          "needs_human_approval": false,
+          "cache_hit": false,
+          "route_plan": {
+            "intent": "return_request",
+            "needs_rag": true,
+            "needs_business_tools": true,
+            "required_tools": [],
+            "tool_candidates": [
+              "get_order_detail"
+            ],
+            "knowledge_domains": [
+              "received_return_policy"
+            ],
+            "entity_refs": [],
+            "risk_level": "high",
+            "requires_workflow": true,
+            "source": "llm_with_policy_constraints",
+            "fallback_policy": "ask_order_id",
+            "confidence": 0.9
+          },
+          "route_model": {
+            "used_model": true,
+            "model_name": "deepseek-flash",
+            "fallback_reason": null
+          },
+          "final_answer_model": {
+            "used_model": false,
+            "model_name": null,
+            "fallback_reason": "clarification_required"
+          },
+          "open_task": {
+            "intent": "return_request",
+            "pending_slot": "order_id",
+            "candidates": []
+          },
+          "recent_intent": "return_request",
+          "workflow": null,
+          "clarification": {
+            "clarification_field": "order_id",
+            "message": "你要查询哪一个订单？请选择订单号，或直接补充订单号。",
+            "candidates": []
+          },
+          "citations": [],
+          "tool_calls": [],
+          "history_seen_by_context": {
+            "input_count": 2,
+            "kept_count": 1
+          },
+          "trace_events": [
+            "runtime_context_built",
+            "context_built",
+            "model_route_planned",
+            "route_plan_built",
+            "rag_pre_retrieved",
+            "context_source_safety_checked",
+            "model_answer_generated",
+            "mcp_binding_resolved",
+            "prompt_context_built",
+            "hook_executed",
+            "cost_recorded",
+            "final_answer_generated",
+            "runtime_context_built",
+            "context_built",
+            "model_route_planned",
+            "route_plan_built",
+            "tool_clarification_required",
+            "model_answer_skipped",
+            "mcp_binding_resolved",
+            "prompt_context_built",
+            "hook_executed",
+            "cost_recorded",
+            "final_answer_generated"
+          ]
+        }
+      ],
+      "check": {
+        "label_ok": true,
+        "model_path_ok": true,
+        "entered_apply": true,
+        "application_prepared": false,
+        "switch_ok": true,
+        "invoice_ok": null,
+        "notes": [
+          "办理路径已进入，但没有准备申请或确认卡。"
+        ]
+      }
+    },
+    {
+      "id": "invoice",
+      "mode": "live",
+      "turns": [
+        {
+          "input": "发票开具后在哪里下载？",
+          "history_count": 0,
+          "session_id": "item2-live-20261010183405487420-invoice",
+          "http_status": 200,
+          "elapsed_ms": 1189,
+          "message_count": 1,
+          "intent": "invoice_query",
+          "answer": "电子发票通常在订单完成后 24 小时内开具，开具后你可以在订单详情页查看和下载。\n\n如果你在订单详情页没有找到下载入口，可以把订单号发给我，我帮你进一步核实。",
+          "next_action": "answer_user",
+          "risk_level": "low",
+          "needs_human_approval": false,
+          "cache_hit": false,
+          "route_plan": {
+            "intent": "invoice_query",
+            "needs_rag": true,
+            "needs_business_tools": false,
+            "required_tools": [],
+            "tool_candidates": [],
+            "knowledge_domains": [
+              "invoice"
+            ],
+            "entity_refs": [],
+            "risk_level": "low",
+            "requires_workflow": false,
+            "source": "llm_with_policy_constraints",
+            "fallback_policy": "safe_deterministic_path",
+            "confidence": 0.9
+          },
+          "route_model": {
+            "used_model": true,
+            "model_name": "deepseek-flash",
+            "fallback_reason": null
+          },
+          "final_answer_model": {
+            "used_model": true,
+            "model_name": "deepseek-flash",
+            "fallback_reason": null
+          },
+          "open_task": null,
+          "recent_intent": "invoice_query",
+          "workflow": null,
+          "clarification": null,
+          "citations": [
+            {
+              "source": "knowledge/payment_invoice_policy.md",
+              "title": "荒野户外发票 FAQ",
+              "policy_id": "invoice_issue",
+              "snippet": "电子发票通常在订单完成后 24 小时内开具，可在订单详情页查看和下载。"
+            }
+          ],
+          "tool_calls": [],
+          "history_seen_by_context": {
+            "input_count": 0,
+            "kept_count": 0
+          },
+          "trace_events": [
+            "runtime_context_built",
+            "context_built",
+            "model_route_planned",
+            "route_plan_built",
+            "rag_pre_retrieved",
+            "context_source_safety_checked",
+            "rag_hybrid_retrieved",
+            "model_answer_generated",
+            "mcp_binding_resolved",
+            "prompt_context_built",
+            "hook_executed",
+            "cost_recorded",
+            "final_answer_generated"
+          ]
+        }
+      ],
+      "check": {
+        "label_ok": true,
+        "model_path_ok": true,
+        "entered_apply": null,
+        "application_prepared": null,
+        "switch_ok": null,
+        "invoice_ok": true,
+        "notes": []
+      }
+    }
+  ],
+  "fallback": [
+    {
+      "id": "apply-refund",
+      "mode": "fallback",
+      "turns": [
+        {
+          "input": "ORD1234 还没发货，我现在要申请退款。",
+          "history_count": 0,
+          "session_id": "item2-fallback-20261010183405487420-apply-refund",
+          "http_status": 200,
+          "elapsed_ms": 61,
+          "message_count": 1,
+          "intent": "refund_request",
+          "answer": "订单事实或支付状态没有通过退款资格校验，暂不能创建退款审批，请转人工核验。",
+          "next_action": "transfer_to_human",
+          "risk_level": "high",
+          "needs_human_approval": false,
+          "cache_hit": false,
+          "route_plan": {
+            "intent": "refund_request",
+            "needs_rag": true,
+            "needs_business_tools": true,
+            "required_tools": [
+              "get_order_detail"
+            ],
+            "tool_candidates": [
+              "get_order_detail"
+            ],
+            "knowledge_domains": [
+              "after_sale_policy"
+            ],
+            "entity_refs": [
+              "ORD1234"
+            ],
+            "risk_level": "high",
+            "requires_workflow": true,
+            "source": "deterministic_fallback",
+            "fallback_policy": "safe_deterministic_path",
+            "confidence": 0.75
+          },
+          "route_model": {
+            "used_model": false,
+            "model_name": null,
+            "fallback_reason": "model_config_missing"
+          },
+          "final_answer_model": {
+            "used_model": false,
+            "model_name": null,
+            "fallback_reason": "model_config_missing"
+          },
+          "open_task": null,
+          "recent_intent": "refund_request",
+          "workflow": null,
+          "clarification": null,
+          "citations": [
+            {
+              "source": "knowledge/after_sale_policy.md",
+              "title": "荒野户外未发货退款 SOP",
+              "policy_id": "refund_before_shipping",
+              "snippet": "已支付且未出库、未发货的订单，可以发起退款申请；资金类动作必须进入售后审批。"
+            }
+          ],
+          "tool_calls": [
+            {
+              "tool_name": "get_order_detail",
+              "status": "error",
+              "error_type": "not_found",
+              "output_summary": "订单 ORD1234 不存在或当前业务系统暂未返回该订单。",
+              "next_action": "ask_clarification",
+              "arguments": {
+                "order_id": "ORD1234"
+              }
+            }
+          ],
+          "history_seen_by_context": {
+            "input_count": 0,
+            "kept_count": 0
+          },
+          "trace_events": [
+            "runtime_context_built",
+            "context_built",
+            "model_route_planned",
+            "route_plan_built",
+            "langchain_tool_agent_completed",
+            "tool_started",
+            "tool_finished",
+            "rag_pre_retrieved",
+            "refund_eligibility_blocked",
+            "context_source_safety_checked",
+            "model_answer_generated",
+            "mcp_binding_resolved",
+            "hook_executed",
+            "hook_executed",
+            "hook_executed",
+            "hook_executed",
+            "cost_recorded",
+            "final_answer_generated"
+          ]
+        }
+      ],
+      "check": {
+        "label_ok": true,
+        "model_path_ok": true,
+        "entered_apply": true,
+        "application_prepared": false,
+        "switch_ok": null,
+        "invoice_ok": null,
+        "notes": [
+          "办理路径已进入，但没有准备申请或确认卡。"
+        ]
+      }
+    },
+    {
+      "id": "apply-return",
+      "mode": "fallback",
+      "turns": [
+        {
+          "input": "ORD1234 已签收，我想申请七天无理由退货。",
+          "history_count": 0,
+          "session_id": "item2-fallback-20261010183405487420-apply-return",
+          "http_status": 200,
+          "elapsed_ms": 28,
+          "message_count": 1,
+          "intent": "return_request",
+          "answer": "订单 ORD1234 不存在或当前业务系统暂未返回该订单。",
+          "next_action": "transfer_to_human",
+          "risk_level": "high",
+          "needs_human_approval": false,
+          "cache_hit": false,
+          "route_plan": {
+            "intent": "return_request",
+            "needs_rag": true,
+            "needs_business_tools": true,
+            "required_tools": [
+              "get_order_detail"
+            ],
+            "tool_candidates": [
+              "get_order_detail"
+            ],
+            "knowledge_domains": [
+              "received_return_policy"
+            ],
+            "entity_refs": [
+              "ORD1234"
+            ],
+            "risk_level": "high",
+            "requires_workflow": true,
+            "source": "deterministic_fallback",
+            "fallback_policy": "safe_deterministic_path",
+            "confidence": 0.75
+          },
+          "route_model": {
+            "used_model": false,
+            "model_name": null,
+            "fallback_reason": "model_config_missing"
+          },
+          "final_answer_model": {
+            "used_model": false,
+            "model_name": null,
+            "fallback_reason": "model_config_missing"
+          },
+          "open_task": null,
+          "recent_intent": "return_request",
+          "workflow": null,
+          "clarification": null,
+          "citations": [],
+          "tool_calls": [
+            {
+              "tool_name": "get_order_detail",
+              "status": "error",
+              "error_type": "not_found",
+              "output_summary": "订单 ORD1234 不存在或当前业务系统暂未返回该订单。",
+              "next_action": "ask_clarification",
+              "arguments": {
+                "order_id": "ORD1234"
+              }
+            }
+          ],
+          "history_seen_by_context": {
+            "input_count": 0,
+            "kept_count": 0
+          },
+          "trace_events": [
+            "runtime_context_built",
+            "context_built",
+            "model_route_planned",
+            "route_plan_built",
+            "tool_started",
+            "tool_finished",
+            "context_source_safety_checked",
+            "model_answer_generated",
+            "mcp_binding_resolved",
+            "hook_executed",
+            "hook_executed",
+            "hook_executed",
+            "hook_executed",
+            "cost_recorded",
+            "final_answer_generated"
+          ]
+        }
+      ],
+      "check": {
+        "label_ok": true,
+        "model_path_ok": true,
+        "entered_apply": true,
+        "application_prepared": false,
+        "switch_ok": null,
+        "invoice_ok": null,
+        "notes": [
+          "办理路径已进入，但没有准备申请或确认卡。"
+        ]
+      }
+    },
+    {
+      "id": "switch-refund",
+      "mode": "fallback",
+      "turns": [
+        {
+          "input": "退款政策是什么？我先了解一下，不申请退款。",
+          "history_count": 0,
+          "session_id": "item2-fallback-20261010183405487420-switch-refund",
+          "http_status": 200,
+          "elapsed_ms": 3,
+          "message_count": 1,
+          "intent": "refund_policy_query",
+          "answer": "已支付且未出库、未发货的订单，可以发起退款申请；资金类动作必须进入售后审批。",
+          "next_action": "answer_user",
+          "risk_level": "low",
+          "needs_human_approval": false,
+          "cache_hit": false,
+          "route_plan": {
+            "intent": "refund_policy_query",
+            "needs_rag": true,
+            "needs_business_tools": false,
+            "required_tools": [],
+            "tool_candidates": [],
+            "knowledge_domains": [
+              "after_sale_policy"
+            ],
+            "entity_refs": [],
+            "risk_level": "low",
+            "requires_workflow": false,
+            "source": "deterministic_fallback",
+            "fallback_policy": "safe_deterministic_path",
+            "confidence": 0.75
+          },
+          "route_model": {
+            "used_model": false,
+            "model_name": null,
+            "fallback_reason": "model_config_missing"
+          },
+          "final_answer_model": {
+            "used_model": false,
+            "model_name": null,
+            "fallback_reason": "model_config_missing"
+          },
+          "open_task": null,
+          "recent_intent": "refund_policy_query",
+          "workflow": null,
+          "clarification": null,
+          "citations": [
+            {
+              "source": "knowledge/after_sale_policy.md",
+              "title": "荒野户外未发货退款 SOP",
+              "policy_id": "refund_before_shipping",
+              "snippet": "已支付且未出库、未发货的订单，可以发起退款申请；资金类动作必须进入售后审批。"
+            }
+          ],
+          "tool_calls": [],
+          "history_seen_by_context": {
+            "input_count": 0,
+            "kept_count": 0
+          },
+          "trace_events": [
+            "runtime_context_built",
+            "context_built",
+            "model_route_planned",
+            "route_plan_built",
+            "rag_pre_retrieved",
+            "context_source_safety_checked",
+            "model_answer_generated",
+            "mcp_binding_resolved",
+            "hook_executed",
+            "cost_recorded",
+            "final_answer_generated"
+          ]
+        },
+        {
+          "input": "我现在要申请退款。",
+          "history_count": 2,
+          "session_id": "item2-fallback-20261010183405487420-switch-refund",
+          "http_status": 200,
+          "elapsed_ms": 2,
+          "message_count": 2,
+          "intent": "refund_request",
+          "answer": "你要退款哪一个订单？请选择订单号，或直接补充订单号。",
+          "next_action": "ask_clarification",
+          "risk_level": "medium",
+          "needs_human_approval": false,
+          "cache_hit": false,
+          "route_plan": {
+            "intent": "refund_request",
+            "needs_rag": true,
+            "needs_business_tools": true,
+            "required_tools": [],
+            "tool_candidates": [
+              "get_order_detail"
+            ],
+            "knowledge_domains": [
+              "after_sale_policy"
+            ],
+            "entity_refs": [],
+            "risk_level": "high",
+            "requires_workflow": true,
+            "source": "deterministic_fallback",
+            "fallback_policy": "ask_order_id",
+            "confidence": 0.75
+          },
+          "route_model": {
+            "used_model": false,
+            "model_name": null,
+            "fallback_reason": "model_config_missing"
+          },
+          "final_answer_model": {
+            "used_model": false,
+            "model_name": null,
+            "fallback_reason": "clarification_required"
+          },
+          "open_task": {
+            "intent": "refund_request",
+            "pending_slot": "order_id",
+            "candidates": []
+          },
+          "recent_intent": "refund_request",
+          "workflow": null,
+          "clarification": {
+            "clarification_field": "order_id",
+            "message": "你要退款哪一个订单？请选择订单号，或直接补充订单号。",
+            "candidates": []
+          },
+          "citations": [],
+          "tool_calls": [],
+          "history_seen_by_context": {
+            "input_count": 2,
+            "kept_count": 2
+          },
+          "trace_events": [
+            "runtime_context_built",
+            "context_built",
+            "model_route_planned",
+            "route_plan_built",
+            "rag_pre_retrieved",
+            "context_source_safety_checked",
+            "model_answer_generated",
+            "mcp_binding_resolved",
+            "hook_executed",
+            "cost_recorded",
+            "final_answer_generated",
+            "runtime_context_built",
+            "context_built",
+            "model_route_planned",
+            "route_plan_built",
+            "tool_clarification_required",
+            "langchain_tool_agent_completed",
+            "model_answer_skipped",
+            "mcp_binding_resolved",
+            "hook_executed",
+            "cost_recorded",
+            "final_answer_generated"
+          ]
+        }
+      ],
+      "check": {
+        "label_ok": true,
+        "model_path_ok": true,
+        "entered_apply": true,
+        "application_prepared": false,
+        "switch_ok": true,
+        "invoice_ok": null,
+        "notes": [
+          "办理路径已进入，但没有准备申请或确认卡。"
+        ]
+      }
+    },
+    {
+      "id": "switch-return",
+      "mode": "fallback",
+      "turns": [
+        {
+          "input": "七天无理由退货需要满足什么条件？只是咨询，暂时不退。",
+          "history_count": 0,
+          "session_id": "item2-fallback-20261010183405487420-switch-return",
+          "http_status": 200,
+          "elapsed_ms": 3,
+          "message_count": 1,
+          "intent": "return_policy_query",
+          "answer": "七天无理由退货适用于已支付并签收、申请提交时仍在签收后七天窗口内，且整单商品在购买时均支持七天无理由退货的订单。七天无理由是申请类型，用户无需另外填写退货理由；具体订单是否符合条件仍需核验可信订单事实，不得自动承诺退货成功。\n\n用户核对并确认提交后，申请进入待审核；管理员同意退货并提供退回地址后，由用户寄回并填写退回物流。商家收到商品且验收通过后才退款，同意退货不等于退款已完成。\n\n商品不支持七天无理由、超出窗口或资格事实缺失时，不进入这条无理由退货流程；质量问题等其他售后需说明具体问题并另行核验，不能一律认定为无法办理任何售后。",
+          "next_action": "answer_user",
+          "risk_level": "low",
+          "needs_human_approval": false,
+          "cache_hit": false,
+          "route_plan": {
+            "intent": "return_policy_query",
+            "needs_rag": true,
+            "needs_business_tools": false,
+            "required_tools": [],
+            "tool_candidates": [],
+            "knowledge_domains": [
+              "received_return_policy"
+            ],
+            "entity_refs": [],
+            "risk_level": "low",
+            "requires_workflow": false,
+            "source": "deterministic_fallback",
+            "fallback_policy": "safe_deterministic_path",
+            "confidence": 0.75
+          },
+          "route_model": {
+            "used_model": false,
+            "model_name": null,
+            "fallback_reason": "model_config_missing"
+          },
+          "final_answer_model": {
+            "used_model": false,
+            "model_name": null,
+            "fallback_reason": "model_config_missing"
+          },
+          "open_task": null,
+          "recent_intent": "return_policy_query",
+          "workflow": null,
+          "clarification": null,
+          "citations": [
+            {
+              "source": "knowledge/received_return_policy.md",
+              "title": "荒野户外签收后退货 SOP",
+              "policy_id": "return_after_delivery",
+              "snippet": "七天无理由退货适用于已支付并签收、申请提交时仍在签收后七天窗口内，且整单商品在购买时均支持七天无理由退货的订单。七天无理由是申请类型，用户无需另外填写退货理由；具体订单是否符合条件仍需核验可信订单事实，不得自动承诺退货成功。\n\n用户核对并确认提交后，申请进入待审核；管理员同意退货并提供退回地址后，由用户寄回并填写退回物流。商家收到商品且验收通过后才退款，同意退货不等于退款已完成。\n\n商品不支持七天无理由、超出窗口或资格事实缺失时，不进入这条无理由退货流程；质量问题等其他售后需说明具体问题并另行核验，不能一律认定为无法办理任何售后。"
+            }
+          ],
+          "tool_calls": [],
+          "history_seen_by_context": {
+            "input_count": 0,
+            "kept_count": 0
+          },
+          "trace_events": [
+            "runtime_context_built",
+            "context_built",
+            "model_route_planned",
+            "route_plan_built",
+            "rag_pre_retrieved",
+            "context_source_safety_checked",
+            "model_answer_generated",
+            "mcp_binding_resolved",
+            "hook_executed",
+            "cost_recorded",
+            "final_answer_generated"
+          ]
+        },
+        {
+          "input": "我现在要申请七天无理由退货。",
+          "history_count": 2,
+          "session_id": "item2-fallback-20261010183405487420-switch-return",
+          "http_status": 200,
+          "elapsed_ms": 2,
+          "message_count": 2,
+          "intent": "return_request",
+          "answer": "你要查询哪一个订单？请选择订单号，或直接补充订单号。",
+          "next_action": "ask_clarification",
+          "risk_level": "high",
+          "needs_human_approval": false,
+          "cache_hit": false,
+          "route_plan": {
+            "intent": "return_request",
+            "needs_rag": true,
+            "needs_business_tools": true,
+            "required_tools": [],
+            "tool_candidates": [
+              "get_order_detail"
+            ],
+            "knowledge_domains": [
+              "received_return_policy"
+            ],
+            "entity_refs": [],
+            "risk_level": "high",
+            "requires_workflow": true,
+            "source": "deterministic_fallback",
+            "fallback_policy": "ask_order_id",
+            "confidence": 0.75
+          },
+          "route_model": {
+            "used_model": false,
+            "model_name": null,
+            "fallback_reason": "model_config_missing"
+          },
+          "final_answer_model": {
+            "used_model": false,
+            "model_name": null,
+            "fallback_reason": "clarification_required"
+          },
+          "open_task": {
+            "intent": "return_request",
+            "pending_slot": "order_id",
+            "candidates": []
+          },
+          "recent_intent": "return_request",
+          "workflow": null,
+          "clarification": {
+            "clarification_field": "order_id",
+            "message": "你要查询哪一个订单？请选择订单号，或直接补充订单号。",
+            "candidates": []
+          },
+          "citations": [],
+          "tool_calls": [],
+          "history_seen_by_context": {
+            "input_count": 2,
+            "kept_count": 1
+          },
+          "trace_events": [
+            "runtime_context_built",
+            "context_built",
+            "model_route_planned",
+            "route_plan_built",
+            "rag_pre_retrieved",
+            "context_source_safety_checked",
+            "model_answer_generated",
+            "mcp_binding_resolved",
+            "hook_executed",
+            "cost_recorded",
+            "final_answer_generated",
+            "runtime_context_built",
+            "context_built",
+            "model_route_planned",
+            "route_plan_built",
+            "tool_clarification_required",
+            "model_answer_skipped",
+            "mcp_binding_resolved",
+            "hook_executed",
+            "cost_recorded",
+            "final_answer_generated"
+          ]
+        }
+      ],
+      "check": {
+        "label_ok": true,
+        "model_path_ok": true,
+        "entered_apply": true,
+        "application_prepared": false,
+        "switch_ok": true,
+        "invoice_ok": null,
+        "notes": [
+          "办理路径已进入，但没有准备申请或确认卡。"
+        ]
+      }
+    },
+    {
+      "id": "invoice",
+      "mode": "fallback",
+      "turns": [
+        {
+          "input": "发票开具后在哪里下载？",
+          "history_count": 0,
+          "session_id": "item2-fallback-20261010183405487420-invoice",
+          "http_status": 200,
+          "elapsed_ms": 4,
+          "message_count": 1,
+          "intent": "invoice_query",
+          "answer": "电子发票通常在订单完成后 24 小时内开具，你可以在订单详情页查看和下载。",
+          "next_action": "answer_user",
+          "risk_level": "low",
+          "needs_human_approval": false,
+          "cache_hit": false,
+          "route_plan": {
+            "intent": "invoice_query",
+            "needs_rag": true,
+            "needs_business_tools": false,
+            "required_tools": [],
+            "tool_candidates": [],
+            "knowledge_domains": [
+              "invoice"
+            ],
+            "entity_refs": [],
+            "risk_level": "low",
+            "requires_workflow": false,
+            "source": "deterministic_fallback",
+            "fallback_policy": "safe_deterministic_path",
+            "confidence": 0.75
+          },
+          "route_model": {
+            "used_model": false,
+            "model_name": null,
+            "fallback_reason": "model_config_missing"
+          },
+          "final_answer_model": {
+            "used_model": false,
+            "model_name": null,
+            "fallback_reason": "model_config_missing"
+          },
+          "open_task": null,
+          "recent_intent": "invoice_query",
+          "workflow": null,
+          "clarification": null,
+          "citations": [
+            {
+              "source": "knowledge/payment_invoice_policy.md",
+              "title": "荒野户外发票 FAQ",
+              "policy_id": "invoice_issue",
+              "snippet": "电子发票通常在订单完成后 24 小时内开具，可在订单详情页查看和下载。"
+            }
+          ],
+          "tool_calls": [],
+          "history_seen_by_context": {
+            "input_count": 0,
+            "kept_count": 0
+          },
+          "trace_events": [
+            "runtime_context_built",
+            "context_built",
+            "model_route_planned",
+            "route_plan_built",
+            "rag_pre_retrieved",
+            "context_source_safety_checked",
+            "rag_hybrid_retrieved",
+            "model_answer_generated",
+            "mcp_binding_resolved",
+            "hook_executed",
+            "cost_recorded",
+            "final_answer_generated"
+          ]
+        }
+      ],
+      "check": {
+        "label_ok": true,
+        "model_path_ok": true,
+        "entered_apply": null,
+        "application_prepared": null,
+        "switch_ok": null,
+        "invoice_ok": true,
+        "notes": []
+      }
+    }
+  ]
+}

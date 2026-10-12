@@ -1,0 +1,170 @@
+{
+  "reason": "combine对嵌套choice字典触发TypeError；现在明确兼容choice字段并验证有限枚举，缺失或非法输出仍invalid",
+  "original_runs": 40,
+  "type_errors": 32,
+  "original_file": "split_deepseek-parser-before.jsonl",
+  "planned_reruns": 40,
+  "question_and_labels_changed": false,
+  "source_after_repair_sha256": "593924b834789355ab5b76f5fe64e594fdfd21e2d4df499b5997782d91e218c3",
+  "original_failed_response_usage": "TypeError使原始回复未保存，受影响首轮费用无法从产物核算；不把这些记录作为模型语义错误",
+  "normalization": "复跑API原始数据不变；确定性读取字符串或choice/type中的有限枚举，拒绝其他内容；保留解析前文件并从回复重建结果，未再调用模型",
+  "normalization_changed_rows": [
+    {
+      "id": "N01",
+      "repeat": 1,
+      "before": "invalid",
+      "after": "cancel"
+    },
+    {
+      "id": "N02",
+      "repeat": 1,
+      "before": "invalid",
+      "after": "cancel"
+    },
+    {
+      "id": "N06",
+      "repeat": 1,
+      "before": "invalid",
+      "after": "cancel"
+    },
+    {
+      "id": "N07",
+      "repeat": 1,
+      "before": "invalid",
+      "after": "keep"
+    },
+    {
+      "id": "N09",
+      "repeat": 1,
+      "before": "invalid",
+      "after": "keep"
+    },
+    {
+      "id": "N11",
+      "repeat": 1,
+      "before": "invalid",
+      "after": "keep"
+    },
+    {
+      "id": "N13",
+      "repeat": 1,
+      "before": "invalid",
+      "after": "clarify"
+    },
+    {
+      "id": "N14",
+      "repeat": 1,
+      "before": "invalid",
+      "after": "clarify"
+    },
+    {
+      "id": "N15",
+      "repeat": 1,
+      "before": "invalid",
+      "after": "clarify"
+    },
+    {
+      "id": "N16",
+      "repeat": 1,
+      "before": "invalid",
+      "after": "clarify"
+    },
+    {
+      "id": "N17",
+      "repeat": 1,
+      "before": "invalid",
+      "after": "clarify"
+    },
+    {
+      "id": "N19",
+      "repeat": 1,
+      "before": "invalid",
+      "after": "clarify"
+    },
+    {
+      "id": "N19",
+      "repeat": 2,
+      "before": "invalid",
+      "after": "clarify"
+    },
+    {
+      "id": "N17",
+      "repeat": 2,
+      "before": "invalid",
+      "after": "clarify"
+    },
+    {
+      "id": "N16",
+      "repeat": 2,
+      "before": "invalid",
+      "after": "clarify"
+    },
+    {
+      "id": "N15",
+      "repeat": 2,
+      "before": "invalid",
+      "after": "clarify"
+    },
+    {
+      "id": "N14",
+      "repeat": 2,
+      "before": "invalid",
+      "after": "clarify"
+    },
+    {
+      "id": "N13",
+      "repeat": 2,
+      "before": "invalid",
+      "after": "clarify"
+    },
+    {
+      "id": "N11",
+      "repeat": 2,
+      "before": "invalid",
+      "after": "keep"
+    },
+    {
+      "id": "N09",
+      "repeat": 2,
+      "before": "invalid",
+      "after": "keep"
+    },
+    {
+      "id": "N07",
+      "repeat": 2,
+      "before": "invalid",
+      "after": "keep"
+    },
+    {
+      "id": "N06",
+      "repeat": 2,
+      "before": "invalid",
+      "after": "cancel"
+    },
+    {
+      "id": "N04",
+      "repeat": 2,
+      "before": "invalid",
+      "after": "cancel"
+    },
+    {
+      "id": "N03",
+      "repeat": 2,
+      "before": "invalid",
+      "after": "cancel"
+    },
+    {
+      "id": "N02",
+      "repeat": 2,
+      "before": "invalid",
+      "after": "cancel"
+    },
+    {
+      "id": "N01",
+      "repeat": 2,
+      "before": "invalid",
+      "after": "cancel"
+    }
+  ],
+  "source_final_sha256": "ace20a52ec5b61e63b67218fef2b0fc68bb3f4e27c6e18f28726a08518884aa5"
+}

@@ -1,0 +1,48 @@
+{
+  "turns" : 19,
+  "passed" : false,
+  "mode" : "synthetic_agent",
+  "checks" : [ {
+    "check" : "确认卡后聊天取消：取消本次申请。",
+    "passed" : true
+  }, {
+    "check" : "取消后旧卡提交被拒绝：取消本次申请。",
+    "passed" : true
+  }, {
+    "check" : "取消后查物流不恢复确认卡：取消本次申请。",
+    "passed" : true
+  }, {
+    "check" : "重新申请生成新凭证：取消本次申请。",
+    "passed" : true
+  }, {
+    "check" : "确认卡后聊天取消：算了，不退了。",
+    "passed" : false
+  }, {
+    "check" : "确认卡后聊天取消：先不退了。",
+    "passed" : false
+  }, {
+    "check" : "按钮取消及旧卡失效",
+    "passed" : true
+  }, {
+    "check" : "选单前尚未生成确认卡",
+    "passed" : true
+  }, {
+    "check" : "等待选单时取消",
+    "passed" : true
+  }, {
+    "check" : "取消后第一笔不复活旧待办",
+    "passed" : true
+  }, {
+    "check" : "等待补原因的前置状态",
+    "passed" : true
+  }, {
+    "check" : "补原因前自然取消",
+    "passed" : false
+  }, {
+    "check" : "无待办不虚报取消成功",
+    "passed" : true
+  }, {
+    "check" : "取消对话无新增售后、资金流水或余额变化",
+    "passed" : true
+  } ]
+}

@@ -1,0 +1,16 @@
+{
+  "session_id": "item2-fallback-20261010183405487420-switch-refund",
+  "runtime_user_id": "intent-eval",
+  "user_message": "我现在要申请退款。",
+  "history_messages": [
+    {
+      "role": "user",
+      "content": "退款政策是什么？我先了解一下，不申请退款。"
+    },
+    {
+      "role": "assistant",
+      "content": "已支付且未出库、未发货的订单，可以发起退款申请；资金类动作必须进入售后审批。"
+    }
+  ],
+  "debug": false
+}

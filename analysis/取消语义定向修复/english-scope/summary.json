@@ -1,0 +1,192 @@
+{
+  "fixture_sha256": "b218e9c89f5759561190c1e3d321601fcf6a6ef4275df94c3321bd4564f8ac1c",
+  "arms": {
+    "split_jev": {
+      "runs": 40,
+      "valid": 40,
+      "correct": 36,
+      "false_cancel": 4,
+      "non_cancel_runs": 28,
+      "missed_cancel": 0,
+      "cancel_runs": 12,
+      "p50_ms": 445.676,
+      "p95_ms": 617.766,
+      "cost_estimate_usd_range": [
+        0.0017598000000000006,
+        0.0017598000000000006
+      ],
+      "repeat_disagreements": [],
+      "mismatches": [
+        {
+          "id": "N10",
+          "repeat": 1,
+          "expected": "keep",
+          "actual": "cancel",
+          "components": {
+            "decision": "stop",
+            "target": "current",
+            "extra_task": "no"
+          }
+        },
+        {
+          "id": "N18",
+          "repeat": 1,
+          "expected": "clarify",
+          "actual": "cancel",
+          "components": {
+            "decision": "stop",
+            "target": "current",
+            "extra_task": "no"
+          }
+        },
+        {
+          "id": "N18",
+          "repeat": 2,
+          "expected": "clarify",
+          "actual": "cancel",
+          "components": {
+            "decision": "stop",
+            "target": "current",
+            "extra_task": "no"
+          }
+        },
+        {
+          "id": "N10",
+          "repeat": 2,
+          "expected": "keep",
+          "actual": "cancel",
+          "components": {
+            "decision": "stop",
+            "target": "current",
+            "extra_task": "no"
+          }
+        }
+      ]
+    },
+    "split_deepseek": {
+      "runs": 40,
+      "valid": 37,
+      "correct": 37,
+      "false_cancel": 0,
+      "non_cancel_runs": 28,
+      "missed_cancel": 1,
+      "cancel_runs": 12,
+      "p50_ms": 747.618,
+      "p95_ms": 1304.15,
+      "cost_estimate_usd_range": [
+        0.00233094,
+        0.00466188
+      ],
+      "repeat_disagreements": [
+        "N03"
+      ],
+      "mismatches": [
+        {
+          "id": "N03",
+          "repeat": 1,
+          "expected": "cancel",
+          "actual": "invalid",
+          "components": null
+        },
+        {
+          "id": "N20",
+          "repeat": 1,
+          "expected": "clarify",
+          "actual": "invalid",
+          "components": null
+        },
+        {
+          "id": "N20",
+          "repeat": 2,
+          "expected": "clarify",
+          "actual": "invalid",
+          "components": null
+        }
+      ]
+    },
+    "regression_split_jev": {
+      "runs": 60,
+      "valid": 60,
+      "correct": 54,
+      "false_cancel": 2,
+      "non_cancel_runs": 36,
+      "missed_cancel": 2,
+      "cancel_runs": 24,
+      "p50_ms": 466.974,
+      "p95_ms": 658.775,
+      "cost_estimate_usd_range": [
+        0.0026528040000000004,
+        0.0026528040000000004
+      ],
+      "repeat_disagreements": [],
+      "mismatches": [
+        {
+          "id": "C10",
+          "repeat": 1,
+          "expected": "cancel",
+          "actual": "clarify",
+          "components": {
+            "decision": "stop",
+            "target": "ambiguous",
+            "extra_task": "no"
+          }
+        },
+        {
+          "id": "K07",
+          "repeat": 1,
+          "expected": "keep",
+          "actual": "clarify",
+          "components": {
+            "decision": "uncertain",
+            "target": "current",
+            "extra_task": "no"
+          }
+        },
+        {
+          "id": "A05",
+          "repeat": 1,
+          "expected": "clarify",
+          "actual": "cancel",
+          "components": {
+            "decision": "stop",
+            "target": "current",
+            "extra_task": "no"
+          }
+        },
+        {
+          "id": "A05",
+          "repeat": 2,
+          "expected": "clarify",
+          "actual": "cancel",
+          "components": {
+            "decision": "stop",
+            "target": "current",
+            "extra_task": "no"
+          }
+        },
+        {
+          "id": "K07",
+          "repeat": 2,
+          "expected": "keep",
+          "actual": "clarify",
+          "components": {
+            "decision": "uncertain",
+            "target": "current",
+            "extra_task": "no"
+          }
+        },
+        {
+          "id": "C10",
+          "repeat": 2,
+          "expected": "cancel",
+          "actual": "clarify",
+          "components": {
+            "decision": "stop",
+            "target": "ambiguous",
+            "extra_task": "no"
+          }
+        }
+      ]
+    }
+  }
+}

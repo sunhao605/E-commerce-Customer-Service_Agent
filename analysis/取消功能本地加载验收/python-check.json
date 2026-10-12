@@ -1,0 +1,11 @@
+{
+  "mode": "check",
+  "old_pid": 2378,
+  "new_pid": 4006,
+  "health": {
+    "status": "ok",
+    "lesson": "41"
+  },
+  "cancel_execute": "1",
+  "score_min": "0.9"
+}

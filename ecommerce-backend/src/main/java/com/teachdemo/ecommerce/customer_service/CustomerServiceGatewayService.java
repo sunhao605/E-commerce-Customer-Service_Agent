@@ -44,6 +44,7 @@ import com.teachdemo.ecommerce.common.BusinessException;
 
 import java.time.LocalDateTime;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import java.util.List;
@@ -83,6 +84,8 @@ public class CustomerServiceGatewayService {
     private final ShopService shopService;
     private static final Pattern ORDER_NO = Pattern.compile("\\b(?:SO[A-Za-z0-9_-]{6,}|ORD\\d{4,})\\b", Pattern.CASE_INSENSITIVE);
     private static final Pattern REFUND_REASON = Pattern.compile("(?:退款原因|原因)\\s*[:：]\\s*(.+)|因为\\s*(.+)");
+    // shortcut: 只接收独立、明确的取消句；复合请求需要另行定义取消对象和新任务。
+    private static final Pattern CANCEL_DRAFT = Pattern.compile("(?:算了[，,\\s]*)?(?:取消本次申请|不退了|不申请了|先不退了|不退款了|不退货了|不提交了)[。！!\\s]*");
 
     public CustomerServiceGatewayService(CustomerServiceAgentClient agentClient,
                                          CustomerServiceSessionStore sessionStore,
@@ -111,19 +114,47 @@ public class CustomerServiceGatewayService {
         CustomerServiceSession session = sessionStore.getOrCreate(sessionId, profile.getUserId());
         synchronized (session) {
             assertSessionOwner(session, profile.getUserId());
+            session.setCancellationJudged(false);
             String message = request.getMessage();
-            String continuingType = session.getActionType();
-            boolean continuingRefund = session.getPendingAction() != null && !session.isHandled();
-            boolean needsOrder = "REFUND_ORDER_REQUIRED".equals(session.getPendingAction());
-            String requestedOrder = extractOrderNo(message);
-            if (requestedOrder == null && pageContext != null) requestedOrder = trimToNull(pageContext.getOrderNo());
-            boolean changedOrder = requestedOrder != null && !Objects.equals(requestedOrder, session.getRelatedOrderNo());
-            CustomerServiceResponse followup = refundFollowup(session, message, pageContext, profile.getUserId());
-            if (followup != null) {
-                return followup;
+            String unsupported = unsupportedServiceReason(message);
+            if (unsupported != null || wantsHumanSupport(message)) {
+                boolean replaceDraft = unsupported != null && !isServicePolicyQuestion(message);
+                CustomerServiceResponse response = humanSupportResponse(session,
+                    unsupported == null ? "你希望联系人工客服。" : "你希望咨询或办理" + unsupported + "，当前客服助手暂不能办理这类业务。",
+                    replaceDraft);
+                rememberTurn(session, message, response.getAnswer());
+                return response;
             }
-            if (continuingRefund && requestedOrder != null && (needsOrder || changedOrder)) {
-                message += "\n客户正在补充或更换" + ("RETURN".equals(continuingType) ? "七天无理由退货退款" : "未发货整单退款") + "申请的订单号，尚未确认提交。";
+            if (session.getAfterSaleQuery() != null && message.trim().matches("(?:好的|好|可以|知道了|先不办|暂时不办)[。！!\\s]*")) {
+                if (message.contains("不办")) session.setAfterSaleQuery(null);
+                CustomerServiceResponse response = new CustomerServiceResponse("好的，这次只咨询，没有准备新的申请。需要办理时请明确提出申请。",
+                    sessionId, false, "ELIGIBILITY_QUERY", null, null, null, null, null, List.of(), false);
+                rememberTurn(session, message, response.getAnswer());
+                return response;
+            }
+            // 独立取消和已知办理的纯订单输入仍走原续接；查询选单不走办理续接。
+            if (CANCEL_DRAFT.matcher(message.trim()).matches() || session.getAfterSaleQuery() == null
+                && "REFUND_ORDER_REQUIRED".equals(session.getPendingAction()) && ORDER_NO.matcher(message.trim()).matches()) {
+                CustomerServiceResponse followup = refundFollowup(session, message, pageContext, profile.getUserId());
+                if (followup != null) {
+                    rememberTurn(session, message, followup.getAnswer());
+                    return followup;
+                }
+            }
+            Map<String, Object> runtimeContext = buildRuntimeContext(profile, pageContext, request.getMessage());
+            runtimeContext.put("mallAfterSaleRouting", true);
+            runtimeContext.put("afterSaleQuery", session.getAfterSaleQuery());
+            if (session.getPendingAction() != null && !session.isHandled()) {
+                runtimeContext.put("afterSaleOpenTask", Map.of("intent", "RETURN".equals(session.getActionType()) ? "return_request" : "refund_request",
+                    "pending_slot", "REFUND_ORDER_REQUIRED".equals(session.getPendingAction()) ? "order_id" : "reason"));
+            }
+            runtimeContext.put("cancelledAfterSaleDraft", "CANCELLED".equals(session.getPendingAction()));
+            runtimeContext.put("afterSaleDraft", afterSaleDraftSummary(session));
+            if (session.isCancellationJudged()) {
+                runtimeContext.put("cancellationJudged", true);
+            }
+            if (!session.recentDialogue().isEmpty()) {
+                runtimeContext.put("recentDialogue", session.recentDialogue());
             }
             AgentChatRequest agentRequest = new AgentChatRequest(
                 sessionId,
@@ -132,14 +163,58 @@ public class CustomerServiceGatewayService {
                 profile.getMemberLevel(),
                 profile.getRiskLevel(),
                 buildAgentMessage(message, pageContext, profile.getUserId()),
-                buildRuntimeContext(profile, pageContext)
+                runtimeContext
             );
             try {
                 JsonNode agentResponse = agentClient.chat(agentRequest);
-                return sanitizeChatResponse(agentResponse, session, pageContext, profile.getUserId(), request.getMessage());
+                if (agentResponse != null && "transfer_to_human".equals(agentResponse.path("next_action").asText())
+                    && !isApprovalRequired(workflowNode(agentResponse))) {
+                    CustomerServiceResponse response = humanSupportResponse(session,
+                        text(agentResponse, "answer", "当前问题需要人工进一步核验。"), false);
+                    rememberTurn(session, message, response.getAnswer());
+                    return response;
+                }
+                if (agentResponse != null && "after_sale_eligibility_query".equals(agentResponse.path("session_state").path("intent").asText())) {
+                    CustomerServiceResponse response = eligibilityQueryResponse(agentResponse, session);
+                    rememberTurn(session, message, response.getAnswer());
+                    return response;
+                }
+                // 只读商品咨询直接返回：不续接旧退款、不重发待确认卡，也不改动任何售后会话状态。
+                if (agentResponse != null && "product_query".equals(agentResponse.path("session_state").path("intent").asText())) {
+                    CustomerServiceResponse response = new CustomerServiceResponse(text(agentResponse, "answer", FALLBACK_ANSWER),
+                        sessionId, false, "PRODUCT_QUERY", null, null, null, null, null, List.of(), false);
+                    rememberTurn(session, message, response.getAnswer());
+                    return response;
+                }
+                String followupMessage = message;
+                String selected = agentResponse == null ? null : text(agentResponse.path("session_state").path("context_report"), "chosen_order_id", null);
+                String intent = agentResponse == null ? null : text(agentResponse.path("session_state"), "intent", null);
+                if (Set.of("refund_request", "return_request").contains(intent == null ? "" : intent) && selected != null
+                    && extractOrderNo(message) == null) {
+                    followupMessage += " " + selected;
+                }
+                if (Set.of("refund_request", "return_request").contains(intent == null ? "" : intent)
+                    && session.getAfterSaleQuery() != null && extractOrderNo(message) == null && pageContext != null
+                    && pageContext.getOrderNo() != null && session.getAfterSaleQuery().get("order_id") != null
+                    && !Objects.equals(pageContext.getOrderNo(), session.getAfterSaleQuery().get("order_id"))) {
+                    CustomerServiceResponse response = new CustomerServiceResponse("当前页面订单与刚查询的订单不同，请明确要申请哪一笔订单。尚未准备新申请。",
+                        sessionId, false, "ELIGIBILITY_ORDER_REQUIRED", null, null, null, null, null, List.of(), false);
+                    rememberTurn(session, message, response.getAnswer());
+                    return response;
+                }
+                CustomerServiceResponse followup = refundFollowup(session, followupMessage, pageContext, profile.getUserId());
+                if (followup != null) {
+                    rememberTurn(session, message, followup.getAnswer());
+                    return followup;
+                }
+                CustomerServiceResponse response = sanitizeChatResponse(agentResponse, session, pageContext, profile.getUserId(), request.getMessage());
+                rememberTurn(session, request.getMessage(), response.getAnswer());
+                return response;
             } catch (RuntimeException ex) {
                 sessionStore.save(session);
-                return fallback(sessionId);
+                CustomerServiceResponse response = fallback(sessionId);
+                rememberTurn(session, request.getMessage(), response.getAnswer());
+                return response;
             }
         }
     }
@@ -151,8 +226,15 @@ public class CustomerServiceGatewayService {
         synchronized (session) {
             assertSessionOwner(session, profile.getUserId());
             String decision = request.getDecision().trim().toUpperCase(Locale.ROOT);
+            if ("KEEP".equals(decision) || "CANCEL_DRAFT".equals(decision)) {
+                return resumeConflict(session, request, decision);
+            }
             if (!Set.of("CONFIRM_SUBMIT", "CANCEL_SUBMIT").contains(decision)) {
-                throw new CustomerServiceException(HttpStatus.BAD_REQUEST, "BAD_REQUEST", "decision 只支持 CONFIRM_SUBMIT 或 CANCEL_SUBMIT");
+                throw new CustomerServiceException(HttpStatus.BAD_REQUEST, "BAD_REQUEST", "decision 只支持 CONFIRM_SUBMIT、CANCEL_SUBMIT、KEEP 或 CANCEL_DRAFT");
+            }
+            if ("CONFIRM_SUBMIT".equals(decision) && session.getConflictToken() != null
+                && session.getConflictToken().equals(request.getResumeToken())) {
+                throw new CustomerServiceException(HttpStatus.BAD_REQUEST, "BAD_REQUEST", "这张卡片不能提交申请");
             }
             validateResumeSession(session, request);
             if (session.isHandled()) {
@@ -165,9 +247,7 @@ public class CustomerServiceGatewayService {
                 throw new CustomerServiceException(HttpStatus.CONFLICT, "CONFLICT", "本次确认已处理，旧卡不可用");
             }
             if ("CANCEL_SUBMIT".equals(decision)) {
-                session.setHandled(true);
-                sessionStore.save(session);
-                return plainResponse(session, "本次售后申请已取消，未提交。", "CANCELLED");
+                return cancelPendingRefund(session);
             }
             try {
                 ShopAfterSaleResponse application = "RETURN".equals(session.getActionType())
@@ -244,8 +324,10 @@ public class CustomerServiceGatewayService {
         }
     }
 
-    private Map<String, Object> buildRuntimeContext(UserProfile profile, CustomerServicePageContextRequest pageContext) {
+    private Map<String, Object> buildRuntimeContext(UserProfile profile, CustomerServicePageContextRequest pageContext, String userMessage) {
         Map<String, Object> context = new HashMap<>();
+        // 保留用户原句，避免追加的页面订单号覆盖“第一笔”等明确选择。
+        context.put("userMessage", userMessage);
         context.put("userId", profile.getUserId());
         context.put("nickname", profile.getNickname());
         context.put("mobile", profile.getMobile());
@@ -276,6 +358,203 @@ public class CustomerServiceGatewayService {
             }
         }
         return context;
+    }
+
+    enum CancelFollowup { CANCEL, PASS }
+
+    static CancelFollowup decideFollowup(boolean exactSentence, JsonNode judgment, boolean versionMatches) {
+        if (judgment == null || judgment.isNull() || judgment.isMissingNode()) {
+            return exactSentence ? CancelFollowup.CANCEL : CancelFollowup.PASS;
+        }
+        if (judgment.path("executed").asBoolean(false) && versionMatches) {
+            return CancelFollowup.CANCEL;
+        }
+        if ("keep".equals(judgment.path("action").asText(""))) {
+            return CancelFollowup.PASS;
+        }
+        if (exactSentence) {
+            return CancelFollowup.CANCEL;
+        }
+        return CancelFollowup.PASS;
+    }
+
+    private JsonNode cancellationJudgment(CustomerServiceSession session, String message) {
+        if (!"1".equals(System.getenv("CANCEL_INTENT_EXECUTE"))) {
+            return null;
+        }
+        session.setCancellationJudged(true);
+        Map<String, Object> runtime = new HashMap<>();
+        runtime.put("userMessage", message);
+        runtime.put("recentDialogue", session.recentDialogue());
+        runtime.put("afterSaleDraft", afterSaleDraftSummary(session));
+        if (session.getObjectWait() != null && !session.getObjectWait().isEmpty()) {
+            runtime.put("objectWait", session.getObjectWait());
+        }
+        Map<String, Object> body = new HashMap<>();
+        body.put("session_id", session.getSessionId());
+        body.put("runtime_user_id", session.getUserId());
+        body.put("user_message", message);
+        body.put("runtime_context", runtime);
+        try {
+            return agentClient.judgeCancellation(body);
+        } catch (RuntimeException ex) {
+            return null;
+        }
+    }
+
+    private static boolean draftVersionMatches(CustomerServiceSession session, JsonNode judgment) {
+        String expected = judgment.path("draft_version").asText("");
+        return !expected.isEmpty() && expected.equals(Integer.toString(session.getDraftRevision()));
+    }
+
+    private CustomerServiceResponse clarificationReply(CustomerServiceSession session, JsonNode judgment, boolean exactCancel) {
+        if (judgment == null || judgment.isNull()) {
+            return null;
+        }
+        String action = judgment.path("action").asText("");
+        String reply = judgment.path("reply").asText("");
+        boolean shipping = "keep_unknown_fact".equals(action);
+        if ("confirm".equals(action)) {
+            return conflictCard(session, StringUtils.hasText(reply) ? reply : "请选择保留当前办理，或取消这次尚未提交的售后申请。");
+        }
+        if ("score_low".equals(action) || ("object_noted".equals(action)
+            && "below_threshold".equals(judgment.path("reason").asText()))) {
+            session.setObjectWait(null);
+            String kind = "RETURN".equals(session.getActionType()) ? "退货退款" : "退款";
+            return conflictCard(session, StringUtils.hasText(reply) ? reply : "是否停止本次尚未提交的" + kind + "申请？");
+        }
+        boolean clarify = Set.of("ask_object", "ask_decision", "keep_other", "candidates_changed", "object_noted", "hold_review").contains(action);
+        if (!shipping && (exactCancel || !clarify)) {
+            return null;
+        }
+        if (!StringUtils.hasText(reply)) {
+            return null;
+        }
+        session.setObjectWait(judgment.path("object_wait").isObject() ? readObjectWait(judgment.path("object_wait")) : null);
+        return plainResponse(session, reply, action.toUpperCase(Locale.ROOT));
+    }
+
+    private CustomerServiceResponse conflictCard(CustomerServiceSession session, String reply) {
+        String token = UUID.randomUUID().toString();
+        session.setResumeToken(token);
+        session.setConflictToken(token);
+        session.setConflictRevision(session.getDraftRevision());
+        String order = session.getRelatedOrderNo();
+        String summary;
+        String cancelLabel;
+        if (StringUtils.hasText(order)) {
+            String product = session.getRefundItemSummary();
+            String type = "RETURN".equals(session.getActionType()) ? "退货退款" : "退款";
+            summary = "订单：" + order
+                + (StringUtils.hasText(product) ? "；商品：" + product : "")
+                + "；售后类型：" + type
+                + "。请选择保留当前办理，或取消这次尚未提交的售后申请。";
+            cancelLabel = "取消这次尚未提交的售后申请";
+        } else {
+            summary = "结束这次未提交的退款办理。当前还没有订单号。";
+            cancelLabel = "结束这次未提交的退款办理";
+        }
+        sessionStore.save(session);
+        return new CustomerServiceResponse(reply, session.getSessionId(), true, session.getPendingAction(),
+            "请选择是否保留办理", summary, order, null, token,
+            List.of(
+                new CustomerServiceActionResponse("KEEP", "保留当前办理"),
+                new CustomerServiceActionResponse("CANCEL_DRAFT", cancelLabel)
+            ),
+            false);
+    }
+
+    private CustomerServiceResponse resumeConflict(CustomerServiceSession session, CustomerServiceResumeRequest request, String decision) {
+        if (session.isExpired(LocalDateTime.now())) {
+            throw new CustomerServiceException(HttpStatus.CONFLICT, "CONFLICT", "本次确认已过期，请重新发起咨询");
+        }
+        if (session.isHandled() || "CANCELLED".equals(session.getPendingAction())) {
+            throw new CustomerServiceException(HttpStatus.CONFLICT, "CONFLICT", "本次确认已处理，旧卡不可用");
+        }
+        String token = session.getConflictToken();
+        if (!StringUtils.hasText(token) || !token.equals(request.getResumeToken())) {
+            throw new CustomerServiceException(HttpStatus.FORBIDDEN, "FORBIDDEN", "恢复凭证不匹配");
+        }
+        if (session.getConflictRevision() != session.getDraftRevision()) {
+            throw new CustomerServiceException(HttpStatus.CONFLICT, "CONFLICT", "办理内容已变化，旧卡不可用");
+        }
+        if (StringUtils.hasText(request.getRelatedOrderNo()) && StringUtils.hasText(session.getRelatedOrderNo())
+            && !session.getRelatedOrderNo().equals(request.getRelatedOrderNo())) {
+            throw new CustomerServiceException(HttpStatus.FORBIDDEN, "FORBIDDEN", "关联订单不匹配");
+        }
+        session.setConflictToken(null);
+        if ("KEEP".equals(decision)) {
+            rememberTurn(session, "客户点击「保留当前办理」，明确选择继续本次售后申请，不停止申请。", "继续办理本次售后申请，尚未提交。");
+            if ("CONFIRM_SUBMIT".equals(session.getPendingAction())) {
+                session.setResumeToken(UUID.randomUUID().toString());
+                sessionStore.save(session);
+                return pendingRefundResponse(session, "继续办理本次售后申请，尚未提交。");
+            }
+            if (token.equals(session.getResumeToken())) {
+                session.setResumeToken(null);
+            }
+            return plainResponse(session, "继续办理本次售后申请。", "KEEP");
+        }
+        return cancelPendingRefund(session);
+    }
+
+    private Map<String, Object> readObjectWait(JsonNode wait) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("kind", "object");
+        map.put("draft_version", wait.path("draft_version").asText(""));
+        map.put("draft_order", wait.path("draft_order").isTextual() ? wait.path("draft_order").asText() : null);
+        map.put("decision", wait.path("decision").asText("uncertain"));
+        if (wait.path("decision_score").isNumber()) {
+            map.put("decision_score", wait.path("decision_score").asDouble());
+        }
+        map.put("extra_task", wait.path("extra_task").asText("uncertain"));
+        List<String> candidates = new ArrayList<>();
+        if (wait.path("candidates").isArray()) {
+            wait.path("candidates").forEach(item -> {
+                if (item.isTextual() && StringUtils.hasText(item.asText())) {
+                    candidates.add(item.asText());
+                }
+            });
+        }
+        map.put("candidates", candidates);
+        return map;
+    }
+
+    private Map<String, Object> afterSaleDraftSummary(CustomerServiceSession session) {
+        String pending = session.getPendingAction();
+        boolean submitted = session.isHandled() && StringUtils.hasText(session.getRelatedAfterSaleNo());
+        String stage;
+        if (submitted || "SUBMITTED".equals(pending)) {
+            stage = "submitted";
+        } else if ("CANCELLED".equals(pending)) {
+            stage = "cancelled";
+        } else if (session.isExpired(LocalDateTime.now())) {
+            stage = "expired";
+        } else if ("REFUND_ORDER_REQUIRED".equals(pending)) {
+            stage = "choosing_order";
+        } else if ("REFUND_REASON_REQUIRED".equals(pending)) {
+            stage = "awaiting_reason";
+        } else if ("CONFIRM_SUBMIT".equals(pending)) {
+            stage = "draft";
+        } else {
+            stage = "none";
+        }
+        boolean active = "choosing_order".equals(stage) || "awaiting_reason".equals(stage) || "draft".equals(stage);
+        Map<String, Object> draft = new HashMap<>();
+        draft.put("stage", stage);
+        draft.put("order", active || "submitted".equals(stage) ? session.getRelatedOrderNo() : null);
+        String actionType = session.getActionType();
+        draft.put("afterSaleType", "REFUND".equals(actionType) || "RETURN".equals(actionType) ? actionType : null);
+        draft.put("submitted", submitted);
+        draft.put("valid", active);
+        draft.put("version", Integer.toString(session.getDraftRevision()));
+        draft.put("ownerVerified", true);
+        return draft;
+    }
+
+    private void rememberTurn(CustomerServiceSession session, String userMessage, String answer) {
+        session.appendDialogue("user", userMessage);
+        session.appendDialogue("assistant", answer);
     }
 
     private String buildAgentMessage(String message, CustomerServicePageContextRequest pageContext, String userId) {
@@ -319,16 +598,31 @@ public class CustomerServiceGatewayService {
 
     private CustomerServiceResponse refundFollowup(CustomerServiceSession session, String message,
                                                    CustomerServicePageContextRequest page, String userId) {
+        boolean exactCancel = CANCEL_DRAFT.matcher(message.trim()).matches();
         if (session.getPendingAction() == null || session.isHandled()) {
+            if (exactCancel) {
+                return plainResponse(session, "当前没有可取消的未提交售后办理。本次未撤销任何已提交申请。", "NO_PENDING_APPLICATION");
+            }
             return null;
         }
         if (session.isExpired(LocalDateTime.now())) {
             clearPendingRefund(session);
             return plainResponse(session, "本次确认已过期，请重新提出退款诉求并核对申请。", "EXPIRED");
         }
-        if (message.trim().matches("(?:取消本次申请|不退了|不申请了)[。！!]?")) {
-            session.setHandled(true);
-            return plainResponse(session, "本次售后申请已取消，未提交。", "CANCELLED");
+        // 补订单是已知办理的输入，不让旧取消对话覆盖；未决确认仍先处理。
+        if ("REFUND_ORDER_REQUIRED".equals(session.getPendingAction()) && session.getConflictToken() == null
+            && session.getObjectWait() == null && ORDER_NO.matcher(message.trim()).matches()) {
+            return prepareRefund(session, userId, message.trim(), session.getRefundReason(),
+                "本次仅准备申请，尚未提交。", session.getActionType());
+        }
+        JsonNode judgment = cancellationJudgment(session, message);
+        CustomerServiceResponse clarification = clarificationReply(session, judgment, exactCancel);
+        if (clarification != null) {
+            return clarification;
+        }
+        boolean versionMatches = judgment != null && draftVersionMatches(session, judgment);
+        if (decideFollowup(exactCancel, judgment, versionMatches) == CancelFollowup.CANCEL) {
+            return cancelPendingRefund(session);
         }
         if ("RETURN".equals(session.getActionType()) && isOtherReturnReason(message)) {
             clearPendingRefund(session);
@@ -346,6 +640,8 @@ public class CustomerServiceGatewayService {
         if (session.getRelatedOrderNo() == null) {
             String reason = extractRefundReason(message);
             if (reason != null) {
+                session.bumpDraftRevision();
+                session.setObjectWait(null);
                 session.setRefundReason(reason);
                 sessionStore.save(session);
                 if (requestedOrder == null) {
@@ -368,6 +664,7 @@ public class CustomerServiceGatewayService {
             boolean returning = "RETURN".equals(actionType);
             ShopOrderResponse order = returning ? shopService.getCustomerReturnOrder(userId, orderNo)
                 : shopService.getCustomerRefundOrder(userId, orderNo);
+            session.setAfterSaleQuery(null);
             if (returning) reason = "七天无理由退货";
             if (reason != null && (reason.isBlank() || reason.length() > 200)) {
                 clearPendingRefund(session);
@@ -389,6 +686,8 @@ public class CustomerServiceGatewayService {
             }
             if (changed) {
                 // 客户确认凭证独立于调试台审批凭证，内容变化后旧卡立即失效。
+                session.bumpDraftRevision();
+                session.setObjectWait(null);
                 session.setResumeToken(UUID.randomUUID().toString());
                 session.setWorkflowId("customer-refund-" + UUID.randomUUID());
             }
@@ -445,7 +744,54 @@ public class CustomerServiceGatewayService {
             session.getRelatedOrderNo(), session.getRelatedAfterSaleNo(), null, List.of(), false);
     }
 
+    private CustomerServiceResponse humanSupportResponse(CustomerServiceSession session, String answer, boolean replaceDraft) {
+        boolean hadDraft = replaceDraft && session.getPendingAction() != null && !session.isHandled();
+        if (replaceDraft) {
+            if (hadDraft) clearPendingRefund(session);
+            session.setAfterSaleQuery(null);
+        }
+        sessionStore.save(session);
+        String token = session.isHandled() ? null : session.getResumeToken();
+        return new CustomerServiceResponse(answer + (hadDraft ? " 原未提交申请的确认卡已失效。" : "")
+            + " 可前往人工客服继续处理，本次未新增售后申请。",
+            session.getSessionId(), true, "HUMAN_SUPPORT", "是否转接人工客服？",
+            "由人工客服继续为你处理；前往人工客服不会提交售后申请。",
+            session.getRelatedOrderNo(), session.getRelatedAfterSaleNo(), token,
+            List.of(new CustomerServiceActionResponse("OPEN_HUMAN_SUPPORT", "确认前往"),
+                new CustomerServiceActionResponse("STAY_WITH_AGENT", "暂不前往")), false);
+    }
+
+    // shortcut: 首版覆盖明确业务词及其直接否定；复杂组合售后需另行定义目标和顺序。
+    private static String unsupportedServiceReason(String message) {
+        String text = message.replaceAll("(?:不是|不要|不用|无需|不需要|不想要|不想|别|不)(?:再)?(?:给我|帮我)?(?:换货|换一件|换新|换一个|维修|修理|返修|修一下|保修|补发|部分(?:订单)?退款|部分退货)", "")
+            .replaceAll("(?:非|没有|不是)质量问题", "");
+        if (text.matches("(?s).*(?:部分(?:订单)?退款|部分退货|退一部分|退部分|(?:只|仅)退(?:其中)?(?:一|1|两|2)件|(?:只|仅)退(?:这|那|其中的)(?:一)?(?:件|个|款)|退款.*部分金额).*")) return "部分退款或部分退货";
+        if (text.matches("(?s).*(?:换货|换一件|换新|换一个).*")) return "换货";
+        if (text.matches("(?s).*(?:维修|修理|返修|修一下|保修).*")) return "维修";
+        if (text.contains("补发")) return "补发";
+        if (text.matches("(?s).*(?:质量问题|商品破损|发错货|少件|与描述不符|收到.{0,8}(?:破了|坏了)).*")) return "质量问题售后";
+        return null;
+    }
+
+    private static boolean wantsHumanSupport(String message) {
+        String text = message.replaceAll("(?:不要|不用|不需要|别|不)(?:再)?(?:给我|帮我)?(?:转(?:接)?人工|人工客服|真人客服)", "");
+        return text.matches("(?s).*(?:转(?:接)?人工|人工客服|真人客服|找人工).*");
+    }
+
+    private static boolean isServicePolicyQuestion(String message) {
+        return message.matches("(?s).*(?:政策|规则|条件|流程|怎么|如何|能否|能不能|可以.*吗|支持.*吗|[？?]).*");
+    }
+
+    private CustomerServiceResponse cancelPendingRefund(CustomerServiceSession session) {
+        clearPendingRefund(session);
+        session.setHandled(true);
+        session.setPendingAction("CANCELLED");
+        return plainResponse(session, "本次售后申请已取消，未提交。", "CANCELLED");
+    }
+
     private void clearPendingRefund(CustomerServiceSession session) {
+        session.bumpDraftRevision();
+        session.setObjectWait(null);
         session.setActionType(null);
         session.setPendingAction(null);
         session.setResumeToken(null);
@@ -460,6 +806,25 @@ public class CustomerServiceGatewayService {
         sessionStore.save(session);
     }
 
+    private CustomerServiceResponse eligibilityQueryResponse(JsonNode agentResponse, CustomerServiceSession session) {
+        JsonNode query = agentResponse.path("session_state").path("eligibility_query");
+        Map<String, Object> context = new HashMap<>();
+        context.put("intent", "after_sale_eligibility_query");
+        context.put("order_id", text(query, "order_id", null));
+        context.put("application_type", text(query, "application_type", null));
+        context.put("pending_slot", text(query, "pending_slot", null));
+        List<Map<String, String>> candidates = new ArrayList<>();
+        for (JsonNode item : query.path("candidates")) {
+            candidates.add(Map.of("value", item.path("value").asText(), "label", item.path("label").asText()));
+        }
+        context.put("candidates", candidates);
+        session.setAfterSaleQuery(context);
+        sessionStore.save(session);
+        return new CustomerServiceResponse(text(agentResponse, "answer", FALLBACK_ANSWER), session.getSessionId(), false,
+            context.get("pending_slot") == null ? "ELIGIBILITY_QUERY" : "ELIGIBILITY_ORDER_REQUIRED",
+            null, null, (String) context.get("order_id"), null, null, List.of(), false);
+    }
+
     private CustomerServiceResponse sanitizeChatResponse(JsonNode agentResponse, CustomerServiceSession session,
                                                          CustomerServicePageContextRequest pageContext, String userId,
                                                          String userMessage) {
@@ -468,6 +833,28 @@ public class CustomerServiceGatewayService {
         }
         JsonNode workflow = workflowNode(agentResponse);
         String answer = text(agentResponse, "answer", FALLBACK_ANSWER);
+        String intent = agentResponse.path("session_state").path("intent").asText();
+        if ((workflow.isMissingNode() || workflow.isNull()) && Set.of("refund_request", "return_request").contains(intent)) {
+            String type = "return_request".equals(intent) ? "RETURN" : "REFUND";
+            String orderNo = text(agentResponse.path("session_state").path("context_report"), "chosen_order_id", null);
+            if ("order_id".equals(agentResponse.path("clarification").path("clarification_field").asText())) orderNo = null;
+            session.setAfterSaleQuery(null);
+            if ("RETURN".equals(type) && isOtherReturnReason(userMessage)) {
+                return plainResponse(session, "质量问题等其他售后请联系人工核验，本次未准备无理由退货申请。", "RETURN_TYPE_REQUIRED");
+            }
+            if (orderNo != null) {
+                return prepareRefund(session, userId, orderNo, extractRefundReason(userMessage),
+                    "请核对申请，确认提交后等待后台审核。", type);
+            }
+            session.bumpDraftRevision();
+            session.setObjectWait(null);
+            session.setHandled(false);
+            session.setActionType(type);
+            session.setPendingAction("REFUND_ORDER_REQUIRED");
+            session.setRefundReason("RETURN".equals(type) ? "七天无理由退货" : extractRefundReason(userMessage));
+            session.setExpiresAt(LocalDateTime.now().plusMinutes(30));
+            return plainResponse(session, answer, "REFUND_ORDER_REQUIRED");
+        }
         if (isOtherReturnReason(userMessage) && ("received_return".equals(text(workflow, "workflow_type", null))
             || "return_request".equals(agentResponse.path("session_state").path("intent").asText()))) {
             clearPendingRefund(session);
@@ -514,6 +901,9 @@ public class CustomerServiceGatewayService {
         }
         if (Set.of("refund_request", "return_request").contains(agentResponse.path("session_state").path("intent").asText())
             && "order_id".equals(agentResponse.path("clarification").path("clarification_field").asText())) {
+            session.bumpDraftRevision();
+            session.setObjectWait(null);
+            session.setHandled(false);
             session.setActionType("return_request".equals(agentResponse.path("session_state").path("intent").asText()) ? "RETURN" : "REFUND");
             session.setPendingAction("REFUND_ORDER_REQUIRED");
             session.setRefundReason("RETURN".equals(session.getActionType()) ? "七天无理由退货" : extractRefundReason(userMessage));
@@ -533,6 +923,9 @@ public class CustomerServiceGatewayService {
     private void validateResumeSession(CustomerServiceSession session, CustomerServiceResumeRequest request) {
         if (session.isExpired(LocalDateTime.now())) {
             throw new CustomerServiceException(HttpStatus.CONFLICT, "CONFLICT", "本次确认已过期，请重新发起咨询");
+        }
+        if ("CANCELLED".equals(session.getPendingAction())) {
+            throw new CustomerServiceException(HttpStatus.CONFLICT, "CONFLICT", "本次申请已取消，旧卡不可用");
         }
         if (!StringUtils.hasText(session.getResumeToken()) || !session.getResumeToken().equals(request.getResumeToken())) {
             throw new CustomerServiceException(HttpStatus.FORBIDDEN, "FORBIDDEN", "恢复凭证不匹配");

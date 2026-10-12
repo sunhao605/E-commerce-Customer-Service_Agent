@@ -1,0 +1,40 @@
+{
+  "before": {
+    "pending": "SUBMITTED",
+    "handled": true,
+    "revision": 0,
+    "order": "ORD9801"
+  },
+  "response": {
+    "success": true,
+    "code": "OK",
+    "message": "success",
+    "data": {
+      "answer": "你希望咨询或办理换货，当前客服助手暂不能办理这类业务。 人工客服功能开发中，确认后仅前往说明页面，暂时无法接入真人客服。本次未新增售后申请。",
+      "sessionId": "submitted-synthetic",
+      "confirmRequired": true,
+      "pendingAction": "HUMAN_SUPPORT",
+      "confirmationTitle": "是否前往人工客服入口？",
+      "confirmationSummary": "人工客服功能开发中；进入说明页面不会转接真人或提交售后申请。",
+      "relatedOrderNo": "ORD9801",
+      "relatedAfterSaleNo": "EXISTING-SYNTHETIC",
+      "actions": [
+        {
+          "code": "OPEN_HUMAN_SUPPORT",
+          "label": "确认前往"
+        },
+        {
+          "code": "STAY_WITH_AGENT",
+          "label": "暂不前往"
+        }
+      ],
+      "fallback": false
+    }
+  },
+  "after": {
+    "pending": "SUBMITTED",
+    "handled": true,
+    "revision": 0,
+    "order": "ORD9801"
+  }
+}

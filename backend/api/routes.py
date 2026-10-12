@@ -8,6 +8,8 @@ from typing import Any
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 
+from agent.cancellation import judge_cancellation
+from agent.context import current_memory
 from agent.customer_service_agent import Lesson41Agent
 from agent.workflows.resume import resolve_trusted_reviewer
 from api.schemas import *
@@ -44,6 +46,14 @@ def health() -> dict[str, str]:
 def capabilities() -> dict[str, Any]:
     """返回当前课程能力清单。"""
     return load_agent_capabilities()
+
+
+@app.post("/cancellation/judge")
+def cancellation_judge(request: ChatRequest) -> dict[str, Any]:
+    """只判断能否取消当前未提交办理。不在这里改草稿。"""
+    result = judge_cancellation(request, current_memory(request.session_id, request.runtime_user_id).get("open_task"))
+    trace_store.add(request.session_id, "cancellation_intent_observed", result)
+    return result
 
 
 @app.post("/chat", response_model=ChatResponse)

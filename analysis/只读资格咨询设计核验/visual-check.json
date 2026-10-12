@@ -1,0 +1,6 @@
+{
+  "panels": 7,
+  "flowcharts": 2,
+  "horizontal_overflow": false,
+  "scope": "仅检查设计讲解页，不调用模型或业务接口"
+}
