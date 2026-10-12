@@ -1,0 +1,819 @@
+INFO:     Started server process [84233]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:55087 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55100 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55100 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55111 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55148 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55153 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55153 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55205 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55205 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55256 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55256 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55321 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55321 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55391 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55391 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55429 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55429 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55455 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55499 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55499 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55549 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55549 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55594 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55594 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55640 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55640 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55684 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55684 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55714 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55714 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55775 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55775 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55826 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55826 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55893 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55893 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55919 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55919 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55980 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55980 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56023 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56023 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56076 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56076 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56142 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56142 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56208 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56208 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56242 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56242 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56294 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56294 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56355 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56355 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56412 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56412 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56459 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56459 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56530 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56530 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56586 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56586 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56644 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56644 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56687 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56687 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56767 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56767 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56801 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56801 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56883 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56883 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56981 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56981 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57041 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57041 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57070 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57070 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57139 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57139 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57181 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57181 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57260 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57260 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57309 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57309 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57353 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57353 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57422 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57422 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57486 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57486 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57551 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57551 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57614 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57614 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57661 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57661 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57707 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57707 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57742 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57742 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57789 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57789 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57844 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57844 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57909 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57909 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57949 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57949 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58007 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58007 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58041 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58041 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58071 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58071 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58127 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58127 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58184 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58184 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58223 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58223 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58256 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58256 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58310 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58310 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58366 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58366 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58401 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58401 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58475 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58475 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58542 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58542 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58601 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58601 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58640 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58640 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58684 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58684 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58744 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58744 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58786 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58786 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58829 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58829 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58881 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58881 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58951 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58951 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58987 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58987 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59048 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59048 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59086 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59086 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59149 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59149 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59202 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59202 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59260 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59260 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59292 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59292 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59411 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59411 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59470 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59470 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59519 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59519 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59576 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59576 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59623 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59623 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59674 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59674 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59711 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59711 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59754 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59754 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59800 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59800 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59849 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59849 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59902 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59902 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59961 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59961 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60031 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60031 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60082 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60082 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60170 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60170 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60211 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60211 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60261 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60261 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60298 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60298 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60375 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60375 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60417 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60417 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60451 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60451 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60511 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60511 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60544 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60544 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60588 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60588 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60646 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60646 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60712 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60712 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60739 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60739 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60780 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60780 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60834 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60834 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60880 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60880 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60913 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60913 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60978 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60978 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61034 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61034 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61085 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61085 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61143 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61143 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61188 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61188 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61231 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61231 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61274 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61274 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61327 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61327 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61390 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61390 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61453 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61453 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61542 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61542 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61585 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61585 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61629 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61629 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61703 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61703 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61744 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61744 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61783 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61783 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61810 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61810 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61850 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61850 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61947 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61947 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62002 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62002 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62044 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62044 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62101 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62101 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62159 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62159 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62215 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62215 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62241 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62241 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62299 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62299 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62347 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62347 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62388 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62388 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62445 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62445 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62484 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62484 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62569 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62569 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62609 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62609 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62664 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62664 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62709 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62709 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62758 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62758 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62803 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62803 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62869 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62869 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62898 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62898 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63040 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63040 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63114 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63114 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63201 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63201 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63255 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63255 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63332 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63332 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63372 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63372 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63419 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63419 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63475 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63475 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63532 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63532 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63555 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63555 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63583 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63583 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63625 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63625 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63648 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63648 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63696 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63696 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63726 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63726 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63764 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63764 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63783 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63783 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63805 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63805 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63858 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63858 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63876 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63876 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63917 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63917 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63955 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63955 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:63986 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63986 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64025 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64025 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64068 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64068 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64112 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64112 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64135 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64135 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64178 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64178 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64203 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64203 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64238 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64238 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64263 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64263 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64307 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64307 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64352 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64352 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64372 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64372 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64439 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64439 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64479 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64479 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64520 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64520 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64551 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64551 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64623 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64623 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64654 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64654 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64696 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64696 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64736 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64736 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64769 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64769 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64811 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64811 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64920 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64920 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64960 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64960 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64984 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64984 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:65028 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65028 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:65074 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65074 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:65183 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65183 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:65216 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65216 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:65276 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65276 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:65315 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65315 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:65363 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65363 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:65401 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65401 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:65453 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65453 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:65468 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65468 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:65498 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65498 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:65516 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65516 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:49186 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49186 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:49219 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49219 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:49253 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49253 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:49342 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49342 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:49519 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49519 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:49569 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49569 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:49628 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49628 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:49668 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49668 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:49721 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49721 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:49733 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49759 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49759 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:49828 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49828 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:49872 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49872 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:49906 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49906 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:49948 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49948 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:50031 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50031 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:50103 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50103 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:50207 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50207 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:50269 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50269 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:50340 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50340 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:50364 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50364 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:50402 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50402 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:50439 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50439 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:50471 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50471 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:50524 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50524 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:50727 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50727 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:50850 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50850 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:50913 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50913 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:50942 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50942 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:51079 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51079 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:51138 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51138 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:51193 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51193 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:51241 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51241 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:51264 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51264 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:51304 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51304 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:51414 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51414 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:51479 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51479 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:51548 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51548 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:51604 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51604 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:51799 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51799 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:51836 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51836 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:51904 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51904 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:51991 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51991 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52114 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52114 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52202 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52202 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52271 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52271 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52391 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52391 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52434 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52434 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52485 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52485 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52526 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52526 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52594 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52594 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52641 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52641 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52688 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52688 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52758 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52758 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52782 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52782 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52797 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52830 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52830 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52858 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52858 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52921 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52921 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52977 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52977 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53024 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53024 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53040 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53040 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53079 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53079 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53118 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53118 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53174 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53174 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53226 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53226 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53338 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53338 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53401 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53401 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53478 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53478 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53582 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53582 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53729 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53729 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53783 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53783 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53859 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53859 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53904 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53904 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53979 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53979 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54026 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54026 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54078 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54078 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54126 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54126 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54216 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54216 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54254 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54254 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54389 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54389 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54445 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54445 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54503 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54503 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54548 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54548 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54584 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54584 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54641 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54641 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54697 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54697 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54757 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54757 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54829 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54829 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54880 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54880 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54927 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54927 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54978 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54978 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55082 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55082 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55156 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55156 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55211 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55211 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55243 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55243 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55318 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55318 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55371 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55371 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55418 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55418 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55451 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55451 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55520 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55520 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55599 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55599 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55743 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55743 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55812 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55812 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55848 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55848 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55906 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55906 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55978 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55978 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56041 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56041 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56193 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56193 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56356 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56356 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56424 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56424 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56542 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56542 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56590 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56590 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56638 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56638 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56722 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56722 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56778 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56778 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56822 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56822 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56890 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56890 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:56947 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56947 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57189 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57189 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57269 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57269 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57472 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57472 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57537 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57537 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57604 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57604 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57656 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57656 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57744 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57744 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57776 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57776 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57819 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57819 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57864 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57864 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57925 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57925 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57965 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57965 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58012 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58012 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58049 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58049 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58097 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58097 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58132 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58132 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58180 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58180 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58212 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58212 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58270 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58270 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58326 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58326 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58384 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58384 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58424 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58424 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58485 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58485 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58535 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58535 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58573 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58573 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58626 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58626 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58690 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58690 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58716 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58716 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58777 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58777 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58829 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58829 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58909 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58909 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58954 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58954 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58989 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58989 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59026 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59026 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59058 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59058 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59099 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59099 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59170 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59170 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59216 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59216 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59301 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59301 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59368 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59368 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59421 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59421 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59513 - "GET /capabilities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59513 - "GET /capabilities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59604 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59604 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59694 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59694 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59799 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59799 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59838 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59838 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59896 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59896 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60002 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60002 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60106 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60155 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60155 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60219 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60219 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60256 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60256 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60370 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60370 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60424 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60424 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60478 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60478 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60562 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60562 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60694 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60694 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60769 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60769 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60820 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60820 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60877 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60877 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60986 - "GET /capabilities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60986 - "GET /capabilities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60986 - "OPTIONS /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60988 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60988 - "GET /sessions/session-U1001-wspnfgq6/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61033 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61033 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61113 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61113 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61157 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61157 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61255 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61255 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61299 - "GET /capabilities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61299 - "GET /capabilities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61299 - "OPTIONS /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61300 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61300 - "GET /sessions/session-U1001-optz8098/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61378 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61378 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61428 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61428 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61532 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61532 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61568 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61568 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61657 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61657 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61710 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61710 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61799 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61799 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61872 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61872 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61943 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61943 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62033 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62033 - "GET /v1/models HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:62109 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62109 - "GET /v1/models HTTP/1.1" 404 Not Found

@@ -1,0 +1,1295 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="blueprint" data-mode="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="Answer me with HTML 0.4.2">
+<title>当前 Agent 如何识别意图</title>
+<style>
+html[data-theme="blueprint"], html[data-theme="blueprint"][data-mode="light"] {
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "JetBrains Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  --radius: 0px;
+  --shadow: none;
+  --bw: 1.5px;
+  --head-font: var(--font-sans);
+  --bg: #f6f6f3;
+  --paper: #ffffff;
+  --ink: #16181d;
+  --ink-2: #4b5260;
+  --ink-3: #8b929e;
+  --line: #1d2026;
+  --line-2: #d6dae1;
+  --fill: #f3f5f8;
+  --accent: #1d5fbf;
+  --accent-bg: #e4ecf8;
+  --ok: #1d5fbf;
+  --ok-bg: #e4ecf8;
+  --err: #c62828;
+  --err-bg: #fbeaea;
+  --warn: #a8620a;
+  --warn-bg: #fdf3e2;
+  --head-bg: #16181d;
+  --head-fg: #ffffff;
+}
+html[data-theme="blueprint"][data-mode="dark"] {
+  --bg: #081322;
+  --paper: #0d1c31;
+  --ink: #e6edf7;
+  --ink-2: #a9b8cc;
+  --ink-3: #6b7f99;
+  --line: #c9d6e8;
+  --line-2: #23385a;
+  --fill: #12253f;
+  --accent: #6ea8ff;
+  --accent-bg: #16305a;
+  --ok: #6ea8ff;
+  --ok-bg: #16305a;
+  --err: #ff7070;
+  --err-bg: #3b1620;
+  --warn: #f0b14a;
+  --warn-bg: #3a2a10;
+  --head-bg: #e6edf7;
+  --head-fg: #081322;
+}
+@media (prefers-color-scheme: dark) {
+html[data-theme="blueprint"][data-mode="auto"] {
+  --bg: #081322;
+  --paper: #0d1c31;
+  --ink: #e6edf7;
+  --ink-2: #a9b8cc;
+  --ink-3: #6b7f99;
+  --line: #c9d6e8;
+  --line-2: #23385a;
+  --fill: #12253f;
+  --accent: #6ea8ff;
+  --accent-bg: #16305a;
+  --ok: #6ea8ff;
+  --ok-bg: #16305a;
+  --err: #ff7070;
+  --err-bg: #3b1620;
+  --warn: #f0b14a;
+  --warn-bg: #3a2a10;
+  --head-bg: #e6edf7;
+  --head-fg: #081322;
+}
+}
+
+html[data-theme="shadcn"], html[data-theme="shadcn"][data-mode="light"] {
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "JetBrains Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  --radius: 8px;
+  --shadow: 0 1px 2px 0 rgba(0,0,0,0.05);
+  --bw: 1px;
+  --head-font: var(--font-sans);
+  --bg: #fafafa;
+  --paper: #ffffff;
+  --ink: #09090b;
+  --ink-2: #71717a;
+  --ink-3: #a1a1aa;
+  --line: #e4e4e7;
+  --line-2: #f0f0f2;
+  --fill: #f4f4f5;
+  --accent: #2563eb;
+  --accent-bg: #eff6ff;
+  --ok: #16a34a;
+  --ok-bg: #f0fdf4;
+  --err: #dc2626;
+  --err-bg: #fef2f2;
+  --warn: #d97706;
+  --warn-bg: #fffbeb;
+  --head-bg: #18181b;
+  --head-fg: #fafafa;
+}
+html[data-theme="shadcn"][data-mode="dark"] {
+  --bg: #09090b;
+  --paper: #121215;
+  --ink: #fafafa;
+  --ink-2: #a1a1aa;
+  --ink-3: #71717a;
+  --line: #27272a;
+  --line-2: #1c1c1f;
+  --fill: #18181b;
+  --accent: #60a5fa;
+  --accent-bg: #172554;
+  --ok: #4ade80;
+  --ok-bg: #052e16;
+  --err: #f87171;
+  --err-bg: #450a0a;
+  --warn: #fbbf24;
+  --warn-bg: #451a03;
+  --head-bg: #fafafa;
+  --head-fg: #18181b;
+}
+@media (prefers-color-scheme: dark) {
+html[data-theme="shadcn"][data-mode="auto"] {
+  --bg: #09090b;
+  --paper: #121215;
+  --ink: #fafafa;
+  --ink-2: #a1a1aa;
+  --ink-3: #71717a;
+  --line: #27272a;
+  --line-2: #1c1c1f;
+  --fill: #18181b;
+  --accent: #60a5fa;
+  --accent-bg: #172554;
+  --ok: #4ade80;
+  --ok-bg: #052e16;
+  --err: #f87171;
+  --err-bg: #450a0a;
+  --warn: #fbbf24;
+  --warn-bg: #451a03;
+  --head-bg: #fafafa;
+  --head-fg: #18181b;
+}
+}
+
+/* Answer me with HTML base — 只引用主题变量，禁止写死颜色（主题 token 见 themes/index.js） */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: var(--font-sans); font-size: 14px; line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+code, pre, kbd { font-family: var(--font-mono); }
+
+/* ── 工具栏 ─────────────────────────────── */
+.am-toolbar {
+  position: fixed; top: 12px; right: 12px; z-index: 10; display: flex; gap: 6px;
+}
+.am-btn {
+  font: 12px/1 var(--font-sans); color: var(--ink); background: var(--paper);
+  border: 1px solid var(--line-2); border-radius: var(--radius); padding: 7px 10px; cursor: pointer;
+}
+.am-btn:hover { border-color: var(--ink-3); }
+.am-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* ── 页头 ───────────────────────────────── */
+.am-head { margin: 0 0 20px; padding-right: 260px; }
+.am-head h1 { margin: 0; font-size: 24px; line-height: 1.25; letter-spacing: -0.01em; }
+.am-sub { margin: 4px 0 0; color: var(--ink-2); }
+.am-head-meta { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 10px; font-size: 12px; color: var(--ink-2); }
+.am-head-meta b { font-family: var(--font-mono); font-weight: 400; color: var(--ink-3); margin-right: 6px; }
+.am-intro { margin-top: 12px; max-width: 80ch; }
+
+/* ── sheet 图纸板 ────────────────────────── */
+.am-sheet { max-width: 1680px; margin: 0 auto; padding: 32px 28px 40px; }
+.am-frame { position: relative; }
+.am-grid {
+  display: grid; grid-template-columns: repeat(var(--cols, 3), minmax(0, 1fr));
+  gap: 20px; align-items: start;
+}
+.am-ruler { display: none; }
+html[data-theme="blueprint"] .am-frame { border: 1px solid var(--line); padding: 30px; }
+html[data-theme="blueprint"] .am-frame::before {
+  content: ""; position: absolute; inset: 18px; border: 1px solid var(--line); pointer-events: none;
+}
+html[data-theme="blueprint"] .am-ruler {
+  display: flex; position: absolute; font: 10px/1 var(--font-mono); color: var(--ink-3);
+}
+.am-ruler span { flex: 1; display: flex; align-items: center; justify-content: center; }
+.am-ruler--top, .am-ruler--bottom { left: 18px; right: 18px; height: 18px; }
+.am-ruler--top { top: 0; }
+.am-ruler--bottom { bottom: 0; }
+.am-ruler--left, .am-ruler--right { top: 18px; bottom: 18px; width: 18px; flex-direction: column; }
+.am-ruler--left { left: 0; }
+.am-ruler--right { right: 0; }
+.am-ruler--top span + span, .am-ruler--bottom span + span { border-left: 1px solid var(--line); }
+.am-ruler--left span + span, .am-ruler--right span + span { border-top: 1px solid var(--line); }
+
+/* ── 面板 ───────────────────────────────── */
+.am-panel {
+  background: var(--paper); border: var(--bw) solid var(--line); border-radius: var(--radius);
+  box-shadow: var(--shadow); min-width: 0; overflow: hidden;
+}
+.am-panel-head {
+  display: flex; align-items: stretch; gap: 0; border-bottom: var(--bw) solid var(--line); min-height: 34px;
+}
+.am-panel-id {
+  display: flex; align-items: center; justify-content: center; min-width: 34px; padding: 0 8px;
+  background: var(--head-bg); color: var(--head-fg); font-weight: 600; font-size: 14px;
+}
+html[data-theme="shadcn"] .am-panel-id { border-radius: 6px; min-width: 24px; height: 24px; margin: 9px 0 9px 14px; font-size: 12px; }
+html[data-theme="shadcn"] .am-panel-head { border-bottom-width: 1px; }
+.am-panel-head h2 { margin: 0; padding: 7px 12px; font-size: 15px; font-weight: 600; flex: 1; display: flex; align-items: center; }
+.am-panel-meta { align-self: center; padding: 0 12px; font: 11px/1.3 var(--font-mono); color: var(--ink-2); text-align: right; }
+.am-panel-body { padding: 14px 16px 16px; }
+.am-panel-body > * + * { margin-top: 12px; }
+
+/* ── Markdown 正文 ───────────────────────── */
+.am-md > :first-child { margin-top: 0; }
+.am-md > :last-child { margin-bottom: 0; }
+.am-md p { margin: 0 0 8px; }
+.am-md ul, .am-md ol { margin: 0 0 8px; padding-left: 20px; }
+.am-md li + li { margin-top: 3px; }
+.am-md h3, .am-md h4 { margin: 14px 0 6px; font-size: 13px; }
+.am-md a { color: var(--accent); }
+.am-md blockquote { margin: 0 0 8px; padding: 2px 12px; border-left: 3px solid var(--line-2); color: var(--ink-2); }
+.am-md :not(pre) > code { font-size: 0.9em; background: var(--fill); padding: 1px 5px; border-radius: 4px; }
+.am-md hr { border: 0; border-top: 1px solid var(--line-2); margin: 12px 0; }
+.am-md table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.am-md th {
+  text-align: left; font: 11px/1.3 var(--font-mono); color: var(--ink-2); font-weight: 400;
+  padding: 6px 10px; border-bottom: 1px solid var(--line-2);
+}
+.am-md td { padding: 7px 10px; border-bottom: 1px solid var(--line-2); vertical-align: top; }
+.am-md tbody tr:nth-child(even) td { background: var(--fill); }
+.am-table-wrap { overflow-x: auto; }
+.am-code {
+  margin: 0; padding: 12px 14px; background: var(--fill); border: 1px solid var(--line-2);
+  border-radius: var(--radius); overflow-x: auto; font-size: 12.5px; line-height: 1.5;
+}
+
+/* ── 状态徽章 ok / no / warn ──────────────── */
+.am-status { white-space: nowrap; font-weight: 500; }
+.am-status--ok { color: var(--ok); }
+.am-status--no { color: var(--err); }
+.am-status--warn { color: var(--warn); }
+.am-status-icon { display: inline-block; width: 1.1em; font-weight: 700; }
+
+/* ── callout ─────────────────────────────── */
+.am-callout {
+  border: 1px solid var(--line-2); border-left: 3px solid var(--accent); background: var(--accent-bg);
+  padding: 10px 14px; border-radius: var(--radius);
+}
+.am-callout--ok { border-left-color: var(--ok); background: var(--ok-bg); }
+.am-callout--warn { border-left-color: var(--warn); background: var(--warn-bg); }
+.am-callout--err { border-left-color: var(--err); background: var(--err-bg); }
+.am-callout-title { font-weight: 600; margin-bottom: 4px; }
+
+/* ── kv 标题栏格 ─────────────────────────── */
+.am-kv {
+  display: grid; grid-template-columns: repeat(var(--kv-cols, 2), minmax(0, 1fr)); margin: 0;
+  border-top: var(--bw) solid var(--line); border-left: var(--bw) solid var(--line);
+}
+.am-kv-cell { border-right: var(--bw) solid var(--line); border-bottom: var(--bw) solid var(--line); padding: 6px 10px 8px; min-width: 0; }
+.am-kv-cell--wide { grid-column: 1 / -1; }
+.am-kv dt { font: 11px/1.4 var(--font-mono); color: var(--ink-2); }
+.am-kv dd { margin: 2px 0 0; font-size: 14px; font-weight: 500; overflow-wrap: anywhere; }
+.am-kv-cell--wide dd { font-size: 17px; font-weight: 600; }
+html[data-theme="shadcn"] .am-kv { border-color: var(--line); border-radius: var(--radius); overflow: hidden; }
+
+/* ── timeline ────────────────────────────── */
+.am-timeline { list-style: none; margin: 0; padding: 0; }
+.am-timeline--h { display: grid; grid-template-columns: repeat(var(--n, 1), minmax(0, 1fr)); padding-top: 4px; }
+.am-timeline--h li { position: relative; text-align: center; padding: 0 6px; }
+.am-timeline--h li::before {
+  content: ""; position: absolute; top: 31px; left: 0; right: 0; border-top: var(--bw) solid var(--line);
+}
+.am-timeline--h li:first-child::before { left: 50%; }
+.am-timeline--h li:last-child::before { right: 50%; }
+.am-tl-when { display: block; font-size: 15px; font-weight: 500; height: 24px; }
+.am-tl-dot {
+  position: relative; display: block; width: 11px; height: 11px; margin: 2px auto 8px;
+  border: var(--bw) solid var(--line); border-radius: 50%; background: var(--paper);
+}
+.am-tl-item--hi .am-tl-dot { background: var(--accent); border-color: var(--accent); }
+.am-tl-title { display: block; font-size: 12.5px; font-weight: 500; }
+.am-tl-text { display: block; font-size: 12px; color: var(--ink-2); line-height: 1.45; }
+.am-timeline--v li { position: relative; padding: 0 0 14px 22px; }
+.am-timeline--v li::before { content: ""; position: absolute; left: 5px; top: 6px; bottom: -6px; border-left: var(--bw) solid var(--line-2); }
+.am-timeline--v li:last-child::before { display: none; }
+.am-timeline--v .am-tl-dot { position: absolute; left: 0; top: 4px; margin: 0; }
+.am-timeline--v .am-tl-when { display: inline; height: auto; font: 12px var(--font-mono); color: var(--ink-2); margin-right: 8px; }
+.am-timeline--v .am-tl-title { display: inline; font-size: 14px; }
+.am-timeline--v .am-tl-text { margin-top: 2px; }
+
+/* ── annot 句子标注 ──────────────────────── */
+.am-annot + .am-annot { border-top: 1px solid var(--line-2); padding-top: 12px; }
+.am-annot-head { display: flex; justify-content: space-between; gap: 12px; font-size: 13px; font-weight: 600; margin-bottom: 8px; }
+.am-annot-meta { font: 11px var(--font-mono); font-weight: 400; color: var(--ink-2); }
+.am-annot-scroll { overflow-x: auto; }
+.am-annot-line {
+  position: relative; display: inline-block; white-space: pre; font: 14px/1.6 var(--font-mono);
+  padding-bottom: calc(var(--rows, 0) * 17px + 14px);
+}
+.am-annot-line--wrap { display: block; white-space: normal; padding-bottom: 10px; }
+.am-annot-line--wrap .am-seg { white-space: nowrap; }
+.am-seg { position: relative; }
+.am-seg::after {
+  content: ""; position: absolute; left: 1px; right: 1px; top: calc(100% + 1px); height: 5px;
+  border: 1px solid var(--accent); border-top: 0;
+}
+.am-seg-n {
+  position: absolute; left: 0; top: calc(100% + 8px + var(--row, 0) * 17px);
+  font: 11px/16px var(--font-sans); color: var(--accent); white-space: nowrap;
+}
+.am-seg--err { color: var(--err); }
+.am-seg--err::after { border-color: var(--err); }
+.am-seg--err .am-seg-n { color: var(--err); }
+.am-annot-caption { font-size: 12px; color: var(--ink-2); }
+
+/* ── limits 限值条 ───────────────────────── */
+.am-lim + .am-lim { margin-top: 14px; }
+.am-lim-head { display: flex; justify-content: space-between; gap: 12px; font-size: 13px; margin-bottom: 4px; }
+.am-lim-val { font: 12px var(--font-mono); color: var(--accent); white-space: nowrap; }
+.am-lim-track { position: relative; height: 12px; border: 1px solid var(--line-2); background: var(--fill); border-radius: calc(var(--radius) / 2); }
+.am-lim-fill { position: absolute; left: 0; top: 0; bottom: 0; background: var(--accent-bg); border-right: 1px solid var(--accent); }
+.am-lim-mark { position: absolute; top: -4px; bottom: -4px; border-left: 2px solid var(--accent); }
+.am-lim.is-over .am-lim-fill { background: var(--err-bg); border-right-color: var(--err); }
+.am-lim.is-over .am-lim-val { color: var(--err); }
+.am-lim-ticks { position: relative; height: 16px; font: 10px/16px var(--font-mono); color: var(--ink-3); }
+.am-lim-ticks span { position: absolute; transform: translateX(-50%); }
+.am-lim-ticks span:first-child { transform: none; }
+.am-lim-note { font-size: 11px; color: var(--ink-2); margin-left: 6px; }
+
+/* ── tree 结构树 ─────────────────────────── */
+.am-tree { font-size: 13px; }
+.am-tree-root { display: flex; justify-content: center; position: relative; padding-bottom: 18px; }
+.am-tree-root::after { content: ""; position: absolute; bottom: 0; left: 50%; height: 18px; border-left: var(--bw) solid var(--line); }
+.am-tree-root--solo { padding-bottom: 12px; }
+.am-tree-root--solo::after { display: none; }
+.am-tree-box {
+  border: var(--bw) solid var(--line); background: var(--paper); padding: 6px 14px; text-align: center;
+  border-radius: var(--radius); font-weight: 600;
+}
+.am-tree-box small { display: block; font-weight: 400; color: var(--ink-2); font-size: 12px; }
+.am-tree-box--root { background: var(--accent-bg); font-size: 15px; padding: 8px 28px; }
+.am-tree-cols { display: grid; grid-template-columns: repeat(var(--n, 1), minmax(0, 1fr)); }
+.am-tree-col { position: relative; padding: 18px 8px 0; min-width: 0; }
+.am-tree-col::before { content: ""; position: absolute; top: 0; left: 0; right: 0; border-top: var(--bw) solid var(--line); }
+.am-tree-col:first-child::before { left: 50%; }
+.am-tree-col:last-child::before { right: 50%; }
+.am-tree-col::after { content: ""; position: absolute; top: 0; left: 50%; height: 18px; border-left: var(--bw) solid var(--line); }
+.am-tree-list, .am-tree-list ul { list-style: none; margin: 0; padding: 0; }
+.am-tree-col > .am-tree-list { margin: 8px 0 0 14px; }
+.am-tree-list ul { margin-left: 16px; }
+.am-tree-list li { position: relative; padding: 3px 0 3px 18px; }
+.am-tree-list li::before { content: ""; position: absolute; left: 0; top: 0.95em; width: 12px; border-top: 1px solid var(--ink-3); }
+.am-tree-list li::after { content: ""; position: absolute; left: 0; top: 0; bottom: 0; border-left: 1px solid var(--ink-3); }
+.am-tree-list li:last-child::after { bottom: auto; height: 0.95em; }
+.am-tree-tag { font: 11px var(--font-mono); color: var(--ink-3); margin-right: 4px; }
+.am-tree code { font: 12px var(--font-mono); }
+.am-tree-sub { display: block; font-size: 11.5px; color: var(--ink-2); }
+.am-tree-hi > .am-tree-label { color: var(--accent); font-weight: 600; }
+
+/* ── 图（flow / sequence）───────────────── */
+.am-diagram { margin: 0; overflow-x: auto; text-align: center; }
+.am-diagram svg { max-width: 100%; height: auto; font-family: var(--font-sans); }
+.am-diagram text { fill: var(--ink); font-size: 13px; }
+.am-node-shape { fill: var(--paper); stroke: var(--line); stroke-width: var(--bw); }
+.am-node--hi .am-node-shape { fill: var(--accent-bg); stroke: var(--accent); }
+.am-node--hi text { fill: var(--accent); font-weight: 600; }
+.am-edge { fill: none; stroke: var(--ink-2); stroke-width: 1.3; }
+.am-edge--dashed { stroke-dasharray: 5 4; }
+.am-arrow { fill: var(--ink-2); }
+.am-edge-label rect { fill: var(--paper); }
+.am-diagram .am-edge-label text { fill: var(--accent); font-size: 11.5px; }
+.am-cluster { fill: var(--fill); stroke: var(--line-2); stroke-width: 1; stroke-dasharray: 4 3; }
+.am-diagram .am-cluster-label { fill: var(--ink-2); font: 11px var(--font-mono); }
+.am-lifeline { stroke: var(--ink-3); stroke-width: 1; stroke-dasharray: 4 4; }
+.am-actor { fill: var(--paper); stroke: var(--line); stroke-width: var(--bw); }
+.am-note { fill: var(--warn-bg); stroke: var(--warn); stroke-width: 1; }
+.am-diagram .am-step { fill: var(--ink-3); font: 10px var(--font-mono); }
+
+/* ── doc 线性讲解 ────────────────────────── */
+.am-doc { max-width: 1120px; margin: 0 auto; padding: 40px 28px 64px; }
+.am-doc-layout { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 32px; align-items: start; }
+.am-doc-layout--notoc { grid-template-columns: minmax(0, 1fr); max-width: 860px; }
+.am-toc { position: sticky; top: 24px; font-size: 13px; }
+.am-toc a { display: block; color: var(--ink-2); text-decoration: none; padding: 4px 0 4px 10px; border-left: 2px solid var(--line-2); }
+.am-toc a:hover { color: var(--ink); border-left-color: var(--accent); }
+.am-doc-body > .am-panel + .am-panel { margin-top: 20px; }
+
+/* ── 响应式与打印 ─────────────────────────── */
+@media (max-width: 1100px) {
+  .am-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .am-grid > .am-panel { grid-column: auto !important; }
+  .am-grid > .am-panel.am-span-wide { grid-column: 1 / -1 !important; }
+}
+@media (max-width: 760px) {
+  .am-sheet, .am-doc { padding: 56px 12px 24px; }
+  .am-head { padding-right: 0; }
+  .am-grid { grid-template-columns: minmax(0, 1fr); }
+  .am-grid > .am-panel.am-span-wide { grid-column: auto !important; }
+  html[data-theme="blueprint"] .am-frame { padding: 0; border: 0; }
+  html[data-theme="blueprint"] .am-frame::before, html[data-theme="blueprint"] .am-ruler { display: none; }
+  .am-doc-layout { grid-template-columns: minmax(0, 1fr); }
+  .am-toc { position: static; }
+  .am-timeline--h { grid-template-columns: minmax(0, 1fr); }
+  .am-tree-cols { grid-template-columns: minmax(0, 1fr); }
+}
+.am-colophon { text-align: center; padding: 0 0 28px; font: 11px var(--font-mono); color: var(--ink-3); }
+
+@media print {
+  .am-toolbar { display: none; }
+  body { background: var(--paper); }
+  .am-panel { break-inside: avoid; box-shadow: none; }
+}
+.am-panel--bare { border: 0; background: transparent; box-shadow: none; }
+.am-panel--bare > .am-panel-body { padding: 0; }
+.am-panel--bare .am-kv { background: var(--paper); }
+
+</style>
+</head>
+<body>
+<div class="am-toolbar">
+<button class="am-btn" type="button" data-am="theme" data-labels="{&quot;blueprint&quot;:&quot;主题：图纸&quot;,&quot;shadcn&quot;:&quot;主题：卡片&quot;}">主题：图纸</button>
+<button class="am-btn" type="button" data-am="mode" data-labels="{&quot;auto&quot;:&quot;明暗：跟随系统&quot;,&quot;light&quot;:&quot;明暗：亮&quot;,&quot;dark&quot;:&quot;明暗：暗&quot;}">明暗：亮</button>
+<button class="am-btn" type="button" data-am="copy" data-done="已复制 ✓">复制源稿</button>
+</div>
+<main class="am-doc">
+<header class="am-head"><h1>当前 Agent 如何识别意图</h1><p class="am-sub">荒野户外服务助手 · 从一句话到受控业务路径</p><div class="am-head-meta"><span><b>source</b>本地源码核验 · 2026-10-09</span></div><div class="am-intro am-md"><div class="am-md"><p>当前实现采用“大模型分类＋关键词规则兜底＋代码约束路由”。模型选择一个意图标签，代码决定接下来能走哪条业务路径。</p>
+</div></div></header>
+<div class="am-doc-layout">
+<nav class="am-toc" aria-label="目录"><a href="#panel-A">A · 先分清三个问题</a><a href="#panel-B">B · 一条消息实际经过什么</a><a href="#panel-C">C · 大模型到底看什么、输出什么</a><a href="#panel-D">D · 关键词规则如何判断优先级</a><a href="#panel-E">E · 识别以后，各意图进入哪条路径</a><a href="#panel-F">F · 多轮对话与页面上下文在哪里生效</a><a href="#panel-G">G · 用具体问题看懂当前边界</a><a href="#panel-H">H · 如何检查结果，以及最值得改什么</a></nav><div class="am-doc-body">
+<section class="am-panel" id="panel-A">
+<header class="am-panel-head"><span class="am-panel-id">A</span><h2>先分清三个问题</h2></header>
+<div class="am-panel-body"><div class="am-callout am-callout--info" role="note"><div class="am-callout-title">核心判断</div><div class="am-callout-body am-md"><p>意图识别回答“用户想做什么”。识别成退款申请，只表示进入资格核验路径。商城仍需客户确认、管理员独立处理。</p>
+</div></div>
+<div class="am-md"><div class="am-table-wrap"><table>
+<thead>
+<tr>
+<th>问题</th>
+<th>本项目怎样处理</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>用户想做什么？</td>
+<td>意图识别：模型与规则共同决定</td>
+<td>查物流、查退款进度、申请退款</td>
+</tr>
+<tr>
+<td>要处理哪个对象？</td>
+<td>参数抽取与上下文补全</td>
+<td>提取订单号，或采用页面订单</td>
+</tr>
+<tr>
+<td>可以做哪些动作？</td>
+<td>代码生成 RoutePlan，限制工具与流程</td>
+<td>读订单、读政策、核验售后资格</td>
+</tr>
+</tbody></table></div>
+<p>可以把它理解为客服分诊。模型提出分诊结果，代码安排业务路径。</p>
+</div></div>
+</section>
+<section class="am-panel" id="panel-B">
+<header class="am-panel-head"><span class="am-panel-id">B</span><h2>一条消息实际经过什么</h2></header>
+<div class="am-panel-body"><div class="am-callout am-callout--info" role="note"><div class="am-callout-title">先记住结果选择规则</div><div class="am-callout-body am-md"><p>先尝试采用有效模型结果。五类保护规则与模型结果冲突时，改用规则。模型不可用或输出无效时，也用规则。</p>
+</div></div>
+<div class="am-md"><h3>跟着一句具体请求走</h3>
+<p>用户输入：<strong>“查 ORD1234 的物流，同时帮我申请退款。”</strong></p>
+<p>ORD1234 是讲解用编号。本例不提供页面订单，且会话没有历史记忆。为展示冲突处理，我们把模型输出设为 order_query。</p>
+<p>模型输出是人为设定的。下面的规则、校验、覆盖与计划结果来自现有函数的离线执行。</p>
+</div>
+<figure class="am-diagram am-flow"><svg viewBox="0 0 1006 63" width="1006" height="63" role="img" aria-label="流程图：这句请求、规则备用、模型结果、覆盖结果、执行计划" xmlns="http://www.w3.org/2000/svg"><defs><marker id="am1-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="am-arrow" d="M0,0 L10,5 L0,10 z"/></marker></defs><g></g><g><g data-step="0"><path class="am-edge" d="M106,31.5 L140.3,31.5 Q174.6,31.5 208.8,31.5 L243.1,31.5" marker-end="url(#am1-arrow)"/><g class="am-edge-label"><rect x="130" y="22.5" width="89.1" height="18" rx="3"/><text x="174.6" y="31.5" text-anchor="middle" dominant-baseline="central">refund_request</text></g></g><g data-step="1"><path class="am-edge" d="M323.1,31.5 L359.9,31.5 Q396.6,31.5 433.4,31.5 L470.1,31.5" marker-end="url(#am1-arrow)"/><g class="am-edge-label"><rect x="347.1" y="22.5" width="99" height="18" rx="3"/><text x="396.6" y="31.5" text-anchor="middle" dominant-baseline="central">示例 order_query</text></g></g><g data-step="2"><path class="am-edge" d="M550.1,31.5 L584.4,31.5 Q618.7,31.5 653,31.5 L687.3,31.5" marker-end="url(#am1-arrow)"/><g class="am-edge-label"><rect x="574.1" y="22.5" width="89.1" height="18" rx="3"/><text x="618.7" y="31.5" text-anchor="middle" dominant-baseline="central">refund_request</text></g></g><g data-step="3"><path class="am-edge" d="M767.3,31.5 L803.4,31.5 Q839.5,31.5 875.6,31.5 L911.7,31.5" marker-end="url(#am1-arrow)"/><g class="am-edge-label"><rect x="791.3" y="22.5" width="96.5" height="18" rx="3"/><text x="839.5" y="31.5" text-anchor="middle" dominant-baseline="central">get_order_detail</text></g></g></g><g><g class="am-node am-node--round" data-key="这句请求" data-step="0"><rect class="am-node-shape" x="14" y="14" width="92" height="35" rx="17.5"/><text x="60" y="31.5" text-anchor="middle" dominant-baseline="central">这句请求</text></g><g class="am-node am-node--rect" data-key="规则备用" data-step="0"><rect class="am-node-shape" x="243.1" y="14" width="80" height="35" rx="3"/><text x="283.1" y="31.5" text-anchor="middle" dominant-baseline="central">规则备用</text></g><g class="am-node am-node--rect" data-key="模型结果" data-step="1"><rect class="am-node-shape" x="470.1" y="14" width="80" height="35" rx="3"/><text x="510.1" y="31.5" text-anchor="middle" dominant-baseline="central">模型结果</text></g><g class="am-node am-node--rect" data-key="覆盖结果" data-step="2"><rect class="am-node-shape" x="687.3" y="14" width="80" height="35" rx="3"/><text x="727.3" y="31.5" text-anchor="middle" dominant-baseline="central">覆盖结果</text></g><g class="am-node am-node--rect" data-key="执行计划" data-step="3"><rect class="am-node-shape" x="911.7" y="14" width="80" height="35" rx="3"/><text x="951.7" y="31.5" text-anchor="middle" dominant-baseline="central">执行计划</text></g></g></svg></figure>
+<div class="am-md"><h3>每个环节到底输出什么</h3>
+<div class="am-table-wrap"><table>
+<thead>
+<tr>
+<th>环节</th>
+<th>输入</th>
+<th>输出的关键字段</th>
+<th>为什么得到这个结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1. 关键词规则分类</td>
+<td>用户这句话</td>
+<td><code>fallback_intent = &quot;refund_request&quot;</code></td>
+<td>“退款”先于“订单、物流”命中</td>
+</tr>
+<tr>
+<td>2. 大模型分类</td>
+<td>三段 Prompt＋用户这句话</td>
+<td><code>{&quot;intent&quot;:&quot;order_query&quot;}</code></td>
+<td>这是人为设定的模型返回，用来展示冲突</td>
+</tr>
+<tr>
+<td>3. 模型客户端校验</td>
+<td>上一步的 JSON 文本</td>
+<td><code>intent=&quot;order_query&quot;</code>；<code>used_model=true</code>；<code>fallback_reason=null</code></td>
+<td>JSON 可解析，order_query 在允许清单中</td>
+</tr>
+<tr>
+<td>4. 强制覆盖检查</td>
+<td>规则为退款；模型为物流</td>
+<td><code>intent=&quot;refund_request&quot;</code>；<code>used_model=true</code>；<code>fallback_reason=&quot;rule_guard_refund_request&quot;</code></td>
+<td>退款属于五类保护规则，因此覆盖模型</td>
+</tr>
+<tr>
+<td>5. 订单抽取与上下文选择</td>
+<td>用户文字；无页面订单与历史订单</td>
+<td><code>explicit_order_id=&quot;ORD1234&quot;</code>；<code>order_id=&quot;ORD1234&quot;</code></td>
+<td>正则抽取到订单号，采用本轮明确对象</td>
+</tr>
+<tr>
+<td>6. 生成 RoutePlan</td>
+<td>覆盖后的退款意图＋订单号</td>
+<td>调用参数 <code>model_used=false</code>；输出见下方 JSON</td>
+<td>本轮虽然调用过模型，最终意图采用了规则</td>
+</tr>
+</tbody></table></div>
+<p>第 4 步没有再调用模型，也没有比较两个置信分数。代码发现冲突后，直接采用保护规则。</p>
+<p>第 6 步输出以下 RoutePlan 关键字段：</p>
+</div>
+<pre class="am-code"><code data-lang="json">{
+  &quot;intent&quot;: &quot;refund_request&quot;,
+  &quot;needs_rag&quot;: true,
+  &quot;needs_business_tools&quot;: true,
+  &quot;required_tools&quot;: [&quot;get_order_detail&quot;],
+  &quot;knowledge_domains&quot;: [&quot;after_sale_policy&quot;],
+  &quot;entity_refs&quot;: [&quot;ORD1234&quot;],
+  &quot;risk_level&quot;: &quot;high&quot;,
+  &quot;requires_workflow&quot;: true,
+  &quot;confidence&quot;: 0.75,
+  &quot;source&quot;: &quot;deterministic_fallback&quot;,
+  &quot;fallback_policy&quot;: &quot;safe_deterministic_path&quot;
+}</code></pre>
+<div class="am-md"><p>接下来先读 ORD1234 的订单事实，再核验退款资格。不会同时执行一条独立物流任务，也不会根据这个标签直接退款。</p>
+<p>抽取到订单号，不代表订单存在或属于用户。这些业务事实仍需工具核验。</p>
+</div>
+<div class="am-callout am-callout--info" role="note"><div class="am-callout-title">为什么 used_model=true，source 却是规则？</div><div class="am-callout-body am-md"><p>used_model=true 表示客户端取得过有效模型结果。source 表示 RoutePlan 最终采用哪种路由。本例模型结果被覆盖，所以 source 为 deterministic_fallback。0.75 是固定填值，不是识别准确率。</p>
+</div></div>
+<div class="am-md"><h3>同一句话，换一种模型情况会采用什么</h3>
+<p>下表始终使用同一条退款请求。规则备用结果始终为 refund_request。</p>
+<div class="am-table-wrap"><table>
+<thead>
+<tr>
+<th>模型情况</th>
+<th>模型客户端先输出什么</th>
+<th>覆盖检查后采用什么</th>
+<th>最终来源与原因</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>有效返回 refund_request，与规则一致</td>
+<td><code>intent=refund_request</code>；<code>used_model=true</code></td>
+<td>refund_request</td>
+<td>采用模型；source=llm_with_policy_constraints；无覆盖原因</td>
+</tr>
+<tr>
+<td>有效返回 order_query，与保护规则冲突</td>
+<td><code>intent=order_query</code>；<code>used_model=true</code></td>
+<td>refund_request</td>
+<td>改用规则；source=deterministic_fallback；reason=rule_guard_refund_request</td>
+</tr>
+<tr>
+<td>返回 delete_order，标签不在清单中</td>
+<td>回退为 <code>intent=refund_request</code>；<code>used_model=false</code></td>
+<td>refund_request</td>
+<td>采用规则；reason=invalid_model_route</td>
+</tr>
+<tr>
+<td>返回无法解析的文本</td>
+<td>回退为 <code>intent=refund_request</code>；<code>used_model=false</code></td>
+<td>refund_request</td>
+<td>采用规则；reason=invalid_model_route</td>
+</tr>
+<tr>
+<td>禁用模型、配置缺失或模型库不可用</td>
+<td>直接返回 <code>intent=refund_request</code>；<code>used_model=false</code></td>
+<td>refund_request</td>
+<td>采用规则；reason=model_config_missing</td>
+</tr>
+<tr>
+<td>模型调用抛出 TimeoutError</td>
+<td>回退为 <code>intent=refund_request</code>；<code>used_model=false</code></td>
+<td>refund_request</td>
+<td>采用规则；reason=TimeoutError</td>
+</tr>
+</tbody></table></div>
+<p>第一行的 RoutePlan 使用模型来源，confidence 固定为 0.9。其余行使用规则来源，confidence 固定为 0.75。</p>
+<p>这几种情况最后都进入退款路径，但采用结果的过程不同。不能仅凭最终 intent 判断模型有没有工作。</p>
+<h3>普通查询发生冲突，会采用模型结果</h3>
+<p>换一句话：<strong>“露营椅多少钱？”</strong></p>
+<div class="am-table-wrap"><table>
+<thead>
+<tr>
+<th>环节</th>
+<th>输出</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>关键词规则</td>
+<td><code>fallback_intent=&quot;product_query&quot;</code></td>
+</tr>
+<tr>
+<td>人为设定的有效模型返回</td>
+<td><code>{&quot;intent&quot;:&quot;promotion_query&quot;}</code></td>
+</tr>
+<tr>
+<td>强制覆盖检查</td>
+<td>保留 <code>intent=&quot;promotion_query&quot;</code></td>
+</tr>
+<tr>
+<td>RoutePlan</td>
+<td><code>source=&quot;llm_with_policy_constraints&quot;</code>；<code>required_tools=[]</code>；<code>needs_rag=true</code></td>
+</tr>
+</tbody></table></div>
+<p>product_query 不在五类保护规则中。因此，这里即使两者不同，路由仍采用模型结果。</p>
+<p>模型返回的标签合法，不代表它正确理解了问题。本例会在路由阶段进入优惠规则路径，偏离用户的价格查询。</p>
+<h3>如果没有订单号，会采用什么结果</h3>
+<p>把主例改为：<strong>“查订单物流，同时帮我申请退款。”</strong></p>
+<p>保持模型冲突情况，并确保没有页面订单或会话历史订单。最终意图仍是 refund_request，订单抽取与选择均返回 null。</p>
+<p>RoutePlan 的相关字段变为：</p>
+</div>
+<pre class="am-code"><code data-lang="json">{
+  &quot;intent&quot;: &quot;refund_request&quot;,
+  &quot;required_tools&quot;: [],
+  &quot;entity_refs&quot;: [],
+  &quot;fallback_policy&quot;: &quot;ask_order_id&quot;
+}</code></pre>
+<div class="am-md"><p>候选工具仍包含 get_order_detail，但目前不允许执行。后端先追问订单号。缺少对象参数不会把退款意图改成普通聊天。</p>
+<p>**本面板验证：**8 种分支已用现有函数离线核验。模型返回与超时由替身提供，未调用在线模型或业务工具。</p>
+<p>依据：<a href="../../../backend/agent/customer_service_agent.py">聊天入口与覆盖检查</a>，44–64、844–866 行；<a href="../../../backend/agent/models/router_client.py">模型客户端</a>，47–77 行；<a href="../../../backend/agent/tools/planning.py">RoutePlan 生成</a>，61–166 行。</p>
+</div></div>
+</section>
+<section class="am-panel" id="panel-C">
+<header class="am-panel-head"><span class="am-panel-id">C</span><h2>大模型到底看什么、输出什么</h2></header>
+<div class="am-panel-body"><div class="am-md"><p>模型收到一条 system 消息和本轮 user_message。路由阶段不单独读取 history_messages、会话记忆或 runtime_context。</p>
+<div class="am-table-wrap"><table>
+<thead>
+<tr>
+<th>system 消息的组成</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>prompt_security</td>
+<td>保密、权限与事实边界</td>
+</tr>
+<tr>
+<td>system_customer_service</td>
+<td>客服角色与事实来源</td>
+</tr>
+<tr>
+<td>route_contract</td>
+<td>意图清单、分类边界、复合问题示例</td>
+</tr>
+</tbody></table></div>
+<p>例如，用户输入“查 ORD1234 的退款进度”，契约要求输出：</p>
+</div>
+<pre class="am-code"><code data-lang="json">{&quot;intent&quot;:&quot;refund_status_query&quot;}</code></pre>
+<div class="am-md"><p>允许的标签共 12 个。模型只选择一个标签，不生成工具名、订单号或多步计划。</p>
+<div class="am-table-wrap"><table>
+<thead>
+<tr>
+<th>条件</th>
+<th>处理</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>禁用模型、缺少 Key 或模型库不可用</td>
+<td>采用规则，记录 model_config_missing</td>
+</tr>
+<tr>
+<td>JSON 无法解析或标签不在清单中</td>
+<td>采用规则，记录 invalid_model_route</td>
+</tr>
+<tr>
+<td>调用异常，例如超时</td>
+<td>采用规则，记录异常类名</td>
+</tr>
+<tr>
+<td>标签合法，但业务含义选错</td>
+<td>仅五类覆盖规则能纠正；其他情况可能保留</td>
+</tr>
+</tbody></table></div>
+<p>解析器也接受夹在额外文本中的 JSON。模型参数为 temperature=0、max_tokens=256、timeout=30 秒、max_retries=0。模型名称由 AGENT_OPENAI_MODEL 指定。</p>
+<p>依据：<a href="../../../backend/agent/models/router_client.py">模型路由客户端</a>，47–143 行；<a href="../../../backend/resources/prompts/route_contract.md">路由契约</a>；<a href="../../../backend/resources/prompts/prompt_registry.yml">Prompt 注册表</a>。</p>
+</div></div>
+</section>
+<section class="am-panel" id="panel-D">
+<header class="am-panel-head"><span class="am-panel-id">D</span><h2>关键词规则如何判断优先级</h2></header>
+<div class="am-panel-body"><div class="am-md"><p>规则逐项匹配字面子串。先命中的条件立即返回，后面的条件不再检查。</p>
+<div class="am-table-wrap"><table>
+<thead>
+<tr>
+<th>顺序</th>
+<th>命中条件举例</th>
+<th>备用意图</th>
+<th>能覆盖模型？</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>SERVICE_TIMEOUT、工具超时、接口不可用</td>
+<td>degradation_request</td>
+<td>是</td>
+</tr>
+<tr>
+<td>2</td>
+<td>系统提示词、隐藏推理、内部策略</td>
+<td>security_request</td>
+<td>是</td>
+</tr>
+<tr>
+<td>3</td>
+<td>退款或退货＋进度或状态等词</td>
+<td>refund_status_query</td>
+<td>是</td>
+</tr>
+<tr>
+<td>4</td>
+<td>退货、七天无理由</td>
+<td>return_request</td>
+<td>是</td>
+</tr>
+<tr>
+<td>5</td>
+<td>退款、退钱、取消订单</td>
+<td>refund_request</td>
+<td>是</td>
+</tr>
+<tr>
+<td>6</td>
+<td>订单、物流、快递</td>
+<td>order_query</td>
+<td>否</td>
+</tr>
+<tr>
+<td>7</td>
+<td>发票</td>
+<td>faq_query</td>
+<td>否</td>
+</tr>
+<tr>
+<td>8</td>
+<td>火星会员、隐藏券、未知活动等词</td>
+<td>low_confidence_query</td>
+<td>否</td>
+</tr>
+<tr>
+<td>9</td>
+<td>活动词＋商品名、价格或库存等词</td>
+<td>product_query</td>
+<td>否</td>
+</tr>
+<tr>
+<td>10</td>
+<td>只有活动、满减、会员券等词</td>
+<td>promotion_query</td>
+<td>否</td>
+</tr>
+<tr>
+<td>11</td>
+<td>户外商品名、价格、库存、推荐等词</td>
+<td>product_query</td>
+<td>否</td>
+</tr>
+<tr>
+<td>12</td>
+<td>都未命中</td>
+<td>general_chat</td>
+<td>否</td>
+</tr>
+</tbody></table></div>
+<p>例如，“查物流，同时申请退款”命中第 5 项。退款路径优先于物流路径。</p>
+<p>“退款進度”与“退款进度”并非同一子串。规则没有完整的语义、否定或同义词理解。模型可以补充语义判断，但受保护路径仍可能被规则覆盖。</p>
+<p>依据：<a href="../../../backend/agent/tools/planning.py">规则分类器</a>，21–45 行。表中条件为节选。</p>
+</div></div>
+</section>
+<section class="am-panel" id="panel-E">
+<header class="am-panel-head"><span class="am-panel-id">E</span><h2>识别以后，各意图进入哪条路径</h2></header>
+<div class="am-panel-body"><div class="am-md"><p>RoutePlan 由代码中的固定映射生成。模型不能自行增加工具或退款权限。</p>
+<div class="am-table-wrap"><table>
+<thead>
+<tr>
+<th>意图标签</th>
+<th>代码安排的业务路径</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>order_query</td>
+<td>get_order_logistics：只读订单物流</td>
+</tr>
+<tr>
+<td>refund_status_query</td>
+<td>get_refund_status：只读已有售后进度</td>
+</tr>
+<tr>
+<td>refund_request</td>
+<td>get_order_detail＋未发货退款政策＋固定售后资格流程</td>
+</tr>
+<tr>
+<td>return_request</td>
+<td>get_order_detail＋签收退货政策＋固定退货资格流程</td>
+</tr>
+<tr>
+<td>product_query</td>
+<td>search_products；含活动、优惠、满减或会员词时，补通用政策</td>
+</tr>
+<tr>
+<td>faq_query</td>
+<td>发票 FAQ 路径；当前实现并非任意 FAQ 检索</td>
+</tr>
+<tr>
+<td>promotion_query</td>
+<td>活动与会员政策路径；无引用时改为 low_confidence_query</td>
+</tr>
+<tr>
+<td>low_confidence_query</td>
+<td>缺少可靠权益依据的兜底路径</td>
+</tr>
+<tr>
+<td>degradation_request</td>
+<td>返回服务不可用说明与转人工建议</td>
+</tr>
+<tr>
+<td>security_request</td>
+<td>拒绝提供受保护信息</td>
+</tr>
+<tr>
+<td>general_chat / unknown</td>
+<td>通用聊天兜底；unknown 没有独立澄清分支</td>
+</tr>
+</tbody></table></div>
+<p>缺少订单号时，RoutePlan 保留候选工具，但把可执行工具列表设为空。后端生成订单追问，不能让模型编造订单参数。</p>
+<p>一个请求只有一个意图，但一条路径可以使用多种能力。例如，商品查询可同时查商品事实和优惠规则。它没有拆成多个独立意图任务。</p>
+<p>还有一处独立检查：“我是谁”等身份问题直接读取 Runtime Context 回答。它优先于上表的业务分支，说明实际执行还受其他代码条件影响。</p>
+<p>依据：<a href="../../../backend/agent/tools/planning.py">RoutePlan 映射</a>，61–166 行；<a href="../../../backend/agent/customer_service_agent.py">业务分支</a>，130–539 行；<a href="../../../backend/agent/tools/runtime_context.py">身份检查</a>，29–54 行。</p>
+</div></div>
+</section>
+<section class="am-panel" id="panel-F">
+<header class="am-panel-head"><span class="am-panel-id">F</span><h2>多轮对话与页面上下文在哪里生效</h2></header>
+<div class="am-panel-body"><figure class="am-diagram am-seq"><svg viewBox="0 0 838 274" width="838" height="274" role="img" aria-label="时序图：商城网关、Python路由、Python上下文、业务执行" xmlns="http://www.w3.org/2000/svg"><defs><marker id="am2-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="am-arrow" d="M0,0 L10,5 L0,10 z"/></marker></defs><line class="am-lifeline" x1="118" y1="42" x2="118" y2="270"/><g data-key="商城网关"><rect class="am-actor" x="76" y="8" width="84" height="34" rx="2"/><text x="118" y="25" text-anchor="middle" dominant-baseline="central" font-weight="600">商城网关</text></g><line class="am-lifeline" x1="386" y1="42" x2="386" y2="270"/><g data-key="Python路由"><rect class="am-actor" x="337.9" y="8" width="96.1" height="34" rx="2"/><text x="386" y="25" text-anchor="middle" dominant-baseline="central" font-weight="600">Python路由</text></g><line class="am-lifeline" x1="550" y1="42" x2="550" y2="270"/><g data-key="Python上下文"><rect class="am-actor" x="495.4" y="8" width="109.1" height="34" rx="2"/><text x="550" y="25" text-anchor="middle" dominant-baseline="central" font-weight="600">Python上下文</text></g><line class="am-lifeline" x1="783.2" y1="42" x2="783.2" y2="270"/><g data-key="业务执行"><rect class="am-actor" x="741.2" y="8" width="84" height="34" rx="2"/><text x="783.2" y="25" text-anchor="middle" dominant-baseline="central" font-weight="600">业务执行</text></g><g data-step="0"><text x="252" y="70" text-anchor="middle">用户原话＋页面信息＋部分售后续办说明</text><path class="am-edge" d="M118,80 L384,80" marker-end="url(#am2-arrow)"/><text class="am-step" x="124" y="74" text-anchor="start">1</text></g><g data-step="1"><text x="468" y="110" text-anchor="middle">先定意图，再选择订单</text><path class="am-edge" d="M386,120 L548,120" marker-end="url(#am2-arrow)"/><text class="am-step" x="392" y="114" text-anchor="start">2</text></g><g data-step="2"><text x="666.6" y="150" text-anchor="middle">文字订单号 &gt; 页面订单 &gt; 最近订单</text><path class="am-edge" d="M550,160 L781.2,160" marker-end="url(#am2-arrow)"/><text class="am-step" x="556" y="154" text-anchor="start">3</text></g><g data-step="3"><text x="450.6" y="190" text-anchor="middle">资格结果或订单追问</text><path class="am-edge am-edge--dashed" d="M783.2,200 L120,200" marker-end="url(#am2-arrow)"/><text class="am-step" x="777.2" y="194" text-anchor="end">4</text></g><g data-step="4"><rect class="am-note" x="12" y="224" width="212" height="28" rx="2"/><text x="118" y="238" text-anchor="middle" dominant-baseline="central" font-size="12">部分待确认售后续问直接由网关处理</text></g></svg></figure>
+<div class="am-md"><div class="am-table-wrap"><table>
+<thead>
+<tr>
+<th>层级或入口</th>
+<th>当前能力</th>
+<th>需要注意</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Python 路由</td>
+<td>只分类本轮 user_message</td>
+<td>不自动继承上一轮意图</td>
+</tr>
+<tr>
+<td>Python 上下文</td>
+<td>选订单，整理历史，保存最近意图</td>
+<td>保存 recent_intent，不等于分类时使用它</td>
+</tr>
+<tr>
+<td>商城网关</td>
+<td>校验页面对象，拼入本轮消息</td>
+<td>Python 收到的消息可能已经包含上下文文字</td>
+</tr>
+<tr>
+<td>商城售后续办</td>
+<td>保存待办状态，补订单时添加售后说明</td>
+<td>部分续问直接处理，不经过模型分类</td>
+</tr>
+<tr>
+<td>评测工作台</td>
+<td>发送历史，候选按钮重写下一句</td>
+<td>路由仍只看重写后的本轮消息</td>
+</tr>
+</tbody></table></div>
+<p>因此，“路由不读取完整历史”成立，但不能推断商城完全没有续办能力。</p>
+<p>只向 Python 规则输入“ORD1234”，结果是 general_chat。商城补订单路径会添加退款或退货说明，不能把两种入口混为一谈。</p>
+<p>依据：<a href="../../../backend/agent/context.py">Python 上下文</a>，40–45、126 行；<a href="../../../ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/CustomerServiceGatewayService.java">商城网关</a>，105–139、281–362 行；<a href="../../../frontend/src/hooks/useAgentChat.ts">工作台请求</a>，285–302 行。</p>
+</div></div>
+</section>
+<section class="am-panel" id="panel-G">
+<header class="am-panel-head"><span class="am-panel-id">G</span><h2>用具体问题看懂当前边界</h2></header>
+<div class="am-panel-body"><div class="am-md"><p>以下前四行来自本轮离线规则检查。它们不代表在线模型每次都会这样分类。</p>
+<div class="am-table-wrap"><table>
+<thead>
+<tr>
+<th>输入</th>
+<th>当前规则结果</th>
+<th>后续含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>露营椅多少钱，满减怎么算？</td>
+<td>product_query</td>
+<td>查商品事实，补优惠政策</td>
+</tr>
+<tr>
+<td>露营季满减和会员券能叠加吗？</td>
+<td>promotion_query</td>
+<td>查活动与会员规则</td>
+</tr>
+<tr>
+<td>查 ORD1234 的退款进度</td>
+<td>refund_status_query</td>
+<td>只读已有申请，不新建申请</td>
+</tr>
+<tr>
+<td>查订单物流，同时申请退款</td>
+<td>refund_request</td>
+<td>优先核验退款资格</td>
+</tr>
+</tbody></table></div>
+</div>
+<div class="am-callout am-callout--warn" role="note"><div class="am-callout-title">政策咨询可能被误分到申请路径</div><div class="am-callout-body am-md"><p>“退款政策是什么？我先了解一下，不申请退款。”仍命中 refund_request。即使模型返回 faq_query，覆盖规则也会改回退款申请。商城另有确认与咨询检查，但路由本身没有区分好咨询和申请。</p>
+</div></div>
+<div class="am-md"><p>工作台还有一个具体续问问题。上一轮为 refund_request 时，选择订单会生成“查 ORD1234 的退款进度”。这会把申请任务改成进度查询。</p>
+<p>上一轮为 return_request 时，按钮生成“我选择 ORD1234”。该句缺少退货词，Python 规则会返回 general_chat。在线模型结果未在本轮验证。</p>
+<p>这两个行为来自现有续问函数的隔离执行，未修复。不能用它们推断商城网关也存在同样行为。</p>
+<p>依据：<a href="../../../backend/agent/customer_service_agent.py">覆盖规则</a>，844–866 行；<a href="../../../frontend/src/App.tsx">工作台续问函数</a>，261–274 行。</p>
+</div></div>
+</section>
+<section class="am-panel" id="panel-H">
+<header class="am-panel-head"><span class="am-panel-id">H</span><h2>如何检查结果，以及最值得改什么</h2></header>
+<div class="am-panel-body"><div class="am-md"><div class="am-table-wrap"><table>
+<thead>
+<tr>
+<th>响应字段</th>
+<th>怎样读</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>session_state.intent</td>
+<td>执行后的意图标签；活动无依据时可能变成低置信路径</td>
+</tr>
+<tr>
+<td>session_state.model.route_planner.used_model</td>
+<td>是否采用过有效模型结果；被规则覆盖后仍可能为 true</td>
+</tr>
+<tr>
+<td>route_planner.fallback_reason</td>
+<td>rule_guard_ 开头表示规则覆盖；也可记录模型失败原因</td>
+</tr>
+<tr>
+<td>session_state.route_plan.source</td>
+<td>未被覆盖的模型结果为 llm_with_policy_constraints；否则为 deterministic_fallback</td>
+</tr>
+<tr>
+<td>session_state.route_plan.required_tools</td>
+<td>真正允许执行的工具列表</td>
+</tr>
+<tr>
+<td>session_state.route_plan.confidence</td>
+<td>模型路径固定 0.9，规则路径固定 0.75；不是准确率</td>
+</tr>
+</tbody></table></div>
+<p>low_confidence_query 是一个业务标签。它不表示系统测出了低于某个阈值的模型置信度。</p>
+<p>Trace 事件 model_route_planned 只记录覆盖结果。当前没有单独保留模型原始标签，难以完整比较“模型判断”与“规则纠正”。</p>
+<p>**我的判断：**现有混合路由适合范围明确的演示客服。更值得先改的是任务边界和续办行为，暂时没有证据支持换模型。</p>
+<p>建议依次验证：政策咨询与申请的区分；补订单后是否保留原任务；模型标签与规则覆盖是否可分别评估。这些是改进建议，本轮没有实施。</p>
+<p>**本轮验证范围：**38 项 Python 离线检查通过。另隔离执行了工作台续问函数的 4 种意图分支。模型成功、无效输出与超时使用替身验证。未调用在线模型、完整聊天链路或业务数据库，未修改业务代码。</p>
+<p>依据：<a href="../../../backend/agent/customer_service_agent.py">路由结果字段</a>，698–725 行；<a href="../../../backend/agent/tools/planning.py">固定 confidence</a>，134–136 行；<a href="../../../backend/agent/trace.py">路由 Trace</a>，232–241 行。</p>
+</div></div>
+</section>
+</div>
+</div>
+</main>
+<footer class="am-colophon">Generated by Answer me with HTML 0.4.2 · 2026-10-09 20:43</footer>
+<textarea id="am-source" hidden readonly aria-hidden="true">---
+title: 当前 Agent 如何识别意图
+subtitle: 荒野户外服务助手 · 从一句话到受控业务路径
+lang: zh
+template: doc
+theme: blueprint
+mode: light
+source: 本地源码核验 · 2026-10-09
+---
+当前实现采用“大模型分类＋关键词规则兜底＋代码约束路由”。模型选择一个意图标签，代码决定接下来能走哪条业务路径。
+
+## A 先分清三个问题
+```callout info 核心判断
+意图识别回答“用户想做什么”。识别成退款申请，只表示进入资格核验路径。商城仍需客户确认、管理员独立处理。
+```
+
+| 问题 | 本项目怎样处理 | 例子 |
+|---|---|---|
+| 用户想做什么？ | 意图识别：模型与规则共同决定 | 查物流、查退款进度、申请退款 |
+| 要处理哪个对象？ | 参数抽取与上下文补全 | 提取订单号，或采用页面订单 |
+| 可以做哪些动作？ | 代码生成 RoutePlan，限制工具与流程 | 读订单、读政策、核验售后资格 |
+
+可以把它理解为客服分诊。模型提出分诊结果，代码安排业务路径。
+
+## B 一条消息实际经过什么
+
+```callout info 先记住结果选择规则
+先尝试采用有效模型结果。五类保护规则与模型结果冲突时，改用规则。模型不可用或输出无效时，也用规则。
+```
+
+### 跟着一句具体请求走
+
+用户输入：**“查 ORD1234 的物流，同时帮我申请退款。”**
+
+ORD1234 是讲解用编号。本例不提供页面订单，且会话没有历史记忆。为展示冲突处理，我们把模型输出设为 order_query。
+
+模型输出是人为设定的。下面的规则、校验、覆盖与计划结果来自现有函数的离线执行。
+
+```flow LR
+(这句请求) -&gt; 规则备用: refund_request
+规则备用 -&gt; 模型结果: 示例 order_query
+模型结果 -&gt; 覆盖结果: refund_request
+覆盖结果 -&gt; 执行计划: get_order_detail
+```
+
+### 每个环节到底输出什么
+
+| 环节 | 输入 | 输出的关键字段 | 为什么得到这个结果 |
+|---|---|---|---|
+| 1. 关键词规则分类 | 用户这句话 | `fallback_intent = &quot;refund_request&quot;` | “退款”先于“订单、物流”命中 |
+| 2. 大模型分类 | 三段 Prompt＋用户这句话 | `{&quot;intent&quot;:&quot;order_query&quot;}` | 这是人为设定的模型返回，用来展示冲突 |
+| 3. 模型客户端校验 | 上一步的 JSON 文本 | `intent=&quot;order_query&quot;`；`used_model=true`；`fallback_reason=null` | JSON 可解析，order_query 在允许清单中 |
+| 4. 强制覆盖检查 | 规则为退款；模型为物流 | `intent=&quot;refund_request&quot;`；`used_model=true`；`fallback_reason=&quot;rule_guard_refund_request&quot;` | 退款属于五类保护规则，因此覆盖模型 |
+| 5. 订单抽取与上下文选择 | 用户文字；无页面订单与历史订单 | `explicit_order_id=&quot;ORD1234&quot;`；`order_id=&quot;ORD1234&quot;` | 正则抽取到订单号，采用本轮明确对象 |
+| 6. 生成 RoutePlan | 覆盖后的退款意图＋订单号 | 调用参数 `model_used=false`；输出见下方 JSON | 本轮虽然调用过模型，最终意图采用了规则 |
+
+第 4 步没有再调用模型，也没有比较两个置信分数。代码发现冲突后，直接采用保护规则。
+
+第 6 步输出以下 RoutePlan 关键字段：
+
+```json
+{
+  &quot;intent&quot;: &quot;refund_request&quot;,
+  &quot;needs_rag&quot;: true,
+  &quot;needs_business_tools&quot;: true,
+  &quot;required_tools&quot;: [&quot;get_order_detail&quot;],
+  &quot;knowledge_domains&quot;: [&quot;after_sale_policy&quot;],
+  &quot;entity_refs&quot;: [&quot;ORD1234&quot;],
+  &quot;risk_level&quot;: &quot;high&quot;,
+  &quot;requires_workflow&quot;: true,
+  &quot;confidence&quot;: 0.75,
+  &quot;source&quot;: &quot;deterministic_fallback&quot;,
+  &quot;fallback_policy&quot;: &quot;safe_deterministic_path&quot;
+}
+```
+
+接下来先读 ORD1234 的订单事实，再核验退款资格。不会同时执行一条独立物流任务，也不会根据这个标签直接退款。
+
+抽取到订单号，不代表订单存在或属于用户。这些业务事实仍需工具核验。
+
+```callout info 为什么 used_model=true，source 却是规则？
+used_model=true 表示客户端取得过有效模型结果。source 表示 RoutePlan 最终采用哪种路由。本例模型结果被覆盖，所以 source 为 deterministic_fallback。0.75 是固定填值，不是识别准确率。
+```
+
+### 同一句话，换一种模型情况会采用什么
+
+下表始终使用同一条退款请求。规则备用结果始终为 refund_request。
+
+| 模型情况 | 模型客户端先输出什么 | 覆盖检查后采用什么 | 最终来源与原因 |
+|---|---|---|---|
+| 有效返回 refund_request，与规则一致 | `intent=refund_request`；`used_model=true` | refund_request | 采用模型；source=llm_with_policy_constraints；无覆盖原因 |
+| 有效返回 order_query，与保护规则冲突 | `intent=order_query`；`used_model=true` | refund_request | 改用规则；source=deterministic_fallback；reason=rule_guard_refund_request |
+| 返回 delete_order，标签不在清单中 | 回退为 `intent=refund_request`；`used_model=false` | refund_request | 采用规则；reason=invalid_model_route |
+| 返回无法解析的文本 | 回退为 `intent=refund_request`；`used_model=false` | refund_request | 采用规则；reason=invalid_model_route |
+| 禁用模型、配置缺失或模型库不可用 | 直接返回 `intent=refund_request`；`used_model=false` | refund_request | 采用规则；reason=model_config_missing |
+| 模型调用抛出 TimeoutError | 回退为 `intent=refund_request`；`used_model=false` | refund_request | 采用规则；reason=TimeoutError |
+
+第一行的 RoutePlan 使用模型来源，confidence 固定为 0.9。其余行使用规则来源，confidence 固定为 0.75。
+
+这几种情况最后都进入退款路径，但采用结果的过程不同。不能仅凭最终 intent 判断模型有没有工作。
+
+### 普通查询发生冲突，会采用模型结果
+
+换一句话：**“露营椅多少钱？”**
+
+| 环节 | 输出 |
+|---|---|
+| 关键词规则 | `fallback_intent=&quot;product_query&quot;` |
+| 人为设定的有效模型返回 | `{&quot;intent&quot;:&quot;promotion_query&quot;}` |
+| 强制覆盖检查 | 保留 `intent=&quot;promotion_query&quot;` |
+| RoutePlan | `source=&quot;llm_with_policy_constraints&quot;`；`required_tools=[]`；`needs_rag=true` |
+
+product_query 不在五类保护规则中。因此，这里即使两者不同，路由仍采用模型结果。
+
+模型返回的标签合法，不代表它正确理解了问题。本例会在路由阶段进入优惠规则路径，偏离用户的价格查询。
+
+### 如果没有订单号，会采用什么结果
+
+把主例改为：**“查订单物流，同时帮我申请退款。”**
+
+保持模型冲突情况，并确保没有页面订单或会话历史订单。最终意图仍是 refund_request，订单抽取与选择均返回 null。
+
+RoutePlan 的相关字段变为：
+
+```json
+{
+  &quot;intent&quot;: &quot;refund_request&quot;,
+  &quot;required_tools&quot;: [],
+  &quot;entity_refs&quot;: [],
+  &quot;fallback_policy&quot;: &quot;ask_order_id&quot;
+}
+```
+
+候选工具仍包含 get_order_detail，但目前不允许执行。后端先追问订单号。缺少对象参数不会把退款意图改成普通聊天。
+
+**本面板验证：**8 种分支已用现有函数离线核验。模型返回与超时由替身提供，未调用在线模型或业务工具。
+
+依据：[聊天入口与覆盖检查](../../../backend/agent/customer_service_agent.py)，44–64、844–866 行；[模型客户端](../../../backend/agent/models/router_client.py)，47–77 行；[RoutePlan 生成](../../../backend/agent/tools/planning.py)，61–166 行。
+## C 大模型到底看什么、输出什么
+模型收到一条 system 消息和本轮 user_message。路由阶段不单独读取 history_messages、会话记忆或 runtime_context。
+
+| system 消息的组成 | 作用 |
+|---|---|
+| prompt_security | 保密、权限与事实边界 |
+| system_customer_service | 客服角色与事实来源 |
+| route_contract | 意图清单、分类边界、复合问题示例 |
+
+例如，用户输入“查 ORD1234 的退款进度”，契约要求输出：
+
+```json
+{&quot;intent&quot;:&quot;refund_status_query&quot;}
+```
+
+允许的标签共 12 个。模型只选择一个标签，不生成工具名、订单号或多步计划。
+
+| 条件 | 处理 |
+|---|---|
+| 禁用模型、缺少 Key 或模型库不可用 | 采用规则，记录 model_config_missing |
+| JSON 无法解析或标签不在清单中 | 采用规则，记录 invalid_model_route |
+| 调用异常，例如超时 | 采用规则，记录异常类名 |
+| 标签合法，但业务含义选错 | 仅五类覆盖规则能纠正；其他情况可能保留 |
+
+解析器也接受夹在额外文本中的 JSON。模型参数为 temperature=0、max_tokens=256、timeout=30 秒、max_retries=0。模型名称由 AGENT_OPENAI_MODEL 指定。
+
+依据：[模型路由客户端](../../../backend/agent/models/router_client.py)，47–143 行；[路由契约](../../../backend/resources/prompts/route_contract.md)；[Prompt 注册表](../../../backend/resources/prompts/prompt_registry.yml)。
+
+## D 关键词规则如何判断优先级
+规则逐项匹配字面子串。先命中的条件立即返回，后面的条件不再检查。
+
+| 顺序 | 命中条件举例 | 备用意图 | 能覆盖模型？ |
+|---|---|---|---|
+| 1 | SERVICE_TIMEOUT、工具超时、接口不可用 | degradation_request | 是 |
+| 2 | 系统提示词、隐藏推理、内部策略 | security_request | 是 |
+| 3 | 退款或退货＋进度或状态等词 | refund_status_query | 是 |
+| 4 | 退货、七天无理由 | return_request | 是 |
+| 5 | 退款、退钱、取消订单 | refund_request | 是 |
+| 6 | 订单、物流、快递 | order_query | 否 |
+| 7 | 发票 | faq_query | 否 |
+| 8 | 火星会员、隐藏券、未知活动等词 | low_confidence_query | 否 |
+| 9 | 活动词＋商品名、价格或库存等词 | product_query | 否 |
+| 10 | 只有活动、满减、会员券等词 | promotion_query | 否 |
+| 11 | 户外商品名、价格、库存、推荐等词 | product_query | 否 |
+| 12 | 都未命中 | general_chat | 否 |
+
+例如，“查物流，同时申请退款”命中第 5 项。退款路径优先于物流路径。
+
+“退款進度”与“退款进度”并非同一子串。规则没有完整的语义、否定或同义词理解。模型可以补充语义判断，但受保护路径仍可能被规则覆盖。
+
+依据：[规则分类器](../../../backend/agent/tools/planning.py)，21–45 行。表中条件为节选。
+
+## E 识别以后，各意图进入哪条路径
+RoutePlan 由代码中的固定映射生成。模型不能自行增加工具或退款权限。
+
+| 意图标签 | 代码安排的业务路径 |
+|---|---|
+| order_query | get_order_logistics：只读订单物流 |
+| refund_status_query | get_refund_status：只读已有售后进度 |
+| refund_request | get_order_detail＋未发货退款政策＋固定售后资格流程 |
+| return_request | get_order_detail＋签收退货政策＋固定退货资格流程 |
+| product_query | search_products；含活动、优惠、满减或会员词时，补通用政策 |
+| faq_query | 发票 FAQ 路径；当前实现并非任意 FAQ 检索 |
+| promotion_query | 活动与会员政策路径；无引用时改为 low_confidence_query |
+| low_confidence_query | 缺少可靠权益依据的兜底路径 |
+| degradation_request | 返回服务不可用说明与转人工建议 |
+| security_request | 拒绝提供受保护信息 |
+| general_chat / unknown | 通用聊天兜底；unknown 没有独立澄清分支 |
+
+缺少订单号时，RoutePlan 保留候选工具，但把可执行工具列表设为空。后端生成订单追问，不能让模型编造订单参数。
+
+一个请求只有一个意图，但一条路径可以使用多种能力。例如，商品查询可同时查商品事实和优惠规则。它没有拆成多个独立意图任务。
+
+还有一处独立检查：“我是谁”等身份问题直接读取 Runtime Context 回答。它优先于上表的业务分支，说明实际执行还受其他代码条件影响。
+
+依据：[RoutePlan 映射](../../../backend/agent/tools/planning.py)，61–166 行；[业务分支](../../../backend/agent/customer_service_agent.py)，130–539 行；[身份检查](../../../backend/agent/tools/runtime_context.py)，29–54 行。
+## F 多轮对话与页面上下文在哪里生效
+```sequence num
+商城网关 -&gt; Python路由: 用户原话＋页面信息＋部分售后续办说明
+Python路由 -&gt; Python上下文: 先定意图，再选择订单
+Python上下文 -&gt; 业务执行: 文字订单号 &gt; 页面订单 &gt; 最近订单
+业务执行 --&gt; 商城网关: 资格结果或订单追问
+note 商城网关: 部分待确认售后续问直接由网关处理
+```
+
+| 层级或入口 | 当前能力 | 需要注意 |
+|---|---|---|
+| Python 路由 | 只分类本轮 user_message | 不自动继承上一轮意图 |
+| Python 上下文 | 选订单，整理历史，保存最近意图 | 保存 recent_intent，不等于分类时使用它 |
+| 商城网关 | 校验页面对象，拼入本轮消息 | Python 收到的消息可能已经包含上下文文字 |
+| 商城售后续办 | 保存待办状态，补订单时添加售后说明 | 部分续问直接处理，不经过模型分类 |
+| 评测工作台 | 发送历史，候选按钮重写下一句 | 路由仍只看重写后的本轮消息 |
+
+因此，“路由不读取完整历史”成立，但不能推断商城完全没有续办能力。
+
+只向 Python 规则输入“ORD1234”，结果是 general_chat。商城补订单路径会添加退款或退货说明，不能把两种入口混为一谈。
+
+依据：[Python 上下文](../../../backend/agent/context.py)，40–45、126 行；[商城网关](../../../ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/CustomerServiceGatewayService.java)，105–139、281–362 行；[工作台请求](../../../frontend/src/hooks/useAgentChat.ts)，285–302 行。
+
+## G 用具体问题看懂当前边界
+以下前四行来自本轮离线规则检查。它们不代表在线模型每次都会这样分类。
+
+| 输入 | 当前规则结果 | 后续含义 |
+|---|---|---|
+| 露营椅多少钱，满减怎么算？ | product_query | 查商品事实，补优惠政策 |
+| 露营季满减和会员券能叠加吗？ | promotion_query | 查活动与会员规则 |
+| 查 ORD1234 的退款进度 | refund_status_query | 只读已有申请，不新建申请 |
+| 查订单物流，同时申请退款 | refund_request | 优先核验退款资格 |
+
+```callout warn 政策咨询可能被误分到申请路径
+“退款政策是什么？我先了解一下，不申请退款。”仍命中 refund_request。即使模型返回 faq_query，覆盖规则也会改回退款申请。商城另有确认与咨询检查，但路由本身没有区分好咨询和申请。
+```
+
+工作台还有一个具体续问问题。上一轮为 refund_request 时，选择订单会生成“查 ORD1234 的退款进度”。这会把申请任务改成进度查询。
+
+上一轮为 return_request 时，按钮生成“我选择 ORD1234”。该句缺少退货词，Python 规则会返回 general_chat。在线模型结果未在本轮验证。
+
+这两个行为来自现有续问函数的隔离执行，未修复。不能用它们推断商城网关也存在同样行为。
+
+依据：[覆盖规则](../../../backend/agent/customer_service_agent.py)，844–866 行；[工作台续问函数](../../../frontend/src/App.tsx)，261–274 行。
+
+## H 如何检查结果，以及最值得改什么
+| 响应字段 | 怎样读 |
+|---|---|
+| session_state.intent | 执行后的意图标签；活动无依据时可能变成低置信路径 |
+| session_state.model.route_planner.used_model | 是否采用过有效模型结果；被规则覆盖后仍可能为 true |
+| route_planner.fallback_reason | rule_guard_ 开头表示规则覆盖；也可记录模型失败原因 |
+| session_state.route_plan.source | 未被覆盖的模型结果为 llm_with_policy_constraints；否则为 deterministic_fallback |
+| session_state.route_plan.required_tools | 真正允许执行的工具列表 |
+| session_state.route_plan.confidence | 模型路径固定 0.9，规则路径固定 0.75；不是准确率 |
+
+low_confidence_query 是一个业务标签。它不表示系统测出了低于某个阈值的模型置信度。
+
+Trace 事件 model_route_planned 只记录覆盖结果。当前没有单独保留模型原始标签，难以完整比较“模型判断”与“规则纠正”。
+
+**我的判断：**现有混合路由适合范围明确的演示客服。更值得先改的是任务边界和续办行为，暂时没有证据支持换模型。
+
+建议依次验证：政策咨询与申请的区分；补订单后是否保留原任务；模型标签与规则覆盖是否可分别评估。这些是改进建议，本轮没有实施。
+
+**本轮验证范围：**38 项 Python 离线检查通过。另隔离执行了工作台续问函数的 4 种意图分支。模型成功、无效输出与超时使用替身验证。未调用在线模型、完整聊天链路或业务数据库，未修改业务代码。
+
+依据：[路由结果字段](../../../backend/agent/customer_service_agent.py)，698–725 行；[固定 confidence](../../../backend/agent/tools/planning.py)，134–136 行；[路由 Trace](../../../backend/agent/trace.py)，232–241 行。</textarea>
+<script>
+(() => {
+  const root = document.documentElement;
+  const cycle = (list, cur) => list[(list.indexOf(cur) + 1) % list.length];
+  const label = (btn, value) => {
+    const map = JSON.parse(btn.dataset.labels || '{}');
+    btn.textContent = map[value] || value;
+  };
+  const bind = (name, attr, values) => {
+    const btn = document.querySelector(`[data-am="${name}"]`);
+    if (!btn) return;
+    label(btn, root.getAttribute(attr));
+    btn.addEventListener('click', () => {
+      const next = cycle(values, root.getAttribute(attr));
+      root.setAttribute(attr, next);
+      label(btn, next);
+    });
+  };
+  bind('theme', 'data-theme', ['blueprint', 'shadcn']);
+  bind('mode', 'data-mode', ['auto', 'light', 'dark']);
+
+  const copyBtn = document.querySelector('[data-am="copy"]');
+  copyBtn?.addEventListener('click', async () => {
+    const text = document.getElementById('am-source').value;
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch {
+      const ta = Object.assign(document.createElement('textarea'), { value: text });
+      document.body.append(ta);
+      ta.select();
+      document.execCommand('copy');
+      ta.remove();
+    }
+    const original = copyBtn.textContent;
+    copyBtn.textContent = copyBtn.dataset.done;
+    setTimeout(() => { copyBtn.textContent = original; }, 1400);
+  });
+})();
+</script>
+</body>
+</html>

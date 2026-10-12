@@ -1,0 +1,837 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="blueprint" data-mode="auto">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="Answer me with HTML 0.4.2">
+<title>不支持业务的清晰出口：产品需求规划</title>
+<style>
+html[data-theme="blueprint"], html[data-theme="blueprint"][data-mode="light"] {
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "JetBrains Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  --radius: 0px;
+  --shadow: none;
+  --bw: 1.5px;
+  --head-font: var(--font-sans);
+  --bg: #f6f6f3;
+  --paper: #ffffff;
+  --ink: #16181d;
+  --ink-2: #4b5260;
+  --ink-3: #8b929e;
+  --line: #1d2026;
+  --line-2: #d6dae1;
+  --fill: #f3f5f8;
+  --accent: #1d5fbf;
+  --accent-bg: #e4ecf8;
+  --ok: #1d5fbf;
+  --ok-bg: #e4ecf8;
+  --err: #c62828;
+  --err-bg: #fbeaea;
+  --warn: #a8620a;
+  --warn-bg: #fdf3e2;
+  --head-bg: #16181d;
+  --head-fg: #ffffff;
+}
+html[data-theme="blueprint"][data-mode="dark"] {
+  --bg: #081322;
+  --paper: #0d1c31;
+  --ink: #e6edf7;
+  --ink-2: #a9b8cc;
+  --ink-3: #6b7f99;
+  --line: #c9d6e8;
+  --line-2: #23385a;
+  --fill: #12253f;
+  --accent: #6ea8ff;
+  --accent-bg: #16305a;
+  --ok: #6ea8ff;
+  --ok-bg: #16305a;
+  --err: #ff7070;
+  --err-bg: #3b1620;
+  --warn: #f0b14a;
+  --warn-bg: #3a2a10;
+  --head-bg: #e6edf7;
+  --head-fg: #081322;
+}
+@media (prefers-color-scheme: dark) {
+html[data-theme="blueprint"][data-mode="auto"] {
+  --bg: #081322;
+  --paper: #0d1c31;
+  --ink: #e6edf7;
+  --ink-2: #a9b8cc;
+  --ink-3: #6b7f99;
+  --line: #c9d6e8;
+  --line-2: #23385a;
+  --fill: #12253f;
+  --accent: #6ea8ff;
+  --accent-bg: #16305a;
+  --ok: #6ea8ff;
+  --ok-bg: #16305a;
+  --err: #ff7070;
+  --err-bg: #3b1620;
+  --warn: #f0b14a;
+  --warn-bg: #3a2a10;
+  --head-bg: #e6edf7;
+  --head-fg: #081322;
+}
+}
+
+html[data-theme="shadcn"], html[data-theme="shadcn"][data-mode="light"] {
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "JetBrains Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  --radius: 8px;
+  --shadow: 0 1px 2px 0 rgba(0,0,0,0.05);
+  --bw: 1px;
+  --head-font: var(--font-sans);
+  --bg: #fafafa;
+  --paper: #ffffff;
+  --ink: #09090b;
+  --ink-2: #71717a;
+  --ink-3: #a1a1aa;
+  --line: #e4e4e7;
+  --line-2: #f0f0f2;
+  --fill: #f4f4f5;
+  --accent: #2563eb;
+  --accent-bg: #eff6ff;
+  --ok: #16a34a;
+  --ok-bg: #f0fdf4;
+  --err: #dc2626;
+  --err-bg: #fef2f2;
+  --warn: #d97706;
+  --warn-bg: #fffbeb;
+  --head-bg: #18181b;
+  --head-fg: #fafafa;
+}
+html[data-theme="shadcn"][data-mode="dark"] {
+  --bg: #09090b;
+  --paper: #121215;
+  --ink: #fafafa;
+  --ink-2: #a1a1aa;
+  --ink-3: #71717a;
+  --line: #27272a;
+  --line-2: #1c1c1f;
+  --fill: #18181b;
+  --accent: #60a5fa;
+  --accent-bg: #172554;
+  --ok: #4ade80;
+  --ok-bg: #052e16;
+  --err: #f87171;
+  --err-bg: #450a0a;
+  --warn: #fbbf24;
+  --warn-bg: #451a03;
+  --head-bg: #fafafa;
+  --head-fg: #18181b;
+}
+@media (prefers-color-scheme: dark) {
+html[data-theme="shadcn"][data-mode="auto"] {
+  --bg: #09090b;
+  --paper: #121215;
+  --ink: #fafafa;
+  --ink-2: #a1a1aa;
+  --ink-3: #71717a;
+  --line: #27272a;
+  --line-2: #1c1c1f;
+  --fill: #18181b;
+  --accent: #60a5fa;
+  --accent-bg: #172554;
+  --ok: #4ade80;
+  --ok-bg: #052e16;
+  --err: #f87171;
+  --err-bg: #450a0a;
+  --warn: #fbbf24;
+  --warn-bg: #451a03;
+  --head-bg: #fafafa;
+  --head-fg: #18181b;
+}
+}
+
+/* Answer me with HTML base — 只引用主题变量，禁止写死颜色（主题 token 见 themes/index.js） */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: var(--font-sans); font-size: 14px; line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+code, pre, kbd { font-family: var(--font-mono); }
+
+/* ── 工具栏 ─────────────────────────────── */
+.am-toolbar {
+  position: fixed; top: 12px; right: 12px; z-index: 10; display: flex; gap: 6px;
+}
+.am-btn {
+  font: 12px/1 var(--font-sans); color: var(--ink); background: var(--paper);
+  border: 1px solid var(--line-2); border-radius: var(--radius); padding: 7px 10px; cursor: pointer;
+}
+.am-btn:hover { border-color: var(--ink-3); }
+.am-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* ── 页头 ───────────────────────────────── */
+.am-head { margin: 0 0 20px; padding-right: 260px; }
+.am-head h1 { margin: 0; font-size: 24px; line-height: 1.25; letter-spacing: -0.01em; }
+.am-sub { margin: 4px 0 0; color: var(--ink-2); }
+.am-head-meta { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 10px; font-size: 12px; color: var(--ink-2); }
+.am-head-meta b { font-family: var(--font-mono); font-weight: 400; color: var(--ink-3); margin-right: 6px; }
+.am-intro { margin-top: 12px; max-width: 80ch; }
+
+/* ── sheet 图纸板 ────────────────────────── */
+.am-sheet { max-width: 1680px; margin: 0 auto; padding: 32px 28px 40px; }
+.am-frame { position: relative; }
+.am-grid {
+  display: grid; grid-template-columns: repeat(var(--cols, 3), minmax(0, 1fr));
+  gap: 20px; align-items: start;
+}
+.am-ruler { display: none; }
+html[data-theme="blueprint"] .am-frame { border: 1px solid var(--line); padding: 30px; }
+html[data-theme="blueprint"] .am-frame::before {
+  content: ""; position: absolute; inset: 18px; border: 1px solid var(--line); pointer-events: none;
+}
+html[data-theme="blueprint"] .am-ruler {
+  display: flex; position: absolute; font: 10px/1 var(--font-mono); color: var(--ink-3);
+}
+.am-ruler span { flex: 1; display: flex; align-items: center; justify-content: center; }
+.am-ruler--top, .am-ruler--bottom { left: 18px; right: 18px; height: 18px; }
+.am-ruler--top { top: 0; }
+.am-ruler--bottom { bottom: 0; }
+.am-ruler--left, .am-ruler--right { top: 18px; bottom: 18px; width: 18px; flex-direction: column; }
+.am-ruler--left { left: 0; }
+.am-ruler--right { right: 0; }
+.am-ruler--top span + span, .am-ruler--bottom span + span { border-left: 1px solid var(--line); }
+.am-ruler--left span + span, .am-ruler--right span + span { border-top: 1px solid var(--line); }
+
+/* ── 面板 ───────────────────────────────── */
+.am-panel {
+  background: var(--paper); border: var(--bw) solid var(--line); border-radius: var(--radius);
+  box-shadow: var(--shadow); min-width: 0; overflow: hidden;
+}
+.am-panel-head {
+  display: flex; align-items: stretch; gap: 0; border-bottom: var(--bw) solid var(--line); min-height: 34px;
+}
+.am-panel-id {
+  display: flex; align-items: center; justify-content: center; min-width: 34px; padding: 0 8px;
+  background: var(--head-bg); color: var(--head-fg); font-weight: 600; font-size: 14px;
+}
+html[data-theme="shadcn"] .am-panel-id { border-radius: 6px; min-width: 24px; height: 24px; margin: 9px 0 9px 14px; font-size: 12px; }
+html[data-theme="shadcn"] .am-panel-head { border-bottom-width: 1px; }
+.am-panel-head h2 { margin: 0; padding: 7px 12px; font-size: 15px; font-weight: 600; flex: 1; display: flex; align-items: center; }
+.am-panel-meta { align-self: center; padding: 0 12px; font: 11px/1.3 var(--font-mono); color: var(--ink-2); text-align: right; }
+.am-panel-body { padding: 14px 16px 16px; }
+.am-panel-body > * + * { margin-top: 12px; }
+
+/* ── Markdown 正文 ───────────────────────── */
+.am-md > :first-child { margin-top: 0; }
+.am-md > :last-child { margin-bottom: 0; }
+.am-md p { margin: 0 0 8px; }
+.am-md ul, .am-md ol { margin: 0 0 8px; padding-left: 20px; }
+.am-md li + li { margin-top: 3px; }
+.am-md h3, .am-md h4 { margin: 14px 0 6px; font-size: 13px; }
+.am-md a { color: var(--accent); }
+.am-md blockquote { margin: 0 0 8px; padding: 2px 12px; border-left: 3px solid var(--line-2); color: var(--ink-2); }
+.am-md :not(pre) > code { font-size: 0.9em; background: var(--fill); padding: 1px 5px; border-radius: 4px; }
+.am-md hr { border: 0; border-top: 1px solid var(--line-2); margin: 12px 0; }
+.am-md table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.am-md th {
+  text-align: left; font: 11px/1.3 var(--font-mono); color: var(--ink-2); font-weight: 400;
+  padding: 6px 10px; border-bottom: 1px solid var(--line-2);
+}
+.am-md td { padding: 7px 10px; border-bottom: 1px solid var(--line-2); vertical-align: top; }
+.am-md tbody tr:nth-child(even) td { background: var(--fill); }
+.am-table-wrap { overflow-x: auto; }
+.am-code {
+  margin: 0; padding: 12px 14px; background: var(--fill); border: 1px solid var(--line-2);
+  border-radius: var(--radius); overflow-x: auto; font-size: 12.5px; line-height: 1.5;
+}
+
+/* ── 状态徽章 ok / no / warn ──────────────── */
+.am-status { white-space: nowrap; font-weight: 500; }
+.am-status--ok { color: var(--ok); }
+.am-status--no { color: var(--err); }
+.am-status--warn { color: var(--warn); }
+.am-status-icon { display: inline-block; width: 1.1em; font-weight: 700; }
+
+/* ── callout ─────────────────────────────── */
+.am-callout {
+  border: 1px solid var(--line-2); border-left: 3px solid var(--accent); background: var(--accent-bg);
+  padding: 10px 14px; border-radius: var(--radius);
+}
+.am-callout--ok { border-left-color: var(--ok); background: var(--ok-bg); }
+.am-callout--warn { border-left-color: var(--warn); background: var(--warn-bg); }
+.am-callout--err { border-left-color: var(--err); background: var(--err-bg); }
+.am-callout-title { font-weight: 600; margin-bottom: 4px; }
+
+/* ── kv 标题栏格 ─────────────────────────── */
+.am-kv {
+  display: grid; grid-template-columns: repeat(var(--kv-cols, 2), minmax(0, 1fr)); margin: 0;
+  border-top: var(--bw) solid var(--line); border-left: var(--bw) solid var(--line);
+}
+.am-kv-cell { border-right: var(--bw) solid var(--line); border-bottom: var(--bw) solid var(--line); padding: 6px 10px 8px; min-width: 0; }
+.am-kv-cell--wide { grid-column: 1 / -1; }
+.am-kv dt { font: 11px/1.4 var(--font-mono); color: var(--ink-2); }
+.am-kv dd { margin: 2px 0 0; font-size: 14px; font-weight: 500; overflow-wrap: anywhere; }
+.am-kv-cell--wide dd { font-size: 17px; font-weight: 600; }
+html[data-theme="shadcn"] .am-kv { border-color: var(--line); border-radius: var(--radius); overflow: hidden; }
+
+/* ── timeline ────────────────────────────── */
+.am-timeline { list-style: none; margin: 0; padding: 0; }
+.am-timeline--h { display: grid; grid-template-columns: repeat(var(--n, 1), minmax(0, 1fr)); padding-top: 4px; }
+.am-timeline--h li { position: relative; text-align: center; padding: 0 6px; }
+.am-timeline--h li::before {
+  content: ""; position: absolute; top: 31px; left: 0; right: 0; border-top: var(--bw) solid var(--line);
+}
+.am-timeline--h li:first-child::before { left: 50%; }
+.am-timeline--h li:last-child::before { right: 50%; }
+.am-tl-when { display: block; font-size: 15px; font-weight: 500; height: 24px; }
+.am-tl-dot {
+  position: relative; display: block; width: 11px; height: 11px; margin: 2px auto 8px;
+  border: var(--bw) solid var(--line); border-radius: 50%; background: var(--paper);
+}
+.am-tl-item--hi .am-tl-dot { background: var(--accent); border-color: var(--accent); }
+.am-tl-title { display: block; font-size: 12.5px; font-weight: 500; }
+.am-tl-text { display: block; font-size: 12px; color: var(--ink-2); line-height: 1.45; }
+.am-timeline--v li { position: relative; padding: 0 0 14px 22px; }
+.am-timeline--v li::before { content: ""; position: absolute; left: 5px; top: 6px; bottom: -6px; border-left: var(--bw) solid var(--line-2); }
+.am-timeline--v li:last-child::before { display: none; }
+.am-timeline--v .am-tl-dot { position: absolute; left: 0; top: 4px; margin: 0; }
+.am-timeline--v .am-tl-when { display: inline; height: auto; font: 12px var(--font-mono); color: var(--ink-2); margin-right: 8px; }
+.am-timeline--v .am-tl-title { display: inline; font-size: 14px; }
+.am-timeline--v .am-tl-text { margin-top: 2px; }
+
+/* ── annot 句子标注 ──────────────────────── */
+.am-annot + .am-annot { border-top: 1px solid var(--line-2); padding-top: 12px; }
+.am-annot-head { display: flex; justify-content: space-between; gap: 12px; font-size: 13px; font-weight: 600; margin-bottom: 8px; }
+.am-annot-meta { font: 11px var(--font-mono); font-weight: 400; color: var(--ink-2); }
+.am-annot-scroll { overflow-x: auto; }
+.am-annot-line {
+  position: relative; display: inline-block; white-space: pre; font: 14px/1.6 var(--font-mono);
+  padding-bottom: calc(var(--rows, 0) * 17px + 14px);
+}
+.am-annot-line--wrap { display: block; white-space: normal; padding-bottom: 10px; }
+.am-annot-line--wrap .am-seg { white-space: nowrap; }
+.am-seg { position: relative; }
+.am-seg::after {
+  content: ""; position: absolute; left: 1px; right: 1px; top: calc(100% + 1px); height: 5px;
+  border: 1px solid var(--accent); border-top: 0;
+}
+.am-seg-n {
+  position: absolute; left: 0; top: calc(100% + 8px + var(--row, 0) * 17px);
+  font: 11px/16px var(--font-sans); color: var(--accent); white-space: nowrap;
+}
+.am-seg--err { color: var(--err); }
+.am-seg--err::after { border-color: var(--err); }
+.am-seg--err .am-seg-n { color: var(--err); }
+.am-annot-caption { font-size: 12px; color: var(--ink-2); }
+
+/* ── limits 限值条 ───────────────────────── */
+.am-lim + .am-lim { margin-top: 14px; }
+.am-lim-head { display: flex; justify-content: space-between; gap: 12px; font-size: 13px; margin-bottom: 4px; }
+.am-lim-val { font: 12px var(--font-mono); color: var(--accent); white-space: nowrap; }
+.am-lim-track { position: relative; height: 12px; border: 1px solid var(--line-2); background: var(--fill); border-radius: calc(var(--radius) / 2); }
+.am-lim-fill { position: absolute; left: 0; top: 0; bottom: 0; background: var(--accent-bg); border-right: 1px solid var(--accent); }
+.am-lim-mark { position: absolute; top: -4px; bottom: -4px; border-left: 2px solid var(--accent); }
+.am-lim.is-over .am-lim-fill { background: var(--err-bg); border-right-color: var(--err); }
+.am-lim.is-over .am-lim-val { color: var(--err); }
+.am-lim-ticks { position: relative; height: 16px; font: 10px/16px var(--font-mono); color: var(--ink-3); }
+.am-lim-ticks span { position: absolute; transform: translateX(-50%); }
+.am-lim-ticks span:first-child { transform: none; }
+.am-lim-note { font-size: 11px; color: var(--ink-2); margin-left: 6px; }
+
+/* ── tree 结构树 ─────────────────────────── */
+.am-tree { font-size: 13px; }
+.am-tree-root { display: flex; justify-content: center; position: relative; padding-bottom: 18px; }
+.am-tree-root::after { content: ""; position: absolute; bottom: 0; left: 50%; height: 18px; border-left: var(--bw) solid var(--line); }
+.am-tree-root--solo { padding-bottom: 12px; }
+.am-tree-root--solo::after { display: none; }
+.am-tree-box {
+  border: var(--bw) solid var(--line); background: var(--paper); padding: 6px 14px; text-align: center;
+  border-radius: var(--radius); font-weight: 600;
+}
+.am-tree-box small { display: block; font-weight: 400; color: var(--ink-2); font-size: 12px; }
+.am-tree-box--root { background: var(--accent-bg); font-size: 15px; padding: 8px 28px; }
+.am-tree-cols { display: grid; grid-template-columns: repeat(var(--n, 1), minmax(0, 1fr)); }
+.am-tree-col { position: relative; padding: 18px 8px 0; min-width: 0; }
+.am-tree-col::before { content: ""; position: absolute; top: 0; left: 0; right: 0; border-top: var(--bw) solid var(--line); }
+.am-tree-col:first-child::before { left: 50%; }
+.am-tree-col:last-child::before { right: 50%; }
+.am-tree-col::after { content: ""; position: absolute; top: 0; left: 50%; height: 18px; border-left: var(--bw) solid var(--line); }
+.am-tree-list, .am-tree-list ul { list-style: none; margin: 0; padding: 0; }
+.am-tree-col > .am-tree-list { margin: 8px 0 0 14px; }
+.am-tree-list ul { margin-left: 16px; }
+.am-tree-list li { position: relative; padding: 3px 0 3px 18px; }
+.am-tree-list li::before { content: ""; position: absolute; left: 0; top: 0.95em; width: 12px; border-top: 1px solid var(--ink-3); }
+.am-tree-list li::after { content: ""; position: absolute; left: 0; top: 0; bottom: 0; border-left: 1px solid var(--ink-3); }
+.am-tree-list li:last-child::after { bottom: auto; height: 0.95em; }
+.am-tree-tag { font: 11px var(--font-mono); color: var(--ink-3); margin-right: 4px; }
+.am-tree code { font: 12px var(--font-mono); }
+.am-tree-sub { display: block; font-size: 11.5px; color: var(--ink-2); }
+.am-tree-hi > .am-tree-label { color: var(--accent); font-weight: 600; }
+
+/* ── 图（flow / sequence）───────────────── */
+.am-diagram { margin: 0; overflow-x: auto; text-align: center; }
+.am-diagram svg { max-width: 100%; height: auto; font-family: var(--font-sans); }
+.am-diagram text { fill: var(--ink); font-size: 13px; }
+.am-node-shape { fill: var(--paper); stroke: var(--line); stroke-width: var(--bw); }
+.am-node--hi .am-node-shape { fill: var(--accent-bg); stroke: var(--accent); }
+.am-node--hi text { fill: var(--accent); font-weight: 600; }
+.am-edge { fill: none; stroke: var(--ink-2); stroke-width: 1.3; }
+.am-edge--dashed { stroke-dasharray: 5 4; }
+.am-arrow { fill: var(--ink-2); }
+.am-edge-label rect { fill: var(--paper); }
+.am-diagram .am-edge-label text { fill: var(--accent); font-size: 11.5px; }
+.am-cluster { fill: var(--fill); stroke: var(--line-2); stroke-width: 1; stroke-dasharray: 4 3; }
+.am-diagram .am-cluster-label { fill: var(--ink-2); font: 11px var(--font-mono); }
+.am-lifeline { stroke: var(--ink-3); stroke-width: 1; stroke-dasharray: 4 4; }
+.am-actor { fill: var(--paper); stroke: var(--line); stroke-width: var(--bw); }
+.am-note { fill: var(--warn-bg); stroke: var(--warn); stroke-width: 1; }
+.am-diagram .am-step { fill: var(--ink-3); font: 10px var(--font-mono); }
+
+/* ── doc 线性讲解 ────────────────────────── */
+.am-doc { max-width: 1120px; margin: 0 auto; padding: 40px 28px 64px; }
+.am-doc-layout { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 32px; align-items: start; }
+.am-doc-layout--notoc { grid-template-columns: minmax(0, 1fr); max-width: 860px; }
+.am-toc { position: sticky; top: 24px; font-size: 13px; }
+.am-toc a { display: block; color: var(--ink-2); text-decoration: none; padding: 4px 0 4px 10px; border-left: 2px solid var(--line-2); }
+.am-toc a:hover { color: var(--ink); border-left-color: var(--accent); }
+.am-doc-body > .am-panel + .am-panel { margin-top: 20px; }
+
+/* ── 响应式与打印 ─────────────────────────── */
+@media (max-width: 1100px) {
+  .am-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .am-grid > .am-panel { grid-column: auto !important; }
+  .am-grid > .am-panel.am-span-wide { grid-column: 1 / -1 !important; }
+}
+@media (max-width: 760px) {
+  .am-sheet, .am-doc { padding: 56px 12px 24px; }
+  .am-head { padding-right: 0; }
+  .am-grid { grid-template-columns: minmax(0, 1fr); }
+  .am-grid > .am-panel.am-span-wide { grid-column: auto !important; }
+  html[data-theme="blueprint"] .am-frame { padding: 0; border: 0; }
+  html[data-theme="blueprint"] .am-frame::before, html[data-theme="blueprint"] .am-ruler { display: none; }
+  .am-doc-layout { grid-template-columns: minmax(0, 1fr); }
+  .am-toc { position: static; }
+  .am-timeline--h { grid-template-columns: minmax(0, 1fr); }
+  .am-tree-cols { grid-template-columns: minmax(0, 1fr); }
+}
+.am-colophon { text-align: center; padding: 0 0 28px; font: 11px var(--font-mono); color: var(--ink-3); }
+
+@media print {
+  .am-toolbar { display: none; }
+  body { background: var(--paper); }
+  .am-panel { break-inside: avoid; box-shadow: none; }
+}
+.am-panel--bare { border: 0; background: transparent; box-shadow: none; }
+.am-panel--bare > .am-panel-body { padding: 0; }
+.am-panel--bare .am-kv { background: var(--paper); }
+
+</style>
+</head>
+<body>
+<div class="am-toolbar">
+<button class="am-btn" type="button" data-am="theme" data-labels="{&quot;blueprint&quot;:&quot;主题：图纸&quot;,&quot;shadcn&quot;:&quot;主题：卡片&quot;}">主题：图纸</button>
+<button class="am-btn" type="button" data-am="mode" data-labels="{&quot;auto&quot;:&quot;明暗：跟随系统&quot;,&quot;light&quot;:&quot;明暗：亮&quot;,&quot;dark&quot;:&quot;明暗：暗&quot;}">明暗：跟随系统</button>
+<button class="am-btn" type="button" data-am="copy" data-done="已复制 ✓">复制源稿</button>
+</div>
+<main class="am-doc">
+<header class="am-head"><h1>不支持业务的清晰出口：产品需求规划</h1><div class="am-intro am-md"><div class="am-md"><p>日期：2026-10-12。状态：已按用户补充要求实现商城人工客服占位卡与说明页；隔离50项检查通过，未加载日常服务。</p>
+<p>用户已安排另一位 Agent 修改工具故障反馈。本聊天跳过该项，接续<a href="../../01-%E9%A1%B9%E7%9B%AE%E6%A6%82%E8%A7%88/%E9%A1%B9%E7%9B%AE%E7%BC%BA%E5%8F%A3%E7%9B%98%E7%82%B9%E4%B8%8E%E6%8E%A8%E8%BF%9B%E4%BC%98%E5%85%88%E7%BA%A7.md">推进清单</a>第四项。本轮只修改商城Java网关、页面转发与客服页面。另一位Agent负责Python路由、商品工具及故障反馈。本轮不重启日常服务。</p>
+</div></div></header>
+<div class="am-doc-layout">
+<nav class="am-toc" aria-label="目录"><a href="#panel-A">A · 1. 判断与客户场景</a><a href="#panel-B">B · 2. 当前证据与问题</a><a href="#panel-C">C · 3. 首版业务边界</a><a href="#panel-D">D · 4. 最小实现方案与取舍</a><a href="#panel-E">E · 5. 修改范围与并行边界</a><a href="#panel-F">F · 6. 验收标准与实施顺序</a></nav><div class="am-doc-body">
+<section class="am-panel" id="panel-A">
+<header class="am-panel-head"><span class="am-panel-id">A</span><h2>1. 判断与客户场景</h2></header>
+<div class="am-panel-body"><div class="am-md"><p><strong>客户已经说清楚要换货，系统应说明当前办不了换货，而不是再次问需求或替客户准备退款。</strong> 当前没有真人接管能力。用户明确要求先放置入口：展示确认卡，确认后进入独立页面，提示“人工客服功能开发中”。</p>
+<p>首版目标是准确停止错误办理，并说明真实可用的下一步。完整换货、维修、部分退款和真人坐席建设另行排期。占位入口已接入商城；真人服务和完整换货办理仍未实现。</p>
+<p>示例（拟定话术）：</p>
+<blockquote>
+<p>客户：收到时就破了，我只要换一件，不要退款。</p>
+<p>客服：你希望处理商品破损并换一件，不是退款。当前客服助手不能办理换货，本次没有创建换货或退款申请。人工客服功能开发中。你可以确认前往人工客服说明页面，或选择暂不前往、留在当前对话。</p>
+</blockquote>
+<p>“查看记录”只帮助核对已有申请，不是换货提交入口。占位页不代表真人办理渠道已开放，不能虚报接入或受理状态。</p>
+</div></div>
+</section>
+<section class="am-panel" id="panel-B">
+<header class="am-panel-head"><span class="am-panel-id">B</span><h2>2. 当前证据与问题</h2></header>
+<div class="am-panel-body"><div class="am-md"><p>上一轮设计阶段执行现有函数，禁止网络调用，没有运行完整 <code>chat</code> 或访问业务数据库。4条构造输入及2项契约断言完成；详见<a href="../../../analysis/07-%E4%B8%8D%E6%94%AF%E6%8C%81%E4%B8%9A%E5%8A%A1%E4%B8%8E%E4%BA%BA%E5%B7%A5%E5%85%A5%E5%8F%A3/%E4%B8%8D%E6%94%AF%E6%8C%81%E4%B8%9A%E5%8A%A1%E5%87%BA%E5%8F%A3%E8%AE%BE%E8%AE%A1%E6%A0%B8%E9%AA%8C/current.json">原始记录</a>和<a href="../../../analysis/07-%E4%B8%8D%E6%94%AF%E6%8C%81%E4%B8%9A%E5%8A%A1%E4%B8%8E%E4%BA%BA%E5%B7%A5%E5%85%A5%E5%8F%A3/%E4%B8%8D%E6%94%AF%E6%8C%81%E4%B8%9A%E5%8A%A1%E5%87%BA%E5%8F%A3%E8%AE%BE%E8%AE%A1%E6%A0%B8%E9%AA%8C/check_current.py">复跑脚本</a>。这是当前行为诊断，不是优化后通过成绩。</p>
+<div class="am-table-wrap"><table>
+<thead>
+<tr>
+<th>输入或检查</th>
+<th>当前观察</th>
+<th>客户风险</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ORD1234 收到时就破了，我只要换一件，不要退款</td>
+<td>规则分类为 <code>refund_request</code>，计划要求订单读取及退款 Workflow</td>
+<td>否定的退款被当成办理，真实换货诉求被覆盖</td>
+</tr>
+<tr>
+<td>ORD1234 两件里只退一件，给我部分退款</td>
+<td>同样为 <code>refund_request</code></td>
+<td>现有整单流程无法表达部分金额或件数</td>
+</tr>
+<tr>
+<td>ORD1234 的椅子坏了，帮我维修</td>
+<td><code>general_chat</code>，普通咨询回复是通用问候</td>
+<td>客户说清了维修，系统却没有回应能力边界</td>
+</tr>
+<tr>
+<td>未发货、明确申请整单退款</td>
+<td><code>refund_request</code></td>
+<td>这条正常路径应继续保留</td>
+</tr>
+<tr>
+<td>输出 <code>unsupported_service</code> 标签</td>
+<td>解析器不接受，返回 <code>None</code></td>
+<td>只改 Prompt 不能接通新的出口</td>
+</tr>
+<tr>
+<td>B15 的“收到时就破了”</td>
+<td>原因提取结果为 <code>None</code></td>
+<td>现有固定词无法覆盖这一破损表达</td>
+</tr>
+</tbody></table></div>
+<p>静态依据：</p>
+<div class="am-table-wrap"><table>
+<thead>
+<tr>
+<th>位置</th>
+<th>已确认事实</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>backend/agent/tools/planning.py:68–99</code></td>
+<td>规则按“退货／退款”命中，没有独立不支持业务出口，也没有覆盖“不要退款”的办理否定</td>
+</tr>
+<tr>
+<td><code>backend/api/schemas.py:20–36</code>；<code>backend/agent/models/router_client.py:94–111</code></td>
+<td>意图集合无不支持标签；解析器按同一集合校验</td>
+</tr>
+<tr>
+<td><code>backend/resources/prompts/route_contract.md:12–14</code></td>
+<td>已要求质量售后保留原义，但没有独立可执行出口</td>
+</tr>
+<tr>
+<td><code>CustomerServiceGatewayService.java:783–808,865–866</code></td>
+<td>缺 Workflow 仍可能按退款标签准备申请；其他退货原因只匹配有限固定词，且拦截主要针对退货分支</td>
+</tr>
+<tr>
+<td><code>CustomerServiceGatewayService.java:845–847</code></td>
+<td>旧草稿存在时，普通回复仍可能附带原待确认申请；改口后的旧卡保护需要独立验收</td>
+</tr>
+<tr>
+<td><code>frontend/src/shop/App.tsx:931,1110–1235</code></td>
+<td>“联系荒野客服”打开 Agent 对话；核验的客服 Controller、Response 中未找到真人接管接口</td>
+</tr>
+<tr>
+<td><code>DataInitializer.java:303–305</code>；<code>frontend/src/shop/App.tsx:1073</code></td>
+<td>种子政策写了免费换货、承担运费、创建换货申请，页面也列出换货说明；这不证明当前具备办理能力</td>
+</tr>
+</tbody></table></div>
+<p>Java与前端路径均相对于 <code>ecommerce-backend/</code>。未核实页面当前数据库是否仍使用该种子政策；不能把源码种子文案写成当前在线页面的实测结果。历史B15曾被真实模型判为退货，见<a href="../../03-%E8%AF%84%E6%B5%8B%E4%B8%8E%E9%97%AE%E9%A2%98/%E6%84%8F%E5%9B%BE%E4%B8%8E%E6%94%BF%E7%AD%96%E4%B8%93%E9%A1%B9/%E6%84%8F%E5%9B%BE%E8%AF%86%E5%88%AB%E6%B5%8B%E8%AF%95.md">历史意图测试</a>，不与本轮规则检查合并统计。</p>
+</div></div>
+</section>
+<section class="am-panel" id="panel-C">
+<header class="am-panel-head"><span class="am-panel-id">C</span><h2>3. 首版业务边界</h2></header>
+<div class="am-panel-body"><div class="am-md"><div class="am-table-wrap"><table>
+<thead>
+<tr>
+<th>客户实际诉求</th>
+<th>首版应做什么</th>
+<th>不应做什么</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>换货、维修、补发、质量问题处理</td>
+<td>保留原诉求，明确本助手不能办理，说明可核实入口或入口缺失</td>
+<td>改成无理由退货，承诺已受理、换新、运费承担</td>
+</tr>
+<tr>
+<td>只退一件、退部分金额、部分退货</td>
+<td>说明目前只能办理符合条件的整单流程</td>
+<td>自动扩大成整单退款，默认金额或件数</td>
+</tr>
+<tr>
+<td>本人未发货整单退款、符合条件的七天无理由整单退货</td>
+<td>沿用现有核验及本人确认流程</td>
+<td>因出现“退货／退款”就一律阻断</td>
+</tr>
+<tr>
+<td>“质量问题怎么办”“换货规则是什么”</td>
+<td>解释已核实政策与本助手办理边界</td>
+<td>把咨询当成申请，清掉原退款草稿</td>
+</tr>
+<tr>
+<td>只给订单号、只说帮我处理一下</td>
+<td>保留 <code>unknown</code>，澄清目标</td>
+<td>猜换货、退款或其他办理</td>
+</tr>
+<tr>
+<td>否定换货，明确要求未发货整单退款</td>
+<td>识别客户最终明确的受支持目标</td>
+<td>仅因出现“换货”二字就拦截</td>
+</tr>
+</tbody></table></div>
+<p>质量描述本身不等于新的办理指令。“商品坏了”不能被改写成“七天无理由”；也不能据此断言客户没有任何售后权利。涉及真实政策判断时只回答已核实依据。</p>
+</div></div>
+</section>
+<section class="am-panel" id="panel-D">
+<header class="am-panel-head"><span class="am-panel-id">D</span><h2>4. 最小实现方案与取舍</h2></header>
+<div class="am-panel-body"><div class="am-md"><p>按用户补充要求，复用商城卡片与路由，不新增Python意图标签。Java网关在调用模型和准备售后之前拦截明确的不支持业务。固定Agent即使误判退款，也不能让这些请求进入整单流程。此前新增<code>unsupported_service</code>标签的建议由本轮方案替代；Python独立工作台不属于本次接入范围。</p>
+<p>维修、部分退款／退货、换货、补发、质量售后，以及客户主动要求人工客服，都返回<code>pendingAction=HUMAN_SUPPORT</code>。其他Agent路径返回<code>next_action=transfer_to_human</code>且没有有效审批Workflow时，也提供同一张卡。退款审批继续使用业务卡，不引向开发中页面。</p>
+<p>人工卡复用现有<code>confirmRequired</code>、标题、摘要和<code>actions</code>。动作是<code>OPEN_HUMAN_SUPPORT</code>（确认前往）和<code>STAY_WITH_AGENT</code>（暂不前往）。前端单独处理导航，不调用售后<code>resume</code>，不生成换货、退款或人工服务申请。</p>
+<p>新会话没有提交凭证。原退款草稿保留时，响应沿用原凭证，让原业务卡继续有效；它不是人工交接凭证。明确改办未支持业务时，服务端清理原草稿凭证，前端禁用旧卡；向服务端重发旧凭证也不能提交。</p>
+<h3>4.1 改口与旧确认卡</h3>
+<p>已有未提交退款，客户明确说“不要退款，改换货”：原卡与凭证失效，新回复只有人工入口卡。已提交申请不撤销。只问换货政策或单独要求人工入口时，保留原草稿，进入或退出说明页不修改申请。</p>
+<p>识别规则覆盖明确业务词与直接否定。否定换货／人工后明确申请整单退款仍走原流程。复杂组合任务和所有自然语言表达的覆盖未纳入首版。局部规则验证不代表真实模型识别率。</p>
+<h3>4.2 占位页与可扩展位置</h3>
+<p>点击前，人工卡就说明功能开发中。确认后进入<code>/human-support</code>，显示“人工客服功能开发中”。页面明确尚未接入真人，未登记服务请求或提交售后申请，并提供“返回客服助手”。暂不前往则留在对话并显示选择结果。</p>
+<p>占位页沿用商城路由和样式，没有外部URL、排队、工单或会话复制。后续真实服务可以替换<code>onHumanSupport</code>的导航去向与目标页内容。真实交接的身份、上下文和回执需要届时接入，不属于当前已有能力。同页往返保留对话，刷新整页仍按现有商城规则重建前端对话。</p>
+<p>种子中的换货政策与助手办理能力分开阅读。本轮没有重置数据库政策或更改运费规则。新卡与说明页明确当前不可办理，不把示例政策变成执行能力。</p>
+</div></div>
+</section>
+<section class="am-panel" id="panel-E">
+<header class="am-panel-head"><span class="am-panel-id">E</span><h2>5. 修改范围与并行边界</h2></header>
+<div class="am-panel-body"><div class="am-md"><div class="am-table-wrap"><table>
+<thead>
+<tr>
+<th>位置</th>
+<th>本轮实际修改</th>
+<th>复用与限制</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>CustomerServiceGatewayService.java</code></td>
+<td>执行前业务边界、人工占位卡、改口后旧卡失效</td>
+<td>复用草稿清理与响应契约，保留鉴权、归属和提交校验</td>
+</tr>
+<tr>
+<td><code>frontend/src/shop/App.tsx</code></td>
+<td>人工卡导航分支、独立说明页、返回客服</td>
+<td>复用路由与卡片样式，不增依赖、配置或新状态机</td>
+</tr>
+<tr>
+<td><code>config/SpaForwardController.java</code></td>
+<td>增加一条人工页转发</td>
+<td>支持Java静态部署后的直达与刷新</td>
+</tr>
+<tr>
+<td><code>analysis/07-不支持业务与人工入口/人工客服占位入口实现验收/</code></td>
+<td>改动前后固定Agent、隔离H2与浏览器检查</td>
+<td>独立18302／18303端口，不连接在线模型或日常MySQL</td>
+</tr>
+</tbody></table></div>
+<p>Java和前端业务路径相对于<code>ecommerce-backend/</code>。Python类型、Prompt、工具、前端共享响应类型和Java响应类均未修改。故障反馈仍由另一位Agent负责，不将本项成绩写成其验收结果。</p>
+</div></div>
+</section>
+<section class="am-panel" id="panel-F">
+<header class="am-panel-head"><span class="am-panel-id">F</span><h2>6. 验收标准与实施顺序</h2></header>
+<div class="am-panel-body"><div class="am-md"><p>以下是本轮定向验收要求，实际结果见<a href="../../../analysis/07-%E4%B8%8D%E6%94%AF%E6%8C%81%E4%B8%9A%E5%8A%A1%E4%B8%8E%E4%BA%BA%E5%B7%A5%E5%85%A5%E5%8F%A3/%E4%BA%BA%E5%B7%A5%E5%AE%A2%E6%9C%8D%E5%8D%A0%E4%BD%8D%E5%85%A5%E5%8F%A3%E5%AE%9E%E7%8E%B0%E9%AA%8C%E6%94%B6/%E7%BB%93%E6%9E%9C.md">实现验收</a>。构造样本用于定向检查，不能外推真实用户成功率。</p>
+<div class="am-table-wrap"><table>
+<thead>
+<tr>
+<th>用例组</th>
+<th>关键输入／初始条件</th>
+<th>必须观察到的结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>V01 明确换货</td>
+<td>本人有效订单；“收到时就破了，只要换一件，不要退款”</td>
+<td>保留破损换货目标，展示人工占位卡，无退款／退货Workflow和业务提交卡，不创建申请</td>
+</tr>
+<tr>
+<td>V02 部分与维修</td>
+<td>“两件只退一件”“椅子坏了，帮我维修”</td>
+<td>各自说明能力边界，不是通用问候，不创建整单申请</td>
+</tr>
+<tr>
+<td>V03 防止过度拦截</td>
+<td>“不用换货，未发货订单我要整单退款”；明确七天无理由申请</td>
+<td>进入已有资格核验和确认卡，确认前不写申请</td>
+</tr>
+<tr>
+<td>V04 仅咨询与目标未知</td>
+<td>换货政策咨询；仅订单号</td>
+<td>前者说明政策／能力边界，后者澄清目标；不新增办理</td>
+</tr>
+<tr>
+<td>V05 明确替换原办理</td>
+<td>原退款提交卡有效；“不要退款，改换货”</td>
+<td>旧token／revision不能提交，新回复无卡；已提交申请保持原状态</td>
+</tr>
+<tr>
+<td>V06 回退与模型误判</td>
+<td>模型不可用；固定模型故意返回退款／退货标签</td>
+<td>明确不支持诉求仍不能准备或提交错误申请；安全与正常退款检查仍有效</td>
+</tr>
+<tr>
+<td>V07 出口与承诺</td>
+<td>没有真人接管配置</td>
+<td>确认后进入开发中页，暂不前往留在对话；不虚报转接或受理，两项均不调用提交接口</td>
+</tr>
+</tbody></table></div>
+<p>顺序：先用固定模型与隔离订单复现V01及V05，再做最小跨端修改；完成相关Python检查、Java编译及必要页面构建；用隔离H2与浏览器验证回复、动作、旧凭证和申请状态。逐轮保存截图和文字，比较8张业务表，V05中仅允许未提交会话状态变化。无相关新失败后停止，不自动扩大模型评测或重启日常服务。</p>
+<p>未来出现真实运营渠道时，替换占位页并补真实交接回执。当前设计可以完成“诚实的能力边界”，仍不能让客户在本系统完成换货；这是产品能力限制，不能用更好的话术掩盖。</p>
+</div></div>
+</section>
+</div>
+</div>
+</main>
+<footer class="am-colophon">Generated by Answer me with HTML 0.4.2 · 2026-10-12 13:23</footer>
+<textarea id="am-source" hidden readonly aria-hidden="true">---
+title: 不支持业务的清晰出口：产品需求规划
+template: doc
+lang: zh
+---
+
+日期：2026-10-12。状态：已按用户补充要求实现商城人工客服占位卡与说明页；隔离50项检查通过，未加载日常服务。
+
+用户已安排另一位 Agent 修改工具故障反馈。本聊天跳过该项，接续[推进清单](../../01-项目概览/项目缺口盘点与推进优先级.md)第四项。本轮只修改商城Java网关、页面转发与客服页面。另一位Agent负责Python路由、商品工具及故障反馈。本轮不重启日常服务。
+
+## 1. 判断与客户场景
+
+**客户已经说清楚要换货，系统应说明当前办不了换货，而不是再次问需求或替客户准备退款。** 当前没有真人接管能力。用户明确要求先放置入口：展示确认卡，确认后进入独立页面，提示“人工客服功能开发中”。
+
+首版目标是准确停止错误办理，并说明真实可用的下一步。完整换货、维修、部分退款和真人坐席建设另行排期。占位入口已接入商城；真人服务和完整换货办理仍未实现。
+
+示例（拟定话术）：
+
+&gt; 客户：收到时就破了，我只要换一件，不要退款。
+&gt;
+&gt; 客服：你希望处理商品破损并换一件，不是退款。当前客服助手不能办理换货，本次没有创建换货或退款申请。人工客服功能开发中。你可以确认前往人工客服说明页面，或选择暂不前往、留在当前对话。
+
+“查看记录”只帮助核对已有申请，不是换货提交入口。占位页不代表真人办理渠道已开放，不能虚报接入或受理状态。
+
+## 2. 当前证据与问题
+
+上一轮设计阶段执行现有函数，禁止网络调用，没有运行完整 `chat` 或访问业务数据库。4条构造输入及2项契约断言完成；详见[原始记录](../../../analysis/07-不支持业务与人工入口/不支持业务出口设计核验/current.json)和[复跑脚本](../../../analysis/07-不支持业务与人工入口/不支持业务出口设计核验/check_current.py)。这是当前行为诊断，不是优化后通过成绩。
+
+| 输入或检查 | 当前观察 | 客户风险 |
+|---|---|---|
+| ORD1234 收到时就破了，我只要换一件，不要退款 | 规则分类为 `refund_request`，计划要求订单读取及退款 Workflow | 否定的退款被当成办理，真实换货诉求被覆盖 |
+| ORD1234 两件里只退一件，给我部分退款 | 同样为 `refund_request` | 现有整单流程无法表达部分金额或件数 |
+| ORD1234 的椅子坏了，帮我维修 | `general_chat`，普通咨询回复是通用问候 | 客户说清了维修，系统却没有回应能力边界 |
+| 未发货、明确申请整单退款 | `refund_request` | 这条正常路径应继续保留 |
+| 输出 `unsupported_service` 标签 | 解析器不接受，返回 `None` | 只改 Prompt 不能接通新的出口 |
+| B15 的“收到时就破了” | 原因提取结果为 `None` | 现有固定词无法覆盖这一破损表达 |
+
+静态依据：
+
+| 位置 | 已确认事实 |
+|---|---|
+| `backend/agent/tools/planning.py:68–99` | 规则按“退货／退款”命中，没有独立不支持业务出口，也没有覆盖“不要退款”的办理否定 |
+| `backend/api/schemas.py:20–36`；`backend/agent/models/router_client.py:94–111` | 意图集合无不支持标签；解析器按同一集合校验 |
+| `backend/resources/prompts/route_contract.md:12–14` | 已要求质量售后保留原义，但没有独立可执行出口 |
+| `CustomerServiceGatewayService.java:783–808,865–866` | 缺 Workflow 仍可能按退款标签准备申请；其他退货原因只匹配有限固定词，且拦截主要针对退货分支 |
+| `CustomerServiceGatewayService.java:845–847` | 旧草稿存在时，普通回复仍可能附带原待确认申请；改口后的旧卡保护需要独立验收 |
+| `frontend/src/shop/App.tsx:931,1110–1235` | “联系荒野客服”打开 Agent 对话；核验的客服 Controller、Response 中未找到真人接管接口 |
+| `DataInitializer.java:303–305`；`frontend/src/shop/App.tsx:1073` | 种子政策写了免费换货、承担运费、创建换货申请，页面也列出换货说明；这不证明当前具备办理能力 |
+
+Java与前端路径均相对于 `ecommerce-backend/`。未核实页面当前数据库是否仍使用该种子政策；不能把源码种子文案写成当前在线页面的实测结果。历史B15曾被真实模型判为退货，见[历史意图测试](../../03-评测与问题/意图与政策专项/意图识别测试.md)，不与本轮规则检查合并统计。
+
+## 3. 首版业务边界
+
+| 客户实际诉求 | 首版应做什么 | 不应做什么 |
+|---|---|---|
+| 换货、维修、补发、质量问题处理 | 保留原诉求，明确本助手不能办理，说明可核实入口或入口缺失 | 改成无理由退货，承诺已受理、换新、运费承担 |
+| 只退一件、退部分金额、部分退货 | 说明目前只能办理符合条件的整单流程 | 自动扩大成整单退款，默认金额或件数 |
+| 本人未发货整单退款、符合条件的七天无理由整单退货 | 沿用现有核验及本人确认流程 | 因出现“退货／退款”就一律阻断 |
+| “质量问题怎么办”“换货规则是什么” | 解释已核实政策与本助手办理边界 | 把咨询当成申请，清掉原退款草稿 |
+| 只给订单号、只说帮我处理一下 | 保留 `unknown`，澄清目标 | 猜换货、退款或其他办理 |
+| 否定换货，明确要求未发货整单退款 | 识别客户最终明确的受支持目标 | 仅因出现“换货”二字就拦截 |
+
+质量描述本身不等于新的办理指令。“商品坏了”不能被改写成“七天无理由”；也不能据此断言客户没有任何售后权利。涉及真实政策判断时只回答已核实依据。
+
+## 4. 最小实现方案与取舍
+
+按用户补充要求，复用商城卡片与路由，不新增Python意图标签。Java网关在调用模型和准备售后之前拦截明确的不支持业务。固定Agent即使误判退款，也不能让这些请求进入整单流程。此前新增`unsupported_service`标签的建议由本轮方案替代；Python独立工作台不属于本次接入范围。
+
+维修、部分退款／退货、换货、补发、质量售后，以及客户主动要求人工客服，都返回`pendingAction=HUMAN_SUPPORT`。其他Agent路径返回`next_action=transfer_to_human`且没有有效审批Workflow时，也提供同一张卡。退款审批继续使用业务卡，不引向开发中页面。
+
+人工卡复用现有`confirmRequired`、标题、摘要和`actions`。动作是`OPEN_HUMAN_SUPPORT`（确认前往）和`STAY_WITH_AGENT`（暂不前往）。前端单独处理导航，不调用售后`resume`，不生成换货、退款或人工服务申请。
+
+新会话没有提交凭证。原退款草稿保留时，响应沿用原凭证，让原业务卡继续有效；它不是人工交接凭证。明确改办未支持业务时，服务端清理原草稿凭证，前端禁用旧卡；向服务端重发旧凭证也不能提交。
+
+### 4.1 改口与旧确认卡
+
+已有未提交退款，客户明确说“不要退款，改换货”：原卡与凭证失效，新回复只有人工入口卡。已提交申请不撤销。只问换货政策或单独要求人工入口时，保留原草稿，进入或退出说明页不修改申请。
+
+识别规则覆盖明确业务词与直接否定。否定换货／人工后明确申请整单退款仍走原流程。复杂组合任务和所有自然语言表达的覆盖未纳入首版。局部规则验证不代表真实模型识别率。
+
+### 4.2 占位页与可扩展位置
+
+点击前，人工卡就说明功能开发中。确认后进入`/human-support`，显示“人工客服功能开发中”。页面明确尚未接入真人，未登记服务请求或提交售后申请，并提供“返回客服助手”。暂不前往则留在对话并显示选择结果。
+
+占位页沿用商城路由和样式，没有外部URL、排队、工单或会话复制。后续真实服务可以替换`onHumanSupport`的导航去向与目标页内容。真实交接的身份、上下文和回执需要届时接入，不属于当前已有能力。同页往返保留对话，刷新整页仍按现有商城规则重建前端对话。
+
+种子中的换货政策与助手办理能力分开阅读。本轮没有重置数据库政策或更改运费规则。新卡与说明页明确当前不可办理，不把示例政策变成执行能力。
+
+## 5. 修改范围与并行边界
+
+| 位置 | 本轮实际修改 | 复用与限制 |
+|---|---|---|
+| `CustomerServiceGatewayService.java` | 执行前业务边界、人工占位卡、改口后旧卡失效 | 复用草稿清理与响应契约，保留鉴权、归属和提交校验 |
+| `frontend/src/shop/App.tsx` | 人工卡导航分支、独立说明页、返回客服 | 复用路由与卡片样式，不增依赖、配置或新状态机 |
+| `config/SpaForwardController.java` | 增加一条人工页转发 | 支持Java静态部署后的直达与刷新 |
+| `analysis/07-不支持业务与人工入口/人工客服占位入口实现验收/` | 改动前后固定Agent、隔离H2与浏览器检查 | 独立18302／18303端口，不连接在线模型或日常MySQL |
+
+Java和前端业务路径相对于`ecommerce-backend/`。Python类型、Prompt、工具、前端共享响应类型和Java响应类均未修改。故障反馈仍由另一位Agent负责，不将本项成绩写成其验收结果。
+
+## 6. 验收标准与实施顺序
+
+以下是本轮定向验收要求，实际结果见[实现验收](../../../analysis/07-不支持业务与人工入口/人工客服占位入口实现验收/结果.md)。构造样本用于定向检查，不能外推真实用户成功率。
+
+| 用例组 | 关键输入／初始条件 | 必须观察到的结果 |
+|---|---|---|
+| V01 明确换货 | 本人有效订单；“收到时就破了，只要换一件，不要退款” | 保留破损换货目标，展示人工占位卡，无退款／退货Workflow和业务提交卡，不创建申请 |
+| V02 部分与维修 | “两件只退一件”“椅子坏了，帮我维修” | 各自说明能力边界，不是通用问候，不创建整单申请 |
+| V03 防止过度拦截 | “不用换货，未发货订单我要整单退款”；明确七天无理由申请 | 进入已有资格核验和确认卡，确认前不写申请 |
+| V04 仅咨询与目标未知 | 换货政策咨询；仅订单号 | 前者说明政策／能力边界，后者澄清目标；不新增办理 |
+| V05 明确替换原办理 | 原退款提交卡有效；“不要退款，改换货” | 旧token／revision不能提交，新回复无卡；已提交申请保持原状态 |
+| V06 回退与模型误判 | 模型不可用；固定模型故意返回退款／退货标签 | 明确不支持诉求仍不能准备或提交错误申请；安全与正常退款检查仍有效 |
+| V07 出口与承诺 | 没有真人接管配置 | 确认后进入开发中页，暂不前往留在对话；不虚报转接或受理，两项均不调用提交接口 |
+
+顺序：先用固定模型与隔离订单复现V01及V05，再做最小跨端修改；完成相关Python检查、Java编译及必要页面构建；用隔离H2与浏览器验证回复、动作、旧凭证和申请状态。逐轮保存截图和文字，比较8张业务表，V05中仅允许未提交会话状态变化。无相关新失败后停止，不自动扩大模型评测或重启日常服务。
+
+未来出现真实运营渠道时，替换占位页并补真实交接回执。当前设计可以完成“诚实的能力边界”，仍不能让客户在本系统完成换货；这是产品能力限制，不能用更好的话术掩盖。
+</textarea>
+<script>
+(() => {
+  const root = document.documentElement;
+  const cycle = (list, cur) => list[(list.indexOf(cur) + 1) % list.length];
+  const label = (btn, value) => {
+    const map = JSON.parse(btn.dataset.labels || '{}');
+    btn.textContent = map[value] || value;
+  };
+  const bind = (name, attr, values) => {
+    const btn = document.querySelector(`[data-am="${name}"]`);
+    if (!btn) return;
+    label(btn, root.getAttribute(attr));
+    btn.addEventListener('click', () => {
+      const next = cycle(values, root.getAttribute(attr));
+      root.setAttribute(attr, next);
+      label(btn, next);
+    });
+  };
+  bind('theme', 'data-theme', ['blueprint', 'shadcn']);
+  bind('mode', 'data-mode', ['auto', 'light', 'dark']);
+
+  const copyBtn = document.querySelector('[data-am="copy"]');
+  copyBtn?.addEventListener('click', async () => {
+    const text = document.getElementById('am-source').value;
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch {
+      const ta = Object.assign(document.createElement('textarea'), { value: text });
+      document.body.append(ta);
+      ta.select();
+      document.execCommand('copy');
+      ta.remove();
+    }
+    const original = copyBtn.textContent;
+    copyBtn.textContent = copyBtn.dataset.done;
+    setTimeout(() => { copyBtn.textContent = original; }, 1400);
+  });
+})();
+</script>
+</body>
+</html>

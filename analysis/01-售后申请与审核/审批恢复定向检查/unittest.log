@@ -1,0 +1,22 @@
+test_concurrent_approvals_submit_once_and_conflicts_lose (test_resume_guard.ResumeGuardTest.test_concurrent_approvals_submit_once_and_conflicts_lose) ... ok
+test_customer_session_is_rejected_and_simulated_flag_is_explicit (test_resume_guard.ResumeGuardTest.test_customer_session_is_rejected_and_simulated_flag_is_explicit) ... ok
+test_http_ignores_self_claimed_role_until_server_trusts_the_caller (test_resume_guard.ResumeGuardTest.test_http_ignores_self_claimed_role_until_server_trusts_the_caller) ... /Users/sunhao/Downloads/03_AIPMProject/0305_DianShang_Agent/.venv/lib/python3.14/site-packages/langsmith/_internal/_beta_decorator.py:70: DeprecationWarning: 'asyncio.iscoroutinefunction' is deprecated and slated for removal in Python 3.16; use inspect.iscoroutinefunction() instead
+  if asyncio.iscoroutinefunction(func):
+ok
+test_lost_checkpoint_blocks_without_success (test_resume_guard.ResumeGuardTest.test_lost_checkpoint_blocks_without_success) ... ok
+test_missing_latest_order_does_not_use_snapshot (test_resume_guard.ResumeGuardTest.test_missing_latest_order_does_not_use_snapshot) ... ok
+test_more_info_stays_pending_and_later_approval_rechecks (test_resume_guard.ResumeGuardTest.test_more_info_stays_pending_and_later_approval_rechecks) ... ok
+test_offline_mirror_is_labeled_and_not_a_real_recheck (test_resume_guard.ResumeGuardTest.test_offline_mirror_is_labeled_and_not_a_real_recheck) ... ok
+test_opposite_decision_keeps_the_saved_result (test_resume_guard.ResumeGuardTest.test_opposite_decision_keeps_the_saved_result) ... ok
+test_query_error_and_missing_status_block_without_calling_it_unchanged (test_resume_guard.ResumeGuardTest.test_query_error_and_missing_status_block_without_calling_it_unchanged) ... ok
+test_recheck_can_continue_after_query_recovers (test_resume_guard.ResumeGuardTest.test_recheck_can_continue_after_query_recovers) ... ok
+test_repeat_approval_survives_a_later_query_failure (test_resume_guard.ResumeGuardTest.test_repeat_approval_survives_a_later_query_failure) ... ok
+test_repeat_rejection_does_not_submit (test_resume_guard.ResumeGuardTest.test_repeat_rejection_does_not_submit) ... ok
+test_self_claimed_reviewer_cannot_approve (test_resume_guard.ResumeGuardTest.test_self_claimed_reviewer_cannot_approve) ... ok
+test_shipped_order_stops_the_original_refund (test_resume_guard.ResumeGuardTest.test_shipped_order_stops_the_original_refund) ... ok
+test_trusted_reviewer_records_one_submission_on_the_checkpoint (test_resume_guard.ResumeGuardTest.test_trusted_reviewer_records_one_submission_on_the_checkpoint) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 0.561s
+
+OK

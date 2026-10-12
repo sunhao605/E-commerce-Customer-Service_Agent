@@ -1,0 +1,44 @@
+{
+  "run_id": "RESUME-001",
+  "started_at": "2026-10-12T16:18:59.751649+08:00",
+  "duration_seconds": 1.096,
+  "command": [
+    ".venv/bin/python",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "backend/tests",
+    "-p",
+    "test_resume_guard.py",
+    "-v"
+  ],
+  "config": {
+    "PYTHONPATH": "backend",
+    "AGENT_COURSE_DISABLE_LLM": "1",
+    "AGENT_COURSE_OFFLINE_RAG": "1",
+    "AGENT_COURSE_OFFLINE_FACTS": "1",
+    "AGENT_COURSE_ENV": "/dev/null"
+  },
+  "exit_code": 0,
+  "source_sha256_before": {
+    "backend/tests/test_resume_guard.py": "4116919e7b7bde947d5626e35e1b5d6b89530ee22de6950f108af99e25c23f25",
+    "backend/agent/workflows/resume.py": "ec0a188d3a0759af154b7f134aef63f37365c9a578d57bec44834aaa6a4f67f4",
+    "backend/api/routes.py": "991f3eff24f5f3d41bd432b9c6cc3088b5198172f98b5a6a5b2a64aad8ade401",
+    "backend/api/schemas.py": "143b27323352778563ce0d2463024a63d45f1000958b8fb0016c9f1ff45477da",
+    "backend/agent/state.py": "084150d57ae8b2258b5105e3951ca16d13889e9c10612105049f71abc6247540",
+    "backend/agent/trace.py": "073c0e5e1cbeee3bf0bb352e0a7024e43bd7283fdb38f0d3f50cebac32fbf3db",
+    "backend/settings.py": "15467fc842ec2aa47709c3aaa5c4b8631f95fc9a7c8bbab2e5426ebe03da6630"
+  },
+  "source_sha256_after": {
+    "backend/tests/test_resume_guard.py": "4116919e7b7bde947d5626e35e1b5d6b89530ee22de6950f108af99e25c23f25",
+    "backend/agent/workflows/resume.py": "ec0a188d3a0759af154b7f134aef63f37365c9a578d57bec44834aaa6a4f67f4",
+    "backend/api/routes.py": "991f3eff24f5f3d41bd432b9c6cc3088b5198172f98b5a6a5b2a64aad8ade401",
+    "backend/api/schemas.py": "143b27323352778563ce0d2463024a63d45f1000958b8fb0016c9f1ff45477da",
+    "backend/agent/state.py": "084150d57ae8b2258b5105e3951ca16d13889e9c10612105049f71abc6247540",
+    "backend/agent/trace.py": "073c0e5e1cbeee3bf0bb352e0a7024e43bd7283fdb38f0d3f50cebac32fbf3db",
+    "backend/settings.py": "15467fc842ec2aa47709c3aaa5c4b8631f95fc9a7c8bbab2e5426ebe03da6630"
+  },
+  "source_unchanged": true,
+  "scope": "existing isolated tests; synthetic orders and reviewer stubs; in-process TestClient"
+}

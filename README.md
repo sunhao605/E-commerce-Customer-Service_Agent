@@ -1,82 +1,227 @@
-# 荒野户外服务助手
+<div align="center">
+  <img src="ecommerce-backend/frontend/public/cartoon-camp.svg" width="220" alt="荒野小分队的帐篷、太阳和露营装备" />
 
-面向虚构户外品牌店的客服与售后演示原型。用户可以查询商品价格库存、订单物流及售后进度，了解优惠和会员规则，并核验售后资格。商城支持本人已支付、未发货订单的整单退款，以及已签收且符合七天无理由的整单退货退款。客户确认后保存待审核；后台同意退货只提供退回地址，客户填写物流后，后台实际收货验收通过才退款。运输中联系人工处理拦截；工作台保持模拟审核。2026-10-09 已更新本地服务，验证范围见 [七天退货验收](analysis/七天退货验证/README.md)。
+# 🏕️ 荒野户外 · AI 客服与售后助手
 
-本项目基于课程提供的电商客服代码改编。本次改造主要完成户外业务场景迁移、商品及政策材料更新、商城/管理后台/评测工作台的品牌与交互调整，以及对应验证。工具、检索、流程、身份与权限机制沿用原实现，不声称从零实现；没有真实用户或企业上线指标。来源许可证尚未核实。2026-10-07 清理旧品牌时移除了原源码备份与差异文件，保留课程来源说明、历史哈希清单及非品牌迁移契约。
+**把规则讲清楚，把订单查明白，把申请交给正确的人。**
 
-当前界面采用蓝黄橙的卡通露营风格：粗描边卡片、贴纸标签和本地 SVG 插画。新截图与样式检查在 `analysis/卡通风格验证/`；页面业务 API 的验证限制见下文。
+RAG 政策检索 · 实时工具查询 · Runtime Context · 多轮会话 · 售后申请与人工审核 · 可观察评测
 
-## 目录与维护入口
+</div>
 
-```text
-backend/                  Python 服务
-  api/                    HTTP 入口和请求响应结构
-  agent/                  对话编排、上下文、状态、工具与售后流程
-  retrieval/              知识加载、混合检索与规则答复
-  resources/              提示词、政策材料、能力清单和评测用例
-  evals/                  回归评测与反馈归因
-  tests/                  单元检查
-  main.py                 启动入口
-  settings.py             运行配置
-frontend/                 评测工作台（独立 React 18 工程）
-ecommerce-backend/         Java 业务服务与 Docker 构建
-  src/main/java/.../      按账号、商品、订单、售后、客服等业务分组
-  src/main/resources/    Spring 配置
-  frontend/              商城和管理后台（共享 React 19 工程）
-    src/shop/            商城源码
-    src/admin/           管理后台源码
-    src/shared/          共用 API 请求与类型
-    public/              当前 SVG 商品资源
-    admin/index.html     后台 HTML 入口，保留 /admin/ 地址
-  docker/                Maven 配置与实际构建使用的依赖缓存
-docs/                     产品学习、交接、评测、BadCase 与手测用例
-analysis/                 源码分析、流程图及各阶段验证证据
-  课程参考截图/           随包课程参考材料
-  结构整理验证/           本轮清理检查与结果
-```
+荒野户外是一个围绕户外装备零售设计的 AI 客服与售后项目。客户可以在商城里咨询商品、了解政策、查询订单和售后资格，再决定是否提交申请；管理员通过后台独立审核，评测工作台则帮助检查回答依据和执行过程。
 
-本轮改动及后续优化优先级见 [结构审查与整理](docs/结构审查与整理.md)。Python 后端已从 20 个顶层目录收拢为 6 个，文档链接及导入已同步迁移。命令统一在项目根目录执行；各前端命令按下文先进入对应目录。
+项目关注一条完整的服务链路：**客户表达需求 → 系统找到可信信息 → 给出可理解的答复或下一步 → 必要时确认并进入业务流程。**
 
-## 三个入口
+![荒野户外商城：露营主题首页、活动会场与商品列表](docs/01-项目概览/项目展示/shop-home.png)
 
-| 入口 | 源码 | 作用 |
+## 产品全景
+
+### 三个入口，服务三类任务
+
+| 入口 | 使用者 | 可以做什么 |
 |---|---|---|
-| 荒野户外商城 | `ecommerce-backend/frontend/src/shop/` | 商品、购物车、余额支付、订单及商城客服 |
-| 荒野户外管理后台 | `ecommerce-backend/frontend/src/admin/` | 商品、活动、订单、用户与售后管理 |
-| 荒野户外 · 评测工作台 | `frontend/src/` | 演示用户对话、依据、模拟审批、执行记录、回归评测和反馈 |
+| 🛍️ 商城与客服 | 客户 | 浏览商品、购物车与演示余额支付；咨询政策、查询商品与订单、核验售后资格、确认提交申请、填写退回物流 |
+| 📋 管理后台 | 管理员 | 管理商品与活动、查看订单和用户、审核售后、记录收货验收并处理演示余额退款 |
+| 🔎 评测工作台 | 产品与开发人员 | 切换演示用户、观察意图与上下文、检查工具与政策引用、查看执行轨迹、运行回归评测和记录反馈 |
 
-商城客服经过 Java 网关，由登录身份建立上下文；评测工作台直接调用 Python Agent，使用演示用户。两个入口用途不同，工作台切换用户不等于真实登录或管理员审批。
+商城通过登录会话识别客户，管理后台独立校验管理员权限。工作台使用演示身份，售后审批与提交记录属于模拟流程，和商城的实际业务记录分开。
 
-## 保留的处理链路
+### 客户能获得哪些帮助
+
+| 客户的问题 | 系统提供的服务 |
+|---|---|
+| “这款折叠椅多少钱，还有货吗？” | 确定商品，查询标价、活动信息与库存，说明适用条件 |
+| “会员券和满减可以一起用吗？” | 检索政策知识库，给出规则、限制及引用依据 |
+| “我的订单到哪了？退款处理到哪了？” | 核验订单归属，读取订单、物流或售后状态 |
+| “这笔订单现在能退吗？我先问问。” | 只查询资格，解释可办理项或阻断原因 |
+| “我决定申请退款。” | 核验最新事实，补齐必要信息，展示确认卡；确认后登记待审核 |
+| “收到了，我想七天无理由退货。” | 核验整单退货条件，串起申请、审核、寄回、验收与退款 |
+| “我需要换货／维修／部分退款。” | 说明自动办理的能力边界，提供人工客服入口；当前入口为功能说明页 |
+
+## AI 产品设计：让每类问题走合适的路径
+
+设计的起点是客户要完成的任务，以及这项任务需要什么证据、会影响哪些业务状态。
+
+### 1. 按信息性质选择来源
+
+| 信息类型 | 客户场景 | 产品机制 | 设计考虑 |
+|---|---|---|---|
+| 通用规则 | 退货政策、发票时效、活动叠加规则 | **RAG**：从本地政策知识库检索相关内容，返回引用 | 规则有出处，便于核对；证据不足时明确说明 |
+| 实时业务事实 | 商品价格库存、订单物流、退款进度 | **Tool Calling**：调用商品、订单、物流与售后接口 | 用当前业务数据回答，避免拿静态政策替代实时状态 |
+| 当前身份与业务对象 | 谁在咨询、会员等级、正在看哪件商品或哪笔订单 | **Runtime Context**：商城网关注入登录身份、页面对象及相关业务上下文 | 减少客户重复输入，让工具查询和权限校验有明确对象 |
+| 会话里的延续关系 | “第二款呢？”“就第一笔”“继续刚才的申请” | **Memory 与上下文管理**：保存会话内的候选、已选对象和待办 | 支持连续交流，处理明确输入、页面对象与历史对象的冲突 |
+
+Runtime Context 提供本轮处理所需的上下文；**信息是否准确，还要结合工具读取的最新事实、政策依据和服务端校验。** 用户自称的会员身份、审批结果或订单归属，不能覆盖系统记录。
+
+RAG 承接“通常怎样规定”，工具承接“这件商品／这笔订单现在怎样”。涉及活动时，也会区分平台通用叠加规则、商品活动条件和最终结算结果。
+
+![商品详情页中的客服咨询：附带当前商品，区分标价、活动价、库存与通用规则](docs/01-项目概览/项目展示/chat-product.png)
+
+*从商品页发问时，客户可以直接说“这款商品”。截图中的价格和库存来自本地演示业务数据，数值会随数据变化。*
+
+### 2. 理解需求之后，再约束执行范围
+
+一句“我想问问能不能退”和一句“我确定要申请退款”，会进入不同的产品流程。
+
+- **意图识别**区分政策咨询、实时查询、资格咨询与明确申请。模型不可用或输出不可信时，使用规则兜底。
+- **受控路由**为每类任务指定可用工具、知识域和业务流程，限制本轮执行范围。
+- **对象澄清**在存在多件商品或多笔订单时展示候选；客户选择后绑定本会话中的对象，再读取事实。
+- **多轮续办**保留当前任务需要的信息，允许客户补充、切换或取消未提交申请；关键业务事实仍需重新核验。
+
+整体采用单 Agent 编排：只读查询使用受限的工具循环，售后申请使用明确的状态流程。商城的身份校验、申请提交、审核和余额更新由 Java 业务服务执行。
+
+### 3. 售后是有角色和状态的业务流程
+
+**客户决定是否申请，管理员决定是否批准，系统按规则执行和记录结果。**
+
+未发货整单退款：
 
 ```text
-需求识别 → 代码建立工具白名单与上下文
-  → 商品/订单只读工具，或政策检索，或固定售后资格流程
-  → 有依据的答复 / 追问 / 模拟待审批 / 安全兜底
-  → 会话状态、Trace 与成本估算
+核验本人订单、支付与履约状态
+  → 展示订单、实付金额与原因的确认卡
+  → 客户确认提交
+  → 保存待审核申请
+  → 管理员独立审核
+  → 通过后退回演示余额，并同步订单、支付与履约状态
 ```
 
-价格库存来自业务工具，通用优惠来自政策引用；一般满减规则不等于某商品最终成交价。退货资格满足只代表可以准备申请。退款审批与资金到账必须区分。
+签收后七天无理由整单退货退款：
 
-2026-10-08 已按 [缺口一计划](缺口一提交申请与审核分开的产品设计计划.md) 分开商城提交与工作台模拟审批。确认卡显示可信实付金额和明确原因，提交前重读事实；取消、旧卡失效与重复提交由后端处理。提交成功才返回业务申请号与状态。金额必须有本人 PAYMENT 流水与订单金额核对依据，缺可信记录的历史样例不会放行。隔离验证与复跑见 [GAP-001](docs/项目评测记录.md#gap-0012026-10-08商城确认提交待审核)。
+```text
+核验签收时间与整单可退条件
+  → 客户确认申请
+  → 管理员同意退货，提供退回信息
+  → 客户寄回并填写物流
+  → 管理员确认收货、验收
+  → 验收通过后退款；异常时记录原因，等待人工处理
+```
 
-2026-10-09 补齐管理员批准后的订单终态：未发货整单全额退款在同一事务同步订单/支付已退款、履约取消；列表和详情切回窗口会重读，并支持已退款筛选。用户指出的已入账测试订单已单笔修正，不重复入账。验证范围见 [GAP-002](docs/项目评测记录.md#gap-0022026-10-09管理员退款通过后同步订单状态)。
+“符合资格”“申请已提交”“审核通过”“退款完成”分别展示。退货初审同意后先等待寄回，收货验收通过后才退款。
+
+提交前重新核对归属、支付凭证、金额和状态；确认凭证绑定当前申请，旧卡失效与重复提交由服务端控制。管理员操作保留处理记录，退款通过事务和重复入账检查控制。
+
+<details>
+<summary><b>📋 查看管理后台：待审核申请与独立审批</b></summary>
+
+![管理后台售后审批：申请列表、待审核退款与管理员操作](docs/01-项目概览/项目展示/admin-after-sales.png)
+
+*截图查看的是已有待审核退款申请，拍摄时没有执行审批或退款。*
+
+</details>
+
+### 4. 无法确定时，给客户可行动的下一步
+
+| 情况 | 客户看到的处理 |
+|---|---|
+| 商品或订单不明确 | 询问必要信息或列出候选 |
+| 政策依据不足 | 说明无法确认，提示进一步核验 |
+| 查询无匹配或确实无库存 | 分别说明“没有找到”和“当前无货” |
+| 工具超时、读取失败或只有部分事实 | 说明本次查询未成功；已核实的信息可以回答，未知字段不补写 |
+| 超出自动办理范围 | 保留原诉求，说明能力边界并提供人工入口 |
+| 用户或检索内容试图改变权限和流程 | 保持系统身份、工具范围与业务校验约束 |
+
+### 5. 用业务结果评测，用执行记录定位问题
+
+工作台展示意图、工具调用、政策引用、Runtime Context、会话记忆、流程节点和成本估算。评测检查公开回复与执行状态，覆盖回答内容、应调用与禁止调用的工具、引用依据、状态变化和恢复行为。
+
+产品上的判定是：**回答有依据、对象选对、权限有效、状态变化符合客户授权，才算这项任务完成。** HTTP 返回成功或工具调用成功，只是其中一步。
+
+![评测工作台：活动政策咨询、引用依据和本次执行记录](docs/01-项目概览/项目展示/workbench-policy.png)
+
+*截图使用真实本地服务查询政策。工作台便于观察执行过程；截图本身不代表完整业务验收。专项结论及范围见[项目评测记录](docs/03-评测与问题/项目评测记录.md)。*
+
+## 系统如何分工
+
+```mermaid
+flowchart TD
+    Customer[客户：商城与客服] --> Gateway[Java 网关：登录身份与页面上下文]
+    Gateway --> Agent[Python Agent：意图、上下文与受控路由]
+    Agent --> RAG[政策知识库：检索与引用]
+    Agent --> Tools[只读工具：商品、订单、物流与售后]
+    Tools --> Business[Java 业务服务与 MySQL]
+    Agent --> Reply[有依据的答复、澄清或申请准备]
+    Reply --> Gateway
+    Gateway --> Confirm[客户确认提交]
+    Confirm --> Application[Java：保存待审核申请]
+    Admin[管理员后台] --> Review[审核、收货验收与退款处理]
+    Application --> Review
+    Review --> Business
+    Lab[评测工作台：演示身份] --> Agent
+    Agent -. 公开轨迹与状态 .-> Lab
+```
+
+| 层次 | 主要技术 | 职责 |
+|---|---|---|
+| 交互层 | React、TypeScript、Vite | 商城客服、管理后台与评测工作台 |
+| Agent 层 | Python、FastAPI、LangChain | 意图识别、受控工具调用、政策检索与答复 |
+| 模拟流程与观察 | LangGraph、会话状态、Trace、Eval | 工作台售后流程、审批恢复、执行记录与回归检查 |
+| 业务层 | Java 17、Spring Boot、Spring Security | 登录与权限、商品订单、售后提交与审批、业务事务 |
+| 数据与运行 | MySQL 8、Docker Compose | 演示业务数据和本地运行环境 |
 
 ## 本地运行
 
-以下命令在项目根目录执行。Node 两套前端分别使用 React 18/Vite 8 与 React 19/Vite 7，不合并依赖。Java 后端需要 JDK 17、Maven 与独立 MySQL 演示库。
+### 准备环境与配置
 
-Python Agent：
+核心体验需要 **Docker Compose、Python 3.12+**。Docker 构建包含商城与管理后台页面，以及 Java 服务和 MySQL。开发前端或使用评测工作台时，还需要 **Node.js 22.12+**。
+
+首次运行，在项目根目录创建 `.env.local`，设置两项数据库密码：
+
+```dotenv
+HUANGYE_DB_PASSWORD=替换为你设置的数据库密码
+HUANGYE_DB_ROOT_PASSWORD=替换为你设置的数据库管理员密码
+```
+
+已有 `.env.local` 和数据卷时继续使用原配置，避免更换密码导致旧数据库无法连接。
+
+需要模型理解和生成答复时，创建 `.env.model.local`，填写可用的 OpenAI 兼容接口配置：
+
+```dotenv
+AGENT_OPENAI_API_KEY=填入你的APIKey
+AGENT_OPENAI_BASE_URL=填入模型服务的API地址
+AGENT_OPENAI_MODEL=填入该服务支持的模型名称
+```
+
+这两个文件均被 Git 忽略。模型配置可执行 `chmod 600 .env.model.local` 限制访问权限。暂不配置模型时，可以在下方启动命令中设置 `AGENT_COURSE_DISABLE_LLM=1`，使用规则路径体验页面与业务查询。
+
+### 启动核心服务
+
+以下命令均从项目根目录开始执行。
+
+**终端一：启动业务服务、数据库与商城页面。**
+
+```bash
+docker compose --env-file .env.local -f compose.local.yml up -d --build
+docker compose --env-file .env.local -f compose.local.yml ps
+```
+
+**终端二：安装并启动 Python Agent。**
 
 ```bash
 python3 -m venv .venv
 .venv/bin/python -m pip install -r requirements.txt
-PYTHONPATH=backend AGENT_COURSE_DISABLE_LLM=0 AGENT_COURSE_OFFLINE_RAG=1 AGENT_COURSE_OFFLINE_FACTS=0 AGENT_COURSE_ENV="$PWD/.env.model.local" AGENT_ECOMMERCE_SERVICE_TOKEN=course-debug-agent-service LANGCHAIN_TRACING_V2=false LANGSMITH_TRACING=false .venv/bin/uvicorn api.routes:app --host 127.0.0.1 --port 8000
+
+PYTHONPATH=backend \
+AGENT_COURSE_ENV="$PWD/.env.model.local" \
+AGENT_COURSE_DISABLE_LLM=0 \
+AGENT_COURSE_OFFLINE_RAG=1 \
+AGENT_COURSE_OFFLINE_FACTS=0 \
+AGENT_ECOMMERCE_SERVICE_TOKEN=course-debug-agent-service \
+LANGCHAIN_TRACING_V2=false \
+LANGSMITH_TRACING=false \
+.venv/bin/uvicorn api.routes:app --host 127.0.0.1 --port 8000
 ```
 
-当前已按用户授权启用 DeepSeek 真实聊天模型，密钥保存在被 Git 忽略、权限为 600 的 `.env.model.local`。该文件配置 `AGENT_OPENAI_API_KEY`、`AGENT_OPENAI_BASE_URL=https://api.deepseek.com`、`AGENT_OPENAI_MODEL=deepseek-flash`，不要将实际 Key 写进文档或提交仓库。模型列表认证、Agent 路由/工具/最终回答及商城客服物流查询已实际通过；新配置重启后需要新建对话。仅启用聊天模型，政策检索仍采用本地简化向量。模型请求会向 DeepSeek 发送对话与相关上下文并消耗 API 额度；禁用聊天模型时把 `AGENT_COURSE_DISABLE_LLM` 改为 `1`。
+| 入口 | 地址 | 演示账号 |
+|---|---|---|
+| 商城 | [http://127.0.0.1:8081/](http://127.0.0.1:8081/) | `zhangsan / 123456` |
+| 管理后台 | [http://127.0.0.1:8081/admin/](http://127.0.0.1:8081/admin/) | `admin / admin123456` |
+| Python API 文档 | [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs) | 本地调试入口 |
+| 业务服务健康检查 | [http://127.0.0.1:8081/actuator/health](http://127.0.0.1:8081/actuator/health) | — |
 
-评测工作台（另开终端）：
+### 可选：评测工作台与前端开发
+
+评测工作台，另开终端：
 
 ```bash
 cd frontend
@@ -84,9 +229,9 @@ npm ci
 npm run dev
 ```
 
-默认地址为 `http://localhost:5173`；`VITE_AGENT_BASE_URL` 默认 `http://localhost:8000`，`VITE_ECOMMERCE_BASE_URL` 默认 `http://localhost:8081`。
+访问 [http://127.0.0.1:5173/](http://127.0.0.1:5173/)，选择演示用户后发送问题。审批决定在工作台中模拟，不会替代管理员后台的审核。
 
-商城与管理后台（另开终端）：
+商城与管理后台前端开发，另开终端：
 
 ```bash
 cd ecommerce-backend/frontend
@@ -94,54 +239,83 @@ npm ci
 npm run dev
 ```
 
-默认地址为 `http://localhost:5174`，管理后台为 `/admin/`；Vite 把 `/api` 转发到业务服务 8081。
+开发地址为 [http://127.0.0.1:5174/](http://127.0.0.1:5174/)，后台为 `/admin/`，`/api` 请求代理到 8081。README 的商城与后台截图取自这一开发入口。
 
-Java 业务服务优先使用已验证的 Docker 方式，容器内提供 Java 17、Maven 3.9.6 与 MySQL 8；宿主机无需安装 Java/Maven。当前机器已生成私有 `.env.local` 保存随机数据库密码，不提交仓库。更换机器时先设置 HUANGYE_DB_PASSWORD 和 HUANGYE_DB_ROOT_PASSWORD。
+<details>
+<summary><b>配置说明与停止方式</b></summary>
 
-```bash
-docker compose --env-file .env.local -f compose.local.yml up -d --build
-docker compose --env-file .env.local -f compose.local.yml ps
-```
+| 变量 | 作用 |
+|---|---|
+| `AGENT_COURSE_ENV` | 显式指定模型配置文件 |
+| `AGENT_COURSE_DISABLE_LLM=1` | 禁用聊天模型，使用规则兜底 |
+| `AGENT_COURSE_OFFLINE_RAG=1` | 政策检索使用本地简化字符向量；上述启动方式使用此模式 |
+| `AGENT_COURSE_OFFLINE_FACTS=0` | 从 Java 业务接口读取事实，关闭种子镜像回退 |
+| `AGENT_ECOMMERCE_SERVICE_TOKEN` | 与 Compose 中 Java 网关的服务身份配置保持一致 |
+| `AGENT_EMBEDDING_MODEL` | 使用在线向量检索时指定 Embedding 模型；接口也需支持该模型 |
+| `AGENT_COURSE_TODAY` | 工作台模拟售后的日期基准，默认 `2026-07-15`；商城按业务服务日期校验 |
 
-后端健康检查：`http://127.0.0.1:8081/actuator/health`。新卷 `huangye-outdoor_mysql-data` 独立于旧课程数据卷；MySQL 不开放宿主机端口，后端仅开放本机 8081。启用已有 course-debug Profile，Java 与本机 Agent 使用相同的本地演示服务 token。业务接口启用后应设置 `AGENT_COURSE_OFFLINE_FACTS=0`，避免回退订单镜像。
+如果需要完全离线的规则演示，可同时设置 `AGENT_COURSE_DISABLE_LLM=1`、`AGENT_COURSE_OFFLINE_RAG=1`、`AGENT_COURSE_OFFLINE_FACTS=1`。种子镜像只覆盖有限样例，不代表完整商城数据。
 
-商城：`http://127.0.0.1:5174/`，账号 `zhangsan / 123456`；管理后台：`http://127.0.0.1:5174/admin/`，账号 `admin / admin123456`。这些是已有源码定义的演示账号。
+启用在线聊天或 Embedding 会向配置的模型服务发送相应内容并消耗 API 额度。
 
-停止本项目容器但保留数据：`docker compose --env-file .env.local -f compose.local.yml stop`。重启：同一配置执行 `up -d`；源码变化时加 `--build`。保留 `.env.local` 与数据卷配套使用，不能重新生成密码后直接复用旧卷。
-
-若选择宿主机方式，需要另装 JDK 17/Maven，并手动配置独立 MySQL、数据源和 Agent 地址。服务身份 token 必须一致，工作台订单摘要依赖 course-debug Profile。
-
-**商品迁移不要清空已有数据库。** 首次在空的演示库启动会生成户外商品；已有商品的图片 URL 改为本次 SVG 后，会触发原有更新逻辑。但已有订单商品快照、偏好、优惠券不保证重建，需要在隔离演示库核验或通过已有管理入口更新。2026-10-07 已初始化本项目新建的独立演示数据库，未连接或修改旧课程数据库。
-
-## 离线模式与模型配置
-
-原配置名保留以兼容课程代码：
-
-- `AGENT_COURSE_DISABLE_LLM=1`：不调用聊天模型。
-- `AGENT_COURSE_OFFLINE_RAG=1`：使用本地字符向量，不能当成真实语义模型。
-- `AGENT_COURSE_OFFLINE_FACTS=1`：业务接口不可用时允许显式种子镜像；商品镜像仅覆盖露营折叠椅，不能当成完整商城。
-- `AGENT_COURSE_TODAY`：覆盖默认固定演示日期 `2026-07-15`；改日期须同步签收样例。
-- `AGENT_COURSE_ENV`：指定配置文件，避免误加载其他项目的共享 `course.env`。
-
-真实模型沿用 `AGENT_OPENAI_API_KEY`、`AGENT_OPENAI_BASE_URL`、`AGENT_OPENAI_MODEL` 和 `AGENT_EMBEDDING_MODEL`，不在源码中存放密钥。不要把禁聊天模型当成禁 Embedding；需要完整离线时显式开启三个离线开关。历史离线回归没有真实模型请求；2026-10-07 的 MODEL-001 单独记录两条真实聊天验证，不能混入原离线通过率。
-
-## 验证与已知边界
+停止容器并保留数据：
 
 ```bash
-PYTHONPATH=backend AGENT_COURSE_DISABLE_LLM=1 AGENT_COURSE_OFFLINE_RAG=1 AGENT_COURSE_OFFLINE_FACTS=1 AGENT_COURSE_ENV=/tmp/huangye-no-model.env .venv/bin/python -m unittest discover -s backend/tests
-.venv/bin/python analysis/改造验证/check_migration.py
-.venv/bin/python analysis/结构整理验证/check_structure.py
-.venv/bin/python analysis/结构整理验证/check_backend_api.py
-.venv/bin/python analysis/结构整理验证/check_ecommerce_layout.py
-.venv/bin/python analysis/改造验证/run_offline_eval.py backend /tmp/huangye-eval.json
+docker compose --env-file .env.local -f compose.local.yml stop
 ```
 
-两套前端各自执行 `npm run build`。原版和改版在显式离线镜像、无网络/无模型条件下均为 10/13，通过数不能代表真实业务成功率；同三条回答语义检查仍失败，未放宽断言。详细结果见 `docs/项目评测记录.md` 和 `analysis/改造验证/`。
+恢复时使用相同配置执行 `up -d`；源码变化后加 `--build`。Python 与前端开发服务在各自终端用 `Ctrl+C` 停止。
 
-- 工作台批准仅记录模拟结果；商城客户只登记待审核，不能自行批准。已有管理员批准可能改变本地演示余额，本次未修改或执行该动作；不接外部资金退款。转人工仍是状态与建议。
-- 商品和规则是合成演示材料；SVG 为本地商品示意图，不是商品实拍；保留原版的 SKU、价格库存、商品可退标志、政策 ID、状态及审批逻辑。
-- Agent 状态及检查点在内存中，重启不保证恢复；MCP 模块是本地目录，不能视为真实 MCP 服务接入。
-- Python 模拟恢复的 BC-001 旧快照回退和 BC-004 角色/终态问题仍未修改；商城提交已绕开该入口，最新事实读取失败会阻断。2026-10-09 最新服务已重新构建启动，真实 MySQL/在线模型的确认卡与取消通过；正式提交和管理员审批留给用户手测。见 [当前测试路径](docs/本地测试用例.md) 与 [RUN-001](docs/项目评测记录.md#run-0012026-10-09最新本地服务启动与手测准备)。
-- `analysis/课程参考截图/` 为随包课程材料；卡通改造阶段截图使用前端业务 API fixture。2026-10-07 新的 `analysis/商城启动验证/` 使用实际 Java/MySQL 与浏览器，登录、商品及客服查询已通过，未验证购买、支付或商城退款确认。
+</details>
 
-项目导读见 `analysis/dianshang-agent.md`，场景改造和取舍见 `docs/产品设计学习.md`，当前停点以 `docs/项目交接.md` 为准。文档和验证目录的编号、日期、对应关系见 `docs/文件索引.md`。
+## 第一次体验，建议这样走
+
+1. **商品咨询**：登录商城，打开一件商品，点击“咨询这件商品”，询问“这款商品的标价、活动价和库存分别是多少？”观察页面上下文与实时查询。
+2. **政策咨询**：问“露营季活动满减和山友会员券能不能叠加？”，再到工作台查看政策引用和执行记录。
+3. **资格咨询**：打开本人订单问“这笔订单现在能退款吗？我先了解一下”，确认回复停在资格说明。
+4. **申请与审核**：选一笔符合条件的本人订单，明确提出申请，核对确认卡。仅在需要体验完整业务流程时提交，再用管理员账号审核；这会改变演示业务数据和余额。
+
+## 项目边界
+
+- 面向本地演示与产品验证，商品、账号和政策为演示数据；支付与退款使用本地模拟余额，未接入真实支付渠道。
+- 自动售后范围为本人已支付、未发货的整单退款，以及符合条件的签收七天无理由整单退货退款。运输中拦截、换货、维修和部分退款不自动办理。
+- 人工客服入口已提供交互和说明页，尚未接入真人、工单分配与交接回执。
+- 会话记忆及部分流程状态保存在内存中，重启不保证恢复。自然语言取消增强保持默认关闭，未提交申请可通过取消按钮终止。
+- 当前 MCP 模块用于本地能力目录与元数据展示，尚未接入远程 MCP 服务。模型表现和专项评测均应按各自验证范围理解，不外推真实用户或生产指标。
+
+## 继续了解项目
+
+```text
+backend/                  Agent API、工具、检索、状态、评测与测试
+frontend/                 独立评测工作台
+ecommerce-backend/         Java 业务服务与商城／管理后台前端
+docs/                     项目概览、全局设计、评测、复盘与参考
+analysis/                 按业务主题整理的验证脚本、结果、日志与截图
+compose.local.yml         本地业务服务与数据库运行配置
+```
+
+| 想看什么 | 入口 |
+|---|---|
+| 整体架构与源码入口 | [项目导读](docs/01-项目概览/项目导读.md) |
+| 文档阅读顺序 | [文档导航](docs/README.md) |
+| 具体业务的设计与约束 | [产品设计目录](docs/02-产品设计/README.md) |
+| 测试用例、验收结论与已知问题 | [评测与问题](docs/03-评测与问题/README.md) |
+| 原始验证材料 | [验证证据导航](analysis/README.md) |
+| 当前工作停点 | [项目交接](docs/01-项目概览/项目交接.md) |
+
+文档与资源链接检查：
+
+```bash
+python3 analysis/90-项目改造与运行/文档整理验证/check_documents.py
+```
+
+Agent 单元检查（规则与显式离线配置）：
+
+```bash
+PYTHONPATH=backend \
+AGENT_COURSE_DISABLE_LLM=1 \
+AGENT_COURSE_OFFLINE_RAG=1 \
+AGENT_COURSE_OFFLINE_FACTS=1 \
+AGENT_COURSE_ENV=/tmp/huangye-no-model.env \
+.venv/bin/python -m unittest discover -s backend/tests
+```

@@ -1,0 +1,58 @@
+{
+  "date": "2026-10-12",
+  "scope": "documentation and evidence layout only; no business evaluation rerun",
+  "moves": 81,
+  "original_regular_files_accounted_for": 4082,
+  "original_files_byte_identical": 3992,
+  "text_files_updated_for_paths_and_navigation": 87,
+  "concurrent_updates": [
+    {
+      "file": "docs/.DS_Store",
+      "type": "Finder metadata update"
+    },
+    {
+      "file": "analysis/.DS_Store",
+      "type": "Finder metadata update"
+    },
+    {
+      "file": "analysis/06-工具故障反馈/工具故障反馈实现验收/加载本地服务/python-default.log",
+      "type": "append-only log update",
+      "original_prefix_bytes": 42000,
+      "appended_bytes": 2142
+    }
+  ],
+  "original_symlinks_preserved": 7,
+  "local_reference_checks": {
+    "local_links_checked": 1535,
+    "python_scripts_parsed": 77,
+    "symlinks_checked": 7,
+    "broken_project_links": [],
+    "missing_original_project_references": [
+      "Customer-Agent Bad Case.md",
+      "Customer-Agent/Agent/CustomerAgent/tools/get_product_knowledge.py",
+      "Customer-Agent/Agent/CustomerAgent/custom/tool_decorator.py",
+      "Customer-Agent/Message/handlers/keyword_handler.py",
+      "Customer-Agent Bad Case.md#bc-002发货政策存在但检索返回空结果"
+    ]
+  },
+  "static_runner_path_checks": {
+    "python_files": 77,
+    "repository_roots_checked": 24,
+    "dependency_paths_checked": 92,
+    "errors": []
+  },
+  "not_checked": [
+    "external URL availability",
+    "Markdown heading anchors",
+    "historical source line accuracy",
+    "business script execution",
+    "online models",
+    "database or service behavior"
+  ],
+  "intent_case_reader_check": {
+    "case_file": "docs/03-评测与问题/意图与政策专项/意图识别评测用例.md",
+    "cases_parsed": 48,
+    "unique_case_ids": 48,
+    "model_calls": 0
+  }
+}
