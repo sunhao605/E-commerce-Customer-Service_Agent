@@ -1,0 +1,59 @@
+{
+  "run_id": "CAP-PLAN-001",
+  "changed_files": [
+    "backend/api/schemas.py",
+    "backend/agent/models/router_client.py",
+    "backend/resources/prompts/route_contract.md",
+    "backend/agent/tools/planning.py",
+    "backend/agent/customer_service_agent.py",
+    "backend/agent/service_capabilities.py",
+    "backend/tests/test_service_capabilities.py",
+    "frontend/src/components/TracePanel.tsx",
+    "backend/agent/trace.py",
+    "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/CustomerServiceGatewayService.java"
+  ],
+  "new_python_test_methods": [
+    "test_capability_query_is_reusable_from_a_policy_intent",
+    "test_explicit_empty_plan_does_not_reparse_reminder_during_execution",
+    "test_model_capability_evidence_is_executed_without_keyword_recognition",
+    "test_plan_owns_capability_queries_and_explicit_empty_is_authoritative",
+    "test_route_contract_carries_capability_evidence_for_any_intent",
+    "test_same_route_model_call_returns_main_intent_and_capability_ids",
+    "test_scope_consultation_misrouted_as_application_still_cannot_apply",
+    "test_scope_consultation_preserves_pending_policy_question",
+    "test_scope_consultation_preserves_product_selection",
+    "test_service_scope_uses_the_same_final_composer",
+    "test_unregistered_planned_capability_stays_unknown"
+  ],
+  "python_tests": {
+    "passed": 199,
+    "total": 199,
+    "seconds": 2.2,
+    "kind": "offline unit and isolated regression"
+  },
+  "java": {
+    "business_sources": 159,
+    "assertions": 68,
+    "fixed_agent_turns": 9,
+    "passed": true,
+    "database": "in-memory H2",
+    "business_hashes_unchanged": true
+  },
+  "workbench": {
+    "typescript": "passed",
+    "vite": "passed with existing arm64 Node v24.15.0",
+    "first_attempt": "x64 Node v24.13.0 lacks native rolldown binding; log preserved",
+    "dependencies_installed": false,
+    "browser_test": "not run"
+  },
+  "daily_services_restarted": false,
+  "real_model_calls": 0,
+  "live_business_writes": false,
+  "historical_CAP_LIVE_001": "2/3 retained, not rerun",
+  "limits": [
+    "explicit empty capability_ids is authoritative, route-model omission quality not evaluated live",
+    "missing old field uses shared rule fallback when building RoutePlan",
+    "Java early unsupported-service handling retained; no whole gateway redesign",
+    "existing internal capability references are coverage guards, not general semantic verification"
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "run_id": "CAP-LIVE-001",
+  "cases": [
+    {
+      "id": "CAP-LIVE-01",
+      "message": "轻量露营折叠椅现在多少钱，有货后能提醒我吗？",
+      "session_id": "cap-live-3a1a9c16814e42e89783ba046262331c",
+      "answer": "轻量露营折叠椅目前标价是 199 元，不过现在暂时没有库存。\n\n另外，到货提醒这个服务我们暂时没有，所以没办法帮您登记到货通知，还请您留意后续库存情况。\n当前客服助手不支持到货或补货提醒。你可以稍后主动查询商品库存。",
+      "elapsed_ms": 3889.7,
+      "mechanical_checks": {
+        "http_success": true,
+        "capability_query_succeeded": true,
+        "no_confirmation_or_token": true,
+        "no_workflow_events": true,
+        "no_workflow_plan": true,
+        "real_route_model": true
+      },
+      "business_interaction_passed": true,
+      "assistant_review": "199元、无库存与本次商品API一致；明确不支持提醒。能力说明重复，记录为呈现局限。",
+      "review_scope": "人工审阅回复与Trace，非独立评审或泛化准确率"
+    },
+    {
+      "id": "CAP-LIVE-02",
+      "message": "支持到货提醒吗？",
+      "session_id": "cap-live-029b6be182334651b04ca4dd97594730",
+      "answer": "我还不知道你要办哪一件事。如果是订单物流、商品、活动规则或售后，请直接说具体需求。\n当前客服助手不支持到货或补货提醒。你可以稍后主动查询商品库存。",
+      "elapsed_ms": 884.0,
+      "mechanical_checks": {
+        "http_success": true,
+        "capability_query_succeeded": true,
+        "no_confirmation_or_token": true,
+        "no_workflow_events": true,
+        "no_workflow_plan": true,
+        "real_route_model": true,
+        "no_product_tool": true
+      },
+      "business_interaction_passed": false,
+      "assistant_review": "已查询并明确不支持提醒，但前置unknown兜底仍要求用户重新说明具体需求；完整交互不通过。",
+      "review_scope": "人工审阅回复与Trace，非独立评审或泛化准确率"
+    },
+    {
+      "id": "CAP-LIVE-03",
+      "message": "支持退款吗？",
+      "session_id": "cap-live-3ced25c8b9bd401ab126200329a25a56",
+      "answer": "您好，关于退款，目前可以支持的是**整单未发货退款**，需要先核对订单、退款范围和实际支付金额后才能办理。\n\n另外说明几点：\n- 部分退款、仅退运费、差价补偿、运输拦截、定制制作暂停等，目前暂不支持，需要另行核实。\n- 退款金额以订单实际支付和可信资金记录为准，不是按今天的标价或折扣计算。\n- 如果订单已经提交过退款申请，撤销和停止办理是两回事，目前不能直接帮您撤销旧申请。\n\n如果您方便提供订单号，我可以先帮您核对这笔订单是否在可退范围内。\n当前客服可以办理符合条件的未发货整单退款。是否支持不等于这笔订单已经符合条件，也不等于已经提交申请。你可以说明订单号后再核验退款资格。",
+      "elapsed_ms": 3126.4,
+      "mechanical_checks": {
+        "http_success": true,
+        "capability_query_succeeded": true,
+        "no_confirmation_or_token": true,
+        "no_workflow_events": true,
+        "no_workflow_plan": true,
+        "real_route_model": true
+      },
+      "business_interaction_passed": true,
+      "assistant_review": "说明未发货整单退款和资格边界，无确认卡、凭证或Workflow；提示提供订单号为可选下一步。",
+      "review_scope": "人工审阅回复与Trace，非独立评审或泛化准确率"
+    }
+  ],
+  "capability_and_no_action_passed": 3,
+  "business_interaction_passed": 2,
+  "case_count": 3,
+  "business_snapshot_unchanged": true,
+  "source_and_configuration_unchanged": true,
+  "real_model": "deepseek-flash",
+  "retry_count": 0,
+  "remaining_issue": "BC-022",
+  "historical_RAG_LIVE_005_unchanged": true
+}

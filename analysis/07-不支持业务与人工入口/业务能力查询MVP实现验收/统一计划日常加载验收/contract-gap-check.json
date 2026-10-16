@@ -1,0 +1,18 @@
+{
+  "kind": "offline synthetic counterexamples; not raw output recovered from online model",
+  "source": "backend/agent/service_capabilities.py:163-171",
+  "cases": [
+    {
+      "capability_id": "stock_notification",
+      "synthetic_model_answer": "目前客服助手不支持到货或补货提醒，你可以稍后主动查询商品库存。[[capability:stock_notification]]",
+      "accepted_by_current_renderer": true,
+      "rendered": "目前客服助手不支持到货或补货提醒，你可以稍后主动查询商品库存。当前客服助手不支持到货或补货提醒。你可以稍后主动查询商品库存。"
+    },
+    {
+      "capability_id": "refund_consultation",
+      "synthetic_model_answer": "当前客服可以办理符合条件的未发货整单退款，您可以提供订单号核验资格。[[capability:refund_consultation]]",
+      "accepted_by_current_renderer": true,
+      "rendered": "当前客服可以办理符合条件的未发货整单退款，您可以提供订单号核验资格。当前客服可以办理符合条件的未发货整单退款。是否支持不等于这笔订单已经符合条件，也不等于已经提交申请。你可以说明订单号后再核验退款资格。"
+    }
+  ]
+}

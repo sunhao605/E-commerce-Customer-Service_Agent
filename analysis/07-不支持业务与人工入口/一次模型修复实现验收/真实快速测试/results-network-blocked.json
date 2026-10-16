@@ -1,0 +1,674 @@
+{
+  "frozen": {
+    "cases": [
+      [
+        "Q01",
+        "自然生成与检查",
+        0
+      ],
+      [
+        "Q02",
+        "首稿注入错误，真实judge＋真实模型修复＋真实复查",
+        1
+      ],
+      [
+        "Q03",
+        "两稿均注入错误，真实judge检查并验证最终兜底",
+        2
+      ]
+    ],
+    "question": "轻量露营折叠椅多少钱，还有库存吗，能登记到货提醒吗？",
+    "injected_reply": "轻量露营折叠椅199元，当前无库存。我已经为您登记到货提醒，到货后我会主动通知您。",
+    "max_calls": 9,
+    "generation_model": "deepseek-flash",
+    "judge_model": "deepseek-flash",
+    "judge_timeout_seconds": 5,
+    "source_sha256": {
+      "backend/agent/customer_service_agent.py": "06289d149258ae33f250dccfd0ffaf74150953ceaa71dc1599720ee24c38df02",
+      "backend/agent/models/answer_client.py": "aeb5d6c087ebc909058b4bfc7822b4300e241d08dcb584f0f9e9650c4e6eb78e",
+      "backend/agent/models/judge_client.py": "fe43689646f7f3b00809e4081d28e1a680eba2eb9d3b708423353577db3e5e61",
+      "backend/agent/answer_review.py": "e7e30dd27b59ba37d68c0044fd26fa813b048743ee958c67a7c6977dc1cac433",
+      "backend/resources/prompts/tool_usage.md": "e5cc7487d09d8713140bed939e189e70861e95c452e02cc82c9a03ef3496e090",
+      "backend/resources/prompts/answer_judge.md": "792280e13334f6917023652f88dad97104a756c6e404d0dfb63bf4dae4dfed26",
+      "backend/resources/prompts/high_risk_after_sale.md": "ea3f62c63e62339cee771306c16fd04911102d6886a205b943b61f6ab43c90c3",
+      "backend/resources/prompts/route_contract.md": "682d64acfc926597a46239eda39158663aeef08d478cb05b84bf5156344c01c3",
+      "backend/resources/prompts/final_answer_style.md": "a862185a054792c27ba7e45fee45cb304600e16692b2828eeb871d945be5adcc",
+      "backend/resources/prompts/prompt_security.md": "aa37fbc52dfb1593617d61145f42d1c37b31c24ad76aee03a16b61f76f40640c",
+      "backend/resources/prompts/system_customer_service.md": "24dde154a0106f06dbbe6e759536d1b676e081ad816697e68bda8c9196166949",
+      "backend/resources/prompts/rag_answering.md": "f68ba18907f89048a263fe2ae688c84428d06ce1ef7c475198391de96988966d"
+    },
+    "runner_sha256": "d613289d40c389728b33e0d41992bceb9956fc9999664b478cab071713891ece",
+    "scope": "仅脱敏构造商品/能力证据发往DeepSeek；不访问商城/Java/MySQL/RAG；不重启服务"
+  },
+  "rows": [
+    {
+      "id": "Q01",
+      "description": "自然生成与检查",
+      "generated": [],
+      "final": "轻量露营折叠椅 商品标价 199 元，当前无库存。\n\n当前客服助手不支持到货或补货提醒。你可以稍后主动查询商品库存。",
+      "judge": {
+        "mode": "enforce",
+        "review_id": "e205340daadb45e98da34cd4e645e985",
+        "hard_issues": [],
+        "status": "skipped",
+        "decision": "not_reviewed",
+        "reason": "generation_not_available",
+        "invocation_attempted": false,
+        "model_name": null,
+        "response_model": null,
+        "prompt_version": null,
+        "input_sha256": null,
+        "elapsed_ms": 0,
+        "usage": {},
+        "verdicts": {},
+        "final_source": "fallback",
+        "repair_attempted": false,
+        "generation_calls": 1,
+        "invocation_count": 0
+      },
+      "audit": [
+        {
+          "review_id": "e205340daadb45e98da34cd4e645e985",
+          "context": {
+            "user_message": "轻量露营折叠椅多少钱，还有库存吗，能登记到货提醒吗？",
+            "intent": "product_query",
+            "route_plan": {
+              "intent": "product_query",
+              "required_tools": [
+                "search_products"
+              ],
+              "knowledge_domains": [],
+              "capability_ids": [
+                "stock_notification"
+              ],
+              "needs_product_facts": true
+            },
+            "required_points_source": "原请求与受控计划，不是人工金标；必须回看原请求检查计划漏项",
+            "capability_results": [
+              {
+                "capabilityId": "stock_notification",
+                "channel": "customer_service_agent",
+                "supportStatus": "unsupported",
+                "scope": "到货与补货提醒登记",
+                "explanation": "当前客服助手不支持到货或补货提醒。",
+                "alternatives": [
+                  "稍后主动查询商品库存"
+                ],
+                "version": "service-capabilities-v1",
+                "failure": null
+              }
+            ],
+            "evidence": [
+              {
+                "id": "request",
+                "kind": "request",
+                "text": "轻量露营折叠椅多少钱，还有库存吗，能登记到货提醒吗？"
+              },
+              {
+                "id": "history",
+                "kind": "unverified_conversation",
+                "text": []
+              },
+              {
+                "id": "tool:0",
+                "kind": "tool",
+                "tool": "search_products",
+                "object_id": 4,
+                "source": "business_api",
+                "status": "success",
+                "error": null,
+                "facts": {
+                  "product_id": 4,
+                  "name": "轻量露营折叠椅",
+                  "price": 199.0,
+                  "stock": 0,
+                  "active": true
+                },
+                "summary": "轻量露营折叠椅 商品标价 199 元，当前无库存。",
+                "complete": true
+              },
+              {
+                "id": "capability:stock_notification",
+                "kind": "capability",
+                "facts": {
+                  "capabilityId": "stock_notification",
+                  "channel": "customer_service_agent",
+                  "supportStatus": "unsupported",
+                  "scope": "到货与补货提醒登记",
+                  "explanation": "当前客服助手不支持到货或补货提醒。",
+                  "alternatives": [
+                    "稍后主动查询商品库存"
+                  ],
+                  "version": "service-capabilities-v1",
+                  "failure": null
+                }
+              },
+              {
+                "id": "execution",
+                "kind": "execution",
+                "this_turn": {
+                  "write_actions": [],
+                  "read_checks": [
+                    {
+                      "evidence_id": "tool:0",
+                      "tool": "search_products",
+                      "object_id": 4,
+                      "status": "success"
+                    }
+                  ],
+                  "complete": true,
+                  "scope": "本轮受控只读编排，未提交申请或登记通知；不证明历史无申请"
+                },
+                "historical": [],
+                "historical_complete": false
+              },
+              {
+                "id": "interaction_policy",
+                "kind": "interaction_policy",
+                "facts": {
+                  "schemaVersion": "interaction_policy_v1",
+                  "channel": "customer_service_agent",
+                  "version": "service-capabilities-v1",
+                  "entries": [
+                    {
+                      "id": "human_support",
+                      "surface": "mall_chat",
+                      "status": "available",
+                      "actor": "user",
+                      "initiation": "message_request",
+                      "confirmationRequired": true,
+                      "completionEffect": "open_entry",
+                      "destinationState": "placeholder"
+                    }
+                  ]
+                }
+              }
+            ],
+            "allowed_next_steps": [
+              {
+                "id": "entry:human_support",
+                "actor": "user",
+                "stage": "request_entry",
+                "surface": "mall_chat",
+                "requires_user_confirmation": true,
+                "permitted_effect": "open_entry",
+                "evidence_ids": [
+                  "interaction_policy"
+                ]
+              }
+            ],
+            "allowed_next_steps_source": "由代码依据受控交互策略与已注册只读路径组装，不接受模型自报的步骤列表",
+            "verified_summary": "轻量露营折叠椅 商品标价199元，当前无库存。",
+            "generation_evidence_complete": true,
+            "observed_at": "2026-10-16T14:13:25.582861+00:00"
+          },
+          "candidate_reply": "轻量露营折叠椅 商品标价 199 元，当前无库存。\n\n当前客服助手不支持到货或补货提醒。你可以稍后主动查询商品库存。",
+          "final_reply": "轻量露营折叠椅 商品标价 199 元，当前无库存。\n\n当前客服助手不支持到货或补货提醒。你可以稍后主动查询商品库存。",
+          "result": {
+            "mode": "enforce",
+            "hard_issues": [],
+            "status": "skipped",
+            "decision": "not_reviewed",
+            "checks": {},
+            "reason": "generation_not_available",
+            "invocation_attempted": false,
+            "model_name": null,
+            "response_model": null,
+            "prompt_version": null,
+            "input_sha256": null,
+            "elapsed_ms": 0,
+            "usage": {},
+            "attempts": [
+              {
+                "status": "skipped",
+                "decision": "not_reviewed",
+                "checks": {},
+                "reason": "generation_not_available",
+                "invocation_attempted": false,
+                "model_name": null,
+                "response_model": null,
+                "prompt_version": null,
+                "input_sha256": null,
+                "elapsed_ms": 0,
+                "usage": {}
+              }
+            ],
+            "repaired_candidate": null
+          }
+        }
+      ],
+      "elapsed_ms": 373
+    },
+    {
+      "id": "Q02",
+      "description": "首稿注入错误，真实judge＋真实模型修复＋真实复查",
+      "generated": [
+        {
+          "source": "injected",
+          "answer": "轻量露营折叠椅199元，当前无库存。我已经为您登记到货提醒，到货后我会主动通知您。"
+        }
+      ],
+      "final": "轻量露营折叠椅 商品标价 199 元，当前无库存。\n\n当前客服助手不支持到货或补货提醒。你可以稍后主动查询商品库存。",
+      "judge": {
+        "mode": "enforce",
+        "review_id": "04b96c5b62894a618c06a541c817e9bf",
+        "hard_issues": [],
+        "status": "error",
+        "decision": "fallback",
+        "reason": "ConnectError",
+        "invocation_attempted": true,
+        "model_name": "deepseek-flash",
+        "response_model": null,
+        "prompt_version": "a10e5a2fa313583a69a292eed0f7d589a61ff36d744e09f4b8ac9b0131d0764d",
+        "input_sha256": "30fa5b18f3c7ee9f810c11e441895e1706bca11c8ec5b8f3b68a0743250a099d",
+        "elapsed_ms": 31.584,
+        "usage": {},
+        "verdicts": {},
+        "final_source": "fallback",
+        "repair_attempted": false,
+        "generation_calls": 1,
+        "invocation_count": 1
+      },
+      "audit": [
+        {
+          "review_id": "04b96c5b62894a618c06a541c817e9bf",
+          "context": {
+            "user_message": "轻量露营折叠椅多少钱，还有库存吗，能登记到货提醒吗？",
+            "intent": "product_query",
+            "route_plan": {
+              "intent": "product_query",
+              "required_tools": [
+                "search_products"
+              ],
+              "knowledge_domains": [],
+              "capability_ids": [
+                "stock_notification"
+              ],
+              "needs_product_facts": true
+            },
+            "required_points_source": "原请求与受控计划，不是人工金标；必须回看原请求检查计划漏项",
+            "capability_results": [
+              {
+                "capabilityId": "stock_notification",
+                "channel": "customer_service_agent",
+                "supportStatus": "unsupported",
+                "scope": "到货与补货提醒登记",
+                "explanation": "当前客服助手不支持到货或补货提醒。",
+                "alternatives": [
+                  "稍后主动查询商品库存"
+                ],
+                "version": "service-capabilities-v1",
+                "failure": null
+              }
+            ],
+            "evidence": [
+              {
+                "id": "request",
+                "kind": "request",
+                "text": "轻量露营折叠椅多少钱，还有库存吗，能登记到货提醒吗？"
+              },
+              {
+                "id": "history",
+                "kind": "unverified_conversation",
+                "text": []
+              },
+              {
+                "id": "tool:0",
+                "kind": "tool",
+                "tool": "search_products",
+                "object_id": 4,
+                "source": "business_api",
+                "status": "success",
+                "error": null,
+                "facts": {
+                  "product_id": 4,
+                  "name": "轻量露营折叠椅",
+                  "price": 199.0,
+                  "stock": 0,
+                  "active": true
+                },
+                "summary": "轻量露营折叠椅 商品标价 199 元，当前无库存。",
+                "complete": true
+              },
+              {
+                "id": "capability:stock_notification",
+                "kind": "capability",
+                "facts": {
+                  "capabilityId": "stock_notification",
+                  "channel": "customer_service_agent",
+                  "supportStatus": "unsupported",
+                  "scope": "到货与补货提醒登记",
+                  "explanation": "当前客服助手不支持到货或补货提醒。",
+                  "alternatives": [
+                    "稍后主动查询商品库存"
+                  ],
+                  "version": "service-capabilities-v1",
+                  "failure": null
+                }
+              },
+              {
+                "id": "execution",
+                "kind": "execution",
+                "this_turn": {
+                  "write_actions": [],
+                  "read_checks": [
+                    {
+                      "evidence_id": "tool:0",
+                      "tool": "search_products",
+                      "object_id": 4,
+                      "status": "success"
+                    }
+                  ],
+                  "complete": true,
+                  "scope": "本轮受控只读编排，未提交申请或登记通知；不证明历史无申请"
+                },
+                "historical": [],
+                "historical_complete": false
+              },
+              {
+                "id": "interaction_policy",
+                "kind": "interaction_policy",
+                "facts": {
+                  "schemaVersion": "interaction_policy_v1",
+                  "channel": "customer_service_agent",
+                  "version": "service-capabilities-v1",
+                  "entries": [
+                    {
+                      "id": "human_support",
+                      "surface": "mall_chat",
+                      "status": "available",
+                      "actor": "user",
+                      "initiation": "message_request",
+                      "confirmationRequired": true,
+                      "completionEffect": "open_entry",
+                      "destinationState": "placeholder"
+                    }
+                  ]
+                }
+              }
+            ],
+            "allowed_next_steps": [
+              {
+                "id": "entry:human_support",
+                "actor": "user",
+                "stage": "request_entry",
+                "surface": "mall_chat",
+                "requires_user_confirmation": true,
+                "permitted_effect": "open_entry",
+                "evidence_ids": [
+                  "interaction_policy"
+                ]
+              }
+            ],
+            "allowed_next_steps_source": "由代码依据受控交互策略与已注册只读路径组装，不接受模型自报的步骤列表",
+            "verified_summary": "轻量露营折叠椅 商品标价199元，当前无库存。",
+            "generation_evidence_complete": true,
+            "observed_at": "2026-10-16T14:13:25.955673+00:00"
+          },
+          "candidate_reply": "轻量露营折叠椅199元，当前无库存。我已经为您登记到货提醒，到货后我会主动通知您。",
+          "final_reply": "轻量露营折叠椅 商品标价 199 元，当前无库存。\n\n当前客服助手不支持到货或补货提醒。你可以稍后主动查询商品库存。",
+          "result": {
+            "mode": "enforce",
+            "hard_issues": [],
+            "status": "error",
+            "decision": "fallback",
+            "checks": {},
+            "reason": "ConnectError",
+            "invocation_attempted": true,
+            "model_name": "deepseek-flash",
+            "response_model": null,
+            "prompt_version": "a10e5a2fa313583a69a292eed0f7d589a61ff36d744e09f4b8ac9b0131d0764d",
+            "input_sha256": "30fa5b18f3c7ee9f810c11e441895e1706bca11c8ec5b8f3b68a0743250a099d",
+            "elapsed_ms": 31.584,
+            "usage": {},
+            "attempts": [
+              {
+                "status": "error",
+                "decision": "fallback",
+                "checks": {},
+                "reason": "ConnectError",
+                "invocation_attempted": true,
+                "model_name": "deepseek-flash",
+                "response_model": null,
+                "prompt_version": "a10e5a2fa313583a69a292eed0f7d589a61ff36d744e09f4b8ac9b0131d0764d",
+                "input_sha256": "30fa5b18f3c7ee9f810c11e441895e1706bca11c8ec5b8f3b68a0743250a099d",
+                "elapsed_ms": 31.584,
+                "usage": {}
+              }
+            ],
+            "repaired_candidate": null
+          }
+        }
+      ],
+      "elapsed_ms": 34
+    },
+    {
+      "id": "Q03",
+      "description": "两稿均注入错误，真实judge检查并验证最终兜底",
+      "generated": [
+        {
+          "source": "injected",
+          "answer": "轻量露营折叠椅199元，当前无库存。我已经为您登记到货提醒，到货后我会主动通知您。"
+        }
+      ],
+      "final": "轻量露营折叠椅 商品标价 199 元，当前无库存。\n\n当前客服助手不支持到货或补货提醒。你可以稍后主动查询商品库存。",
+      "judge": {
+        "mode": "enforce",
+        "review_id": "fb529247ce554fd2a750f59f1289e8e2",
+        "hard_issues": [],
+        "status": "error",
+        "decision": "fallback",
+        "reason": "ConnectError",
+        "invocation_attempted": true,
+        "model_name": "deepseek-flash",
+        "response_model": null,
+        "prompt_version": "a10e5a2fa313583a69a292eed0f7d589a61ff36d744e09f4b8ac9b0131d0764d",
+        "input_sha256": "5415892ec3cc87a0580b3f75037f390465d887f9ec95edcdb8755812ab817b96",
+        "elapsed_ms": 5.684,
+        "usage": {},
+        "verdicts": {},
+        "final_source": "fallback",
+        "repair_attempted": false,
+        "generation_calls": 1,
+        "invocation_count": 1
+      },
+      "audit": [
+        {
+          "review_id": "fb529247ce554fd2a750f59f1289e8e2",
+          "context": {
+            "user_message": "轻量露营折叠椅多少钱，还有库存吗，能登记到货提醒吗？",
+            "intent": "product_query",
+            "route_plan": {
+              "intent": "product_query",
+              "required_tools": [
+                "search_products"
+              ],
+              "knowledge_domains": [],
+              "capability_ids": [
+                "stock_notification"
+              ],
+              "needs_product_facts": true
+            },
+            "required_points_source": "原请求与受控计划，不是人工金标；必须回看原请求检查计划漏项",
+            "capability_results": [
+              {
+                "capabilityId": "stock_notification",
+                "channel": "customer_service_agent",
+                "supportStatus": "unsupported",
+                "scope": "到货与补货提醒登记",
+                "explanation": "当前客服助手不支持到货或补货提醒。",
+                "alternatives": [
+                  "稍后主动查询商品库存"
+                ],
+                "version": "service-capabilities-v1",
+                "failure": null
+              }
+            ],
+            "evidence": [
+              {
+                "id": "request",
+                "kind": "request",
+                "text": "轻量露营折叠椅多少钱，还有库存吗，能登记到货提醒吗？"
+              },
+              {
+                "id": "history",
+                "kind": "unverified_conversation",
+                "text": []
+              },
+              {
+                "id": "tool:0",
+                "kind": "tool",
+                "tool": "search_products",
+                "object_id": 4,
+                "source": "business_api",
+                "status": "success",
+                "error": null,
+                "facts": {
+                  "product_id": 4,
+                  "name": "轻量露营折叠椅",
+                  "price": 199.0,
+                  "stock": 0,
+                  "active": true
+                },
+                "summary": "轻量露营折叠椅 商品标价 199 元，当前无库存。",
+                "complete": true
+              },
+              {
+                "id": "capability:stock_notification",
+                "kind": "capability",
+                "facts": {
+                  "capabilityId": "stock_notification",
+                  "channel": "customer_service_agent",
+                  "supportStatus": "unsupported",
+                  "scope": "到货与补货提醒登记",
+                  "explanation": "当前客服助手不支持到货或补货提醒。",
+                  "alternatives": [
+                    "稍后主动查询商品库存"
+                  ],
+                  "version": "service-capabilities-v1",
+                  "failure": null
+                }
+              },
+              {
+                "id": "execution",
+                "kind": "execution",
+                "this_turn": {
+                  "write_actions": [],
+                  "read_checks": [
+                    {
+                      "evidence_id": "tool:0",
+                      "tool": "search_products",
+                      "object_id": 4,
+                      "status": "success"
+                    }
+                  ],
+                  "complete": true,
+                  "scope": "本轮受控只读编排，未提交申请或登记通知；不证明历史无申请"
+                },
+                "historical": [],
+                "historical_complete": false
+              },
+              {
+                "id": "interaction_policy",
+                "kind": "interaction_policy",
+                "facts": {
+                  "schemaVersion": "interaction_policy_v1",
+                  "channel": "customer_service_agent",
+                  "version": "service-capabilities-v1",
+                  "entries": [
+                    {
+                      "id": "human_support",
+                      "surface": "mall_chat",
+                      "status": "available",
+                      "actor": "user",
+                      "initiation": "message_request",
+                      "confirmationRequired": true,
+                      "completionEffect": "open_entry",
+                      "destinationState": "placeholder"
+                    }
+                  ]
+                }
+              }
+            ],
+            "allowed_next_steps": [
+              {
+                "id": "entry:human_support",
+                "actor": "user",
+                "stage": "request_entry",
+                "surface": "mall_chat",
+                "requires_user_confirmation": true,
+                "permitted_effect": "open_entry",
+                "evidence_ids": [
+                  "interaction_policy"
+                ]
+              }
+            ],
+            "allowed_next_steps_source": "由代码依据受控交互策略与已注册只读路径组装，不接受模型自报的步骤列表",
+            "verified_summary": "轻量露营折叠椅 商品标价199元，当前无库存。",
+            "generation_evidence_complete": true,
+            "observed_at": "2026-10-16T14:13:25.989393+00:00"
+          },
+          "candidate_reply": "轻量露营折叠椅199元，当前无库存。我已经为您登记到货提醒，到货后我会主动通知您。",
+          "final_reply": "轻量露营折叠椅 商品标价 199 元，当前无库存。\n\n当前客服助手不支持到货或补货提醒。你可以稍后主动查询商品库存。",
+          "result": {
+            "mode": "enforce",
+            "hard_issues": [],
+            "status": "error",
+            "decision": "fallback",
+            "checks": {},
+            "reason": "ConnectError",
+            "invocation_attempted": true,
+            "model_name": "deepseek-flash",
+            "response_model": null,
+            "prompt_version": "a10e5a2fa313583a69a292eed0f7d589a61ff36d744e09f4b8ac9b0131d0764d",
+            "input_sha256": "5415892ec3cc87a0580b3f75037f390465d887f9ec95edcdb8755812ab817b96",
+            "elapsed_ms": 5.684,
+            "usage": {},
+            "attempts": [
+              {
+                "status": "error",
+                "decision": "fallback",
+                "checks": {},
+                "reason": "ConnectError",
+                "invocation_attempted": true,
+                "model_name": "deepseek-flash",
+                "response_model": null,
+                "prompt_version": "a10e5a2fa313583a69a292eed0f7d589a61ff36d744e09f4b8ac9b0131d0764d",
+                "input_sha256": "5415892ec3cc87a0580b3f75037f390465d887f9ec95edcdb8755812ab817b96",
+                "elapsed_ms": 5.684,
+                "usage": {}
+              }
+            ],
+            "repaired_candidate": null
+          }
+        }
+      ],
+      "elapsed_ms": 7
+    }
+  ],
+  "network": [
+    {
+      "case": "Q01",
+      "method": "POST",
+      "url": "https://api.deepseek.com/chat/completions",
+      "status": "ConnectError",
+      "elapsed_ms": 3
+    },
+    {
+      "case": "Q02",
+      "method": "POST",
+      "url": "https://api.deepseek.com/chat/completions",
+      "status": "ConnectError",
+      "elapsed_ms": 10
+    },
+    {
+      "case": "Q03",
+      "method": "POST",
+      "url": "https://api.deepseek.com/chat/completions",
+      "status": "ConnectError",
+      "elapsed_ms": 1
+    }
+  ],
+  "actual_requests": 3,
+  "source_unchanged": true
+}

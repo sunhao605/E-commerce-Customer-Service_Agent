@@ -37,6 +37,7 @@ class TraceEventNormalizer:
         "cancellation_intent_observed": "model",
         "model_answer_generated": "model",
         "model_answer_skipped": "model",
+        "answer_judged": "model",
         "langchain_tool_agent_completed": "tool",
         "tool_clarification_required": "tool",
         "received_return_boundary_blocked": "workflow",
@@ -44,6 +45,10 @@ class TraceEventNormalizer:
         "human_approval_resolved": "hitl",
         "cost_recorded": "cost",
         "final_answer_generated": "answer",
+        "evidence_domain_completed": "rag",
+        "rag_clarification_required": "rag",
+        "rag_policy_admission": "rag",
+        "rag_policy_blocked": "rag",
     }
     _PHONE_PATTERN = re.compile(r"\b1[3-9]\d{9}\b")
     _ADDRESS_PATTERN = re.compile(r"(收货地址|地址)\s*[:：]\s*[^,，。;\n]+")
@@ -239,6 +244,10 @@ def record_initial_chat_trace(
             "used_model": route_result.used_model,
             "model_name": route_result.model_name,
             "fallback_reason": route_result.fallback_reason,
+            "invocation_attempted": route_result.invocation_attempted,
+            "elapsed_ms": route_result.elapsed_ms,
+            "usage": route_result.usage,
+            "capability_ids": route_result.capability_ids,
         },
     )
 

@@ -1,0 +1,32 @@
+{
+  "payment_invoice_policy.md": {
+    "policy_id": "invoice_issue",
+    "version": "2026-10-14.2",
+    "sha256": "6ea411835ca688cc2b6bf03ebd7751d9d941098f61622b6ccf438d3b5c0fb815"
+  },
+  "received_return_policy.md": {
+    "policy_id": "return_after_delivery",
+    "version": "2026-10-14.2",
+    "sha256": "3f15b90e30473b7e3451e29fb647532508e098107e84f65e86e33382b2377eeb"
+  },
+  "product_knowledge.md": {
+    "policy_id": "outdoor_product_guide",
+    "version": "2026-10-14.2",
+    "sha256": "5bbf1e029fc40f1bd4c0cebeeaa57975b2cef51b3dc3b9e964e036e1fb013d5d"
+  },
+  "member_coupon_policy.md": {
+    "policy_id": "member_coupon_gold_rule",
+    "version": "2026-10-14.2",
+    "sha256": "00161486ded0deaa9c027bf72936c79ee013401b52a5fbf3f7316e3daff57f31"
+  },
+  "promotion_policy.md": {
+    "policy_id": "promotion_camping_season_stack_rule",
+    "version": "2026-10-14.2",
+    "sha256": "0594cdbd7afecc03fc3227e5fbbd3d0121497c33243f3db658d325e14f063347"
+  },
+  "after_sale_policy.md": {
+    "policy_id": "refund_before_shipping",
+    "version": "2026-10-14.2",
+    "sha256": "08c63bf8703d535825d85dadf7f1c243b449479d1af1d730a4ef0d08782de7f3"
+  }
+}

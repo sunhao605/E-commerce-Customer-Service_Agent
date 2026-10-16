@@ -1,0 +1,74 @@
+{
+  "at": "2026-10-15T19:31:19.120627+08:00",
+  "pid": 26110,
+  "settings": {
+    "AGENT_COURSE_ENV": "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/.env.model.local",
+    "AGENT_COURSE_DISABLE_LLM": "0",
+    "AGENT_COURSE_OFFLINE_RAG": "0",
+    "AGENT_COURSE_OFFLINE_FACTS": "0",
+    "CANCEL_INTENT_EXECUTE": "0",
+    "CANCEL_SCORE_MIN": "0.9"
+  },
+  "configuration_preserved": true,
+  "source_files_unchanged": 250,
+  "health": {
+    "8000": {
+      "status_code": 200,
+      "body": {
+        "status": "ok",
+        "lesson": "41",
+        "rag_index": {
+          "loaded": true,
+          "version": "lesson41-idx-37f6dea438a5",
+          "chunk_count": 115,
+          "files": [
+            "after_sale_policy.md",
+            "payment_invoice_policy.md",
+            "promotion_policy.md",
+            "member_coupon_policy.md",
+            "product_knowledge.md",
+            "received_return_policy.md"
+          ],
+          "embedding": "openai_compatible_embedding:Qwen/Qwen3-Embedding-8B",
+          "governed_files": [
+            "after_sale_policy.md",
+            "payment_invoice_policy.md",
+            "promotion_policy.md",
+            "member_coupon_policy.md",
+            "product_knowledge.md",
+            "received_return_policy.md"
+          ],
+          "snapshot_version": "knowledge-3524fd57e6c4",
+          "judged_at": "2026-10-15T19:31:18.770697+08:00",
+          "available_policy_signature": "0d705f48ae1a",
+          "available_policies": {
+            "refund_before_shipping": "2026-10-14.2",
+            "invoice_issue": "2026-10-14.2",
+            "promotion_camping_season_stack_rule": "2026-10-14.2",
+            "member_coupon_gold_rule": "2026-10-14.2",
+            "outdoor_product_guide": "2026-10-14.2",
+            "return_after_delivery": "2026-10-14.2"
+          },
+          "blocked_policies": {}
+        }
+      }
+    },
+    "8081": {
+      "status_code": 200,
+      "body": {
+        "status": "UP"
+      }
+    },
+    "5173": {
+      "status_code": 200,
+      "body": "HTML received"
+    },
+    "5174": {
+      "status_code": 200,
+      "body": "HTML received"
+    }
+  },
+  "java_image": "sha256:02677d66074ff071a28e093b836e37a5a108363b31672ed91247238cc58e42cb",
+  "mysql_not_restarted": true,
+  "mysql_mounts_unchanged": true
+}

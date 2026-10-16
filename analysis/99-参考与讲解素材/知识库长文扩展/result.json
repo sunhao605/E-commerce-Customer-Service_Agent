@@ -1,0 +1,69 @@
+{
+  "date": "2026-10-12",
+  "files": {
+    "product_knowledge.md": {
+      "before_body_chars": 0,
+      "after_body_chars": 4170,
+      "sha256": "0b5102d496b6854e4d201096a0236b9af0f0a9d38cbb110267e008794e1492b1",
+      "metadata_preserved": false,
+      "source_guard_tainted": false
+    },
+    "member_coupon_policy.md": {
+      "before_body_chars": 37,
+      "after_body_chars": 3057,
+      "sha256": "0522768e3b4f5f3e69c4426ff1a23f7acb4ab49d6b410dfdfd86dc1f9240654f",
+      "metadata_preserved": true,
+      "source_guard_tainted": false
+    },
+    "promotion_policy.md": {
+      "before_body_chars": 47,
+      "after_body_chars": 3248,
+      "sha256": "44fb2aaaf0f5c8231bdd242e7e57dab45afb5c867fafbe230e800d84e7099092",
+      "metadata_preserved": true,
+      "source_guard_tainted": false
+    },
+    "after_sale_policy.md": {
+      "before_body_chars": 38,
+      "after_body_chars": 3137,
+      "sha256": "ac2ba2f449bb5b9f858cfc019bac8e59667dd4633f39632d3aef87d2b36673f0",
+      "metadata_preserved": true,
+      "source_guard_tainted": false
+    },
+    "received_return_policy.md": {
+      "before_body_chars": 268,
+      "after_body_chars": 4026,
+      "sha256": "76909d85a872eee61ec808ccb5b77d719cdf9ac4d98adfffc24c0b8fe3dcc5c1",
+      "metadata_preserved": true,
+      "source_guard_tainted": false
+    }
+  },
+  "total_body_chars": 17638,
+  "index_chunk_count": 56,
+  "index_chunks_by_file": {
+    "after_sale_policy.md": 18,
+    "payment_invoice_policy.md": 1,
+    "promotion_policy.md": 19,
+    "member_coupon_policy.md": 18
+  },
+  "checks": {
+    "existing_test_count": 14,
+    "failures": 0,
+    "errors": 0,
+    "relative_links_verified": 43,
+    "business_source_hashes_match": 228,
+    "invoice_unchanged": true,
+    "citations_load": true,
+    "source_guard_untainted": true,
+    "max_chunk_chars": 220
+  },
+  "boundary": {
+    "offline_hash_embedding": true,
+    "external_model_calls": 0,
+    "business_service_calls": 0,
+    "source_code_changes": 0,
+    "service_reload": false,
+    "product_guide_indexed": false,
+    "return_policy_indexed": false,
+    "real_dialogue_acceptance": false
+  }
+}

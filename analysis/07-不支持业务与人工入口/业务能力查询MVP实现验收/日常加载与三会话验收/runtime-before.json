@@ -1,0 +1,70 @@
+{
+  "at": "2026-10-15T19:27:16.586379+08:00",
+  "pid": 91954,
+  "settings": {
+    "AGENT_COURSE_ENV": "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/.env.model.local",
+    "AGENT_COURSE_DISABLE_LLM": "0",
+    "AGENT_COURSE_OFFLINE_RAG": "0",
+    "AGENT_COURSE_OFFLINE_FACTS": "0",
+    "CANCEL_INTENT_EXECUTE": "0",
+    "CANCEL_SCORE_MIN": "0.9"
+  },
+  "health": {
+    "status": "ok",
+    "lesson": "41",
+    "rag_index": {
+      "loaded": true,
+      "version": "lesson41-idx-37f6dea438a5",
+      "chunk_count": 115,
+      "files": [
+        "after_sale_policy.md",
+        "payment_invoice_policy.md",
+        "promotion_policy.md",
+        "member_coupon_policy.md",
+        "product_knowledge.md",
+        "received_return_policy.md"
+      ],
+      "embedding": "openai_compatible_embedding:Qwen/Qwen3-Embedding-8B",
+      "governed_files": [
+        "after_sale_policy.md",
+        "payment_invoice_policy.md",
+        "promotion_policy.md",
+        "member_coupon_policy.md",
+        "product_knowledge.md",
+        "received_return_policy.md"
+      ],
+      "snapshot_version": "knowledge-3524fd57e6c4",
+      "judged_at": "2026-10-15T19:27:16.217509+08:00",
+      "available_policy_signature": "0d705f48ae1a",
+      "available_policies": {
+        "refund_before_shipping": "2026-10-14.2",
+        "invoice_issue": "2026-10-14.2",
+        "promotion_camping_season_stack_rule": "2026-10-14.2",
+        "member_coupon_gold_rule": "2026-10-14.2",
+        "outdoor_product_guide": "2026-10-14.2",
+        "return_after_delivery": "2026-10-14.2"
+      },
+      "blocked_policies": {}
+    }
+  },
+  "http": {
+    "8081": 200,
+    "5173": 200,
+    "5174": 200
+  },
+  "java_image": "sha256:b2928f7506e927d085ef4a7eb31d69a47f2de1390dc8993df9e1c9eca01abc7a",
+  "mysql_started_at": "2026-10-14T09:35:13.733769685Z",
+  "mysql_mounts": [
+    {
+      "Type": "volume",
+      "Name": "huangye-outdoor_mysql-data",
+      "Source": "/home/sunhao.guest/.local/share/docker/volumes/huangye-outdoor_mysql-data/_data",
+      "Destination": "/var/lib/mysql",
+      "Driver": "local",
+      "Mode": "rw",
+      "RW": true,
+      "Propagation": ""
+    }
+  ],
+  "credentials_saved": false
+}

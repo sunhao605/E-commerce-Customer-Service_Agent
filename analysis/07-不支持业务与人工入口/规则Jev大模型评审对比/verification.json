@@ -1,0 +1,22 @@
+{
+  "verified_at": "2026-10-16T13:26:48.556248+08:00",
+  "status": "passed",
+  "frozen_sha256": "19eb4ee7d24247679c7af2947c4eb83644e564342cfd9313febe63c80ce10495",
+  "human_labels_equal_frozen": true,
+  "runner_and_rule_source_unchanged": true,
+  "review_data_unchanged": true,
+  "rows_per_provider": {
+    "rules": 24,
+    "jev": 24,
+    "llm": 24
+  },
+  "remote_calls": 48,
+  "automatic_retries": 0,
+  "invalid_or_error": 0,
+  "result_sha256": {
+    "rules": "359b161a4918504826b01c806ed6fecca116a2e7174df0b3a02e57fc7a4ac5cf",
+    "jev": "22b0f4b741bb637de744ba781ac40ff280b849c83a05773d67b464b42bc2f74c",
+    "llm": "4bee0f0a06ca8f7a09bedd32a98843c7a8f58a64985acb520eec5ed251fe7f97"
+  },
+  "summary_sha256": "38c9124b6271035e1c9e4544dfdf7248cef18617c6aeb8320571e5cf67fe906d"
+}

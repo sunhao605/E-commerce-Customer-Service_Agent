@@ -1,0 +1,997 @@
+{
+  "id": "GUARD-COMPARE-001",
+  "annotation_source": "user_reviewed_assistant_proposals",
+  "sample_scope": "6 saved model replies + 18 constructed boundary fixtures; not production distribution or independent blind labeling",
+  "providers": {
+    "rules": {
+      "rows": 24,
+      "attempted": 24,
+      "valid": 24,
+      "invalid_or_error": 0,
+      "overall_exact_agreement": {
+        "count": 16,
+        "total": 24,
+        "rate": 0.6666666666666666
+      },
+      "overall_exact_agreement_all_cases": {
+        "count": 16,
+        "total": 24,
+        "rate": 0.6666666666666666
+      },
+      "all_dimensions_agree": {
+        "count": 15,
+        "total": 24,
+        "rate": 0.625
+      },
+      "missed_problem": {
+        "count": 2,
+        "total": 10,
+        "rate": 0.2
+      },
+      "false_rejection": {
+        "count": 4,
+        "total": 12,
+        "rate": 0.3333333333333333
+      },
+      "correct_sent_to_review": {
+        "count": 0,
+        "total": 12,
+        "rate": 0.0
+      },
+      "review_count": 0,
+      "dimensions": {
+        "omission": {
+          "exact_agreement": {
+            "count": 20,
+            "total": 24,
+            "rate": 0.8333333333333334
+          },
+          "missed_problem": {
+            "count": 1,
+            "total": 2,
+            "rate": 0.5
+          },
+          "problem_sent_to_review": {
+            "count": 0,
+            "total": 2,
+            "rate": 0.0
+          },
+          "false_rejection": {
+            "count": 3,
+            "total": 22,
+            "rate": 0.13636363636363635
+          },
+          "correct_sent_to_review": {
+            "count": 0,
+            "total": 22,
+            "rate": 0.0
+          }
+        },
+        "conflict": {
+          "exact_agreement": {
+            "count": 22,
+            "total": 24,
+            "rate": 0.9166666666666666
+          },
+          "missed_problem": {
+            "count": 1,
+            "total": 4,
+            "rate": 0.25
+          },
+          "problem_sent_to_review": {
+            "count": 0,
+            "total": 4,
+            "rate": 0.0
+          },
+          "false_rejection": {
+            "count": 0,
+            "total": 19,
+            "rate": 0.0
+          },
+          "correct_sent_to_review": {
+            "count": 0,
+            "total": 19,
+            "rate": 0.0
+          }
+        },
+        "unperformed": {
+          "exact_agreement": {
+            "count": 19,
+            "total": 24,
+            "rate": 0.7916666666666666
+          },
+          "missed_problem": {
+            "count": 2,
+            "total": 5,
+            "rate": 0.4
+          },
+          "problem_sent_to_review": {
+            "count": 0,
+            "total": 5,
+            "rate": 0.0
+          },
+          "false_rejection": {
+            "count": 2,
+            "total": 18,
+            "rate": 0.1111111111111111
+          },
+          "correct_sent_to_review": {
+            "count": 0,
+            "total": 18,
+            "rate": 0.0
+          }
+        }
+      },
+      "p50_ms": 0.079,
+      "p95_ms": 0.71,
+      "mismatches": [
+        {
+          "id": "G03",
+          "expected": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "pass"
+          },
+          "actual": {
+            "omission": "fail",
+            "conflict": "pass",
+            "unperformed": "pass"
+          }
+        },
+        {
+          "id": "G07",
+          "expected": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "pass"
+          },
+          "actual": {
+            "omission": "fail",
+            "conflict": "pass",
+            "unperformed": "pass"
+          }
+        },
+        {
+          "id": "G09",
+          "expected": {
+            "omission": "fail",
+            "conflict": "pass",
+            "unperformed": "pass"
+          },
+          "actual": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "pass"
+          }
+        },
+        {
+          "id": "G14",
+          "expected": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "fail"
+          },
+          "actual": {
+            "omission": "fail",
+            "conflict": "pass",
+            "unperformed": "pass"
+          }
+        },
+        {
+          "id": "G17",
+          "expected": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "pass"
+          },
+          "actual": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "fail"
+          }
+        },
+        {
+          "id": "G19",
+          "expected": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "pass"
+          },
+          "actual": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "fail"
+          }
+        },
+        {
+          "id": "G21",
+          "expected": {
+            "omission": "pass",
+            "conflict": "fail",
+            "unperformed": "fail"
+          },
+          "actual": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "pass"
+          }
+        },
+        {
+          "id": "G22",
+          "expected": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "uncertain"
+          },
+          "actual": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "pass"
+          }
+        },
+        {
+          "id": "G23",
+          "expected": {
+            "omission": "pass",
+            "conflict": "uncertain",
+            "unperformed": "pass"
+          },
+          "actual": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "pass"
+          }
+        }
+      ],
+      "errors": [],
+      "usage": []
+    },
+    "jev": {
+      "rows": 24,
+      "attempted": 24,
+      "valid": 24,
+      "invalid_or_error": 0,
+      "overall_exact_agreement": {
+        "count": 21,
+        "total": 24,
+        "rate": 0.875
+      },
+      "overall_exact_agreement_all_cases": {
+        "count": 21,
+        "total": 24,
+        "rate": 0.875
+      },
+      "all_dimensions_agree": {
+        "count": 15,
+        "total": 24,
+        "rate": 0.625
+      },
+      "missed_problem": {
+        "count": 1,
+        "total": 10,
+        "rate": 0.1
+      },
+      "false_rejection": {
+        "count": 0,
+        "total": 12,
+        "rate": 0.0
+      },
+      "correct_sent_to_review": {
+        "count": 0,
+        "total": 12,
+        "rate": 0.0
+      },
+      "review_count": 0,
+      "dimensions": {
+        "omission": {
+          "exact_agreement": {
+            "count": 17,
+            "total": 24,
+            "rate": 0.7083333333333334
+          },
+          "missed_problem": {
+            "count": 0,
+            "total": 2,
+            "rate": 0.0
+          },
+          "problem_sent_to_review": {
+            "count": 0,
+            "total": 2,
+            "rate": 0.0
+          },
+          "false_rejection": {
+            "count": 7,
+            "total": 22,
+            "rate": 0.3181818181818182
+          },
+          "correct_sent_to_review": {
+            "count": 0,
+            "total": 22,
+            "rate": 0.0
+          }
+        },
+        "conflict": {
+          "exact_agreement": {
+            "count": 20,
+            "total": 24,
+            "rate": 0.8333333333333334
+          },
+          "missed_problem": {
+            "count": 0,
+            "total": 4,
+            "rate": 0.0
+          },
+          "problem_sent_to_review": {
+            "count": 0,
+            "total": 4,
+            "rate": 0.0
+          },
+          "false_rejection": {
+            "count": 3,
+            "total": 19,
+            "rate": 0.15789473684210525
+          },
+          "correct_sent_to_review": {
+            "count": 0,
+            "total": 19,
+            "rate": 0.0
+          }
+        },
+        "unperformed": {
+          "exact_agreement": {
+            "count": 20,
+            "total": 24,
+            "rate": 0.8333333333333334
+          },
+          "missed_problem": {
+            "count": 1,
+            "total": 5,
+            "rate": 0.2
+          },
+          "problem_sent_to_review": {
+            "count": 0,
+            "total": 5,
+            "rate": 0.0
+          },
+          "false_rejection": {
+            "count": 2,
+            "total": 18,
+            "rate": 0.1111111111111111
+          },
+          "correct_sent_to_review": {
+            "count": 0,
+            "total": 18,
+            "rate": 0.0
+          }
+        }
+      },
+      "p50_ms": 514.64,
+      "p95_ms": 603.553,
+      "mismatches": [
+        {
+          "id": "G04",
+          "expected": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "fail"
+          },
+          "actual": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "pass"
+          }
+        },
+        {
+          "id": "G10",
+          "expected": {
+            "omission": "pass",
+            "conflict": "fail",
+            "unperformed": "pass"
+          },
+          "actual": {
+            "omission": "fail",
+            "conflict": "fail",
+            "unperformed": "fail"
+          }
+        },
+        {
+          "id": "G13",
+          "expected": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "fail"
+          },
+          "actual": {
+            "omission": "fail",
+            "conflict": "fail",
+            "unperformed": "fail"
+          }
+        },
+        {
+          "id": "G14",
+          "expected": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "fail"
+          },
+          "actual": {
+            "omission": "fail",
+            "conflict": "fail",
+            "unperformed": "fail"
+          }
+        },
+        {
+          "id": "G15",
+          "expected": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "fail"
+          },
+          "actual": {
+            "omission": "fail",
+            "conflict": "pass",
+            "unperformed": "fail"
+          }
+        },
+        {
+          "id": "G21",
+          "expected": {
+            "omission": "pass",
+            "conflict": "fail",
+            "unperformed": "fail"
+          },
+          "actual": {
+            "omission": "fail",
+            "conflict": "fail",
+            "unperformed": "fail"
+          }
+        },
+        {
+          "id": "G22",
+          "expected": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "uncertain"
+          },
+          "actual": {
+            "omission": "fail",
+            "conflict": "fail",
+            "unperformed": "fail"
+          }
+        },
+        {
+          "id": "G23",
+          "expected": {
+            "omission": "pass",
+            "conflict": "uncertain",
+            "unperformed": "pass"
+          },
+          "actual": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "pass"
+          }
+        },
+        {
+          "id": "G24",
+          "expected": {
+            "omission": "pass",
+            "conflict": "fail",
+            "unperformed": "pass"
+          },
+          "actual": {
+            "omission": "fail",
+            "conflict": "fail",
+            "unperformed": "fail"
+          }
+        }
+      ],
+      "errors": [],
+      "usage": [
+        {
+          "input_tokens": 1737,
+          "output_tokens": 120
+        },
+        {
+          "input_tokens": 1841,
+          "output_tokens": 120
+        },
+        {
+          "input_tokens": 1844,
+          "output_tokens": 120
+        },
+        {
+          "input_tokens": 2186,
+          "output_tokens": 120
+        },
+        {
+          "input_tokens": 1864,
+          "output_tokens": 120
+        },
+        {
+          "input_tokens": 2154,
+          "output_tokens": 120
+        },
+        {
+          "input_tokens": 1715,
+          "output_tokens": 120
+        },
+        {
+          "input_tokens": 1757,
+          "output_tokens": 120
+        },
+        {
+          "input_tokens": 1762,
+          "output_tokens": 120
+        },
+        {
+          "input_tokens": 1710,
+          "output_tokens": 120
+        },
+        {
+          "input_tokens": 1634,
+          "output_tokens": 120
+        },
+        {
+          "input_tokens": 1650,
+          "output_tokens": 120
+        },
+        {
+          "input_tokens": 1704,
+          "output_tokens": 120
+        },
+        {
+          "input_tokens": 1702,
+          "output_tokens": 120
+        },
+        {
+          "input_tokens": 1787,
+          "output_tokens": 120
+        },
+        {
+          "input_tokens": 1798,
+          "output_tokens": 120
+        },
+        {
+          "input_tokens": 1881,
+          "output_tokens": 120
+        },
+        {
+          "input_tokens": 1732,
+          "output_tokens": 120
+        },
+        {
+          "input_tokens": 1731,
+          "output_tokens": 120
+        },
+        {
+          "input_tokens": 1700,
+          "output_tokens": 120
+        },
+        {
+          "input_tokens": 1841,
+          "output_tokens": 120
+        },
+        {
+          "input_tokens": 1596,
+          "output_tokens": 120
+        },
+        {
+          "input_tokens": 1599,
+          "output_tokens": 120
+        },
+        {
+          "input_tokens": 1725,
+          "output_tokens": 120
+        }
+      ]
+    },
+    "llm": {
+      "rows": 24,
+      "attempted": 24,
+      "valid": 24,
+      "invalid_or_error": 0,
+      "overall_exact_agreement": {
+        "count": 23,
+        "total": 24,
+        "rate": 0.9583333333333334
+      },
+      "overall_exact_agreement_all_cases": {
+        "count": 23,
+        "total": 24,
+        "rate": 0.9583333333333334
+      },
+      "all_dimensions_agree": {
+        "count": 21,
+        "total": 24,
+        "rate": 0.875
+      },
+      "missed_problem": {
+        "count": 0,
+        "total": 10,
+        "rate": 0.0
+      },
+      "false_rejection": {
+        "count": 0,
+        "total": 12,
+        "rate": 0.0
+      },
+      "correct_sent_to_review": {
+        "count": 0,
+        "total": 12,
+        "rate": 0.0
+      },
+      "review_count": 1,
+      "dimensions": {
+        "omission": {
+          "exact_agreement": {
+            "count": 23,
+            "total": 24,
+            "rate": 0.9583333333333334
+          },
+          "missed_problem": {
+            "count": 0,
+            "total": 2,
+            "rate": 0.0
+          },
+          "problem_sent_to_review": {
+            "count": 0,
+            "total": 2,
+            "rate": 0.0
+          },
+          "false_rejection": {
+            "count": 1,
+            "total": 22,
+            "rate": 0.045454545454545456
+          },
+          "correct_sent_to_review": {
+            "count": 0,
+            "total": 22,
+            "rate": 0.0
+          }
+        },
+        "conflict": {
+          "exact_agreement": {
+            "count": 21,
+            "total": 24,
+            "rate": 0.875
+          },
+          "missed_problem": {
+            "count": 0,
+            "total": 4,
+            "rate": 0.0
+          },
+          "problem_sent_to_review": {
+            "count": 0,
+            "total": 4,
+            "rate": 0.0
+          },
+          "false_rejection": {
+            "count": 2,
+            "total": 19,
+            "rate": 0.10526315789473684
+          },
+          "correct_sent_to_review": {
+            "count": 1,
+            "total": 19,
+            "rate": 0.05263157894736842
+          }
+        },
+        "unperformed": {
+          "exact_agreement": {
+            "count": 23,
+            "total": 24,
+            "rate": 0.9583333333333334
+          },
+          "missed_problem": {
+            "count": 0,
+            "total": 5,
+            "rate": 0.0
+          },
+          "problem_sent_to_review": {
+            "count": 0,
+            "total": 5,
+            "rate": 0.0
+          },
+          "false_rejection": {
+            "count": 0,
+            "total": 18,
+            "rate": 0.0
+          },
+          "correct_sent_to_review": {
+            "count": 0,
+            "total": 18,
+            "rate": 0.0
+          }
+        }
+      },
+      "p50_ms": 1066.526,
+      "p95_ms": 1296.806,
+      "mismatches": [
+        {
+          "id": "G13",
+          "expected": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "fail"
+          },
+          "actual": {
+            "omission": "pass",
+            "conflict": "fail",
+            "unperformed": "fail"
+          }
+        },
+        {
+          "id": "G14",
+          "expected": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "fail"
+          },
+          "actual": {
+            "omission": "fail",
+            "conflict": "fail",
+            "unperformed": "fail"
+          }
+        },
+        {
+          "id": "G22",
+          "expected": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "uncertain"
+          },
+          "actual": {
+            "omission": "pass",
+            "conflict": "uncertain",
+            "unperformed": "fail"
+          }
+        }
+      ],
+      "errors": [],
+      "usage": [
+        {
+          "prompt_tokens": 1028,
+          "completion_tokens": 50,
+          "total_tokens": 1078,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          },
+          "prompt_cache_hit_tokens": 0,
+          "prompt_cache_miss_tokens": 1028
+        },
+        {
+          "prompt_tokens": 1095,
+          "completion_tokens": 50,
+          "total_tokens": 1145,
+          "prompt_tokens_details": {
+            "cached_tokens": 640
+          },
+          "prompt_cache_hit_tokens": 640,
+          "prompt_cache_miss_tokens": 455
+        },
+        {
+          "prompt_tokens": 1085,
+          "completion_tokens": 52,
+          "total_tokens": 1137,
+          "prompt_tokens_details": {
+            "cached_tokens": 640
+          },
+          "prompt_cache_hit_tokens": 640,
+          "prompt_cache_miss_tokens": 445
+        },
+        {
+          "prompt_tokens": 1313,
+          "completion_tokens": 66,
+          "total_tokens": 1379,
+          "prompt_tokens_details": {
+            "cached_tokens": 640
+          },
+          "prompt_cache_hit_tokens": 640,
+          "prompt_cache_miss_tokens": 673
+        },
+        {
+          "prompt_tokens": 1094,
+          "completion_tokens": 57,
+          "total_tokens": 1151,
+          "prompt_tokens_details": {
+            "cached_tokens": 640
+          },
+          "prompt_cache_hit_tokens": 640,
+          "prompt_cache_miss_tokens": 454
+        },
+        {
+          "prompt_tokens": 1285,
+          "completion_tokens": 54,
+          "total_tokens": 1339,
+          "prompt_tokens_details": {
+            "cached_tokens": 640
+          },
+          "prompt_cache_hit_tokens": 640,
+          "prompt_cache_miss_tokens": 645
+        },
+        {
+          "prompt_tokens": 1015,
+          "completion_tokens": 55,
+          "total_tokens": 1070,
+          "prompt_tokens_details": {
+            "cached_tokens": 640
+          },
+          "prompt_cache_hit_tokens": 640,
+          "prompt_cache_miss_tokens": 375
+        },
+        {
+          "prompt_tokens": 1042,
+          "completion_tokens": 47,
+          "total_tokens": 1089,
+          "prompt_tokens_details": {
+            "cached_tokens": 640
+          },
+          "prompt_cache_hit_tokens": 640,
+          "prompt_cache_miss_tokens": 402
+        },
+        {
+          "prompt_tokens": 1045,
+          "completion_tokens": 37,
+          "total_tokens": 1082,
+          "prompt_tokens_details": {
+            "cached_tokens": 640
+          },
+          "prompt_cache_hit_tokens": 640,
+          "prompt_cache_miss_tokens": 405
+        },
+        {
+          "prompt_tokens": 1012,
+          "completion_tokens": 52,
+          "total_tokens": 1064,
+          "prompt_tokens_details": {
+            "cached_tokens": 640
+          },
+          "prompt_cache_hit_tokens": 640,
+          "prompt_cache_miss_tokens": 372
+        },
+        {
+          "prompt_tokens": 959,
+          "completion_tokens": 64,
+          "total_tokens": 1023,
+          "prompt_tokens_details": {
+            "cached_tokens": 640
+          },
+          "prompt_cache_hit_tokens": 640,
+          "prompt_cache_miss_tokens": 319
+        },
+        {
+          "prompt_tokens": 970,
+          "completion_tokens": 55,
+          "total_tokens": 1025,
+          "prompt_tokens_details": {
+            "cached_tokens": 640
+          },
+          "prompt_cache_hit_tokens": 640,
+          "prompt_cache_miss_tokens": 330
+        },
+        {
+          "prompt_tokens": 1008,
+          "completion_tokens": 56,
+          "total_tokens": 1064,
+          "prompt_tokens_details": {
+            "cached_tokens": 640
+          },
+          "prompt_cache_hit_tokens": 640,
+          "prompt_cache_miss_tokens": 368
+        },
+        {
+          "prompt_tokens": 1007,
+          "completion_tokens": 60,
+          "total_tokens": 1067,
+          "prompt_tokens_details": {
+            "cached_tokens": 640
+          },
+          "prompt_cache_hit_tokens": 640,
+          "prompt_cache_miss_tokens": 367
+        },
+        {
+          "prompt_tokens": 1050,
+          "completion_tokens": 52,
+          "total_tokens": 1102,
+          "prompt_tokens_details": {
+            "cached_tokens": 640
+          },
+          "prompt_cache_hit_tokens": 640,
+          "prompt_cache_miss_tokens": 410
+        },
+        {
+          "prompt_tokens": 1056,
+          "completion_tokens": 50,
+          "total_tokens": 1106,
+          "prompt_tokens_details": {
+            "cached_tokens": 640
+          },
+          "prompt_cache_hit_tokens": 640,
+          "prompt_cache_miss_tokens": 416
+        },
+        {
+          "prompt_tokens": 1114,
+          "completion_tokens": 63,
+          "total_tokens": 1177,
+          "prompt_tokens_details": {
+            "cached_tokens": 640
+          },
+          "prompt_cache_hit_tokens": 640,
+          "prompt_cache_miss_tokens": 474
+        },
+        {
+          "prompt_tokens": 1023,
+          "completion_tokens": 48,
+          "total_tokens": 1071,
+          "prompt_tokens_details": {
+            "cached_tokens": 640
+          },
+          "prompt_cache_hit_tokens": 640,
+          "prompt_cache_miss_tokens": 383
+        },
+        {
+          "prompt_tokens": 1023,
+          "completion_tokens": 53,
+          "total_tokens": 1076,
+          "prompt_tokens_details": {
+            "cached_tokens": 640
+          },
+          "prompt_cache_hit_tokens": 640,
+          "prompt_cache_miss_tokens": 383
+        },
+        {
+          "prompt_tokens": 1001,
+          "completion_tokens": 49,
+          "total_tokens": 1050,
+          "prompt_tokens_details": {
+            "cached_tokens": 640
+          },
+          "prompt_cache_hit_tokens": 640,
+          "prompt_cache_miss_tokens": 361
+        },
+        {
+          "prompt_tokens": 1095,
+          "completion_tokens": 58,
+          "total_tokens": 1153,
+          "prompt_tokens_details": {
+            "cached_tokens": 640
+          },
+          "prompt_cache_hit_tokens": 640,
+          "prompt_cache_miss_tokens": 455
+        },
+        {
+          "prompt_tokens": 929,
+          "completion_tokens": 54,
+          "total_tokens": 983,
+          "prompt_tokens_details": {
+            "cached_tokens": 640
+          },
+          "prompt_cache_hit_tokens": 640,
+          "prompt_cache_miss_tokens": 289
+        },
+        {
+          "prompt_tokens": 932,
+          "completion_tokens": 59,
+          "total_tokens": 991,
+          "prompt_tokens_details": {
+            "cached_tokens": 640
+          },
+          "prompt_cache_hit_tokens": 640,
+          "prompt_cache_miss_tokens": 292
+        },
+        {
+          "prompt_tokens": 1023,
+          "completion_tokens": 55,
+          "total_tokens": 1078,
+          "prompt_tokens_details": {
+            "cached_tokens": 640
+          },
+          "prompt_cache_hit_tokens": 640,
+          "prompt_cache_miss_tokens": 383
+        }
+      ]
+    }
+  },
+  "cost_note": "usage retained; supplier bill not checked; no guessed dollar cost"
+}

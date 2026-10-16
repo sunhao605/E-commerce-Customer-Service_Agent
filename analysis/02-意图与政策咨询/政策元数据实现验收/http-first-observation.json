@@ -1,0 +1,416 @@
+{
+  "session_id": "pm-http-diag",
+  "answer": "电子发票通常在订单完成后 24 小时内开具，可在订单详情页查看和下载。",
+  "citations": [
+    {
+      "source": "knowledge/payment_invoice_policy.md",
+      "title": "荒野户外发票 FAQ",
+      "snippet": "电子发票通常在订单完成后 24 小时内开具，可在订单详情页查看和下载。",
+      "score": 0.73,
+      "retrieval_stage": "pre_retrieval",
+      "metadata": {
+        "policy_id": "invoice_issue",
+        "scene_key": "payment_invoice",
+        "version": "2026-10-14.2",
+        "publication_status": "published",
+        "effective_from": "2025-01-01T00:00:00+08:00",
+        "effective_to": "2028-01-01T00:00:00+08:00",
+        "snapshot_version": "knowledge-3524fd57e6c4"
+      }
+    }
+  ],
+  "tool_calls": [],
+  "clarification": null,
+  "reasoning_summary": [
+    "Trace 记录的是公开执行摘要：Runtime Context、Context、Tool、RAG、Workflow/HITL、Hooks 和 Cost。",
+    "tool_calls 与 citations 是可观察证据，不是 hidden CoT。",
+    "评测视图会尝试展示主链路最终模型返回的 reasoning_content；系统提示词、密钥、隐私原文和内部堆栈不会写入公开 trace。"
+  ],
+  "reasoning_content": null,
+  "session_state": {
+    "agent_version": "lesson-41-final-rehearsal",
+    "message_count": 1,
+    "intent": "invoice_query",
+    "eligibility_query": null,
+    "product_query": null,
+    "model": {
+      "route_planner": {
+        "used_model": false,
+        "model_name": null,
+        "fallback_reason": "model_config_missing",
+        "prompt_fragments": [],
+        "invocation_attempted": false,
+        "elapsed_ms": null,
+        "usage": {}
+      },
+      "final_answer": {
+        "used_model": false,
+        "model_name": null,
+        "fallback_reason": "model_config_missing",
+        "prompt_fragments": []
+      }
+    },
+    "prompt_registry": {
+      "schema_version": "prompt_registry_v1",
+      "selected_fragments": [],
+      "selected_fragment_ids": [],
+      "prompt_body_exposed": false
+    },
+    "route_plan": {
+      "intent": "invoice_query",
+      "needs_rag": true,
+      "needs_business_tools": false,
+      "required_tools": [],
+      "tool_candidates": [],
+      "knowledge_domains": [
+        "invoice"
+      ],
+      "needs_product_facts": null,
+      "clarification_fields": [],
+      "retrieval_strategies": [
+        {
+          "knowledge_domain": "invoice",
+          "retrieval_mode": "hybrid",
+          "citation_scope": "document"
+        }
+      ],
+      "entity_refs": [],
+      "risk_level": "low",
+      "requires_workflow": false,
+      "confidence": 0.75,
+      "source": "deterministic_fallback",
+      "fallback_policy": "safe_deterministic_path"
+    },
+    "evidence_retrievals": {
+      "invoice": {
+        "snapshot_version": "knowledge-3524fd57e6c4",
+        "judged_at": "2026-10-14T14:53:45.809425+08:00",
+        "available_policy_signature": "0d705f48ae1a",
+        "available_policies": {
+          "refund_before_shipping": "2026-10-14.2",
+          "invoice_issue": "2026-10-14.2",
+          "promotion_camping_season_stack_rule": "2026-10-14.2",
+          "member_coupon_gold_rule": "2026-10-14.2",
+          "outdoor_product_guide": "2026-10-14.2",
+          "return_after_delivery": "2026-10-14.2"
+        },
+        "blocked_policies": {},
+        "mode": "langchain_inmemory_hybrid",
+        "embedding": "local_token_embedding_for_explicit_offline_course",
+        "plan": {
+          "original_query": "电子发票通常多久能准备好",
+          "rewritten_query": "电子发票通常多久能准备好",
+          "intent": "invoice_query",
+          "knowledge_domains": [
+            "invoice"
+          ],
+          "reason": "口语归一后按 RoutePlan 知识域执行向量与关键词双路召回。"
+        },
+        "index_version": "lesson41-idx-f370d4501647",
+        "index_chunk_count": 85,
+        "index_cache_hit": true,
+        "retrieval_cache_hit": true,
+        "cache_key": "15c439a611068270",
+        "vector_policy_ids": [
+          "invoice_issue"
+        ],
+        "keyword_policy_ids": [
+          "invoice_issue"
+        ],
+        "source_scores": {
+          "invoice_issue": {
+            "vector": 0.349,
+            "keyword": 0.65,
+            "final": 0.73,
+            "sources": [
+              "vector召回",
+              "keyword召回"
+            ]
+          }
+        }
+      }
+    },
+    "tool_calling": {
+      "create_agent": false,
+      "skip_reason": "route_does_not_need_business_tools",
+      "available_tools": [],
+      "selected_tools": [],
+      "message_types": [],
+      "tool_message_count": 0,
+      "fallback_used": false,
+      "clarification": null
+    },
+    "mcp": {
+      "tool_source": "mcp_catalog",
+      "selected_tool": null,
+      "available_tools": [
+        "get_after_sale_eligibility",
+        "get_order_logistics",
+        "get_refund_status",
+        "search_products"
+      ],
+      "resources": [],
+      "prompts": [],
+      "boundary": "MCP 提供标准化目录；Tool Use、Hooks 和 Workflow 仍负责执行与安全治理。"
+    },
+    "frameworks": {
+      "langchain": {
+        "used": false,
+        "route_chain": null,
+        "final_answer_chain": null,
+        "prompt_registry": "prompts/prompt_registry.yml",
+        "selected_fragment_ids": [],
+        "create_agent": false
+      },
+      "langgraph": {
+        "used": false,
+        "graph_name": null,
+        "current_node": null,
+        "node_history": []
+      }
+    },
+    "risk_level": "low",
+    "next_action": "answer_user",
+    "needs_human_approval": false,
+    "runtime_context": {
+      "user_id": "U1001",
+      "nickname": null,
+      "member_level": null,
+      "risk_level": null,
+      "trusted_for_model": {
+        "nickname": null,
+        "member_level": null
+      },
+      "system_only": {
+        "user_id": "U1001",
+        "risk_level": null
+      },
+      "source": "request_runtime_context"
+    },
+    "memory": {
+      "runtime_user_id": "U1001",
+      "last_order_id": null,
+      "last_product_name": null,
+      "product_query": null,
+      "recent_intent": "invoice_query",
+      "open_task": null,
+      "low_risk_preferences": {},
+      "write_decisions": [],
+      "excluded_items": [],
+      "ttl": "session"
+    },
+    "context_report": {
+      "schema_version": "context_build_report_v1",
+      "sources": [
+        "runtime_context",
+        "session_memory",
+        "history_messages",
+        "user_message"
+      ],
+      "trust_order": [
+        "runtime_context",
+        "verified_tool_fact",
+        "session_memory",
+        "history_messages",
+        "user_message"
+      ],
+      "chosen_order_id": null,
+      "conflict_resolutions": [],
+      "model_context": [
+        "[runtime_context/trusted] member_level=unknown, risk_level=unknown"
+      ],
+      "source_safety": {
+        "tainted": false,
+        "tainted_sources": [],
+        "reports": [
+          {
+            "source": "user_message",
+            "tainted": false,
+            "categories": []
+          },
+          {
+            "source": "rag_document",
+            "tainted": false,
+            "categories": []
+          }
+        ]
+      }
+    },
+    "compression_report": {
+      "schema_version": "context_compression_v1",
+      "recent_window_size": 4,
+      "token_budget": 80,
+      "input_count": 0,
+      "kept_count": 0,
+      "dropped_count": 0,
+      "kept_indexes": [],
+      "strategy": "recent_window_plus_order_relevance",
+      "relevance_score": {
+        "matching_order_reference": 100,
+        "recent_window": 80,
+        "older_history": 20
+      }
+    },
+    "hook_events": [
+      {
+        "hook_type": "on_completion",
+        "target_name": "chat_request",
+        "action": "summarize_tool_governance",
+        "status": "completed",
+        "risk_level": "low",
+        "next_action": "answer_user",
+        "degraded": false,
+        "redacted": true
+      }
+    ],
+    "hook_completion": {
+      "hook_count": 1,
+      "tool_count": 0,
+      "touched_tools": [],
+      "degraded": false,
+      "redacted_count": 1,
+      "degraded_count": 0,
+      "risk_hit_count": 0
+    },
+    "workflow": null,
+    "rag": {
+      "admission": {
+        "snapshot_version": "knowledge-3524fd57e6c4",
+        "judged_at": "2026-10-14T14:53:45.809425+08:00",
+        "available_policy_signature": "0d705f48ae1a",
+        "available_policies": {
+          "refund_before_shipping": "2026-10-14.2",
+          "invoice_issue": "2026-10-14.2",
+          "promotion_camping_season_stack_rule": "2026-10-14.2",
+          "member_coupon_gold_rule": "2026-10-14.2",
+          "outdoor_product_guide": "2026-10-14.2",
+          "return_after_delivery": "2026-10-14.2"
+        },
+        "blocked_policies": {}
+      },
+      "low_confidence": false,
+      "hit_count": 1,
+      "citation_ids": [
+        "invoice_issue"
+      ],
+      "rerank_mode": null,
+      "reranked_policy_ids": [],
+      "rerank_scores": {},
+      "rerank_reasons": {},
+      "retrieval_mode": "langchain_inmemory_hybrid",
+      "rewritten_query": "电子发票通常多久能准备好",
+      "index_version": "lesson41-idx-f370d4501647",
+      "index_chunk_count": 85,
+      "index_cache_hit": true,
+      "retrieval_cache_hit": true,
+      "vector_policy_ids": [
+        "invoice_issue"
+      ],
+      "keyword_policy_ids": [
+        "invoice_issue"
+      ],
+      "source_scores": {
+        "invoice_issue": {
+          "vector": 0.349,
+          "keyword": 0.65,
+          "final": 0.73,
+          "sources": [
+            "vector召回",
+            "keyword召回"
+          ]
+        }
+      },
+      "embedding": "local_token_embedding_for_explicit_offline_course"
+    },
+    "degraded": false,
+    "cost_summary": {
+      "schema_version": "cost_summary_v1",
+      "cost_profile": "teaching",
+      "path_type": "light_react_agent",
+      "model_calls": {
+        "route_planner": 0,
+        "tool_agent": 0,
+        "final_answer": 0,
+        "extra_reasoning": 0
+      },
+      "frameworks": {
+        "langchain_runnable_sequence": false,
+        "langchain_create_agent": false,
+        "langgraph_state_graph": false,
+        "offline_deterministic_fallback": true
+      },
+      "tool_call_count": 0,
+      "business_tool_call_count": 0,
+      "rag": {
+        "needs_rag": true,
+        "hit_count": 1,
+        "pre_retrieval_count": 1,
+        "tool_retrieval_count": 0,
+        "retrieval_paths": [
+          "pre_retrieval"
+        ],
+        "cache_hit": false
+      },
+      "tokens": {
+        "context_estimated": 5,
+        "prompt_estimated": 0,
+        "answer_estimated": 17,
+        "total_estimated": 22,
+        "context_budget": 160
+      },
+      "prompt_fragments": {
+        "selected": [],
+        "selections": [],
+        "fragment_count": 0,
+        "fragmentized": false,
+        "source": "actual_model_invocations"
+      },
+      "cache": {
+        "common_hit_cache": false,
+        "cache_key": null,
+        "does_not_cache_high_risk_workflow": true
+      },
+      "observation_compression": {
+        "schema_version": "observation_compression_v1",
+        "original_tokens": 0,
+        "compressed_tokens": 0,
+        "saved_tokens": 0,
+        "strategy": "keep_status_next_action_and_risk_summary"
+      },
+      "workflow": {
+        "used_langgraph": false,
+        "workflow_id": null,
+        "workflow_type": null,
+        "graph_name": null,
+        "node_history": [],
+        "hitl_required": false,
+        "status": null
+      },
+      "degradation": {
+        "degraded": false,
+        "reason": null,
+        "cost_threshold_exceeded": false,
+        "warnings": []
+      },
+      "reasoning": {
+        "view": "default",
+        "thinking_requested": false,
+        "reasoning_content_returned": false,
+        "source": null
+      },
+      "safety_boundary": {
+        "cost_control_does_not_skip_business_facts": true,
+        "cost_control_does_not_skip_hitl": true,
+        "not_finops_or_billing_system": true
+      },
+      "route_usage_actual": {}
+    },
+    "trace": {
+      "schema_version": "trace_event_v1",
+      "event_count": 14,
+      "public_trace_only": true,
+      "hidden_cot_exposed": false
+    },
+    "next_gap": "第十幕用同一阶段 Agent 做大促总演习，并把证据整理成项目答辩表达。"
+  }
+}

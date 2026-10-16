@@ -4,7 +4,7 @@ description: 第 41 课总演习使用的轻量 Prompt 注册表，只管理稳�
 prompts:
   - name: prompt_security
     level: global_policy
-    version: v1
+    version: v2
     load: always
     priority: 100
     status: active
@@ -36,15 +36,15 @@ prompts:
 
   - name: tool_usage
     level: capability
-    version: v1
+    version: v2
     load: when_business_tool
     priority: 70
     status: active
-    description: 实时业务事实和工具 Observation 的使用边界。
+    description: 实时业务事实和工具 Observation 的使用边界；故障澄清与用户人工入口的主体和阶段限定。
 
   - name: rag_answering
     level: capability
-    version: v1
+    version: v2
     load: when_rag
     priority: 60
     status: active
@@ -52,8 +52,8 @@ prompts:
 
   - name: final_answer_style
     level: response_contract
-    version: v1
+    version: v3
     load: when_final_answer
     priority: 40
     status: active
-    description: 最终客服回答的语言和公开输出格式。
+    description: 最终客服回答的语言和公开输出格式；含 allowed_next_steps 的用户入口与代办边界。

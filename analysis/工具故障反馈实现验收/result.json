@@ -1,0 +1,255 @@
+[
+  {
+    "case": "F01",
+    "answer": "没有找到与“折叠椅”匹配的商品。可以补充更完整的商品名称或款式再试。",
+    "tool_status": "success",
+    "error_type": null,
+    "arguments": {
+      "keyword": "折叠椅",
+      "result": "no_match",
+      "fact_source": "business_api"
+    },
+    "degraded": false,
+    "degradation_reason": null,
+    "final_answer_skip": "clarification_required",
+    "path": "code_fallback",
+    "input": "折叠椅多少钱？"
+  },
+  {
+    "case": "F02",
+    "answer": "这次商品信息查询没有成功，暂时无法核实。请稍后重试。",
+    "tool_status": "error",
+    "error_type": "timeout",
+    "arguments": {
+      "keyword": "折叠椅",
+      "read_error": "timeout"
+    },
+    "degraded": true,
+    "degradation_reason": "timeout",
+    "final_answer_skip": "degraded_path",
+    "path": "code_fallback",
+    "injected": "timeout",
+    "input": "折叠椅多少钱？"
+  },
+  {
+    "case": "F02",
+    "answer": "这次商品信息查询没有成功，暂时无法核实。请稍后重试。",
+    "tool_status": "error",
+    "error_type": "business_api_unavailable",
+    "arguments": {
+      "keyword": "折叠椅",
+      "read_error": "business_api_unavailable"
+    },
+    "degraded": true,
+    "degradation_reason": "business_api_unavailable",
+    "final_answer_skip": "degraded_path",
+    "path": "code_fallback",
+    "injected": "unavailable",
+    "input": "折叠椅多少钱？"
+  },
+  {
+    "case": "F02",
+    "answer": "这次商品信息查询没有成功，暂时无法核实。请稍后重试。",
+    "tool_status": "error",
+    "error_type": "timeout",
+    "arguments": {
+      "keyword": "折叠椅",
+      "read_error": "timeout"
+    },
+    "degraded": true,
+    "degradation_reason": "timeout",
+    "final_answer_skip": "degraded_path",
+    "path": "model_tool",
+    "injected": "timeout",
+    "input": "折叠椅多少钱？"
+  },
+  {
+    "case": "F02",
+    "answer": "这次商品信息查询没有成功，暂时无法核实。请稍后重试。",
+    "tool_status": "error",
+    "error_type": "business_api_unavailable",
+    "arguments": {
+      "keyword": "折叠椅",
+      "read_error": "business_api_unavailable"
+    },
+    "degraded": true,
+    "degradation_reason": "business_api_unavailable",
+    "final_answer_skip": "degraded_path",
+    "path": "model_tool",
+    "injected": "unavailable",
+    "input": "折叠椅多少钱？"
+  },
+  {
+    "case": "F03",
+    "answer": "轻量露营折叠椅 商品标价 199 元，当前无库存。",
+    "tool_status": "success",
+    "error_type": null,
+    "arguments": {
+      "keyword": "轻量露营折叠椅",
+      "product_id": 4,
+      "product_name": "轻量露营折叠椅",
+      "fact_source": "business_api"
+    },
+    "degraded": false,
+    "degradation_reason": null,
+    "final_answer_skip": "model_config_missing",
+    "path": "code_fallback",
+    "input": "轻量露营折叠椅多少钱？"
+  },
+  {
+    "case": "F04",
+    "answer": "轻量露营折叠椅 商品标价 199 元。库存暂未核实。",
+    "tool_status": "success",
+    "error_type": null,
+    "arguments": {
+      "keyword": "轻量露营折叠椅",
+      "product_id": 4,
+      "product_name": "轻量露营折叠椅",
+      "fact_source": "business_api",
+      "missing_fields": [
+        "stock"
+      ]
+    },
+    "degraded": false,
+    "degradation_reason": null,
+    "final_answer_skip": "verified_tool_wording",
+    "path": "code_fallback",
+    "variant": "missing_stock",
+    "input": "轻量露营折叠椅多少钱？"
+  },
+  {
+    "case": "F04",
+    "answer": "轻量露营折叠椅 库存 8 件。价格暂未核实。",
+    "tool_status": "success",
+    "error_type": null,
+    "arguments": {
+      "keyword": "轻量露营折叠椅",
+      "product_id": 4,
+      "product_name": "轻量露营折叠椅",
+      "fact_source": "business_api",
+      "missing_fields": [
+        "price"
+      ]
+    },
+    "degraded": false,
+    "degradation_reason": null,
+    "final_answer_skip": "verified_tool_wording",
+    "path": "code_fallback",
+    "variant": "missing_price",
+    "input": "轻量露营折叠椅多少钱？"
+  },
+  {
+    "case": "F04",
+    "answer": "轻量露营折叠椅 商品标价 0 元，库存 4 件。",
+    "tool_status": "success",
+    "error_type": null,
+    "arguments": {
+      "keyword": "轻量露营折叠椅",
+      "product_id": 4,
+      "product_name": "轻量露营折叠椅",
+      "fact_source": "business_api"
+    },
+    "degraded": false,
+    "degradation_reason": null,
+    "final_answer_skip": "model_config_missing",
+    "path": "code_fallback",
+    "variant": "zero_price",
+    "input": "轻量露营折叠椅多少钱？"
+  },
+  {
+    "case": "F04",
+    "answer": "轻量露营折叠椅 商品标价 50 元。库存暂未核实。",
+    "tool_status": "success",
+    "error_type": null,
+    "arguments": {
+      "keyword": "轻量露营折叠椅",
+      "product_id": 4,
+      "product_name": "轻量露营折叠椅",
+      "fact_source": "business_api",
+      "missing_fields": [
+        "stock"
+      ]
+    },
+    "degraded": false,
+    "degradation_reason": null,
+    "final_answer_skip": "verified_tool_wording",
+    "path": "code_fallback",
+    "variant": "negative_stock",
+    "input": "轻量露营折叠椅多少钱？"
+  },
+  {
+    "case": "F04",
+    "answer": "轻量露营折叠椅 库存 3 件。价格暂未核实。",
+    "tool_status": "success",
+    "error_type": null,
+    "arguments": {
+      "keyword": "轻量露营折叠椅",
+      "product_id": 4,
+      "product_name": "轻量露营折叠椅",
+      "fact_source": "business_api",
+      "missing_fields": [
+        "price"
+      ]
+    },
+    "degraded": false,
+    "degradation_reason": null,
+    "final_answer_skip": "verified_tool_wording",
+    "path": "code_fallback",
+    "variant": "string_price",
+    "input": "轻量露营折叠椅多少钱？"
+  },
+  {
+    "case": "F04",
+    "answer": "轻量露营折叠椅 商品标价 199 元。库存暂未核实。",
+    "tool_status": "success",
+    "error_type": null,
+    "arguments": {
+      "keyword": "轻量露营折叠椅",
+      "product_id": 4,
+      "product_name": "轻量露营折叠椅",
+      "fact_source": "business_api",
+      "missing_fields": [
+        "stock"
+      ]
+    },
+    "degraded": false,
+    "degradation_reason": null,
+    "final_answer_skip": "verified_tool_wording",
+    "path": "model_tool",
+    "variant": "missing_stock",
+    "input": "轻量露营折叠椅多少钱？"
+  },
+  {
+    "case": "F06",
+    "answer": "这次商品信息查询没有成功，暂时无法核实。请稍后重试。",
+    "tool_status": "error",
+    "error_type": "timeout",
+    "arguments": {
+      "product_id": "4",
+      "read_error": "timeout"
+    },
+    "degraded": true,
+    "degradation_reason": "timeout",
+    "final_answer_skip": "degraded_path",
+    "path": "code_fallback",
+    "input": "刚才那款还有货吗？",
+    "stage": "failed"
+  },
+  {
+    "case": "F06",
+    "answer": "轻量露营折叠椅 商品标价 910 元，库存 2 件。",
+    "tool_status": "success",
+    "error_type": null,
+    "arguments": {
+      "product_id": "4",
+      "product_name": "轻量露营折叠椅",
+      "fact_source": "business_api"
+    },
+    "degraded": false,
+    "degradation_reason": null,
+    "final_answer_skip": "model_config_missing",
+    "path": "code_fallback",
+    "input": "刚才那款多少钱？",
+    "stage": "recovered"
+  }
+]

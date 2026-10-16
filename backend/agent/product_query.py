@@ -14,6 +14,69 @@ SELECTION_PATTERN = re.compile(r"^(?:我选择\s*)?第([1-3]|[一二三])款[。
 STOP_PENDING_PATTERN = re.compile(r"^(?:先不看了?|不看了?|算了|先不选了)[。！!？?\s]*$")
 JUST_NOW_CUES = ("刚才那款", "刚才这款", "刚刚那款", "上次那款")
 THIS_ITEM_CUES = ("这件", "这款", "此商品", "该商品")
+PRODUCT_KNOWLEDGE_CUES = ("保养", "清洁", "收纳", "搭建", "漏水", "返潮", "冷凝", "里面有水", "配件", "缺件", "支架", "晃动", "温标", "承重", "重量", "容量", "续航", "防水", "材质", "兼容", "安装", "充电", "锁止", "展开", "印错")
+PRODUCT_FACT_CUES = ("多少钱", "价格", "库存", "有货", "没货", "活动", "优惠", "满减", "会员", "推荐", "哪款", "比较", "区别", "承重", "重量", "容量", "续航", "防水等级", "规格")
+
+
+def needs_product_knowledge(message: str) -> bool:
+    # 商品名称里的“防水／收纳”不表示顾客在询问使用知识。
+    text = message
+    for name in ("防水收纳袋", "防水袋", "收纳袋", "收纳车", "收纳柜", "露营配件"):
+        text = text.replace(name, "")
+    # shortcut: 首版按主题词识别，新问法需补例子验证后再扩展。
+    return any(cue in text for cue in PRODUCT_KNOWLEDGE_CUES)
+
+
+def needs_product_facts(message: str) -> bool:
+    return not needs_product_knowledge(message) or any(cue in message for cue in PRODUCT_FACT_CUES)
+
+
+def wants_stock_reminder(message: str) -> bool:
+    # shortcut: 只识别明确提醒请求；扩大表达范围时补否定和指代样例。
+    cues = ("到货提醒", "补货提醒", "到货通知", "补货通知", "有货后提醒", "有货后通知", "提醒我", "通知我")
+    return any(cue in message and not any(negative + cue in message for negative in ("不要", "不用", "不需要", "无需"))
+               for cue in cues)
+
+
+# ponytail: 只认点名的提醒承诺。婉转说法如「我记着」会漏；升级路径是每句承诺带证据编号。
+_UNSUPPORTED_STOCK_PROMISE = re.compile(
+    r"已(?:经|为你|帮你)?开启.{0,16}(?:提醒|通知)"
+    r"|帮[你您](?:留意|登记|设置|盯)"
+    r"|为[你您]留意"
+    r"|(?<!不)(?:可以|能够|会)(?:帮[你您]|为[你您])?留意"
+    r"|(?:到货|补货|有货)后.{0,8}(?:提醒|通知|告诉)"
+    r"|有货了.{0,8}(?:提醒|通知|告诉)"
+    r"|留意(?:补货|到货|库存)"
+)
+_REFUSAL_MARKS = ("不支持", "不能", "无法", "没有这项", "做不到")
+_SENTENCE = re.compile(r"[^。！？\n；;]*[。！？\n；;]?")
+# 客服现在完不成这些动作。某个工具真的做成之后，调用时把名字放进 performed。
+_UNPERFORMED_ACTIONS = (("stock_watch", _UNSUPPORTED_STOCK_PROMISE),)
+
+
+def _customer_sentences(text: str) -> list[str]:
+    return [piece for piece in _SENTENCE.findall(text or "") if piece.strip()]
+
+
+def _claims_unperformed_action(sentence: str, performed: frozenset[str] = frozenset()) -> bool:
+    if any(mark in sentence for mark in _REFUSAL_MARKS):
+        return False
+    return any(name not in performed and pattern.search(sentence) for name, pattern in _UNPERFORMED_ACTIONS)
+
+
+def promises_unsupported_stock_watch(text: str) -> bool:
+    """回复是否声称会登记或执行到货、补货提醒。项目没有这项服务。"""
+    return any(_claims_unperformed_action(sentence) for sentence in _customer_sentences(text))
+
+
+def without_unperformed_actions(text: str, performed: frozenset[str] = frozenset()) -> str:
+    """删掉宣布了未完成动作的句子，保留其余。"""
+    return "".join(
+        sentence for sentence in _customer_sentences(text)
+        if not _claims_unperformed_action(sentence, performed)
+    ).strip()
+
+
 FOLLOWUP_CUES = ("多少钱", "价格", "库存", "有货", "没货", "活动", "优惠", "包邮", "几件", "还剩", "贵吗", "便宜")
 
 _STRIP = re.compile(r"[\s，。！？、；：,.!?;:~·\-—_*「」『』\"'“”‘’()（）\[\]【】]")

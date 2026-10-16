@@ -1,0 +1,9 @@
+vite v8.0.16 building client environment for production...
+[2Ktransforming...✓ 21 modules transformed.
+rendering chunks...
+computing gzip size...
+../analysis/07-不支持业务与人工入口/业务能力查询MVP实现验收/能力查询统一计划改造/.runtime/workbench-build/index.html                   0.42 kB │ gzip:  0.31 kB
+../analysis/07-不支持业务与人工入口/业务能力查询MVP实现验收/能力查询统一计划改造/.runtime/workbench-build/assets/index-Dsz21z3V.css   15.44 kB │ gzip:  3.60 kB
+../analysis/07-不支持业务与人工入口/业务能力查询MVP实现验收/能力查询统一计划改造/.runtime/workbench-build/assets/index-uThcpKfx.js   208.19 kB │ gzip: 65.27 kB
+
+✓ built in 116ms

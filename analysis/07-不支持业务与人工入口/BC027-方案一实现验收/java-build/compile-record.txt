@@ -1,0 +1,1 @@
+mvn -q compile (maven:3.9.6-eclipse-temurin-17, exit 0, target/classes含InteractionPolicy*.class与service-capabilities.json interactionPolicy节)

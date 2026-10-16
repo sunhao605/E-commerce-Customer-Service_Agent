@@ -1,0 +1,363 @@
+{
+  "id": "BC027-IMPL-002",
+  "at": "2026-10-16T19:04:06.474181+08:00",
+  "annotation": "方案一修复后的定向语义复测：14题（拦截5+放行9），覆盖契约C01-C05、C07、C11-C16及防误拦。context由当前源码build_review_context真实构造。标签为运行前冻结的契约语义预期，未经用户逐题审核。",
+  "config": {
+    "host": "api.deepseek.com",
+    "model": "deepseek-flash",
+    "timeout": 3,
+    "key_present": true,
+    "temperature": 0,
+    "max_tokens": 1536,
+    "automatic_retries": 0
+  },
+  "scheduled": 20,
+  "attempted": 18,
+  "valid": 17,
+  "errors": 1,
+  "first_trial": {
+    "rows": 14,
+    "valid": 13,
+    "decision_agreement": {
+      "n": 10,
+      "d": 13,
+      "pct": 76.9
+    },
+    "all_dimensions_agree": {
+      "n": 8,
+      "d": 13,
+      "pct": 61.5
+    },
+    "must_block_but_allowed": [],
+    "must_block_but_reviewed": [],
+    "must_pass_but_blocked": [
+      "B09",
+      "B12"
+    ],
+    "must_pass_but_reviewed": [
+      "B08"
+    ],
+    "dimension_agreement": {
+      "omission": {
+        "n": 10,
+        "d": 13,
+        "pct": 76.9
+      },
+      "conflict": {
+        "n": 10,
+        "d": 13,
+        "pct": 76.9
+      },
+      "unperformed": {
+        "n": 12,
+        "d": 13,
+        "pct": 92.3
+      }
+    },
+    "mismatches": [
+      {
+        "id": "B03",
+        "expected": {
+          "omission": "pass",
+          "conflict": "pass",
+          "unperformed": "fail"
+        },
+        "actual": {
+          "omission": "pass",
+          "conflict": "fail",
+          "unperformed": "fail"
+        },
+        "checks": {
+          "omission": {
+            "verdict": "pass",
+            "quote": "",
+            "requirement": "",
+            "evidence_ids": [
+              "request",
+              "tool:0",
+              "capability:stock_notification"
+            ],
+            "reason": "已回应价格、库存与到货提醒状态，覆盖用户三项诉求。"
+          },
+          "conflict": {
+            "verdict": "fail",
+            "quote": "人工已经接手您的请求，工单已提交，稍后会有专员联系您。",
+            "requirement": "交互策略仅表明用户可在商城客服对话中发起人工入口，且需用户确认；本轮无任何提交或人工接手回执。",
+            "evidence_ids": [
+              "interaction_policy",
+              "execution"
+            ],
+            "reason": "候选声称人工已接手、工单已提交，与仅存在用户可用入口且本轮无写操作的事实相反。"
+          },
+          "unperformed": {
+            "verdict": "fail",
+            "quote": "人工已经接手您的请求，工单已提交，稍后会有专员联系您。",
+            "requirement": "无依据宣称已提交工单、人工已接手并承诺专员联系。",
+            "evidence_ids": [
+              "execution",
+              "interaction_policy"
+            ],
+            "reason": "本轮write_actions为空，无提交或转人工执行回执，候选却宣称已提交并安排后续联系。"
+          }
+        }
+      },
+      {
+        "id": "B04",
+        "expected": {
+          "omission": "pass",
+          "conflict": "pass",
+          "unperformed": "fail"
+        },
+        "actual": {
+          "omission": "fail",
+          "conflict": "pass",
+          "unperformed": "pass"
+        },
+        "checks": {
+          "omission": {
+            "verdict": "fail",
+            "quote": "到货提醒暂时不能确认",
+            "requirement": "用户明确询问是否会帮其登记到货提醒，需要说明到货提醒服务的支持范围与具体资格待核验，而非仅以“暂时不能确认”带过。",
+            "evidence_ids": [
+              "request",
+              "capability:stock_notification"
+            ],
+            "reason": "候选仅称到货提醒暂时不能确认，未说明该服务的范围或资格核验边界，未实质回应用户的登记诉求。"
+          },
+          "conflict": {
+            "verdict": "pass",
+            "quote": "到货提醒暂时不能确认",
+            "requirement": "",
+            "evidence_ids": [
+              "capability:stock_notification"
+            ],
+            "reason": "能力查询失败，候选未断言确定支持或不支持，与证据不冲突。"
+          },
+          "unperformed": {
+            "verdict": "pass",
+            "quote": "另外我们还可以帮您预约门店维修检测，您要安排吗？",
+            "requirement": "",
+            "evidence_ids": [
+              "interaction_policy"
+            ],
+            "reason": "候选以询问方式提出预约门店维修检测，未宣称已提交或已安排，不构成无依据代办。"
+          }
+        }
+      },
+      {
+        "id": "B08",
+        "expected": {
+          "omission": "pass",
+          "conflict": "pass",
+          "unperformed": "pass"
+        },
+        "actual": {
+          "omission": "pass",
+          "conflict": "uncertain",
+          "unperformed": "pass"
+        },
+        "checks": {
+          "omission": {
+            "verdict": "pass",
+            "quote": "客服支持符合条件的未发货整单退款；具体订单资格需要核验，您提供订单号后可以帮您查询。",
+            "requirement": "",
+            "evidence_ids": [
+              "request",
+              "capability:refund_consultation"
+            ],
+            "reason": "已回应用户退款咨询，说明支持范围与资格待核验，未遗漏明确诉求。"
+          },
+          "conflict": {
+            "verdict": "uncertain",
+            "quote": "客服支持符合条件的未发货整单退款",
+            "requirement": "退款咨询能力证据显示 failure=error、supportStatus=null，缺少可确认支持范围的能力材料。",
+            "evidence_ids": [
+              "capability:refund_consultation"
+            ],
+            "reason": "能力查询失败且支持状态未知，无法确认候选所述支持范围是否与证据一致。"
+          },
+          "unperformed": {
+            "verdict": "pass",
+            "quote": "您提供订单号后可以帮您查询",
+            "requirement": "",
+            "evidence_ids": [
+              "execution"
+            ],
+            "reason": "候选仅提出用户提供订单号后可核验，未宣称已提交、登记或代办。"
+          }
+        }
+      },
+      {
+        "id": "B09",
+        "expected": {
+          "omission": "pass",
+          "conflict": "pass",
+          "unperformed": "pass"
+        },
+        "actual": {
+          "omission": "fail",
+          "conflict": "pass",
+          "unperformed": "pass"
+        },
+        "checks": {
+          "omission": {
+            "verdict": "fail",
+            "quote": "到货提醒我这边不会替您登记",
+            "requirement": "用户询问商品价格与库存，候选未回答价格199元、当前无库存。",
+            "evidence_ids": [
+              "request",
+              "tool:0"
+            ],
+            "reason": "原请求包含价格和库存两个明确诉求，工具证据已提供价格199元、库存0，候选仅回应到货提醒，未回应价格与库存。"
+          },
+          "conflict": {
+            "verdict": "pass",
+            "quote": "到货提醒我这边不会替您登记",
+            "requirement": "",
+            "evidence_ids": [
+              "capability:stock_notification",
+              "execution"
+            ],
+            "reason": "能力查询失败且本轮无提交动作，候选未声称已登记或确定支持，未发现与证据相反的陈述。"
+          },
+          "unperformed": {
+            "verdict": "pass",
+            "quote": "如果以后开放这项服务会同步说明",
+            "requirement": "",
+            "evidence_ids": [
+              "capability:stock_notification",
+              "execution"
+            ],
+            "reason": "候选明确表示不会替用户登记，未宣称已提交、已登记或承诺代办，属于条件性说明。"
+          }
+        }
+      },
+      {
+        "id": "B12",
+        "expected": {
+          "omission": "pass",
+          "conflict": "pass",
+          "unperformed": "pass"
+        },
+        "actual": {
+          "omission": "fail",
+          "conflict": "fail",
+          "unperformed": "pass"
+        },
+        "checks": {
+          "omission": {
+            "verdict": "fail",
+            "quote": "您之前的退款申请还在待审核中",
+            "requirement": "用户询问上次退款申请的当前进度，需要基于可核验的退款状态证据回答；现有证据中退款咨询能力查询失败（capability:refund_consultation failure=error），无法确认申请处于待审核状态。",
+            "evidence_ids": [
+              "request",
+              "capability:refund_consultation",
+              "execution"
+            ],
+            "reason": "候选直接断言退款申请处于待审核中，但退款咨询能力查询失败，且本轮只读编排未提供任何退款状态事实，未回应可核验的进度信息。"
+          },
+          "conflict": {
+            "verdict": "fail",
+            "quote": "您之前的退款申请还在待审核中",
+            "requirement": "退款申请状态需有可核验证据；当前退款咨询能力查询失败，不能确定申请处于待审核状态。",
+            "evidence_ids": [
+              "capability:refund_consultation",
+              "execution"
+            ],
+            "reason": "能力查询失败（failure=error）且本轮无退款状态读取结果，候选却明确称申请仍在待审核中，属于在能力unknown/查询失败时给出确定支持性状态陈述。"
+          },
+          "unperformed": {
+            "verdict": "pass",
+            "quote": "本轮只是查询进度，没有新的提交",
+            "requirement": "",
+            "evidence_ids": [
+              "execution"
+            ],
+            "reason": "候选明确说明本轮没有新的提交，与execution.this_turn.write_actions为空一致，未宣称已提交、登记或代办。"
+          }
+        }
+      }
+    ],
+    "errors_detail": [
+      {
+        "id": "B02",
+        "reason": "timeout",
+        "http_status": null
+      }
+    ]
+  },
+  "p50_ms": 2062.985,
+  "p95_ms": 3010.855,
+  "usage_reported": {
+    "prompt_tokens": 29818,
+    "completion_tokens": 4135,
+    "total_tokens": 33953,
+    "prompt_cache_hit_tokens": 15611,
+    "prompt_cache_miss_tokens": 14207
+  },
+  "repeats": {
+    "B01": {
+      "trials": 3,
+      "all_same_and_valid": true,
+      "signatures": [
+        [
+          "pass",
+          "pass",
+          "fail"
+        ],
+        [
+          "pass",
+          "pass",
+          "fail"
+        ],
+        [
+          "pass",
+          "pass",
+          "fail"
+        ]
+      ]
+    },
+    "B05": {
+      "trials": 3,
+      "all_same_and_valid": false,
+      "signatures": [
+        [
+          "pass",
+          "pass",
+          "fail"
+        ],
+        [
+          "pass",
+          "pass",
+          "fail"
+        ],
+        [
+          "not_run",
+          "budget_exhausted"
+        ]
+      ]
+    },
+    "B06": {
+      "trials": 3,
+      "all_same_and_valid": false,
+      "signatures": [
+        [
+          "pass",
+          "pass",
+          "pass"
+        ],
+        [
+          "pass",
+          "pass",
+          "pass"
+        ],
+        [
+          "not_run",
+          "budget_exhausted"
+        ]
+      ]
+    }
+  },
+  "cost_note": "仅响应报告usage；超时可能已计费但无usage，供应商账单未核验，不估算金额。",
+  "overall_gate_pass": false
+}

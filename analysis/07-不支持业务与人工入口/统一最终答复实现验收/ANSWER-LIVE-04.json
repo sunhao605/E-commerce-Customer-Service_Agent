@@ -1,0 +1,1187 @@
+{
+  "case": {
+    "id": "ANSWER-LIVE-04",
+    "surface": "api",
+    "message": "露营季满减与平台会员券能叠加吗，支持到货提醒吗？",
+    "expected_intent": "promotion_query",
+    "capability_ids": [
+      "stock_notification"
+    ],
+    "expected": "依据实际政策说明通用叠加及限制，不承诺个人适用；提醒说明一次"
+  },
+  "request": {
+    "sessionId": "answer-live-53451001ebc94ede99acb438b9e4ce4f",
+    "message": "露营季满减与平台会员券能叠加吗，支持到货提醒吗？"
+  },
+  "started_at": "2026-10-16T11:29:02.589697+08:00",
+  "status_code": 200,
+  "response": {
+    "success": true,
+    "code": "OK",
+    "message": "success",
+    "data": {
+      "answer": "您好，关于您问的两个问题，分别说明如下：\n\n**1. 露营季满减与平台会员券能否叠加**\n\n根据荒野户外的露营季活动规则，满 300 减 40 的活动是可以与平台会员券叠加使用的，但不能与同类型的满减券重复叠加。另外，山友会员券需要在有效期内、由本人账号使用。\n\n需要提醒的是，具体某件商品是否参与活动、活动价、会员门槛、您的券是否在有效期内以及最终结算金额，仍需以商品页和结算页的实际显示为准。\n\n**2. 到货提醒**\n\n很抱歉，目前客服这边暂不支持登记到货或补货提醒。您可以稍后主动来查询商品库存情况，我们也可以帮您留意。\n\n如果您方便的话，可以把具体商品或订单信息发给我，我帮您进一步核实活动参与和优惠情况。",
+      "sessionId": "answer-live-53451001ebc94ede99acb438b9e4ce4f",
+      "confirmRequired": false,
+      "pendingAction": "CAPABILITY_QUERY",
+      "actions": [],
+      "fallback": false
+    }
+  },
+  "elapsed_ms": 5258.6,
+  "trace": [
+    {
+      "event_type": "rag_policy_admission",
+      "timestamp": "2026-10-16T03:29:02.655075Z",
+      "agent_mode": "lesson-41-final-rehearsal",
+      "step": 1,
+      "schema_version": "trace_event_v1",
+      "category": "rag",
+      "stage": "retrieval",
+      "name": "rag_policy_admission",
+      "status": "recorded",
+      "target": {
+        "type": null,
+        "name": null
+      },
+      "ids": {
+        "session_id": "answer-live-53451001ebc94ede99acb438b9e4ce4f",
+        "workflow_id": null,
+        "order_no": null,
+        "tool_call_id": null
+      },
+      "summary": {
+        "event_type": "rag_policy_admission"
+      },
+      "signals": [
+        "rag_policy_admission"
+      ],
+      "safety": {
+        "public_trace": true,
+        "hidden_cot_exposed": false,
+        "payload_sanitized": false,
+        "contains_sensitive_raw": false
+      },
+      "payload": {
+        "snapshot_version": "knowledge-3524fd57e6c4",
+        "judged_at": "2026-10-16T11:29:02.654968+08:00",
+        "available_policy_signature": "0d705f48ae1a",
+        "available_policies": {
+          "refund_before_shipping": "2026-10-14.2",
+          "invoice_issue": "2026-10-14.2",
+          "promotion_camping_season_stack_rule": "2026-10-14.2",
+          "member_coupon_gold_rule": "2026-10-14.2",
+          "outdoor_product_guide": "2026-10-14.2",
+          "return_after_delivery": "2026-10-14.2"
+        },
+        "blocked_policies": {}
+      }
+    },
+    {
+      "event_type": "runtime_context_built",
+      "timestamp": "2026-10-16T03:29:03.456962Z",
+      "agent_mode": "lesson-41-final-rehearsal",
+      "step": 2,
+      "schema_version": "trace_event_v1",
+      "category": "runtime_context",
+      "stage": "event",
+      "name": "runtime_context_built",
+      "status": "recorded",
+      "target": {
+        "type": null,
+        "name": null
+      },
+      "ids": {
+        "session_id": "answer-live-53451001ebc94ede99acb438b9e4ce4f",
+        "workflow_id": null,
+        "order_no": null,
+        "tool_call_id": null
+      },
+      "summary": {
+        "event_type": "runtime_context_built",
+        "risk_level": "low"
+      },
+      "signals": [
+        "runtime_context_built"
+      ],
+      "safety": {
+        "public_trace": true,
+        "hidden_cot_exposed": false,
+        "payload_sanitized": false,
+        "contains_sensitive_raw": false
+      },
+      "payload": {
+        "session_id": "answer-live-53451001ebc94ede99acb438b9e4ce4f",
+        "runtime_user_id": "U1001",
+        "runtime_nickname": "张三",
+        "member_level": "gold",
+        "risk_level": "low"
+      }
+    },
+    {
+      "event_type": "context_built",
+      "timestamp": "2026-10-16T03:29:03.457052Z",
+      "agent_mode": "lesson-41-final-rehearsal",
+      "step": 3,
+      "schema_version": "trace_event_v1",
+      "category": "context",
+      "stage": "event",
+      "name": "context_built",
+      "status": "recorded",
+      "target": {
+        "type": null,
+        "name": null
+      },
+      "ids": {
+        "session_id": "answer-live-53451001ebc94ede99acb438b9e4ce4f",
+        "workflow_id": null,
+        "order_no": null,
+        "tool_call_id": null
+      },
+      "summary": {
+        "event_type": "context_built",
+        "intent": "promotion_query"
+      },
+      "signals": [
+        "context_built"
+      ],
+      "safety": {
+        "public_trace": true,
+        "hidden_cot_exposed": false,
+        "payload_sanitized": false,
+        "contains_sensitive_raw": false
+      },
+      "payload": {
+        "session_id": "answer-live-53451001ebc94ede99acb438b9e4ce4f",
+        "intent": "promotion_query",
+        "sources": [
+          "runtime_context",
+          "session_memory",
+          "history_messages",
+          "user_message"
+        ],
+        "chosen_order_id": null,
+        "conflict_count": 0,
+        "history_kept_count": 0,
+        "history_dropped_count": 0,
+        "estimated_tokens": 12
+      }
+    },
+    {
+      "event_type": "model_route_planned",
+      "timestamp": "2026-10-16T03:29:03.457105Z",
+      "agent_mode": "lesson-41-final-rehearsal",
+      "step": 4,
+      "schema_version": "trace_event_v1",
+      "category": "model",
+      "stage": "event",
+      "name": "model_route_planned",
+      "status": "recorded",
+      "target": {
+        "type": null,
+        "name": null
+      },
+      "ids": {
+        "session_id": "answer-live-53451001ebc94ede99acb438b9e4ce4f",
+        "workflow_id": null,
+        "order_no": null,
+        "tool_call_id": null
+      },
+      "summary": {
+        "event_type": "model_route_planned",
+        "intent": "promotion_query"
+      },
+      "signals": [
+        "model_route_planned"
+      ],
+      "safety": {
+        "public_trace": true,
+        "hidden_cot_exposed": false,
+        "payload_sanitized": false,
+        "contains_sensitive_raw": false
+      },
+      "payload": {
+        "session_id": "answer-live-53451001ebc94ede99acb438b9e4ce4f",
+        "intent": "promotion_query",
+        "used_model": true,
+        "model_name": "deepseek-flash",
+        "fallback_reason": null,
+        "invocation_attempted": true,
+        "elapsed_ms": 801.103,
+        "usage": {
+          "input_tokens": 2703,
+          "output_tokens": 24,
+          "total_tokens": 2727
+        },
+        "capability_ids": [
+          "stock_notification"
+        ]
+      }
+    },
+    {
+      "event_type": "route_plan_built",
+      "timestamp": "2026-10-16T03:29:03.457213Z",
+      "agent_mode": "lesson-41-final-rehearsal",
+      "step": 5,
+      "schema_version": "trace_event_v1",
+      "category": "model",
+      "stage": "event",
+      "name": "route_plan_built",
+      "status": "recorded",
+      "target": {
+        "type": null,
+        "name": null
+      },
+      "ids": {
+        "session_id": "answer-live-53451001ebc94ede99acb438b9e4ce4f",
+        "workflow_id": null,
+        "order_no": null,
+        "tool_call_id": null
+      },
+      "summary": {
+        "event_type": "route_plan_built",
+        "intent": "promotion_query",
+        "risk_level": "low"
+      },
+      "signals": [
+        "route_plan_built"
+      ],
+      "safety": {
+        "public_trace": true,
+        "hidden_cot_exposed": false,
+        "payload_sanitized": false,
+        "contains_sensitive_raw": false
+      },
+      "payload": {
+        "session_id": "answer-live-53451001ebc94ede99acb438b9e4ce4f",
+        "intent": "promotion_query",
+        "source": "llm_with_policy_constraints",
+        "needs_product_facts": null,
+        "knowledge_domains": [
+          "promotion_and_member_policy"
+        ],
+        "capability_ids": [
+          "stock_notification"
+        ],
+        "clarification_fields": [],
+        "retrieval_strategies": [
+          {
+            "knowledge_domain": "promotion_and_member_policy",
+            "retrieval_mode": "hybrid",
+            "citation_scope": "section"
+          }
+        ],
+        "required_tools": [],
+        "needs_rag": true,
+        "needs_business_tools": true,
+        "requires_workflow": false,
+        "risk_level": "low"
+      }
+    },
+    {
+      "event_type": "rag_pre_retrieved",
+      "timestamp": "2026-10-16T03:29:05.976121Z",
+      "agent_mode": "lesson-41-final-rehearsal",
+      "step": 6,
+      "schema_version": "trace_event_v1",
+      "category": "rag",
+      "stage": "retrieval",
+      "name": "rag_pre_retrieved",
+      "status": "recorded",
+      "target": {
+        "type": null,
+        "name": null
+      },
+      "ids": {
+        "session_id": "answer-live-53451001ebc94ede99acb438b9e4ce4f",
+        "workflow_id": null,
+        "order_no": null,
+        "tool_call_id": null
+      },
+      "summary": {
+        "event_type": "rag_pre_retrieved",
+        "hit_count": 4,
+        "retrieval_stage": "pre_retrieval"
+      },
+      "signals": [
+        "rag_pre_retrieved"
+      ],
+      "safety": {
+        "public_trace": true,
+        "hidden_cot_exposed": false,
+        "payload_sanitized": false,
+        "contains_sensitive_raw": false
+      },
+      "payload": {
+        "session_id": "answer-live-53451001ebc94ede99acb438b9e4ce4f",
+        "hit_count": 4,
+        "retrieval_stage": "pre_retrieval",
+        "policy_id": "promotion_camping_season_stack_rule",
+        "candidate_policy_ids": [
+          "member_coupon_gold_rule",
+          "promotion_camping_season_stack_rule",
+          "promotion_camping_season_stack_rule",
+          "promotion_camping_season_stack_rule"
+        ]
+      }
+    },
+    {
+      "event_type": "rag_reranked",
+      "timestamp": "2026-10-16T03:29:05.976183Z",
+      "agent_mode": "lesson-41-final-rehearsal",
+      "step": 7,
+      "schema_version": "trace_event_v1",
+      "category": "rag",
+      "stage": "retrieval",
+      "name": "rag_reranked",
+      "status": "recorded",
+      "target": {
+        "type": null,
+        "name": null
+      },
+      "ids": {
+        "session_id": "answer-live-53451001ebc94ede99acb438b9e4ce4f",
+        "workflow_id": null,
+        "order_no": null,
+        "tool_call_id": null
+      },
+      "summary": {
+        "event_type": "rag_reranked"
+      },
+      "signals": [
+        "rag_reranked"
+      ],
+      "safety": {
+        "public_trace": true,
+        "hidden_cot_exposed": false,
+        "payload_sanitized": false,
+        "contains_sensitive_raw": false
+      },
+      "payload": {
+        "session_id": "answer-live-53451001ebc94ede99acb438b9e4ce4f",
+        "mode": "lesson41_lightweight",
+        "reranked_policy_ids": [
+          "member_coupon_gold_rule",
+          "promotion_camping_season_stack_rule",
+          "promotion_camping_season_stack_rule",
+          "promotion_camping_season_stack_rule"
+        ],
+        "top_policy_id": "member_coupon_gold_rule",
+        "rerank_reasons": {
+          "member_coupon_gold_rule": [
+            "vector召回",
+            "bm25召回",
+            "会员券条件匹配",
+            "叠加问题需要联合引用"
+          ],
+          "promotion_camping_season_stack_rule": [
+            "vector召回",
+            "bm25召回",
+            "当前大促规则加权",
+            "叠加问题需要联合引用"
+          ]
+        }
+      }
+    },
+    {
+      "event_type": "context_source_safety_checked",
+      "timestamp": "2026-10-16T03:29:05.976240Z",
+      "agent_mode": "lesson-41-final-rehearsal",
+      "step": 8,
+      "schema_version": "trace_event_v1",
+      "category": "system",
+      "stage": "event",
+      "name": "context_source_safety_checked",
+      "status": "recorded",
+      "target": {
+        "type": null,
+        "name": null
+      },
+      "ids": {
+        "session_id": "answer-live-53451001ebc94ede99acb438b9e4ce4f",
+        "workflow_id": null,
+        "order_no": null,
+        "tool_call_id": null
+      },
+      "summary": {
+        "event_type": "context_source_safety_checked"
+      },
+      "signals": [
+        "context_source_safety_checked"
+      ],
+      "safety": {
+        "public_trace": true,
+        "hidden_cot_exposed": false,
+        "payload_sanitized": false,
+        "contains_sensitive_raw": false
+      },
+      "payload": {
+        "session_id": "answer-live-53451001ebc94ede99acb438b9e4ce4f",
+        "tainted": false,
+        "tainted_sources": [],
+        "source_count": 5
+      }
+    },
+    {
+      "event_type": "evidence_domain_completed",
+      "timestamp": "2026-10-16T03:29:05.976521Z",
+      "agent_mode": "lesson-41-final-rehearsal",
+      "step": 9,
+      "schema_version": "trace_event_v1",
+      "category": "rag",
+      "stage": "finish",
+      "name": "evidence_domain_completed",
+      "status": "answered",
+      "target": {
+        "type": null,
+        "name": null
+      },
+      "ids": {
+        "session_id": "answer-live-53451001ebc94ede99acb438b9e4ce4f",
+        "workflow_id": null,
+        "order_no": null,
+        "tool_call_id": null
+      },
+      "summary": {
+        "event_type": "evidence_domain_completed"
+      },
+      "signals": [
+        "evidence_domain_completed"
+      ],
+      "safety": {
+        "public_trace": true,
+        "hidden_cot_exposed": false,
+        "payload_sanitized": false,
+        "contains_sensitive_raw": false
+      },
+      "payload": {
+        "knowledge_domain": "promotion_and_member_policy",
+        "retrieval_mode": "hybrid",
+        "citation_scope": "section",
+        "status": "answered",
+        "retrieval": {
+          "snapshot_version": "knowledge-3524fd57e6c4",
+          "judged_at": "2026-10-16T11:29:02.654968+08:00",
+          "available_policy_signature": "0d705f48ae1a",
+          "available_policies": {
+            "refund_before_shipping": "2026-10-14.2",
+            "invoice_issue": "2026-10-14.2",
+            "promotion_camping_season_stack_rule": "2026-10-14.2",
+            "member_coupon_gold_rule": "2026-10-14.2",
+            "outdoor_product_guide": "2026-10-14.2",
+            "return_after_delivery": "2026-10-14.2"
+          },
+          "blocked_policies": {},
+          "mode": "langchain_inmemory_hybrid",
+          "fusion": "rrf",
+          "embedding": "openai_compatible_embedding:Qwen/Qwen3-Embedding-8B",
+          "plan": {
+            "original_query": "露营季满减与平台会员券能叠加吗，支持到货提醒吗？",
+            "rewritten_query": "露营季满减与平台会员券能叠加吗，支持到货提醒吗？",
+            "intent": "promotion_query",
+            "knowledge_domains": [
+              "promotion",
+              "member_coupon"
+            ],
+            "reason": "口语归一后按 RoutePlan 知识域执行向量与关键词双路召回。"
+          },
+          "index_version": "lesson41-idx-37f6dea438a5",
+          "index_chunk_count": 115,
+          "index_cache_hit": true,
+          "retrieval_cache_hit": false,
+          "cache_key": "e86782202383b0f7",
+          "vector_policy_ids": [
+            "promotion_camping_season_stack_rule",
+            "member_coupon_gold_rule"
+          ],
+          "keyword_policy_ids": [
+            "member_coupon_gold_rule",
+            "promotion_camping_season_stack_rule"
+          ],
+          "source_scores": {
+            "member_coupon_gold_rule": {
+              "vector": 0.746,
+              "bm25": 20.274,
+              "final": 1.0,
+              "sources": [
+                "vector召回",
+                "bm25召回"
+              ]
+            },
+            "promotion_camping_season_stack_rule": {
+              "vector": 0.78,
+              "bm25": 17.727,
+              "final": 0.992,
+              "sources": [
+                "vector召回",
+                "bm25召回"
+              ]
+            }
+          }
+        },
+        "citations": [
+          {
+            "source": "knowledge/member_coupon_policy.md",
+            "title": "荒野户外会员券使用规则",
+            "snippet": "## 6. 叠加、退单与优惠恢复  \n本项目已有通用规则允许露营季满 300 减 40 与平台会员券叠加，同时禁止同类型满减券重复叠加。该规则不自动覆盖品类券、定向券或未发布的其他活动；具体组合仍需活动和券的证据。详见 [活动规则](promotion_policy.md)。",
+            "score": 1.0,
+            "retrieval_stage": "pre_retrieval",
+            "metadata": {
+              "policy_id": "member_coupon_gold_rule",
+              "scene_key": "member_coupon",
+              "version": "2026-10-14.2",
+              "publication_status": "published",
+              "effective_from": "2025-01-01T00:00:00+08:00",
+              "effective_to": "2028-01-01T00:00:00+08:00",
+              "snapshot_version": "knowledge-3524fd57e6c4",
+              "chunk_ids": [
+                "member_coupon_gold_rule-chunk-55"
+              ],
+              "section_id": "member_coupon_gold_rule-section-6",
+              "section": "6. 叠加、退单与优惠恢复"
+            }
+          },
+          {
+            "source": "knowledge/promotion_policy.md",
+            "title": "荒野户外 露营季活动规则",
+            "snippet": "## 8. 常见客服场景  \n以下为模拟问法，分别检验活动对象、账号条件、门槛和跨文档证据。  \n| 顾客问题 | 正确的处理方向 | 不应给出的结论 |\n|---|---|---|\n| “露营季满减能叠我的山友券吗？” | 取得具体券，结合通用叠加规则和券条件 | 任意券都能叠加 |\n| “双十一也和这次一样吗？” | 明确缺少双十一政策，不能沿用露营季 | 双十一也是满 300 减 40 |",
+            "score": 0.992,
+            "retrieval_stage": "pre_retrieval",
+            "metadata": {
+              "policy_id": "promotion_camping_season_stack_rule",
+              "scene_key": "promotion",
+              "version": "2026-10-14.2",
+              "publication_status": "published",
+              "effective_from": "2025-01-01T00:00:00+08:00",
+              "effective_to": "2028-01-01T00:00:00+08:00",
+              "snapshot_version": "knowledge-3524fd57e6c4",
+              "chunk_ids": [
+                "promotion_camping_season_stack_rule-chunk-38"
+              ],
+              "section_id": "promotion_camping_season_stack_rule-section-8",
+              "section": "8. 常见客服场景"
+            }
+          },
+          {
+            "source": "knowledge/promotion_policy.md",
+            "title": "荒野户外 露营季活动规则",
+            "snippet": "露营季活动期间，满 300 减 40 活动可以与平台会员券叠加，但不能与同类型满减券重复叠加。  \n# 荒野户外露营季活动客服知识  \n## 1. 本文件说明什么  \n本文是项目演示知识，保留既有满减和会员券叠加规则，补充活动范围、价格差异和异常咨询的处理方法。具体活动是否正在进行、哪件商品参与、活动价、会员门槛、优惠券状态和最终金额需要查询活动及结算数据。",
+            "score": 0.992,
+            "retrieval_stage": "pre_retrieval",
+            "metadata": {
+              "policy_id": "promotion_camping_season_stack_rule",
+              "scene_key": "promotion",
+              "version": "2026-10-14.2",
+              "publication_status": "published",
+              "effective_from": "2025-01-01T00:00:00+08:00",
+              "effective_to": "2028-01-01T00:00:00+08:00",
+              "snapshot_version": "knowledge-3524fd57e6c4",
+              "chunk_ids": [
+                "promotion_camping_season_stack_rule-chunk-21"
+              ],
+              "section_id": "promotion_camping_season_stack_rule-section-1",
+              "section": "1. 本文件说明什么"
+            }
+          },
+          {
+            "source": "knowledge/promotion_policy.md",
+            "title": "荒野户外 露营季活动规则",
+            "snippet": "## 4. 满 300 减 40 与叠加边界  \n现有通用政策说明：符合露营季活动条件时，满 300 减 40 可以与平台会员券叠加；同类型满减券不能重复叠加。它没有定义“每满 300 减 40”、所有订单无限次参加、其他券种一律兼容等规则，不应补出这些结论。",
+            "score": 0.949,
+            "retrieval_stage": "pre_retrieval",
+            "metadata": {
+              "policy_id": "promotion_camping_season_stack_rule",
+              "scene_key": "promotion",
+              "version": "2026-10-14.2",
+              "publication_status": "published",
+              "effective_from": "2025-01-01T00:00:00+08:00",
+              "effective_to": "2028-01-01T00:00:00+08:00",
+              "snapshot_version": "knowledge-3524fd57e6c4",
+              "chunk_ids": [
+                "promotion_camping_season_stack_rule-chunk-28"
+              ],
+              "section_id": "promotion_camping_season_stack_rule-section-4",
+              "section": "4. 满 300 减 40 与叠加边界"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "event_type": "rag_hybrid_retrieved",
+      "timestamp": "2026-10-16T03:29:05.976561Z",
+      "agent_mode": "lesson-41-final-rehearsal",
+      "step": 10,
+      "schema_version": "trace_event_v1",
+      "category": "rag",
+      "stage": "retrieval",
+      "name": "rag_hybrid_retrieved",
+      "status": "recorded",
+      "target": {
+        "type": null,
+        "name": null
+      },
+      "ids": {
+        "session_id": "answer-live-53451001ebc94ede99acb438b9e4ce4f",
+        "workflow_id": null,
+        "order_no": null,
+        "tool_call_id": null
+      },
+      "summary": {
+        "event_type": "rag_hybrid_retrieved",
+        "hit_count": 4,
+        "retrieval_stage": "hybrid_retrieval"
+      },
+      "signals": [
+        "rag_hybrid_retrieved"
+      ],
+      "safety": {
+        "public_trace": true,
+        "hidden_cot_exposed": false,
+        "payload_sanitized": false,
+        "contains_sensitive_raw": false
+      },
+      "payload": {
+        "session_id": "answer-live-53451001ebc94ede99acb438b9e4ce4f",
+        "mode": "langchain_inmemory_hybrid",
+        "rewritten_query": "露营季满减与平台会员券能叠加吗，支持到货提醒吗？",
+        "index_version": "lesson41-idx-37f6dea438a5",
+        "index_chunk_count": 115,
+        "index_cache_hit": true,
+        "retrieval_cache_hit": false,
+        "vector_policy_ids": [
+          "promotion_camping_season_stack_rule",
+          "member_coupon_gold_rule"
+        ],
+        "keyword_policy_ids": [
+          "member_coupon_gold_rule",
+          "promotion_camping_season_stack_rule"
+        ],
+        "hit_count": 4,
+        "retrieval_stage": "hybrid_retrieval"
+      }
+    },
+    {
+      "event_type": "service_capability_queried",
+      "timestamp": "2026-10-16T03:29:06.018099Z",
+      "agent_mode": "lesson-41-final-rehearsal",
+      "step": 11,
+      "schema_version": "trace_event_v1",
+      "category": "system",
+      "stage": "event",
+      "name": "service_capability_queried",
+      "status": "recorded",
+      "target": {
+        "type": null,
+        "name": null
+      },
+      "ids": {
+        "session_id": "answer-live-53451001ebc94ede99acb438b9e4ce4f",
+        "workflow_id": null,
+        "order_no": null,
+        "tool_call_id": null
+      },
+      "summary": {
+        "event_type": "service_capability_queried"
+      },
+      "signals": [
+        "service_capability_queried"
+      ],
+      "safety": {
+        "public_trace": true,
+        "hidden_cot_exposed": false,
+        "payload_sanitized": false,
+        "contains_sensitive_raw": false
+      },
+      "payload": {
+        "session_id": "answer-live-53451001ebc94ede99acb438b9e4ce4f",
+        "capability_id": "stock_notification",
+        "support_status": "unsupported",
+        "failure": null,
+        "version": "service-capabilities-v1",
+        "channel": "customer_service_agent"
+      }
+    },
+    {
+      "event_type": "model_answer_generated",
+      "timestamp": "2026-10-16T03:29:07.801687Z",
+      "agent_mode": "lesson-41-final-rehearsal",
+      "step": 12,
+      "schema_version": "trace_event_v1",
+      "category": "model",
+      "stage": "event",
+      "name": "model_answer_generated",
+      "status": "recorded",
+      "target": {
+        "type": null,
+        "name": null
+      },
+      "ids": {
+        "session_id": "answer-live-53451001ebc94ede99acb438b9e4ce4f",
+        "workflow_id": null,
+        "order_no": null,
+        "tool_call_id": null
+      },
+      "summary": {
+        "event_type": "model_answer_generated",
+        "intent": "promotion_query"
+      },
+      "signals": [
+        "model_answer_generated"
+      ],
+      "safety": {
+        "public_trace": true,
+        "hidden_cot_exposed": false,
+        "payload_sanitized": false,
+        "contains_sensitive_raw": false
+      },
+      "payload": {
+        "session_id": "answer-live-53451001ebc94ede99acb438b9e4ce4f",
+        "intent": "promotion_query",
+        "used_model": true,
+        "model_name": "deepseek-flash",
+        "fallback_reason": null
+      }
+    },
+    {
+      "event_type": "mcp_binding_resolved",
+      "timestamp": "2026-10-16T03:29:07.801762Z",
+      "agent_mode": "lesson-41-final-rehearsal",
+      "step": 13,
+      "schema_version": "trace_event_v1",
+      "category": "system",
+      "stage": "event",
+      "name": "mcp_binding_resolved",
+      "status": "recorded",
+      "target": {
+        "type": null,
+        "name": null
+      },
+      "ids": {
+        "session_id": "answer-live-53451001ebc94ede99acb438b9e4ce4f",
+        "workflow_id": null,
+        "order_no": null,
+        "tool_call_id": null
+      },
+      "summary": {
+        "event_type": "mcp_binding_resolved"
+      },
+      "signals": [
+        "mcp_binding_resolved"
+      ],
+      "safety": {
+        "public_trace": true,
+        "hidden_cot_exposed": false,
+        "payload_sanitized": false,
+        "contains_sensitive_raw": false
+      },
+      "payload": {
+        "session_id": "answer-live-53451001ebc94ede99acb438b9e4ce4f",
+        "tool_source": "mcp_catalog",
+        "selected_tool": null,
+        "available_tools": [
+          "get_after_sale_eligibility",
+          "get_order_logistics",
+          "get_refund_status",
+          "search_products"
+        ],
+        "resources": [],
+        "prompts": [],
+        "boundary": "MCP 提供标准化目录；Tool Use、Hooks 和 Workflow 仍负责执行与安全治理。"
+      }
+    },
+    {
+      "event_type": "prompt_context_built",
+      "timestamp": "2026-10-16T03:29:07.801846Z",
+      "agent_mode": "lesson-41-final-rehearsal",
+      "step": 14,
+      "schema_version": "trace_event_v1",
+      "category": "prompt",
+      "stage": "event",
+      "name": "prompt_context_built",
+      "status": "recorded",
+      "target": {
+        "type": null,
+        "name": null
+      },
+      "ids": {
+        "session_id": "answer-live-53451001ebc94ede99acb438b9e4ce4f",
+        "workflow_id": null,
+        "order_no": null,
+        "tool_call_id": null
+      },
+      "summary": {
+        "event_type": "prompt_context_built"
+      },
+      "signals": [
+        "prompt_context_built"
+      ],
+      "safety": {
+        "public_trace": true,
+        "hidden_cot_exposed": false,
+        "payload_sanitized": false,
+        "contains_sensitive_raw": false
+      },
+      "payload": {
+        "session_id": "answer-live-53451001ebc94ede99acb438b9e4ce4f",
+        "registry_schema": "prompt_registry_v1",
+        "selected_fragments": [
+          {
+            "name": "prompt_security",
+            "level": "global_policy",
+            "version": "v1",
+            "load": "always",
+            "priority": 100,
+            "phase": "route",
+            "estimated_tokens": 29
+          },
+          {
+            "name": "system_customer_service",
+            "level": "role",
+            "version": "v1",
+            "load": "always",
+            "priority": 90,
+            "phase": "route",
+            "estimated_tokens": 32
+          },
+          {
+            "name": "route_contract",
+            "level": "task_contract",
+            "version": "v1",
+            "load": "when_route",
+            "priority": 80,
+            "phase": "route",
+            "estimated_tokens": 1402
+          },
+          {
+            "name": "prompt_security",
+            "level": "global_policy",
+            "version": "v1",
+            "load": "always",
+            "priority": 100,
+            "phase": "final_answer",
+            "estimated_tokens": 29
+          },
+          {
+            "name": "system_customer_service",
+            "level": "role",
+            "version": "v1",
+            "load": "always",
+            "priority": 90,
+            "phase": "final_answer",
+            "estimated_tokens": 32
+          },
+          {
+            "name": "rag_answering",
+            "level": "capability",
+            "version": "v1",
+            "load": "when_rag",
+            "priority": 60,
+            "phase": "final_answer",
+            "estimated_tokens": 65
+          },
+          {
+            "name": "final_answer_style",
+            "level": "response_contract",
+            "version": "v1",
+            "load": "when_final_answer",
+            "priority": 40,
+            "phase": "final_answer",
+            "estimated_tokens": 142
+          }
+        ],
+        "prompt_body_exposed": false
+      }
+    },
+    {
+      "event_type": "hook_executed",
+      "timestamp": "2026-10-16T03:29:07.801900Z",
+      "agent_mode": "lesson-41-final-rehearsal",
+      "step": 15,
+      "schema_version": "trace_event_v1",
+      "category": "hook",
+      "stage": "on_completion",
+      "name": "hook_executed",
+      "status": "completed",
+      "target": {
+        "type": null,
+        "name": "chat_request"
+      },
+      "ids": {
+        "session_id": "answer-live-53451001ebc94ede99acb438b9e4ce4f",
+        "workflow_id": null,
+        "order_no": null,
+        "tool_call_id": null
+      },
+      "summary": {
+        "event_type": "hook_executed",
+        "risk_level": "low",
+        "degraded": false,
+        "hook_type": "on_completion"
+      },
+      "signals": [
+        "hook_executed",
+        "on_completion"
+      ],
+      "safety": {
+        "public_trace": true,
+        "hidden_cot_exposed": false,
+        "payload_sanitized": false,
+        "contains_sensitive_raw": false
+      },
+      "payload": {
+        "session_id": "answer-live-53451001ebc94ede99acb438b9e4ce4f",
+        "hook_type": "on_completion",
+        "target_name": "chat_request",
+        "action": "summarize_tool_governance",
+        "status": "completed",
+        "risk_level": "low",
+        "next_action": "answer_user",
+        "degraded": false,
+        "redacted": true
+      }
+    },
+    {
+      "event_type": "cost_recorded",
+      "timestamp": "2026-10-16T03:29:07.802057Z",
+      "agent_mode": "lesson-41-final-rehearsal",
+      "step": 16,
+      "schema_version": "trace_event_v1",
+      "category": "cost",
+      "stage": "cost_summary",
+      "name": "cost_recorded",
+      "status": "recorded",
+      "target": {
+        "type": null,
+        "name": null
+      },
+      "ids": {
+        "session_id": "answer-live-53451001ebc94ede99acb438b9e4ce4f",
+        "workflow_id": null,
+        "order_no": null,
+        "tool_call_id": null
+      },
+      "summary": {
+        "event_type": "cost_recorded",
+        "path_type": "light_react_agent",
+        "tool_call_count": 0
+      },
+      "signals": [
+        "cost_recorded",
+        "light_react_agent"
+      ],
+      "safety": {
+        "public_trace": true,
+        "hidden_cot_exposed": false,
+        "payload_sanitized": false,
+        "contains_sensitive_raw": false
+      },
+      "payload": {
+        "schema_version": "cost_summary_v1",
+        "cost_profile": "teaching",
+        "path_type": "light_react_agent",
+        "model_calls": {
+          "route_planner": 1,
+          "tool_agent": 0,
+          "final_answer": 1,
+          "extra_reasoning": 0
+        },
+        "frameworks": {
+          "langchain_runnable_sequence": true,
+          "langchain_create_agent": false,
+          "langgraph_state_graph": false,
+          "offline_deterministic_fallback": false
+        },
+        "tool_call_count": 0,
+        "business_tool_call_count": 0,
+        "rag": {
+          "needs_rag": true,
+          "hit_count": 4,
+          "pre_retrieval_count": 1,
+          "tool_retrieval_count": 0,
+          "retrieval_paths": [
+            "pre_retrieval",
+            "pre_retrieval",
+            "pre_retrieval",
+            "pre_retrieval"
+          ],
+          "cache_hit": false
+        },
+        "tokens": {
+          "context_estimated": 12,
+          "prompt_estimated": 1731,
+          "answer_estimated": 154,
+          "total_estimated": 1897,
+          "context_budget": 160
+        },
+        "prompt_fragments": {
+          "selected": [
+            "prompt_security",
+            "system_customer_service",
+            "route_contract",
+            "prompt_security",
+            "system_customer_service",
+            "rag_answering",
+            "final_answer_style"
+          ],
+          "selections": [
+            {
+              "name": "prompt_security",
+              "level": "global_policy",
+              "version": "v1",
+              "load": "always",
+              "priority": 100,
+              "phase": "route",
+              "estimated_tokens": 29
+            },
+            {
+              "name": "system_customer_service",
+              "level": "role",
+              "version": "v1",
+              "load": "always",
+              "priority": 90,
+              "phase": "route",
+              "estimated_tokens": 32
+            },
+            {
+              "name": "route_contract",
+              "level": "task_contract",
+              "version": "v1",
+              "load": "when_route",
+              "priority": 80,
+              "phase": "route",
+              "estimated_tokens": 1402
+            },
+            {
+              "name": "prompt_security",
+              "level": "global_policy",
+              "version": "v1",
+              "load": "always",
+              "priority": 100,
+              "phase": "final_answer",
+              "estimated_tokens": 29
+            },
+            {
+              "name": "system_customer_service",
+              "level": "role",
+              "version": "v1",
+              "load": "always",
+              "priority": 90,
+              "phase": "final_answer",
+              "estimated_tokens": 32
+            },
+            {
+              "name": "rag_answering",
+              "level": "capability",
+              "version": "v1",
+              "load": "when_rag",
+              "priority": 60,
+              "phase": "final_answer",
+              "estimated_tokens": 65
+            },
+            {
+              "name": "final_answer_style",
+              "level": "response_contract",
+              "version": "v1",
+              "load": "when_final_answer",
+              "priority": 40,
+              "phase": "final_answer",
+              "estimated_tokens": 142
+            }
+          ],
+          "fragment_count": 7,
+          "fragmentized": true,
+          "source": "actual_model_invocations"
+        },
+        "cache": {
+          "common_hit_cache": false,
+          "cache_key": null,
+          "does_not_cache_high_risk_workflow": true
+        },
+        "observation_compression": {
+          "schema_version": "observation_compression_v1",
+          "original_tokens": 0,
+          "compressed_tokens": 0,
+          "saved_tokens": 0,
+          "strategy": "keep_status_next_action_and_risk_summary"
+        },
+        "workflow": {
+          "used_langgraph": false,
+          "workflow_id": null,
+          "workflow_type": null,
+          "graph_name": null,
+          "node_history": [],
+          "hitl_required": false,
+          "status": null
+        },
+        "degradation": {
+          "degraded": false,
+          "reason": null,
+          "cost_threshold_exceeded": true,
+          "warnings": [
+            "total_estimated_tokens_over_teaching_budget"
+          ]
+        },
+        "reasoning": {
+          "view": "off",
+          "thinking_requested": false,
+          "reasoning_content_returned": false,
+          "source": null
+        },
+        "safety_boundary": {
+          "cost_control_does_not_skip_business_facts": true,
+          "cost_control_does_not_skip_hitl": true,
+          "not_finops_or_billing_system": true
+        },
+        "route_usage_actual": {
+          "input_tokens": 2703,
+          "output_tokens": 24,
+          "total_tokens": 2727
+        }
+      }
+    },
+    {
+      "event_type": "final_answer_generated",
+      "timestamp": "2026-10-16T03:29:07.802082Z",
+      "agent_mode": "lesson-41-final-rehearsal",
+      "step": 17,
+      "schema_version": "trace_event_v1",
+      "category": "answer",
+      "stage": "event",
+      "name": "final_answer_generated",
+      "status": "success",
+      "target": {
+        "type": null,
+        "name": null
+      },
+      "ids": {
+        "session_id": "answer-live-53451001ebc94ede99acb438b9e4ce4f",
+        "workflow_id": null,
+        "order_no": null,
+        "tool_call_id": null
+      },
+      "summary": {
+        "event_type": "final_answer_generated",
+        "intent": "promotion_query",
+        "risk_level": "low"
+      },
+      "signals": [
+        "final_answer_generated"
+      ],
+      "safety": {
+        "public_trace": true,
+        "hidden_cot_exposed": false,
+        "payload_sanitized": false,
+        "contains_sensitive_raw": false
+      },
+      "payload": {
+        "session_id": "answer-live-53451001ebc94ede99acb438b9e4ce4f",
+        "intent": "promotion_query",
+        "status": "success",
+        "risk_level": "low",
+        "used_model": true,
+        "reasoning_content_returned": false
+      }
+    }
+  ]
+}

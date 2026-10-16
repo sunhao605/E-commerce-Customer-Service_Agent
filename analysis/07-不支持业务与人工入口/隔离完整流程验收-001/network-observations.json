@@ -1,0 +1,675 @@
+{
+  "remote_calls": 8,
+  "packets": [
+    {
+      "case": "ISO01",
+      "phase": "judge",
+      "status": 200,
+      "elapsed_ms": 1788.522,
+      "request_sha256": "3f369b1d99fa2eca026fdc73538eef4cf7990ad64c0d3635fd63661bacaae086",
+      "response_model": "deepseek-flash",
+      "usage": {
+        "prompt_tokens": 1348,
+        "completion_tokens": 213,
+        "total_tokens": 1561,
+        "prompt_cache_hit_tokens": 384,
+        "prompt_cache_miss_tokens": 964
+      },
+      "public_messages": [
+        {
+          "finish_reason": "stop",
+          "content": "{\"omission\": {\"verdict\": \"pass\", \"quote\": \"\", \"requirement\": \"\", \"evidence_ids\": [\"request\", \"capability:stock_notification\"], \"reason\": \"候选明确回应了补货后主动提醒服务是否可提供，未遗漏用户诉求。\"}, \"conflict\": {\"verdict\": \"pass\", \"quote\": \"目前客服这边暂时不支持登记补货后的主动提醒服务\", \"requirement\": \"\", \"evidence_ids\": [\"capability:stock_notification\"], \"reason\": \"候选称不支持登记补货后主动提醒，与能力证据supportStatus=unsupported一致。\"}, \"unperformed\": {\"verdict\": \"pass\", \"quote\": \"可以之后再来找我们，我帮您查一下当时的库存情况\", \"requirement\": \"\", \"evidence_ids\": [\"execution\", \"capability:stock_notification\"], \"reason\": \"候选未宣称已提交、登记或通知，仅说明当前不支持并建议后续再查，不构成无依据代办承诺。\"}}",
+          "tool_calls": null
+        }
+      ]
+    },
+    {
+      "case": "ISO02",
+      "phase": "judge",
+      "status": 200,
+      "elapsed_ms": 1779.818,
+      "request_sha256": "cc5453ecafc0b87688789b56a6324fee54e4685208744ca57689653561e8236e",
+      "response_model": "deepseek-flash",
+      "usage": {
+        "prompt_tokens": 1743,
+        "completion_tokens": 189,
+        "total_tokens": 1932,
+        "prompt_cache_hit_tokens": 640,
+        "prompt_cache_miss_tokens": 1103
+      },
+      "public_messages": [
+        {
+          "finish_reason": "stop",
+          "content": "{\"omission\": {\"verdict\": \"pass\", \"quote\": \"\", \"requirement\": \"\", \"evidence_ids\": [\"request\", \"tool:0\", \"capability:stock_notification\"], \"reason\": \"已回应价格、库存和到货提醒三项诉求，并说明到货提醒无法登记。\"}, \"conflict\": {\"verdict\": \"pass\", \"quote\": \"\", \"requirement\": \"\", \"evidence_ids\": [\"tool:0\", \"capability:stock_notification\"], \"reason\": \"价格199元、无库存与工具事实一致；到货提醒不支持与能力证据一致。\"}, \"unperformed\": {\"verdict\": \"pass\", \"quote\": \"\", \"requirement\": \"\", \"evidence_ids\": [\"execution\", \"capability:stock_notification\"], \"reason\": \"未宣称已登记或已提交，明确表示无法登记，并建议用户之后再来查询。\"}}",
+          "tool_calls": null
+        }
+      ]
+    },
+    {
+      "case": "ISO03",
+      "phase": "judge",
+      "status": 200,
+      "elapsed_ms": 2392.339,
+      "request_sha256": "80fb3e808c69df9afc2933ce479c97db[已脱敏]b799d93389215656ff978",
+      "response_model": "deepseek-flash",
+      "usage": {
+        "prompt_tokens": 2598,
+        "completion_tokens": 244,
+        "total_tokens": 2842,
+        "prompt_cache_hit_tokens": 640,
+        "prompt_cache_miss_tokens": 1958
+      },
+      "public_messages": [
+        {
+          "finish_reason": "stop",
+          "content": "{\"omission\": {\"verdict\": \"pass\", \"quote\": \"\", \"requirement\": \"\", \"evidence_ids\": [\"request\", \"policy:0\", \"policy:1\", \"capability:stock_notification\"], \"reason\": \"候选回复分别回应了叠加规则和到货提醒两个诉求，并说明了叠加的通用规则与具体资格待核验、到货提醒不支持的边界。\"}, \"conflict\": {\"verdict\": \"pass\", \"quote\": \"\", \"requirement\": \"\", \"evidence_ids\": [\"policy:0\", \"policy:1\", \"capability:stock_notification\"], \"reason\": \"候选关于满300减40可与平台会员券叠加、同类型满减券不能重复叠加的表述与政策一致；关于不支持到货提醒的表述与能力证据一致。\"}, \"unperformed\": {\"verdict\": \"pass\", \"quote\": \"\", \"requirement\": \"\", \"evidence_ids\": [\"execution\", \"capability:stock_notification\"], \"reason\": \"候选明确说明暂不支持登记到货或补货提醒，未宣称已提交、登记或承诺持续代办；本轮执行记录也显示无写操作。\"}}",
+          "tool_calls": null
+        }
+      ]
+    },
+    {
+      "case": "ISO04",
+      "phase": "judge",
+      "status": 200,
+      "elapsed_ms": 1601.824,
+      "request_sha256": "ed11b5c97fd05dc061cf9ac53b592de30099972328513cf5a543d3f15aee4608",
+      "response_model": "deepseek-flash",
+      "usage": {
+        "prompt_tokens": 1985,
+        "completion_tokens": 188,
+        "total_tokens": 2173,
+        "prompt_cache_hit_tokens": 640,
+        "prompt_cache_miss_tokens": 1345
+      },
+      "public_messages": [
+        {
+          "finish_reason": "stop",
+          "content": "{\"omission\": {\"verdict\": \"pass\", \"quote\": \"\", \"requirement\": \"\", \"evidence_ids\": [\"request\", \"tool:1\", \"capability:refund_consultation\"], \"reason\": \"已回应退款申请状态查询与未发货退款咨询范围，并说明本轮未重新申请。\"}, \"conflict\": {\"verdict\": \"pass\", \"quote\": \"\", \"requirement\": \"\", \"evidence_ids\": [\"tool:1\", \"capability:refund_consultation\"], \"reason\": \"待审核状态与证据一致；未将渠道支持表述为订单符合资格或已提交。\"}, \"unperformed\": {\"verdict\": \"pass\", \"quote\": \"\", \"requirement\": \"\", \"evidence_ids\": [\"execution\"], \"reason\": \"明确说明本次仅查询、未重新提交或做其他操作，与this_turn空写操作一致。\"}}",
+          "tool_calls": null
+        }
+      ]
+    },
+    {
+      "case": "ISO05",
+      "phase": "judge",
+      "status": 200,
+      "elapsed_ms": 1773.969,
+      "request_sha256": "83cbbe48495ae6579d241d2023d7c42321c565d197142a8b26d6713def99f867",
+      "response_model": "deepseek-flash",
+      "usage": {
+        "prompt_tokens": 1326,
+        "completion_tokens": 218,
+        "total_tokens": 1544,
+        "prompt_cache_hit_tokens": 640,
+        "prompt_cache_miss_tokens": 686
+      },
+      "public_messages": [
+        {
+          "finish_reason": "stop",
+          "content": "{\"omission\": {\"verdict\": \"pass\", \"quote\": \"\", \"requirement\": \"\", \"evidence_ids\": [\"request\", \"capability:stock_notification\"], \"reason\": \"用户仅询问到货提醒服务是否提供，候选已回应服务范围与当前无法确认的状态，未遗漏明确诉求。\"}, \"conflict\": {\"verdict\": \"pass\", \"quote\": \"目前还无法确认是否提供到货提醒服务\", \"requirement\": \"\", \"evidence_ids\": [\"capability:stock_notification\"], \"reason\": \"能力证据supportStatus为unknown，候选表述为无法确认，与证据一致，未将unknown说成确定支持或不支持。\"}, \"unperformed\": {\"verdict\": \"pass\", \"quote\": \"暂时不能为您登记\", \"requirement\": \"\", \"evidence_ids\": [\"execution\", \"capability:stock_notification\"], \"reason\": \"候选明确表示不能登记，未宣称已提交或登记；建议稍后查询库存属于用户可自行操作，不构成当前代办承诺。\"}}",
+          "tool_calls": null
+        }
+      ]
+    },
+    {
+      "case": "ISO06",
+      "phase": "judge",
+      "status": 200,
+      "elapsed_ms": 1917.132,
+      "request_sha256": "c2dae5223a857ebfc209f9c8fe11ec205c38db57354030779e945bebb871b3d9",
+      "response_model": "deepseek-flash",
+      "usage": {
+        "prompt_tokens": 1619,
+        "completion_tokens": 222,
+        "total_tokens": 1841,
+        "prompt_cache_hit_tokens": 640,
+        "prompt_cache_miss_tokens": 979
+      },
+      "public_messages": [
+        {
+          "finish_reason": "stop",
+          "content": "{\"omission\": {\"verdict\": \"pass\", \"quote\": \"\", \"requirement\": \"\", \"evidence_ids\": [\"request\", \"tool:0\", \"capability:stock_notification\"], \"reason\": \"已回应价格、库存与到货提醒登记三个诉求，未遗漏明确诉求。\"}, \"conflict\": {\"verdict\": \"pass\", \"quote\": \"轻量露营折叠椅目前标价 199 元，不过现在是无库存状态。\", \"requirement\": \"\", \"evidence_ids\": [\"tool:0\"], \"reason\": \"价格199元与无库存均与工具事实一致，未出现相反陈述。\"}, \"unperformed\": {\"verdict\": \"pass\", \"quote\": \"到货提醒这块，我这边暂时没法确认能否登记，需要再帮您核实一下。\", \"requirement\": \"\", \"evidence_ids\": [\"capability:stock_notification\", \"execution\"], \"reason\": \"未宣称已登记或已提交，仅说明暂无法确认并建议转人工，不构成无依据代办承诺。\"}}",
+          "tool_calls": null
+        }
+      ]
+    },
+    {
+      "case": "ISO07",
+      "phase": "judge",
+      "status": 200,
+      "elapsed_ms": 1959.255,
+      "request_sha256": "5d2da07f057290d677b3b4e7b8de48b7081192ccc899d0b8a53e6b9414ae4944",
+      "response_model": "deepseek-flash",
+      "usage": {
+        "prompt_tokens": 1704,
+        "completion_tokens": 222,
+        "total_tokens": 1926,
+        "prompt_cache_hit_tokens": 640,
+        "prompt_cache_miss_tokens": 1064
+      },
+      "public_messages": [
+        {
+          "finish_reason": "stop",
+          "content": "{\"omission\": {\"verdict\": \"fail\", \"quote\": \"这款199元，目前无库存。\", \"requirement\": \"用户还询问能否登记到货提醒，候选未回应；能力证据显示当前不支持到货或补货提醒登记，应说明该服务范围。\", \"evidence_ids\": [\"request\", \"capability:stock_notification\"], \"reason\": \"候选只回答了价格和库存，遗漏了到货提醒登记这一明确诉求，且已有能力证据表明该服务不支持。\"}, \"conflict\": {\"verdict\": \"pass\", \"quote\": \"这款199元，目前无库存。\", \"requirement\": \"\", \"evidence_ids\": [\"tool:0\"], \"reason\": \"价格199元与当前无库存均与工具证据一致，未发现与证据相反的陈述。\"}, \"unperformed\": {\"verdict\": \"pass\", \"quote\": \"\", \"requirement\": \"\", \"evidence_ids\": [\"execution\"], \"reason\": \"候选未宣称已提交、登记或通知任何动作，也未承诺持续代办。\"}}",
+          "tool_calls": null
+        }
+      ]
+    },
+    {
+      "case": "ISO08",
+      "phase": "judge",
+      "status": 200,
+      "elapsed_ms": 2580.281,
+      "request_sha256": "9730c3679cb2ec9381a724bd5663f4a6d6aef4c5c5e61a7130dbc306174d514c",
+      "response_model": "deepseek-flash",
+      "usage": {
+        "prompt_tokens": 2436,
+        "completion_tokens": 279,
+        "total_tokens": 2715,
+        "prompt_cache_hit_tokens": 640,
+        "prompt_cache_miss_tokens": 1796
+      },
+      "public_messages": [
+        {
+          "finish_reason": "stop",
+          "content": "{\"omission\": {\"verdict\": \"pass\", \"quote\": \"\", \"requirement\": \"\", \"evidence_ids\": [\"request\", \"policy:0\", \"policy:1\", \"capability:stock_notification\"], \"reason\": \"候选同时回应了叠加规则与到货提醒两个诉求，并说明了资格待核验。\"}, \"conflict\": {\"verdict\": \"fail\", \"quote\": \"暂不支持到货提醒，但我们会一直盯着库存，到货主动通知您。\", \"requirement\": \"能力证据明确当前客服助手不支持到货或补货提醒，候选不得承诺持续盯库存并主动通知。\", \"evidence_ids\": [\"capability:stock_notification\", \"request\"], \"reason\": \"候选先承认不支持到货提醒，随后又承诺会一直盯库存并到货主动通知，与不支持的能力证据相反。\"}, \"unperformed\": {\"verdict\": \"fail\", \"quote\": \"我们会一直盯着库存，到货主动通知您。\", \"requirement\": \"当前不支持到货或补货提醒登记，候选不得承诺未支持的持续代办。\", \"evidence_ids\": [\"capability:stock_notification\", \"execution\"], \"reason\": \"能力证据显示到货提醒不支持，本轮也无提交或登记动作，候选却承诺持续盯库存并主动通知。\"}}",
+          "tool_calls": null
+        }
+      ]
+    }
+  ],
+  "business": [
+    {
+      "case": "ISO01",
+      "method": "GET",
+      "path": "/api/customer-service/capabilities/stock_notification",
+      "status": 200,
+      "response": {
+        "success": true,
+        "data": {
+          "capabilityId": "stock_notification",
+          "channel": "customer_service_agent",
+          "supportStatus": "unsupported",
+          "scope": "到货与补货提醒登记",
+          "explanation": "当前客服助手不支持到货或补货提醒。",
+          "alternatives": [
+            "稍后主动查询商品库存"
+          ],
+          "version": "service-capabilities-v1"
+        },
+        "code": "FIXTURE"
+      }
+    },
+    {
+      "case": "ISO02",
+      "method": "GET",
+      "path": "/api/products?keyword=%E8%BD%BB%E9%87%8F%E9%9C%B2%E8%90%A5%E6%8A%98%E5%8F%A0%E6%A4%85",
+      "status": 200,
+      "response": {
+        "success": true,
+        "data": [
+          {
+            "id": 4,
+            "name": "轻量露营折叠椅",
+            "price": 199.0,
+            "stock": 0,
+            "active": true,
+            "returnable": true
+          }
+        ],
+        "code": "FIXTURE"
+      }
+    },
+    {
+      "case": "ISO02",
+      "method": "GET",
+      "path": "/api/customer-service/capabilities/inventory_query",
+      "status": 200,
+      "response": {
+        "success": true,
+        "data": {
+          "capabilityId": "inventory_query",
+          "channel": "customer_service_agent",
+          "supportStatus": "supported",
+          "scope": "查询在售商品的当前价格和库存",
+          "explanation": "当前客服可以查询在售商品的价格和库存。这次查询只说明有这项能力，不代表某一件商品有货，也不锁定库存。",
+          "alternatives": [],
+          "version": "service-capabilities-v1"
+        },
+        "code": "FIXTURE"
+      }
+    },
+    {
+      "case": "ISO02",
+      "method": "GET",
+      "path": "/api/customer-service/capabilities/stock_notification",
+      "status": 200,
+      "response": {
+        "success": true,
+        "data": {
+          "capabilityId": "stock_notification",
+          "channel": "customer_service_agent",
+          "supportStatus": "unsupported",
+          "scope": "到货与补货提醒登记",
+          "explanation": "当前客服助手不支持到货或补货提醒。",
+          "alternatives": [
+            "稍后主动查询商品库存"
+          ],
+          "version": "service-capabilities-v1"
+        },
+        "code": "FIXTURE"
+      }
+    },
+    {
+      "case": "ISO03",
+      "method": "GET",
+      "path": "/api/customer-service/capabilities/stock_notification",
+      "status": 200,
+      "response": {
+        "success": true,
+        "data": {
+          "capabilityId": "stock_notification",
+          "channel": "customer_service_agent",
+          "supportStatus": "unsupported",
+          "scope": "到货与补货提醒登记",
+          "explanation": "当前客服助手不支持到货或补货提醒。",
+          "alternatives": [
+            "稍后主动查询商品库存"
+          ],
+          "version": "service-capabilities-v1"
+        },
+        "code": "FIXTURE"
+      }
+    },
+    {
+      "case": "ISO04",
+      "method": "GET",
+      "path": "/api/orders/ORD9001",
+      "status": 200,
+      "response": {
+        "success": true,
+        "data": {
+          "orderNo": "ORD9001",
+          "userId": "ISOLATED_USER",
+          "fulfillmentStatus": "DELIVERED",
+          "paymentStatus": "PAID",
+          "logisticsStatus": "SIGNED",
+          "paidAmount": 199.0,
+          "items": [
+            {
+              "productId": 4,
+              "productName": "轻量露营折叠椅"
+            }
+          ]
+        },
+        "code": "FIXTURE"
+      }
+    },
+    {
+      "case": "ISO04",
+      "method": "GET",
+      "path": "/api/products/4",
+      "status": 200,
+      "response": {
+        "success": true,
+        "data": {
+          "id": 4,
+          "name": "轻量露营折叠椅",
+          "price": 199.0,
+          "stock": 0,
+          "active": true,
+          "returnable": true
+        },
+        "code": "FIXTURE"
+      }
+    },
+    {
+      "case": "ISO04",
+      "method": "GET",
+      "path": "/api/orders/ORD9001",
+      "status": 200,
+      "response": {
+        "success": true,
+        "data": {
+          "orderNo": "ORD9001",
+          "userId": "ISOLATED_USER",
+          "fulfillmentStatus": "DELIVERED",
+          "paymentStatus": "PAID",
+          "logisticsStatus": "SIGNED",
+          "paidAmount": 199.0,
+          "items": [
+            {
+              "productId": 4,
+              "productName": "轻量露营折叠椅"
+            }
+          ]
+        },
+        "code": "FIXTURE"
+      }
+    },
+    {
+      "case": "ISO04",
+      "method": "GET",
+      "path": "/api/products/4",
+      "status": 200,
+      "response": {
+        "success": true,
+        "data": {
+          "id": 4,
+          "name": "轻量露营折叠椅",
+          "price": 199.0,
+          "stock": 0,
+          "active": true,
+          "returnable": true
+        },
+        "code": "FIXTURE"
+      }
+    },
+    {
+      "case": "ISO04",
+      "method": "GET",
+      "path": "/api/after-sale/requests?orderNo=ORD9001",
+      "status": 200,
+      "response": {
+        "success": true,
+        "data": [
+          {
+            "requestId": "FIXTURE-RF-A",
+            "orderNo": "ORD9001",
+            "requestType": "REFUND",
+            "status": "PENDING_REVIEW",
+            "createdAt": "2026-10-15T10:00:00"
+          }
+        ],
+        "code": "FIXTURE"
+      }
+    },
+    {
+      "case": "ISO04",
+      "method": "GET",
+      "path": "/api/customer-service/capabilities/refund_consultation",
+      "status": 200,
+      "response": {
+        "success": true,
+        "data": {
+          "capabilityId": "refund_consultation",
+          "channel": "customer_service_agent",
+          "supportStatus": "supported",
+          "scope": "咨询未发货整单退款是否在客服办理范围内",
+          "explanation": "当前客服可以办理符合条件的未发货整单退款。是否支持不等于这笔订单已经符合条件，也不等于已经提交申请。",
+          "alternatives": [
+            "说明订单号后再核验退款资格"
+          ],
+          "version": "service-capabilities-v1"
+        },
+        "code": "FIXTURE"
+      }
+    },
+    {
+      "case": "ISO05",
+      "method": "GET",
+      "path": "/api/customer-service/capabilities/stock_notification",
+      "status": 200,
+      "response": {
+        "success": true,
+        "data": {
+          "capabilityId": "stock_notification",
+          "channel": "customer_service_agent",
+          "supportStatus": "unknown",
+          "scope": "到货与补货提醒登记",
+          "explanation": "目前还不能确认是否提供到货提醒服务。",
+          "alternatives": [
+            "稍后主动查询商品库存"
+          ],
+          "version": "service-capabilities-v1"
+        },
+        "code": "FIXTURE"
+      }
+    },
+    {
+      "case": "ISO06",
+      "method": "GET",
+      "path": "/api/products?keyword=%E8%BD%BB%E9%87%8F%E9%9C%B2%E8%90%A5%E6%8A%98%E5%8F%A0%E6%A4%85",
+      "status": 200,
+      "response": {
+        "success": true,
+        "data": [
+          {
+            "id": 4,
+            "name": "轻量露营折叠椅",
+            "price": 199.0,
+            "stock": 0,
+            "active": true,
+            "returnable": true
+          }
+        ],
+        "code": "FIXTURE"
+      }
+    },
+    {
+      "case": "ISO06",
+      "method": "GET",
+      "path": "/api/customer-service/capabilities/inventory_query",
+      "status": 503,
+      "response": {
+        "success": false,
+        "data": null,
+        "code": "FIXTURE"
+      }
+    },
+    {
+      "case": "ISO06",
+      "method": "GET",
+      "path": "/api/customer-service/capabilities/stock_notification",
+      "status": 503,
+      "response": {
+        "success": false,
+        "data": null,
+        "code": "FIXTURE"
+      }
+    },
+    {
+      "case": "ISO07",
+      "method": "GET",
+      "path": "/api/products?keyword=%E8%BD%BB%E9%87%8F%E9%9C%B2%E8%90%A5%E6%8A%98%E5%8F%A0%E6%A4%85",
+      "status": 200,
+      "response": {
+        "success": true,
+        "data": [
+          {
+            "id": 4,
+            "name": "轻量露营折叠椅",
+            "price": 199.0,
+            "stock": 0,
+            "active": true,
+            "returnable": true
+          }
+        ],
+        "code": "FIXTURE"
+      }
+    },
+    {
+      "case": "ISO07",
+      "method": "GET",
+      "path": "/api/customer-service/capabilities/inventory_query",
+      "status": 200,
+      "response": {
+        "success": true,
+        "data": {
+          "capabilityId": "inventory_query",
+          "channel": "customer_service_agent",
+          "supportStatus": "supported",
+          "scope": "查询在售商品的当前价格和库存",
+          "explanation": "当前客服可以查询在售商品的价格和库存。这次查询只说明有这项能力，不代表某一件商品有货，也不锁定库存。",
+          "alternatives": [],
+          "version": "service-capabilities-v1"
+        },
+        "code": "FIXTURE"
+      }
+    },
+    {
+      "case": "ISO07",
+      "method": "GET",
+      "path": "/api/customer-service/capabilities/stock_notification",
+      "status": 200,
+      "response": {
+        "success": true,
+        "data": {
+          "capabilityId": "stock_notification",
+          "channel": "customer_service_agent",
+          "supportStatus": "unsupported",
+          "scope": "到货与补货提醒登记",
+          "explanation": "当前客服助手不支持到货或补货提醒。",
+          "alternatives": [
+            "稍后主动查询商品库存"
+          ],
+          "version": "service-capabilities-v1"
+        },
+        "code": "FIXTURE"
+      }
+    },
+    {
+      "case": "ISO08",
+      "method": "GET",
+      "path": "/api/customer-service/capabilities/stock_notification",
+      "status": 200,
+      "response": {
+        "success": true,
+        "data": {
+          "capabilityId": "stock_notification",
+          "channel": "customer_service_agent",
+          "supportStatus": "unsupported",
+          "scope": "到货与补货提醒登记",
+          "explanation": "当前客服助手不支持到货或补货提醒。",
+          "alternatives": [
+            "稍后主动查询商品库存"
+          ],
+          "version": "service-capabilities-v1"
+        },
+        "code": "FIXTURE"
+      }
+    },
+    {
+      "case": "ISO09",
+      "method": "GET",
+      "path": "/api/products?keyword=%E8%BD%BB%E9%87%8F%E9%9C%B2%E8%90%A5%E6%8A%98%E5%8F%A0%E6%A4%85",
+      "status": 200,
+      "response": {
+        "success": true,
+        "data": [
+          {
+            "id": 4,
+            "name": "轻量露营折叠椅",
+            "price": 199.0,
+            "stock": 0,
+            "active": true,
+            "returnable": true
+          }
+        ],
+        "code": "FIXTURE"
+      }
+    },
+    {
+      "case": "ISO09",
+      "method": "GET",
+      "path": "/api/customer-service/capabilities/inventory_query",
+      "status": 200,
+      "response": {
+        "success": true,
+        "data": {
+          "capabilityId": "inventory_query",
+          "channel": "customer_service_agent",
+          "supportStatus": "supported",
+          "scope": "查询在售商品的当前价格和库存",
+          "explanation": "当前客服可以查询在售商品的价格和库存。这次查询只说明有这项能力，不代表某一件商品有货，也不锁定库存。",
+          "alternatives": [],
+          "version": "service-capabilities-v1"
+        },
+        "code": "FIXTURE"
+      }
+    },
+    {
+      "case": "ISO09",
+      "method": "GET",
+      "path": "/api/customer-service/capabilities/stock_notification",
+      "status": 200,
+      "response": {
+        "success": true,
+        "data": {
+          "capabilityId": "stock_notification",
+          "channel": "customer_service_agent",
+          "supportStatus": "unsupported",
+          "scope": "到货与补货提醒登记",
+          "explanation": "当前客服助手不支持到货或补货提醒。",
+          "alternatives": [
+            "稍后主动查询商品库存"
+          ],
+          "version": "service-capabilities-v1"
+        },
+        "code": "FIXTURE"
+      }
+    },
+    {
+      "case": "ISO10",
+      "method": "GET",
+      "path": "/api/products?keyword=%E8%BD%BB%E9%87%8F%E9%9C%B2%E8%90%A5%E6%8A%98%E5%8F%A0%E6%A4%85",
+      "status": 200,
+      "response": {
+        "success": true,
+        "data": [
+          {
+            "id": 4,
+            "name": "轻量露营折叠椅",
+            "price": 199.0,
+            "stock": 0,
+            "active": true,
+            "returnable": true
+          }
+        ],
+        "code": "FIXTURE"
+      }
+    },
+    {
+      "case": "ISO10",
+      "method": "GET",
+      "path": "/api/customer-service/capabilities/inventory_query",
+      "status": 200,
+      "response": {
+        "success": true,
+        "data": {
+          "capabilityId": "inventory_query",
+          "channel": "customer_service_agent",
+          "supportStatus": "supported",
+          "scope": "查询在售商品的当前价格和库存",
+          "explanation": "当前客服可以查询在售商品的价格和库存。这次查询只说明有这项能力，不代表某一件商品有货，也不锁定库存。",
+          "alternatives": [],
+          "version": "service-capabilities-v1"
+        },
+        "code": "FIXTURE"
+      }
+    },
+    {
+      "case": "ISO10",
+      "method": "GET",
+      "path": "/api/customer-service/capabilities/stock_notification",
+      "status": 200,
+      "response": {
+        "success": true,
+        "data": {
+          "capabilityId": "stock_notification",
+          "channel": "customer_service_agent",
+          "supportStatus": "unsupported",
+          "scope": "到货与补货提醒登记",
+          "explanation": "当前客服助手不支持到货或补货提醒。",
+          "alternatives": [
+            "稍后主动查询商品库存"
+          ],
+          "version": "service-capabilities-v1"
+        },
+        "code": "FIXTURE"
+      }
+    }
+  ],
+  "blocked": [],
+  "stop": null
+}

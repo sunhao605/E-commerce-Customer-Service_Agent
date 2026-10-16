@@ -1,0 +1,22 @@
+{
+  "java_image": "sha256:e79ce2a0d734b954009af77f40edc83766213a3cfb15cbe823d036f0bccb18e0",
+  "mysql_started_at": "2026-10-14T09:35:13.733769685Z",
+  "mysql_mounts": [
+    {
+      "Type": "volume",
+      "Name": "huangye-outdoor_mysql-data",
+      "Source": "/home/sunhao.guest/.local/share/docker/volumes/huangye-outdoor_mysql-data/_data",
+      "Destination": "/var/lib/mysql",
+      "Driver": "local",
+      "Mode": "rw",
+      "RW": true,
+      "Propagation": ""
+    }
+  ],
+  "http": {
+    "8000": 200,
+    "8081": 200,
+    "5173": 200,
+    "5174": 200
+  }
+}

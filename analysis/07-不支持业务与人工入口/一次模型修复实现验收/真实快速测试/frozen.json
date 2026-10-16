@@ -1,0 +1,41 @@
+{
+  "cases": [
+    [
+      "Q01",
+      "自然生成与检查",
+      0
+    ],
+    [
+      "Q02",
+      "首稿注入错误，真实judge＋真实模型修复＋真实复查",
+      1
+    ],
+    [
+      "Q03",
+      "两稿均注入错误，真实judge检查并验证最终兜底",
+      2
+    ]
+  ],
+  "question": "轻量露营折叠椅多少钱，还有库存吗，能登记到货提醒吗？",
+  "injected_reply": "轻量露营折叠椅199元，当前无库存。我已经为您登记到货提醒，到货后我会主动通知您。",
+  "max_calls": 9,
+  "generation_model": "deepseek-flash",
+  "judge_model": "deepseek-flash",
+  "judge_timeout_seconds": 5,
+  "source_sha256": {
+    "backend/agent/customer_service_agent.py": "06289d149258ae33f250dccfd0ffaf74150953ceaa71dc1599720ee24c38df02",
+    "backend/agent/models/answer_client.py": "aeb5d6c087ebc909058b4bfc7822b4300e241d08dcb584f0f9e9650c4e6eb78e",
+    "backend/agent/models/judge_client.py": "fe43689646f7f3b00809e4081d28e1a680eba2eb9d3b708423353577db3e5e61",
+    "backend/agent/answer_review.py": "e7e30dd27b59ba37d68c0044fd26fa813b048743ee958c67a7c6977dc1cac433",
+    "backend/resources/prompts/tool_usage.md": "e5cc7487d09d8713140bed939e189e70861e95c452e02cc82c9a03ef3496e090",
+    "backend/resources/prompts/answer_judge.md": "792280e13334f6917023652f88dad97104a756c6e404d0dfb63bf4dae4dfed26",
+    "backend/resources/prompts/high_risk_after_sale.md": "ea3f62c63e62339cee771306c16fd04911102d6886a205b943b61f6ab43c90c3",
+    "backend/resources/prompts/route_contract.md": "682d64acfc926597a46239eda39158663aeef08d478cb05b84bf5156344c01c3",
+    "backend/resources/prompts/final_answer_style.md": "a862185a054792c27ba7e45fee45cb304600e16692b2828eeb871d945be5adcc",
+    "backend/resources/prompts/prompt_security.md": "aa37fbc52dfb1593617d61145f42d1c37b31c24ad76aee03a16b61f76f40640c",
+    "backend/resources/prompts/system_customer_service.md": "24dde154a0106f06dbbe6e759536d1b676e081ad816697e68bda8c9196166949",
+    "backend/resources/prompts/rag_answering.md": "f68ba18907f89048a263fe2ae688c84428d06ce1ef7c475198391de96988966d"
+  },
+  "runner_sha256": "d613289d40c389728b33e0d41992bceb9956fc9999664b478cab071713891ece",
+  "scope": "仅脱敏构造商品/能力证据发往DeepSeek；不访问商城/Java/MySQL/RAG；不重启服务"
+}

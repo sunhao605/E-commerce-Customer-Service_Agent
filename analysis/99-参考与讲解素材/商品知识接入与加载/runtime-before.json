@@ -1,0 +1,27 @@
+{
+  "pid": 84233,
+  "command": "/Users/sunhao/Downloads/03_AIPMProject/0305_DianShang_Agent/.venv/bin/python /Users/sunhao/Downloads/03_AIPMProject/0305_DianShang_Agent/.venv/bin/uvicorn api.routes:app --host 127.0.0.1 --port 8000",
+  "cwd": [
+    "p84233",
+    "fcwd",
+    "n/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent"
+  ],
+  "flags": {
+    "AGENT_COURSE_ENV": "/Users/sunhao/Downloads/03_AIPMProject/0305_DianShang_Agent/.env.model.local",
+    "AGENT_COURSE_DISABLE_LLM": "0",
+    "AGENT_COURSE_OFFLINE_RAG": "1",
+    "AGENT_COURSE_OFFLINE_FACTS": "0",
+    "CANCEL_INTENT_EXECUTE": "0",
+    "CANCEL_INTENT_OBSERVE": "0",
+    "CANCEL_SCORE_MIN": "0.9",
+    "LANGCHAIN_TRACING_V2": "false",
+    "LANGSMITH_TRACING": "false"
+  },
+  "python": {
+    "status": "ok",
+    "lesson": "41"
+  },
+  "java": {
+    "status": "UP"
+  }
+}

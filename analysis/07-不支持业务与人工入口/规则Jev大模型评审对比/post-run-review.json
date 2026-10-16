@@ -1,0 +1,29 @@
+{
+  "at": "2026-10-16T14:52:48.426669+08:00",
+  "phase": "post_run_human_review",
+  "source": "direct_user_feedback",
+  "user_message": "我认为G14和G22大模型判断的没什么问题",
+  "model_labels_user_accepts": {
+    "G14": {
+      "omission": "fail",
+      "conflict": "fail",
+      "unperformed": "fail"
+    },
+    "G22": {
+      "omission": "pass",
+      "conflict": "uncertain",
+      "unperformed": "fail"
+    }
+  },
+  "assistant_interpretation": {
+    "G14": "按独立诊断理解，同一回复可缺少正确能力边界、与能力冲突且承诺未支持代办；先前互斥归类不是唯一合理产品定义。",
+    "G22": "可以质疑无证据的确定已提交答复；但不能据评审材料缺失断定现实没有提交。必须区分答复当时无依据与评测材料漏采。"
+  },
+  "status": "反馈已记录；全组新口径及关联标签未一致复核，不回写原冻结成绩",
+  "followup_consistency_cases": [
+    "G13",
+    "G23"
+  ],
+  "remote_calls_this_turn": 0,
+  "original_frozen_sha256": "19eb4ee7d24247679c7af2947c4eb83644e564342cfd9313febe63c80ce10495"
+}

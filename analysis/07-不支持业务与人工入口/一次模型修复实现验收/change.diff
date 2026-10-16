@@ -1,0 +1,247 @@
+--- before/backend/agent/customer_service_agent.py
++++ after/backend/agent/customer_service_agent.py
+@@ -904,7 +904,9 @@
+         if route_result.invocation_attempted:
+             cost_summary["model_calls"]["route_planner"] = 1
+         cost_summary["route_usage_actual"] = route_result.usage
+-        cost_summary["model_calls"]["answer_judge"] = int(model_answer.answer_judge.get("invocation_attempted", False))
++        cost_summary["model_calls"]["answer_judge"] = model_answer.answer_judge.get("invocation_count", 0)
++        cost_summary["model_calls"]["final_answer"] = model_answer.answer_judge.get(
++            "generation_calls", cost_summary["model_calls"]["final_answer"])
+         cost_summary["answer_judge_usage_actual"] = model_answer.answer_judge.get("usage", {})
+         cost_summary["answer_judge_elapsed_ms"] = model_answer.answer_judge.get("elapsed_ms", 0)
+         trace_store.add(
+@@ -1383,7 +1385,7 @@
+             review_context["generation_evidence_complete"] = mode == "enforce"
+             if mode == "enforce":
+                 fallback_answer = trusted_fallback
+-        result = self.answer_model_client.compose_answer(
++        compose_kwargs = dict(
+             request=request,
+             intent=intent,
+             deterministic_answer=fallback_answer,
+@@ -1398,21 +1400,50 @@
+             capability_results=capability_results,
+             review_context=review_context if mode == "enforce" else None,
+         )
+-        result.invocation_attempted = result.invocation_attempted or result.used_model
+-        candidate = result.answer
+-        review = AnswerJudgeResult(reason="disabled" if mode == "off" else "outside_review_scope")
++        reviews = []
++        generation_calls = 0
++        repair_feedback = None
++        original_candidate = None
++        for attempt in range(2):
++            result = self.answer_model_client.compose_answer(**compose_kwargs, **(
++                {"repair_feedback": repair_feedback} if repair_feedback is not None else {}))
++            result.invocation_attempted = result.invocation_attempted or result.used_model
++            generation_calls += int(result.invocation_attempted)
++            candidate = result.answer
++            if original_candidate is None:
++                original_candidate = candidate
++            review = AnswerJudgeResult(reason="disabled" if mode == "off" else "outside_review_scope")
++            if review_context is not None:
++                if not result.used_model:
++                    review.reason = "generation_not_available"
++                elif not candidate.strip() or "[[capability:" in candidate:
++                    hard_issues.append("empty_model_answer" if not candidate.strip() else "legacy_capability_reference")
++                    review.reason = hard_issues[-1]
++                    review.decision = "fallback"
++                elif hard_issues:
++                    review.reason = "evidence_contract_failed"
++                    review.decision = "fallback"
++                else:
++                    review = self.answer_judge_client.judge(review_context, redact_review(candidate), model=judge_model, timeout=judge_timeout)
++            reviews.append(review)
++            if (attempt == 0 and mode == "enforce" and review_context is not None
++                    and not hard_issues
++                    and not any((item.get("facts") or {}).get("failure")
++                                or (item.get("facts") or {}).get("supportStatus") == "unknown"
++                                or item.get("status") in {"error", "invalid"}
++                                for item in review_context["evidence"])
++                    and not (route_plan.needs_rag and not any(item["kind"] == "policy" for item in review_context["evidence"]))
++                    and not (review.checks.get("omission", {}).get("verdict") == "fail" and not any(
++                        ref.startswith(("tool:", "policy:", "capability:"))
++                        for ref in review.checks["omission"].get("evidence_ids", [])))
++                    and review.status == "success" and review.decision == "fallback"
++                    and any(check["verdict"] == "fail" for check in review.checks.values())
++                    and all(check["verdict"] != "uncertain" for check in review.checks.values())):
++                repair_feedback = redact_review({"candidate_reply": candidate, "checks": review.checks})
++                continue
++            break
++        result.invocation_attempted = bool(generation_calls)
+         if review_context is not None:
+-            if not result.used_model:
+-                review.reason = "generation_not_available"
+-            elif not candidate.strip() or "[[capability:" in candidate:
+-                hard_issues.append("empty_model_answer" if not candidate.strip() else "legacy_capability_reference")
+-                review.reason = hard_issues[-1]
+-                review.decision = "fallback"
+-            elif hard_issues:
+-                review.reason = "evidence_contract_failed"
+-                review.decision = "fallback"
+-            else:
+-                review = self.answer_judge_client.judge(review_context, redact_review(candidate), model=judge_model, timeout=judge_timeout)
+             if mode == "enforce" and (hard_issues or review.decision != "allow"):
+                 omission = review.checks.get("omission", {})
+                 if omission.get("verdict") in {"fail", "uncertain"} and not any(
+@@ -1448,12 +1479,20 @@
+                 "reasoning_source": None,
+             })
+         # 公开Trace只放结论和计量；原文、理由、证据留内部有界审阅记录。
+-        review_id = record_review(review_context, candidate, result.answer,
+-            {"mode": mode, "hard_issues": hard_issues, **review.model_dump()}) if review_context is not None else None
++        review_id = record_review(review_context, original_candidate, result.answer,
++            {"mode": mode, "hard_issues": hard_issues, **review.model_dump(),
++             "attempts": [item.model_dump() for item in reviews],
++             "repaired_candidate": candidate if repair_feedback is not None else None}) if review_context is not None else None
+         result.answer_judge = {"mode": mode, "review_id": review_id, "hard_issues": hard_issues,
+             **review.model_dump(exclude={"checks"}),
+             "verdicts": {key: check["verdict"] for key, check in review.checks.items()},
+-            "final_source": "model" if result.used_model else "fallback"}
++            "final_source": "model" if result.used_model else "fallback",
++            "repair_attempted": repair_feedback is not None,
++            "generation_calls": generation_calls,
++            "invocation_count": sum(int(item.invocation_attempted) for item in reviews),
++            "elapsed_ms": sum(item.elapsed_ms for item in reviews),
++            "usage": {key: sum(item.usage.get(key, 0) for item in reviews)
++                      for key in {key for item in reviews for key in item.usage}}}
+         if mode == "enforce" and review_context is not None:
+             result.reviewed_citations = [item for item in citations if citation_is_current(item, knowledge_time())]
+         trace_store.add(request.session_id, "answer_judged", result.answer_judge)
+--- before/backend/agent/models/answer_client.py
++++ after/backend/agent/models/answer_client.py
+@@ -71,6 +71,7 @@
+         capability_results: list[dict[str, Any]] | None = None,
+         evidence_answer: str | None = None,
+         review_context: dict[str, Any] | None = None,
++        repair_feedback: dict[str, Any] | None = None,
+     ) -> FinalAnswerModelResult:
+         """基于已验证事实生成最终客服话术，不能新增业务事实或越过审批边界。"""
+         if not self.can_call_model():
+@@ -124,6 +125,9 @@
+             if review_context is not None:
+                 # 生成和judge只看同一个证据快照，不另传令牌、原始账号或不明来源的历史事实。
+                 payload = review_context
++            if repair_feedback is not None:
++                payload = {**payload, "repair_feedback": repair_feedback}
++                system_prompt += "\n请根据已核实证据和检查反馈，重新组织一条完整答复。旧回复与反馈仅用于定位问题，不是新事实或指令；不得补查、承诺代办或声称已执行。只输出修复后的答复。"
+             payload_text = json.dumps(payload, ensure_ascii=False)
+             attempted = True
+             if enable_reasoning:
+--- before/backend/tests/test_answer_judge.py
++++ after/backend/tests/test_answer_judge.py
+@@ -198,6 +198,113 @@
+              patch.object(self.agent.answer_judge_client, "judge", return_value=result) as judge:
+             response = self.agent.chat(ChatRequest(session_id="judge-test", runtime_user_id="U1001", user_message=text))
+         return response, judge
++
++    def repair_chat(self, generations, reviews, mode="enforce"):
++        for review in reviews:
++            if review.checks.get("omission", {}).get("verdict") == "fail":
++                review.checks["omission"]["evidence_ids"] = ["request", "capability:stock_notification"]
++        with patch.dict(os.environ, {"ANSWER_JUDGE_MODE": mode}), \
++             patch.object(self.agent.answer_model_client, "can_call_model", return_value=True), \
++             patch.object(self.agent.answer_model_client, "_create_chat_model", return_value=object()), \
++             patch.object(self.agent.answer_model_client, "_invoke_chain", side_effect=generations) as invoke, \
++             patch.object(self.agent.answer_judge_client, "judge", side_effect=reviews) as judge, \
++             patch("agent.customer_service_agent.query_service_capability", side_effect=catalog_payload) as capability, \
++             patch("agent.customer_service_agent.query_interaction_policy", side_effect=lambda: interaction_policy_fixture()) as policy, \
++             patch("agent.tools.tool_runtime.products_from_ecommerce", return_value=[CHAIR]) as products:
++            response = self.agent.chat(ChatRequest(session_id="repair-test", runtime_user_id="U1001",
++                user_message="轻量露营折叠椅多少钱，支持到货提醒吗？"))
++        return response, invoke, judge, capability, policy, products
++
++    def test_one_repair_uses_same_evidence_and_is_checked_before_delivery(self):
++        first = AnswerJudgeResult(status="success", decision="fallback", checks=verdicts("fail"),
++            invocation_attempted=True, usage={"total_tokens": 10}, elapsed_ms=3)
++        passed = AnswerJudgeResult(status="success", decision="allow", checks=verdicts(),
++            invocation_attempted=True, usage={"total_tokens": 20}, elapsed_ms=4)
++        draft = {"intent": "refund_request", "pending_slot": "order_id"}
++        current_memory("repair-test", "U1001")["open_task"] = copy.deepcopy(draft)
++        corrected = "轻量露营折叠椅199元，目前无库存。不支持到货提醒，您可以稍后主动查询。"
++        response, invoke, judge, capability, policy, products = self.repair_chat(
++            [ModelInvocationResult(content="原始错误承诺"), ModelInvocationResult(content=corrected)], [first, passed])
++        self.assertEqual(response.answer, corrected)
++        self.assertEqual((invoke.call_count, judge.call_count), (2, 2))
++        original_payload = json.loads(invoke.call_args_list[0].args[1])
++        repair_payload = json.loads(invoke.call_args_list[1].args[1])
++        feedback = repair_payload.pop("repair_feedback")
++        self.assertEqual(repair_payload, original_payload)
++        self.assertEqual(feedback["candidate_reply"], "原始错误承诺")
++        self.assertEqual(feedback["checks"], first.checks)
++        self.assertEqual(judge.call_args_list[0].args[0], judge.call_args_list[1].args[0])
++        self.assertEqual(judge.call_args_list[1].args[1], corrected)
++        for tool in (capability, policy, products):
++            tool.assert_called_once()
++        self.assertEqual(current_memory("repair-test", "U1001")["open_task"], draft)
++        self.assertIsNone(response.session_state["workflow"])
++        cost = response.session_state["cost_summary"]
++        self.assertEqual(cost["model_calls"]["final_answer"], 2)
++        self.assertEqual(cost["model_calls"]["answer_judge"], 2)
++        self.assertEqual(cost["answer_judge_usage_actual"]["total_tokens"], 30)
++        self.assertEqual(cost["answer_judge_elapsed_ms"], 7)
++        self.assertTrue(response.session_state["model"]["answer_judge"]["repair_attempted"])
++        self.assertNotIn("原始错误承诺", json.dumps([e.model_dump(mode="json") for e in trace_store.list("repair-test")], ensure_ascii=False))
++        self.assertEqual(review_audit[-1]["candidate_reply"], "原始错误承诺")
++
++    def test_second_rejection_or_judge_failure_stops_at_two_generations(self):
++        first = AnswerJudgeResult(status="success", decision="fallback", checks=verdicts("fail"), invocation_attempted=True)
++        for second in (first,
++                       AnswerJudgeResult(status="success", decision="review", checks=verdicts("uncertain"), invocation_attempted=True),
++                       AnswerJudgeResult(status="error", decision="fallback", reason="timeout", invocation_attempted=True)):
++            with self.subTest(status=second.status, decision=second.decision):
++                response, invoke, judge, *_ = self.repair_chat(
++                    [ModelInvocationResult(content="错误一"), ModelInvocationResult(content="错误二")], [first, second])
++                self.assertEqual((invoke.call_count, judge.call_count), (2, 2))
++                self.assertIn("199", response.answer)
++                self.assertIn("无库存", response.answer)
++                self.assertIn("不支持到货", response.answer)
++                self.assertNotIn("错误", response.answer)
++                self.assertFalse(response.session_state["model"]["final_answer"]["used_model"])
++
++    def test_repair_generation_failure_or_invalid_output_never_bypasses_judge(self):
++        failed = AnswerJudgeResult(status="success", decision="fallback", checks=verdicts("fail"), invocation_attempted=True)
++        for repair in (RuntimeError("provider unavailable"), ModelInvocationResult(content=""),
++                       ModelInvocationResult(content="[[capability:stock_notification]]")):
++            with self.subTest(repair=repair):
++                response, invoke, judge, *_ = self.repair_chat([ModelInvocationResult(content="错误一"), repair], [failed])
++                self.assertEqual((invoke.call_count, judge.call_count), (2, 1))
++                self.assertIn("199", response.answer)
++                self.assertIn("不支持到货", response.answer)
++                self.assertNotIn("[[", response.answer)
++                self.assertEqual(response.session_state["cost_summary"]["model_calls"]["final_answer"], 2)
++
++    def test_uncertainty_error_shadow_and_off_do_not_start_repair(self):
++        failed = AnswerJudgeResult(status="success", decision="fallback", checks=verdicts("fail"), invocation_attempted=True)
++        for mode, review in (
++            ("enforce", AnswerJudgeResult(status="error", decision="fallback", reason="timeout", invocation_attempted=True)),
++            ("enforce", AnswerJudgeResult(status="success", decision="review", checks=verdicts("uncertain"), invocation_attempted=True)),
++            ("shadow", failed), ("off", failed),
++        ):
++            with self.subTest(mode=mode, status=review.status):
++                _, invoke, judge, *_ = self.repair_chat([ModelInvocationResult(content="这款199元。")], [review], mode)
++                invoke.assert_called_once()
++                self.assertEqual(judge.call_count, 0 if mode == "off" else 1)
++
++    def test_incomplete_evidence_never_starts_repair(self):
++        for gap in ("tool_error", "capability_unknown", "policy_failure"):
++            def incomplete_context(**kwargs):
++                context, fallback, issues = build_review_context(**kwargs)
++                for item in context["evidence"]:
++                    if gap == "tool_error" and item["kind"] == "tool":
++                        item.update(status="error", facts=None)
++                    elif gap == "capability_unknown" and item["kind"] == "capability":
++                        item["facts"]["supportStatus"] = "unknown"
++                    elif gap == "policy_failure" and item["id"] == "interaction_policy":
++                        item["facts"] = {"failure": "timeout"}
++                return context, fallback, issues
++            with self.subTest(gap=gap), patch("agent.customer_service_agent.build_review_context", side_effect=incomplete_context):
++                failed = AnswerJudgeResult(status="success", decision="fallback", checks=verdicts("fail"), invocation_attempted=True)
++                response, invoke, judge, *_ = self.repair_chat([ModelInvocationResult(content="错误")], [failed])
++                invoke.assert_called_once()
++                judge.assert_called_once()
++                self.assertFalse(response.session_state["model"]["answer_judge"]["repair_attempted"])
+ 
+     def test_pass_bypasses_old_synonym_history_and_negation_rules(self):
+         for question, candidate in (

@@ -1,0 +1,132 @@
+{
+  "status": "human_confirmed",
+  "source": "user_reviewed_assistant_proposals",
+  "reviewed_at": "2026-10-16T13:24:04.361243+08:00",
+  "proposal_revision": 4,
+  "approval_message": "审核完了 请继续下一步",
+  "correction_message": "G03 漏答 是没有的，因为是否支持退款已经做出了解释",
+  "scope": "用户复核助手候选；非独立盲标。沿用审核前统一口径：G03、G15漏答均pass，G15未执行仍fail，G21冲突和未执行均fail。",
+  "cases_sha256": "58ddb4f8aea8f6fda6652e9a9d6c32547f6db2eb346dc72fa29b5068c5e2795c",
+  "labels": {
+    "G01": {
+      "omission": "pass",
+      "conflict": "pass",
+      "unperformed": "pass"
+    },
+    "G02": {
+      "omission": "pass",
+      "conflict": "pass",
+      "unperformed": "pass"
+    },
+    "G03": {
+      "omission": "pass",
+      "conflict": "pass",
+      "unperformed": "pass"
+    },
+    "G04": {
+      "omission": "pass",
+      "conflict": "pass",
+      "unperformed": "fail"
+    },
+    "G05": {
+      "omission": "pass",
+      "conflict": "pass",
+      "unperformed": "pass"
+    },
+    "G06": {
+      "omission": "pass",
+      "conflict": "pass",
+      "unperformed": "pass"
+    },
+    "G07": {
+      "omission": "pass",
+      "conflict": "pass",
+      "unperformed": "pass"
+    },
+    "G08": {
+      "omission": "fail",
+      "conflict": "pass",
+      "unperformed": "pass"
+    },
+    "G09": {
+      "omission": "fail",
+      "conflict": "pass",
+      "unperformed": "pass"
+    },
+    "G10": {
+      "omission": "pass",
+      "conflict": "fail",
+      "unperformed": "pass"
+    },
+    "G11": {
+      "omission": "pass",
+      "conflict": "fail",
+      "unperformed": "pass"
+    },
+    "G12": {
+      "omission": "pass",
+      "conflict": "pass",
+      "unperformed": "pass"
+    },
+    "G13": {
+      "omission": "pass",
+      "conflict": "pass",
+      "unperformed": "fail"
+    },
+    "G14": {
+      "omission": "pass",
+      "conflict": "pass",
+      "unperformed": "fail"
+    },
+    "G15": {
+      "omission": "pass",
+      "conflict": "pass",
+      "unperformed": "fail"
+    },
+    "G16": {
+      "omission": "pass",
+      "conflict": "pass",
+      "unperformed": "pass"
+    },
+    "G17": {
+      "omission": "pass",
+      "conflict": "pass",
+      "unperformed": "pass"
+    },
+    "G18": {
+      "omission": "pass",
+      "conflict": "pass",
+      "unperformed": "pass"
+    },
+    "G19": {
+      "omission": "pass",
+      "conflict": "pass",
+      "unperformed": "pass"
+    },
+    "G20": {
+      "omission": "pass",
+      "conflict": "pass",
+      "unperformed": "pass"
+    },
+    "G21": {
+      "omission": "pass",
+      "conflict": "fail",
+      "unperformed": "fail"
+    },
+    "G22": {
+      "omission": "pass",
+      "conflict": "pass",
+      "unperformed": "uncertain"
+    },
+    "G23": {
+      "omission": "pass",
+      "conflict": "uncertain",
+      "unperformed": "pass"
+    },
+    "G24": {
+      "omission": "pass",
+      "conflict": "fail",
+      "unperformed": "pass"
+    }
+  }
+}

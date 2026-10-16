@@ -1,0 +1,62 @@
+{
+  "old_pid": 26110,
+  "new_pid": 40945,
+  "settings": {
+    "AGENT_COURSE_ENV": "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/.env.model.local",
+    "AGENT_COURSE_DISABLE_LLM": "0",
+    "AGENT_COURSE_OFFLINE_RAG": "0",
+    "AGENT_COURSE_OFFLINE_FACTS": "0",
+    "CANCEL_INTENT_EXECUTE": "0",
+    "CANCEL_SCORE_MIN": "0.9"
+  },
+  "health": {
+    "status": "ok",
+    "lesson": "41",
+    "rag_index": {
+      "loaded": true,
+      "version": "lesson41-idx-37f6dea438a5",
+      "chunk_count": 115,
+      "files": [
+        "after_sale_policy.md",
+        "payment_invoice_policy.md",
+        "promotion_policy.md",
+        "member_coupon_policy.md",
+        "product_knowledge.md",
+        "received_return_policy.md"
+      ],
+      "embedding": "openai_compatible_embedding:Qwen/Qwen3-Embedding-8B",
+      "governed_files": [
+        "after_sale_policy.md",
+        "payment_invoice_policy.md",
+        "promotion_policy.md",
+        "member_coupon_policy.md",
+        "product_knowledge.md",
+        "received_return_policy.md"
+      ],
+      "snapshot_version": "knowledge-3524fd57e6c4",
+      "judged_at": "2026-10-15T20:54:07.812188+08:00",
+      "available_policy_signature": "0d705f48ae1a",
+      "available_policies": {
+        "refund_before_shipping": "2026-10-14.2",
+        "invoice_issue": "2026-10-14.2",
+        "promotion_camping_season_stack_rule": "2026-10-14.2",
+        "member_coupon_gold_rule": "2026-10-14.2",
+        "outdoor_product_guide": "2026-10-14.2",
+        "return_after_delivery": "2026-10-14.2"
+      },
+      "blocked_policies": {}
+    }
+  },
+  "credentials_saved": false,
+  "copied_environment_keys": [
+    "AGENT_COURSE_DISABLE_LLM",
+    "AGENT_COURSE_ENV",
+    "AGENT_COURSE_OFFLINE_FACTS",
+    "AGENT_COURSE_OFFLINE_RAG",
+    "AGENT_ECOMMERCE_SERVICE_TOKEN",
+    "CANCEL_INTENT_EXECUTE",
+    "CANCEL_SCORE_MIN",
+    "LANGCHAIN_TRACING_V2",
+    "LANGSMITH_TRACING"
+  ]
+}

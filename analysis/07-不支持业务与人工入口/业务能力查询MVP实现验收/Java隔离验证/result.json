@@ -1,0 +1,9 @@
+{
+  "database" : "isolated in-memory H2",
+  "agent" : "fixed Java test double",
+  "daily_services_changed" : false,
+  "external_network" : false,
+  "checks" : 61,
+  "passed" : true,
+  "agent_calls" : 7
+}

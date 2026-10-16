@@ -73,6 +73,27 @@ def deepseek_extra_body(*, enable_thinking: bool = False) -> dict[str, Any] | No
     return None
 
 
+def answer_judge_settings() -> tuple[str, str, float]:
+    """默认不启用新门控；配置错误不能静默退回放行。"""
+    mode = os.getenv("ANSWER_JUDGE_MODE", "off").strip()
+    if mode not in {"off", "shadow", "enforce"}:
+        raise ValueError("invalid_answer_judge_mode")
+    timeout = float(os.getenv("ANSWER_JUDGE_TIMEOUT_SECONDS", "3"))
+    if not 0 < timeout <= 30:
+        raise ValueError("invalid_answer_judge_timeout")
+    return mode, os.getenv("ANSWER_JUDGE_MODEL", "deepseek-flash"), timeout
+
+
 def embedding_model_name() -> str:
-    """返回知识检索使用的真实 Embedding 模型名称。"""
-    return os.getenv("AGENT_EMBEDDING_MODEL", "BAAI/bge-m3")
+    """返回知识检索使用的 Embedding 模型。聊天模型另走 AGENT_OPENAI_MODEL。"""
+    return os.getenv("AGENT_EMBEDDING_MODEL", "Qwen/Qwen3-Embedding-8B")
+
+
+def embedding_base_url() -> str:
+    """检索向量的服务地址。不跟随聊天用的 AGENT_OPENAI_BASE_URL。"""
+    return os.getenv("AGENT_EMBEDDING_BASE_URL", "https://api.siliconflow.cn/v1").rstrip("/")
+
+
+def embedding_api_key() -> str | None:
+    """硅基流动的检索密钥。不回退到聊天用的 AGENT_OPENAI_API_KEY。"""
+    return os.getenv("AGENT_EMBEDDING_API_KEY")

@@ -1,0 +1,19 @@
+{
+  "at": "2026-10-16T16:09:42.962406+08:00",
+  "runner_unchanged": true,
+  "frozen_unchanged": true,
+  "protected_files_unchanged": true,
+  "stop_reason": null,
+  "rows": 66,
+  "first_cases": 54,
+  "valid_responses": 65,
+  "errors": 1,
+  "independent_summary_check": "pass",
+  "no_automatic_retry": true,
+  "response_models": {
+    "deepseek-flash": 66
+  },
+  "first_overall": "53/54",
+  "first_all_dimensions": "48/54",
+  "results_sha256": "4fa3f77bb649287ccef4f5cf6222e5e89dca07a1561d512cabf66eb3991830e5"
+}

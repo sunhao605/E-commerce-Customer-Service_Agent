@@ -1,0 +1,71 @@
+file:///Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/frontend/node_modules/rolldown/dist/shared/binding-CXquf8ay.mjs:507
+		if (loadErrors.length > 0) throw new Error("Cannot find native binding. npm has a bug related to optional dependencies (https://github.com/npm/cli/issues/4828). Please try `npm i` again after removing both package-lock.json and node_modules directory.", { cause: loadErrors.reduce((err, cur) => {
+		                                 ^
+
+Error: Cannot find native binding. npm has a bug related to optional dependencies (https://github.com/npm/cli/issues/4828). Please try `npm i` again after removing both package-lock.json and node_modules directory.
+    at file:///Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/frontend/node_modules/rolldown/dist/shared/binding-CXquf8ay.mjs:507:36
+    at file:///Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/frontend/node_modules/rolldown/dist/shared/binding-CXquf8ay.mjs:9:49
+    at file:///Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/frontend/node_modules/rolldown/dist/shared/parse-Bg2pr2Q5.mjs:3:46
+    at ModuleJob.run (node:internal/modules/esm/module_job:413:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:660:26)
+    at async CAC.<anonymous> (file:///Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/frontend/node_modules/vite/dist/node/cli.js:763:28) {
+  [cause]: Error: Cannot find module '@rolldown/binding-darwin-x64'
+  Require stack:
+  - /Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/frontend/node_modules/rolldown/dist/shared/binding-CXquf8ay.mjs
+      at Module._resolveFilename (node:internal/modules/cjs/loader:1421:15)
+      ... 6 lines matching cause stack trace ...
+      at require (node:internal/modules/helpers:152:16)
+      at requireNative (file:///Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/frontend/node_modules/rolldown/dist/shared/binding-CXquf8ay.mjs:205:22)
+      at file:///Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/frontend/node_modules/rolldown/dist/shared/binding-CXquf8ay.mjs:475:18 {
+    code: 'MODULE_NOT_FOUND',
+    requireStack: [
+      '/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/frontend/node_modules/rolldown/dist/shared/binding-CXquf8ay.mjs'
+    ],
+    cause: Error: Cannot find module './rolldown-binding.darwin-x64.node'
+    Require stack:
+    - /Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/frontend/node_modules/rolldown/dist/shared/binding-CXquf8ay.mjs
+        at Module._resolveFilename (node:internal/modules/cjs/loader:1421:15)
+        ... 6 lines matching cause stack trace ...
+        at require (node:internal/modules/helpers:152:16)
+        at requireNative (file:///Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/frontend/node_modules/rolldown/dist/shared/binding-CXquf8ay.mjs:200:13)
+        at file:///Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/frontend/node_modules/rolldown/dist/shared/binding-CXquf8ay.mjs:475:18 {
+      code: 'MODULE_NOT_FOUND',
+      requireStack: [
+        '/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/frontend/node_modules/rolldown/dist/shared/binding-CXquf8ay.mjs'
+      ],
+      cause: Error: Cannot find module '@rolldown/binding-darwin-universal'
+      Require stack:
+      - /Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/frontend/node_modules/rolldown/dist/shared/binding-CXquf8ay.mjs
+          at Module._resolveFilename (node:internal/modules/cjs/loader:1421:15)
+          ... 6 lines matching cause stack trace ...
+          at require (node:internal/modules/helpers:152:16)
+          at requireNative (file:///Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/frontend/node_modules/rolldown/dist/shared/binding-CXquf8ay.mjs:191:21)
+          at file:///Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/frontend/node_modules/rolldown/dist/shared/binding-CXquf8ay.mjs:475:18 {
+        code: 'MODULE_NOT_FOUND',
+        requireStack: [
+          '/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/frontend/node_modules/rolldown/dist/shared/binding-CXquf8ay.mjs'
+        ],
+        cause: Error: Cannot find module './rolldown-binding.darwin-universal.node'
+        Require stack:
+        - /Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/frontend/node_modules/rolldown/dist/shared/binding-CXquf8ay.mjs
+            at Module._resolveFilename (node:internal/modules/cjs/loader:1421:15)
+            at defaultResolveImpl (node:internal/modules/cjs/loader:1059:19)
+            at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1064:22)
+            at Module._load (node:internal/modules/cjs/loader:1227:37)
+            at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+            at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)
+            at Module.require (node:internal/modules/cjs/loader:1504:12)
+            at require (node:internal/modules/helpers:152:16)
+            at requireNative (file:///Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/frontend/node_modules/rolldown/dist/shared/binding-CXquf8ay.mjs:186:12)
+            at file:///Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/frontend/node_modules/rolldown/dist/shared/binding-CXquf8ay.mjs:475:18 {
+          code: 'MODULE_NOT_FOUND',
+          requireStack: [
+            '/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/frontend/node_modules/rolldown/dist/shared/binding-CXquf8ay.mjs'
+          ]
+        }
+      }
+    }
+  }
+}
+
+Node.js v24.13.0

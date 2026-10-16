@@ -1,0 +1,15 @@
+59cf939edd35523f7e8964fd359b6223b96afd62  ecommerce-backend/src/main/resources/service-capabilities.json
+b7f073230f376777461333f9fea524ed7df1fc3e  ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/ServiceCapabilityCatalog.java
+20d3554a328627de3bc52225b5e30122ddac9aed  ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/ServiceCapabilityController.java
+e99b09a05a2a3bbdec22189c1ae5fb0bacf6ef55  ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/ServiceCapabilityResponse.java
+2a631cf82f2168870eeb0af8837b0318db196274  backend/agent/service_capabilities.py
+ff64f129442410eb09edc12f33fc064a47dbcae1  backend/agent/answer_review.py
+46faea9a38cf95dd8b06f65111296aa5a96b2249  backend/agent/customer_service_agent.py
+67c3cf0954c8ec60694ac13c4313c3ffd9b025f5  backend/agent/models/answer_client.py
+ab0b388a934ecd02886e1a5d45e96912e6b2264c  backend/agent/models/judge_client.py
+815d21a6228be1b187391f2e724b1df25ed66c5d  backend/resources/prompts/tool_usage.md
+52c0ece3dbb23336da7c3aa3c265e7eebd6aaf70  backend/resources/prompts/final_answer_style.md
+e95b7524ea4612b4010c555ffbaf77da82c93c8a  backend/resources/prompts/answer_judge.md
+2f2f350c51ccfb6a73b400d0159ad0208554c7cb  backend/resources/prompts/prompt_registry.yml
+f8969d6ac6b4fe6bda87fd3ed83d3600bfa087f2  backend/tests/test_answer_judge.py
+407e64c054627599e83964d6b377e2653bb20900  backend/tests/test_service_capabilities.py

@@ -1,0 +1,23 @@
+FF
+======================================================================
+FAIL: test_policy_fallback_replays_iso08_without_teaching_material (backend.tests.test_answer_judge.ReviewEvidenceTest.test_policy_fallback_replays_iso08_without_teaching_material)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_judge.py", line 392, in test_policy_fallback_replays_iso08_without_teaching_material
+    self.assertNotIn(unwanted, fallback)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+AssertionError: '模拟问法' unexpectedly found in '当前客服助手不支持到货或补货提醒。你可以稍后主动查询商品库存。\n\n本项目已有通用规则允许露营季满 300 减 40 与平台会员券叠加，同时禁止同类型满减券重复叠加。该规则不自动覆盖品类券、定向券或未发布的其他活动；具体组合仍需活动和券的证据。详见 [活动规则](promotion_policy.md)。\n\n现有通用政策说明：符合露营季活动条件时，满 300 减 40 可以与平台会员券叠加；同类型满减券不能重复叠加。它没有定义“每满 300 减 40”、所有订单无限次参加、其他券种一律兼容等规则，不应补出这些结论。\n\n露营季活动期间，满 300 减 40 活动可以与平台会员券叠加，但不能与同类型满减券重复叠加。  \n本文是项目演示知识，保留既有满减和会员券叠加规则，补充活动范围、价格差异和异常咨询的处理方法。具体活动是否正在进行、哪件商品参与、活动价、会员门槛、优惠券状态和最终金额需要查询活动及结算数据。\n\n以下为模拟问法，分别检验活动对象、账号条件、门槛和跨文档证据。  \n| 顾客问题 | 正确的处理方向 | 不应给出的结论 |\n|---|---|---|\n| “露营季满减能叠我的山友券吗？” | 取得具体券，结合通用叠加规则和券条件 | 任意券都能叠加 |\n| “双十一也和这次一样吗？” | 明确缺少双十一政策，不能沿用露营季 | 双十一也是满 300 减 40 |\n\n以上为平台通用规则，不代表当前商品参与活动或本人优惠券已适用，具体组合以商品页和结算条件为准。'
+
+======================================================================
+FAIL: test_policy_fallback_keeps_limits_tables_and_deduplicates_exact_sentences (backend.tests.test_answer_judge.ReviewEvidenceTest.test_policy_fallback_keeps_limits_tables_and_deduplicates_exact_sentences)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_judge.py", line 414, in test_policy_fallback_keeps_limits_tables_and_deduplicates_exact_sentences
+    self.assertEqual(fallback.count("券需在有效期内使用。"), 1)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 2 != 1
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.010s
+
+FAILED (failures=2)

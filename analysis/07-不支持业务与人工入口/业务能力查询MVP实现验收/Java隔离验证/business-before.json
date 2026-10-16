@@ -1,0 +1,34 @@
+{
+  "after_sale_request" : {
+    "sha256" : "fe0c86e44d832e4028116cf85e4189cbeb5c6d3412727420a277e06b2846b8e6",
+    "rows" : 4
+  },
+  "approval_record" : {
+    "sha256" : "ff50607cf2dca788d8e5369ccf9a18f44dded82a1b0f5416da2a108ca88571bd",
+    "rows" : 4
+  },
+  "balance_account" : {
+    "sha256" : "8aa2d6480b47a05bfa0ad7aafacb0bb849c8bc3598eb9a33a4951648df804e45",
+    "rows" : 3
+  },
+  "balance_transaction" : {
+    "sha256" : "9082e6f69dbe03d9945649f15698cb37caade693a22dde8f7e9791b43ed3d26e",
+    "rows" : 2
+  },
+  "logistics_event" : {
+    "sha256" : "3c5f30f602af01479ed1a0f86428c458f410be744041908b91577c8c3c9c6ff2",
+    "rows" : 13
+  },
+  "logistics_info" : {
+    "sha256" : "f119bdbcaa530653a2c47636e2f46f73dd21748e3e5120f27e201a6decdc3632",
+    "rows" : 10
+  },
+  "order_header" : {
+    "sha256" : "d8c738c966374c101051fd60613c5a8984224b44b7f589c93187375eff5e0f44",
+    "rows" : 14
+  },
+  "order_item" : {
+    "sha256" : "af29f0151f6361e11209979e7a5edee6094056b74b8fa8d119f81c550688558e",
+    "rows" : 15
+  }
+}

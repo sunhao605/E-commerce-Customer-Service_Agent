@@ -1,0 +1,269 @@
+Browser tab: 1, Title: "荒野户外商城", URL: "http://127.0.0.1:5174/".
+0 AXWebArea 荒野户外商城, URL: 127.0.0.1:5174/
+	1 container root
+		2 container
+			3 button 荒 荒野户外商城 荒野户外
+				4 text 荒
+				5 text 荒野户外商城
+				6 text 荒野户外
+			7 button 商品
+			8 button 购物车
+			9 button 我的订单
+			10 button 客服
+			11 button (collapsed) 张三, Secondary Actions: Expand
+		12 container
+			13 text 荒野小分队 · 周末出发
+			14 heading 把周末，交给旷野。, Value: 1
+				15 text 把周末，交给旷野。
+			16 text 营地家具、帐篷天幕与户外配件。查询价格库存，了解活动，随时咨询售后。
+			17 button 咨询客服
+			18 container
+				269 text 荒野户外 · 露营季
+				270 heading 下一站，去户外。, Value: 2
+					271 text 下一站，去户外。
+				272 text 从一把折叠椅到一套营地装备，露营季活动已开启。活动条件与会员权益以商品详情和结算页为准。 15 款参与活动 具体可享价格以会员等级、活动条件和结算页为准。
+				23 button 上一个活动
+				24 container 活动轮播
+					25 button 切换到荒野户外 · 露营季
+					26 button 切换到营地装备精选会场
+					27 button 切换到帐篷天幕精选会场
+					28 button 切换到营地家具会员会场
+					29 button 切换到露营配件会员会场
+					30 button 切换到徒步装备满减会场
+				31 button 下一个活动
+			32 button 全部会场 查看所有 露营季商品
+				33 text 全部会场
+				34 text 查看所有 露营季商品
+			35 button 营地装备精选会场 4 款，¥999.00 起
+				122 text 营地装备精选会场
+				123 text 4
+				124 text  款，
+				125 text ¥999.00
+				126 text  起
+			36 button 帐篷天幕精选会场 4 款，¥899.00 起
+				127 text 帐篷天幕精选会场
+				128 text 4
+				129 text  款，
+				130 text ¥899.00
+				131 text  起
+			37 button 营地家具会员会场 3 款，¥199.00 起
+				132 text 营地家具会员会场
+				133 text 3
+				134 text  款，
+				135 text ¥199.00
+				136 text  起
+			38 button 露营配件会员会场 2 款，¥699.00 起
+				137 text 露营配件会员会场
+				138 text 2
+				139 text  款，
+				140 text ¥699.00
+				141 text  起
+			39 button 徒步装备满减会场 2 款，¥899.00 起
+				142 text 徒步装备满减会场
+				143 text 2
+				144 text  款，
+				145 text ¥899.00
+				146 text  起
+			40 text field (settable)
+			41 pop up button (collapsed, settable) Value: 全部分类, Secondary Actions: Expand
+				42 menu
+					43 (selected) 全部分类
+					44 营地家具
+					45 露营配件
+					46 帐篷天幕
+					47 露营照明
+					48 徒步装备
+			49 button 筛选
+			50 image 露营折叠椅
+			147 text 营地家具
+			51 heading 露营折叠椅, Value: 3
+				148 text 露营折叠椅
+			149 text 折叠收纳的营地休闲椅，配有扶手与收纳袋，适合周末露营。
+			150 text 营地家具会员会场
+			151 text ¥529.00
+			152 text ¥599.00
+			153 text 支持 7 天无理由 库存 519
+			52 button 查看详情
+			53 button 加入购物车
+			54 image 户外野餐垫
+			154 text 露营配件
+			55 heading 户外野餐垫, Value: 3
+				155 text 户外野餐垫
+			156 text 可折叠的户外野餐垫，配有提手，适合公园野餐与营地休息。
+			157 text 营地家具会员会场
+			158 text ¥199.00
+			159 text ¥199.00
+			160 text 支持 7 天无理由 库存 827
+			56 button 查看详情
+			57 button 加入购物车
+			58 image 便携折叠桌
+			161 text 营地家具
+			59 heading 便携折叠桌, Value: 3
+				162 text 便携折叠桌
+			163 text 可拆卸收纳的便携折叠桌，适合营地餐饮和户外休闲。
+			164 text 营地家具会员会场
+			165 text ¥269.00
+			166 text ¥299.00
+			167 text 支持 7 天无理由 库存 360
+			60 button 查看详情
+			61 button 加入购物车
+			62 image 轻量露营折叠椅
+			168 text 营地家具
+			63 heading 轻量露营折叠椅, Value: 3
+				169 text 轻量露营折叠椅
+			170 text 轻量款折叠椅，适合简装出游与短途露营。
+			171 text ¥199.00
+			172 text 支持 7 天无理由 已售罄
+			64 button 查看详情
+			173 button (disabled) 暂不可买
+			65 image 定制营地旗
+			174 text 露营配件
+			66 heading 定制营地旗, Value: 3
+				175 text 定制营地旗
+			176 text 按用户选择的文字和图案制作的营地旗，搭配收纳袋。
+			177 text ¥899.00
+			178 text 特殊售后规则 库存 25
+			67 button 查看详情
+			68 button 加入购物车
+			69 image 山野四人帐篷
+			179 text 帐篷天幕
+			70 heading 山野四人帐篷, Value: 3
+				180 text 山野四人帐篷
+			181 text 四人露营帐篷，配有外帐、支架与收纳袋，适合家庭周末露营。
+			182 text 帐篷天幕精选会场
+			183 text ¥1999.00
+			184 text ¥2499.00
+			185 text 支持 7 天无理由 库存 180
+			71 button 查看详情
+			72 button 加入购物车
+			73 image 轻旅方形天幕
+			186 text 帐篷天幕
+			74 heading 轻旅方形天幕, Value: 3
+				187 text 轻旅方形天幕
+			188 text 方形营地天幕，配有支杆与拉绳，适合户外休憩。
+			189 text 帐篷天幕精选会场
+			190 text ¥1749.00
+			191 text ¥1899.00
+			192 text 支持 7 天无理由 库存 220
+			75 button 查看详情
+			76 button 加入购物车
+			77 image 全地形营地收纳车
+			193 text 营地家具
+			78 heading 全地形营地收纳车, Value: 3
+				194 text 全地形营地收纳车
+			195 text 可折叠营地收纳车，用于搬运露营装备，附收纳袋。
+			196 text 营地装备精选会场
+			197 text ¥2399.00
+			198 text ¥2999.00
+			199 text 支持 7 天无理由 库存 95
+			79 button 查看详情
+			80 button 加入购物车
+			81 image 营地大型组装帐篷
+			200 text 帐篷天幕
+			82 heading 营地大型组装帐篷, Value: 3
+				201 text 营地大型组装帐篷
+			202 text 需组装的大型营地帐篷，适合多人活动与长时间驻营。
+			203 text 营地装备精选会场
+			204 text ¥2799.00
+			205 text ¥3299.00
+			206 text 特殊售后规则 库存 60
+			83 button 查看详情
+			84 button 加入购物车
+			85 image 暖光营地灯
+			207 text 露营照明
+			86 heading 暖光营地灯, Value: 3
+				208 text 暖光营地灯
+			209 text 带提手的营地照明灯，适合桌面摆放或悬挂使用。
+			210 text 露营配件会员会场
+			211 text ¥699.00
+			212 text ¥799.00
+			213 text 支持 7 天无理由 库存 260
+			87 button 查看详情
+			88 button 加入购物车
+			89 image 轻量伸缩登山杖
+			214 text 徒步装备
+			90 heading 轻量伸缩登山杖, Value: 3
+				215 text 轻量伸缩登山杖
+			216 text 伸缩式登山杖，配有腕带与脚垫，适合徒步出游。
+			217 text 徒步装备满减会场
+			218 text ¥899.00
+			219 text ¥999.00
+			220 text 支持 7 天无理由 库存 150
+			91 button 查看详情
+			92 button 加入购物车
+			93 image 营地炊具套装
+			221 text 露营配件
+			94 heading 营地炊具套装, Value: 3
+				222 text 营地炊具套装
+			223 text 可叠放收纳的营地炊具，适合野餐与营地料理。
+			224 text 露营配件会员会场
+			225 text ¥1399.00
+			226 text ¥1599.00
+			227 text 支持 7 天无理由 库存 88
+			95 button 查看详情
+			96 button 加入购物车
+			97 image 便携折叠收纳柜
+			228 text 营地家具
+			98 heading 便携折叠收纳柜, Value: 3
+				229 text 便携折叠收纳柜
+			230 text 可折叠的营地收纳柜，配有层板和收纳袋，适合整理装备。
+			231 text 帐篷天幕精选会场
+			232 text ¥1099.00
+			233 text ¥1299.00
+			234 text 支持 7 天无理由 库存 140
+			99 button 查看详情
+			100 button 加入购物车
+			101 image 山径徒步背包
+			235 text 徒步装备
+			102 heading 山径徒步背包, Value: 3
+				236 text 山径徒步背包
+			237 text 配有多层收纳空间的徒步背包，适合短途徒步与露营。
+			238 text 营地装备精选会场
+			239 text ¥999.00
+			240 text ¥1199.00
+			241 text 支持 7 天无理由 库存 110
+			103 button 查看详情
+			104 button 加入购物车
+			105 image 贴身露营睡袋
+			242 text 徒步装备
+			106 heading 贴身露营睡袋, Value: 3
+				243 text 贴身露营睡袋
+			244 text 带收纳袋的贴身露营睡袋，适合营地休息。
+			245 text 徒步装备满减会场
+			246 text ¥1699.00
+			247 text ¥1899.00
+			248 text 特殊售后规则 库存 75
+			107 button 查看详情
+			108 button 加入购物车
+			109 image 定制营地标识套装
+			249 text 露营配件
+			110 heading 定制营地标识套装, Value: 3
+				250 text 定制营地标识套装
+			251 text 按选定文字制作的营地标识套装，适合团队活动。
+			252 text 营地装备精选会场
+			253 text ¥1299.00
+			254 text ¥1499.00
+			255 text 特殊售后规则 库存 96
+			111 button 查看详情
+			112 button 加入购物车
+			113 image 户外防水收纳袋套装
+			256 text 露营配件
+			114 heading 户外防水收纳袋套装, Value: 3
+				257 text 户外防水收纳袋套装
+			258 text 不同容量的户外收纳袋套装，适合分类收纳衣物与装备。
+			259 text 帐篷天幕精选会场
+			260 text ¥899.00
+			261 text ¥1099.00
+			262 text 支持 7 天无理由 库存 130
+			115 button 查看详情
+			116 button 加入购物车
+		117 button 政策解读和FAQ
+		263 container
+			264 text 荒野客服 商品与售后咨询
+			265 button 关闭
+			266 text 您好，我是荒野户外的客服助手，请问有什么可以帮您？ 轻量露营折叠椅目前标价和库存是多少？ 轻量露营折叠椅 商品标价 199 元，当前无库存。 轻量露营折叠椅有货后提醒我，先告诉我价格库存。 轻量露营折叠椅 商品标价 199 元，当前无库存。
+目前不支持到货或补货提醒，你可以稍后再查询库存。
+			273 text field (settable)
+			268 button 发送
+
+The focused UI element is 0 AXWebArea 荒野户外商城, URL: 127.0.0.1:5174/

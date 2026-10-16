@@ -1,0 +1,28 @@
+======================================================================
+FAIL: test_promise_is_removed_and_capability_result_remains (tests.test_service_capabilities.CapabilityAnswerTest.test_promise_is_removed_and_capability_result_remains)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_service_capabilities.py", line 229, in test_promise_is_removed_and_capability_result_remains
+    self.assertEqual(response.session_state["model"]["final_answer"]["fallback_reason"], "unsupported_service_promise_removed")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'capability_answer_incomplete' != 'unsupported_service_promise_removed'
+- capability_answer_incomplete
++ unsupported_service_promise_removed
+
+
+======================================================================
+FAIL: test_supported_consultations_do_not_create_applications (tests.test_service_capabilities.CapabilityAnswerTest.test_supported_consultations_do_not_create_applications)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_service_capabilities.py", line 283, in test_supported_consultations_do_not_create_applications
+    self.assertEqual(refund.session_state["intent"], "refund_policy_query")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'general_chat' != 'refund_policy_query'
+- general_chat
++ refund_policy_query
+
+
+----------------------------------------------------------------------
+Ran 42 tests in 0.145s
+
+FAILED (failures=2)

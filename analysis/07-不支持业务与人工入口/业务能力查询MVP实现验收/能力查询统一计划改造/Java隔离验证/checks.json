@@ -1,0 +1,205 @@
+[ {
+  "check" : "匿名读取被拒绝",
+  "passed" : true
+}, {
+  "check" : "错误服务令牌被拒绝",
+  "passed" : true
+}, {
+  "check" : "目录加载六项能力",
+  "passed" : true
+}, {
+  "check" : "HTTP 200: /api/customer-service/capabilities/inventory_query",
+  "passed" : true
+}, {
+  "check" : "业务响应成功",
+  "passed" : true
+}, {
+  "check" : "真实接口与单一目录一致: inventory_query",
+  "passed" : true
+}, {
+  "check" : "HTTP 200: /api/customer-service/capabilities/stock_notification",
+  "passed" : true
+}, {
+  "check" : "业务响应成功",
+  "passed" : true
+}, {
+  "check" : "真实接口与单一目录一致: stock_notification",
+  "passed" : true
+}, {
+  "check" : "HTTP 200: /api/customer-service/capabilities/exchange_handling",
+  "passed" : true
+}, {
+  "check" : "业务响应成功",
+  "passed" : true
+}, {
+  "check" : "真实接口与单一目录一致: exchange_handling",
+  "passed" : true
+}, {
+  "check" : "HTTP 200: /api/customer-service/capabilities/human_takeover",
+  "passed" : true
+}, {
+  "check" : "业务响应成功",
+  "passed" : true
+}, {
+  "check" : "真实接口与单一目录一致: human_takeover",
+  "passed" : true
+}, {
+  "check" : "HTTP 200: /api/customer-service/capabilities/refund_consultation",
+  "passed" : true
+}, {
+  "check" : "业务响应成功",
+  "passed" : true
+}, {
+  "check" : "真实接口与单一目录一致: refund_consultation",
+  "passed" : true
+}, {
+  "check" : "HTTP 200: /api/customer-service/capabilities/return_consultation",
+  "passed" : true
+}, {
+  "check" : "业务响应成功",
+  "passed" : true
+}, {
+  "check" : "真实接口与单一目录一致: return_consultation",
+  "passed" : true
+}, {
+  "check" : "HTTP 200: /api/customer-service/capabilities/not_registered",
+  "passed" : true
+}, {
+  "check" : "业务响应成功",
+  "passed" : true
+}, {
+  "check" : "未登记返回 unknown",
+  "passed" : true
+}, {
+  "check" : "非法标识返回 400",
+  "passed" : true
+}, {
+  "check" : "服务身份没有能力写入口权限",
+  "passed" : true
+}, {
+  "check" : "隔离客户登录成功",
+  "passed" : true
+}, {
+  "check" : "HTTP 200: /api/customer-service/capabilities/stock_notification",
+  "passed" : true
+}, {
+  "check" : "业务响应成功",
+  "passed" : true
+}, {
+  "check" : "登录客户可读取能力",
+  "passed" : true
+}, {
+  "check" : "隔离管理员登录成功",
+  "passed" : true
+}, {
+  "check" : "管理员角色不会越过 USER/AGENT_SERVICE 限制",
+  "passed" : true
+}, {
+  "check" : "HTTP 200: /api/customer-service/chat",
+  "passed" : true
+}, {
+  "check" : "业务响应成功",
+  "passed" : true
+}, {
+  "check" : "咨询直出且无确认卡: 支持到货提醒吗",
+  "passed" : true
+}, {
+  "check" : "服务端未准备申请: 支持到货提醒吗",
+  "passed" : true
+}, {
+  "check" : "HTTP 200: /api/customer-service/chat",
+  "passed" : true
+}, {
+  "check" : "业务响应成功",
+  "passed" : true
+}, {
+  "check" : "咨询直出且无确认卡: 轻量露营折叠椅现在多少钱，有货后能提醒我吗？",
+  "passed" : true
+}, {
+  "check" : "服务端未准备申请: 轻量露营折叠椅现在多少钱，有货后能提醒我吗？",
+  "passed" : true
+}, {
+  "check" : "HTTP 200: /api/customer-service/chat",
+  "passed" : true
+}, {
+  "check" : "业务响应成功",
+  "passed" : true
+}, {
+  "check" : "咨询直出且无确认卡: 支持退款吗",
+  "passed" : true
+}, {
+  "check" : "服务端未准备申请: 支持退款吗",
+  "passed" : true
+}, {
+  "check" : "HTTP 200: /api/customer-service/chat",
+  "passed" : true
+}, {
+  "check" : "业务响应成功",
+  "passed" : true
+}, {
+  "check" : "咨询直出且无确认卡: 支持退货吗",
+  "passed" : true
+}, {
+  "check" : "服务端未准备申请: 支持退货吗",
+  "passed" : true
+}, {
+  "check" : "HTTP 200: /api/customer-service/chat",
+  "passed" : true
+}, {
+  "check" : "业务响应成功",
+  "passed" : true
+}, {
+  "check" : "咨询直出且无确认卡: 支持换货吗",
+  "passed" : true
+}, {
+  "check" : "服务端未准备申请: 支持换货吗",
+  "passed" : true
+}, {
+  "check" : "HTTP 200: /api/customer-service/chat",
+  "passed" : true
+}, {
+  "check" : "业务响应成功",
+  "passed" : true
+}, {
+  "check" : "咨询直出且无确认卡: 能不能转人工",
+  "passed" : true
+}, {
+  "check" : "服务端未准备申请: 能不能转人工",
+  "passed" : true
+}, {
+  "check" : "HTTP 200: /api/customer-service/chat",
+  "passed" : true
+}, {
+  "check" : "业务响应成功",
+  "passed" : true
+}, {
+  "check" : "咨询直出且无确认卡: 介绍一下你们能提供哪些服务？",
+  "passed" : true
+}, {
+  "check" : "服务端未准备申请: 介绍一下你们能提供哪些服务？",
+  "passed" : true
+}, {
+  "check" : "HTTP 200: /api/customer-service/chat",
+  "passed" : true
+}, {
+  "check" : "业务响应成功",
+  "passed" : true
+}, {
+  "check" : "能力咨询保留既有草稿、版本和凭证",
+  "passed" : true
+}, {
+  "check" : "HTTP 200: /api/customer-service/chat",
+  "passed" : true
+}, {
+  "check" : "业务响应成功",
+  "passed" : true
+}, {
+  "check" : "新服务范围意图保留既有草稿和凭证",
+  "passed" : true
+}, {
+  "check" : "九轮咨询均经过固定 Agent，无额外恢复或外发",
+  "passed" : true
+}, {
+  "check" : "验收前后八张业务表行数及内容哈希一致",
+  "passed" : true
+} ]

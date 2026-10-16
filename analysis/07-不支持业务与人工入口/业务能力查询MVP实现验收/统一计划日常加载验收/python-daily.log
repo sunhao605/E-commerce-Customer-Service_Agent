@@ -1,0 +1,23 @@
+INFO:     Started server process [40945]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:51949 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51975 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51975 - "GET /sessions/cap-plan-live-7c975af7098a4d56a4d44dd848d1c7bf/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51977 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51975 - "GET /sessions/cap-plan-live-7c975af7098a4d56a4d44dd848d1c7bf/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51975 - "GET /sessions/cap-plan-live-930d739b484d4dbba5a942b28b122f03/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51977 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51975 - "GET /sessions/cap-plan-live-930d739b484d4dbba5a942b28b122f03/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51975 - "GET /sessions/cap-plan-live-aa4f31fca3aa47fdae04da8622e9f04b/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51977 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51975 - "GET /sessions/cap-plan-live-aa4f31fca3aa47fdae04da8622e9f04b/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51975 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52291 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52291 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58641 - "GET /health HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [40945]

@@ -142,7 +142,7 @@ cases:
     expected_tools:
       - search_products
     expected_citations:
-      - promotion_618_stack_rule
+      - promotion_camping_season_stack_rule
     expected_trace_events:
       - rag_pre_retrieved
       - context_source_safety_checked
@@ -226,7 +226,7 @@ cases:
         - id: gold_member_condition
           any_of: [山友会员, 山友会员券]
     expected_citations:
-      - promotion_618_stack_rule
+      - promotion_camping_season_stack_rule
       - member_coupon_gold_rule
     expected_trace_events:
       - rag_pre_retrieved

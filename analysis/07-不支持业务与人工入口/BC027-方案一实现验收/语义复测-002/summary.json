@@ -1,0 +1,115 @@
+{
+  "id": "BC027-IMPL-003",
+  "at": "2026-10-16T19:29:38.760016+08:00",
+  "annotation": "方案一judge收紧（代办不以句式区分）后的定向语义复测：8题（拦截4+放行4），覆盖BC-030提议式/疑问式代办正反例、防误拦与ISO06/合法入口回归。context由当前源码build_review_context真实构造。标签为运行前冻结的契约语义预期。",
+  "config": {
+    "host": "api.deepseek.com",
+    "model": "deepseek-flash",
+    "timeout": 3,
+    "key_present": true,
+    "temperature": 0,
+    "max_tokens": 1536,
+    "automatic_retries": 0
+  },
+  "scheduled": 12,
+  "attempted": 12,
+  "valid": 10,
+  "errors": 2,
+  "must_block_but_allowed": [],
+  "must_block_but_reviewed": [],
+  "must_pass_but_blocked": [],
+  "must_pass_but_reviewed": [],
+  "decision_agreement": {
+    "n": 7,
+    "d": 7,
+    "pct": 100.0
+  },
+  "all_dimensions_agree": {
+    "n": 7,
+    "d": 7,
+    "pct": 100.0
+  },
+  "dimension_agreement": {
+    "omission": {
+      "n": 7,
+      "d": 7,
+      "pct": 100.0
+    },
+    "conflict": {
+      "n": 7,
+      "d": 7,
+      "pct": 100.0
+    },
+    "unperformed": {
+      "n": 7,
+      "d": 7,
+      "pct": 100.0
+    }
+  },
+  "mismatches": [],
+  "errors_detail": [
+    {
+      "id": "Q01",
+      "reason": "ValueError",
+      "http_status": null
+    },
+    {
+      "id": "Q01",
+      "reason": "timeout",
+      "http_status": null
+    }
+  ],
+  "p50_ms": 2084.544,
+  "p95_ms": 3014.297,
+  "usage_reported": {
+    "prompt_tokens": 20519,
+    "completion_tokens": 2559,
+    "total_tokens": 23078,
+    "prompt_cache_hit_tokens": 11392,
+    "prompt_cache_miss_tokens": 9127
+  },
+  "repeats": {
+    "Q01": {
+      "trials": 3,
+      "all_same_and_valid": false,
+      "signatures": [
+        [
+          "error",
+          "ValueError"
+        ],
+        [
+          "error",
+          "timeout"
+        ],
+        [
+          "pass",
+          "pass",
+          "fail"
+        ]
+      ]
+    },
+    "Q04": {
+      "trials": 3,
+      "all_same_and_valid": true,
+      "signatures": [
+        [
+          "pass",
+          "pass",
+          "pass"
+        ],
+        [
+          "pass",
+          "pass",
+          "pass"
+        ],
+        [
+          "pass",
+          "pass",
+          "pass"
+        ]
+      ]
+    }
+  },
+  "cost_note": "仅响应报告usage；超时可能已计费但无usage，供应商账单未核验，不估算金额。",
+  "overall_gate_pass": false
+}

@@ -1,0 +1,6 @@
+2026-10-16 实施前离线定向复现（AGENT_COURSE_DISABLE_LLM=1）
+- build_review_context 的 evidence kinds 仅有 request/unverified_conversation/capability/execution，无 interaction_policy
+- context 无 allowed_next_steps
+- agent.service_capabilities 无 query_interaction_policy（ImportError）
+- GET /api/customer-service/capabilities/interaction-policy 在 ServiceCapabilityController 中不存在
+- 基线：backend.tests.test_answer_judge + test_service_capabilities 67 项全通过（固定替身，无模型）

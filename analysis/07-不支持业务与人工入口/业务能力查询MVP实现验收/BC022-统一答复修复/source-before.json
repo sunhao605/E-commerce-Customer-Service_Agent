@@ -1,0 +1,8 @@
+{
+  "backend/agent/customer_service_agent.py": "7d374332c9d1ef442b7abfec40e5b406a4cb5fd74c5e1af27fa3d5628541e36c",
+  "backend/agent/service_capabilities.py": "7e5c41c1f53020c31422c08c9986af928f2a263948062ff887f43e70f1227299",
+  "backend/agent/models/answer_client.py": "c2838be9fc4bf8b85f840fd269efa6ddf1cf6dc505bb6c90deb3248e02a8136f",
+  "backend/resources/prompts/final_answer_style.md": "e74c4366bee393245398a8f9b916bc2a6390c84137a6508a01ad807f0ed10331",
+  "backend/tests/test_service_capabilities.py": "b4622c3711a04e1e943c6d76b9477a0a3281e10a425dfac3f997966c52b42c0f",
+  "backend/tests/test_product_query.py": "a680f1fdf531deecdb2767c65d51d6de5b27658820da5ab008eb3baf2db17c0b"
+}

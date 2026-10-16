@@ -1,0 +1,24 @@
+{
+  "refund_consultation": {
+    "capabilityId": "refund_consultation",
+    "channel": "customer_service_agent",
+    "supportStatus": "supported",
+    "scope": "咨询未发货整单退款是否在客服办理范围内",
+    "explanation": "当前客服可以办理符合条件的未发货整单退款。是否支持不等于这笔订单已经符合条件，也不等于已经提交申请。",
+    "alternatives": [
+      "说明订单号后再核验退款资格"
+    ],
+    "version": "service-capabilities-v1"
+  },
+  "stock_notification": {
+    "capabilityId": "stock_notification",
+    "channel": "customer_service_agent",
+    "supportStatus": "unsupported",
+    "scope": "到货与补货提醒登记",
+    "explanation": "当前客服助手不支持到货或补货提醒。",
+    "alternatives": [
+      "稍后主动查询商品库存"
+    ],
+    "version": "service-capabilities-v1"
+  }
+}

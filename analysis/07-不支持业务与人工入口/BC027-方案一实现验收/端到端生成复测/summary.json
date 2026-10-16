@@ -1,0 +1,63 @@
+{
+  "id": "BC027-IMPL-004",
+  "at": "2026-10-16T19:40:44.236495+08:00",
+  "config": {
+    "host": "api.deepseek.com",
+    "model": "deepseek-flash",
+    "judge_timeout": 3.0,
+    "key_present": true,
+    "automatic_retries": 0
+  },
+  "annotation": "端到端真实生成+judge复测：3场景（ISO06策略有效/策略失败/提议式诱导），每场景一次生成+一次judge（6次调用），验证新Prompt下生成器是否还生成留资代办句与judge兜底。",
+  "rows": 3,
+  "leak_count": 1,
+  "leak_ids": [
+    "E03"
+  ],
+  "caught_count": 0,
+  "caught_ids": [],
+  "clean_count": 2,
+  "clean_ids": [
+    "E01",
+    "E02"
+  ],
+  "final_source": {
+    "E01": "model",
+    "E02": "model",
+    "E03": "model"
+  },
+  "verdicts": {
+    "E01": {
+      "omission": "pass",
+      "conflict": "pass",
+      "unperformed": "pass"
+    },
+    "E02": {
+      "omission": "pass",
+      "conflict": "pass",
+      "unperformed": "pass"
+    },
+    "E03": {
+      "omission": "pass",
+      "conflict": "pass",
+      "unperformed": "pass"
+    }
+  },
+  "candidate_flags": {
+    "E01": [],
+    "E02": [],
+    "E03": [
+      "帮您盯",
+      "帮您盯着"
+    ]
+  },
+  "final_flags": {
+    "E01": [],
+    "E02": [],
+    "E03": [
+      "帮您盯",
+      "帮您盯着"
+    ]
+  },
+  "note": "leak=生成结果被放行且含代办短语（关键失败）；caught=候选含代办但judge拦截降级；clean=候选与最终均无代办短语。最终结论需人工核对candidate/final全文与judge verdict。"
+}

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import os
+from contextlib import asynccontextmanager
 from typing import Any
 
 from fastapi import FastAPI, Request
@@ -14,6 +15,8 @@ from agent.customer_service_agent import Lesson41Agent
 from agent.workflows.resume import resolve_trusted_reviewer
 from api.schemas import *
 from settings import CASES_PATH, load_agent_capabilities
+from retrieval.hybrid_retrieval import get_knowledge_index, knowledge_index_status
+from retrieval.documents import get_knowledge_snapshot
 from evals.runner import EvalRunner
 from evals.feedback import FailureAttributor, build_backfilled_case
 from agent.trace import trace_store
@@ -23,7 +26,14 @@ agent = Lesson41Agent()
 eval_runner = EvalRunner(agent, CASES_PATH)
 eval_runner.backfilled_cases = BACKFILLED_CASES
 failure_attributor = FailureAttributor()
-app = FastAPI(title="荒野户外售后服务助手")
+@asynccontextmanager
+async def lifespan(_app: FastAPI):
+    get_knowledge_snapshot()
+    get_knowledge_index()
+    yield
+
+
+app = FastAPI(title="荒野户外售后服务助手", lifespan=lifespan)
 _local_origin = r"https?://(localhost|127\.0\.0\.1|\[::1\]|host\.docker\.internal|192\.168\.\d{1,3}\.\d{1,3}|10\.\d{1,3}\.\d{1,3}\.\d{1,3})(:\d+)?$"
 _extra_origins = [item.strip() for item in os.getenv("AGENT_WORKBENCH_ORIGINS", "").split(",") if item.strip()]
 app.add_middleware(
@@ -37,9 +47,9 @@ app.add_middleware(
 
 
 @app.get("/health")
-def health() -> dict[str, str]:
+def health() -> dict[str, Any]:
     """提供课程快照健康检查。"""
-    return {"status": "ok", "lesson": "41"}
+    return {"status": "ok", "lesson": "41", "rag_index": knowledge_index_status()}
 
 
 @app.get("/capabilities")

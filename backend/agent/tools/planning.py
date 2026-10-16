@@ -17,6 +17,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
 from api.schemas import *
+from agent.product_query import needs_product_facts, needs_product_knowledge
 
 _POLICY_CUES = ("政策", "规则", "条件", "流程", "怎么寄", "如何寄", "了解一下", "只是咨询", "只了解", "咨询一下", "寄回")
 _ELIGIBILITY_CUES = ("能退", "可退", "能否退", "能不能退", "还能退", "可以退", "资格", "能申请退款", "能申请退货")
@@ -75,6 +76,10 @@ def classify_intent(user_message: str) -> Intent:
         return "refund_status_query"
     if is_specific_eligibility_question(user_message):
         return "after_sale_eligibility_query"
+    from agent.service_capabilities import asked_capability_ids, is_service_scope_question
+
+    if is_service_scope_question(user_message, asked_capability_ids(user_message)):
+        return "service_scope_query"
     read_only = read_only_after_sale_intent(user_message)
     if read_only:
         return read_only
@@ -93,6 +98,8 @@ def classify_intent(user_message: str) -> Intent:
             return "product_query"
         return "promotion_query"
     if any(term in user_message for term in ["商品", "折叠椅", "露营椅", "折叠桌", "野餐垫", "帐篷", "天幕", "营地灯", "头灯", "背包", "登山杖", "睡袋", "收纳车", "收纳柜", "炊具", "防水袋", "营地旗", "营地标识", "库存", "价格", "多少钱", "有货", "推荐"]):
+        return "product_query"
+    if needs_product_knowledge(user_message):
         return "product_query"
     return "general_chat"
 
@@ -141,8 +148,16 @@ def build_route_plan(
     user_message: str,
     order_id: str | None,
     model_used: bool,
+    evidence: dict[str, Any] | None = None,
+    capability_ids: list[str] | None = None,
 ) -> RoutePlan:
     """把意图收敛成白名单 RoutePlan，模型不能自由增加工具或高风险动作。"""
+    from agent.service_capabilities import asked_capability_ids
+
+    # 缺字段的旧路由按共享规则补计划；显式空数组表示本轮没有能力查询。
+    planned_capabilities = list(capability_ids if capability_ids is not None else asked_capability_ids(user_message))
+    if intent in {"security_request", "degradation_request"}:
+        planned_capabilities = []
     candidate_catalog = {
         "get_order_detail": ToolCandidate(
             name="get_order_detail",
@@ -179,6 +194,8 @@ def build_route_plan(
     knowledge_domains: list[str] = []
     risk_level: RiskLevel = "low"
     requires_workflow = False
+    product_facts: bool | None = None
+    clarification_fields = list(evidence.get("clarification_fields", [])) if evidence and intent in {"product_query", "promotion_query"} else []
     if intent == "order_query":
         required_tools = ["get_order_logistics"]
     elif intent == "refund_status_query":
@@ -200,8 +217,15 @@ def build_route_plan(
     elif intent == "return_policy_query":
         knowledge_domains = ["received_return_policy"]
     elif intent == "product_query":
-        required_tools = ["search_products"]
-        knowledge_domains = ["promotion_and_member_policy"] if any(term in user_message for term in ["活动", "优惠", "满减", "会员"]) else []
+        if evidence is not None:
+            product_facts = evidence["needs_product_facts"]
+            knowledge_domains = list(dict.fromkeys(evidence["knowledge_domains"]))
+        else:
+            product_facts = needs_product_facts(user_message)
+            knowledge_domains = ["promotion_and_member_policy"] if any(term in user_message for term in ["活动", "优惠", "满减", "会员"]) else []
+            if needs_product_knowledge(user_message):
+                knowledge_domains.append("product_knowledge")
+        required_tools = ["search_products"] if product_facts is True else []
     elif intent in {"invoice_query", "promotion_query", "low_confidence_query"}:
         knowledge_domains = ["invoice"] if intent == "invoice_query" else ["promotion_and_member_policy"]
     elif intent in {"security_request", "degradation_request"}:
@@ -210,13 +234,24 @@ def build_route_plan(
     # 缺少订单号时保留候选工具，但不允许模型凭空生成参数并执行。
     order_bound_tools = {"get_order_detail", "get_order_logistics", "get_refund_status", "get_after_sale_eligibility"}
     executable_tools = required_tools if order_id or not any(name in order_bound_tools for name in required_tools) else []
+    strategies = {
+        "product_knowledge": ("hybrid", "section"),
+        "promotion_and_member_policy": ("hybrid", "section"),
+        "after_sale_policy": ("hybrid", "section"),
+        "received_return_policy": ("hybrid", "section"),
+        "invoice": ("hybrid", "section"),
+    }
     return RoutePlan(
         intent=intent,
         needs_rag=bool(knowledge_domains),
-        needs_business_tools=bool(required_tools),
+        needs_business_tools=bool(required_tools or planned_capabilities),
         required_tools=executable_tools,
         tool_candidates=[candidate_catalog[name] for name in required_tools],
         knowledge_domains=knowledge_domains,
+        capability_ids=planned_capabilities,
+        needs_product_facts=product_facts,
+        clarification_fields=clarification_fields,
+        retrieval_strategies=[RetrievalStrategy(knowledge_domain=domain, retrieval_mode=strategies[domain][0], citation_scope=strategies[domain][1]) for domain in knowledge_domains if domain in strategies],
         entity_refs=[order_id] if order_id else [],
         risk_level=risk_level,
         requires_workflow=requires_workflow,

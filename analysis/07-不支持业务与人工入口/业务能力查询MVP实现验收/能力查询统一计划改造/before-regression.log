@@ -1,0 +1,64 @@
+test_route_contract_carries_capability_evidence_for_any_intent (tests.test_service_capabilities.CapabilityContractTest.test_route_contract_carries_capability_evidence_for_any_intent) ... 
+  test_route_contract_carries_capability_evidence_for_any_intent (tests.test_service_capabilities.CapabilityContractTest.test_route_contract_carries_capability_evidence_for_any_intent) (payload={'intent': 'service_scope_query', 'capability_ids': ['stock_notification']}) ... FAIL
+  test_route_contract_carries_capability_evidence_for_any_intent (tests.test_service_capabilities.CapabilityContractTest.test_route_contract_carries_capability_evidence_for_any_intent) (payload={'intent': 'product_query', 'needs_product_facts': True, 'knowledge_domains': [], 'clarification_fields': [], 'capability_ids': ['stock_notification']}) ... FAIL
+  test_route_contract_carries_capability_evidence_for_any_intent (tests.test_service_capabilities.CapabilityContractTest.test_route_contract_carries_capability_evidence_for_any_intent) (payload={'intent': 'refund_policy_query', 'capability_ids': ['refund_consultation']}) ... FAIL
+test_plan_owns_capability_queries_and_explicit_empty_is_authoritative (tests.test_service_capabilities.CapabilityContractTest.test_plan_owns_capability_queries_and_explicit_empty_is_authoritative) ... ERROR
+test_model_capability_evidence_is_executed_without_keyword_recognition (tests.test_service_capabilities.CapabilityAnswerTest.test_model_capability_evidence_is_executed_without_keyword_recognition) ... FAIL
+
+======================================================================
+ERROR: test_plan_owns_capability_queries_and_explicit_empty_is_authoritative (tests.test_service_capabilities.CapabilityContractTest.test_plan_owns_capability_queries_and_explicit_empty_is_authoritative)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_service_capabilities.py", line 43, in test_plan_owns_capability_queries_and_explicit_empty_is_authoritative
+    plan = build_route_plan(intent="product_query", user_message="轻量露营折叠椅多少钱，有货后提醒我", order_id=None,
+                            model_used=True, evidence={"needs_product_facts": True, "knowledge_domains": []},
+                            capability_ids=[])
+TypeError: build_route_plan() got an unexpected keyword argument 'capability_ids'
+
+======================================================================
+FAIL: test_route_contract_carries_capability_evidence_for_any_intent (tests.test_service_capabilities.CapabilityContractTest.test_route_contract_carries_capability_evidence_for_any_intent) (payload={'intent': 'service_scope_query', 'capability_ids': ['stock_notification']})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_service_capabilities.py", line 37, in test_route_contract_carries_capability_evidence_for_any_intent
+    self.assertEqual(RouteModelClient._extract_decision(json.dumps(payload)), payload)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: None != {'intent': 'service_scope_query', 'capability_ids': ['stock_notification']}
+
+======================================================================
+FAIL: test_route_contract_carries_capability_evidence_for_any_intent (tests.test_service_capabilities.CapabilityContractTest.test_route_contract_carries_capability_evidence_for_any_intent) (payload={'intent': 'product_query', 'needs_product_facts': True, 'knowledge_domains': [], 'clarification_fields': [], 'capability_ids': ['stock_notification']})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_service_capabilities.py", line 37, in test_route_contract_carries_capability_evidence_for_any_intent
+    self.assertEqual(RouteModelClient._extract_decision(json.dumps(payload)), payload)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: None != {'intent': 'product_query', 'needs_produc[105 chars]on']}
+
+======================================================================
+FAIL: test_route_contract_carries_capability_evidence_for_any_intent (tests.test_service_capabilities.CapabilityContractTest.test_route_contract_carries_capability_evidence_for_any_intent) (payload={'intent': 'refund_policy_query', 'capability_ids': ['refund_consultation']})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_service_capabilities.py", line 37, in test_route_contract_carries_capability_evidence_for_any_intent
+    self.assertEqual(RouteModelClient._extract_decision(json.dumps(payload)), payload)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: None != {'intent': 'refund_policy_query', 'capability_ids': ['refund_consultation']}
+
+======================================================================
+FAIL: test_model_capability_evidence_is_executed_without_keyword_recognition (tests.test_service_capabilities.CapabilityAnswerTest.test_model_capability_evidence_is_executed_without_keyword_recognition)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_service_capabilities.py", line 179, in test_model_capability_evidence_is_executed_without_keyword_recognition
+    self.assertEqual(self.queried, ["stock_notification"])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [] != ['stock_notification']
+
+Second list contains 1 additional elements.
+First extra element 0:
+'stock_notification'
+
+- []
++ ['stock_notification']
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.009s
+
+FAILED (failures=4, errors=1)

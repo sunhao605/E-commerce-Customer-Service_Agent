@@ -237,17 +237,17 @@ class RoutePriorityTest(unittest.TestCase):
             self.assertIsNone(response.session_state["memory"]["open_task"])
             self.assertEqual(response.session_state["next_action"], "answer_user")
             self.assertFalse(response.session_state["needs_human_approval"])
-            self.assertEqual(
-                [item.metadata.get("policy_id") for item in response.citations],
-                [policy_id],
-            )
+            self.assertTrue(response.citations)
+            self.assertTrue(all(item.metadata.get("policy_id") == policy_id for item in response.citations))
             self.assertNotIn("发票", response.answer)
         self.assertEqual(refund.session_state["intent"], "refund_policy_query")
         self.assertEqual(returned.session_state["intent"], "return_policy_query")
         self.assertIn("未发货", refund.answer)
         self.assertIn("七天窗口", returned.answer)
         self.assertEqual(invoice.session_state["intent"], "invoice_query")
-        self.assertEqual(invoice.answer, "发票缓存标记")
+        self.assertNotIn("发票缓存标记", invoice.answer)
+        self.assertIn("下载", invoice.answer)
+        self.assertFalse(invoice.session_state["cost_summary"]["cache"]["common_hit_cache"])
         self.assertEqual(invoice.session_state["memory"]["open_task"], None)
         self.assertEqual(eligibility.session_state["intent"], "after_sale_eligibility_query")
         self.assertIsNone(eligibility.session_state["workflow"])

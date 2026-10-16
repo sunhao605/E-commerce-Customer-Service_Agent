@@ -1,0 +1,2328 @@
+[
+  {
+    "event_type": "runtime_context_built",
+    "timestamp": "2026-10-13T02:26:13.562925Z",
+    "agent_mode": "lesson-41-final-rehearsal",
+    "step": 1,
+    "schema_version": "trace_event_v1",
+    "category": "runtime_context",
+    "stage": "event",
+    "name": "runtime_context_built",
+    "status": "recorded",
+    "target": {
+      "type": null,
+      "name": null
+    },
+    "ids": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "workflow_id": null,
+      "order_no": null,
+      "tool_call_id": null
+    },
+    "summary": {
+      "event_type": "runtime_context_built",
+      "risk_level": "low"
+    },
+    "signals": [
+      "runtime_context_built"
+    ],
+    "safety": {
+      "public_trace": true,
+      "hidden_cot_exposed": false,
+      "payload_sanitized": false,
+      "contains_sensitive_raw": false
+    },
+    "payload": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "runtime_user_id": "U1001",
+      "runtime_nickname": "张三",
+      "member_level": "gold",
+      "risk_level": "low"
+    }
+  },
+  {
+    "event_type": "context_built",
+    "timestamp": "2026-10-13T02:26:13.562993Z",
+    "agent_mode": "lesson-41-final-rehearsal",
+    "step": 2,
+    "schema_version": "trace_event_v1",
+    "category": "context",
+    "stage": "event",
+    "name": "context_built",
+    "status": "recorded",
+    "target": {
+      "type": null,
+      "name": null
+    },
+    "ids": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "workflow_id": null,
+      "order_no": null,
+      "tool_call_id": null
+    },
+    "summary": {
+      "event_type": "context_built",
+      "intent": "product_query"
+    },
+    "signals": [
+      "context_built"
+    ],
+    "safety": {
+      "public_trace": true,
+      "hidden_cot_exposed": false,
+      "payload_sanitized": false,
+      "contains_sensitive_raw": false
+    },
+    "payload": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "intent": "product_query",
+      "sources": [
+        "runtime_context",
+        "session_memory",
+        "history_messages",
+        "user_message"
+      ],
+      "chosen_order_id": null,
+      "conflict_count": 0,
+      "history_kept_count": 0,
+      "history_dropped_count": 0,
+      "estimated_tokens": 25
+    }
+  },
+  {
+    "event_type": "model_route_planned",
+    "timestamp": "2026-10-13T02:26:13.563014Z",
+    "agent_mode": "lesson-41-final-rehearsal",
+    "step": 3,
+    "schema_version": "trace_event_v1",
+    "category": "model",
+    "stage": "event",
+    "name": "model_route_planned",
+    "status": "recorded",
+    "target": {
+      "type": null,
+      "name": null
+    },
+    "ids": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "workflow_id": null,
+      "order_no": null,
+      "tool_call_id": null
+    },
+    "summary": {
+      "event_type": "model_route_planned",
+      "intent": "product_query"
+    },
+    "signals": [
+      "model_route_planned"
+    ],
+    "safety": {
+      "public_trace": true,
+      "hidden_cot_exposed": false,
+      "payload_sanitized": false,
+      "contains_sensitive_raw": false
+    },
+    "payload": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "intent": "product_query",
+      "used_model": true,
+      "model_name": "deepseek-flash",
+      "fallback_reason": null
+    }
+  },
+  {
+    "event_type": "route_plan_built",
+    "timestamp": "2026-10-13T02:26:13.563036Z",
+    "agent_mode": "lesson-41-final-rehearsal",
+    "step": 4,
+    "schema_version": "trace_event_v1",
+    "category": "model",
+    "stage": "event",
+    "name": "route_plan_built",
+    "status": "recorded",
+    "target": {
+      "type": null,
+      "name": null
+    },
+    "ids": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "workflow_id": null,
+      "order_no": null,
+      "tool_call_id": null
+    },
+    "summary": {
+      "event_type": "route_plan_built",
+      "intent": "product_query",
+      "risk_level": "low"
+    },
+    "signals": [
+      "route_plan_built"
+    ],
+    "safety": {
+      "public_trace": true,
+      "hidden_cot_exposed": false,
+      "payload_sanitized": false,
+      "contains_sensitive_raw": false
+    },
+    "payload": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "intent": "product_query",
+      "source": "llm_with_policy_constraints",
+      "required_tools": [],
+      "needs_rag": true,
+      "needs_business_tools": false,
+      "requires_workflow": false,
+      "risk_level": "low"
+    }
+  },
+  {
+    "event_type": "rag_pre_retrieved",
+    "timestamp": "2026-10-13T02:26:13.572183Z",
+    "agent_mode": "lesson-41-final-rehearsal",
+    "step": 5,
+    "schema_version": "trace_event_v1",
+    "category": "rag",
+    "stage": "retrieval",
+    "name": "rag_pre_retrieved",
+    "status": "recorded",
+    "target": {
+      "type": null,
+      "name": null
+    },
+    "ids": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "workflow_id": null,
+      "order_no": null,
+      "tool_call_id": null
+    },
+    "summary": {
+      "event_type": "rag_pre_retrieved",
+      "intent": "product_query",
+      "hit_count": 1
+    },
+    "signals": [
+      "rag_pre_retrieved"
+    ],
+    "safety": {
+      "public_trace": true,
+      "hidden_cot_exposed": false,
+      "payload_sanitized": false,
+      "contains_sensitive_raw": false
+    },
+    "payload": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "intent": "product_query",
+      "policy_id": "outdoor_product_guide",
+      "hit_count": 1,
+      "section_ids": [
+        "outdoor_product_guide-section-5"
+      ]
+    }
+  },
+  {
+    "event_type": "product_target_resolved",
+    "timestamp": "2026-10-13T02:26:13.572216Z",
+    "agent_mode": "lesson-41-final-rehearsal",
+    "step": 6,
+    "schema_version": "trace_event_v1",
+    "category": "system",
+    "stage": "event",
+    "name": "product_target_resolved",
+    "status": "answered",
+    "target": {
+      "type": null,
+      "name": null
+    },
+    "ids": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "workflow_id": null,
+      "order_no": null,
+      "tool_call_id": null
+    },
+    "summary": {
+      "event_type": "product_target_resolved"
+    },
+    "signals": [
+      "product_target_resolved"
+    ],
+    "safety": {
+      "public_trace": true,
+      "hidden_cot_exposed": false,
+      "payload_sanitized": false,
+      "contains_sensitive_raw": false
+    },
+    "payload": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "resolution": "knowledge",
+      "source": "product_guide",
+      "status": "answered",
+      "product_id": null
+    }
+  },
+  {
+    "event_type": "context_source_safety_checked",
+    "timestamp": "2026-10-13T02:26:13.572258Z",
+    "agent_mode": "lesson-41-final-rehearsal",
+    "step": 7,
+    "schema_version": "trace_event_v1",
+    "category": "system",
+    "stage": "event",
+    "name": "context_source_safety_checked",
+    "status": "recorded",
+    "target": {
+      "type": null,
+      "name": null
+    },
+    "ids": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "workflow_id": null,
+      "order_no": null,
+      "tool_call_id": null
+    },
+    "summary": {
+      "event_type": "context_source_safety_checked"
+    },
+    "signals": [
+      "context_source_safety_checked"
+    ],
+    "safety": {
+      "public_trace": true,
+      "hidden_cot_exposed": false,
+      "payload_sanitized": false,
+      "contains_sensitive_raw": false
+    },
+    "payload": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "tainted": false,
+      "tainted_sources": [],
+      "source_count": 2
+    }
+  },
+  {
+    "event_type": "rag_hybrid_retrieved",
+    "timestamp": "2026-10-13T02:26:13.572290Z",
+    "agent_mode": "lesson-41-final-rehearsal",
+    "step": 8,
+    "schema_version": "trace_event_v1",
+    "category": "rag",
+    "stage": "retrieval",
+    "name": "rag_hybrid_retrieved",
+    "status": "recorded",
+    "target": {
+      "type": null,
+      "name": null
+    },
+    "ids": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "workflow_id": null,
+      "order_no": null,
+      "tool_call_id": null
+    },
+    "summary": {
+      "event_type": "rag_hybrid_retrieved",
+      "hit_count": 1,
+      "retrieval_stage": "hybrid_retrieval"
+    },
+    "signals": [
+      "rag_hybrid_retrieved"
+    ],
+    "safety": {
+      "public_trace": true,
+      "hidden_cot_exposed": false,
+      "payload_sanitized": false,
+      "contains_sensitive_raw": false
+    },
+    "payload": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "mode": "langchain_inmemory_hybrid",
+      "rewritten_query": "帐篷怎么清洁收纳？",
+      "index_version": "lesson41-idx-81e8d9ad64bc",
+      "index_chunk_count": 85,
+      "index_cache_hit": true,
+      "retrieval_cache_hit": false,
+      "vector_policy_ids": [
+        "outdoor_product_guide"
+      ],
+      "keyword_policy_ids": [
+        "outdoor_product_guide"
+      ],
+      "hit_count": 1,
+      "retrieval_stage": "hybrid_retrieval"
+    }
+  },
+  {
+    "event_type": "model_answer_skipped",
+    "timestamp": "2026-10-13T02:26:13.572317Z",
+    "agent_mode": "lesson-41-final-rehearsal",
+    "step": 9,
+    "schema_version": "trace_event_v1",
+    "category": "model",
+    "stage": "event",
+    "name": "model_answer_skipped",
+    "status": "recorded",
+    "target": {
+      "type": null,
+      "name": null
+    },
+    "ids": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "workflow_id": null,
+      "order_no": null,
+      "tool_call_id": null
+    },
+    "summary": {
+      "event_type": "model_answer_skipped",
+      "intent": "product_query"
+    },
+    "signals": [
+      "model_answer_skipped"
+    ],
+    "safety": {
+      "public_trace": true,
+      "hidden_cot_exposed": false,
+      "payload_sanitized": false,
+      "contains_sensitive_raw": false
+    },
+    "payload": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "intent": "product_query",
+      "reason": "verified_tool_wording"
+    }
+  },
+  {
+    "event_type": "mcp_binding_resolved",
+    "timestamp": "2026-10-13T02:26:13.572354Z",
+    "agent_mode": "lesson-41-final-rehearsal",
+    "step": 10,
+    "schema_version": "trace_event_v1",
+    "category": "system",
+    "stage": "event",
+    "name": "mcp_binding_resolved",
+    "status": "recorded",
+    "target": {
+      "type": null,
+      "name": null
+    },
+    "ids": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "workflow_id": null,
+      "order_no": null,
+      "tool_call_id": null
+    },
+    "summary": {
+      "event_type": "mcp_binding_resolved"
+    },
+    "signals": [
+      "mcp_binding_resolved"
+    ],
+    "safety": {
+      "public_trace": true,
+      "hidden_cot_exposed": false,
+      "payload_sanitized": false,
+      "contains_sensitive_raw": false
+    },
+    "payload": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "tool_source": "mcp_catalog",
+      "selected_tool": null,
+      "available_tools": [
+        "get_after_sale_eligibility",
+        "get_order_logistics",
+        "get_refund_status",
+        "search_products"
+      ],
+      "resources": [],
+      "prompts": [],
+      "boundary": "MCP 提供标准化目录；Tool Use、Hooks 和 Workflow 仍负责执行与安全治理。"
+    }
+  },
+  {
+    "event_type": "prompt_context_built",
+    "timestamp": "2026-10-13T02:26:13.572394Z",
+    "agent_mode": "lesson-41-final-rehearsal",
+    "step": 11,
+    "schema_version": "trace_event_v1",
+    "category": "prompt",
+    "stage": "event",
+    "name": "prompt_context_built",
+    "status": "recorded",
+    "target": {
+      "type": null,
+      "name": null
+    },
+    "ids": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "workflow_id": null,
+      "order_no": null,
+      "tool_call_id": null
+    },
+    "summary": {
+      "event_type": "prompt_context_built"
+    },
+    "signals": [
+      "prompt_context_built"
+    ],
+    "safety": {
+      "public_trace": true,
+      "hidden_cot_exposed": false,
+      "payload_sanitized": false,
+      "contains_sensitive_raw": false
+    },
+    "payload": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "registry_schema": "prompt_registry_v1",
+      "selected_fragments": [
+        {
+          "name": "prompt_security",
+          "level": "global_policy",
+          "version": "v1",
+          "load": "always",
+          "priority": 100,
+          "phase": "route",
+          "estimated_tokens": 29
+        },
+        {
+          "name": "system_customer_service",
+          "level": "role",
+          "version": "v1",
+          "load": "always",
+          "priority": 90,
+          "phase": "route",
+          "estimated_tokens": 32
+        },
+        {
+          "name": "route_contract",
+          "level": "task_contract",
+          "version": "v1",
+          "load": "when_route",
+          "priority": 80,
+          "phase": "route",
+          "estimated_tokens": 748
+        }
+      ],
+      "prompt_body_exposed": false
+    }
+  },
+  {
+    "event_type": "hook_executed",
+    "timestamp": "2026-10-13T02:26:13.572650Z",
+    "agent_mode": "lesson-41-final-rehearsal",
+    "step": 12,
+    "schema_version": "trace_event_v1",
+    "category": "hook",
+    "stage": "on_completion",
+    "name": "hook_executed",
+    "status": "completed",
+    "target": {
+      "type": null,
+      "name": "chat_request"
+    },
+    "ids": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "workflow_id": null,
+      "order_no": null,
+      "tool_call_id": null
+    },
+    "summary": {
+      "event_type": "hook_executed",
+      "risk_level": "low",
+      "degraded": false,
+      "hook_type": "on_completion"
+    },
+    "signals": [
+      "hook_executed",
+      "on_completion"
+    ],
+    "safety": {
+      "public_trace": true,
+      "hidden_cot_exposed": false,
+      "payload_sanitized": false,
+      "contains_sensitive_raw": false
+    },
+    "payload": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "hook_type": "on_completion",
+      "target_name": "chat_request",
+      "action": "summarize_tool_governance",
+      "status": "completed",
+      "risk_level": "low",
+      "next_action": "answer_user",
+      "degraded": false,
+      "redacted": true
+    }
+  },
+  {
+    "event_type": "cost_recorded",
+    "timestamp": "2026-10-13T02:26:13.572747Z",
+    "agent_mode": "lesson-41-final-rehearsal",
+    "step": 13,
+    "schema_version": "trace_event_v1",
+    "category": "cost",
+    "stage": "cost_summary",
+    "name": "cost_recorded",
+    "status": "recorded",
+    "target": {
+      "type": null,
+      "name": null
+    },
+    "ids": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "workflow_id": null,
+      "order_no": null,
+      "tool_call_id": null
+    },
+    "summary": {
+      "event_type": "cost_recorded",
+      "path_type": "light_react_agent",
+      "tool_call_count": 0
+    },
+    "signals": [
+      "cost_recorded",
+      "light_react_agent"
+    ],
+    "safety": {
+      "public_trace": true,
+      "hidden_cot_exposed": false,
+      "payload_sanitized": false,
+      "contains_sensitive_raw": false
+    },
+    "payload": {
+      "schema_version": "cost_summary_v1",
+      "cost_profile": "teaching",
+      "path_type": "light_react_agent",
+      "model_calls": {
+        "route_planner": 1,
+        "tool_agent": 0,
+        "final_answer": 0,
+        "extra_reasoning": 0
+      },
+      "frameworks": {
+        "langchain_runnable_sequence": true,
+        "langchain_create_agent": false,
+        "langgraph_state_graph": false,
+        "offline_deterministic_fallback": false
+      },
+      "tool_call_count": 0,
+      "business_tool_call_count": 0,
+      "rag": {
+        "needs_rag": true,
+        "hit_count": 1,
+        "pre_retrieval_count": 1,
+        "tool_retrieval_count": 0,
+        "retrieval_paths": [
+          "pre_retrieval"
+        ],
+        "cache_hit": false
+      },
+      "tokens": {
+        "context_estimated": 25,
+        "prompt_estimated": 809,
+        "answer_estimated": 110,
+        "total_estimated": 944,
+        "context_budget": 160
+      },
+      "prompt_fragments": {
+        "selected": [
+          "prompt_security",
+          "system_customer_service",
+          "route_contract"
+        ],
+        "selections": [
+          {
+            "name": "prompt_security",
+            "level": "global_policy",
+            "version": "v1",
+            "load": "always",
+            "priority": 100,
+            "phase": "route",
+            "estimated_tokens": 29
+          },
+          {
+            "name": "system_customer_service",
+            "level": "role",
+            "version": "v1",
+            "load": "always",
+            "priority": 90,
+            "phase": "route",
+            "estimated_tokens": 32
+          },
+          {
+            "name": "route_contract",
+            "level": "task_contract",
+            "version": "v1",
+            "load": "when_route",
+            "priority": 80,
+            "phase": "route",
+            "estimated_tokens": 748
+          }
+        ],
+        "fragment_count": 3,
+        "fragmentized": true,
+        "source": "actual_model_invocations"
+      },
+      "cache": {
+        "common_hit_cache": false,
+        "cache_key": null,
+        "does_not_cache_high_risk_workflow": true
+      },
+      "observation_compression": {
+        "schema_version": "observation_compression_v1",
+        "original_tokens": 0,
+        "compressed_tokens": 0,
+        "saved_tokens": 0,
+        "strategy": "keep_status_next_action_and_risk_summary"
+      },
+      "workflow": {
+        "used_langgraph": false,
+        "workflow_id": null,
+        "workflow_type": null,
+        "graph_name": null,
+        "node_history": [],
+        "hitl_required": false,
+        "status": null
+      },
+      "degradation": {
+        "degraded": false,
+        "reason": null,
+        "cost_threshold_exceeded": true,
+        "warnings": [
+          "total_estimated_tokens_over_teaching_budget"
+        ]
+      },
+      "reasoning": {
+        "view": "off",
+        "thinking_requested": false,
+        "reasoning_content_returned": false,
+        "source": null
+      },
+      "safety_boundary": {
+        "cost_control_does_not_skip_business_facts": true,
+        "cost_control_does_not_skip_hitl": true,
+        "not_finops_or_billing_system": true
+      }
+    }
+  },
+  {
+    "event_type": "final_answer_generated",
+    "timestamp": "2026-10-13T02:26:13.572770Z",
+    "agent_mode": "lesson-41-final-rehearsal",
+    "step": 14,
+    "schema_version": "trace_event_v1",
+    "category": "answer",
+    "stage": "event",
+    "name": "final_answer_generated",
+    "status": "success",
+    "target": {
+      "type": null,
+      "name": null
+    },
+    "ids": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "workflow_id": null,
+      "order_no": null,
+      "tool_call_id": null
+    },
+    "summary": {
+      "event_type": "final_answer_generated",
+      "intent": "product_query",
+      "risk_level": "low"
+    },
+    "signals": [
+      "final_answer_generated"
+    ],
+    "safety": {
+      "public_trace": true,
+      "hidden_cot_exposed": false,
+      "payload_sanitized": false,
+      "contains_sensitive_raw": false
+    },
+    "payload": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "intent": "product_query",
+      "status": "success",
+      "risk_level": "low",
+      "used_model": false,
+      "reasoning_content_returned": false
+    }
+  },
+  {
+    "event_type": "runtime_context_built",
+    "timestamp": "2026-10-13T02:26:15.664772Z",
+    "agent_mode": "lesson-41-final-rehearsal",
+    "step": 15,
+    "schema_version": "trace_event_v1",
+    "category": "runtime_context",
+    "stage": "event",
+    "name": "runtime_context_built",
+    "status": "recorded",
+    "target": {
+      "type": null,
+      "name": null
+    },
+    "ids": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "workflow_id": null,
+      "order_no": null,
+      "tool_call_id": null
+    },
+    "summary": {
+      "event_type": "runtime_context_built",
+      "risk_level": "low"
+    },
+    "signals": [
+      "runtime_context_built"
+    ],
+    "safety": {
+      "public_trace": true,
+      "hidden_cot_exposed": false,
+      "payload_sanitized": false,
+      "contains_sensitive_raw": false
+    },
+    "payload": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "runtime_user_id": "U1001",
+      "runtime_nickname": "张三",
+      "member_level": "gold",
+      "risk_level": "low"
+    }
+  },
+  {
+    "event_type": "context_built",
+    "timestamp": "2026-10-13T02:26:15.664846Z",
+    "agent_mode": "lesson-41-final-rehearsal",
+    "step": 16,
+    "schema_version": "trace_event_v1",
+    "category": "context",
+    "stage": "event",
+    "name": "context_built",
+    "status": "recorded",
+    "target": {
+      "type": null,
+      "name": null
+    },
+    "ids": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "workflow_id": null,
+      "order_no": null,
+      "tool_call_id": null
+    },
+    "summary": {
+      "event_type": "context_built",
+      "intent": "product_query"
+    },
+    "signals": [
+      "context_built"
+    ],
+    "safety": {
+      "public_trace": true,
+      "hidden_cot_exposed": false,
+      "payload_sanitized": false,
+      "contains_sensitive_raw": false
+    },
+    "payload": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "intent": "product_query",
+      "sources": [
+        "runtime_context",
+        "session_memory",
+        "history_messages",
+        "user_message"
+      ],
+      "chosen_order_id": null,
+      "conflict_count": 0,
+      "history_kept_count": 0,
+      "history_dropped_count": 0,
+      "estimated_tokens": 25
+    }
+  },
+  {
+    "event_type": "model_route_planned",
+    "timestamp": "2026-10-13T02:26:15.664909Z",
+    "agent_mode": "lesson-41-final-rehearsal",
+    "step": 17,
+    "schema_version": "trace_event_v1",
+    "category": "model",
+    "stage": "event",
+    "name": "model_route_planned",
+    "status": "recorded",
+    "target": {
+      "type": null,
+      "name": null
+    },
+    "ids": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "workflow_id": null,
+      "order_no": null,
+      "tool_call_id": null
+    },
+    "summary": {
+      "event_type": "model_route_planned",
+      "intent": "product_query"
+    },
+    "signals": [
+      "model_route_planned"
+    ],
+    "safety": {
+      "public_trace": true,
+      "hidden_cot_exposed": false,
+      "payload_sanitized": false,
+      "contains_sensitive_raw": false
+    },
+    "payload": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "intent": "product_query",
+      "used_model": true,
+      "model_name": "deepseek-flash",
+      "fallback_reason": null
+    }
+  },
+  {
+    "event_type": "route_plan_built",
+    "timestamp": "2026-10-13T02:26:15.664972Z",
+    "agent_mode": "lesson-41-final-rehearsal",
+    "step": 18,
+    "schema_version": "trace_event_v1",
+    "category": "model",
+    "stage": "event",
+    "name": "route_plan_built",
+    "status": "recorded",
+    "target": {
+      "type": null,
+      "name": null
+    },
+    "ids": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "workflow_id": null,
+      "order_no": null,
+      "tool_call_id": null
+    },
+    "summary": {
+      "event_type": "route_plan_built",
+      "intent": "product_query",
+      "risk_level": "low"
+    },
+    "signals": [
+      "route_plan_built"
+    ],
+    "safety": {
+      "public_trace": true,
+      "hidden_cot_exposed": false,
+      "payload_sanitized": false,
+      "contains_sensitive_raw": false
+    },
+    "payload": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "intent": "product_query",
+      "source": "llm_with_policy_constraints",
+      "required_tools": [],
+      "needs_rag": true,
+      "needs_business_tools": false,
+      "requires_workflow": false,
+      "risk_level": "low"
+    }
+  },
+  {
+    "event_type": "rag_pre_retrieved",
+    "timestamp": "2026-10-13T02:26:15.666384Z",
+    "agent_mode": "lesson-41-final-rehearsal",
+    "step": 19,
+    "schema_version": "trace_event_v1",
+    "category": "rag",
+    "stage": "retrieval",
+    "name": "rag_pre_retrieved",
+    "status": "recorded",
+    "target": {
+      "type": null,
+      "name": null
+    },
+    "ids": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "workflow_id": null,
+      "order_no": null,
+      "tool_call_id": null
+    },
+    "summary": {
+      "event_type": "rag_pre_retrieved",
+      "intent": "product_query",
+      "hit_count": 1
+    },
+    "signals": [
+      "rag_pre_retrieved"
+    ],
+    "safety": {
+      "public_trace": true,
+      "hidden_cot_exposed": false,
+      "payload_sanitized": false,
+      "contains_sensitive_raw": false
+    },
+    "payload": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "intent": "product_query",
+      "policy_id": "outdoor_product_guide",
+      "hit_count": 1,
+      "section_ids": [
+        "outdoor_product_guide-section-5"
+      ]
+    }
+  },
+  {
+    "event_type": "product_target_resolved",
+    "timestamp": "2026-10-13T02:26:15.666753Z",
+    "agent_mode": "lesson-41-final-rehearsal",
+    "step": 20,
+    "schema_version": "trace_event_v1",
+    "category": "system",
+    "stage": "event",
+    "name": "product_target_resolved",
+    "status": "answered",
+    "target": {
+      "type": null,
+      "name": null
+    },
+    "ids": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "workflow_id": null,
+      "order_no": null,
+      "tool_call_id": null
+    },
+    "summary": {
+      "event_type": "product_target_resolved"
+    },
+    "signals": [
+      "product_target_resolved"
+    ],
+    "safety": {
+      "public_trace": true,
+      "hidden_cot_exposed": false,
+      "payload_sanitized": false,
+      "contains_sensitive_raw": false
+    },
+    "payload": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "resolution": "knowledge",
+      "source": "product_guide",
+      "status": "answered",
+      "product_id": null
+    }
+  },
+  {
+    "event_type": "context_source_safety_checked",
+    "timestamp": "2026-10-13T02:26:15.667495Z",
+    "agent_mode": "lesson-41-final-rehearsal",
+    "step": 21,
+    "schema_version": "trace_event_v1",
+    "category": "system",
+    "stage": "event",
+    "name": "context_source_safety_checked",
+    "status": "recorded",
+    "target": {
+      "type": null,
+      "name": null
+    },
+    "ids": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "workflow_id": null,
+      "order_no": null,
+      "tool_call_id": null
+    },
+    "summary": {
+      "event_type": "context_source_safety_checked"
+    },
+    "signals": [
+      "context_source_safety_checked"
+    ],
+    "safety": {
+      "public_trace": true,
+      "hidden_cot_exposed": false,
+      "payload_sanitized": false,
+      "contains_sensitive_raw": false
+    },
+    "payload": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "tainted": false,
+      "tainted_sources": [],
+      "source_count": 2
+    }
+  },
+  {
+    "event_type": "rag_hybrid_retrieved",
+    "timestamp": "2026-10-13T02:26:15.668175Z",
+    "agent_mode": "lesson-41-final-rehearsal",
+    "step": 22,
+    "schema_version": "trace_event_v1",
+    "category": "rag",
+    "stage": "retrieval",
+    "name": "rag_hybrid_retrieved",
+    "status": "recorded",
+    "target": {
+      "type": null,
+      "name": null
+    },
+    "ids": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "workflow_id": null,
+      "order_no": null,
+      "tool_call_id": null
+    },
+    "summary": {
+      "event_type": "rag_hybrid_retrieved",
+      "hit_count": 1,
+      "retrieval_stage": "hybrid_retrieval"
+    },
+    "signals": [
+      "rag_hybrid_retrieved"
+    ],
+    "safety": {
+      "public_trace": true,
+      "hidden_cot_exposed": false,
+      "payload_sanitized": false,
+      "contains_sensitive_raw": false
+    },
+    "payload": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "mode": "langchain_inmemory_hybrid",
+      "rewritten_query": "帐篷怎么清洁收纳？",
+      "index_version": "lesson41-idx-81e8d9ad64bc",
+      "index_chunk_count": 85,
+      "index_cache_hit": true,
+      "retrieval_cache_hit": true,
+      "vector_policy_ids": [
+        "outdoor_product_guide"
+      ],
+      "keyword_policy_ids": [
+        "outdoor_product_guide"
+      ],
+      "hit_count": 1,
+      "retrieval_stage": "hybrid_retrieval"
+    }
+  },
+  {
+    "event_type": "model_answer_skipped",
+    "timestamp": "2026-10-13T02:26:15.668640Z",
+    "agent_mode": "lesson-41-final-rehearsal",
+    "step": 23,
+    "schema_version": "trace_event_v1",
+    "category": "model",
+    "stage": "event",
+    "name": "model_answer_skipped",
+    "status": "recorded",
+    "target": {
+      "type": null,
+      "name": null
+    },
+    "ids": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "workflow_id": null,
+      "order_no": null,
+      "tool_call_id": null
+    },
+    "summary": {
+      "event_type": "model_answer_skipped",
+      "intent": "product_query"
+    },
+    "signals": [
+      "model_answer_skipped"
+    ],
+    "safety": {
+      "public_trace": true,
+      "hidden_cot_exposed": false,
+      "payload_sanitized": false,
+      "contains_sensitive_raw": false
+    },
+    "payload": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "intent": "product_query",
+      "reason": "verified_tool_wording"
+    }
+  },
+  {
+    "event_type": "mcp_binding_resolved",
+    "timestamp": "2026-10-13T02:26:15.668754Z",
+    "agent_mode": "lesson-41-final-rehearsal",
+    "step": 24,
+    "schema_version": "trace_event_v1",
+    "category": "system",
+    "stage": "event",
+    "name": "mcp_binding_resolved",
+    "status": "recorded",
+    "target": {
+      "type": null,
+      "name": null
+    },
+    "ids": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "workflow_id": null,
+      "order_no": null,
+      "tool_call_id": null
+    },
+    "summary": {
+      "event_type": "mcp_binding_resolved"
+    },
+    "signals": [
+      "mcp_binding_resolved"
+    ],
+    "safety": {
+      "public_trace": true,
+      "hidden_cot_exposed": false,
+      "payload_sanitized": false,
+      "contains_sensitive_raw": false
+    },
+    "payload": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "tool_source": "mcp_catalog",
+      "selected_tool": null,
+      "available_tools": [
+        "get_after_sale_eligibility",
+        "get_order_logistics",
+        "get_refund_status",
+        "search_products"
+      ],
+      "resources": [],
+      "prompts": [],
+      "boundary": "MCP 提供标准化目录；Tool Use、Hooks 和 Workflow 仍负责执行与安全治理。"
+    }
+  },
+  {
+    "event_type": "prompt_context_built",
+    "timestamp": "2026-10-13T02:26:15.669067Z",
+    "agent_mode": "lesson-41-final-rehearsal",
+    "step": 25,
+    "schema_version": "trace_event_v1",
+    "category": "prompt",
+    "stage": "event",
+    "name": "prompt_context_built",
+    "status": "recorded",
+    "target": {
+      "type": null,
+      "name": null
+    },
+    "ids": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "workflow_id": null,
+      "order_no": null,
+      "tool_call_id": null
+    },
+    "summary": {
+      "event_type": "prompt_context_built"
+    },
+    "signals": [
+      "prompt_context_built"
+    ],
+    "safety": {
+      "public_trace": true,
+      "hidden_cot_exposed": false,
+      "payload_sanitized": false,
+      "contains_sensitive_raw": false
+    },
+    "payload": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "registry_schema": "prompt_registry_v1",
+      "selected_fragments": [
+        {
+          "name": "prompt_security",
+          "level": "global_policy",
+          "version": "v1",
+          "load": "always",
+          "priority": 100,
+          "phase": "route",
+          "estimated_tokens": 29
+        },
+        {
+          "name": "system_customer_service",
+          "level": "role",
+          "version": "v1",
+          "load": "always",
+          "priority": 90,
+          "phase": "route",
+          "estimated_tokens": 32
+        },
+        {
+          "name": "route_contract",
+          "level": "task_contract",
+          "version": "v1",
+          "load": "when_route",
+          "priority": 80,
+          "phase": "route",
+          "estimated_tokens": 748
+        }
+      ],
+      "prompt_body_exposed": false
+    }
+  },
+  {
+    "event_type": "hook_executed",
+    "timestamp": "2026-10-13T02:26:15.669199Z",
+    "agent_mode": "lesson-41-final-rehearsal",
+    "step": 26,
+    "schema_version": "trace_event_v1",
+    "category": "hook",
+    "stage": "on_completion",
+    "name": "hook_executed",
+    "status": "completed",
+    "target": {
+      "type": null,
+      "name": "chat_request"
+    },
+    "ids": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "workflow_id": null,
+      "order_no": null,
+      "tool_call_id": null
+    },
+    "summary": {
+      "event_type": "hook_executed",
+      "risk_level": "low",
+      "degraded": false,
+      "hook_type": "on_completion"
+    },
+    "signals": [
+      "hook_executed",
+      "on_completion"
+    ],
+    "safety": {
+      "public_trace": true,
+      "hidden_cot_exposed": false,
+      "payload_sanitized": false,
+      "contains_sensitive_raw": false
+    },
+    "payload": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "hook_type": "on_completion",
+      "target_name": "chat_request",
+      "action": "summarize_tool_governance",
+      "status": "completed",
+      "risk_level": "low",
+      "next_action": "answer_user",
+      "degraded": false,
+      "redacted": true
+    }
+  },
+  {
+    "event_type": "cost_recorded",
+    "timestamp": "2026-10-13T02:26:15.669305Z",
+    "agent_mode": "lesson-41-final-rehearsal",
+    "step": 27,
+    "schema_version": "trace_event_v1",
+    "category": "cost",
+    "stage": "cost_summary",
+    "name": "cost_recorded",
+    "status": "recorded",
+    "target": {
+      "type": null,
+      "name": null
+    },
+    "ids": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "workflow_id": null,
+      "order_no": null,
+      "tool_call_id": null
+    },
+    "summary": {
+      "event_type": "cost_recorded",
+      "path_type": "light_react_agent",
+      "tool_call_count": 0
+    },
+    "signals": [
+      "cost_recorded",
+      "light_react_agent"
+    ],
+    "safety": {
+      "public_trace": true,
+      "hidden_cot_exposed": false,
+      "payload_sanitized": false,
+      "contains_sensitive_raw": false
+    },
+    "payload": {
+      "schema_version": "cost_summary_v1",
+      "cost_profile": "teaching",
+      "path_type": "light_react_agent",
+      "model_calls": {
+        "route_planner": 1,
+        "tool_agent": 0,
+        "final_answer": 0,
+        "extra_reasoning": 0
+      },
+      "frameworks": {
+        "langchain_runnable_sequence": true,
+        "langchain_create_agent": false,
+        "langgraph_state_graph": false,
+        "offline_deterministic_fallback": false
+      },
+      "tool_call_count": 0,
+      "business_tool_call_count": 0,
+      "rag": {
+        "needs_rag": true,
+        "hit_count": 1,
+        "pre_retrieval_count": 1,
+        "tool_retrieval_count": 0,
+        "retrieval_paths": [
+          "pre_retrieval"
+        ],
+        "cache_hit": false
+      },
+      "tokens": {
+        "context_estimated": 25,
+        "prompt_estimated": 809,
+        "answer_estimated": 110,
+        "total_estimated": 944,
+        "context_budget": 160
+      },
+      "prompt_fragments": {
+        "selected": [
+          "prompt_security",
+          "system_customer_service",
+          "route_contract"
+        ],
+        "selections": [
+          {
+            "name": "prompt_security",
+            "level": "global_policy",
+            "version": "v1",
+            "load": "always",
+            "priority": 100,
+            "phase": "route",
+            "estimated_tokens": 29
+          },
+          {
+            "name": "system_customer_service",
+            "level": "role",
+            "version": "v1",
+            "load": "always",
+            "priority": 90,
+            "phase": "route",
+            "estimated_tokens": 32
+          },
+          {
+            "name": "route_contract",
+            "level": "task_contract",
+            "version": "v1",
+            "load": "when_route",
+            "priority": 80,
+            "phase": "route",
+            "estimated_tokens": 748
+          }
+        ],
+        "fragment_count": 3,
+        "fragmentized": true,
+        "source": "actual_model_invocations"
+      },
+      "cache": {
+        "common_hit_cache": false,
+        "cache_key": null,
+        "does_not_cache_high_risk_workflow": true
+      },
+      "observation_compression": {
+        "schema_version": "observation_compression_v1",
+        "original_tokens": 0,
+        "compressed_tokens": 0,
+        "saved_tokens": 0,
+        "strategy": "keep_status_next_action_and_risk_summary"
+      },
+      "workflow": {
+        "used_langgraph": false,
+        "workflow_id": null,
+        "workflow_type": null,
+        "graph_name": null,
+        "node_history": [],
+        "hitl_required": false,
+        "status": null
+      },
+      "degradation": {
+        "degraded": false,
+        "reason": null,
+        "cost_threshold_exceeded": true,
+        "warnings": [
+          "total_estimated_tokens_over_teaching_budget"
+        ]
+      },
+      "reasoning": {
+        "view": "off",
+        "thinking_requested": false,
+        "reasoning_content_returned": false,
+        "source": null
+      },
+      "safety_boundary": {
+        "cost_control_does_not_skip_business_facts": true,
+        "cost_control_does_not_skip_hitl": true,
+        "not_finops_or_billing_system": true
+      }
+    }
+  },
+  {
+    "event_type": "final_answer_generated",
+    "timestamp": "2026-10-13T02:26:15.669331Z",
+    "agent_mode": "lesson-41-final-rehearsal",
+    "step": 28,
+    "schema_version": "trace_event_v1",
+    "category": "answer",
+    "stage": "event",
+    "name": "final_answer_generated",
+    "status": "success",
+    "target": {
+      "type": null,
+      "name": null
+    },
+    "ids": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "workflow_id": null,
+      "order_no": null,
+      "tool_call_id": null
+    },
+    "summary": {
+      "event_type": "final_answer_generated",
+      "intent": "product_query",
+      "risk_level": "low"
+    },
+    "signals": [
+      "final_answer_generated"
+    ],
+    "safety": {
+      "public_trace": true,
+      "hidden_cot_exposed": false,
+      "payload_sanitized": false,
+      "contains_sensitive_raw": false
+    },
+    "payload": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "intent": "product_query",
+      "status": "success",
+      "risk_level": "low",
+      "used_model": false,
+      "reasoning_content_returned": false
+    }
+  },
+  {
+    "event_type": "runtime_context_built",
+    "timestamp": "2026-10-13T02:26:17.963665Z",
+    "agent_mode": "lesson-41-final-rehearsal",
+    "step": 29,
+    "schema_version": "trace_event_v1",
+    "category": "runtime_context",
+    "stage": "event",
+    "name": "runtime_context_built",
+    "status": "recorded",
+    "target": {
+      "type": null,
+      "name": null
+    },
+    "ids": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "workflow_id": null,
+      "order_no": null,
+      "tool_call_id": null
+    },
+    "summary": {
+      "event_type": "runtime_context_built",
+      "risk_level": "low"
+    },
+    "signals": [
+      "runtime_context_built"
+    ],
+    "safety": {
+      "public_trace": true,
+      "hidden_cot_exposed": false,
+      "payload_sanitized": false,
+      "contains_sensitive_raw": false
+    },
+    "payload": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "runtime_user_id": "U1001",
+      "runtime_nickname": "张三",
+      "member_level": "gold",
+      "risk_level": "low"
+    }
+  },
+  {
+    "event_type": "context_built",
+    "timestamp": "2026-10-13T02:26:17.963708Z",
+    "agent_mode": "lesson-41-final-rehearsal",
+    "step": 30,
+    "schema_version": "trace_event_v1",
+    "category": "context",
+    "stage": "event",
+    "name": "context_built",
+    "status": "recorded",
+    "target": {
+      "type": null,
+      "name": null
+    },
+    "ids": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "workflow_id": null,
+      "order_no": null,
+      "tool_call_id": null
+    },
+    "summary": {
+      "event_type": "context_built",
+      "intent": "promotion_query"
+    },
+    "signals": [
+      "context_built"
+    ],
+    "safety": {
+      "public_trace": true,
+      "hidden_cot_exposed": false,
+      "payload_sanitized": false,
+      "contains_sensitive_raw": false
+    },
+    "payload": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "intent": "promotion_query",
+      "sources": [
+        "runtime_context",
+        "session_memory",
+        "history_messages",
+        "user_message"
+      ],
+      "chosen_order_id": null,
+      "conflict_count": 0,
+      "history_kept_count": 0,
+      "history_dropped_count": 0,
+      "estimated_tokens": 29
+    }
+  },
+  {
+    "event_type": "model_route_planned",
+    "timestamp": "2026-10-13T02:26:17.963725Z",
+    "agent_mode": "lesson-41-final-rehearsal",
+    "step": 31,
+    "schema_version": "trace_event_v1",
+    "category": "model",
+    "stage": "event",
+    "name": "model_route_planned",
+    "status": "recorded",
+    "target": {
+      "type": null,
+      "name": null
+    },
+    "ids": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "workflow_id": null,
+      "order_no": null,
+      "tool_call_id": null
+    },
+    "summary": {
+      "event_type": "model_route_planned",
+      "intent": "promotion_query"
+    },
+    "signals": [
+      "model_route_planned"
+    ],
+    "safety": {
+      "public_trace": true,
+      "hidden_cot_exposed": false,
+      "payload_sanitized": false,
+      "contains_sensitive_raw": false
+    },
+    "payload": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "intent": "promotion_query",
+      "used_model": true,
+      "model_name": "deepseek-flash",
+      "fallback_reason": null
+    }
+  },
+  {
+    "event_type": "route_plan_built",
+    "timestamp": "2026-10-13T02:26:17.963744Z",
+    "agent_mode": "lesson-41-final-rehearsal",
+    "step": 32,
+    "schema_version": "trace_event_v1",
+    "category": "model",
+    "stage": "event",
+    "name": "route_plan_built",
+    "status": "recorded",
+    "target": {
+      "type": null,
+      "name": null
+    },
+    "ids": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "workflow_id": null,
+      "order_no": null,
+      "tool_call_id": null
+    },
+    "summary": {
+      "event_type": "route_plan_built",
+      "intent": "promotion_query",
+      "risk_level": "low"
+    },
+    "signals": [
+      "route_plan_built"
+    ],
+    "safety": {
+      "public_trace": true,
+      "hidden_cot_exposed": false,
+      "payload_sanitized": false,
+      "contains_sensitive_raw": false
+    },
+    "payload": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "intent": "promotion_query",
+      "source": "llm_with_policy_constraints",
+      "required_tools": [],
+      "needs_rag": true,
+      "needs_business_tools": false,
+      "requires_workflow": false,
+      "risk_level": "low"
+    }
+  },
+  {
+    "event_type": "rag_pre_retrieved",
+    "timestamp": "2026-10-13T02:26:17.968770Z",
+    "agent_mode": "lesson-41-final-rehearsal",
+    "step": 33,
+    "schema_version": "trace_event_v1",
+    "category": "rag",
+    "stage": "retrieval",
+    "name": "rag_pre_retrieved",
+    "status": "recorded",
+    "target": {
+      "type": null,
+      "name": null
+    },
+    "ids": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "workflow_id": null,
+      "order_no": null,
+      "tool_call_id": null
+    },
+    "summary": {
+      "event_type": "rag_pre_retrieved",
+      "hit_count": 1,
+      "retrieval_stage": "pre_retrieval"
+    },
+    "signals": [
+      "rag_pre_retrieved"
+    ],
+    "safety": {
+      "public_trace": true,
+      "hidden_cot_exposed": false,
+      "payload_sanitized": false,
+      "contains_sensitive_raw": false
+    },
+    "payload": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "hit_count": 1,
+      "retrieval_stage": "pre_retrieval",
+      "policy_id": "promotion_618_stack_rule",
+      "candidate_policy_ids": [
+        "promotion_618_stack_rule"
+      ]
+    }
+  },
+  {
+    "event_type": "rag_reranked",
+    "timestamp": "2026-10-13T02:26:17.968848Z",
+    "agent_mode": "lesson-41-final-rehearsal",
+    "step": 34,
+    "schema_version": "trace_event_v1",
+    "category": "rag",
+    "stage": "retrieval",
+    "name": "rag_reranked",
+    "status": "recorded",
+    "target": {
+      "type": null,
+      "name": null
+    },
+    "ids": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "workflow_id": null,
+      "order_no": null,
+      "tool_call_id": null
+    },
+    "summary": {
+      "event_type": "rag_reranked"
+    },
+    "signals": [
+      "rag_reranked"
+    ],
+    "safety": {
+      "public_trace": true,
+      "hidden_cot_exposed": false,
+      "payload_sanitized": false,
+      "contains_sensitive_raw": false
+    },
+    "payload": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "mode": "lesson41_lightweight",
+      "reranked_policy_ids": [
+        "promotion_618_stack_rule"
+      ],
+      "top_policy_id": "promotion_618_stack_rule",
+      "rerank_reasons": {
+        "promotion_618_stack_rule": [
+          "vector召回",
+          "keyword召回",
+          "当前大促规则加权"
+        ]
+      }
+    }
+  },
+  {
+    "event_type": "context_source_safety_checked",
+    "timestamp": "2026-10-13T02:26:17.969017Z",
+    "agent_mode": "lesson-41-final-rehearsal",
+    "step": 35,
+    "schema_version": "trace_event_v1",
+    "category": "system",
+    "stage": "event",
+    "name": "context_source_safety_checked",
+    "status": "recorded",
+    "target": {
+      "type": null,
+      "name": null
+    },
+    "ids": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "workflow_id": null,
+      "order_no": null,
+      "tool_call_id": null
+    },
+    "summary": {
+      "event_type": "context_source_safety_checked"
+    },
+    "signals": [
+      "context_source_safety_checked"
+    ],
+    "safety": {
+      "public_trace": true,
+      "hidden_cot_exposed": false,
+      "payload_sanitized": false,
+      "contains_sensitive_raw": false
+    },
+    "payload": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "tainted": false,
+      "tainted_sources": [],
+      "source_count": 2
+    }
+  },
+  {
+    "event_type": "rag_hybrid_retrieved",
+    "timestamp": "2026-10-13T02:26:17.969055Z",
+    "agent_mode": "lesson-41-final-rehearsal",
+    "step": 36,
+    "schema_version": "trace_event_v1",
+    "category": "rag",
+    "stage": "retrieval",
+    "name": "rag_hybrid_retrieved",
+    "status": "recorded",
+    "target": {
+      "type": null,
+      "name": null
+    },
+    "ids": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "workflow_id": null,
+      "order_no": null,
+      "tool_call_id": null
+    },
+    "summary": {
+      "event_type": "rag_hybrid_retrieved",
+      "hit_count": 1,
+      "retrieval_stage": "hybrid_retrieval"
+    },
+    "signals": [
+      "rag_hybrid_retrieved"
+    ],
+    "safety": {
+      "public_trace": true,
+      "hidden_cot_exposed": false,
+      "payload_sanitized": false,
+      "contains_sensitive_raw": false
+    },
+    "payload": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "mode": "langchain_inmemory_hybrid",
+      "rewritten_query": "双十一活动也能满300减40吗？[荒野户外商城页面上下文]当前页面=home;以上上下文已由电商后端校验归属。",
+      "index_version": "lesson41-idx-81e8d9ad64bc",
+      "index_chunk_count": 85,
+      "index_cache_hit": true,
+      "retrieval_cache_hit": false,
+      "vector_policy_ids": [
+        "promotion_618_stack_rule",
+        "member_coupon_gold_rule"
+      ],
+      "keyword_policy_ids": [
+        "promotion_618_stack_rule",
+        "member_coupon_gold_rule"
+      ],
+      "hit_count": 1,
+      "retrieval_stage": "hybrid_retrieval"
+    }
+  },
+  {
+    "event_type": "model_answer_generated",
+    "timestamp": "2026-10-13T02:26:19.777496Z",
+    "agent_mode": "lesson-41-final-rehearsal",
+    "step": 37,
+    "schema_version": "trace_event_v1",
+    "category": "model",
+    "stage": "event",
+    "name": "model_answer_generated",
+    "status": "recorded",
+    "target": {
+      "type": null,
+      "name": null
+    },
+    "ids": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "workflow_id": null,
+      "order_no": null,
+      "tool_call_id": null
+    },
+    "summary": {
+      "event_type": "model_answer_generated",
+      "intent": "promotion_query"
+    },
+    "signals": [
+      "model_answer_generated"
+    ],
+    "safety": {
+      "public_trace": true,
+      "hidden_cot_exposed": false,
+      "payload_sanitized": false,
+      "contains_sensitive_raw": false
+    },
+    "payload": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "intent": "promotion_query",
+      "used_model": true,
+      "model_name": "deepseek-flash",
+      "fallback_reason": null
+    }
+  },
+  {
+    "event_type": "mcp_binding_resolved",
+    "timestamp": "2026-10-13T02:26:19.777552Z",
+    "agent_mode": "lesson-41-final-rehearsal",
+    "step": 38,
+    "schema_version": "trace_event_v1",
+    "category": "system",
+    "stage": "event",
+    "name": "mcp_binding_resolved",
+    "status": "recorded",
+    "target": {
+      "type": null,
+      "name": null
+    },
+    "ids": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "workflow_id": null,
+      "order_no": null,
+      "tool_call_id": null
+    },
+    "summary": {
+      "event_type": "mcp_binding_resolved"
+    },
+    "signals": [
+      "mcp_binding_resolved"
+    ],
+    "safety": {
+      "public_trace": true,
+      "hidden_cot_exposed": false,
+      "payload_sanitized": false,
+      "contains_sensitive_raw": false
+    },
+    "payload": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "tool_source": "mcp_catalog",
+      "selected_tool": null,
+      "available_tools": [
+        "get_after_sale_eligibility",
+        "get_order_logistics",
+        "get_refund_status",
+        "search_products"
+      ],
+      "resources": [],
+      "prompts": [],
+      "boundary": "MCP 提供标准化目录；Tool Use、Hooks 和 Workflow 仍负责执行与安全治理。"
+    }
+  },
+  {
+    "event_type": "prompt_context_built",
+    "timestamp": "2026-10-13T02:26:19.777621Z",
+    "agent_mode": "lesson-41-final-rehearsal",
+    "step": 39,
+    "schema_version": "trace_event_v1",
+    "category": "prompt",
+    "stage": "event",
+    "name": "prompt_context_built",
+    "status": "recorded",
+    "target": {
+      "type": null,
+      "name": null
+    },
+    "ids": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "workflow_id": null,
+      "order_no": null,
+      "tool_call_id": null
+    },
+    "summary": {
+      "event_type": "prompt_context_built"
+    },
+    "signals": [
+      "prompt_context_built"
+    ],
+    "safety": {
+      "public_trace": true,
+      "hidden_cot_exposed": false,
+      "payload_sanitized": false,
+      "contains_sensitive_raw": false
+    },
+    "payload": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "registry_schema": "prompt_registry_v1",
+      "selected_fragments": [
+        {
+          "name": "prompt_security",
+          "level": "global_policy",
+          "version": "v1",
+          "load": "always",
+          "priority": 100,
+          "phase": "route",
+          "estimated_tokens": 29
+        },
+        {
+          "name": "system_customer_service",
+          "level": "role",
+          "version": "v1",
+          "load": "always",
+          "priority": 90,
+          "phase": "route",
+          "estimated_tokens": 32
+        },
+        {
+          "name": "route_contract",
+          "level": "task_contract",
+          "version": "v1",
+          "load": "when_route",
+          "priority": 80,
+          "phase": "route",
+          "estimated_tokens": 748
+        },
+        {
+          "name": "prompt_security",
+          "level": "global_policy",
+          "version": "v1",
+          "load": "always",
+          "priority": 100,
+          "phase": "final_answer",
+          "estimated_tokens": 29
+        },
+        {
+          "name": "system_customer_service",
+          "level": "role",
+          "version": "v1",
+          "load": "always",
+          "priority": 90,
+          "phase": "final_answer",
+          "estimated_tokens": 32
+        },
+        {
+          "name": "rag_answering",
+          "level": "capability",
+          "version": "v1",
+          "load": "when_rag",
+          "priority": 60,
+          "phase": "final_answer",
+          "estimated_tokens": 54
+        },
+        {
+          "name": "final_answer_style",
+          "level": "response_contract",
+          "version": "v1",
+          "load": "when_final_answer",
+          "priority": 40,
+          "phase": "final_answer",
+          "estimated_tokens": 25
+        }
+      ],
+      "prompt_body_exposed": false
+    }
+  },
+  {
+    "event_type": "hook_executed",
+    "timestamp": "2026-10-13T02:26:19.777658Z",
+    "agent_mode": "lesson-41-final-rehearsal",
+    "step": 40,
+    "schema_version": "trace_event_v1",
+    "category": "hook",
+    "stage": "on_completion",
+    "name": "hook_executed",
+    "status": "completed",
+    "target": {
+      "type": null,
+      "name": "chat_request"
+    },
+    "ids": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "workflow_id": null,
+      "order_no": null,
+      "tool_call_id": null
+    },
+    "summary": {
+      "event_type": "hook_executed",
+      "risk_level": "low",
+      "degraded": false,
+      "hook_type": "on_completion"
+    },
+    "signals": [
+      "hook_executed",
+      "on_completion"
+    ],
+    "safety": {
+      "public_trace": true,
+      "hidden_cot_exposed": false,
+      "payload_sanitized": false,
+      "contains_sensitive_raw": false
+    },
+    "payload": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "hook_type": "on_completion",
+      "target_name": "chat_request",
+      "action": "summarize_tool_governance",
+      "status": "completed",
+      "risk_level": "low",
+      "next_action": "answer_user",
+      "degraded": false,
+      "redacted": true
+    }
+  },
+  {
+    "event_type": "cost_recorded",
+    "timestamp": "2026-10-13T02:26:19.777777Z",
+    "agent_mode": "lesson-41-final-rehearsal",
+    "step": 41,
+    "schema_version": "trace_event_v1",
+    "category": "cost",
+    "stage": "cost_summary",
+    "name": "cost_recorded",
+    "status": "recorded",
+    "target": {
+      "type": null,
+      "name": null
+    },
+    "ids": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "workflow_id": null,
+      "order_no": null,
+      "tool_call_id": null
+    },
+    "summary": {
+      "event_type": "cost_recorded",
+      "path_type": "light_react_agent",
+      "tool_call_count": 0
+    },
+    "signals": [
+      "cost_recorded",
+      "light_react_agent"
+    ],
+    "safety": {
+      "public_trace": true,
+      "hidden_cot_exposed": false,
+      "payload_sanitized": false,
+      "contains_sensitive_raw": false
+    },
+    "payload": {
+      "schema_version": "cost_summary_v1",
+      "cost_profile": "teaching",
+      "path_type": "light_react_agent",
+      "model_calls": {
+        "route_planner": 1,
+        "tool_agent": 0,
+        "final_answer": 1,
+        "extra_reasoning": 0
+      },
+      "frameworks": {
+        "langchain_runnable_sequence": true,
+        "langchain_create_agent": false,
+        "langgraph_state_graph": false,
+        "offline_deterministic_fallback": false
+      },
+      "tool_call_count": 0,
+      "business_tool_call_count": 0,
+      "rag": {
+        "needs_rag": true,
+        "hit_count": 1,
+        "pre_retrieval_count": 1,
+        "tool_retrieval_count": 0,
+        "retrieval_paths": [
+          "pre_retrieval"
+        ],
+        "cache_hit": false
+      },
+      "tokens": {
+        "context_estimated": 29,
+        "prompt_estimated": 949,
+        "answer_estimated": 109,
+        "total_estimated": 1087,
+        "context_budget": 160
+      },
+      "prompt_fragments": {
+        "selected": [
+          "prompt_security",
+          "system_customer_service",
+          "route_contract",
+          "prompt_security",
+          "system_customer_service",
+          "rag_answering",
+          "final_answer_style"
+        ],
+        "selections": [
+          {
+            "name": "prompt_security",
+            "level": "global_policy",
+            "version": "v1",
+            "load": "always",
+            "priority": 100,
+            "phase": "route",
+            "estimated_tokens": 29
+          },
+          {
+            "name": "system_customer_service",
+            "level": "role",
+            "version": "v1",
+            "load": "always",
+            "priority": 90,
+            "phase": "route",
+            "estimated_tokens": 32
+          },
+          {
+            "name": "route_contract",
+            "level": "task_contract",
+            "version": "v1",
+            "load": "when_route",
+            "priority": 80,
+            "phase": "route",
+            "estimated_tokens": 748
+          },
+          {
+            "name": "prompt_security",
+            "level": "global_policy",
+            "version": "v1",
+            "load": "always",
+            "priority": 100,
+            "phase": "final_answer",
+            "estimated_tokens": 29
+          },
+          {
+            "name": "system_customer_service",
+            "level": "role",
+            "version": "v1",
+            "load": "always",
+            "priority": 90,
+            "phase": "final_answer",
+            "estimated_tokens": 32
+          },
+          {
+            "name": "rag_answering",
+            "level": "capability",
+            "version": "v1",
+            "load": "when_rag",
+            "priority": 60,
+            "phase": "final_answer",
+            "estimated_tokens": 54
+          },
+          {
+            "name": "final_answer_style",
+            "level": "response_contract",
+            "version": "v1",
+            "load": "when_final_answer",
+            "priority": 40,
+            "phase": "final_answer",
+            "estimated_tokens": 25
+          }
+        ],
+        "fragment_count": 7,
+        "fragmentized": true,
+        "source": "actual_model_invocations"
+      },
+      "cache": {
+        "common_hit_cache": false,
+        "cache_key": null,
+        "does_not_cache_high_risk_workflow": true
+      },
+      "observation_compression": {
+        "schema_version": "observation_compression_v1",
+        "original_tokens": 0,
+        "compressed_tokens": 0,
+        "saved_tokens": 0,
+        "strategy": "keep_status_next_action_and_risk_summary"
+      },
+      "workflow": {
+        "used_langgraph": false,
+        "workflow_id": null,
+        "workflow_type": null,
+        "graph_name": null,
+        "node_history": [],
+        "hitl_required": false,
+        "status": null
+      },
+      "degradation": {
+        "degraded": false,
+        "reason": null,
+        "cost_threshold_exceeded": true,
+        "warnings": [
+          "total_estimated_tokens_over_teaching_budget"
+        ]
+      },
+      "reasoning": {
+        "view": "off",
+        "thinking_requested": false,
+        "reasoning_content_returned": false,
+        "source": null
+      },
+      "safety_boundary": {
+        "cost_control_does_not_skip_business_facts": true,
+        "cost_control_does_not_skip_hitl": true,
+        "not_finops_or_billing_system": true
+      }
+    }
+  },
+  {
+    "event_type": "final_answer_generated",
+    "timestamp": "2026-10-13T02:26:19.777797Z",
+    "agent_mode": "lesson-41-final-rehearsal",
+    "step": 42,
+    "schema_version": "trace_event_v1",
+    "category": "answer",
+    "stage": "event",
+    "name": "final_answer_generated",
+    "status": "success",
+    "target": {
+      "type": null,
+      "name": null
+    },
+    "ids": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "workflow_id": null,
+      "order_no": null,
+      "tool_call_id": null
+    },
+    "summary": {
+      "event_type": "final_answer_generated",
+      "intent": "promotion_query",
+      "risk_level": "low"
+    },
+    "signals": [
+      "final_answer_generated"
+    ],
+    "safety": {
+      "public_trace": true,
+      "hidden_cot_exposed": false,
+      "payload_sanitized": false,
+      "contains_sensitive_raw": false
+    },
+    "payload": {
+      "session_id": "cs-2c04383b-bfa7-4ea6-912d-5dc9d0ee2a4f",
+      "intent": "promotion_query",
+      "status": "success",
+      "risk_level": "low",
+      "used_model": true,
+      "reasoning_content_returned": false
+    }
+  }
+]

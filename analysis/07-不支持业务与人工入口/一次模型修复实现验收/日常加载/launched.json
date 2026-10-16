@@ -1,0 +1,13 @@
+{
+  "old_pid": 49504,
+  "new_pid": 72994,
+  "settings": {
+    "AGENT_COURSE_DISABLE_LLM": "0",
+    "AGENT_COURSE_OFFLINE_RAG": "0",
+    "AGENT_COURSE_OFFLINE_FACTS": "0",
+    "ANSWER_JUDGE_MODE": "enforce",
+    "ANSWER_JUDGE_TIMEOUT_SECONDS": "5",
+    "CANCEL_INTENT_EXECUTE": "0",
+    "CANCEL_SCORE_MIN": "0.9"
+  }
+}

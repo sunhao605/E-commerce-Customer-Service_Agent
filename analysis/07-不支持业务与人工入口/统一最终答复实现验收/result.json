@@ -1,0 +1,25 @@
+{
+  "id": "ANSWER-UNIFY-001",
+  "engineering": {
+    "baseline": 199,
+    "final": 210,
+    "new_methods": 11,
+    "final_log": "backend-complete.log"
+  },
+  "first_live": {
+    "passed": 4,
+    "total": 6,
+    "review": "reviewed-first-results.json"
+  },
+  "final_live": {
+    "passed": 6,
+    "total": 6,
+    "normal_model_answer": 5,
+    "whole_fallback": 1,
+    "review": "修正后验收/reviewed-results.json"
+  },
+  "business_code_files_changed": 5,
+  "test_files_changed": 1,
+  "loaded": true,
+  "raw_semantic_duplicates_not_guaranteed": true
+}

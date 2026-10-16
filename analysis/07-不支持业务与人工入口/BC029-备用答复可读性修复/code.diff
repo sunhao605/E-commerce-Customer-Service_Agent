@@ -1,0 +1,68 @@
+--- /tmp/bc029-answer-review-before.py	2026-10-16 21:01:47
++++ backend/agent/answer_review.py	2026-10-16 21:02:11
+@@ -10,7 +10,6 @@
+ from api.schemas import ChatRequest, Citation, RoutePlan, ToolCallTrace
+ from agent.service_capabilities import CHANNEL, capability_answer_text
+ from retrieval.documents import knowledge_time, citation_is_current
+-from retrieval.knowledge import _plain_evidence
+ 
+ REVIEW_INTENTS = {"service_scope_query", "product_query", "promotion_query", "invoice_query",
+                   "refund_policy_query", "return_policy_query", "order_query", "refund_status_query"}
+@@ -19,6 +18,36 @@
+ review_audit: deque[dict[str, Any]] = deque(maxlen=100)
+ 
+ 
++def _policy_fallback_text(snippet: str, seen: set[str]) -> str:
++    """备用正文排除教学区，原始引用仍完整留给生成和评审。"""
++    lines = []
++    skip_examples = False
++    for line in snippet.splitlines():
++        heading = re.match(r"^#{1,6}\s+(.+)", line)
++        if heading:
++            skip_examples = bool(re.search(r"常见客服场景|常见客服问法|常见问法|常见客服对话|说明样例", heading[1]))
++            continue
++        if re.match(r"\s*(?:以下为模拟问法|以下问答为模拟场景)", line):
++            skip_examples = True
++        if skip_examples:
++            continue
++        line = re.sub(r"(?:详见|参见)\s*\[[^\]]+\]\([^)]+\)[。]?", "", line)
++        line = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", line)
++        kept = []
++        for sentence in re.split(r"(?<=[。！？])", line):
++            sentence = sentence.strip()
++            if not sentence or sentence.startswith(("本文是项目演示知识", "本轮文档更新时间")):
++                continue
++            key = re.sub(r"\s+", "", sentence)
++            if key not in seen:
++                seen.add(key)
++                kept.append(sentence)
++        if kept:
++            lines.append("".join(kept))
++    # shortcut: 只去除逐字重复，不用模糊相似度合并政策，以免丢失条件或否定；语义压缩另行验收。
++    return "\n".join(lines)
++
++
+ def redact_review(value: Any) -> Any:
+     if isinstance(value, dict):
+         return {key: redact_review(item) for key, item in value.items()
+@@ -94,6 +123,8 @@
+         evidence.append({"id": f"capability:{item['capabilityId']}", "kind": "capability", "facts": item})
+         blocks.append(capability_answer_text(item))
+     valid_citations = []
++    policy_sentences: set[str] = set()
++    policy_texts = []
+     for index, citation in enumerate(citations):
+         metadata = citation.metadata or {}
+         if not metadata or not citation_is_current(citation, knowledge_time()):
+@@ -104,7 +135,10 @@
+             "source": citation.source, "metadata": {key: metadata.get(key) for key in (
+                 "policy_id", "version", "section_id", "effective_from", "effective_to", "publication_status",
+                 "snapshot_version", "scope")}})
+-        blocks.append(_plain_evidence(citation.snippet))
++        policy_texts.append(_policy_fallback_text(citation.snippet, policy_sentences))
++    blocks.extend(policy_texts)
++    if valid_citations and not any(policy_texts):
++        blocks.append("本轮取得的材料仅含说明或示例，暂不能据此确认相关业务规则。")
+     policy_ids = {(item.metadata or {}).get("policy_id") for item in valid_citations}
+     if policy_ids & {"promotion_camping_season_stack_rule", "member_coupon_gold_rule"}:
+         blocks.append("以上为平台通用规则，不代表当前商品参与活动或本人优惠券已适用，具体组合以商品页和结算条件为准。")

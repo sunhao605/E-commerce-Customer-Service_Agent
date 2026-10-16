@@ -1,0 +1,28 @@
+INFO:     Started server process [38000]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:55388 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55499 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55506 - "GET /sessions/live-meta-a42accd4ca9c499faaf7121dd3c91c79/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55499 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55506 - "GET /sessions/live-meta-a39b0cb043ec4d00b74a9a2bdfd7f46f/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55499 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55506 - "GET /sessions/live-meta-81eab02d4e59448098a15f6ce02c86d9/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55499 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55506 - "GET /sessions/live-meta-0d3ac3baf6bc490a93d1a01e154690e6/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55499 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55506 - "GET /sessions/live-meta-484729c969a641d5a93a1f0ccb4abcf9/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55499 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55506 - "GET /sessions/live-meta-20e400d44f954f14970d57edcdd8f49b/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55658 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55658 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55764 - "GET /capabilities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55765 - "GET /capabilities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55841 - "OPTIONS /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55841 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55841 - "GET /sessions/session-U1001-igne0rza/trace HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [38000]

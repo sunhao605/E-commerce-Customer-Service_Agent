@@ -1,0 +1,49 @@
+{
+  "payment_invoice_policy.md": {
+    "chars": 157,
+    "body_chars": 35,
+    "policy_id": "invoice_issue"
+  },
+  "received_return_policy.md": {
+    "chars": 4216,
+    "body_chars": 4026,
+    "policy_id": "return_after_delivery"
+  },
+  "product_knowledge.md": {
+    "chars": 4365,
+    "body_chars": 4170,
+    "policy_id": "outdoor_product_guide"
+  },
+  "member_coupon_policy.md": {
+    "chars": 3243,
+    "body_chars": 3057,
+    "policy_id": "member_coupon_gold_rule"
+  },
+  "promotion_policy.md": {
+    "chars": 3432,
+    "body_chars": 3248,
+    "policy_id": "promotion_618_stack_rule"
+  },
+  "after_sale_policy.md": {
+    "chars": 3328,
+    "body_chars": 3137,
+    "policy_id": "refund_before_shipping"
+  },
+  "index": {
+    "chunks": 56,
+    "per_file": {
+      "after_sale_policy.md": 18,
+      "payment_invoice_policy.md": 1,
+      "promotion_policy.md": 19,
+      "member_coupon_policy.md": 18
+    },
+    "embedding": "local_token_embedding_for_explicit_offline_course",
+    "product_guide_indexed": false,
+    "return_policy_indexed": false
+  },
+  "existing_checks": {
+    "run": 14,
+    "failures": 0,
+    "errors": 0
+  }
+}

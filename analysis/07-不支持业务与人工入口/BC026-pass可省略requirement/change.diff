@@ -1,0 +1,26 @@
+--- before/backend/agent/models/judge_client.py
++++ after/backend/agent/models/judge_client.py
+@@ -37,6 +37,8 @@
+         raise ValueError("invalid_judge_dimensions")
+     valid_ids = {item["id"] for item in context["evidence"]}
+     for dimension, check in data.items():
++        if isinstance(check, dict) and check.get("verdict") == "pass":
++            check.setdefault("requirement", "")
+         if not isinstance(check, dict) or set(check) != {"verdict", "quote", "requirement", "evidence_ids", "reason"}:
+             raise ValueError("invalid_judge_fields")
+         if check["verdict"] not in {"pass", "fail", "uncertain"}:
+--- before/backend/resources/prompts/answer_judge.md
++++ after/backend/resources/prompts/answer_judge.md
+@@ -15,10 +15,10 @@
+ 缺能力材料且未确定生成证据完整时，确定支持的说法conflict=uncertain，不强行判不支持，也不虚构代办问题。
+ 若已有能力unknown/查询失败却说确定支持，则conflict=fail。
+ 
+-只输出JSON对象，必须且仅有omission、conflict、unperformed三个键。每个值必须且仅有：
++只输出JSON对象，必须且仅有omission、conflict、unperformed三个键。每个值仅允许以下字段，除pass时的requirement外均必须提供：
+ - verdict：pass/fail/uncertain
+ - quote：候选原文中涉及的连续短句；遗漏项可为空，不能编造引文
+-- requirement：相关诉求或缺失材料；漏答fail和任何uncertain必须非空
++- requirement：相关诉求或缺失材料；pass时可为空字符串或省略，省略由程序补为空字符串；fail和uncertain时必须提供，漏答fail和任何uncertain必须非空
+ - evidence_ids：context.evidence中真实存在的ID列表，不可为空；漏答fail必须引用request，冲突/动作fail必须引用除request/history之外的证据
+ - reason：简短可核查理由，不输出隐藏推理
+ 

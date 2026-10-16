@@ -1,0 +1,41 @@
+{
+  "case": "N26",
+  "mode": "local_replay_of_saved_public_response",
+  "previous_status": "error",
+  "current_parse_status": "success",
+  "current_decision": "allow",
+  "checks": {
+    "omission": {
+      "verdict": "pass",
+      "quote": "订单A原申请已经提交，现在仍待审核，还没有退款；这轮没有重新提交。",
+      "requirement": "",
+      "evidence_ids": [
+        "request",
+        "order:订单A",
+        "execution"
+      ],
+      "reason": "已回应用户对订单A退款进度的询问，说明申请已提交、待审核、未退款，并说明本轮未重新提交。"
+    },
+    "conflict": {
+      "verdict": "pass",
+      "quote": "订单A原申请已经提交，现在仍待审核，还没有退款",
+      "evidence_ids": [
+        "order:订单A",
+        "execution"
+      ],
+      "reason": "订单A售后状态为PENDING_REVIEW，历史确有已核验的submit_refund记录，候选陈述与证据一致。",
+      "requirement": ""
+    },
+    "unperformed": {
+      "verdict": "pass",
+      "quote": "这轮没有重新提交",
+      "evidence_ids": [
+        "execution"
+      ],
+      "reason": "本轮动作记录为空，候选明确说明本轮未重新提交，未宣称本轮有提交、登记或通知动作。",
+      "requirement": ""
+    }
+  },
+  "remote_calls": 0,
+  "historical_evaluation_files_unchanged": 33
+}

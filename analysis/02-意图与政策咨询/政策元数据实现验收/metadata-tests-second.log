@@ -1,0 +1,13 @@
+======================================================================
+FAIL: test_one_request_uses_one_time_across_knowledge_domains (test_policy_metadata.PolicyMetadataTest.test_one_request_uses_one_time_across_knowledge_domains)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_policy_metadata.py", line 344, in test_one_request_uses_one_time_across_knowledge_domains
+    self.assertTrue(any(c.metadata["policy_id"] == "promotion_camping_season_stack_rule" for c in response.citations))
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true
+
+----------------------------------------------------------------------
+Ran 160 tests in 1.599s
+
+FAILED (failures=1)

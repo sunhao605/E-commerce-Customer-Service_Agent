@@ -1,0 +1,49 @@
+{
+  "old_pid": 69527,
+  "new_pid": 84519,
+  "cwd": "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent",
+  "settings": {
+    "AGENT_COURSE_ENV": "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/.env.model.local",
+    "AGENT_COURSE_OFFLINE_RAG": "1",
+    "AGENT_COURSE_DISABLE_LLM": "0",
+    "AGENT_COURSE_OFFLINE_FACTS": "0",
+    "CANCEL_INTENT_EXECUTE": "0",
+    "CANCEL_SCORE_MIN": "0.9",
+    "LANGCHAIN_TRACING_V2": "false",
+    "LANGSMITH_TRACING": "false"
+  },
+  "health": {
+    "status": "ok",
+    "lesson": "41",
+    "rag_index": {
+      "loaded": true,
+      "version": "lesson41-idx-81e8d9ad64bc",
+      "chunk_count": 85,
+      "files": [
+        "after_sale_policy.md",
+        "payment_invoice_policy.md",
+        "promotion_policy.md",
+        "member_coupon_policy.md",
+        "product_knowledge.md"
+      ],
+      "embedding": "local_token_embedding_for_explicit_offline_course"
+    }
+  },
+  "workbench_pid": [
+    84527
+  ],
+  "workbench": {
+    "http_status": 200,
+    "bytes": 578
+  },
+  "java": {
+    "http_status": 200,
+    "bytes": 15
+  },
+  "mall": {
+    "http_status": 200,
+    "bytes": 568
+  },
+  "fresh_process": true,
+  "disk_index_matches_live": true
+}

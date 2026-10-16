@@ -1,0 +1,108 @@
+{
+  "at": "2026-10-16T22:18:27.601824+08:00",
+  "pid": 49504,
+  "settings": {
+    "AGENT_COURSE_DISABLE_LLM": "0",
+    "AGENT_COURSE_OFFLINE_RAG": "0",
+    "AGENT_COURSE_OFFLINE_FACTS": "0",
+    "ANSWER_JUDGE_MODE": "enforce",
+    "ANSWER_JUDGE_TIMEOUT_SECONDS": "5",
+    "CANCEL_INTENT_EXECUTE": "0",
+    "CANCEL_SCORE_MIN": "0.9"
+  },
+  "health": {
+    "agent": {
+      "status": "ok",
+      "lesson": "41",
+      "rag_index": {
+        "loaded": true,
+        "version": "lesson41-idx-37f6dea438a5",
+        "chunk_count": 115,
+        "files": [
+          "after_sale_policy.md",
+          "payment_invoice_policy.md",
+          "promotion_policy.md",
+          "member_coupon_policy.md",
+          "product_knowledge.md",
+          "received_return_policy.md"
+        ],
+        "embedding": "openai_compatible_embedding:Qwen/Qwen3-Embedding-8B",
+        "governed_files": [
+          "after_sale_policy.md",
+          "payment_invoice_policy.md",
+          "promotion_policy.md",
+          "member_coupon_policy.md",
+          "product_knowledge.md",
+          "received_return_policy.md"
+        ],
+        "snapshot_version": "knowledge-3524fd57e6c4",
+        "judged_at": "2026-10-16T22:18:26.353683+08:00",
+        "available_policy_signature": "0d705f48ae1a",
+        "available_policies": {
+          "refund_before_shipping": "2026-10-14.2",
+          "invoice_issue": "2026-10-14.2",
+          "promotion_camping_season_stack_rule": "2026-10-14.2",
+          "member_coupon_gold_rule": "2026-10-14.2",
+          "outdoor_product_guide": "2026-10-14.2",
+          "return_after_delivery": "2026-10-14.2"
+        },
+        "blocked_policies": {}
+      }
+    },
+    "java": {
+      "status": "UP"
+    }
+  },
+  "source_sha256": {
+    "backend/agent/mcp_catalog.py": "153a2728a69d02bfb9cd5958293b34bf93ff4e0f903eeb86edd39bda143e4f7e",
+    "backend/agent/trace.py": "e2d1d2654b637cf44fb002b23c188009234c58bb27c5e02e306bc754c3962ab5",
+    "backend/agent/source_guard.py": "27b5fee4162ba5538c165cc243a4ba24838d13c620fe434aa7eb5cba3001c7a4",
+    "backend/agent/hooks.py": "1ae64e2183a739073b44ea18d5a0052c382a59c19d3702502e4e00c532cbbfd0",
+    "backend/agent/service_capabilities.py": "6e19ca37a99ee4c6d0f00473c860250f829bdd579e571dc8b281999912649d53",
+    "backend/agent/cancellation.py": "f5f4fd7f3219c1e49f95c4a9f6475bc829d712867f274845f8fe328f22b42b6f",
+    "backend/agent/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "backend/agent/prompts.py": "6317cd97c8482db38fce18f885ced91edd95a2172256fa41e3280be75279d425",
+    "backend/agent/context.py": "8125e7b5aac0d8c15771016ac93821e824a08abe808586ef0460d1d53f7f491a",
+    "backend/agent/customer_service_agent.py": "06289d149258ae33f250dccfd0ffaf74150953ceaa71dc1599720ee24c38df02",
+    "backend/agent/cost.py": "aae7c9cf75eb9ecf365ad42f017cebd9dfe88bd263b9f1f1fd32820b7247764c",
+    "backend/agent/product_query.py": "03a8d9cb93505233ec12cf43ee440b5b4babf29f6d7df088a8beb1e4ad5dd57d",
+    "backend/agent/ecommerce_client.py": "68a2c496fb0c3ef55f708917dc59a391fb9c410d0a0f075560d1152e83611bd4",
+    "backend/agent/state.py": "084150d57ae8b2258b5105e3951ca16d13889e9c10612105049f71abc6247540",
+    "backend/agent/answer_review.py": "e7e30dd27b59ba37d68c0044fd26fa813b048743ee958c67a7c6977dc1cac433",
+    "backend/agent/tools/langchain_runtime.py": "023236123dc1712a5f1e59dac148cd5f991e374049db6b6ab0fd8ac7a574b9ce",
+    "backend/agent/tools/runtime_context.py": "4989622c79716c4505dffc6e3e26e507f09aab206590330c86d7d1c6077e6a88",
+    "backend/agent/tools/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "backend/agent/tools/tool_runtime.py": "4a57a6eccbdbedb2562ba8ed5c8506df9439ce05472cd98e08d49269c81b03ef",
+    "backend/agent/tools/planning.py": "76712c5313b143ec770d1137a1740d55b677d2cee5b51f9f7b9524d391c355a5",
+    "backend/agent/workflows/resume.py": "ec0a188d3a0759af154b7f134aef63f37365c9a578d57bec44834aaa6a4f67f4",
+    "backend/agent/workflows/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "backend/agent/workflows/after_sale_graph.py": "e99d407b35fbead3a9c9c75f8bc025730afee2d4b68ce46117a20034e6622019",
+    "backend/agent/models/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "backend/agent/models/judge_client.py": "fe43689646f7f3b00809e4081d28e1a680eba2eb9d3b708423353577db3e5e61",
+    "backend/agent/models/router_client.py": "2ed74c6276afb22ef7fb9146e60c1f40d1f36e40d2449585ae8a353daf3e4d82",
+    "backend/agent/models/answer_client.py": "aeb5d6c087ebc909058b4bfc7822b4300e241d08dcb584f0f9e9650c4e6eb78e",
+    "backend/retrieval/hybrid_retrieval.py": "ff2ff0c70eee51351984f33211b69a68e0aabeeb290153d8511c086239e2fe93",
+    "backend/retrieval/documents.py": "6b2115aa01f3fa65b40ae9d9e7969bf71bd44b066643a7a3577358e8b3f1c6d8",
+    "backend/retrieval/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "backend/retrieval/knowledge.py": "d3d993b7657c72ee4c0c80f6c97bf2afef5727cf7a962cf75e8285729c40c80c",
+    "backend/resources/cases.yml": "ef137cdf11f396096601ea8075a483c7b6d9227089e068f04432642ae92d389f",
+    "backend/resources/agent_capabilities.json": "f1a54926107b95904f794074101fb504cd5b3070995d658966a883dafdc89a7d",
+    "backend/resources/knowledge/payment_invoice_policy.md": "6ea411835ca688cc2b6bf03ebd7751d9d941098f61622b6ccf438d3b5c0fb815",
+    "backend/resources/knowledge/received_return_policy.md": "1093e25c370315e423c43b73d1f9247d90cbf9cee4240ba05c9a3e4877eae471",
+    "backend/resources/knowledge/README.md": "59a7a57561174d956a239162113c027a2f8174c1779bbc7f144d76d2417eef44",
+    "backend/resources/knowledge/release-manifest.json": "a34bc23b46d2c5abefb4d6226bcd9dc816273546730b81a002ffc4d831e7cf95",
+    "backend/resources/knowledge/product_knowledge.md": "7f1c89ea400a0018c64d7848a317a4022cd134ee7f6aa5ddbb556ea009aae80f",
+    "backend/resources/knowledge/member_coupon_policy.md": "f55008064d30d4a2fbf5dfe871fa767115ddf67fb6cc939566a7655262144163",
+    "backend/resources/knowledge/promotion_policy.md": "1e7f6016dbaa6e9e05623fedb2f8d32d64fdf51588dff2506e51acfe17fe63c2",
+    "backend/resources/knowledge/after_sale_policy.md": "eac40c0ffc4c96bcf6144a12a5379ee71059f74769b877e41525d812fc8df659",
+    "backend/resources/prompts/prompt_registry.yml": "54b780df092398276fd22ba733dc7cbaeb0df3c0ff273881ef7a2700b9942cce",
+    "backend/resources/prompts/tool_usage.md": "e5cc7487d09d8713140bed939e189e70861e95c452e02cc82c9a03ef3496e090",
+    "backend/resources/prompts/answer_judge.md": "792280e13334f6917023652f88dad97104a756c6e404d0dfb63bf4dae4dfed26",
+    "backend/resources/prompts/high_risk_after_sale.md": "ea3f62c63e62339cee771306c16fd04911102d6886a205b943b61f6ab43c90c3",
+    "backend/resources/prompts/route_contract.md": "682d64acfc926597a46239eda39158663aeef08d478cb05b84bf5156344c01c3",
+    "backend/resources/prompts/final_answer_style.md": "a862185a054792c27ba7e45fee45cb304600e16692b2828eeb871d945be5adcc",
+    "backend/resources/prompts/prompt_security.md": "aa37fbc52dfb1593617d61145f42d1c37b31c24ad76aee03a16b61f76f40640c",
+    "backend/resources/prompts/system_customer_service.md": "24dde154a0106f06dbbe6e759536d1b676e081ad816697e68bda8c9196166949",
+    "backend/resources/prompts/rag_answering.md": "f68ba18907f89048a263fe2ae688c84428d06ce1ef7c475198391de96988966d"
+  }
+}

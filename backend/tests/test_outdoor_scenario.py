@@ -24,7 +24,7 @@ class OutdoorScenarioTest(unittest.TestCase):
             self.assertEqual(empty, [])
             self.assertEqual(empty_source, 'course_seed_mirror')
         result = promotion_policy_result('outdoor-policy-test', '露营季满减和山友会员券能否叠加？')
-        self.assertEqual({c.metadata['policy_id'] for c in result.citations}, {'promotion_618_stack_rule','member_coupon_gold_rule'})
+        self.assertEqual({c.metadata['policy_id'] for c in result.citations}, {'promotion_camping_season_stack_rule','member_coupon_gold_rule'})
         self.assertIn('山友会员', result.answer)
         unknown = promotion_policy_result('outdoor-unknown-test', '露营季有隐藏券吗？')
         self.assertEqual(unknown.citations, [])

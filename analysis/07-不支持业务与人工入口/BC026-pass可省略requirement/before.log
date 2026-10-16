@@ -1,0 +1,21 @@
+....F......................
+======================================================================
+FAIL: test_pass_may_omit_requirement_and_client_normalizes_it (test_answer_judge.JudgeClientTest.test_pass_may_omit_requirement_and_client_normalizes_it)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_judge.py", line 91, in test_pass_may_omit_requirement_and_client_normalizes_it
+    self.assertEqual((result.status, result.decision), ("success", "allow"))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Tuples differ: ('error', 'fallback') != ('success', 'allow')
+
+First differing element 0:
+'error'
+'success'
+
+- ('error', 'fallback')
++ ('success', 'allow')
+
+----------------------------------------------------------------------
+Ran 27 tests in 0.117s
+
+FAILED (failures=1)

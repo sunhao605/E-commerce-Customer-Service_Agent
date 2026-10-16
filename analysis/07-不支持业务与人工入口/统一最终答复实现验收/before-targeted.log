@@ -1,0 +1,54 @@
+test_natural_capability_answer_is_the_only_normal_reply (tests.test_service_capabilities.CapabilityAnswerTest.test_natural_capability_answer_is_the_only_normal_reply) ... 
+  test_natural_capability_answer_is_the_only_normal_reply (tests.test_service_capabilities.CapabilityAnswerTest.test_natural_capability_answer_is_the_only_normal_reply) (text='这款199元，无库存。暂时没有自动通知这项功能，可以稍后查库存。') ... FAIL
+  test_natural_capability_answer_is_the_only_normal_reply (tests.test_service_capabilities.CapabilityAnswerTest.test_natural_capability_answer_is_the_only_normal_reply) (text='这款199元，无库存。目前无法提供补货通知服务。') ... FAIL
+test_final_payload_has_one_capability_source_and_local_fallback (tests.test_service_capabilities.CapabilityAnswerTest.test_final_payload_has_one_capability_source_and_local_fallback) ... FAIL
+test_legacy_marker_is_rejected_instead_of_inserting_a_second_explanation (tests.test_service_capabilities.CapabilityAnswerTest.test_legacy_marker_is_rejected_instead_of_inserting_a_second_explanation) ... FAIL
+
+======================================================================
+FAIL: test_natural_capability_answer_is_the_only_normal_reply (tests.test_service_capabilities.CapabilityAnswerTest.test_natural_capability_answer_is_the_only_normal_reply) (text='这款199元，无库存。暂时没有自动通知这项功能，可以稍后查库存。')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_service_capabilities.py", line 182, in test_natural_capability_answer_is_the_only_normal_reply
+    self.assertEqual(response.answer, text)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '轻量露营折叠椅 商品标价 199 元，当前无库存。\n当前客服助手不支持到货或补货提醒。你可以稍后主动查询商品库存。' != '这款199元，无库存。暂时没有自动通知这项功能，可以稍后查库存。'
++ 这款199元，无库存。暂时没有自动通知这项功能，可以稍后查库存。
+- 轻量露营折叠椅 商品标价 199 元，当前无库存。
+- 当前客服助手不支持到货或补货提醒。你可以稍后主动查询商品库存。
+
+
+======================================================================
+FAIL: test_natural_capability_answer_is_the_only_normal_reply (tests.test_service_capabilities.CapabilityAnswerTest.test_natural_capability_answer_is_the_only_normal_reply) (text='这款199元，无库存。目前无法提供补货通知服务。')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_service_capabilities.py", line 182, in test_natural_capability_answer_is_the_only_normal_reply
+    self.assertEqual(response.answer, text)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '轻量露营折叠椅 商品标价 199 元，当前无库存。\n当前客服助手不支持到货或补货提醒。你可以稍后主动查询商品库存。' != '这款199元，无库存。目前无法提供补货通知服务。'
++ 这款199元，无库存。目前无法提供补货通知服务。
+- 轻量露营折叠椅 商品标价 199 元，当前无库存。
+- 当前客服助手不支持到货或补货提醒。你可以稍后主动查询商品库存。
+
+
+======================================================================
+FAIL: test_final_payload_has_one_capability_source_and_local_fallback (tests.test_service_capabilities.CapabilityAnswerTest.test_final_payload_has_one_capability_source_and_local_fallback)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_service_capabilities.py", line 205, in test_final_payload_has_one_capability_source_and_local_fallback
+    self.assertTrue(response.session_state["model"]["final_answer"]["used_model"])
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_legacy_marker_is_rejected_instead_of_inserting_a_second_explanation (tests.test_service_capabilities.CapabilityAnswerTest.test_legacy_marker_is_rejected_instead_of_inserting_a_second_explanation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_service_capabilities.py", line 213, in test_legacy_marker_is_rejected_instead_of_inserting_a_second_explanation
+    self.assertEqual(response.answer.count("不支持到货或补货提醒"), 1)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 2 != 1
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.019s
+
+FAILED (failures=4)

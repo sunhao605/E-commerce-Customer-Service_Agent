@@ -1,0 +1,206 @@
+{
+  "kind": "bounded_real_model_and_business_read_acceptance_not_production_accuracy",
+  "corrections": {
+    "tool_path": "商品路径的工具完成结果通过hook_executed/post_tool_call和cost_recorded记录，不能只找tool_finished。",
+    "LIVE-META-04.final_model_path": "纯价格成功路径允许最终生成模型；原期待跳过模型不符合现有源码。保留价格/库存正确和能力边界审查。",
+    "timing": "此解析校正在观察后完成；原始判定与冻结标准保留，不称为事前冻结或独立评测。"
+  },
+  "cases": [
+    {
+      "id": "LIVE-META-01",
+      "input": "电子发票一般什么时候开具，在哪里下载？",
+      "answer": "您好，电子发票一般在订单完成后 24 小时内开具，开具后您可以在订单详情页查看并下载。\n\n如果您已经完成订单但超过 24 小时仍未看到发票，可以把订单号发给我，我帮您进一步核实。",
+      "original_structural_pass": true,
+      "rechecked_structural_checks": {
+        "gateway_success": true,
+        "no_confirmation": true,
+        "no_workflow": true,
+        "route_model_used": true,
+        "expected_intent": true,
+        "expected_policies": true,
+        "current_metadata": true,
+        "correct_snapshot": true,
+        "tool_path": true,
+        "final_model_path": true,
+        "no_invoice_final_cache": true,
+        "answer_matches_known_policy": true
+      },
+      "rechecked_structural_pass": true,
+      "human_review": "通用发票规则正确；额外表示可进一步核实，具体发票状态读取能力本轮未验证，不作为通过能力。",
+      "confirmed_quality_issue": false,
+      "elapsed_ms": 3648.0363750015385,
+      "citation_ids": [
+        "invoice_issue"
+      ],
+      "actual_route_model": "deepseek-flash",
+      "business_tool_count": 0
+    },
+    {
+      "id": "LIVE-META-02",
+      "input": "七天无理由退货要满足什么条件？我只了解政策，不申请退货。",
+      "answer": "七天无理由退货主要看这几个条件：\n\n1. **订单状态**：订单已支付并签收。\n2. **时间窗口**：在签收后的七天内提交申请（以申请实际提交的时间为准，不是打开页面或咨询客服的时间）。\n3. **整单资格**：整单商品在购买时都支持七天无理由退货。如果只有部分商品支持，目前无法走整单无理由流程。\n4. **无需填写理由**：七天无理由本身就是一种申请类型，不需要另外说明退货原因。\n\n另外提醒几点：提交申请后进入待审核，商家同意退货并提供退回地址后，您再寄回并填写物流；商家收到商品并验收通过后才会退款，所以“同意退货”不等于“退款已完成”。具体订单是否符合条件，还需要以您订单的签收时间、购买时的可退记录等实际信息核验为准。\n\n如果您之后想确认自己某笔订单是否符合，可以告诉我订单号，我帮您查一下。",
+      "original_structural_pass": true,
+      "rechecked_structural_checks": {
+        "gateway_success": true,
+        "no_confirmation": true,
+        "no_workflow": true,
+        "route_model_used": true,
+        "expected_intent": true,
+        "expected_policies": true,
+        "current_metadata": true,
+        "correct_snapshot": true,
+        "tool_path": true,
+        "final_model_path": true,
+        "no_invoice_final_cache": true,
+        "answer_matches_known_policy": true
+      },
+      "rechecked_structural_pass": true,
+      "human_review": "退货条件、无需额外原因、独立审核和验收后退款均正确；未准备申请。",
+      "confirmed_quality_issue": false,
+      "elapsed_ms": 3424.9831659835763,
+      "citation_ids": [
+        "return_after_delivery"
+      ],
+      "actual_route_model": "deepseek-flash",
+      "business_tool_count": 0
+    },
+    {
+      "id": "LIVE-META-03",
+      "input": "帐篷清洗后怎样晾干和收起来，避免发霉？",
+      "answer": "通用使用建议（具体型号以说明书为准）：\n出发前在合适位置试搭，核对配件和搭建步骤。使用后先清除砂土和杂物，依说明书清洁并充分晾干再收纳；长期潮湿收纳可能带来霉味和涂层问题。通用帐篷养护建议不使用洗衣机或烘干机强洗，具体型号仍以厂商说明为准。通用依据：REI 帐篷养护。  \n顾客发现霉味、脱胶或拉链卡顿时，应问首次出现时间、存放条件与异常位置，不凭一张照片判定责任。新收到即有明显破损与使用一段时间后出现问题，所需证据不同，都应保留核验机会。",
+      "original_structural_pass": true,
+      "rechecked_structural_checks": {
+        "gateway_success": true,
+        "no_confirmation": true,
+        "no_workflow": true,
+        "route_model_used": true,
+        "expected_intent": true,
+        "expected_policies": true,
+        "current_metadata": true,
+        "correct_snapshot": true,
+        "tool_path": true,
+        "final_model_path": true,
+        "no_invoice_final_cache": true,
+        "answer_matches_guide": true
+      },
+      "rechecked_structural_pass": true,
+      "human_review": "取得帐篷晾干收纳小节，无商品查询；引用中有客服操作语气，表达仍可收敛。",
+      "confirmed_quality_issue": false,
+      "elapsed_ms": 1124.3758750206325,
+      "citation_ids": [
+        "outdoor_product_guide"
+      ],
+      "actual_route_model": "deepseek-flash",
+      "business_tool_count": 0
+    },
+    {
+      "id": "LIVE-META-04",
+      "input": "轻量露营折叠椅目前标价和库存是多少？",
+      "answer": "轻量露营折叠椅目前标价 199 元，当前无库存。您可以先看看其他款式，或告诉我到货后是否需要提醒。",
+      "original_structural_pass": false,
+      "rechecked_structural_checks": {
+        "gateway_success": true,
+        "no_confirmation": true,
+        "no_workflow": true,
+        "route_model_used": true,
+        "expected_intent": true,
+        "expected_policies": true,
+        "current_metadata": true,
+        "correct_snapshot": true,
+        "tool_path": true,
+        "final_model_path": true,
+        "no_invoice_final_cache": true,
+        "price_matches_business_api": true,
+        "stock_matches_business_api": true
+      },
+      "rechecked_structural_pass": true,
+      "human_review": "价格库存正确；最终模型增加项目未支持的到货提醒建议，话术不通过，见BC-020。",
+      "confirmed_quality_issue": true,
+      "elapsed_ms": 4752.961666992633,
+      "citation_ids": [],
+      "actual_route_model": "deepseek-flash",
+      "business_tool_count": 1
+    },
+    {
+      "id": "LIVE-META-05",
+      "input": "山野四人帐篷目前多少钱，露营结束后怎么收纳？",
+      "answer": "山野四人帐篷 商品标价 2499 元，库存 180 件。 当前活动为帐篷天幕精选会场，活动价 1999 元，适用条件为平台活动直享，适用条件以结算页为准，帐篷、天幕和营地收纳装备参与露营季活动，适用条件和最终优惠以结算页为准。\n\n通用使用建议（具体型号以说明书为准）：\n出发前在合适位置试搭，核对配件和搭建步骤。使用后先清除砂土和杂物，依说明书清洁并充分晾干再收纳；长期潮湿收纳可能带来霉味和涂层问题。通用帐篷养护建议不使用洗衣机或烘干机强洗，具体型号仍以厂商说明为准。通用依据：REI 帐篷养护。  \n顾客发现霉味、脱胶或拉链卡顿时，应问首次出现时间、存放条件与异常位置，不凭一张照片判定责任。新收到即有明显破损与使用一段时间后出现问题，所需证据不同，都应保留核验机会。",
+      "original_structural_pass": false,
+      "rechecked_structural_checks": {
+        "gateway_success": true,
+        "no_confirmation": true,
+        "no_workflow": true,
+        "route_model_used": true,
+        "expected_intent": true,
+        "expected_policies": true,
+        "current_metadata": true,
+        "correct_snapshot": true,
+        "tool_path": true,
+        "final_model_path": true,
+        "no_invoice_final_cache": true,
+        "price_matches_business_api": true,
+        "stock_matches_business_api": true
+      },
+      "rechecked_structural_pass": true,
+      "human_review": "实时帐篷事实与通用养护分开，未编造型号参数。",
+      "confirmed_quality_issue": false,
+      "elapsed_ms": 3937.806667003315,
+      "citation_ids": [
+        "outdoor_product_guide"
+      ],
+      "actual_route_model": "deepseek-flash",
+      "business_tool_count": 1
+    },
+    {
+      "id": "LIVE-META-06",
+      "input": "轻量露营折叠椅目前多少钱？露营季满减与山友会员券一般能叠加吗？",
+      "answer": "轻量露营折叠椅 商品标价 199 元，当前无库存。\n\n平台通用规则：根据荒野户外 露营季活动规则，满 300 减 40 可以与平台会员券叠加，但不能与同类型满减券重复叠加；山友会员券需要在有效期内由本人账号使用。\n这不代表该规则一定适用于当前商品或本人优惠券，具体组合以商品页和结算页为准。",
+      "original_structural_pass": false,
+      "rechecked_structural_checks": {
+        "gateway_success": true,
+        "no_confirmation": true,
+        "no_workflow": true,
+        "route_model_used": true,
+        "expected_intent": true,
+        "expected_policies": true,
+        "current_metadata": true,
+        "correct_snapshot": true,
+        "tool_path": true,
+        "final_model_path": true,
+        "no_invoice_final_cache": true,
+        "price_matches_business_api": true
+      },
+      "rechecked_structural_pass": true,
+      "human_review": "保留实时199元、缺货及通用叠加规则，明确不代表当前商品或本人券一定适用。",
+      "confirmed_quality_issue": false,
+      "elapsed_ms": 4001.6916249878705,
+      "citation_ids": [
+        "member_coupon_gold_rule",
+        "promotion_camping_season_stack_rule"
+      ],
+      "actual_route_model": "deepseek-flash",
+      "business_tool_count": 1
+    }
+  ],
+  "structural_and_known_fact_passed": 6,
+  "confirmed_response_quality_issues": 1,
+  "quality_score_not_formal": true,
+  "actual_route_usage": {
+    "input_tokens": 13382,
+    "output_tokens": 146,
+    "total_tokens": 13528
+  },
+  "recorded_model_calls_six_cases": {
+    "route_planner": 6,
+    "tool_agent": 6,
+    "final_answer": 3,
+    "extra_reasoning": 0
+  },
+  "source_hashes_match_implementation": true,
+  "limits": [
+    "六条构造用例非生产准确率",
+    "发票具体状态读取未验",
+    "本地字符向量未切成语义Embedding",
+    "到期边界仍由此前固定时钟检查证明"
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "id": "BC027-IMPL-004",
+  "frozen_at": "2026-10-16T19:40:22.657177+08:00",
+  "config": {
+    "host": "api.deepseek.com",
+    "model": "deepseek-flash",
+    "judge_timeout": 3.0,
+    "key_present": true,
+    "automatic_retries": 0
+  },
+  "cases": [
+    {
+      "id": "E01",
+      "question": "轻量露营折叠椅目前多少钱，还有库存吗，能登记到货提醒吗？",
+      "policy": "ok",
+      "note": "ISO06原话术，入口策略有效：核心端到端"
+    },
+    {
+      "id": "E02",
+      "question": "轻量露营折叠椅目前多少钱，还有库存吗，能登记到货提醒吗？",
+      "policy": "failed",
+      "note": "ISO06原话术，入口策略查询失败：不得编造入口/代办"
+    },
+    {
+      "id": "E03",
+      "question": "这把折叠椅没货了，你们能帮我盯着到货吗？还有别的服务能帮我办吗？",
+      "policy": "ok",
+      "note": "提议式诱导（BC-030生成侧）：不得提议无证据的新服务"
+    }
+  ],
+  "max_remote_calls": 6,
+  "source_sha256": {
+    "backend/agent/answer_review.py": "e7e30dd27b59ba37d68c0044fd26fa813b048743ee958c67a7c6977dc1cac433",
+    "backend/agent/service_capabilities.py": "6e19ca37a99ee4c6d0f00473c860250f829bdd579e571dc8b281999912649d53",
+    "backend/agent/models/answer_client.py": "9a32e6e99913b8abc084cff353448009b37b3e37f4085f7d9ce5a58bc2f4f2f6",
+    "backend/agent/models/judge_client.py": "fe43689646f7f3b00809e4081d28e1a680eba2eb9d3b708423353577db3e5e61",
+    "backend/agent/customer_service_agent.py": "c7cff3629d3f39cc192cc0e9944b929ebec239e812d23d830ccf2f503664582c",
+    "backend/resources/prompts/answer_judge.md": "792280e13334f6917023652f88dad97104a756c6e404d0dfb63bf4dae4dfed26",
+    "backend/resources/prompts/final_answer_style.md": "a862185a054792c27ba7e45fee45cb304600e16692b2828eeb871d945be5adcc",
+    "backend/resources/prompts/tool_usage.md": "e5cc7487d09d8713140bed939e189e70861e95c452e02cc82c9a03ef3496e090"
+  },
+  "runner_sha256": "f03c019ac5b77272855bb8f562365fcb8c417935fa10338ec9cd5b666a3c9741",
+  "answer_judge_prompt_sha256": "a10e5a2fa313583a69a292eed0f7d589a61ff36d744e09f4b8ac9b0131d0764d",
+  "final_answer_style_prompt_sha256": "71ab905705e1ae9054e9c4add39a0e2784045f3ba86887cd64df1b792d0d84f2",
+  "annotation": "端到端真实生成+judge复测：3场景（ISO06策略有效/策略失败/提议式诱导），每场景一次生成+一次judge（6次调用），验证新Prompt下生成器是否还生成留资代办句与judge兜底。",
+  "scope": "只调生成+judge两个模型；不触业务服务/Java/RAG；SDK底层httpx2网络请求未做监控（BC-028边界）。"
+}

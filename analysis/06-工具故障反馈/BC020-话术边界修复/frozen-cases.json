@@ -1,0 +1,41 @@
+{
+  "date": "2026-10-14",
+  "source": "当前真实API读数作为事实标准；API调用前冻结相邻问法",
+  "forbidden": [
+    "到货提醒或补货监控承诺",
+    "最终模型自由改写商品事实",
+    "业务写入"
+  ],
+  "cases": [
+    {
+      "id": "BC20-01",
+      "message": "轻量露营折叠椅目前标价和库存是多少？",
+      "target": "轻量露营折叠椅",
+      "reminder_requested": false
+    },
+    {
+      "id": "BC20-02",
+      "message": "山野四人帐篷目前多少钱，还有货吗？",
+      "target": "山野四人帐篷",
+      "reminder_requested": false
+    },
+    {
+      "id": "BC20-03",
+      "message": "山野四人帐篷，请推荐并说明目前价格库存。",
+      "target": "山野四人帐篷",
+      "reminder_requested": false
+    },
+    {
+      "id": "BC20-04",
+      "message": "轻量露营折叠椅有货后提醒我，先告诉我价格库存。",
+      "target": "轻量露营折叠椅",
+      "reminder_requested": true
+    },
+    {
+      "id": "BC20-05",
+      "message": "轻量露营折叠椅多少钱？不要到货提醒。",
+      "target": "轻量露营折叠椅",
+      "reminder_requested": false
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+test_known_pure_capability_overrides_unknown_without_reasking (tests.test_service_capabilities.CapabilityAnswerTest.test_known_pure_capability_overrides_unknown_without_reasking) ... FAIL
+test_pure_capability_does_not_collect_unrelated_policy (tests.test_service_capabilities.CapabilityAnswerTest.test_pure_capability_does_not_collect_unrelated_policy) ... ERROR
+test_final_model_receives_capability_evidence_before_composing (tests.test_service_capabilities.CapabilityAnswerTest.test_final_model_receives_capability_evidence_before_composing) ... FAIL
+test_invalid_capability_references_replace_whole_reply_with_trusted_fallback (tests.test_service_capabilities.CapabilityAnswerTest.test_invalid_capability_references_replace_whole_reply_with_trusted_fallback) ... 
+  test_invalid_capability_references_replace_whole_reply_with_trusted_fallback (tests.test_service_capabilities.CapabilityAnswerTest.test_invalid_capability_references_replace_whole_reply_with_trusted_fallback) (text='错误模型只答999元。') ... FAIL
+  test_invalid_capability_references_replace_whole_reply_with_trusted_fallback (tests.test_service_capabilities.CapabilityAnswerTest.test_invalid_capability_references_replace_whole_reply_with_trusted_fallback) (text='错误模型999元。[[capability:stock_notification]][[capability:stock_notification]]') ... FAIL
+  test_invalid_capability_references_replace_whole_reply_with_trusted_fallback (tests.test_service_capabilities.CapabilityAnswerTest.test_invalid_capability_references_replace_whole_reply_with_trusted_fallback) (text='错误模型999元。[[capability:stock_notification]][[capability:human_takeover]]') ... FAIL
+
+======================================================================
+ERROR: test_pure_capability_does_not_collect_unrelated_policy (tests.test_service_capabilities.CapabilityAnswerTest.test_pure_capability_does_not_collect_unrelated_policy)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_service_capabilities.py", line 161, in test_pure_capability_does_not_collect_unrelated_policy
+    response = self.chat("支持退款吗？", session_id="bc022-refund")
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_service_capabilities.py", line 136, in chat
+    return self.agent.chat(ChatRequest(session_id=session_id, runtime_user_id="U1001", user_message=text))
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/agent/customer_service_agent.py", line 82, in chat
+    return self._chat(request)
+           ~~~~~~~~~~^^^^^^^^^
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/agent/customer_service_agent.py", line 786, in _chat
+    model_answer = self._compose_final_answer(
+        request=request,
+    ...<17 lines>...
+        context_report=context_report,
+    )
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/agent/customer_service_agent.py", line 1360, in _compose_final_answer
+    if promises_unsupported_stock_watch(result.answer):
+       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/agent/product_query.py", line 69, in promises_unsupported_stock_watch
+    return any(_claims_unperformed_action(sentence) for sentence in _customer_sentences(text))
+                                                                    ~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/agent/product_query.py", line 58, in _customer_sentences
+    return [piece for piece in _SENTENCE.findall(text or "") if piece.strip()]
+                               ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+TypeError: expected string or bytes-like object, got 'MagicMock'
+
+======================================================================
+FAIL: test_known_pure_capability_overrides_unknown_without_reasking (tests.test_service_capabilities.CapabilityAnswerTest.test_known_pure_capability_overrides_unknown_without_reasking)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_service_capabilities.py", line 150, in test_known_pure_capability_overrides_unknown_without_reasking
+    self.assertEqual(response.answer, capability_answer_text(catalog_payload("stock_notification")))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '我还不知道你要办哪一件事。如果是订单物流、商品、活动规则或售后，请直接说具体需求。\n当前客服助手不支持到货或补货提醒。你可以稍后主动查询商品库存。' != '当前客服助手不支持到货或补货提醒。你可以稍后主动查询商品库存。'
+- 我还不知道你要办哪一件事。如果是订单物流、商品、活动规则或售后，请直接说具体需求。
+  当前客服助手不支持到货或补货提醒。你可以稍后主动查询商品库存。
+
+
+======================================================================
+FAIL: test_final_model_receives_capability_evidence_before_composing (tests.test_service_capabilities.CapabilityAnswerTest.test_final_model_receives_capability_evidence_before_composing)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_service_capabilities.py", line 184, in test_final_model_receives_capability_evidence_before_composing
+    self.assertTrue(response.answer.startswith("这款轻量露营折叠椅售价199元"))
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_invalid_capability_references_replace_whole_reply_with_trusted_fallback (tests.test_service_capabilities.CapabilityAnswerTest.test_invalid_capability_references_replace_whole_reply_with_trusted_fallback) (text='错误模型只答999元。')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_service_capabilities.py", line 196, in test_invalid_capability_references_replace_whole_reply_with_trusted_fallback
+    self.assertIn("199", response.answer)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '199' not found in '错误模型只答999元。\n当前客服助手不支持到货或补货提醒。你可以稍后主动查询商品库存。'
+
+======================================================================
+FAIL: test_invalid_capability_references_replace_whole_reply_with_trusted_fallback (tests.test_service_capabilities.CapabilityAnswerTest.test_invalid_capability_references_replace_whole_reply_with_trusted_fallback) (text='错误模型999元。[[capability:stock_notification]][[capability:stock_notification]]')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_service_capabilities.py", line 196, in test_invalid_capability_references_replace_whole_reply_with_trusted_fallback
+    self.assertIn("199", response.answer)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '199' not found in '错误模型999元。[[capability:stock_notification]][[capability:stock_notification]]\n当前客服助手不支持到货或补货提醒。你可以稍后主动查询商品库存。'
+
+======================================================================
+FAIL: test_invalid_capability_references_replace_whole_reply_with_trusted_fallback (tests.test_service_capabilities.CapabilityAnswerTest.test_invalid_capability_references_replace_whole_reply_with_trusted_fallback) (text='错误模型999元。[[capability:stock_notification]][[capability:human_takeover]]')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_service_capabilities.py", line 196, in test_invalid_capability_references_replace_whole_reply_with_trusted_fallback
+    self.assertIn("199", response.answer)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '199' not found in '错误模型999元。[[capability:stock_notification]][[capability:human_takeover]]\n当前客服助手不支持到货或补货提醒。你可以稍后主动查询商品库存。'
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.019s
+
+FAILED (failures=5, errors=1)

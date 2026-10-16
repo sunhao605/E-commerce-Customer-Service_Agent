@@ -1,0 +1,25 @@
+test_scope_consultation_preserves_product_selection (tests.test_service_capabilities.CapabilityAnswerTest.test_scope_consultation_preserves_product_selection) ... FAIL
+test_scope_consultation_preserves_pending_policy_question (tests.test_service_capabilities.CapabilityAnswerTest.test_scope_consultation_preserves_pending_policy_question) ... ERROR
+
+======================================================================
+ERROR: test_scope_consultation_preserves_pending_policy_question (tests.test_service_capabilities.CapabilityAnswerTest.test_scope_consultation_preserves_pending_policy_question)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_service_capabilities.py", line 262, in test_scope_consultation_preserves_pending_policy_question
+    before = dict(current_memory("scope-policy-pending", "U1001")["promotion_query"])
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+KeyError: 'promotion_query'
+
+======================================================================
+FAIL: test_scope_consultation_preserves_product_selection (tests.test_service_capabilities.CapabilityAnswerTest.test_scope_consultation_preserves_product_selection)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_service_capabilities.py", line 257, in test_scope_consultation_preserves_product_selection
+    self.assertEqual(after["pending_candidates"], before["pending_candidates"])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: None != [{'id': '4', 'name': '轻量露营折叠椅'}, {'id': '5', 'name': '加宽露营折叠椅'}]
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.036s
+
+FAILED (failures=1, errors=1)

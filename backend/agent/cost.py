@@ -112,7 +112,7 @@ def build_cost_summary(
         },
         "cache": {
             "common_hit_cache": cache_hit,
-            "cache_key": "faq:invoice_issue" if "发票" in request.user_message else None,
+            "cache_key": "faq:invoice_issue" if cache_hit else None,
             "does_not_cache_high_risk_workflow": True,
         },
         "observation_compression": compressed,

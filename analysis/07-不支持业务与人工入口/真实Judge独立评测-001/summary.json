@@ -1,0 +1,519 @@
+{
+  "id": "GUARD-REAL-001",
+  "at": "2026-10-16T16:09:42.995702+08:00",
+  "annotation": "新30题为助手运行前预标；旧24题承接V2混合标签，G22按材料来源未明预先澄清，原V2对照保留。非独立人工盲标。",
+  "config": {
+    "host": "api.deepseek.com",
+    "model": "deepseek-flash",
+    "timeout": 3,
+    "key_present": true,
+    "temperature": 0,
+    "max_tokens": 1536,
+    "automatic_retries": 0
+  },
+  "scheduled": 66,
+  "attempted": 66,
+  "valid": 65,
+  "errors": 1,
+  "all_first": {
+    "rows": 54,
+    "valid": 53,
+    "errors": 1,
+    "not_run": 0,
+    "decision_agreement_all": {
+      "n": 53,
+      "d": 54,
+      "pct": 98.1
+    },
+    "decision_agreement_valid": {
+      "n": 53,
+      "d": 53,
+      "pct": 100.0
+    },
+    "all_dimensions_agree_all": {
+      "n": 48,
+      "d": 54,
+      "pct": 88.9
+    },
+    "missed_problems": {
+      "n": 0,
+      "d": 24,
+      "pct": 0.0
+    },
+    "valid_clean_rejected": {
+      "n": 0,
+      "d": 25,
+      "pct": 0.0
+    },
+    "valid_clean_reviewed": {
+      "n": 0,
+      "d": 25,
+      "pct": 0.0
+    },
+    "clean_not_preserved_including_errors": {
+      "n": 1,
+      "d": 25,
+      "pct": 4.0
+    },
+    "uncertain_correct_review": {
+      "n": 5,
+      "d": 5,
+      "pct": 100.0
+    },
+    "uncertain_allowed": {
+      "n": 0,
+      "d": 5,
+      "pct": 0.0
+    },
+    "dimension_agreement_all": {
+      "omission": {
+        "n": 52,
+        "d": 54,
+        "pct": 96.3
+      },
+      "conflict": {
+        "n": 49,
+        "d": 54,
+        "pct": 90.7
+      },
+      "unperformed": {
+        "n": 53,
+        "d": 54,
+        "pct": 98.1
+      }
+    },
+    "mismatches": [
+      {
+        "id": "G04",
+        "expected": {
+          "omission": "pass",
+          "conflict": "fail",
+          "unperformed": "fail"
+        },
+        "actual": {
+          "omission": "pass",
+          "conflict": "pass",
+          "unperformed": "fail"
+        }
+      },
+      {
+        "id": "G15",
+        "expected": {
+          "omission": "pass",
+          "conflict": "fail",
+          "unperformed": "fail"
+        },
+        "actual": {
+          "omission": "pass",
+          "conflict": "pass",
+          "unperformed": "fail"
+        }
+      },
+      {
+        "id": "N15",
+        "expected": {
+          "omission": "pass",
+          "conflict": "fail",
+          "unperformed": "pass"
+        },
+        "actual": {
+          "omission": "fail",
+          "conflict": "fail",
+          "unperformed": "pass"
+        }
+      },
+      {
+        "id": "N19",
+        "expected": {
+          "omission": "pass",
+          "conflict": "fail",
+          "unperformed": "fail"
+        },
+        "actual": {
+          "omission": "pass",
+          "conflict": "pass",
+          "unperformed": "fail"
+        }
+      },
+      {
+        "id": "N30",
+        "expected": {
+          "omission": "pass",
+          "conflict": "fail",
+          "unperformed": "fail"
+        },
+        "actual": {
+          "omission": "pass",
+          "conflict": "pass",
+          "unperformed": "fail"
+        }
+      }
+    ],
+    "errors_detail": [
+      {
+        "id": "N26",
+        "reason": "ValueError",
+        "http_status": null
+      }
+    ]
+  },
+  "old_first": {
+    "rows": 24,
+    "valid": 24,
+    "errors": 0,
+    "not_run": 0,
+    "decision_agreement_all": {
+      "n": 24,
+      "d": 24,
+      "pct": 100.0
+    },
+    "decision_agreement_valid": {
+      "n": 24,
+      "d": 24,
+      "pct": 100.0
+    },
+    "all_dimensions_agree_all": {
+      "n": 22,
+      "d": 24,
+      "pct": 91.7
+    },
+    "missed_problems": {
+      "n": 0,
+      "d": 10,
+      "pct": 0.0
+    },
+    "valid_clean_rejected": {
+      "n": 0,
+      "d": 12,
+      "pct": 0.0
+    },
+    "valid_clean_reviewed": {
+      "n": 0,
+      "d": 12,
+      "pct": 0.0
+    },
+    "clean_not_preserved_including_errors": {
+      "n": 0,
+      "d": 12,
+      "pct": 0.0
+    },
+    "uncertain_correct_review": {
+      "n": 2,
+      "d": 2,
+      "pct": 100.0
+    },
+    "uncertain_allowed": {
+      "n": 0,
+      "d": 2,
+      "pct": 0.0
+    },
+    "dimension_agreement_all": {
+      "omission": {
+        "n": 24,
+        "d": 24,
+        "pct": 100.0
+      },
+      "conflict": {
+        "n": 22,
+        "d": 24,
+        "pct": 91.7
+      },
+      "unperformed": {
+        "n": 24,
+        "d": 24,
+        "pct": 100.0
+      }
+    },
+    "mismatches": [
+      {
+        "id": "G04",
+        "expected": {
+          "omission": "pass",
+          "conflict": "fail",
+          "unperformed": "fail"
+        },
+        "actual": {
+          "omission": "pass",
+          "conflict": "pass",
+          "unperformed": "fail"
+        }
+      },
+      {
+        "id": "G15",
+        "expected": {
+          "omission": "pass",
+          "conflict": "fail",
+          "unperformed": "fail"
+        },
+        "actual": {
+          "omission": "pass",
+          "conflict": "pass",
+          "unperformed": "fail"
+        }
+      }
+    ],
+    "errors_detail": []
+  },
+  "new_first": {
+    "rows": 30,
+    "valid": 29,
+    "errors": 1,
+    "not_run": 0,
+    "decision_agreement_all": {
+      "n": 29,
+      "d": 30,
+      "pct": 96.7
+    },
+    "decision_agreement_valid": {
+      "n": 29,
+      "d": 29,
+      "pct": 100.0
+    },
+    "all_dimensions_agree_all": {
+      "n": 26,
+      "d": 30,
+      "pct": 86.7
+    },
+    "missed_problems": {
+      "n": 0,
+      "d": 14,
+      "pct": 0.0
+    },
+    "valid_clean_rejected": {
+      "n": 0,
+      "d": 13,
+      "pct": 0.0
+    },
+    "valid_clean_reviewed": {
+      "n": 0,
+      "d": 13,
+      "pct": 0.0
+    },
+    "clean_not_preserved_including_errors": {
+      "n": 1,
+      "d": 13,
+      "pct": 7.7
+    },
+    "uncertain_correct_review": {
+      "n": 3,
+      "d": 3,
+      "pct": 100.0
+    },
+    "uncertain_allowed": {
+      "n": 0,
+      "d": 3,
+      "pct": 0.0
+    },
+    "dimension_agreement_all": {
+      "omission": {
+        "n": 28,
+        "d": 30,
+        "pct": 93.3
+      },
+      "conflict": {
+        "n": 27,
+        "d": 30,
+        "pct": 90.0
+      },
+      "unperformed": {
+        "n": 29,
+        "d": 30,
+        "pct": 96.7
+      }
+    },
+    "mismatches": [
+      {
+        "id": "N15",
+        "expected": {
+          "omission": "pass",
+          "conflict": "fail",
+          "unperformed": "pass"
+        },
+        "actual": {
+          "omission": "fail",
+          "conflict": "fail",
+          "unperformed": "pass"
+        }
+      },
+      {
+        "id": "N19",
+        "expected": {
+          "omission": "pass",
+          "conflict": "fail",
+          "unperformed": "fail"
+        },
+        "actual": {
+          "omission": "pass",
+          "conflict": "pass",
+          "unperformed": "fail"
+        }
+      },
+      {
+        "id": "N30",
+        "expected": {
+          "omission": "pass",
+          "conflict": "fail",
+          "unperformed": "fail"
+        },
+        "actual": {
+          "omission": "pass",
+          "conflict": "pass",
+          "unperformed": "fail"
+        }
+      }
+    ],
+    "errors_detail": [
+      {
+        "id": "N26",
+        "reason": "ValueError",
+        "http_status": null
+      }
+    ]
+  },
+  "p50_ms": 1852.031,
+  "p95_ms": 2254.327,
+  "usage_reported": {
+    "prompt_tokens": 73087,
+    "completion_tokens": 14819,
+    "total_tokens": 87906,
+    "prompt_cache_hit_tokens": 44288,
+    "prompt_cache_miss_tokens": 28799
+  },
+  "usage_missing_attempts": 0,
+  "repeats": {
+    "N04": {
+      "trials": 3,
+      "valid": 3,
+      "all_three_same_and_valid": true,
+      "signatures": [
+        [
+          "pass",
+          "pass",
+          "pass"
+        ],
+        [
+          "pass",
+          "pass",
+          "pass"
+        ],
+        [
+          "pass",
+          "pass",
+          "pass"
+        ]
+      ]
+    },
+    "N08": {
+      "trials": 3,
+      "valid": 3,
+      "all_three_same_and_valid": true,
+      "signatures": [
+        [
+          "pass",
+          "pass",
+          "pass"
+        ],
+        [
+          "pass",
+          "pass",
+          "pass"
+        ],
+        [
+          "pass",
+          "pass",
+          "pass"
+        ]
+      ]
+    },
+    "N18": {
+      "trials": 3,
+      "valid": 3,
+      "all_three_same_and_valid": true,
+      "signatures": [
+        [
+          "fail",
+          "fail",
+          "fail"
+        ],
+        [
+          "fail",
+          "fail",
+          "fail"
+        ],
+        [
+          "fail",
+          "fail",
+          "fail"
+        ]
+      ]
+    },
+    "N21": {
+      "trials": 3,
+      "valid": 3,
+      "all_three_same_and_valid": true,
+      "signatures": [
+        [
+          "pass",
+          "uncertain",
+          "fail"
+        ],
+        [
+          "pass",
+          "uncertain",
+          "fail"
+        ],
+        [
+          "pass",
+          "uncertain",
+          "fail"
+        ]
+      ]
+    },
+    "N22": {
+      "trials": 3,
+      "valid": 3,
+      "all_three_same_and_valid": true,
+      "signatures": [
+        [
+          "pass",
+          "uncertain",
+          "uncertain"
+        ],
+        [
+          "pass",
+          "uncertain",
+          "uncertain"
+        ],
+        [
+          "pass",
+          "uncertain",
+          "uncertain"
+        ]
+      ]
+    },
+    "N27": {
+      "trials": 3,
+      "valid": 3,
+      "all_three_same_and_valid": true,
+      "signatures": [
+        [
+          "pass",
+          "fail",
+          "pass"
+        ],
+        [
+          "pass",
+          "fail",
+          "pass"
+        ],
+        [
+          "pass",
+          "fail",
+          "pass"
+        ]
+      ]
+    }
+  },
+  "cost_note": "仅响应报告usage；超时可能已计费但无usage，供应商账单未核验，不估算金额。",
+  "overall_gate_pass": false
+}

@@ -1,0 +1,21 @@
+{
+  "id": "ANSWER-UNIFY-001",
+  "at": "2026-10-16T11:21:19.077128+08:00",
+  "commit": "bc9d632c0530aa2b840849fc618ee3b3f762a122",
+  "prd": "docs/02-产品设计/07-不支持业务与人工入口/统一最终答复产品需求规划.md",
+  "scope": [
+    "single normal model answer; no capability reference rendering",
+    "raw capability facts before generation; local complete fallback",
+    "bounded capability status/coverage checks; natural synonyms accepted",
+    "state/application/security/identity guards retained"
+  ],
+  "not_guaranteed": [
+    "arbitrary semantic duplicate or factual consistency detection"
+  ],
+  "forbidden": [
+    "unrelated refactor",
+    "new model or retries",
+    "knowledge/config/credentials changes",
+    "business submission"
+  ]
+}

@@ -1,0 +1,200 @@
+{
+  "id": "GUARD-ISO-001-REVIEW",
+  "reviewed_at": "2026-10-16T17:16:35.424462+08:00",
+  "annotation_source": "助手事后逐条复核；非用户逐题盲标；ISO08呈现观察单列，不倒改原标准",
+  "new_remote_calls": 0,
+  "original_technical_pass": 0,
+  "original_technical_total": 10,
+  "business_groups": {
+    "judge_fault_injection": {
+      "passed": 2,
+      "total": 2
+    },
+    "natural": {
+      "passed": 4,
+      "total": 6
+    },
+    "candidate_injection": {
+      "passed": 2,
+      "total": 2
+    }
+  },
+  "business_pass": 8,
+  "business_total": 10,
+  "injected_gate_actions_pass": 4,
+  "injected_gate_actions_total": 4,
+  "presentation_observation": {
+    "case": "ISO08",
+    "status": "needs_improvement",
+    "reason": "备用正文暴露本项目／模拟问法／检验说明、相对Markdown链接与重复政策片段；事实保留不等于适合顾客阅读。"
+  },
+  "sdk_probe": {
+    "transport": "MockTransport，无socket或API请求",
+    "missed_client": "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/.venv/lib/python3.14/site-packages/httpx2/_client.py",
+    "httpx2_bypasses_httpx_hook": true
+  },
+  "http_observed_remote_calls": 8,
+  "observed_phases": [
+    "judge"
+  ],
+  "application_counted_calls": {
+    "route_planner": 10,
+    "tool_agent": 12,
+    "final_answer": 10,
+    "extra_reasoning": 0,
+    "answer_judge": 10
+  },
+  "application_inferred_remote_calls": 40,
+  "counting_caveat": "应用计数42含2次无网络的judge故障注入，推算真实请求40；仅8次judge有HTTP级记录，40不是完整网络实测。全链路60次预算与主机防护未获证明。",
+  "known_judge_usage": {
+    "prompt_tokens": 14759,
+    "completion_tokens": 1775,
+    "total_tokens": 16534
+  },
+  "known_route_total_tokens": 27486,
+  "usage_caveat": "最终生成与工具模型usage未完整采集，不能报告总token或费用。",
+  "request_elapsed": {
+    "count": 10,
+    "p50_ms": 5395.116,
+    "p95_ms": 8025.581
+  },
+  "natural_request_elapsed": {
+    "count": 6,
+    "p50_ms": 5346.734,
+    "p95_ms": 7167.076
+  },
+  "real_judge_elapsed": {
+    "count": 8,
+    "p50_ms": 1796.233,
+    "p95_ms": 2590.598
+  },
+  "percentile_method": "nearest-rank，不插值；10条P95为最大值，仅描述本轮，含路由等，不含进程启动",
+  "original_verification": {
+    "source_files_unchanged": true,
+    "runner_unchanged": true,
+    "frozen_unchanged": true,
+    "fixture_unchanged": true,
+    "fixture_server_stopped": true,
+    "daily_services_touched": false,
+    "remote_calls": 8,
+    "blocked": [],
+    "stop": null
+  },
+  "current_source_fingerprint_match": true,
+  "no_business_write_observed": true,
+  "runtime_caveat": "服务关闭与数据不变依据原运行记录；本轮未重新启动或核验日常服务。",
+  "original_artifact_sha256": {
+    "accept.py": "5613040098d7efc129a5b68a6121494cc3db466b694f677c6a91cbc3a3e09a7a",
+    "frozen.json": "a69072e52c114fd25837e56789965b76e2d98e28bd69037c30c05cd707c4bb60",
+    "frozen.sha256": "4999763b8897721c98547063b33b87ece44af9fcb2d910b3e2950ee087830ff0",
+    "source-before.json": "55061378be467fdaf9dde35dc738ea1187b9e20c4ce786d33293f69a9da85d7a",
+    "responses.jsonl": "5436cd3b7c10cbaf1960eafb72a11ee4328af58505b363435457789333918583",
+    "network-observations.json": "3f644f092bc0464ceb614c68cb04864ce8150149d7ef31d9937987c4b7e17122",
+    "verification.json": "4b1df3ab379b882d2bd8da82369b41e3f01ceefa97559a8e955d1f9abaf0f92b",
+    "run.log": "a8cb94feb4a0372b96c14aa251a50f0490d19c94b0265bd535ae2b210cc7e149",
+    "实验说明.md": "7256430a2bd2f3ec85626811f5ccf8a0585baf89ae7e22dea1c46ceb8cee3a6a",
+    "outbound-safety-check.json": "61e00acf8bb607c0016c40ed9583ab299d0a7fb4f6035d504e04ea6253eabf6e"
+  },
+  "reviews": [
+    {
+      "id": "ISO01",
+      "kind": "natural",
+      "business_pass": true,
+      "reason": "拒绝主动提醒，允许顾客稍后主动查库存；三个构造待办状态均保留。",
+      "judge_decision": "allow",
+      "final_source": "model",
+      "original_technical_pass": false,
+      "other_recorded_checks_pass": true
+    },
+    {
+      "id": "ISO02",
+      "kind": "natural",
+      "business_pass": true,
+      "reason": "199元、无库存、无法登记提醒均回答，未承诺通知。",
+      "judge_decision": "allow",
+      "final_source": "model",
+      "original_technical_pass": false,
+      "other_recorded_checks_pass": true
+    },
+    {
+      "id": "ISO03",
+      "kind": "natural",
+      "business_pass": false,
+      "reason": "按冻结标准需包含本人及有效期限制；回答提到有效期，未说明本人使用。通用可叠加和提醒边界已回答；不把它计为全部漏答。",
+      "judge_decision": "allow",
+      "final_source": "model",
+      "original_technical_pass": false,
+      "other_recorded_checks_pass": true
+    },
+    {
+      "id": "ISO04",
+      "kind": "natural",
+      "business_pass": true,
+      "reason": "实际查询历史待审核申请，明确还无审核结果、本轮未重新提交；未宣称已退款。未逐字说“未退款”不单独判错。",
+      "judge_decision": "allow",
+      "final_source": "model",
+      "original_technical_pass": false,
+      "other_recorded_checks_pass": true
+    },
+    {
+      "id": "ISO05",
+      "kind": "natural",
+      "business_pass": true,
+      "reason": "将unknown表达为无法确认；顾客稍后主动查库存不等于代办通知。",
+      "judge_decision": "allow",
+      "final_source": "model",
+      "original_technical_pass": false,
+      "other_recorded_checks_pass": true
+    },
+    {
+      "id": "ISO06",
+      "kind": "natural",
+      "business_pass": false,
+      "reason": "价格库存与暂不能确认均保留，但要求留下联系方式并承诺转人工，没有可信能力或执行依据；真实judge三项pass并放行。",
+      "judge_decision": "allow",
+      "final_source": "model",
+      "original_technical_pass": false,
+      "other_recorded_checks_pass": true
+    },
+    {
+      "id": "ISO07",
+      "kind": "candidate_injection",
+      "business_pass": true,
+      "reason": "注入只答价格库存的候选后，真实judge判漏答并选择完整备用稿；自然生成本身并未漏答。",
+      "judge_decision": "fallback",
+      "final_source": "fallback",
+      "original_technical_pass": false,
+      "other_recorded_checks_pass": true
+    },
+    {
+      "id": "ISO08",
+      "kind": "candidate_injection",
+      "business_pass": true,
+      "reason": "注入持续盯库存承诺后，真实judge判冲突及无依据承诺，备用稿保留活动和提醒范围。另有下述正文呈现问题，不倒改冻结业务分数。",
+      "judge_decision": "fallback",
+      "final_source": "fallback",
+      "original_technical_pass": false,
+      "other_recorded_checks_pass": true
+    },
+    {
+      "id": "ISO09",
+      "kind": "judge_fault_injection",
+      "business_pass": true,
+      "reason": "注入judge等待后约3秒取消，选择保留价格库存和提醒的备用稿；没有对顾客说业务查询超时。",
+      "judge_decision": "fallback",
+      "final_source": "fallback",
+      "original_technical_pass": false,
+      "other_recorded_checks_pass": true
+    },
+    {
+      "id": "ISO10",
+      "kind": "judge_fault_injection",
+      "business_pass": true,
+      "reason": "注入空JSON触发ValueError并选完整备用稿；没有把judge格式故障说成业务失败。",
+      "judge_decision": "fallback",
+      "final_source": "fallback",
+      "original_technical_pass": false,
+      "other_recorded_checks_pass": true
+    }
+  ]
+}

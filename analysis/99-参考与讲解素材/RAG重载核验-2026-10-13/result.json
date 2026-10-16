@@ -1,0 +1,36 @@
+{
+  "date": "2026-10-13",
+  "active_cases": 13,
+  "legacy_question_matches": 0,
+  "prompt_replacements": 2,
+  "index": {
+    "version": "lesson41-idx-81e8d9ad64bc",
+    "chunks": 85,
+    "embedding": "local_token_embedding_for_explicit_offline_course",
+    "chunks_per_file": {
+      "after_sale_policy.md": 18,
+      "payment_invoice_policy.md": 1,
+      "promotion_policy.md": 19,
+      "member_coupon_policy.md": 18,
+      "product_knowledge.md": 29
+    }
+  },
+  "knowledge_hashes_unchanged": true,
+  "offline_checks": {
+    "passed": 18,
+    "failed": 0
+  },
+  "browser_turns": 5,
+  "browser_topics": 4,
+  "coupon_expiry_routing_failure": true,
+  "unknown_campaign_model_reply_correct_in_sample": true,
+  "unknown_campaign_deterministic_fallback_risk": true,
+  "new_index_cold_then_warm_verified": true,
+  "final_process_cold_retrieval_verified": true,
+  "final_promotion_answer_model_used": true,
+  "full_evaluation_run": false,
+  "business_submission": false,
+  "workbench_button_verified": true,
+  "raw_markdown_in_final_promotion_reply": true,
+  "initial_workbench_locator_timeout_resolved": true
+}

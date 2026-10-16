@@ -1,0 +1,14 @@
+[
+ {"id":"P01","message":"帐篷晒干以后该怎么放回袋子里？","intent":"product_query","facts":false,"domains":["product_knowledge"],"clarification":[]},
+ {"id":"P02","message":"别替我推荐款式，告诉我帐篷脏了怎么擦就行。","intent":"product_query","facts":false,"domains":["product_knowledge"],"clarification":[]},
+ {"id":"P03","message":"全地形营地收纳车现在卖多少钱？","intent":"product_query","facts":true,"domains":[],"clarification":[]},
+ {"id":"P04","message":"山野四人帐篷的承重具体是多少公斤？","intent":"product_query","facts":true,"domains":[],"clarification":[]},
+ {"id":"P05","message":"山野四人帐篷多少钱，雨后如何收进袋里，山友会员券能和露营季满减一起用吗？","intent":"product_query","facts":true,"domains":["product_knowledge","promotion_and_member_policy"],"clarification":[]},
+ {"id":"P06","message":"露营季满减和平台会员券能同时使用吗？","intent":"promotion_query","clarification":[]},
+ {"id":"P07","message":"平台会员券能不能跟优惠一起用？","intent":"promotion_query","clarification":["promotion_combination"]},
+ {"id":"P08","message":"请讲一下签收后七天无理由的退货条件，我还没决定退。","intent":"return_policy_query"},
+ {"id":"P09","message":"我的帐篷漏水了，能退吗？先别提交。","intent":"after_sale_eligibility_query"},
+ {"id":"P10","message":"ORD1234没发货，我现在要申请退款。","intent":"refund_request"},
+ {"id":"P11","message":"订单完成后发票啥时候能开好？","intent":"invoice_query"},
+ {"id":"P12","message":"怎么洗？","note":"相关咨询状态（数据）：上轮问题是帐篷如何清洁，knowledge_topic=帐篷，本轮继续问清洁，没有具体商品数据需求。","intent":"product_query","facts":false,"domains":["product_knowledge"],"clarification":[]}
+]

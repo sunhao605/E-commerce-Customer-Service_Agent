@@ -1,0 +1,62 @@
+{
+  "read_date": "2026-10-14",
+  "sources": [
+    {
+      "organization": "Anthropic",
+      "url": "https://www.anthropic.com/engineering/contextual-retrieval",
+      "fetched": true,
+      "relevant_principle": "补充片段上下文"
+    },
+    {
+      "organization": "OpenAI",
+      "url": "https://developers.openai.com/api/docs/guides/retrieval",
+      "fetched": true,
+      "relevant_principle": "相关块与来源；回答引用与搜索结果分开"
+    },
+    {
+      "organization": "Google PAIR",
+      "url": "https://pair.withgoogle.com/chapter/explainability-trust/",
+      "fetched": true,
+      "relevant_principle": "部分解释与渐进展开"
+    },
+    {
+      "organization": "Microsoft HAX",
+      "url": "https://www.microsoft.com/en-us/haxtoolkit/pattern/g11-a-local-explanations/",
+      "fetched": true,
+      "relevant_principle": "解释具体决定"
+    },
+    {
+      "organization": "LangChain",
+      "url": "https://raw.githubusercontent.com/langchain-ai/langchain/master/libs/langchain/langchain_classic/retrievers/parent_document_retriever.py",
+      "fetched": true,
+      "relevant_principle": "检索小块后返回父级上下文"
+    },
+    {
+      "organization": "Hugging Face",
+      "url": "https://huggingface.co/learn/cookbook/structured_generation",
+      "fetched": true,
+      "relevant_principle": "抽取原文片段并高亮来源"
+    },
+    {
+      "organization": "xAI",
+      "url": "https://docs.x.ai/developers/tools/collections-search",
+      "fetched": true,
+      "relevant_principle": "文档级引用身份"
+    },
+    {
+      "organization": "Nielsen Norman Group",
+      "url": "https://www.nngroup.com/articles/progressive-disclosure/",
+      "fetched": true,
+      "relevant_principle": "重要内容先展示，细节按需展开"
+    }
+  ],
+  "supplementary_urls": [
+    "https://developers.openai.com/api/docs/guides/tools-file-search",
+    "https://www.nngroup.com/articles/ai-search-infoseeking/"
+  ],
+  "boundaries": [
+    "具体UI字数、分层与字段是项目建议，不是统一官方标准",
+    "LangChain类参考抓取失败后已核查官方原始源码",
+    "xAI额外cookbook全文未打开，不采用其未核验细节"
+  ]
+}

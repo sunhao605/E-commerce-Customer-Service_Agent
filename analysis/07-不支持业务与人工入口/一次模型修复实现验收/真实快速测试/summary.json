@@ -1,0 +1,11 @@
+{
+  "checks": "3/3",
+  "actual_successful_requests": 7,
+  "requests_with_usage": 7,
+  "usage": {
+    "prompt_tokens": 13788,
+    "completion_tokens": 1347,
+    "total_tokens": 15135
+  },
+  "source_unchanged": true
+}

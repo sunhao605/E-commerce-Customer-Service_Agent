@@ -1,0 +1,27 @@
+{
+  "after_sale_policy.md": {
+    "sha256": "8276827322e0caee0578ff7a939d1f872b946e78f0f38f71356dd2866713a836",
+    "chars": 174,
+    "body_chars": 38
+  },
+  "member_coupon_policy.md": {
+    "sha256": "988e7bf0c7f0c120b0fbebcbe3d77124386cce392ba66ce91ff46f851ca51fbc",
+    "chars": 168,
+    "body_chars": 37
+  },
+  "promotion_policy.md": {
+    "sha256": "5fcea1ca207956e4a40c905197f794cc83550d4feeeda14c926bb88694b0d835",
+    "chars": 176,
+    "body_chars": 47
+  },
+  "received_return_policy.md": {
+    "sha256": "5f182d8d37c36311b768647a337c799495b6fac76dfc9905e74ed9da73c7c296",
+    "chars": 403,
+    "body_chars": 268
+  },
+  "payment_invoice_policy.md": {
+    "sha256": "43c05e34f33ccffcbd0a26706eb101382685805ec89593fc0ad36a3e5e31f23e",
+    "chars": 157,
+    "body_chars": 35
+  }
+}

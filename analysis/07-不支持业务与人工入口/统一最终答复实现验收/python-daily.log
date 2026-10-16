@@ -1,0 +1,28 @@
+INFO:     Started server process [59151]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:58760 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58777 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58777 - "GET /sessions/answer-live-fdfc573f297b47afb2e6eb161d31d097/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58781 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58777 - "GET /sessions/answer-live-fdfc573f297b47afb2e6eb161d31d097/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58777 - "GET /sessions/answer-live-4d759c9a7e784f899a2b8db60ce60076/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58781 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58777 - "GET /sessions/answer-live-4d759c9a7e784f899a2b8db60ce60076/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58777 - "GET /sessions/answer-live-f0ec4afbeec74e619444751f259f1f24/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58781 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58777 - "GET /sessions/answer-live-f0ec4afbeec74e619444751f259f1f24/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58777 - "GET /sessions/answer-live-53451001ebc94ede99acb438b9e4ce4f/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58781 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58816 - "GET /sessions/answer-live-53451001ebc94ede99acb438b9e4ce4f/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58816 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59325 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59337 - "GET /sessions/cs-7890a637-2ea2-4744-bb16-72ba444cd6c6/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59325 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59377 - "GET /sessions/cs-f1df9808-7fe9-4a05-b267-fd383c8b722d/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59786 - "GET /health HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [59151]

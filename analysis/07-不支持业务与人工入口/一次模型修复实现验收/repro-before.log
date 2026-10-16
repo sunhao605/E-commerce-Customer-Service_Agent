@@ -1,0 +1,68 @@
+FFFF
+======================================================================
+FAIL: test_one_repair_uses_same_evidence_and_is_checked_before_delivery (backend.tests.test_answer_judge.ReplyGateTest.test_one_repair_uses_same_evidence_and_is_checked_before_delivery)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_judge.py", line 225, in test_one_repair_uses_same_evidence_and_is_checked_before_delivery
+    self.assertEqual(response.answer, corrected)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '轻量露营折叠椅 商品标价 199 元，当前无库存。\n\n当前客服助手不支持到货或补货提醒。你可[48 chars]能确认。' != '轻量露营折叠椅199元，目前无库存。不支持到货提醒，您可以稍后主动查询。'
++ 轻量露营折叠椅199元，目前无库存。不支持到货提醒，您可以稍后主动查询。
+- 轻量露营折叠椅 商品标价 199 元，当前无库存。
+- 
+- 当前客服助手不支持到货或补货提醒。你可以稍后主动查询商品库存。
+- 您所问的其他尚未在以上内容中说明的事项，本轮还没有取得足够依据，暂不能确认。
+
+
+======================================================================
+FAIL: test_second_rejection_or_judge_failure_stops_at_two_generations (backend.tests.test_answer_judge.ReplyGateTest.test_second_rejection_or_judge_failure_stops_at_two_generations) (status='success', decision='fallback')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_judge.py", line 256, in test_second_rejection_or_judge_failure_stops_at_two_generations
+    self.assertEqual((invoke.call_count, judge.call_count), (2, 2))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Tuples differ: (1, 1) != (2, 2)
+
+First differing element 0:
+1
+2
+
+- (1, 1)
++ (2, 2)
+
+======================================================================
+FAIL: test_second_rejection_or_judge_failure_stops_at_two_generations (backend.tests.test_answer_judge.ReplyGateTest.test_second_rejection_or_judge_failure_stops_at_two_generations) (status='success', decision='review')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_judge.py", line 256, in test_second_rejection_or_judge_failure_stops_at_two_generations
+    self.assertEqual((invoke.call_count, judge.call_count), (2, 2))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Tuples differ: (1, 1) != (2, 2)
+
+First differing element 0:
+1
+2
+
+- (1, 1)
++ (2, 2)
+
+======================================================================
+FAIL: test_second_rejection_or_judge_failure_stops_at_two_generations (backend.tests.test_answer_judge.ReplyGateTest.test_second_rejection_or_judge_failure_stops_at_two_generations) (status='error', decision='fallback')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_judge.py", line 256, in test_second_rejection_or_judge_failure_stops_at_two_generations
+    self.assertEqual((invoke.call_count, judge.call_count), (2, 2))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Tuples differ: (1, 1) != (2, 2)
+
+First differing element 0:
+1
+2
+
+- (1, 1)
++ (2, 2)
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.018s
+
+FAILED (failures=4)

@@ -1,0 +1,50 @@
+{
+  "run_id": "CAP-LIVE-001",
+  "source": "user-authorized follow-up after CAP-JAVA-001",
+  "cases": [
+    {
+      "id": "CAP-LIVE-01",
+      "message": "轻量露营折叠椅现在多少钱，有货后能提醒我吗？",
+      "expected": [
+        "price and stock agree with current business API",
+        "explicitly does not support stock notification",
+        "no reminder promise or application"
+      ],
+      "capability_id": "stock_notification"
+    },
+    {
+      "id": "CAP-LIVE-02",
+      "message": "支持到货提醒吗？",
+      "expected": [
+        "explicitly unsupported",
+        "no product clarification or product lookup",
+        "no reminder registration"
+      ],
+      "capability_id": "stock_notification"
+    },
+    {
+      "id": "CAP-LIVE-03",
+      "message": "支持退款吗？",
+      "expected": [
+        "explain unshipped whole-order refund scope and eligibility conditions",
+        "consultation only; no new refund draft, token, confirmation card, approval or workflow"
+      ],
+      "capability_id": "refund_consultation"
+    }
+  ],
+  "common": [
+    "three independent new sessions with empty prior trace",
+    "real Java gateway and Python with existing model settings",
+    "capability trace must show current version and no query failure",
+    "eight business tables and product facts unchanged",
+    "one run per case; save failure without retry"
+  ],
+  "prohibited": [
+    "refund submission",
+    "approval",
+    "payment",
+    "reminder creation",
+    "mysql restart",
+    "changing model keys or switches"
+  ]
+}

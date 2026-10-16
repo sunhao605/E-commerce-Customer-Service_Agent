@@ -1,0 +1,53 @@
+{
+  "at": "2026-10-16T22:18:32.100406+08:00",
+  "old_pid": 49504,
+  "new_pid": 72994,
+  "settings": {
+    "AGENT_COURSE_DISABLE_LLM": "0",
+    "AGENT_COURSE_OFFLINE_RAG": "0",
+    "AGENT_COURSE_OFFLINE_FACTS": "0",
+    "ANSWER_JUDGE_MODE": "enforce",
+    "ANSWER_JUDGE_TIMEOUT_SECONDS": "5",
+    "CANCEL_INTENT_EXECUTE": "0",
+    "CANCEL_SCORE_MIN": "0.9"
+  },
+  "health": {
+    "status": "ok",
+    "lesson": "41",
+    "rag_index": {
+      "loaded": true,
+      "version": "lesson41-idx-11d1d62278d3",
+      "chunk_count": 53,
+      "files": [
+        "after_sale_policy.md",
+        "payment_invoice_policy.md",
+        "promotion_policy.md",
+        "member_coupon_policy.md",
+        "product_knowledge.md",
+        "received_return_policy.md"
+      ],
+      "embedding": "openai_compatible_embedding:Qwen/Qwen3-Embedding-8B",
+      "governed_files": [
+        "after_sale_policy.md",
+        "payment_invoice_policy.md",
+        "promotion_policy.md",
+        "member_coupon_policy.md",
+        "product_knowledge.md",
+        "received_return_policy.md"
+      ],
+      "snapshot_version": "knowledge-d8e495a59835",
+      "judged_at": "2026-10-16T22:18:32.030233+08:00",
+      "available_policy_signature": "571aeabfbc2b",
+      "available_policies": {
+        "refund_before_shipping": "2026-10-16.1",
+        "invoice_issue": "2026-10-14.2",
+        "promotion_camping_season_stack_rule": "2026-10-16.1",
+        "member_coupon_gold_rule": "2026-10-16.1",
+        "outdoor_product_guide": "2026-10-16.1",
+        "return_after_delivery": "2026-10-16.1"
+      },
+      "blocked_policies": {}
+    }
+  },
+  "source_unchanged": true
+}

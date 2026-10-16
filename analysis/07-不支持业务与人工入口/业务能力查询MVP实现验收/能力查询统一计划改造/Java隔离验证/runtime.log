@@ -1,0 +1,68 @@
+PASS 匿名读取被拒绝
+PASS 错误服务令牌被拒绝
+PASS 目录加载六项能力
+PASS HTTP 200: /api/customer-service/capabilities/inventory_query
+PASS 业务响应成功
+PASS 真实接口与单一目录一致: inventory_query
+PASS HTTP 200: /api/customer-service/capabilities/stock_notification
+PASS 业务响应成功
+PASS 真实接口与单一目录一致: stock_notification
+PASS HTTP 200: /api/customer-service/capabilities/exchange_handling
+PASS 业务响应成功
+PASS 真实接口与单一目录一致: exchange_handling
+PASS HTTP 200: /api/customer-service/capabilities/human_takeover
+PASS 业务响应成功
+PASS 真实接口与单一目录一致: human_takeover
+PASS HTTP 200: /api/customer-service/capabilities/refund_consultation
+PASS 业务响应成功
+PASS 真实接口与单一目录一致: refund_consultation
+PASS HTTP 200: /api/customer-service/capabilities/return_consultation
+PASS 业务响应成功
+PASS 真实接口与单一目录一致: return_consultation
+PASS HTTP 200: /api/customer-service/capabilities/not_registered
+PASS 业务响应成功
+PASS 未登记返回 unknown
+PASS 非法标识返回 400
+PASS 服务身份没有能力写入口权限
+PASS 隔离客户登录成功
+PASS HTTP 200: /api/customer-service/capabilities/stock_notification
+PASS 业务响应成功
+PASS 登录客户可读取能力
+PASS 隔离管理员登录成功
+PASS 管理员角色不会越过 USER/AGENT_SERVICE 限制
+PASS HTTP 200: /api/customer-service/chat
+PASS 业务响应成功
+PASS 咨询直出且无确认卡: 支持到货提醒吗
+PASS 服务端未准备申请: 支持到货提醒吗
+PASS HTTP 200: /api/customer-service/chat
+PASS 业务响应成功
+PASS 咨询直出且无确认卡: 轻量露营折叠椅现在多少钱，有货后能提醒我吗？
+PASS 服务端未准备申请: 轻量露营折叠椅现在多少钱，有货后能提醒我吗？
+PASS HTTP 200: /api/customer-service/chat
+PASS 业务响应成功
+PASS 咨询直出且无确认卡: 支持退款吗
+PASS 服务端未准备申请: 支持退款吗
+PASS HTTP 200: /api/customer-service/chat
+PASS 业务响应成功
+PASS 咨询直出且无确认卡: 支持退货吗
+PASS 服务端未准备申请: 支持退货吗
+PASS HTTP 200: /api/customer-service/chat
+PASS 业务响应成功
+PASS 咨询直出且无确认卡: 支持换货吗
+PASS 服务端未准备申请: 支持换货吗
+PASS HTTP 200: /api/customer-service/chat
+PASS 业务响应成功
+PASS 咨询直出且无确认卡: 能不能转人工
+PASS 服务端未准备申请: 能不能转人工
+PASS HTTP 200: /api/customer-service/chat
+PASS 业务响应成功
+PASS 咨询直出且无确认卡: 介绍一下你们能提供哪些服务？
+PASS 服务端未准备申请: 介绍一下你们能提供哪些服务？
+PASS HTTP 200: /api/customer-service/chat
+PASS 业务响应成功
+PASS 能力咨询保留既有草稿、版本和凭证
+PASS HTTP 200: /api/customer-service/chat
+PASS 业务响应成功
+PASS 新服务范围意图保留既有草稿和凭证
+PASS 九轮咨询均经过固定 Agent，无额外恢复或外发
+PASS 验收前后八张业务表行数及内容哈希一致

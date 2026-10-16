@@ -1,0 +1,1298 @@
+{
+  "id": "GUARD-COMPARE-001-RESCORE-V2",
+  "labels_sha256": "3a887e77105ac14920651d8d8f29bfebea83b44e4209d7450723b0bf0b317947",
+  "annotation_source": "mixed: original human review + direct human corrections + assistant consistency review",
+  "limitations": [
+    "模型看到的是旧冻结Prompt；重算不是新Prompt公平重跑。",
+    "标签在看到输出后修订，不是新的独立盲标成绩。",
+    "G04/G13/G15为助手一致性复核，未冒充用户逐题确认。"
+  ],
+  "remote_calls": 0,
+  "production_changes": false,
+  "original_artifacts_unchanged": true,
+  "providers": {
+    "rules": {
+      "rows": 24,
+      "valid": 24,
+      "invalid_or_error": 0,
+      "overall_exact_agreement": {
+        "count": 16,
+        "total": 24,
+        "rate": 0.6666666666666666
+      },
+      "all_dimensions_agree": {
+        "count": 12,
+        "total": 24,
+        "rate": 0.5
+      },
+      "atomic_agreement": {
+        "count": 56,
+        "total": 72,
+        "rate": 0.7777777777777778
+      },
+      "missed_problem": {
+        "count": 3,
+        "total": 11,
+        "rate": 0.2727272727272727
+      },
+      "false_rejection": {
+        "count": 4,
+        "total": 12,
+        "rate": 0.3333333333333333
+      },
+      "pending_sent_to_review": {
+        "count": 0,
+        "total": 1,
+        "rate": 0.0
+      },
+      "dimensions": {
+        "omission": {
+          "count": 20,
+          "total": 24,
+          "rate": 0.8333333333333334
+        },
+        "conflict": {
+          "count": 17,
+          "total": 24,
+          "rate": 0.7083333333333334
+        },
+        "unperformed": {
+          "count": 19,
+          "total": 24,
+          "rate": 0.7916666666666666
+        }
+      },
+      "mismatches": [
+        {
+          "id": "G03",
+          "expected": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "pass"
+          },
+          "actual": {
+            "omission": "fail",
+            "conflict": "pass",
+            "unperformed": "pass"
+          }
+        },
+        {
+          "id": "G04",
+          "expected": {
+            "omission": "pass",
+            "conflict": "fail",
+            "unperformed": "fail"
+          },
+          "actual": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "fail"
+          }
+        },
+        {
+          "id": "G07",
+          "expected": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "pass"
+          },
+          "actual": {
+            "omission": "fail",
+            "conflict": "pass",
+            "unperformed": "pass"
+          }
+        },
+        {
+          "id": "G09",
+          "expected": {
+            "omission": "fail",
+            "conflict": "pass",
+            "unperformed": "pass"
+          },
+          "actual": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "pass"
+          }
+        },
+        {
+          "id": "G13",
+          "expected": {
+            "omission": "fail",
+            "conflict": "fail",
+            "unperformed": "fail"
+          },
+          "actual": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "fail"
+          }
+        },
+        {
+          "id": "G14",
+          "expected": {
+            "omission": "fail",
+            "conflict": "fail",
+            "unperformed": "fail"
+          },
+          "actual": {
+            "omission": "fail",
+            "conflict": "pass",
+            "unperformed": "pass"
+          }
+        },
+        {
+          "id": "G15",
+          "expected": {
+            "omission": "pass",
+            "conflict": "fail",
+            "unperformed": "fail"
+          },
+          "actual": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "fail"
+          }
+        },
+        {
+          "id": "G17",
+          "expected": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "pass"
+          },
+          "actual": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "fail"
+          }
+        },
+        {
+          "id": "G19",
+          "expected": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "pass"
+          },
+          "actual": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "fail"
+          }
+        },
+        {
+          "id": "G21",
+          "expected": {
+            "omission": "pass",
+            "conflict": "fail",
+            "unperformed": "fail"
+          },
+          "actual": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "pass"
+          }
+        },
+        {
+          "id": "G22",
+          "expected": {
+            "omission": "pass",
+            "conflict": "uncertain",
+            "unperformed": "fail"
+          },
+          "actual": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "pass"
+          }
+        },
+        {
+          "id": "G23",
+          "expected": {
+            "omission": "pass",
+            "conflict": "uncertain",
+            "unperformed": "pass"
+          },
+          "actual": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "pass"
+          }
+        }
+      ]
+    },
+    "jev": {
+      "rows": 24,
+      "valid": 24,
+      "invalid_or_error": 0,
+      "overall_exact_agreement": {
+        "count": 22,
+        "total": 24,
+        "rate": 0.9166666666666666
+      },
+      "all_dimensions_agree": {
+        "count": 17,
+        "total": 24,
+        "rate": 0.7083333333333334
+      },
+      "atomic_agreement": {
+        "count": 60,
+        "total": 72,
+        "rate": 0.8333333333333334
+      },
+      "missed_problem": {
+        "count": 1,
+        "total": 11,
+        "rate": 0.09090909090909091
+      },
+      "false_rejection": {
+        "count": 0,
+        "total": 12,
+        "rate": 0.0
+      },
+      "pending_sent_to_review": {
+        "count": 0,
+        "total": 1,
+        "rate": 0.0
+      },
+      "dimensions": {
+        "omission": {
+          "count": 19,
+          "total": 24,
+          "rate": 0.7916666666666666
+        },
+        "conflict": {
+          "count": 20,
+          "total": 24,
+          "rate": 0.8333333333333334
+        },
+        "unperformed": {
+          "count": 21,
+          "total": 24,
+          "rate": 0.875
+        }
+      },
+      "mismatches": [
+        {
+          "id": "G04",
+          "expected": {
+            "omission": "pass",
+            "conflict": "fail",
+            "unperformed": "fail"
+          },
+          "actual": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "pass"
+          }
+        },
+        {
+          "id": "G10",
+          "expected": {
+            "omission": "pass",
+            "conflict": "fail",
+            "unperformed": "pass"
+          },
+          "actual": {
+            "omission": "fail",
+            "conflict": "fail",
+            "unperformed": "fail"
+          }
+        },
+        {
+          "id": "G15",
+          "expected": {
+            "omission": "pass",
+            "conflict": "fail",
+            "unperformed": "fail"
+          },
+          "actual": {
+            "omission": "fail",
+            "conflict": "pass",
+            "unperformed": "fail"
+          }
+        },
+        {
+          "id": "G21",
+          "expected": {
+            "omission": "pass",
+            "conflict": "fail",
+            "unperformed": "fail"
+          },
+          "actual": {
+            "omission": "fail",
+            "conflict": "fail",
+            "unperformed": "fail"
+          }
+        },
+        {
+          "id": "G22",
+          "expected": {
+            "omission": "pass",
+            "conflict": "uncertain",
+            "unperformed": "fail"
+          },
+          "actual": {
+            "omission": "fail",
+            "conflict": "fail",
+            "unperformed": "fail"
+          }
+        },
+        {
+          "id": "G23",
+          "expected": {
+            "omission": "pass",
+            "conflict": "uncertain",
+            "unperformed": "pass"
+          },
+          "actual": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "pass"
+          }
+        },
+        {
+          "id": "G24",
+          "expected": {
+            "omission": "pass",
+            "conflict": "fail",
+            "unperformed": "pass"
+          },
+          "actual": {
+            "omission": "fail",
+            "conflict": "fail",
+            "unperformed": "fail"
+          }
+        }
+      ]
+    },
+    "llm": {
+      "rows": 24,
+      "valid": 24,
+      "invalid_or_error": 0,
+      "overall_exact_agreement": {
+        "count": 24,
+        "total": 24,
+        "rate": 1.0
+      },
+      "all_dimensions_agree": {
+        "count": 21,
+        "total": 24,
+        "rate": 0.875
+      },
+      "atomic_agreement": {
+        "count": 69,
+        "total": 72,
+        "rate": 0.9583333333333334
+      },
+      "missed_problem": {
+        "count": 0,
+        "total": 11,
+        "rate": 0.0
+      },
+      "false_rejection": {
+        "count": 0,
+        "total": 12,
+        "rate": 0.0
+      },
+      "pending_sent_to_review": {
+        "count": 1,
+        "total": 1,
+        "rate": 1.0
+      },
+      "dimensions": {
+        "omission": {
+          "count": 23,
+          "total": 24,
+          "rate": 0.9583333333333334
+        },
+        "conflict": {
+          "count": 22,
+          "total": 24,
+          "rate": 0.9166666666666666
+        },
+        "unperformed": {
+          "count": 24,
+          "total": 24,
+          "rate": 1.0
+        }
+      },
+      "mismatches": [
+        {
+          "id": "G04",
+          "expected": {
+            "omission": "pass",
+            "conflict": "fail",
+            "unperformed": "fail"
+          },
+          "actual": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "fail"
+          }
+        },
+        {
+          "id": "G13",
+          "expected": {
+            "omission": "fail",
+            "conflict": "fail",
+            "unperformed": "fail"
+          },
+          "actual": {
+            "omission": "pass",
+            "conflict": "fail",
+            "unperformed": "fail"
+          }
+        },
+        {
+          "id": "G15",
+          "expected": {
+            "omission": "pass",
+            "conflict": "fail",
+            "unperformed": "fail"
+          },
+          "actual": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "fail"
+          }
+        }
+      ]
+    }
+  },
+  "human_corrections_only": {
+    "rules": {
+      "rows": 24,
+      "valid": 24,
+      "invalid_or_error": 0,
+      "overall_exact_agreement": {
+        "count": 16,
+        "total": 24,
+        "rate": 0.6666666666666666
+      },
+      "all_dimensions_agree": {
+        "count": 15,
+        "total": 24,
+        "rate": 0.625
+      },
+      "atomic_agreement": {
+        "count": 60,
+        "total": 72,
+        "rate": 0.8333333333333334
+      },
+      "missed_problem": {
+        "count": 3,
+        "total": 11,
+        "rate": 0.2727272727272727
+      },
+      "false_rejection": {
+        "count": 4,
+        "total": 12,
+        "rate": 0.3333333333333333
+      },
+      "pending_sent_to_review": {
+        "count": 0,
+        "total": 1,
+        "rate": 0.0
+      },
+      "dimensions": {
+        "omission": {
+          "count": 21,
+          "total": 24,
+          "rate": 0.875
+        },
+        "conflict": {
+          "count": 20,
+          "total": 24,
+          "rate": 0.8333333333333334
+        },
+        "unperformed": {
+          "count": 19,
+          "total": 24,
+          "rate": 0.7916666666666666
+        }
+      },
+      "mismatches": [
+        {
+          "id": "G03",
+          "expected": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "pass"
+          },
+          "actual": {
+            "omission": "fail",
+            "conflict": "pass",
+            "unperformed": "pass"
+          }
+        },
+        {
+          "id": "G07",
+          "expected": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "pass"
+          },
+          "actual": {
+            "omission": "fail",
+            "conflict": "pass",
+            "unperformed": "pass"
+          }
+        },
+        {
+          "id": "G09",
+          "expected": {
+            "omission": "fail",
+            "conflict": "pass",
+            "unperformed": "pass"
+          },
+          "actual": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "pass"
+          }
+        },
+        {
+          "id": "G14",
+          "expected": {
+            "omission": "fail",
+            "conflict": "fail",
+            "unperformed": "fail"
+          },
+          "actual": {
+            "omission": "fail",
+            "conflict": "pass",
+            "unperformed": "pass"
+          }
+        },
+        {
+          "id": "G17",
+          "expected": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "pass"
+          },
+          "actual": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "fail"
+          }
+        },
+        {
+          "id": "G19",
+          "expected": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "pass"
+          },
+          "actual": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "fail"
+          }
+        },
+        {
+          "id": "G21",
+          "expected": {
+            "omission": "pass",
+            "conflict": "fail",
+            "unperformed": "fail"
+          },
+          "actual": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "pass"
+          }
+        },
+        {
+          "id": "G22",
+          "expected": {
+            "omission": "pass",
+            "conflict": "uncertain",
+            "unperformed": "fail"
+          },
+          "actual": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "pass"
+          }
+        },
+        {
+          "id": "G23",
+          "expected": {
+            "omission": "pass",
+            "conflict": "uncertain",
+            "unperformed": "pass"
+          },
+          "actual": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "pass"
+          }
+        }
+      ]
+    },
+    "jev": {
+      "rows": 24,
+      "valid": 24,
+      "invalid_or_error": 0,
+      "overall_exact_agreement": {
+        "count": 22,
+        "total": 24,
+        "rate": 0.9166666666666666
+      },
+      "all_dimensions_agree": {
+        "count": 16,
+        "total": 24,
+        "rate": 0.6666666666666666
+      },
+      "atomic_agreement": {
+        "count": 60,
+        "total": 72,
+        "rate": 0.8333333333333334
+      },
+      "missed_problem": {
+        "count": 1,
+        "total": 11,
+        "rate": 0.09090909090909091
+      },
+      "false_rejection": {
+        "count": 0,
+        "total": 12,
+        "rate": 0.0
+      },
+      "pending_sent_to_review": {
+        "count": 0,
+        "total": 1,
+        "rate": 0.0
+      },
+      "dimensions": {
+        "omission": {
+          "count": 18,
+          "total": 24,
+          "rate": 0.75
+        },
+        "conflict": {
+          "count": 21,
+          "total": 24,
+          "rate": 0.875
+        },
+        "unperformed": {
+          "count": 21,
+          "total": 24,
+          "rate": 0.875
+        }
+      },
+      "mismatches": [
+        {
+          "id": "G04",
+          "expected": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "fail"
+          },
+          "actual": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "pass"
+          }
+        },
+        {
+          "id": "G10",
+          "expected": {
+            "omission": "pass",
+            "conflict": "fail",
+            "unperformed": "pass"
+          },
+          "actual": {
+            "omission": "fail",
+            "conflict": "fail",
+            "unperformed": "fail"
+          }
+        },
+        {
+          "id": "G13",
+          "expected": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "fail"
+          },
+          "actual": {
+            "omission": "fail",
+            "conflict": "fail",
+            "unperformed": "fail"
+          }
+        },
+        {
+          "id": "G15",
+          "expected": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "fail"
+          },
+          "actual": {
+            "omission": "fail",
+            "conflict": "pass",
+            "unperformed": "fail"
+          }
+        },
+        {
+          "id": "G21",
+          "expected": {
+            "omission": "pass",
+            "conflict": "fail",
+            "unperformed": "fail"
+          },
+          "actual": {
+            "omission": "fail",
+            "conflict": "fail",
+            "unperformed": "fail"
+          }
+        },
+        {
+          "id": "G22",
+          "expected": {
+            "omission": "pass",
+            "conflict": "uncertain",
+            "unperformed": "fail"
+          },
+          "actual": {
+            "omission": "fail",
+            "conflict": "fail",
+            "unperformed": "fail"
+          }
+        },
+        {
+          "id": "G23",
+          "expected": {
+            "omission": "pass",
+            "conflict": "uncertain",
+            "unperformed": "pass"
+          },
+          "actual": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "pass"
+          }
+        },
+        {
+          "id": "G24",
+          "expected": {
+            "omission": "pass",
+            "conflict": "fail",
+            "unperformed": "pass"
+          },
+          "actual": {
+            "omission": "fail",
+            "conflict": "fail",
+            "unperformed": "fail"
+          }
+        }
+      ]
+    },
+    "llm": {
+      "rows": 24,
+      "valid": 24,
+      "invalid_or_error": 0,
+      "overall_exact_agreement": {
+        "count": 24,
+        "total": 24,
+        "rate": 1.0
+      },
+      "all_dimensions_agree": {
+        "count": 23,
+        "total": 24,
+        "rate": 0.9583333333333334
+      },
+      "atomic_agreement": {
+        "count": 71,
+        "total": 72,
+        "rate": 0.9861111111111112
+      },
+      "missed_problem": {
+        "count": 0,
+        "total": 11,
+        "rate": 0.0
+      },
+      "false_rejection": {
+        "count": 0,
+        "total": 12,
+        "rate": 0.0
+      },
+      "pending_sent_to_review": {
+        "count": 1,
+        "total": 1,
+        "rate": 1.0
+      },
+      "dimensions": {
+        "omission": {
+          "count": 24,
+          "total": 24,
+          "rate": 1.0
+        },
+        "conflict": {
+          "count": 23,
+          "total": 24,
+          "rate": 0.9583333333333334
+        },
+        "unperformed": {
+          "count": 24,
+          "total": 24,
+          "rate": 1.0
+        }
+      },
+      "mismatches": [
+        {
+          "id": "G13",
+          "expected": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "fail"
+          },
+          "actual": {
+            "omission": "pass",
+            "conflict": "fail",
+            "unperformed": "fail"
+          }
+        }
+      ]
+    }
+  },
+  "original": {
+    "rules": {
+      "rows": 24,
+      "valid": 24,
+      "invalid_or_error": 0,
+      "overall_exact_agreement": {
+        "count": 16,
+        "total": 24,
+        "rate": 0.6666666666666666
+      },
+      "all_dimensions_agree": {
+        "count": 15,
+        "total": 24,
+        "rate": 0.625
+      },
+      "atomic_agreement": {
+        "count": 61,
+        "total": 72,
+        "rate": 0.8472222222222222
+      },
+      "missed_problem": {
+        "count": 2,
+        "total": 10,
+        "rate": 0.2
+      },
+      "false_rejection": {
+        "count": 4,
+        "total": 12,
+        "rate": 0.3333333333333333
+      },
+      "pending_sent_to_review": {
+        "count": 0,
+        "total": 2,
+        "rate": 0.0
+      },
+      "dimensions": {
+        "omission": {
+          "count": 20,
+          "total": 24,
+          "rate": 0.8333333333333334
+        },
+        "conflict": {
+          "count": 22,
+          "total": 24,
+          "rate": 0.9166666666666666
+        },
+        "unperformed": {
+          "count": 19,
+          "total": 24,
+          "rate": 0.7916666666666666
+        }
+      },
+      "mismatches": [
+        {
+          "id": "G03",
+          "expected": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "pass"
+          },
+          "actual": {
+            "omission": "fail",
+            "conflict": "pass",
+            "unperformed": "pass"
+          }
+        },
+        {
+          "id": "G07",
+          "expected": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "pass"
+          },
+          "actual": {
+            "omission": "fail",
+            "conflict": "pass",
+            "unperformed": "pass"
+          }
+        },
+        {
+          "id": "G09",
+          "expected": {
+            "omission": "fail",
+            "conflict": "pass",
+            "unperformed": "pass"
+          },
+          "actual": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "pass"
+          }
+        },
+        {
+          "id": "G14",
+          "expected": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "fail"
+          },
+          "actual": {
+            "omission": "fail",
+            "conflict": "pass",
+            "unperformed": "pass"
+          }
+        },
+        {
+          "id": "G17",
+          "expected": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "pass"
+          },
+          "actual": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "fail"
+          }
+        },
+        {
+          "id": "G19",
+          "expected": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "pass"
+          },
+          "actual": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "fail"
+          }
+        },
+        {
+          "id": "G21",
+          "expected": {
+            "omission": "pass",
+            "conflict": "fail",
+            "unperformed": "fail"
+          },
+          "actual": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "pass"
+          }
+        },
+        {
+          "id": "G22",
+          "expected": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "uncertain"
+          },
+          "actual": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "pass"
+          }
+        },
+        {
+          "id": "G23",
+          "expected": {
+            "omission": "pass",
+            "conflict": "uncertain",
+            "unperformed": "pass"
+          },
+          "actual": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "pass"
+          }
+        }
+      ]
+    },
+    "jev": {
+      "rows": 24,
+      "valid": 24,
+      "invalid_or_error": 0,
+      "overall_exact_agreement": {
+        "count": 21,
+        "total": 24,
+        "rate": 0.875
+      },
+      "all_dimensions_agree": {
+        "count": 15,
+        "total": 24,
+        "rate": 0.625
+      },
+      "atomic_agreement": {
+        "count": 57,
+        "total": 72,
+        "rate": 0.7916666666666666
+      },
+      "missed_problem": {
+        "count": 1,
+        "total": 10,
+        "rate": 0.1
+      },
+      "false_rejection": {
+        "count": 0,
+        "total": 12,
+        "rate": 0.0
+      },
+      "pending_sent_to_review": {
+        "count": 0,
+        "total": 2,
+        "rate": 0.0
+      },
+      "dimensions": {
+        "omission": {
+          "count": 17,
+          "total": 24,
+          "rate": 0.7083333333333334
+        },
+        "conflict": {
+          "count": 20,
+          "total": 24,
+          "rate": 0.8333333333333334
+        },
+        "unperformed": {
+          "count": 20,
+          "total": 24,
+          "rate": 0.8333333333333334
+        }
+      },
+      "mismatches": [
+        {
+          "id": "G04",
+          "expected": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "fail"
+          },
+          "actual": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "pass"
+          }
+        },
+        {
+          "id": "G10",
+          "expected": {
+            "omission": "pass",
+            "conflict": "fail",
+            "unperformed": "pass"
+          },
+          "actual": {
+            "omission": "fail",
+            "conflict": "fail",
+            "unperformed": "fail"
+          }
+        },
+        {
+          "id": "G13",
+          "expected": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "fail"
+          },
+          "actual": {
+            "omission": "fail",
+            "conflict": "fail",
+            "unperformed": "fail"
+          }
+        },
+        {
+          "id": "G14",
+          "expected": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "fail"
+          },
+          "actual": {
+            "omission": "fail",
+            "conflict": "fail",
+            "unperformed": "fail"
+          }
+        },
+        {
+          "id": "G15",
+          "expected": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "fail"
+          },
+          "actual": {
+            "omission": "fail",
+            "conflict": "pass",
+            "unperformed": "fail"
+          }
+        },
+        {
+          "id": "G21",
+          "expected": {
+            "omission": "pass",
+            "conflict": "fail",
+            "unperformed": "fail"
+          },
+          "actual": {
+            "omission": "fail",
+            "conflict": "fail",
+            "unperformed": "fail"
+          }
+        },
+        {
+          "id": "G22",
+          "expected": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "uncertain"
+          },
+          "actual": {
+            "omission": "fail",
+            "conflict": "fail",
+            "unperformed": "fail"
+          }
+        },
+        {
+          "id": "G23",
+          "expected": {
+            "omission": "pass",
+            "conflict": "uncertain",
+            "unperformed": "pass"
+          },
+          "actual": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "pass"
+          }
+        },
+        {
+          "id": "G24",
+          "expected": {
+            "omission": "pass",
+            "conflict": "fail",
+            "unperformed": "pass"
+          },
+          "actual": {
+            "omission": "fail",
+            "conflict": "fail",
+            "unperformed": "fail"
+          }
+        }
+      ]
+    },
+    "llm": {
+      "rows": 24,
+      "valid": 24,
+      "invalid_or_error": 0,
+      "overall_exact_agreement": {
+        "count": 23,
+        "total": 24,
+        "rate": 0.9583333333333334
+      },
+      "all_dimensions_agree": {
+        "count": 21,
+        "total": 24,
+        "rate": 0.875
+      },
+      "atomic_agreement": {
+        "count": 67,
+        "total": 72,
+        "rate": 0.9305555555555556
+      },
+      "missed_problem": {
+        "count": 0,
+        "total": 10,
+        "rate": 0.0
+      },
+      "false_rejection": {
+        "count": 0,
+        "total": 12,
+        "rate": 0.0
+      },
+      "pending_sent_to_review": {
+        "count": 1,
+        "total": 2,
+        "rate": 0.5
+      },
+      "dimensions": {
+        "omission": {
+          "count": 23,
+          "total": 24,
+          "rate": 0.9583333333333334
+        },
+        "conflict": {
+          "count": 21,
+          "total": 24,
+          "rate": 0.875
+        },
+        "unperformed": {
+          "count": 23,
+          "total": 24,
+          "rate": 0.9583333333333334
+        }
+      },
+      "mismatches": [
+        {
+          "id": "G13",
+          "expected": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "fail"
+          },
+          "actual": {
+            "omission": "pass",
+            "conflict": "fail",
+            "unperformed": "fail"
+          }
+        },
+        {
+          "id": "G14",
+          "expected": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "fail"
+          },
+          "actual": {
+            "omission": "fail",
+            "conflict": "fail",
+            "unperformed": "fail"
+          }
+        },
+        {
+          "id": "G22",
+          "expected": {
+            "omission": "pass",
+            "conflict": "pass",
+            "unperformed": "uncertain"
+          },
+          "actual": {
+            "omission": "pass",
+            "conflict": "uncertain",
+            "unperformed": "fail"
+          }
+        }
+      ]
+    }
+  }
+}

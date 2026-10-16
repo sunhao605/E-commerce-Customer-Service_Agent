@@ -1,0 +1,38 @@
+{
+  "id": "BC029-REHOME-001",
+  "baseline_tests": 253,
+  "baseline_pass": true,
+  "first_changed_run": {
+    "tests": 250,
+    "failures": 3,
+    "log": "first-tests.log"
+  },
+  "final_tests": 252,
+  "final_pass": true,
+  "old_content_filter_tests_removed": 3,
+  "new_contract_tests": 2,
+  "changed_knowledge_files": 5,
+  "unchanged_invoice_sha256": "6ea411835ca688cc2b6bf03ebd7751d9d941098f61622b6ccf438d3b5c0fb815",
+  "staged_knowledge_version": "2026-10-16.1",
+  "snapshot_version": "knowledge-d8e495a59835",
+  "index_version": "lesson41-idx-7443a8241b56",
+  "chunk_count": 53,
+  "after_sha256": {
+    "backend/resources/knowledge/after_sale_policy.md": "eac40c0ffc4c96bcf6144a12a5379ee71059f74769b877e41525d812fc8df659",
+    "backend/resources/knowledge/received_return_policy.md": "1093e25c370315e423c43b73d1f9247d90cbf9cee4240ba05c9a3e4877eae471",
+    "backend/resources/knowledge/member_coupon_policy.md": "f55008064d30d4a2fbf5dfe871fa767115ddf67fb6cc939566a7655262144163",
+    "backend/resources/knowledge/promotion_policy.md": "1e7f6016dbaa6e9e05623fedb2f8d32d64fdf51588dff2506e51acfe17fe63c2",
+    "backend/resources/knowledge/product_knowledge.md": "7f1c89ea400a0018c64d7848a317a4022cd134ee7f6aa5ddbb556ea009aae80f",
+    "backend/resources/knowledge/release-manifest.json": "a34bc23b46d2c5abefb4d6226bcd9dc816273546730b81a002ffc4d831e7cf95",
+    "backend/resources/prompts/rag_answering.md": "f68ba18907f89048a263fe2ae688c84428d06ce1ef7c475198391de96988966d",
+    "backend/resources/prompts/prompt_security.md": "aa37fbc52dfb1593617d61145f42d1c37b31c24ad76aee03a16b61f76f40640c",
+    "backend/resources/prompts/prompt_registry.yml": "54b780df092398276fd22ba733dc7cbaeb0df3c0ff273881ef7a2700b9942cce",
+    "backend/agent/answer_review.py": "e7e30dd27b59ba37d68c0044fd26fa813b048743ee958c67a7c6977dc1cac433",
+    "backend/tests/test_answer_judge.py": "37c156ea5f787d06a8c54255b171795cf0158f6b22b64cc6dc37826b9ef34bae",
+    "backend/tests/test_product_knowledge.py": "9db10fb3065e10ce75b9558a528677900df0b989cd7c11bd76a73e6a0ff3d5bb",
+    "backend/tests/test_policy_metadata.py": "a27c0d8ab7c94731881f00b67b8baf1ebf901573d73f15e47c302e484eceb5d4"
+  },
+  "runtime_reloaded": false,
+  "model_calls": 0,
+  "business_calls": 0
+}

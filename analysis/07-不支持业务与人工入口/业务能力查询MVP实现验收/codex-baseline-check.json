@@ -1,0 +1,16 @@
+{
+  "source": "实施前文本副本，不受Grok并发改动影响",
+  "baseline_copy": "/private/tmp/service-capabilities-before-oowrzqeb",
+  "command": [
+    "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/.venv/bin/python",
+    "-m",
+    "unittest",
+    "tests.test_product_query",
+    "tests.test_evidence_routing",
+    "tests.test_route_priority",
+    "tests.test_product_fault_feedback",
+    "-q"
+  ],
+  "exit_code": 0,
+  "environment": "explicit offline models, embeddings and facts; restricted exec"
+}

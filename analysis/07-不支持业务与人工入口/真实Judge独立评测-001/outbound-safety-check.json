@@ -1,0 +1,357 @@
+{
+  "purpose": "用户明确选择的真实judge独立评测第一步；最多66次调用，无重试，无业务接口访问",
+  "destination": "https://api.deepseek.com/chat/completions",
+  "model": "deepseek-flash",
+  "payloads": 54,
+  "repeats": 12,
+  "old_saved_generic_replies": 6,
+  "constructed_or_curated_fixture_evidence": 54,
+  "source_note": "6条历史模型回复是通用价格/政策/提醒咨询，其他候选为助手构造；订单与执行状态均为离线fixture，订单代号仅订单A/订单B。新30条全为助手构造。",
+  "excluded": "不发送来源路径、样本标题、标签、标注理由、姓名、真实订单号、手机号、邮箱、地址、会话ID、Cookie或业务令牌。仅使用现有模型API认证请求头，认证值不输出。",
+  "automated_scan": "54个实际context/candidate均无9位以上连续数字、邮箱、sk凭据、Bearer凭据或键值凭据；所有订单object_id仅为构造代号",
+  "cases": [
+    {
+      "id": "G01",
+      "payload_sha256": "cbc84af60bca21cfa1f8810653d839599132bfae8a8939bf900210a6878d843a",
+      "bytes": 1238,
+      "order_aliases": []
+    },
+    {
+      "id": "G02",
+      "payload_sha256": "2ff768eec5d70377f122ca07357f30e3bafc5dc9c6d21e51e1fafcaa680704ab",
+      "bytes": 1647,
+      "order_aliases": []
+    },
+    {
+      "id": "G03",
+      "payload_sha256": "d7592f7098d597230c3e34a8ba4778b9c9162773c9b3a005d87b1e7824f883ab",
+      "bytes": 1495,
+      "order_aliases": []
+    },
+    {
+      "id": "G04",
+      "payload_sha256": "38123c885506d0a51f36e3df9ebd13aa77bac96775940222a47a9d4b5189ec21",
+      "bytes": 2810,
+      "order_aliases": []
+    },
+    {
+      "id": "G05",
+      "payload_sha256": "af546d358096d817067ea8434de52dc90e376869e7e3e1dec00b813105c8a1b6",
+      "bytes": 1555,
+      "order_aliases": []
+    },
+    {
+      "id": "G06",
+      "payload_sha256": "07f634c7f27b03dc087c776d22d3ea58b2ed1ec09613f24e5d70f46c463c80e6",
+      "bytes": 2722,
+      "order_aliases": []
+    },
+    {
+      "id": "G07",
+      "payload_sha256": "85b4daa9a03600f1d8c63123663d2ebb37ba0698e80b9781919b90e097c9a6c1",
+      "bytes": 1166,
+      "order_aliases": []
+    },
+    {
+      "id": "G08",
+      "payload_sha256": "e8cf281c2685cd6b0052ea505935d5b3555bb7e2821eb74b6956884036a33434",
+      "bytes": 1386,
+      "order_aliases": []
+    },
+    {
+      "id": "G09",
+      "payload_sha256": "81f246997e26b1d9b0ca6a6202809477006a087cb060221559753291886c8cc1",
+      "bytes": 1407,
+      "order_aliases": []
+    },
+    {
+      "id": "G10",
+      "payload_sha256": "ce3b74b35bf982b147abd1628e9cce84f4d8b0d3f64e0fd0dd2f844302fa8ba0",
+      "bytes": 1151,
+      "order_aliases": []
+    },
+    {
+      "id": "G11",
+      "payload_sha256": "d255655b464f9e35799b1b38512816b3c221b4352e80796315db442202cb557e",
+      "bytes": 931,
+      "order_aliases": []
+    },
+    {
+      "id": "G12",
+      "payload_sha256": "2b4e0add554ff1ac93ecd59e494a8d416e7a164b1f2e1c98c4690a23fe10691a",
+      "bytes": 979,
+      "order_aliases": []
+    },
+    {
+      "id": "G13",
+      "payload_sha256": "f4895df235c82cf4983e804a41e120d5e35b7b77a8df2f27285a6412240a9869",
+      "bytes": 1133,
+      "order_aliases": []
+    },
+    {
+      "id": "G14",
+      "payload_sha256": "575254b87e059dc3004468e8bd3c001449eb9d80e991661238eacf4f08eaf64e",
+      "bytes": 1127,
+      "order_aliases": []
+    },
+    {
+      "id": "G15",
+      "payload_sha256": "792795415e1a416b255964ecc8c7de115b9022a4834a36ca2a0d64e9327d0932",
+      "bytes": 1326,
+      "order_aliases": []
+    },
+    {
+      "id": "G16",
+      "payload_sha256": "c0a8a56971e3e1ca23e36ce82f7550efe0dc9b5024a58416ffac00016c1f29b7",
+      "bytes": 1359,
+      "order_aliases": []
+    },
+    {
+      "id": "G17",
+      "payload_sha256": "abe41eb8786f431efdea511bf31883be61528164c6773e38fa09908278a7b45d",
+      "bytes": 1732,
+      "order_aliases": [
+        "订单A"
+      ]
+    },
+    {
+      "id": "G18",
+      "payload_sha256": "3cac0c299f92fba0bf55b964b9d8a6c88e3280e852bbce9a909df4d162f786a2",
+      "bytes": 1217,
+      "order_aliases": []
+    },
+    {
+      "id": "G19",
+      "payload_sha256": "cab54091eacf060b7aee01ea38c819083b2e5bbf6a7255cb5186a8d6c2c19ffc",
+      "bytes": 1211,
+      "order_aliases": []
+    },
+    {
+      "id": "G20",
+      "payload_sha256": "2a1745e261299f856d36531f5cf94073ce0c39e480255963ffe6e65ff7386c2e",
+      "bytes": 1109,
+      "order_aliases": []
+    },
+    {
+      "id": "G21",
+      "payload_sha256": "412621b1dbd356fb0ca098c3666ec853ac667ee6c747870da09899dde80ee2fe",
+      "bytes": 1633,
+      "order_aliases": [
+        "订单A"
+      ]
+    },
+    {
+      "id": "G22",
+      "payload_sha256": "75aa28a051addf19c00b5836f61c2cb3cb1d7027913992acb02618ba72341ce5",
+      "bytes": 760,
+      "order_aliases": []
+    },
+    {
+      "id": "G23",
+      "payload_sha256": "6735e7cc2d454f55df9e92878b5354b935e59b852a021d8377c68f2e6ce08cce",
+      "bytes": 750,
+      "order_aliases": []
+    },
+    {
+      "id": "G24",
+      "payload_sha256": "440f9d52c043b7ec099a18b8c1eddbdea2390c8b6eba81a07e702f822bdfcba1",
+      "bytes": 1197,
+      "order_aliases": []
+    },
+    {
+      "id": "N01",
+      "payload_sha256": "b11f3ae94b001754372325ec485c66c69a845d6eade0a8fb13de0df9624844b7",
+      "bytes": 1208,
+      "order_aliases": []
+    },
+    {
+      "id": "N02",
+      "payload_sha256": "0aecbe56d0552b2136754c54908814ef536d8d3d877be9e8e0c49a00ac70f01d",
+      "bytes": 1401,
+      "order_aliases": []
+    },
+    {
+      "id": "N03",
+      "payload_sha256": "8f233b4b37961f1c318b37897f522dceedb24f1252357a44925ebad18a073df2",
+      "bytes": 1320,
+      "order_aliases": []
+    },
+    {
+      "id": "N04",
+      "payload_sha256": "2cab33dc358bae84f13c3fbffb904cb309482428e40a85adefd8e3f56b41fdee",
+      "bytes": 1081,
+      "order_aliases": [
+        "订单A"
+      ]
+    },
+    {
+      "id": "N05",
+      "payload_sha256": "28354ae857d37a581eabe278ea9ed0eee231b9fdeab829ca099448d5d870f5e0",
+      "bytes": 1181,
+      "order_aliases": []
+    },
+    {
+      "id": "N06",
+      "payload_sha256": "6dca82e9b51a4dd7e002c660656b20d5e2f13b032daf2f871c70b92c73c0c4af",
+      "bytes": 1235,
+      "order_aliases": []
+    },
+    {
+      "id": "N07",
+      "payload_sha256": "e5fd9daa6c8440b2e441b9b31084faacc15dd7464bea864d8f589c31324cf43a",
+      "bytes": 1017,
+      "order_aliases": []
+    },
+    {
+      "id": "N08",
+      "payload_sha256": "0fbc47c3f8ca0059ad23bc37b1805eca417be35a59d5f37d9cbc507db1952671",
+      "bytes": 1204,
+      "order_aliases": []
+    },
+    {
+      "id": "N09",
+      "payload_sha256": "31af91f247ca825fcb5bc4da22a7ba82a235a8d2720a22339e672b2152165ddd",
+      "bytes": 1759,
+      "order_aliases": []
+    },
+    {
+      "id": "N10",
+      "payload_sha256": "eba68243ef0ec807b656c5f18845e9cf376a86d8bcb2b8182c34d429da92a782",
+      "bytes": 1822,
+      "order_aliases": [
+        "订单A",
+        "订单B"
+      ]
+    },
+    {
+      "id": "N11",
+      "payload_sha256": "c0f70bd525979e408de15ca878e60a306cf5be311a33df8387ab9da69aaaedbc",
+      "bytes": 1368,
+      "order_aliases": []
+    },
+    {
+      "id": "N12",
+      "payload_sha256": "99041c043decb7c76df1115613ea8ab7eacef9d26800ae63e17c3b42c9aaf934",
+      "bytes": 1386,
+      "order_aliases": []
+    },
+    {
+      "id": "N13",
+      "payload_sha256": "f4f070b7c37a9feb906fb3bdd2e68f69e95319c2ac28beba99e55f529af0725d",
+      "bytes": 931,
+      "order_aliases": []
+    },
+    {
+      "id": "N14",
+      "payload_sha256": "7140642382f0d0b1ccf3dae1b8683944223458083edab54edcefd998f26488da",
+      "bytes": 926,
+      "order_aliases": []
+    },
+    {
+      "id": "N15",
+      "payload_sha256": "d00b40b1a31d433ec4d89c746bbd02ee417a4e4af8ba173ab3e5a88e5ab2748d",
+      "bytes": 1166,
+      "order_aliases": []
+    },
+    {
+      "id": "N16",
+      "payload_sha256": "7332146e56cad064caca4aaa62ac83af884d59e42af6dc924c39afefca48a08f",
+      "bytes": 960,
+      "order_aliases": []
+    },
+    {
+      "id": "N17",
+      "payload_sha256": "6fa7d5ae7ae4444586180d1d131aa4c934f239426a9b9514d76b0b355f8c204d",
+      "bytes": 1136,
+      "order_aliases": []
+    },
+    {
+      "id": "N18",
+      "payload_sha256": "8c23dd0236ec3327bc26c739c53c104d4eb30b6299e0edc78d4c451bac3bde16",
+      "bytes": 1145,
+      "order_aliases": []
+    },
+    {
+      "id": "N19",
+      "payload_sha256": "0a3eee4a6937a7a17808de347c115bc3ada172ad3c8a001f317bc9213d5ebb72",
+      "bytes": 1344,
+      "order_aliases": []
+    },
+    {
+      "id": "N20",
+      "payload_sha256": "ff19927b6f840f6a21510b9528bae3324549c100551c7f4996dc03474bf6e819",
+      "bytes": 1560,
+      "order_aliases": [
+        "订单A"
+      ]
+    },
+    {
+      "id": "N21",
+      "payload_sha256": "d5f3cb99acd11a01acaf0e9e47e8f1157e770b0f44dfd0d9e0f5eff8fdbebd82",
+      "bytes": 753,
+      "order_aliases": []
+    },
+    {
+      "id": "N22",
+      "payload_sha256": "1ad2cb18e2d13686d64401a2640e9eedfc788bee0c5e5d92df5be2ce9242dbe3",
+      "bytes": 754,
+      "order_aliases": []
+    },
+    {
+      "id": "N23",
+      "payload_sha256": "87db8db48518f84d1379c135fb51e89878e67b6c347e1ec601731965bbd41907",
+      "bytes": 744,
+      "order_aliases": []
+    },
+    {
+      "id": "N24",
+      "payload_sha256": "a061400b476e04e25c55d7d49f8de302a9bb3e0059492a7d652b7680fc400f4d",
+      "bytes": 1048,
+      "order_aliases": [
+        "订单A",
+        "订单B"
+      ]
+    },
+    {
+      "id": "N25",
+      "payload_sha256": "e031187bdc3faf95ca33d00a546240568178b66b2de5cae7e8832233c08e9d18",
+      "bytes": 1000,
+      "order_aliases": [
+        "订单A"
+      ]
+    },
+    {
+      "id": "N26",
+      "payload_sha256": "18a2ae22ac405a75ab4f6d81290c94a696e677a53661775d8025f766e11c7639",
+      "bytes": 1146,
+      "order_aliases": [
+        "订单A"
+      ]
+    },
+    {
+      "id": "N27",
+      "payload_sha256": "7a70d4d265b0b6c11f5291cd3d513418a1e1e83cede8c71bba9577878e351ea7",
+      "bytes": 1209,
+      "order_aliases": []
+    },
+    {
+      "id": "N28",
+      "payload_sha256": "fad5e93b9d2d50790db4982dc5e9dd1e0ae316d387206caf347b5231b8dd13d5",
+      "bytes": 1252,
+      "order_aliases": []
+    },
+    {
+      "id": "N29",
+      "payload_sha256": "66da715cd00f5a33ac458059953bd6762da4b9a825de2f7f3185bf3e819697e8",
+      "bytes": 1441,
+      "order_aliases": []
+    },
+    {
+      "id": "N30",
+      "payload_sha256": "18348441a8b8b808871a09213eb851a82db29e7d495f909d48fac6f48da03441",
+      "bytes": 1199,
+      "order_aliases": []
+    }
+  ],
+  "frozen_sha256": "520331f378e8539d4a034328590143752d848b276b31f8b7c8eec98f1a72cef2"
+}

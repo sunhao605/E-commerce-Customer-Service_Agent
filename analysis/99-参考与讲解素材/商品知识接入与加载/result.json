@@ -1,0 +1,74 @@
+{
+  "date": "2026-10-12",
+  "offline": {
+    "passed": 111,
+    "new_tests": 17,
+    "existing_tests": 94,
+    "external_network": false
+  },
+  "live": {
+    "final_page_cases": 3,
+    "passed": 3,
+    "rag_hit_counts": [
+      1,
+      1,
+      1
+    ],
+    "business_tool_counts": [
+      0,
+      0,
+      1
+    ],
+    "model_calls_recorded": [
+      {
+        "route_planner": 1,
+        "tool_agent": 0,
+        "final_answer": 0,
+        "extra_reasoning": 0
+      },
+      {
+        "route_planner": 1,
+        "tool_agent": 0,
+        "final_answer": 0,
+        "extra_reasoning": 0
+      },
+      {
+        "route_planner": 1,
+        "tool_agent": 2,
+        "final_answer": 0,
+        "extra_reasoning": 0
+      }
+    ],
+    "token_source": "application estimate; not provider billing",
+    "no_confirmation": true
+  },
+  "index": {
+    "loaded": true,
+    "version": "lesson41-idx-81e8d9ad64bc",
+    "chunk_count": 85,
+    "files": [
+      "after_sale_policy.md",
+      "payment_invoice_policy.md",
+      "promotion_policy.md",
+      "member_coupon_policy.md",
+      "product_knowledge.md"
+    ],
+    "embedding": "local_token_embedding_for_explicit_offline_course"
+  },
+  "database_snapshot_passed": true,
+  "source_hashes_match": true,
+  "services": {
+    "python_restarted": true,
+    "frontend_restarted_for_rename": true,
+    "java_restarted": false,
+    "model_config_changed": false,
+    "cancel_execute": "0"
+  },
+  "limits": [
+    "local hash embeddings, not commercial semantic embeddings",
+    "three final synthetic page questions, not full LLM evaluation",
+    "product-topic cues are bounded rules",
+    "sign-off and funding flows were not executed",
+    "return policy remains direct citation outside hybrid index"
+  ]
+}

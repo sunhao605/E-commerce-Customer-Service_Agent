@@ -1,0 +1,108 @@
+--- backend/retrieval/knowledge.py (before)
++++ backend/retrieval/knowledge.py (after)
+@@ -191,7 +191,7 @@
+                     "session_id": session_id,
+                     "hit_count": len(citations),
+                     "retrieval_stage": "pre_retrieval",
+-                    "policy_id": "promotion_618_stack_rule",
++                    "policy_id": "promotion_camping_season_stack_rule",
+                     "candidate_policy_ids": [
+                         citation.metadata.get("policy_id") for citation, _score, _reasons in candidates if citation.metadata
+                     ],
+@@ -235,10 +235,10 @@
+     asks_promotion = any(term in normalized_query for term in ("露营季", "大促", "活动", "满减", "300减40"))
+     asks_member = any(term in normalized_query for term in ("会员", "会员券", "山友", "优惠券"))
+     if asks_promotion and not asks_member:
+-        return {"promotion_618_stack_rule"}
++        return {"promotion_camping_season_stack_rule"}
+     if asks_member and not asks_promotion:
+         return {"member_coupon_gold_rule"}
+-    return {"promotion_618_stack_rule", "member_coupon_gold_rule"}
++    return {"promotion_camping_season_stack_rule", "member_coupon_gold_rule"}
+ 
+ 
+ def _rerank_promotion_candidates(
+@@ -256,7 +256,7 @@
+         policy_id = citation.metadata.get("policy_id") if citation.metadata else ""
+         final_score = score
+         final_reasons = list(reasons)
+-        if policy_id == "promotion_618_stack_rule" and any(term in normalized for term in ("露营季", "满减", "300减40", "大促")):
++        if policy_id == "promotion_camping_season_stack_rule" and any(term in normalized for term in ("露营季", "满减", "300减40", "大促")):
+             final_score += 0.18
+             final_reasons.append("当前大促规则加权")
+         if policy_id == "member_coupon_gold_rule" and any(term in normalized for term in ("山友", "会员券")):
+@@ -283,12 +283,12 @@
+ def _promotion_policy_answer(citations: list[Citation]) -> str:
+     """按实际命中的 citation 组织回答，避免单一证据问题被迫套完整叠加规则。"""
+     policy_ids = {citation.metadata.get("policy_id") for citation in citations if citation.metadata}
+-    if {"promotion_618_stack_rule", "member_coupon_gold_rule"}.issubset(policy_ids):
++    if {"promotion_camping_season_stack_rule", "member_coupon_gold_rule"}.issubset(policy_ids):
+         return (
+             "根据荒野户外 露营季活动规则，满 300 减 40 可以与平台会员券叠加，"
+             "但不能与同类型满减券重复叠加；山友会员券需要在有效期内由本人账号使用。"
+         )
+-    if "promotion_618_stack_rule" in policy_ids:
++    if "promotion_camping_season_stack_rule" in policy_ids:
+         return "根据荒野户外 露营季活动规则，满 300 减 40 活动可用，但不能与同类型满减券重复叠加。"
+     if "member_coupon_gold_rule" in policy_ids:
+         return "根据荒野户外会员券使用规则，山友会员可领取平台会员券；会员券需在有效期内由本人账号使用，不能转让。"
+--- backend/resources/knowledge/promotion_policy.md (before)
++++ backend/resources/knowledge/promotion_policy.md (after)
+@@ -1,5 +1,5 @@
+ ---
+-policy_id: promotion_618_stack_rule
++policy_id: promotion_camping_season_stack_rule
+ scene_key: promotion
+ title: 荒野户外 露营季活动规则
+ score: 0.91
+@@ -15,7 +15,7 @@
+ 
+ 本文是项目演示知识，保留既有满减和会员券叠加规则，补充活动范围、价格差异和异常咨询的处理方法。具体活动是否正在进行、哪件商品参与、活动价、会员门槛、优惠券状态和最终金额需要查询活动及结算数据。
+ 
+-本轮文档更新时间不代表活动开始时间；内部政策 ID 中保留的 618 也不代表活动现在处于六月。本文不设一个覆盖全部商品的永久活动周期，不提供未发布的双十一、黑五或隐藏券规则。
++本轮文档更新时间不代表活动开始时间；政策 ID 使用 camping_season 标识露营季，不表示固定月份。本文不设一个覆盖全部商品的永久活动周期，不提供未发布的双十一、黑五或隐藏券规则。
+ 
+ 活动知识用于解释已经取得的优惠条件。它不能代替库存、价格、本人持券和订单金额查询，也不构成“所有商品都参与”或“现在一定是最低价”的承诺。
+ 
+--- backend/resources/cases.yml (before)
++++ backend/resources/cases.yml (after)
+@@ -142,7 +142,7 @@
+     expected_tools:
+       - search_products
+     expected_citations:
+-      - promotion_618_stack_rule
++      - promotion_camping_season_stack_rule
+     expected_trace_events:
+       - rag_pre_retrieved
+       - context_source_safety_checked
+@@ -226,7 +226,7 @@
+         - id: gold_member_condition
+           any_of: [山友会员, 山友会员券]
+     expected_citations:
+-      - promotion_618_stack_rule
++      - promotion_camping_season_stack_rule
+       - member_coupon_gold_rule
+     expected_trace_events:
+       - rag_pre_retrieved
+--- backend/tests/test_product_knowledge.py (before)
++++ backend/tests/test_product_knowledge.py (after)
+@@ -100,7 +100,7 @@
+         docs=[d for d in index.documents if d.metadata['scene_key']=='promotion']
+         with patch.object(index.vector_store,'similarity_search_with_score',return_value=[(docs[0],.95),(docs[1],.12)]),patch.object(hybrid,'_keyword_score',return_value=0):
+             r=hybrid.retrieve_knowledge('zzzz9876','promotion_query')
+-        self.assertEqual(r.debug['source_scores']['promotion_618_stack_rule']['vector'],.95)
++        self.assertEqual(r.debug['source_scores']['promotion_camping_season_stack_rule']['vector'],.95)
+ 
+     def test_startup_preloads_index_for_health(self):
+         from fastapi.testclient import TestClient
+--- backend/tests/test_outdoor_scenario.py (before)
++++ backend/tests/test_outdoor_scenario.py (after)
+@@ -24,7 +24,7 @@
+             self.assertEqual(empty, [])
+             self.assertEqual(empty_source, 'course_seed_mirror')
+         result = promotion_policy_result('outdoor-policy-test', '露营季满减和山友会员券能否叠加？')
+-        self.assertEqual({c.metadata['policy_id'] for c in result.citations}, {'promotion_618_stack_rule','member_coupon_gold_rule'})
++        self.assertEqual({c.metadata['policy_id'] for c in result.citations}, {'promotion_camping_season_stack_rule','member_coupon_gold_rule'})
+         self.assertIn('山友会员', result.answer)
+         unknown = promotion_policy_result('outdoor-unknown-test', '露营季有隐藏券吗？')
+         self.assertEqual(unknown.citations, [])

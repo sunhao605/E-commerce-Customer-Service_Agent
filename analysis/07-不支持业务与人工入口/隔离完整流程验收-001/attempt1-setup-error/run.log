@@ -1,0 +1,17 @@
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/analysis/07-不支持业务与人工入口/隔离完整流程验收-001/accept.py", line 357, in <module>
+    else: run()
+          ~~~^^
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/analysis/07-不支持业务与人工入口/隔离完整流程验收-001/accept.py", line 290, in run
+    stack.enter_context(patch.object(REFUND_APPROVAL_GRAPH,"invoke",no_workflow))
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sunhao/.local/share/uv/python/cpython-3.14.7-macos-aarch64-none/lib/python3.14/contextlib.py", line 530, in enter_context
+    result = _enter(cm)
+  File "/Users/sunhao/.local/share/uv/python/cpython-3.14.7-macos-aarch64-none/lib/python3.14/unittest/mock.py", line 1510, in __enter__
+    original, local = self.get_original()
+                      ~~~~~~~~~~~~~~~~~^^
+  File "/Users/sunhao/.local/share/uv/python/cpython-3.14.7-macos-aarch64-none/lib/python3.14/unittest/mock.py", line 1480, in get_original
+    raise AttributeError(
+        "%s does not have the attribute %r" % (target, name)
+    )
+AttributeError: <agent.workflows.after_sale_graph.RefundApprovalGraph object at 0x10a0ee510> does not have the attribute 'invoke'

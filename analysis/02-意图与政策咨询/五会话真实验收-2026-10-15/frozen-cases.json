@@ -1,0 +1,14 @@
+{
+  "run_id": "RAG-LIVE-005",
+  "source": "用户授权的小范围真实验收；人工构造输入，非留存集或生产样本",
+  "frozen_before_run": true,
+  "scope": "五个新商城会话，各一轮；真实模型和业务读取；不重启、不修复、不追加重试",
+  "common_expected": ["商城网关成功，真实路由和最终模型参与", "无确认卡、resumeToken、售后Workflow或业务写入", "知识为当前有效版本，小块引用可定位；回答关键结论由实际证据支持", "不虚构数字、渠道到账时限、账号权益或已执行服务"],
+  "cases": [
+    {"id": "LIVE5-01", "message": "露营季满300减40能和平台会员券一起用吗？我只了解一般规则。", "intent": "promotion_query", "policies": ["promotion_camping_season_stack_rule", "member_coupon_gold_rule"], "business_tools": false, "expected": "解释通用可叠加及同类满减券不可重复；具体券、账号、适用条件仍需核验。引用包含实际叠加依据，不以政策编号代替条款。"},
+    {"id": "LIVE5-02", "message": "未发货订单退款一般什么时候到账？先问问，不申请退款。", "intent": "refund_policy_query", "policies": ["refund_before_shipping"], "business_tools": false, "expected": "直接回应到账时限无法保证，区分审核/退款完成与到账；演示余额不等于外部渠道。依据中有支持时限边界的原文，而非仅有模拟问句。"},
+    {"id": "LIVE5-03", "message": "签收后七天无理由退货，寄回运费谁承担？只是咨询，不申请退货。", "intent": "return_policy_query", "policies": ["return_after_delivery"], "business_tools": false, "expected": "说明项目没有统一运费补贴或报销规则，需要核对对应政策；不直接断定买家/商家承担或保证免费。引用包含运费条款。"},
+    {"id": "LIVE5-04", "message": "轻量露营折叠椅现在多少钱，还有库存吗？", "intent": "product_query", "policies": [], "business_tools": true, "expected": "商品对象正确，价格库存与本次业务API一致；最终改写不增造事实或到货提醒服务。"},
+    {"id": "LIVE5-05", "message": "轻量露营折叠椅现在多少钱，有货后能提醒我吗？", "intent": "product_query", "policies": [], "business_tools": true, "expected": "价格与本次业务API一致，明确目前不支持到货/补货提醒；不表示已登记、已开启或会持续留意。"}
+  ]
+}

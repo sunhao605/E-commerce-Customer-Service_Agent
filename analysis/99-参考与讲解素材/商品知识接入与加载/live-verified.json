@@ -1,0 +1,38 @@
+{
+  "session": "cs-4f1a5995-25a2-445b-a25e-315d22dd8183",
+  "page_cases": 3,
+  "rag_events": 3,
+  "hybrid_events": 3,
+  "section_ids": [
+    [
+      "outdoor_product_guide-section-5"
+    ],
+    [
+      "outdoor_product_guide-section-10"
+    ],
+    [
+      "outdoor_product_guide-section-5"
+    ]
+  ],
+  "model_route_used_count": 3,
+  "final_answer_model_skipped_count": 3,
+  "tool_event_count": 0,
+  "no_confirmation": true,
+  "health": {
+    "status": "ok",
+    "lesson": "41",
+    "rag_index": {
+      "loaded": true,
+      "version": "lesson41-idx-81e8d9ad64bc",
+      "chunk_count": 85,
+      "files": [
+        "after_sale_policy.md",
+        "payment_invoice_policy.md",
+        "promotion_policy.md",
+        "member_coupon_policy.md",
+        "product_knowledge.md"
+      ],
+      "embedding": "local_token_embedding_for_explicit_offline_course"
+    }
+  }
+}

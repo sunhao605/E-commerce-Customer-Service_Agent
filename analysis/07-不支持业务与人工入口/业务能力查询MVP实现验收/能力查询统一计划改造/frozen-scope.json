@@ -1,0 +1,14 @@
+{
+  "run_id": "CAP-PLAN-001",
+  "expected": [
+    "independent service scope query has a real intent, not general_chat",
+    "one existing route call can identify capability ids alongside product or policy evidence",
+    "RoutePlan is the sole source for execution capability ids; explicit empty means no queries",
+    "legacy missing field uses shared rule fallback only while building plan",
+    "ordinary consultation uses the same final composition path, no pure-capability skip",
+    "unknown classification cannot erase already planned independent evidence",
+    "invalid identifiers blocked, unknown valid ids and query failures do not become unsupported",
+    "security, eligibility and explicit application boundaries and existing drafts preserved",
+    "trace plan and queries agree; no daily restart or business writes"
+  ]
+}

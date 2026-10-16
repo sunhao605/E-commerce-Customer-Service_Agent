@@ -1,0 +1,267 @@
+2026-10-15T09:03:35.321099Z  WARN Failed to fetch models error=Network(reqwest::Error { kind: Request, url: "https://cli-chat-proxy.grok.com/v1/models", source: hyper_util::client::legacy::Error(Connect, TimedOut) })
+2026-10-15T09:03:35.321013Z  WARN Settings fetch network error: error sending request for url (https://cli-chat-proxy.grok.com/v1/settings) attempt=0
+2026-10-15T09:03:35.689964Z  WARN failed to remove managed config file file=/Users/sunhao/.grok/managed_config.toml error=Operation not permitted (os error 1)
+2026-10-15T09:03:35.690066Z  WARN failed to remove managed config file file=/Users/sunhao/.grok/requirements.toml error=Operation not permitted (os error 1)
+2026-10-15T09:03:35.697171Z  WARN preferred model not in available models, falling back model_id=grok-4.7-build-fast source=config
+2026-10-15T09:03:35.745701Z  WARN plugin name collision resolved by scope precedence plugin_name=ponytail winner=/Users/sunhao/.grok/installed-plugins/ponytail-3d1ab158 loser=/Users/sunhao/.claude/plugins/cache/ponytail/ponytail/4.9.0
+2026-10-15T09:03:35.787243Z  WARN plugin name collision resolved by scope precedence plugin_name=ponytail winner=/Users/sunhao/.grok/installed-plugins/ponytail-3d1ab158 loser=/Users/sunhao/.claude/plugins/cache/ponytail/ponytail/4.9.0
+2026-10-15T09:03:35.836153Z  WARN skipped permission entry path=/Users/sunhao/.claude/settings.json rule=permissions.allow: Skill(fewer-permission-prompts:*) reason=unknown tool prefix: Skill
+2026-10-15T09:03:36.074810Z  WARN sqlite-vec not available, falling back to FTS-only search
+2026-10-15T09:03:36.326777Z ERROR worker quit with fatal: Transport channel closed, when AuthRequired(AuthRequiredError { www_authenticate_header: "Bearer realm=\"dmm\", resource_metadata=\"https://aicowork.eastmoney.com/dong-mcp-manager/.well-known/oauth-protected-resource\", scope=\"openid\"" })
+2026-10-15T09:03:36.342797Z ERROR worker quit with fatal: Transport channel closed, when AuthRequired(AuthRequiredError { www_authenticate_header: "Bearer realm=\"dmm\", resource_metadata=\"https://aicowork.eastmoney.com/dong-mcp-manager/.well-known/oauth-protected-resource\", scope=\"openid\"" })
+2026-10-15T09:03:36.342917Z  WARN both handshake phases failed (surfacing the legacy error) server=dong-mcp-manager probe_error=Send message error Transport [rmcp::transport::worker::WorkerTransport<rmcp::transport::streamable_http_client::StreamableHttpClientWorker<xai_grok_mcp::mcp_http_client::McpHttpClient<reqwest::async_impl::client::Client>>>] error: Auth required, when send discover request legacy_error=MCP server 'dong-mcp-manager' handshake failed: Send message error Transport [rmcp::transport::worker::WorkerTransport<rmcp::transport::streamable_http_client::StreamableHttpClientWorker<xai_grok_mcp::mcp_http_client::McpHttpClient<reqwest::async_impl::client::Client>>>] error: Auth required, when send initialize request
+2026-10-15T09:03:36.343006Z  WARN MCP server init failed server=dong-mcp-manager error=MCP server 'dong-mcp-manager' handshake failed: Send message error Transport [rmcp::transport::worker::WorkerTransport<rmcp::transport::streamable_http_client::StreamableHttpClientWorker<xai_grok_mcp::mcp_http_client::McpHttpClient<reqwest::async_impl::client::Client>>>] error: Auth required, when send initialize request
+2026-10-15T09:03:36.343024Z  WARN MCP server failed to initialize server="dong-mcp-manager" elapsed_ms=229 timeout_sec=30 error=MCP server 'dong-mcp-manager' handshake failed: Send message error Transport [rmcp::transport::worker::WorkerTransport<rmcp::transport::streamable_http_client::StreamableHttpClientWorker<xai_grok_mcp::mcp_http_client::McpHttpClient<reqwest::async_impl::client::Client>>>] error: Auth required, when send initialize request needs_auth=true
+2026-10-15T09:03:37.407273Z  WARN Error killing MCP child process group: Operation not permitted (os error 1)
+2026-10-15T09:03:37.407364Z  WARN MCP server init failed server=Linear error=MCP server 'Linear' handshake failed: connection closed: initialize response
+2026-10-15T09:03:37.407383Z  WARN MCP server failed to initialize server="Linear" elapsed_ms=1278 timeout_sec=30 error=MCP server 'Linear' handshake failed: connection closed: initialize response needs_auth=false
+2026-10-15T09:03:37.407899Z  WARN Error killing MCP child process group: Operation not permitted (os error 1)
+2026-10-15T09:03:37.407937Z  WARN MCP server init failed server=puppeteer error=MCP server 'puppeteer' handshake failed: connection closed: initialize response
+2026-10-15T09:03:37.407950Z  WARN MCP server failed to initialize server="puppeteer" elapsed_ms=1282 timeout_sec=30 error=MCP server 'puppeteer' handshake failed: connection closed: initialize response needs_auth=false
+2026-10-15T09:03:37.869656Z  WARN Error killing MCP child process group: Operation not permitted (os error 1)
+2026-10-15T09:03:37.869808Z  WARN MCP server init failed server=chrome-devtools error=MCP server 'chrome-devtools' handshake failed: connection closed: initialize response
+2026-10-15T09:03:37.869839Z  WARN MCP server failed to initialize server="chrome-devtools" elapsed_ms=1763 timeout_sec=30 error=MCP server 'chrome-devtools' handshake failed: connection closed: initialize response needs_auth=false
+2026-10-15T09:03:39.307459Z  WARN Error killing MCP child process group: Operation not permitted (os error 1)
+2026-10-15T09:03:39.307559Z  WARN MCP server init failed server=Linear error=MCP server 'Linear' handshake failed: connection closed: initialize response
+2026-10-15T09:03:39.307604Z  WARN auto-restart attempt failed server=Linear attempt=1 reason=MCP server 'Linear' handshake failed: connection closed: initialize response
+2026-10-15T09:03:39.430795Z  WARN Error killing MCP child process group: Operation not permitted (os error 1)
+2026-10-15T09:03:39.430873Z  WARN MCP server init failed server=puppeteer error=MCP server 'puppeteer' handshake failed: connection closed: initialize response
+2026-10-15T09:03:39.430891Z  WARN auto-restart attempt failed server=puppeteer attempt=1 reason=MCP server 'puppeteer' handshake failed: connection closed: initialize response
+2026-10-15T09:03:39.693146Z  WARN Error killing MCP child process group: Operation not permitted (os error 1)
+2026-10-15T09:03:39.693327Z  WARN MCP server init failed server=chrome-devtools error=MCP server 'chrome-devtools' handshake failed: connection closed: initialize response
+2026-10-15T09:03:39.693367Z  WARN auto-restart attempt failed server=chrome-devtools attempt=1 reason=MCP server 'chrome-devtools' handshake failed: connection closed: initialize response
+2026-10-15T09:03:40.704443Z  WARN model catalog fetch timed out timeout_secs=5
+2026-10-15T09:03:40.704607Z  WARN model refresh failed, leaving existing models unchanged
+2026-10-15T09:03:40.706987Z  WARN Failed to fetch models error=Network(reqwest::Error { kind: Request, url: "https://cli-chat-proxy.grok.com/v1/models", source: hyper_util::client::legacy::Error(Connect, TimedOut) })
+2026-10-15T09:03:40.733625Z  WARN Settings fetch network error: error sending request for url (https://cli-chat-proxy.grok.com/v1/settings) attempt=0
+2026-10-15T09:03:40.827669Z  WARN Settings fetch network error: error sending request for url (https://cli-chat-proxy.grok.com/v1/settings) attempt=1
+2026-10-15T09:03:44.156358Z  WARN Error killing MCP child process group: Operation not permitted (os error 1)
+2026-10-15T09:03:44.156492Z  WARN MCP server init failed server=Linear error=MCP server 'Linear' handshake failed: connection closed: initialize response
+2026-10-15T09:03:44.156545Z  WARN auto-restart attempt failed server=Linear attempt=2 reason=MCP server 'Linear' handshake failed: connection closed: initialize response
+2026-10-15T09:03:44.191449Z  WARN Error killing MCP child process group: Operation not permitted (os error 1)
+2026-10-15T09:03:44.191561Z  WARN MCP server init failed server=puppeteer error=MCP server 'puppeteer' handshake failed: connection closed: initialize response
+2026-10-15T09:03:44.191578Z  WARN auto-restart attempt failed server=puppeteer attempt=2 reason=MCP server 'puppeteer' handshake failed: connection closed: initialize response
+2026-10-15T09:03:44.494117Z  WARN Error killing MCP child process group: Operation not permitted (os error 1)
+2026-10-15T09:03:44.494205Z  WARN MCP server init failed server=chrome-devtools error=MCP server 'chrome-devtools' handshake failed: connection closed: initialize response
+2026-10-15T09:03:44.494221Z  WARN auto-restart attempt failed server=chrome-devtools attempt=2 reason=MCP server 'chrome-devtools' handshake failed: connection closed: initialize response
+2026-10-15T09:03:46.191772Z  WARN session title generation failed, falling back to truncated user text model=grok-4.6 error=request error: error sending request for url (https://cli-chat-proxy.grok.com/v1/responses)
+2026-10-15T09:03:46.243463Z  WARN Settings fetch network error: error sending request for url (https://cli-chat-proxy.grok.com/v1/settings) attempt=1
+2026-10-15T09:03:46.834252Z  WARN Settings fetch network error: error sending request for url (https://cli-chat-proxy.grok.com/v1/settings) attempt=2
+2026-10-15T09:03:46.834391Z ERROR Settings fetch failed max_attempts=3
+2026-10-15T09:03:50.174657Z  WARN Ignoring context_window downgrade from response header current_context_window=500000 header_context_window=256000
+2026-10-15T09:03:50.713111Z  WARN model catalog fetch timed out timeout_secs=5
+2026-10-15T09:03:50.713261Z  WARN model refresh failed, leaving existing models unchanged
+2026-10-15T09:03:50.714844Z  WARN Failed to fetch models error=Network(reqwest::Error { kind: Request, url: "https://cli-chat-proxy.grok.com/v1/models", source: hyper_util::client::legacy::Error(Connect, TimedOut) })
+2026-10-15T09:03:52.252744Z  WARN Settings fetch network error: error sending request for url (https://cli-chat-proxy.grok.com/v1/settings) attempt=2
+2026-10-15T09:03:52.252805Z ERROR Settings fetch failed max_attempts=3
+2026-10-15T09:03:55.175422Z  WARN Failed to fetch models error=Network(reqwest::Error { kind: Request, url: "https://cli-chat-proxy.grok.com/v1/models", source: TimedOut })
+2026-10-15T09:03:55.175876Z  WARN model refresh failed, leaving existing models unchanged
+2026-10-15T09:03:57.260889Z  WARN Settings fetch network error: error sending request for url (https://cli-chat-proxy.grok.com/v1/settings) attempt=0
+2026-10-15T09:04:01.582320Z  WARN Error killing MCP child process group: Operation not permitted (os error 1)
+2026-10-15T09:04:01.582412Z  WARN MCP server init failed server=Linear error=MCP server 'Linear' handshake failed: connection closed: initialize response
+2026-10-15T09:04:01.582447Z  WARN auto-restart attempt failed server=Linear attempt=3 reason=MCP server 'Linear' handshake failed: connection closed: initialize response
+2026-10-15T09:04:01.790818Z  WARN Ignoring context_window downgrade from response header current_context_window=500000 header_context_window=256000
+2026-10-15T09:04:01.810325Z  WARN Error killing MCP child process group: Operation not permitted (os error 1)
+2026-10-15T09:04:01.810514Z  WARN MCP server init failed server=chrome-devtools error=MCP server 'chrome-devtools' handshake failed: connection closed: initialize response
+2026-10-15T09:04:01.810538Z  WARN auto-restart attempt failed server=chrome-devtools attempt=3 reason=MCP server 'chrome-devtools' handshake failed: connection closed: initialize response
+2026-10-15T09:04:01.825076Z  WARN Error killing MCP child process group: Operation not permitted (os error 1)
+2026-10-15T09:04:01.825163Z  WARN MCP server init failed server=puppeteer error=MCP server 'puppeteer' handshake failed: connection closed: initialize response
+2026-10-15T09:04:01.825181Z  WARN auto-restart attempt failed server=puppeteer attempt=3 reason=MCP server 'puppeteer' handshake failed: connection closed: initialize response
+2026-10-15T09:04:02.774423Z  WARN Settings fetch network error: error sending request for url (https://cli-chat-proxy.grok.com/v1/settings) attempt=1
+2026-10-15T09:04:05.743673Z  WARN model catalog fetch timed out timeout_secs=5
+2026-10-15T09:04:05.743875Z  WARN model refresh failed, leaving existing models unchanged
+2026-10-15T09:04:05.749247Z  WARN Failed to fetch models error=Network(reqwest::Error { kind: Request, url: "https://cli-chat-proxy.grok.com/v1/models", source: hyper_util::client::legacy::Error(Connect, TimedOut) })
+2026-10-15T09:04:06.788525Z  WARN etag-triggered model refresh timed out
+2026-10-15T09:04:06.789037Z  WARN model refresh failed, leaving existing models unchanged
+2026-10-15T09:04:06.812821Z  WARN Failed to fetch models error=Network(reqwest::Error { kind: Request, url: "https://cli-chat-proxy.grok.com/v1/models", source: hyper_util::client::legacy::Error(Connect, TimedOut) })
+2026-10-15T09:04:08.781298Z  WARN Settings fetch network error: error sending request for url (https://cli-chat-proxy.grok.com/v1/settings) attempt=2
+2026-10-15T09:04:08.781793Z ERROR Settings fetch failed max_attempts=3
+2026-10-15T09:04:08.783025Z  WARN Ignoring context_window downgrade from response header current_context_window=500000 header_context_window=256000
+2026-10-15T09:04:13.786144Z  WARN etag-triggered model refresh timed out
+2026-10-15T09:04:13.786268Z  WARN model refresh failed, leaving existing models unchanged
+2026-10-15T09:04:13.786244Z  WARN Failed to fetch models error=Network(reqwest::Error { kind: Request, url: "https://cli-chat-proxy.grok.com/v1/models", source: hyper_util::client::legacy::Error(Connect, TimedOut) })
+2026-10-15T09:04:21.376527Z  WARN Ignoring context_window downgrade from response header current_context_window=500000 header_context_window=256000
+2026-10-15T09:04:26.377795Z  WARN etag-triggered model refresh timed out
+2026-10-15T09:04:26.377877Z  WARN model refresh failed, leaving existing models unchanged
+2026-10-15T09:04:26.380512Z  WARN Failed to fetch models error=Network(reqwest::Error { kind: Request, url: "https://cli-chat-proxy.grok.com/v1/models", source: hyper_util::client::legacy::Error(Connect, TimedOut) })
+2026-10-15T09:04:30.749220Z  WARN model catalog fetch timed out timeout_secs=5
+2026-10-15T09:04:30.750025Z  WARN model refresh failed, leaving existing models unchanged
+2026-10-15T09:04:30.751446Z  WARN Failed to fetch models error=Network(reqwest::Error { kind: Request, url: "https://cli-chat-proxy.grok.com/v1/models", source: hyper_util::client::legacy::Error(Connect, TimedOut) })
+2026-10-15T09:05:15.757957Z  WARN model catalog fetch timed out timeout_secs=5
+2026-10-15T09:05:15.757951Z  WARN Failed to fetch models error=Network(reqwest::Error { kind: Request, url: "https://cli-chat-proxy.grok.com/v1/models", source: TimedOut })
+2026-10-15T09:05:15.758249Z  WARN model refresh failed, leaving existing models unchanged
+2026-10-15T09:05:15.758442Z  WARN Execution failed after 5 attempts
+2026-10-15T09:05:29.038513Z  WARN Ignoring context_window downgrade from response header current_context_window=500000 header_context_window=256000
+2026-10-15T09:05:34.039809Z  WARN etag-triggered model refresh timed out
+2026-10-15T09:05:34.039866Z  WARN model refresh failed, leaving existing models unchanged
+2026-10-15T09:05:34.041178Z  WARN Failed to fetch models error=Network(reqwest::Error { kind: Request, url: "https://cli-chat-proxy.grok.com/v1/models", source: hyper_util::client::legacy::Error(Connect, TimedOut) })
+2026-10-15T09:05:42.639080Z  WARN Ignoring context_window downgrade from response header current_context_window=500000 header_context_window=256000
+2026-10-15T09:05:47.641344Z  WARN etag-triggered model refresh timed out
+2026-10-15T09:05:47.642411Z  WARN model refresh failed, leaving existing models unchanged
+2026-10-15T09:05:47.643326Z  WARN Failed to fetch models error=Network(reqwest::Error { kind: Request, url: "https://cli-chat-proxy.grok.com/v1/models", source: hyper_util::client::legacy::Error(Connect, TimedOut) })
+2026-10-15T09:05:54.560946Z  WARN Ignoring context_window downgrade from response header current_context_window=500000 header_context_window=256000
+2026-10-15T09:05:59.562520Z  WARN etag-triggered model refresh timed out
+2026-10-15T09:05:59.564068Z  WARN model refresh failed, leaving existing models unchanged
+2026-10-15T09:05:59.564271Z  WARN Failed to fetch models error=Network(reqwest::Error { kind: Request, url: "https://cli-chat-proxy.grok.com/v1/models", source: hyper_util::client::legacy::Error(Connect, TimedOut) })
+2026-10-15T09:06:02.375621Z ERROR tool_error: tool_output_error session_id=2e2854e5-c221-4339-a16a-0ea21d45f609 tool_name="list_dir" effective_tool_name="list_dir" model_id="grok-4.6" error_kind="tool_output_error"
+2026-10-15T09:06:04.689419Z  WARN Ignoring context_window downgrade from response header current_context_window=500000 header_context_window=256000
+2026-10-15T09:06:09.691962Z  WARN etag-triggered model refresh timed out
+2026-10-15T09:06:09.692950Z  WARN model refresh failed, leaving existing models unchanged
+2026-10-15T09:06:09.694958Z  WARN Failed to fetch models error=Network(reqwest::Error { kind: Request, url: "https://cli-chat-proxy.grok.com/v1/models", source: hyper_util::client::legacy::Error(Connect, TimedOut) })
+2026-10-15T09:06:29.878859Z  WARN Ignoring context_window downgrade from response header current_context_window=500000 header_context_window=256000
+2026-10-15T09:06:34.880877Z  WARN etag-triggered model refresh timed out
+2026-10-15T09:06:34.881304Z  WARN model refresh failed, leaving existing models unchanged
+2026-10-15T09:06:34.882009Z  WARN Failed to fetch models error=Network(reqwest::Error { kind: Request, url: "https://cli-chat-proxy.grok.com/v1/models", source: TimedOut })
+2026-10-15T09:07:46.553157Z  WARN Ignoring context_window downgrade from response header current_context_window=500000 header_context_window=256000
+2026-10-15T09:07:51.557197Z  WARN etag-triggered model refresh timed out
+2026-10-15T09:07:51.560595Z  WARN model refresh failed, leaving existing models unchanged
+2026-10-15T09:07:51.560741Z  WARN Failed to fetch models error=Network(reqwest::Error { kind: Request, url: "https://cli-chat-proxy.grok.com/v1/models", source: hyper_util::client::legacy::Error(Connect, TimedOut) })
+2026-10-15T09:08:28.605495Z  WARN Ignoring context_window downgrade from response header current_context_window=500000 header_context_window=256000
+2026-10-15T09:08:33.614319Z  WARN etag-triggered model refresh timed out
+2026-10-15T09:08:33.614577Z  WARN model refresh failed, leaving existing models unchanged
+2026-10-15T09:08:33.615809Z  WARN Failed to fetch models error=Network(reqwest::Error { kind: Request, url: "https://cli-chat-proxy.grok.com/v1/models", source: TimedOut })
+2026-10-15T09:08:40.744896Z  WARN Settings fetch network error: error sending request for url (https://cli-chat-proxy.grok.com/v1/settings) attempt=0
+2026-10-15T09:08:46.254494Z  WARN Settings fetch network error: error sending request for url (https://cli-chat-proxy.grok.com/v1/settings) attempt=1
+2026-10-15T09:08:52.260747Z  WARN Settings fetch network error: error sending request for url (https://cli-chat-proxy.grok.com/v1/settings) attempt=2
+2026-10-15T09:08:52.261699Z ERROR Settings fetch failed max_attempts=3
+2026-10-15T09:09:38.672566Z  WARN Ignoring context_window downgrade from response header current_context_window=500000 header_context_window=256000
+2026-10-15T09:09:43.673866Z  WARN etag-triggered model refresh timed out
+2026-10-15T09:09:43.674000Z  WARN model refresh failed, leaving existing models unchanged
+2026-10-15T09:09:43.676577Z  WARN Failed to fetch models error=Network(reqwest::Error { kind: Request, url: "https://cli-chat-proxy.grok.com/v1/models", source: hyper_util::client::legacy::Error(Connect, TimedOut) })
+2026-10-15T09:10:38.365643Z  WARN Ignoring context_window downgrade from response header current_context_window=500000 header_context_window=256000
+2026-10-15T09:10:43.366808Z  WARN etag-triggered model refresh timed out
+2026-10-15T09:10:43.367103Z  WARN model refresh failed, leaving existing models unchanged
+2026-10-15T09:10:43.369434Z  WARN Failed to fetch models error=Network(reqwest::Error { kind: Request, url: "https://cli-chat-proxy.grok.com/v1/models", source: hyper_util::client::legacy::Error(Connect, TimedOut) })
+2026-10-15T09:11:43.174820Z  WARN Ignoring context_window downgrade from response header current_context_window=500000 header_context_window=256000
+2026-10-15T09:11:48.176011Z  WARN etag-triggered model refresh timed out
+2026-10-15T09:11:48.176366Z  WARN model refresh failed, leaving existing models unchanged
+2026-10-15T09:11:48.179239Z  WARN Failed to fetch models error=Network(reqwest::Error { kind: Request, url: "https://cli-chat-proxy.grok.com/v1/models", source: hyper_util::client::legacy::Error(Connect, TimedOut) })
+2026-10-15T09:12:12.115391Z  WARN Ignoring context_window downgrade from response header current_context_window=500000 header_context_window=256000
+2026-10-15T09:12:17.117312Z  WARN etag-triggered model refresh timed out
+2026-10-15T09:12:17.119075Z  WARN model refresh failed, leaving existing models unchanged
+2026-10-15T09:12:17.119269Z  WARN Failed to fetch models error=Network(reqwest::Error { kind: Request, url: "https://cli-chat-proxy.grok.com/v1/models", source: hyper_util::client::legacy::Error(Connect, TimedOut) })
+2026-10-15T09:12:28.541819Z  WARN Ignoring context_window downgrade from response header current_context_window=500000 header_context_window=256000
+2026-10-15T09:12:33.543688Z  WARN etag-triggered model refresh timed out
+2026-10-15T09:12:33.543941Z  WARN model refresh failed, leaving existing models unchanged
+2026-10-15T09:12:33.545129Z  WARN Failed to fetch models error=Network(reqwest::Error { kind: Request, url: "https://cli-chat-proxy.grok.com/v1/models", source: TimedOut })
+2026-10-15T09:12:36.847753Z  WARN Ignoring context_window downgrade from response header current_context_window=500000 header_context_window=256000
+2026-10-15T09:12:41.847890Z  WARN etag-triggered model refresh timed out
+2026-10-15T09:12:41.848081Z  WARN model refresh failed, leaving existing models unchanged
+2026-10-15T09:12:41.849933Z  WARN Failed to fetch models error=Network(reqwest::Error { kind: Request, url: "https://cli-chat-proxy.grok.com/v1/models", source: TimedOut })
+2026-10-15T09:12:50.521014Z  WARN Ignoring context_window downgrade from response header current_context_window=500000 header_context_window=256000
+2026-10-15T09:12:55.519955Z  WARN etag-triggered model refresh timed out
+2026-10-15T09:12:55.520106Z  WARN model refresh failed, leaving existing models unchanged
+2026-10-15T09:12:55.523865Z  WARN Failed to fetch models error=Network(reqwest::Error { kind: Request, url: "https://cli-chat-proxy.grok.com/v1/models", source: hyper_util::client::legacy::Error(Connect, TimedOut) })
+2026-10-15T09:13:13.638650Z  WARN Ignoring context_window downgrade from response header current_context_window=500000 header_context_window=256000
+2026-10-15T09:13:18.649454Z  WARN etag-triggered model refresh timed out
+2026-10-15T09:13:18.650693Z  WARN model refresh failed, leaving existing models unchanged
+2026-10-15T09:13:18.650377Z  WARN Failed to fetch models error=Network(reqwest::Error { kind: Request, url: "https://cli-chat-proxy.grok.com/v1/models", source: hyper_util::client::legacy::Error(Connect, TimedOut) })
+2026-10-15T09:13:27.396368Z  WARN Ignoring context_window downgrade from response header current_context_window=500000 header_context_window=256000
+2026-10-15T09:13:32.399003Z  WARN etag-triggered model refresh timed out
+2026-10-15T09:13:32.399571Z  WARN model refresh failed, leaving existing models unchanged
+2026-10-15T09:13:32.401014Z  WARN Failed to fetch models error=Network(reqwest::Error { kind: Request, url: "https://cli-chat-proxy.grok.com/v1/models", source: TimedOut })
+2026-10-15T09:13:40.760988Z  WARN Settings fetch network error: error sending request for url (https://cli-chat-proxy.grok.com/v1/settings) attempt=0
+2026-10-15T09:13:43.455324Z  WARN Ignoring context_window downgrade from response header current_context_window=500000 header_context_window=256000
+2026-10-15T09:14:12.774457Z  WARN Settings fetch network error: error sending request for url (https://cli-chat-proxy.grok.com/v1/settings) attempt=0
+2026-10-15T09:14:12.774428Z  WARN Failed to fetch models error=Network(reqwest::Error { kind: Request, url: "https://cli-chat-proxy.grok.com/v1/models", source: hyper_util::client::legacy::Error(Connect, TimedOut) })
+2026-10-15T09:14:13.157096Z  WARN failed to remove managed config file file=/Users/sunhao/.grok/managed_config.toml error=Operation not permitted (os error 1)
+2026-10-15T09:14:13.157237Z  WARN failed to remove managed config file file=/Users/sunhao/.grok/requirements.toml error=Operation not permitted (os error 1)
+2026-10-15T09:14:13.163222Z  WARN preferred model not in available models, falling back model_id=grok-4.7-build-fast source=config
+2026-10-15T09:14:13.205584Z  WARN plugin name collision resolved by scope precedence plugin_name=ponytail winner=/Users/sunhao/.grok/installed-plugins/ponytail-3d1ab158 loser=/Users/sunhao/.claude/plugins/cache/ponytail/ponytail/4.9.0
+2026-10-15T09:14:13.234746Z  WARN load_session: previous process left a turn unfinished; recording it as interrupted session_id=2e2854e5-c221-4339-a16a-0ea21d45f609 trace_turn=0 prompt_id=15c535cb-d236-46bc-bc37-cbe89e20ad4d started_at=Some("2026-10-15T09:03:36.168Z")
+2026-10-15T09:14:13.284709Z  WARN plugin name collision resolved by scope precedence plugin_name=ponytail winner=/Users/sunhao/.grok/installed-plugins/ponytail-3d1ab158 loser=/Users/sunhao/.claude/plugins/cache/ponytail/ponytail/4.9.0
+2026-10-15T09:14:13.294168Z  WARN skipped permission entry path=/Users/sunhao/.claude/settings.json rule=permissions.allow: Skill(fewer-permission-prompts:*) reason=unknown tool prefix: Skill
+2026-10-15T09:14:13.525096Z  WARN sqlite-vec not available, falling back to FTS-only search
+2026-10-15T09:14:13.625249Z ERROR worker quit with fatal: Transport channel closed, when AuthRequired(AuthRequiredError { www_authenticate_header: "Bearer realm=\"dmm\", resource_metadata=\"https://aicowork.eastmoney.com/dong-mcp-manager/.well-known/oauth-protected-resource\", scope=\"openid\"" })
+2026-10-15T09:14:13.647615Z ERROR worker quit with fatal: Transport channel closed, when AuthRequired(AuthRequiredError { www_authenticate_header: "Bearer realm=\"dmm\", resource_metadata=\"https://aicowork.eastmoney.com/dong-mcp-manager/.well-known/oauth-protected-resource\", scope=\"openid\"" })
+2026-10-15T09:14:13.647727Z  WARN both handshake phases failed (surfacing the legacy error) server=dong-mcp-manager probe_error=Send message error Transport [rmcp::transport::worker::WorkerTransport<rmcp::transport::streamable_http_client::StreamableHttpClientWorker<xai_grok_mcp::mcp_http_client::McpHttpClient<reqwest::async_impl::client::Client>>>] error: Auth required, when send discover request legacy_error=MCP server 'dong-mcp-manager' handshake failed: Send message error Transport [rmcp::transport::worker::WorkerTransport<rmcp::transport::streamable_http_client::StreamableHttpClientWorker<xai_grok_mcp::mcp_http_client::McpHttpClient<reqwest::async_impl::client::Client>>>] error: Auth required, when send initialize request
+2026-10-15T09:14:13.647782Z  WARN MCP server init failed server=dong-mcp-manager error=MCP server 'dong-mcp-manager' handshake failed: Send message error Transport [rmcp::transport::worker::WorkerTransport<rmcp::transport::streamable_http_client::StreamableHttpClientWorker<xai_grok_mcp::mcp_http_client::McpHttpClient<reqwest::async_impl::client::Client>>>] error: Auth required, when send initialize request
+2026-10-15T09:14:13.647797Z  WARN MCP server failed to initialize server="dong-mcp-manager" elapsed_ms=132 timeout_sec=30 error=MCP server 'dong-mcp-manager' handshake failed: Send message error Transport [rmcp::transport::worker::WorkerTransport<rmcp::transport::streamable_http_client::StreamableHttpClientWorker<xai_grok_mcp::mcp_http_client::McpHttpClient<reqwest::async_impl::client::Client>>>] error: Auth required, when send initialize request needs_auth=true
+2026-10-15T09:14:14.828119Z  WARN Error killing MCP child process group: Operation not permitted (os error 1)
+2026-10-15T09:14:14.828212Z  WARN MCP server init failed server=chrome-devtools error=MCP server 'chrome-devtools' handshake failed: connection closed: initialize response
+2026-10-15T09:14:14.828228Z  WARN MCP server failed to initialize server="chrome-devtools" elapsed_ms=1319 timeout_sec=30 error=MCP server 'chrome-devtools' handshake failed: connection closed: initialize response needs_auth=false
+2026-10-15T09:14:14.829167Z  WARN Error killing MCP child process group: Operation not permitted (os error 1)
+2026-10-15T09:14:14.829235Z  WARN MCP server init failed server=puppeteer error=MCP server 'puppeteer' handshake failed: connection closed: initialize response
+2026-10-15T09:14:14.829251Z  WARN MCP server failed to initialize server="puppeteer" elapsed_ms=1308 timeout_sec=30 error=MCP server 'puppeteer' handshake failed: connection closed: initialize response needs_auth=false
+2026-10-15T09:14:14.947234Z  WARN Error killing MCP child process group: Operation not permitted (os error 1)
+2026-10-15T09:14:14.947363Z  WARN MCP server init failed server=Linear error=MCP server 'Linear' handshake failed: connection closed: initialize response
+2026-10-15T09:14:14.947387Z  WARN MCP server failed to initialize server="Linear" elapsed_ms=1426 timeout_sec=30 error=MCP server 'Linear' handshake failed: connection closed: initialize response needs_auth=false
+2026-10-15T09:14:16.646650Z  WARN Error killing MCP child process group: Operation not permitted (os error 1)
+2026-10-15T09:14:16.646735Z  WARN MCP server init failed server=chrome-devtools error=MCP server 'chrome-devtools' handshake failed: connection closed: initialize response
+2026-10-15T09:14:16.646755Z  WARN auto-restart attempt failed server=chrome-devtools attempt=1 reason=MCP server 'chrome-devtools' handshake failed: connection closed: initialize response
+2026-10-15T09:14:16.665950Z  WARN Error killing MCP child process group: Operation not permitted (os error 1)
+2026-10-15T09:14:16.666031Z  WARN MCP server init failed server=puppeteer error=MCP server 'puppeteer' handshake failed: connection closed: initialize response
+2026-10-15T09:14:16.666045Z  WARN auto-restart attempt failed server=puppeteer attempt=1 reason=MCP server 'puppeteer' handshake failed: connection closed: initialize response
+2026-10-15T09:14:16.754342Z  WARN Error killing MCP child process group: Operation not permitted (os error 1)
+2026-10-15T09:14:16.754411Z  WARN MCP server init failed server=Linear error=MCP server 'Linear' handshake failed: connection closed: initialize response
+2026-10-15T09:14:16.754425Z  WARN auto-restart attempt failed server=Linear attempt=1 reason=MCP server 'Linear' handshake failed: connection closed: initialize response
+2026-10-15T09:14:18.167712Z  WARN model catalog fetch timed out timeout_secs=5
+2026-10-15T09:14:18.168262Z  WARN model refresh failed, leaving existing models unchanged
+2026-10-15T09:14:18.171547Z  WARN Failed to fetch models error=Network(reqwest::Error { kind: Request, url: "https://cli-chat-proxy.grok.com/v1/models", source: hyper_util::client::legacy::Error(Connect, TimedOut) })
+2026-10-15T09:14:18.187293Z  WARN Settings fetch network error: error sending request for url (https://cli-chat-proxy.grok.com/v1/settings) attempt=0
+2026-10-15T09:14:18.280305Z  WARN Settings fetch network error: error sending request for url (https://cli-chat-proxy.grok.com/v1/settings) attempt=1
+2026-10-15T09:14:21.718123Z  WARN Error killing MCP child process group: Operation not permitted (os error 1)
+2026-10-15T09:14:21.718600Z  WARN MCP server init failed server=chrome-devtools error=MCP server 'chrome-devtools' handshake failed: connection closed: initialize response
+2026-10-15T09:14:21.718705Z  WARN auto-restart attempt failed server=chrome-devtools attempt=2 reason=MCP server 'chrome-devtools' handshake failed: connection closed: initialize response
+2026-10-15T09:14:21.746671Z  WARN Error killing MCP child process group: Operation not permitted (os error 1)
+2026-10-15T09:14:21.746755Z  WARN MCP server init failed server=puppeteer error=MCP server 'puppeteer' handshake failed: connection closed: initialize response
+2026-10-15T09:14:21.746773Z  WARN auto-restart attempt failed server=puppeteer attempt=2 reason=MCP server 'puppeteer' handshake failed: connection closed: initialize response
+2026-10-15T09:14:21.962570Z  WARN Error killing MCP child process group: Operation not permitted (os error 1)
+2026-10-15T09:14:21.962665Z  WARN MCP server init failed server=Linear error=MCP server 'Linear' handshake failed: connection closed: initialize response
+2026-10-15T09:14:21.962705Z  WARN auto-restart attempt failed server=Linear attempt=2 reason=MCP server 'Linear' handshake failed: connection closed: initialize response
+2026-10-15T09:14:23.695429Z  WARN Settings fetch network error: error sending request for url (https://cli-chat-proxy.grok.com/v1/settings) attempt=1
+2026-10-15T09:14:24.041391Z  WARN Ignoring context_window downgrade from response header current_context_window=500000 header_context_window=256000
+2026-10-15T09:14:24.286283Z  WARN Settings fetch network error: error sending request for url (https://cli-chat-proxy.grok.com/v1/settings) attempt=2
+2026-10-15T09:14:24.286362Z ERROR Settings fetch failed max_attempts=3
+2026-10-15T09:14:28.173184Z  WARN model catalog fetch timed out timeout_secs=5
+2026-10-15T09:14:28.173566Z  WARN model refresh failed, leaving existing models unchanged
+2026-10-15T09:14:28.174610Z  WARN Failed to fetch models error=Network(reqwest::Error { kind: Request, url: "https://cli-chat-proxy.grok.com/v1/models", source: hyper_util::client::legacy::Error(Connect, TimedOut) })
+2026-10-15T09:14:29.042975Z  WARN etag-triggered model refresh timed out
+2026-10-15T09:14:29.043142Z  WARN model refresh failed, leaving existing models unchanged
+2026-10-15T09:14:29.044293Z  WARN Failed to fetch models error=Network(reqwest::Error { kind: Request, url: "https://cli-chat-proxy.grok.com/v1/models", source: hyper_util::client::legacy::Error(Connect, TimedOut) })
+2026-10-15T09:14:29.703481Z  WARN Settings fetch network error: error sending request for url (https://cli-chat-proxy.grok.com/v1/settings) attempt=2
+2026-10-15T09:14:29.703599Z ERROR Settings fetch failed max_attempts=3
+2026-10-15T09:14:34.714602Z  WARN Settings fetch network error: error sending request for url (https://cli-chat-proxy.grok.com/v1/settings) attempt=0
+2026-10-15T09:14:38.766058Z  WARN Error killing MCP child process group: Operation not permitted (os error 1)
+2026-10-15T09:14:38.766142Z  WARN MCP server init failed server=Linear error=MCP server 'Linear' handshake failed: connection closed: initialize response
+2026-10-15T09:14:38.766180Z  WARN auto-restart attempt failed server=Linear attempt=3 reason=MCP server 'Linear' handshake failed: connection closed: initialize response
+2026-10-15T09:14:38.766375Z  WARN Error killing MCP child process group: Operation not permitted (os error 1)
+2026-10-15T09:14:38.766414Z  WARN MCP server init failed server=chrome-devtools error=MCP server 'chrome-devtools' handshake failed: connection closed: initialize response
+2026-10-15T09:14:38.766427Z  WARN auto-restart attempt failed server=chrome-devtools attempt=3 reason=MCP server 'chrome-devtools' handshake failed: connection closed: initialize response
+2026-10-15T09:14:38.778069Z  WARN Error killing MCP child process group: Operation not permitted (os error 1)
+2026-10-15T09:14:38.778172Z  WARN MCP server init failed server=puppeteer error=MCP server 'puppeteer' handshake failed: connection closed: initialize response
+2026-10-15T09:14:38.778193Z  WARN auto-restart attempt failed server=puppeteer attempt=3 reason=MCP server 'puppeteer' handshake failed: connection closed: initialize response
+2026-10-15T09:14:40.219473Z  WARN Settings fetch network error: error sending request for url (https://cli-chat-proxy.grok.com/v1/settings) attempt=1
+2026-10-15T09:14:42.687539Z  WARN Ignoring context_window downgrade from response header current_context_window=500000 header_context_window=256000
+2026-10-15T09:14:43.178548Z  WARN model catalog fetch timed out timeout_secs=5
+2026-10-15T09:14:43.178720Z  WARN model refresh failed, leaving existing models unchanged
+2026-10-15T09:14:43.179627Z  WARN Failed to fetch models error=Network(reqwest::Error { kind: Request, url: "https://cli-chat-proxy.grok.com/v1/models", source: hyper_util::client::legacy::Error(Connect, TimedOut) })
+2026-10-15T09:14:46.227369Z  WARN Settings fetch network error: error sending request for url (https://cli-chat-proxy.grok.com/v1/settings) attempt=2
+2026-10-15T09:14:46.227641Z ERROR Settings fetch failed max_attempts=3
+2026-10-15T09:14:47.688986Z  WARN etag-triggered model refresh timed out
+2026-10-15T09:14:47.689151Z  WARN model refresh failed, leaving existing models unchanged
+2026-10-15T09:14:47.690934Z  WARN Failed to fetch models error=Network(reqwest::Error { kind: Request, url: "https://cli-chat-proxy.grok.com/v1/models", source: hyper_util::client::legacy::Error(Connect, TimedOut) })
+2026-10-15T09:15:08.185496Z  WARN model catalog fetch timed out timeout_secs=5
+2026-10-15T09:15:08.185996Z  WARN model refresh failed, leaving existing models unchanged
+2026-10-15T09:15:08.189912Z  WARN Failed to fetch models error=Network(reqwest::Error { kind: Request, url: "https://cli-chat-proxy.grok.com/v1/models", source: hyper_util::client::legacy::Error(Connect, TimedOut) })
+2026-10-15T09:15:49.223120Z  WARN Ignoring context_window downgrade from response header current_context_window=500000 header_context_window=256000
+2026-10-15T09:15:53.191519Z  WARN model catalog fetch timed out timeout_secs=5
+2026-10-15T09:15:53.191837Z  WARN model refresh failed, leaving existing models unchanged
+2026-10-15T09:15:53.192692Z  WARN Execution failed after 5 attempts
+2026-10-15T09:15:53.193524Z  WARN Failed to fetch models error=Network(reqwest::Error { kind: Request, url: "https://cli-chat-proxy.grok.com/v1/models", source: TimedOut })
+2026-10-15T09:15:54.224568Z  WARN etag-triggered model refresh timed out
+2026-10-15T09:15:54.224700Z  WARN model refresh failed, leaving existing models unchanged
+2026-10-15T09:15:54.226297Z  WARN Failed to fetch models error=Network(reqwest::Error { kind: Request, url: "https://cli-chat-proxy.grok.com/v1/models", source: hyper_util::client::legacy::Error(Connect, TimedOut) })
+2026-10-15T09:16:43.269120Z  WARN Ignoring context_window downgrade from response header current_context_window=500000 header_context_window=256000
+2026-10-15T09:16:48.270987Z  WARN etag-triggered model refresh timed out
+2026-10-15T09:16:48.271133Z  WARN model refresh failed, leaving existing models unchanged
+2026-10-15T09:16:48.271981Z  WARN Failed to fetch models error=Network(reqwest::Error { kind: Request, url: "https://cli-chat-proxy.grok.com/v1/models", source: TimedOut })
+2026-10-15T09:16:52.308964Z  WARN Ignoring context_window downgrade from response header current_context_window=500000 header_context_window=256000
+2026-10-15T09:16:57.310228Z  WARN etag-triggered model refresh timed out
+2026-10-15T09:16:57.310708Z  WARN model refresh failed, leaving existing models unchanged
+2026-10-15T09:16:57.312397Z  WARN Failed to fetch models error=Network(reqwest::Error { kind: Request, url: "https://cli-chat-proxy.grok.com/v1/models", source: hyper_util::client::legacy::Error(Connect, TimedOut) })
+2026-10-15T09:17:31.540275Z  WARN Ignoring context_window downgrade from response header current_context_window=500000 header_context_window=256000
+2026-10-15T09:17:36.121105Z  WARN Ignoring context_window downgrade from response header current_context_window=500000 header_context_window=256000
+2026-10-15T09:17:36.542444Z  WARN etag-triggered model refresh timed out
+2026-10-15T09:17:36.542636Z  WARN model refresh failed, leaving existing models unchanged
+2026-10-15T09:17:36.543265Z  WARN Failed to fetch models error=Network(reqwest::Error { kind: Request, url: "https://cli-chat-proxy.grok.com/v1/models", source: TimedOut })

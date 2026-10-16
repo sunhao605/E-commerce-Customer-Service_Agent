@@ -1,0 +1,81 @@
+{
+  "id": "ANSWER-LIVE-001",
+  "cases": [
+    {
+      "id": "ANSWER-LIVE-01",
+      "surface": "api",
+      "message": "支持到货提醒吗？",
+      "expected_intent": "service_scope_query",
+      "capability_ids": [
+        "stock_notification"
+      ],
+      "expected": "明确不支持和可行下一步一次，不要求重述"
+    },
+    {
+      "id": "ANSWER-LIVE-02",
+      "surface": "api",
+      "message": "轻量露营折叠椅现在多少钱，有货后能提醒我吗？",
+      "expected_intent": "product_query",
+      "capability_ids": [
+        "stock_notification"
+      ],
+      "expected": "价格库存按本次API，提醒回答一次，两项证据均先于生成"
+    },
+    {
+      "id": "ANSWER-LIVE-03",
+      "surface": "api",
+      "message": "支持退款吗？",
+      "expected_intent": "service_scope_query",
+      "capability_ids": [
+        "refund_consultation"
+      ],
+      "expected": "未发货整单范围，具体资格核验及未提交边界，无新申请"
+    },
+    {
+      "id": "ANSWER-LIVE-04",
+      "surface": "api",
+      "message": "露营季满减与平台会员券能叠加吗，支持到货提醒吗？",
+      "expected_intent": "promotion_query",
+      "capability_ids": [
+        "stock_notification"
+      ],
+      "expected": "依据实际政策说明通用叠加及限制，不承诺个人适用；提醒说明一次"
+    },
+    {
+      "id": "ANSWER-LIVE-05",
+      "surface": "browser",
+      "source": "相邻自然表达，冻结后不参与调试",
+      "message": "售罄后你们能发消息通知我吗？",
+      "expected_intent": "service_scope_query",
+      "capability_ids": [
+        "stock_notification"
+      ],
+      "expected": "直接说明当前不支持通知，无商品追问或内部引用"
+    },
+    {
+      "id": "ANSWER-LIVE-06",
+      "surface": "browser",
+      "source": "相邻自然表达，冻结后不参与调试",
+      "message": "轻量露营折叠椅售价多少？补货后可以给我发消息吗？",
+      "expected_intent": "product_query",
+      "capability_ids": [
+        "stock_notification"
+      ],
+      "expected": "价格库存按API，明确通知能力，完整而无重复"
+    }
+  ],
+  "common": [
+    "独立新会话，事前Trace为空，一条一轮，不自动重试",
+    "正常路径应由现有最终模型成文，不靠降级掩盖实现",
+    "实际查询与RoutePlan一致，证据先于最终生成",
+    "正文无重复、旧标记、状态冲突或未执行承诺",
+    "无确认凭证／申请／Workflow／资金动作，八表及商品事实哈希不变"
+  ],
+  "forbidden": [
+    "修改模型或知识配置",
+    "重启MySQL",
+    "提交售后或操作资金",
+    "覆盖历史运行"
+  ],
+  "review": "代码／状态核验＋助手语义审阅，有限验收不外推生产质量"
+}

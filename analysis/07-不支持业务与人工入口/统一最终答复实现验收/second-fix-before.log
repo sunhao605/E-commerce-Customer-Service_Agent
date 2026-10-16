@@ -1,0 +1,25 @@
+test_polite_stock_watch_promise_is_removed_from_mixed_policy_reply (tests.test_service_capabilities.CapabilityAnswerTest.test_polite_stock_watch_promise_is_removed_from_mixed_policy_reply) ... FAIL
+test_refund_scope_missing_non_application_boundary_falls_back_whole_reply (tests.test_service_capabilities.CapabilityAnswerTest.test_refund_scope_missing_non_application_boundary_falls_back_whole_reply) ... FAIL
+
+======================================================================
+FAIL: test_polite_stock_watch_promise_is_removed_from_mixed_policy_reply (tests.test_service_capabilities.CapabilityAnswerTest.test_polite_stock_watch_promise_is_removed_from_mixed_policy_reply)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_service_capabilities.py", line 324, in test_polite_stock_watch_promise_is_removed_from_mixed_policy_reply
+    self.assertNotIn("帮您留意", response.answer)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '帮您留意' unexpectedly found in '露营季满300减40可与平台会员券叠加。当前不支持到货提醒。您可以主动查库存，我们也可以帮您留意。'
+
+======================================================================
+FAIL: test_refund_scope_missing_non_application_boundary_falls_back_whole_reply (tests.test_service_capabilities.CapabilityAnswerTest.test_refund_scope_missing_non_application_boundary_falls_back_whole_reply)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_service_capabilities.py", line 334, in test_refund_scope_missing_non_application_boundary_falls_back_whole_reply
+    self.assertFalse(response.session_state["model"]["final_answer"]["used_model"])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: True is not false
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.049s
+
+FAILED (failures=2)

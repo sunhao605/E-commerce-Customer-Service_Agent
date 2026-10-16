@@ -1,0 +1,16 @@
+{
+  "run_id": "CAP-JAVA-001",
+  "java_sources": 159,
+  "checks": 61,
+  "source_and_resources_unchanged": 162,
+  "business_tables_unchanged": 8,
+  "container_exit_code": 0,
+  "jdk": "Temurin 17.0.11",
+  "image": "maven:3.9.6-eclipse-temurin-17",
+  "image_id_short": "29a1658b1f30",
+  "network": "none",
+  "source_mount": "read-only",
+  "daily_services_restarted": false,
+  "online_model_calls": 0,
+  "compile_method": "javac --release 17 with existing dependency jars; all business sources plus isolated checker"
+}

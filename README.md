@@ -174,12 +174,15 @@ HUANGYE_DB_ROOT_PASSWORD=替换为你设置的数据库管理员密码
 
 已有 `.env.local` 和数据卷时继续使用原配置，避免更换密码导致旧数据库无法连接。
 
-需要模型理解和生成答复时，创建 `.env.model.local`，填写可用的 OpenAI 兼容接口配置：
+需要模型理解和生成答复时，创建 `.env.model.local`，填写可用的 OpenAI 兼容接口配置。聊天和检索向量分开写，检索密钥不要复用聊天密钥：
 
 ```dotenv
-AGENT_OPENAI_API_KEY=填入你的APIKey
-AGENT_OPENAI_BASE_URL=填入模型服务的API地址
-AGENT_OPENAI_MODEL=填入该服务支持的模型名称
+AGENT_OPENAI_API_KEY=填入聊天模型的APIKey
+AGENT_OPENAI_BASE_URL=填入聊天模型服务的API地址
+AGENT_OPENAI_MODEL=填入该服务支持的聊天模型名称
+AGENT_EMBEDDING_MODEL=Qwen/Qwen3-Embedding-8B
+AGENT_EMBEDDING_BASE_URL=https://api.siliconflow.cn/v1
+AGENT_EMBEDDING_API_KEY=填入硅基流动的APIKey
 ```
 
 这两个文件均被 Git 忽略。模型配置可执行 `chmod 600 .env.model.local` 限制访问权限。暂不配置模型时，可以在下方启动命令中设置 `AGENT_COURSE_DISABLE_LLM=1`，使用规则路径体验页面与业务查询。
@@ -248,15 +251,22 @@ npm run dev
 |---|---|
 | `AGENT_COURSE_ENV` | 显式指定模型配置文件 |
 | `AGENT_COURSE_DISABLE_LLM=1` | 禁用聊天模型，使用规则兜底 |
-| `AGENT_COURSE_OFFLINE_RAG=1` | 政策检索使用本地简化字符向量；上述启动方式使用此模式 |
+| `ANSWER_JUDGE_MODE` | 默认`off`；`shadow`评审但保留旧出口，`enforce`对覆盖的只读最终生成回复启用语义门控；均不改变动作权限 |
+| `ANSWER_JUDGE_MODEL` | 默认`deepseek-flash`，复用聊天端点与密钥；需确保该端点支持此模型 |
+| `ANSWER_JUDGE_TIMEOUT_SECONDS` | 默认3秒整次截止，无自动重试；enforce失败或待定时使用完整可信替代稿 |
+| `AGENT_COURSE_OFFLINE_RAG=1` | 政策检索使用本地简化字符向量；上述启动方式使用此模式。要改用下面的在线向量，填好检索密钥后启动时不要设置这一项 |
 | `AGENT_COURSE_OFFLINE_FACTS=0` | 从 Java 业务接口读取事实，关闭种子镜像回退 |
 | `AGENT_ECOMMERCE_SERVICE_TOKEN` | 与 Compose 中 Java 网关的服务身份配置保持一致 |
-| `AGENT_EMBEDDING_MODEL` | 使用在线向量检索时指定 Embedding 模型；接口也需支持该模型 |
+| `AGENT_EMBEDDING_MODEL` | 在线检索向量模型，默认 `Qwen/Qwen3-Embedding-8B` |
+| `AGENT_EMBEDDING_BASE_URL` | 检索向量服务地址，默认 `https://api.siliconflow.cn/v1`，不跟随聊天地址 |
+| `AGENT_EMBEDDING_API_KEY` | 硅基流动检索密钥，写在仓库根目录 `.env.model.local`，不回退到聊天密钥 |
 | `AGENT_COURSE_TODAY` | 工作台模拟售后的日期基准，默认 `2026-07-15`；商城按业务服务日期校验 |
 
 如果需要完全离线的规则演示，可同时设置 `AGENT_COURSE_DISABLE_LLM=1`、`AGENT_COURSE_OFFLINE_RAG=1`、`AGENT_COURSE_OFFLINE_FACTS=1`。种子镜像只覆盖有限样例，不代表完整商城数据。
 
 启用在线聊天或 Embedding 会向配置的模型服务发送相应内容并消耗 API 额度。
+
+回复judge已完成离线工程与首次独立真实评审（首轮53/54整体决定一致），仍有格式、原因和时延问题，未加载日常服务；shadow也会增加同步等待。实现、范围与回退方式见[回复检查分工验收](analysis/07-不支持业务与人工入口/回复检查分工实现验收/结果.md)。
 
 停止容器并保留数据：
 

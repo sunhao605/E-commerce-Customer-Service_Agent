@@ -1,0 +1,34 @@
+{
+  "old_pid": 67586,
+  "new_pid": 69527,
+  "health": {
+    "status": "ok",
+    "lesson": "41",
+    "rag_index": {
+      "loaded": true,
+      "version": "lesson41-idx-81e8d9ad64bc",
+      "chunk_count": 85,
+      "files": [
+        "after_sale_policy.md",
+        "payment_invoice_policy.md",
+        "promotion_policy.md",
+        "member_coupon_policy.md",
+        "product_knowledge.md"
+      ],
+      "embedding": "local_token_embedding_for_explicit_offline_course"
+    }
+  },
+  "preserved_flags": {
+    "AGENT_COURSE_DISABLE_LLM": "0",
+    "AGENT_COURSE_OFFLINE_RAG": "1",
+    "AGENT_COURSE_OFFLINE_FACTS": "0",
+    "CANCEL_INTENT_EXECUTE": "0",
+    "CANCEL_INTENT_OBSERVE": "0",
+    "CANCEL_SCORE_MIN": "0.9",
+    "LANGCHAIN_TRACING_V2": "false",
+    "LANGSMITH_TRACING": "false"
+  },
+  "config_path_updated_for_rename": true,
+  "model_config_changed": false,
+  "java_restarted": false
+}

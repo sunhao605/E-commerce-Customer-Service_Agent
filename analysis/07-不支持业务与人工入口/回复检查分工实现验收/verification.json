@@ -1,0 +1,31 @@
+{
+  "id": "GUARD-IMPL-001",
+  "modified_existing_files": [
+    "backend/agent/customer_service_agent.py",
+    "backend/agent/models/answer_client.py",
+    "backend/agent/tools/tool_runtime.py",
+    "backend/agent/trace.py",
+    "backend/api/schemas.py",
+    "backend/resources/prompts/final_answer_style.md",
+    "backend/resources/prompts/prompt_registry.yml",
+    "backend/settings.py"
+  ],
+  "new_files": [
+    "backend/agent/answer_review.py",
+    "backend/agent/models/judge_client.py",
+    "backend/resources/prompts/answer_judge.md",
+    "backend/tests/test_answer_judge.py"
+  ],
+  "python_compile": "pass",
+  "incremental_whitespace": "pass",
+  "offline_baseline_tests": 210,
+  "offline_final_tests": 234,
+  "new_test_methods": 24,
+  "real_judge_calls": 0,
+  "services_reloaded": false,
+  "default_mode": "off",
+  "limits": [
+    "model-stub engineering checks are not semantic accuracy",
+    "no live service or UI acceptance"
+  ]
+}

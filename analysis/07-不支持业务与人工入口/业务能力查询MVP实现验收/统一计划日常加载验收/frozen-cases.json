@@ -1,0 +1,57 @@
+{
+  "run_id": "CAP-PLAN-LIVE-001",
+  "authorization": "user requested Java and Python load followed by bounded acceptance",
+  "cases": [
+    {
+      "id": "PLAN-LIVE-01",
+      "message": "支持到货提醒吗？",
+      "capability_id": "stock_notification",
+      "expected_intent": "service_scope_query",
+      "expected_status": "unsupported",
+      "expected": [
+        "directly explain unsupported notification",
+        "no unrelated clarification, duplication or internal references",
+        "no product lookup, application or approval"
+      ]
+    },
+    {
+      "id": "PLAN-LIVE-02",
+      "message": "轻量露营折叠椅现在多少钱，有货后能提醒我吗？",
+      "capability_id": "stock_notification",
+      "expected_intent": "product_query",
+      "expected_status": "unsupported",
+      "expected": [
+        "price and stock match current API",
+        "answer notification support once",
+        "product and capability evidence both present before final generation"
+      ]
+    },
+    {
+      "id": "PLAN-LIVE-03",
+      "message": "支持退款吗？",
+      "capability_id": "refund_consultation",
+      "expected_intent": "service_scope_query",
+      "expected_status": "supported",
+      "expected": [
+        "state unshipped whole-order scope and eligibility boundary",
+        "no new draft, confirmation, token or workflow",
+        "do not imply current order already eligible or submitted"
+      ]
+    }
+  ],
+  "common": [
+    "three independent new UUID sessions with empty prior trace",
+    "one route model call with capability_ids preserved in RoutePlan",
+    "plan capability ids match exactly the successful actual capability queries",
+    "final composition uses all evidence; any fallback is recorded",
+    "no hidden internal references or false service promises",
+    "eight business-table hashes and 18 product facts unchanged",
+    "one run per case, preserve failure, no automatic retries"
+  ],
+  "forbidden": [
+    "mysql restart",
+    "change model keys or switches",
+    "business submit, payment or approval",
+    "overwrite CAP-LIVE-001 or RAG-LIVE-005 records"
+  ]
+}

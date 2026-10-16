@@ -1,0 +1,36 @@
+{
+  "old_id": "promotion_618_stack_rule",
+  "new_id": "promotion_camping_season_stack_rule",
+  "changes": [
+    {
+      "file": "backend/retrieval/knowledge.py",
+      "id_replacements": 6,
+      "before_sha256": "ecf4a756491d3f66a0b4be6a765cf15a8b6cd8c40fc1d9ed6ba7da31018e8ab1",
+      "after_sha256": "b20d807a4472ee991d8da6b31ef44b42a395f323f68877ca39f42d0024a533bd"
+    },
+    {
+      "file": "backend/resources/knowledge/promotion_policy.md",
+      "id_replacements": 1,
+      "before_sha256": "44fb2aaaf0f5c8231bdd242e7e57dab45afb5c867fafbe230e800d84e7099092",
+      "after_sha256": "6279eb61d0a9a5ca9821c622932451d567a76642508039d96b9bec22fff5c53e"
+    },
+    {
+      "file": "backend/resources/cases.yml",
+      "id_replacements": 2,
+      "before_sha256": "21fc0a95e136d216ea6f767d429e2620834309c5f32410605666d8303eaad680",
+      "after_sha256": "ef137cdf11f396096601ea8075a483c7b6d9227089e068f04432642ae92d389f"
+    },
+    {
+      "file": "backend/tests/test_product_knowledge.py",
+      "id_replacements": 1,
+      "before_sha256": "d9c49ac1b18e282b48fce84658c66ea08b15b5e2731dc127c5f876f3d2e92591",
+      "after_sha256": "982c17120a00602ba61f875a402fccf97a595700eccc14914d70b040ad470921"
+    },
+    {
+      "file": "backend/tests/test_outdoor_scenario.py",
+      "id_replacements": 1,
+      "before_sha256": "55c25027cfc26cf8126e8e5677f0e7a242317bb736137f2e162bf9ea552768e3",
+      "after_sha256": "5cd35a5fdb6f3dc981e89f98002e0243c0b56e3bfc96ddebc057705614f7d937"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+[
+  {
+    "id": "N26",
+    "error_kind": "judge_output_contract_error",
+    "missing_fields": {
+      "omission": [],
+      "conflict": [
+        "requirement"
+      ],
+      "unperformed": [
+        "requirement"
+      ]
+    },
+    "raw_verdicts": {
+      "omission": "pass",
+      "conflict": "pass",
+      "unperformed": "pass"
+    },
+    "note": "公开判定为pass，但conflict与unperformed省略requirement字段；生产严格解析拒绝。不能追认本次通过。"
+  }
+]

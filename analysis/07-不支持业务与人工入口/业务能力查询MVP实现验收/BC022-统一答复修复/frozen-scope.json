@@ -1,0 +1,20 @@
+{
+  "run_id": "BC022-FLOW-001",
+  "kind": "isolated offline regression",
+  "expected": [
+    "known pure capability with unknown route answers directly",
+    "related evidence is collected before final model",
+    "mixed answer is composed once with required capability references rendered at chosen positions",
+    "missing duplicate or foreign capability reference uses entire trusted fallback, never a post-generation appended notice",
+    "degraded paths include verified evidence without inventing product facts",
+    "refund and return consultation preserve drafts and never apply",
+    "unknown capability and query error are not unsupported",
+    "unrelated security, product and transaction branches keep their constraints"
+  ],
+  "not_in_scope": [
+    "daily service restart",
+    "real model rerun",
+    "Java API change",
+    "business writes"
+  ]
+}

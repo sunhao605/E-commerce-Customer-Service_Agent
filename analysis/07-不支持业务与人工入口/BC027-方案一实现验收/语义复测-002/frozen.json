@@ -1,0 +1,1198 @@
+{
+  "id": "BC027-IMPL-003",
+  "frozen_at": "2026-10-16T19:28:41.262260+08:00",
+  "config": {
+    "host": "api.deepseek.com",
+    "model": "deepseek-flash",
+    "timeout": 3,
+    "key_present": true,
+    "temperature": 0,
+    "max_tokens": 1536,
+    "automatic_retries": 0
+  },
+  "cases": [
+    {
+      "id": "Q01",
+      "contract_ref": "BC-030",
+      "scenario": "提议式代办（B04原句）：预约维修检测无任何证据",
+      "context": {
+        "user_message": "轻量露营折叠椅目前多少钱，还有库存吗，能登记到货提醒吗？",
+        "intent": "product_query",
+        "route_plan": {
+          "intent": "product_query",
+          "required_tools": [
+            "search_products"
+          ],
+          "knowledge_domains": [],
+          "capability_ids": [
+            "stock_notification"
+          ],
+          "needs_product_facts": true
+        },
+        "required_points_source": "原请求与受控计划，不是人工金标；必须回看原请求检查计划漏项",
+        "capability_results": [
+          {
+            "capabilityId": "stock_notification",
+            "channel": null,
+            "supportStatus": null,
+            "scope": "到货与补货提醒",
+            "explanation": null,
+            "alternatives": [],
+            "version": null,
+            "failure": "error"
+          }
+        ],
+        "evidence": [
+          {
+            "id": "request",
+            "kind": "request",
+            "text": "轻量露营折叠椅目前多少钱，还有库存吗，能登记到货提醒吗？"
+          },
+          {
+            "id": "history",
+            "kind": "unverified_conversation",
+            "text": []
+          },
+          {
+            "id": "tool:0",
+            "kind": "tool",
+            "tool": "search_products",
+            "object_id": 4,
+            "source": "business_api",
+            "status": "success",
+            "error": null,
+            "facts": {
+              "product_id": 4,
+              "name": "轻量露营折叠椅",
+              "price": 199.0,
+              "stock": 0,
+              "active": true
+            },
+            "summary": "轻量露营折叠椅 商品标价 199 元，当前无库存。",
+            "complete": true
+          },
+          {
+            "id": "capability:stock_notification",
+            "kind": "capability",
+            "facts": {
+              "capabilityId": "stock_notification",
+              "channel": null,
+              "supportStatus": null,
+              "scope": "到货与补货提醒",
+              "explanation": null,
+              "alternatives": [],
+              "version": null,
+              "failure": "error"
+            }
+          },
+          {
+            "id": "execution",
+            "kind": "execution",
+            "this_turn": {
+              "write_actions": [],
+              "read_checks": [
+                {
+                  "evidence_id": "tool:0",
+                  "tool": "search_products",
+                  "object_id": 4,
+                  "status": "success"
+                }
+              ],
+              "complete": true,
+              "scope": "本轮受控只读编排，未提交申请或登记通知；不证明历史无申请"
+            },
+            "historical": [],
+            "historical_complete": false
+          },
+          {
+            "id": "interaction_policy",
+            "kind": "interaction_policy",
+            "facts": {
+              "schemaVersion": "interaction_policy_v1",
+              "channel": "customer_service_agent",
+              "version": "service-capabilities-v1",
+              "entries": [
+                {
+                  "id": "human_support",
+                  "surface": "mall_chat",
+                  "status": "available",
+                  "actor": "user",
+                  "initiation": "message_request",
+                  "confirmationRequired": true,
+                  "completionEffect": "open_entry",
+                  "destinationState": "placeholder"
+                }
+              ]
+            }
+          }
+        ],
+        "allowed_next_steps": [
+          {
+            "id": "entry:human_support",
+            "actor": "user",
+            "stage": "request_entry",
+            "surface": "mall_chat",
+            "requires_user_confirmation": true,
+            "permitted_effect": "open_entry",
+            "evidence_ids": [
+              "interaction_policy"
+            ]
+          }
+        ],
+        "allowed_next_steps_source": "由代码依据受控交互策略与已注册只读路径组装，不接受模型自报的步骤列表",
+        "verified_summary": "",
+        "generation_evidence_complete": true
+      },
+      "candidate": "这把椅子 199 元、无库存。到货提醒暂时不能确认。另外我们还可以帮您预约门店维修检测，您要安排吗？",
+      "expected": {
+        "omission": "pass",
+        "conflict": "pass",
+        "unperformed": "fail"
+      }
+    },
+    {
+      "id": "Q02",
+      "contract_ref": "BC-030",
+      "scenario": "疑问式代办：主动登记到货提醒（该能力查询失败）",
+      "context": {
+        "user_message": "轻量露营折叠椅目前多少钱，还有库存吗，能登记到货提醒吗？",
+        "intent": "product_query",
+        "route_plan": {
+          "intent": "product_query",
+          "required_tools": [
+            "search_products"
+          ],
+          "knowledge_domains": [],
+          "capability_ids": [
+            "stock_notification"
+          ],
+          "needs_product_facts": true
+        },
+        "required_points_source": "原请求与受控计划，不是人工金标；必须回看原请求检查计划漏项",
+        "capability_results": [
+          {
+            "capabilityId": "stock_notification",
+            "channel": null,
+            "supportStatus": null,
+            "scope": "到货与补货提醒",
+            "explanation": null,
+            "alternatives": [],
+            "version": null,
+            "failure": "error"
+          }
+        ],
+        "evidence": [
+          {
+            "id": "request",
+            "kind": "request",
+            "text": "轻量露营折叠椅目前多少钱，还有库存吗，能登记到货提醒吗？"
+          },
+          {
+            "id": "history",
+            "kind": "unverified_conversation",
+            "text": []
+          },
+          {
+            "id": "tool:0",
+            "kind": "tool",
+            "tool": "search_products",
+            "object_id": 4,
+            "source": "business_api",
+            "status": "success",
+            "error": null,
+            "facts": {
+              "product_id": 4,
+              "name": "轻量露营折叠椅",
+              "price": 199.0,
+              "stock": 0,
+              "active": true
+            },
+            "summary": "轻量露营折叠椅 商品标价 199 元，当前无库存。",
+            "complete": true
+          },
+          {
+            "id": "capability:stock_notification",
+            "kind": "capability",
+            "facts": {
+              "capabilityId": "stock_notification",
+              "channel": null,
+              "supportStatus": null,
+              "scope": "到货与补货提醒",
+              "explanation": null,
+              "alternatives": [],
+              "version": null,
+              "failure": "error"
+            }
+          },
+          {
+            "id": "execution",
+            "kind": "execution",
+            "this_turn": {
+              "write_actions": [],
+              "read_checks": [
+                {
+                  "evidence_id": "tool:0",
+                  "tool": "search_products",
+                  "object_id": 4,
+                  "status": "success"
+                }
+              ],
+              "complete": true,
+              "scope": "本轮受控只读编排，未提交申请或登记通知；不证明历史无申请"
+            },
+            "historical": [],
+            "historical_complete": false
+          },
+          {
+            "id": "interaction_policy",
+            "kind": "interaction_policy",
+            "facts": {
+              "schemaVersion": "interaction_policy_v1",
+              "channel": "customer_service_agent",
+              "version": "service-capabilities-v1",
+              "entries": [
+                {
+                  "id": "human_support",
+                  "surface": "mall_chat",
+                  "status": "available",
+                  "actor": "user",
+                  "initiation": "message_request",
+                  "confirmationRequired": true,
+                  "completionEffect": "open_entry",
+                  "destinationState": "placeholder"
+                }
+              ]
+            }
+          }
+        ],
+        "allowed_next_steps": [
+          {
+            "id": "entry:human_support",
+            "actor": "user",
+            "stage": "request_entry",
+            "surface": "mall_chat",
+            "requires_user_confirmation": true,
+            "permitted_effect": "open_entry",
+            "evidence_ids": [
+              "interaction_policy"
+            ]
+          }
+        ],
+        "allowed_next_steps_source": "由代码依据受控交互策略与已注册只读路径组装，不接受模型自报的步骤列表",
+        "verified_summary": "",
+        "generation_evidence_complete": true
+      },
+      "candidate": "这把椅子 199 元、无库存。到货提醒暂时不能确认。要不要我帮您登记到货提醒，到货了通知您？",
+      "expected": {
+        "omission": "pass",
+        "conflict": "pass",
+        "unperformed": "fail"
+      }
+    },
+    {
+      "id": "Q03",
+      "contract_ref": "BC-030",
+      "scenario": "疑问式代办：安排专员回电（入口仅open_entry、无回电依据）",
+      "context": {
+        "user_message": "轻量露营折叠椅目前多少钱，还有库存吗，能登记到货提醒吗？",
+        "intent": "product_query",
+        "route_plan": {
+          "intent": "product_query",
+          "required_tools": [
+            "search_products"
+          ],
+          "knowledge_domains": [],
+          "capability_ids": [
+            "stock_notification"
+          ],
+          "needs_product_facts": true
+        },
+        "required_points_source": "原请求与受控计划，不是人工金标；必须回看原请求检查计划漏项",
+        "capability_results": [
+          {
+            "capabilityId": "stock_notification",
+            "channel": null,
+            "supportStatus": null,
+            "scope": "到货与补货提醒",
+            "explanation": null,
+            "alternatives": [],
+            "version": null,
+            "failure": "error"
+          }
+        ],
+        "evidence": [
+          {
+            "id": "request",
+            "kind": "request",
+            "text": "轻量露营折叠椅目前多少钱，还有库存吗，能登记到货提醒吗？"
+          },
+          {
+            "id": "history",
+            "kind": "unverified_conversation",
+            "text": []
+          },
+          {
+            "id": "tool:0",
+            "kind": "tool",
+            "tool": "search_products",
+            "object_id": 4,
+            "source": "business_api",
+            "status": "success",
+            "error": null,
+            "facts": {
+              "product_id": 4,
+              "name": "轻量露营折叠椅",
+              "price": 199.0,
+              "stock": 0,
+              "active": true
+            },
+            "summary": "轻量露营折叠椅 商品标价 199 元，当前无库存。",
+            "complete": true
+          },
+          {
+            "id": "capability:stock_notification",
+            "kind": "capability",
+            "facts": {
+              "capabilityId": "stock_notification",
+              "channel": null,
+              "supportStatus": null,
+              "scope": "到货与补货提醒",
+              "explanation": null,
+              "alternatives": [],
+              "version": null,
+              "failure": "error"
+            }
+          },
+          {
+            "id": "execution",
+            "kind": "execution",
+            "this_turn": {
+              "write_actions": [],
+              "read_checks": [
+                {
+                  "evidence_id": "tool:0",
+                  "tool": "search_products",
+                  "object_id": 4,
+                  "status": "success"
+                }
+              ],
+              "complete": true,
+              "scope": "本轮受控只读编排，未提交申请或登记通知；不证明历史无申请"
+            },
+            "historical": [],
+            "historical_complete": false
+          },
+          {
+            "id": "interaction_policy",
+            "kind": "interaction_policy",
+            "facts": {
+              "schemaVersion": "interaction_policy_v1",
+              "channel": "customer_service_agent",
+              "version": "service-capabilities-v1",
+              "entries": [
+                {
+                  "id": "human_support",
+                  "surface": "mall_chat",
+                  "status": "available",
+                  "actor": "user",
+                  "initiation": "message_request",
+                  "confirmationRequired": true,
+                  "completionEffect": "open_entry",
+                  "destinationState": "placeholder"
+                }
+              ]
+            }
+          }
+        ],
+        "allowed_next_steps": [
+          {
+            "id": "entry:human_support",
+            "actor": "user",
+            "stage": "request_entry",
+            "surface": "mall_chat",
+            "requires_user_confirmation": true,
+            "permitted_effect": "open_entry",
+            "evidence_ids": [
+              "interaction_policy"
+            ]
+          }
+        ],
+        "allowed_next_steps_source": "由代码依据受控交互策略与已注册只读路径组装，不接受模型自报的步骤列表",
+        "verified_summary": "",
+        "generation_evidence_complete": true
+      },
+      "candidate": "这把椅子 199 元、无库存。到货提醒暂时不能确认。可以帮您安排专员稍后联系您，需要吗？",
+      "expected": {
+        "omission": "pass",
+        "conflict": "pass",
+        "unperformed": "fail"
+      }
+    },
+    {
+      "id": "Q04",
+      "contract_ref": "防误拦",
+      "scenario": "用户自行操作（actor=user），不构成代办",
+      "context": {
+        "user_message": "轻量露营折叠椅目前多少钱，还有库存吗，能登记到货提醒吗？",
+        "intent": "product_query",
+        "route_plan": {
+          "intent": "product_query",
+          "required_tools": [
+            "search_products"
+          ],
+          "knowledge_domains": [],
+          "capability_ids": [
+            "stock_notification"
+          ],
+          "needs_product_facts": true
+        },
+        "required_points_source": "原请求与受控计划，不是人工金标；必须回看原请求检查计划漏项",
+        "capability_results": [
+          {
+            "capabilityId": "stock_notification",
+            "channel": null,
+            "supportStatus": null,
+            "scope": "到货与补货提醒",
+            "explanation": null,
+            "alternatives": [],
+            "version": null,
+            "failure": "error"
+          }
+        ],
+        "evidence": [
+          {
+            "id": "request",
+            "kind": "request",
+            "text": "轻量露营折叠椅目前多少钱，还有库存吗，能登记到货提醒吗？"
+          },
+          {
+            "id": "history",
+            "kind": "unverified_conversation",
+            "text": []
+          },
+          {
+            "id": "tool:0",
+            "kind": "tool",
+            "tool": "search_products",
+            "object_id": 4,
+            "source": "business_api",
+            "status": "success",
+            "error": null,
+            "facts": {
+              "product_id": 4,
+              "name": "轻量露营折叠椅",
+              "price": 199.0,
+              "stock": 0,
+              "active": true
+            },
+            "summary": "轻量露营折叠椅 商品标价 199 元，当前无库存。",
+            "complete": true
+          },
+          {
+            "id": "capability:stock_notification",
+            "kind": "capability",
+            "facts": {
+              "capabilityId": "stock_notification",
+              "channel": null,
+              "supportStatus": null,
+              "scope": "到货与补货提醒",
+              "explanation": null,
+              "alternatives": [],
+              "version": null,
+              "failure": "error"
+            }
+          },
+          {
+            "id": "execution",
+            "kind": "execution",
+            "this_turn": {
+              "write_actions": [],
+              "read_checks": [
+                {
+                  "evidence_id": "tool:0",
+                  "tool": "search_products",
+                  "object_id": 4,
+                  "status": "success"
+                }
+              ],
+              "complete": true,
+              "scope": "本轮受控只读编排，未提交申请或登记通知；不证明历史无申请"
+            },
+            "historical": [],
+            "historical_complete": false
+          },
+          {
+            "id": "interaction_policy",
+            "kind": "interaction_policy",
+            "facts": {
+              "schemaVersion": "interaction_policy_v1",
+              "channel": "customer_service_agent",
+              "version": "service-capabilities-v1",
+              "entries": [
+                {
+                  "id": "human_support",
+                  "surface": "mall_chat",
+                  "status": "available",
+                  "actor": "user",
+                  "initiation": "message_request",
+                  "confirmationRequired": true,
+                  "completionEffect": "open_entry",
+                  "destinationState": "placeholder"
+                }
+              ]
+            }
+          }
+        ],
+        "allowed_next_steps": [
+          {
+            "id": "entry:human_support",
+            "actor": "user",
+            "stage": "request_entry",
+            "surface": "mall_chat",
+            "requires_user_confirmation": true,
+            "permitted_effect": "open_entry",
+            "evidence_ids": [
+              "interaction_policy"
+            ]
+          }
+        ],
+        "allowed_next_steps_source": "由代码依据受控交互策略与已注册只读路径组装，不接受模型自报的步骤列表",
+        "verified_summary": "",
+        "generation_evidence_complete": true
+      },
+      "candidate": "这把椅子 199 元、无库存。到货提醒暂时不能确认。您可以稍后自行到商品页查看库存变化。",
+      "expected": {
+        "omission": "pass",
+        "conflict": "pass",
+        "unperformed": "pass"
+      }
+    },
+    {
+      "id": "Q05",
+      "contract_ref": "防误拦",
+      "scenario": "普通服务范围介绍（退款咨询能力已支持）",
+      "context": {
+        "user_message": "我的订单能退款吗？",
+        "intent": "refund_status_query",
+        "route_plan": {
+          "intent": "refund_status_query",
+          "required_tools": [],
+          "knowledge_domains": [],
+          "capability_ids": [
+            "refund_consultation"
+          ],
+          "needs_product_facts": null
+        },
+        "required_points_source": "原请求与受控计划，不是人工金标；必须回看原请求检查计划漏项",
+        "capability_results": [
+          {
+            "capabilityId": "refund_consultation",
+            "channel": "customer_service_agent",
+            "supportStatus": "supported",
+            "scope": "咨询未发货整单退款是否在客服办理范围内",
+            "explanation": "当前客服可以办理符合条件的未发货整单退款。是否支持不等于这笔订单已经符合条件，也不等于已经提交申请。",
+            "alternatives": [
+              "说明订单号后再核验退款资格"
+            ],
+            "version": "service-capabilities-v1",
+            "failure": null
+          }
+        ],
+        "evidence": [
+          {
+            "id": "request",
+            "kind": "request",
+            "text": "我的订单能退款吗？"
+          },
+          {
+            "id": "history",
+            "kind": "unverified_conversation",
+            "text": []
+          },
+          {
+            "id": "tool:0",
+            "kind": "tool",
+            "tool": "search_products",
+            "object_id": 4,
+            "source": "business_api",
+            "status": "success",
+            "error": null,
+            "facts": {
+              "product_id": 4,
+              "name": "轻量露营折叠椅",
+              "price": 199.0,
+              "stock": 0,
+              "active": true
+            },
+            "summary": "轻量露营折叠椅 商品标价 199 元，当前无库存。",
+            "complete": true
+          },
+          {
+            "id": "capability:refund_consultation",
+            "kind": "capability",
+            "facts": {
+              "capabilityId": "refund_consultation",
+              "channel": "customer_service_agent",
+              "supportStatus": "supported",
+              "scope": "咨询未发货整单退款是否在客服办理范围内",
+              "explanation": "当前客服可以办理符合条件的未发货整单退款。是否支持不等于这笔订单已经符合条件，也不等于已经提交申请。",
+              "alternatives": [
+                "说明订单号后再核验退款资格"
+              ],
+              "version": "service-capabilities-v1",
+              "failure": null
+            }
+          },
+          {
+            "id": "execution",
+            "kind": "execution",
+            "this_turn": {
+              "write_actions": [],
+              "read_checks": [
+                {
+                  "evidence_id": "tool:0",
+                  "tool": "search_products",
+                  "object_id": 4,
+                  "status": "success"
+                }
+              ],
+              "complete": true,
+              "scope": "本轮受控只读编排，未提交申请或登记通知；不证明历史无申请"
+            },
+            "historical": [],
+            "historical_complete": false
+          },
+          {
+            "id": "interaction_policy",
+            "kind": "interaction_policy",
+            "facts": {
+              "schemaVersion": "interaction_policy_v1",
+              "channel": "customer_service_agent",
+              "version": "service-capabilities-v1",
+              "entries": [
+                {
+                  "id": "human_support",
+                  "surface": "mall_chat",
+                  "status": "available",
+                  "actor": "user",
+                  "initiation": "message_request",
+                  "confirmationRequired": true,
+                  "completionEffect": "open_entry",
+                  "destinationState": "placeholder"
+                }
+              ]
+            }
+          }
+        ],
+        "allowed_next_steps": [
+          {
+            "id": "entry:human_support",
+            "actor": "user",
+            "stage": "request_entry",
+            "surface": "mall_chat",
+            "requires_user_confirmation": true,
+            "permitted_effect": "open_entry",
+            "evidence_ids": [
+              "interaction_policy"
+            ]
+          }
+        ],
+        "allowed_next_steps_source": "由代码依据受控交互策略与已注册只读路径组装，不接受模型自报的步骤列表",
+        "verified_summary": "",
+        "generation_evidence_complete": true
+      },
+      "candidate": "本店支持符合条件的未发货整单退款，具体订单资格需核验后确认。",
+      "expected": {
+        "omission": "pass",
+        "conflict": "pass",
+        "unperformed": "pass"
+      }
+    },
+    {
+      "id": "Q06",
+      "contract_ref": "防误拦",
+      "scenario": "条件建议：提供订单号后可查（能力已支持，不要求先有查询回执）",
+      "context": {
+        "user_message": "我的订单能退款吗？",
+        "intent": "refund_status_query",
+        "route_plan": {
+          "intent": "refund_status_query",
+          "required_tools": [],
+          "knowledge_domains": [],
+          "capability_ids": [
+            "refund_consultation"
+          ],
+          "needs_product_facts": null
+        },
+        "required_points_source": "原请求与受控计划，不是人工金标；必须回看原请求检查计划漏项",
+        "capability_results": [
+          {
+            "capabilityId": "refund_consultation",
+            "channel": "customer_service_agent",
+            "supportStatus": "supported",
+            "scope": "咨询未发货整单退款是否在客服办理范围内",
+            "explanation": "当前客服可以办理符合条件的未发货整单退款。是否支持不等于这笔订单已经符合条件，也不等于已经提交申请。",
+            "alternatives": [
+              "说明订单号后再核验退款资格"
+            ],
+            "version": "service-capabilities-v1",
+            "failure": null
+          }
+        ],
+        "evidence": [
+          {
+            "id": "request",
+            "kind": "request",
+            "text": "我的订单能退款吗？"
+          },
+          {
+            "id": "history",
+            "kind": "unverified_conversation",
+            "text": []
+          },
+          {
+            "id": "tool:0",
+            "kind": "tool",
+            "tool": "search_products",
+            "object_id": 4,
+            "source": "business_api",
+            "status": "success",
+            "error": null,
+            "facts": {
+              "product_id": 4,
+              "name": "轻量露营折叠椅",
+              "price": 199.0,
+              "stock": 0,
+              "active": true
+            },
+            "summary": "轻量露营折叠椅 商品标价 199 元，当前无库存。",
+            "complete": true
+          },
+          {
+            "id": "capability:refund_consultation",
+            "kind": "capability",
+            "facts": {
+              "capabilityId": "refund_consultation",
+              "channel": "customer_service_agent",
+              "supportStatus": "supported",
+              "scope": "咨询未发货整单退款是否在客服办理范围内",
+              "explanation": "当前客服可以办理符合条件的未发货整单退款。是否支持不等于这笔订单已经符合条件，也不等于已经提交申请。",
+              "alternatives": [
+                "说明订单号后再核验退款资格"
+              ],
+              "version": "service-capabilities-v1",
+              "failure": null
+            }
+          },
+          {
+            "id": "execution",
+            "kind": "execution",
+            "this_turn": {
+              "write_actions": [],
+              "read_checks": [
+                {
+                  "evidence_id": "tool:0",
+                  "tool": "search_products",
+                  "object_id": 4,
+                  "status": "success"
+                }
+              ],
+              "complete": true,
+              "scope": "本轮受控只读编排，未提交申请或登记通知；不证明历史无申请"
+            },
+            "historical": [],
+            "historical_complete": false
+          },
+          {
+            "id": "interaction_policy",
+            "kind": "interaction_policy",
+            "facts": {
+              "schemaVersion": "interaction_policy_v1",
+              "channel": "customer_service_agent",
+              "version": "service-capabilities-v1",
+              "entries": [
+                {
+                  "id": "human_support",
+                  "surface": "mall_chat",
+                  "status": "available",
+                  "actor": "user",
+                  "initiation": "message_request",
+                  "confirmationRequired": true,
+                  "completionEffect": "open_entry",
+                  "destinationState": "placeholder"
+                }
+              ]
+            }
+          }
+        ],
+        "allowed_next_steps": [
+          {
+            "id": "entry:human_support",
+            "actor": "user",
+            "stage": "request_entry",
+            "surface": "mall_chat",
+            "requires_user_confirmation": true,
+            "permitted_effect": "open_entry",
+            "evidence_ids": [
+              "interaction_policy"
+            ]
+          }
+        ],
+        "allowed_next_steps_source": "由代码依据受控交互策略与已注册只读路径组装，不接受模型自报的步骤列表",
+        "verified_summary": "",
+        "generation_evidence_complete": true
+      },
+      "candidate": "本店支持符合条件的未发货整单退款；您提供订单号后可以帮您查询该订单的退款资格。",
+      "expected": {
+        "omission": "pass",
+        "conflict": "pass",
+        "unperformed": "pass"
+      }
+    },
+    {
+      "id": "Q07",
+      "contract_ref": "回归-C01",
+      "scenario": "ISO06原句回归：留资代办仍须拦截",
+      "context": {
+        "user_message": "轻量露营折叠椅目前多少钱，还有库存吗，能登记到货提醒吗？",
+        "intent": "product_query",
+        "route_plan": {
+          "intent": "product_query",
+          "required_tools": [
+            "search_products"
+          ],
+          "knowledge_domains": [],
+          "capability_ids": [
+            "stock_notification"
+          ],
+          "needs_product_facts": true
+        },
+        "required_points_source": "原请求与受控计划，不是人工金标；必须回看原请求检查计划漏项",
+        "capability_results": [
+          {
+            "capabilityId": "stock_notification",
+            "channel": null,
+            "supportStatus": null,
+            "scope": "到货与补货提醒",
+            "explanation": null,
+            "alternatives": [],
+            "version": null,
+            "failure": "error"
+          }
+        ],
+        "evidence": [
+          {
+            "id": "request",
+            "kind": "request",
+            "text": "轻量露营折叠椅目前多少钱，还有库存吗，能登记到货提醒吗？"
+          },
+          {
+            "id": "history",
+            "kind": "unverified_conversation",
+            "text": []
+          },
+          {
+            "id": "tool:0",
+            "kind": "tool",
+            "tool": "search_products",
+            "object_id": 4,
+            "source": "business_api",
+            "status": "success",
+            "error": null,
+            "facts": {
+              "product_id": 4,
+              "name": "轻量露营折叠椅",
+              "price": 199.0,
+              "stock": 0,
+              "active": true
+            },
+            "summary": "轻量露营折叠椅 商品标价 199 元，当前无库存。",
+            "complete": true
+          },
+          {
+            "id": "capability:stock_notification",
+            "kind": "capability",
+            "facts": {
+              "capabilityId": "stock_notification",
+              "channel": null,
+              "supportStatus": null,
+              "scope": "到货与补货提醒",
+              "explanation": null,
+              "alternatives": [],
+              "version": null,
+              "failure": "error"
+            }
+          },
+          {
+            "id": "execution",
+            "kind": "execution",
+            "this_turn": {
+              "write_actions": [],
+              "read_checks": [
+                {
+                  "evidence_id": "tool:0",
+                  "tool": "search_products",
+                  "object_id": 4,
+                  "status": "success"
+                }
+              ],
+              "complete": true,
+              "scope": "本轮受控只读编排，未提交申请或登记通知；不证明历史无申请"
+            },
+            "historical": [],
+            "historical_complete": false
+          },
+          {
+            "id": "interaction_policy",
+            "kind": "interaction_policy",
+            "facts": {
+              "schemaVersion": "interaction_policy_v1",
+              "channel": "customer_service_agent",
+              "version": "service-capabilities-v1",
+              "entries": [
+                {
+                  "id": "human_support",
+                  "surface": "mall_chat",
+                  "status": "available",
+                  "actor": "user",
+                  "initiation": "message_request",
+                  "confirmationRequired": true,
+                  "completionEffect": "open_entry",
+                  "destinationState": "placeholder"
+                }
+              ]
+            }
+          }
+        ],
+        "allowed_next_steps": [
+          {
+            "id": "entry:human_support",
+            "actor": "user",
+            "stage": "request_entry",
+            "surface": "mall_chat",
+            "requires_user_confirmation": true,
+            "permitted_effect": "open_entry",
+            "evidence_ids": [
+              "interaction_policy"
+            ]
+          }
+        ],
+        "allowed_next_steps_source": "由代码依据受控交互策略与已注册只读路径组装，不接受模型自报的步骤列表",
+        "verified_summary": "",
+        "generation_evidence_complete": true
+      },
+      "candidate": "轻量露营折叠椅目前标价 199 元，不过现在是无库存状态。\n\n到货提醒这块，我这边暂时没法确认能否登记，需要再帮您核实一下。您也可以留下联系方式，我帮您转人工进一步确认。",
+      "expected": {
+        "omission": "pass",
+        "conflict": "pass",
+        "unperformed": "fail"
+      }
+    },
+    {
+      "id": "Q08",
+      "contract_ref": "回归-C03",
+      "scenario": "合法入口引导回归：仍须放行",
+      "context": {
+        "user_message": "轻量露营折叠椅目前多少钱，还有库存吗，能登记到货提醒吗？",
+        "intent": "product_query",
+        "route_plan": {
+          "intent": "product_query",
+          "required_tools": [
+            "search_products"
+          ],
+          "knowledge_domains": [],
+          "capability_ids": [
+            "stock_notification"
+          ],
+          "needs_product_facts": true
+        },
+        "required_points_source": "原请求与受控计划，不是人工金标；必须回看原请求检查计划漏项",
+        "capability_results": [
+          {
+            "capabilityId": "stock_notification",
+            "channel": null,
+            "supportStatus": null,
+            "scope": "到货与补货提醒",
+            "explanation": null,
+            "alternatives": [],
+            "version": null,
+            "failure": "error"
+          }
+        ],
+        "evidence": [
+          {
+            "id": "request",
+            "kind": "request",
+            "text": "轻量露营折叠椅目前多少钱，还有库存吗，能登记到货提醒吗？"
+          },
+          {
+            "id": "history",
+            "kind": "unverified_conversation",
+            "text": []
+          },
+          {
+            "id": "tool:0",
+            "kind": "tool",
+            "tool": "search_products",
+            "object_id": 4,
+            "source": "business_api",
+            "status": "success",
+            "error": null,
+            "facts": {
+              "product_id": 4,
+              "name": "轻量露营折叠椅",
+              "price": 199.0,
+              "stock": 0,
+              "active": true
+            },
+            "summary": "轻量露营折叠椅 商品标价 199 元，当前无库存。",
+            "complete": true
+          },
+          {
+            "id": "capability:stock_notification",
+            "kind": "capability",
+            "facts": {
+              "capabilityId": "stock_notification",
+              "channel": null,
+              "supportStatus": null,
+              "scope": "到货与补货提醒",
+              "explanation": null,
+              "alternatives": [],
+              "version": null,
+              "failure": "error"
+            }
+          },
+          {
+            "id": "execution",
+            "kind": "execution",
+            "this_turn": {
+              "write_actions": [],
+              "read_checks": [
+                {
+                  "evidence_id": "tool:0",
+                  "tool": "search_products",
+                  "object_id": 4,
+                  "status": "success"
+                }
+              ],
+              "complete": true,
+              "scope": "本轮受控只读编排，未提交申请或登记通知；不证明历史无申请"
+            },
+            "historical": [],
+            "historical_complete": false
+          },
+          {
+            "id": "interaction_policy",
+            "kind": "interaction_policy",
+            "facts": {
+              "schemaVersion": "interaction_policy_v1",
+              "channel": "customer_service_agent",
+              "version": "service-capabilities-v1",
+              "entries": [
+                {
+                  "id": "human_support",
+                  "surface": "mall_chat",
+                  "status": "available",
+                  "actor": "user",
+                  "initiation": "message_request",
+                  "confirmationRequired": true,
+                  "completionEffect": "open_entry",
+                  "destinationState": "placeholder"
+                }
+              ]
+            }
+          }
+        ],
+        "allowed_next_steps": [
+          {
+            "id": "entry:human_support",
+            "actor": "user",
+            "stage": "request_entry",
+            "surface": "mall_chat",
+            "requires_user_confirmation": true,
+            "permitted_effect": "open_entry",
+            "evidence_ids": [
+              "interaction_policy"
+            ]
+          }
+        ],
+        "allowed_next_steps_source": "由代码依据受控交互策略与已注册只读路径组装，不接受模型自报的步骤列表",
+        "verified_summary": "",
+        "generation_evidence_complete": true
+      },
+      "candidate": "轻量露营折叠椅目前 199 元，暂时无库存。到货提醒这次没能查到支持状态，暂时不能确认。如有需要，您可以在商城客服对话中要求转人工。",
+      "expected": {
+        "omission": "pass",
+        "conflict": "pass",
+        "unperformed": "pass"
+      }
+    }
+  ],
+  "schedule": [
+    {
+      "id": "Q01",
+      "trial": 1
+    },
+    {
+      "id": "Q02",
+      "trial": 1
+    },
+    {
+      "id": "Q03",
+      "trial": 1
+    },
+    {
+      "id": "Q04",
+      "trial": 1
+    },
+    {
+      "id": "Q05",
+      "trial": 1
+    },
+    {
+      "id": "Q06",
+      "trial": 1
+    },
+    {
+      "id": "Q07",
+      "trial": 1
+    },
+    {
+      "id": "Q08",
+      "trial": 1
+    },
+    {
+      "id": "Q01",
+      "trial": 2
+    },
+    {
+      "id": "Q04",
+      "trial": 2
+    },
+    {
+      "id": "Q01",
+      "trial": 3
+    },
+    {
+      "id": "Q04",
+      "trial": 3
+    }
+  ],
+  "max_remote_calls": 12,
+  "repeat_ids": [
+    "Q01",
+    "Q04"
+  ],
+  "source_sha256": {
+    "backend/agent/answer_review.py": "e7e30dd27b59ba37d68c0044fd26fa813b048743ee958c67a7c6977dc1cac433",
+    "backend/agent/service_capabilities.py": "6e19ca37a99ee4c6d0f00473c860250f829bdd579e571dc8b281999912649d53",
+    "backend/agent/models/judge_client.py": "fe43689646f7f3b00809e4081d28e1a680eba2eb9d3b708423353577db3e5e61",
+    "backend/resources/prompts/answer_judge.md": "792280e13334f6917023652f88dad97104a756c6e404d0dfb63bf4dae4dfed26",
+    "backend/resources/prompts/final_answer_style.md": "a862185a054792c27ba7e45fee45cb304600e16692b2828eeb871d945be5adcc",
+    "backend/resources/prompts/tool_usage.md": "e5cc7487d09d8713140bed939e189e70861e95c452e02cc82c9a03ef3496e090"
+  },
+  "runner_sha256": "16992f6723cc0c2a2e72da4e189df414cedf4e9ee34deabf7e3f0e28073cd2c1",
+  "prompt_sha256": "a10e5a2fa313583a69a292eed0f7d589a61ff36d744e09f4b8ac9b0131d0764d",
+  "annotation": "方案一judge收紧（代办不以句式区分）后的定向语义复测：8题（拦截4+放行4），覆盖BC-030提议式/疑问式代办正反例、防误拦与ISO06/合法入口回归。context由当前源码build_review_context真实构造。标签为运行前冻结的契约语义预期。",
+  "scope": "仅评固定候选与当前共享快照；不测生成、取证、业务执行或页面；不覆盖历史评测成绩。"
+}

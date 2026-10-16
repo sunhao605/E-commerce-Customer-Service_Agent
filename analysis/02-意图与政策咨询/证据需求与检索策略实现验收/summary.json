@@ -1,0 +1,39 @@
+{
+  "kind": "implementation_checks_not_production_acceptance",
+  "baseline_backend_tests": 111,
+  "final_backend_tests": 140,
+  "new_test_methods": 29,
+  "backend_tests_passed": true,
+  "frontend_typescript_and_build_passed": true,
+  "exploratory_routes": {
+    "model": "deepseek-flash",
+    "first_passed": 10,
+    "first_total": 12,
+    "final_passed": 12,
+    "final_total": 12,
+    "final_latency_p50_ms": 815.6225,
+    "final_latency_p95_nearest_rank_ms": 1668.051,
+    "final_usage": {
+      "input_tokens": 26768,
+      "output_tokens": 265,
+      "total_tokens": 27033
+    },
+    "not_a_holdout_or_reliability_score": true
+  },
+  "business_actions_executed": false,
+  "daily_services_actively_restarted": false,
+  "page_checks_run": false,
+  "source_sha256": {
+    "backend/agent/models/router_client.py": "505d4867fffb1b390d3fa26128658286f114a5073bb8cdacad96cceb9d7a012d",
+    "backend/api/schemas.py": "5d3a00ef4563cd50dfb3e503fb708628f6eb3dd2a4373e1652559295a442b790",
+    "backend/agent/tools/planning.py": "1ef406380036b2dba3ca8ff6b7c418d6b49bd5a55b549b44234f6a548b0079fb",
+    "backend/agent/customer_service_agent.py": "67f45de4cd7ff028b02416653c8d01423bc2b2ff07b69657deb1b51a77b7d90f",
+    "backend/agent/trace.py": "97e82848efa6aff57e895bf6dcb71858875e1ab2c0e452958ded1d2ace7d0803",
+    "backend/retrieval/knowledge.py": "f87135d52052e0c99823e80c0948dd2b01bffb75da50cc55d919a55c9474615b",
+    "backend/retrieval/hybrid_retrieval.py": "f9850225c57e1a196d9a16ef719aac8e0e68f22c7ea0b049ba713d82ce545b3c",
+    "backend/resources/prompts/route_contract.md": "a7acd2f1a851b6e7f5a26cd9c3c68274f6df70d5546d73a8d3bb6f2f6ca8f674",
+    "frontend/src/components/TracePanel.tsx": "5c260b49e9804ee7d0f0390ff200e368b48c3ff7f537f61b55ec77402e4b9ccc",
+    "backend/tests/test_evidence_routing.py": "55f618a26afd91667d8df81df6bafaabfbd3c7cc62672e75172d69b196fba90a"
+  },
+  "probe_judgement_self_check_passed": true
+}

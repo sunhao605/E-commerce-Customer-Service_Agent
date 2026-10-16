@@ -1,0 +1,111 @@
+[ {
+  "method" : "GET",
+  "status" : 401,
+  "response" : "{\"success\":false,\"code\":\"UNAUTHORIZED\",\"message\":\"请先登录\"}",
+  "path" : "/api/customer-service/capabilities/inventory_query"
+}, {
+  "method" : "GET",
+  "status" : 401,
+  "response" : "{\"success\":false,\"code\":\"UNAUTHORIZED\",\"message\":\"请先登录\"}",
+  "path" : "/api/customer-service/capabilities/inventory_query"
+}, {
+  "method" : "GET",
+  "status" : 200,
+  "response" : "{\"success\":true,\"code\":\"OK\",\"message\":\"success\",\"data\":{\"capabilityId\":\"inventory_query\",\"channel\":\"customer_service_agent\",\"supportStatus\":\"supported\",\"scope\":\"查询在售商品的当前价格和库存\",\"explanation\":\"当前客服可以查询在售商品的价格和库存。这次查询只说明有这项能力，不代表某一件商品有货，也不锁定库存。\",\"alternatives\":[],\"version\":\"service-capabilities-v1\"}}",
+  "path" : "/api/customer-service/capabilities/inventory_query"
+}, {
+  "method" : "GET",
+  "status" : 200,
+  "response" : "{\"success\":true,\"code\":\"OK\",\"message\":\"success\",\"data\":{\"capabilityId\":\"stock_notification\",\"channel\":\"customer_service_agent\",\"supportStatus\":\"unsupported\",\"scope\":\"到货与补货提醒登记\",\"explanation\":\"当前客服助手不支持到货或补货提醒。\",\"alternatives\":[\"稍后主动查询商品库存\"],\"version\":\"service-capabilities-v1\"}}",
+  "path" : "/api/customer-service/capabilities/stock_notification"
+}, {
+  "method" : "GET",
+  "status" : 200,
+  "response" : "{\"success\":true,\"code\":\"OK\",\"message\":\"success\",\"data\":{\"capabilityId\":\"exchange_handling\",\"channel\":\"customer_service_agent\",\"supportStatus\":\"unsupported\",\"scope\":\"客服助手办理换货\",\"explanation\":\"当前客服助手不能办理换货。人工入口仍是占位，确认前往不会接入真人，也不会提交换货申请。\",\"alternatives\":[\"继续咨询商品、退款或退货\"],\"version\":\"service-capabilities-v1\"}}",
+  "path" : "/api/customer-service/capabilities/exchange_handling"
+}, {
+  "method" : "GET",
+  "status" : 200,
+  "response" : "{\"success\":true,\"code\":\"OK\",\"message\":\"success\",\"data\":{\"capabilityId\":\"human_takeover\",\"channel\":\"customer_service_agent\",\"supportStatus\":\"unsupported\",\"scope\":\"真人客服接管当前对话\",\"explanation\":\"当前没有真人客服接管。人工入口只是占位，确认前往不会有人接手，也不会提交售后申请。\",\"alternatives\":[\"继续由当前客服助手处理已经支持的查询\"],\"version\":\"service-capabilities-v1\"}}",
+  "path" : "/api/customer-service/capabilities/human_takeover"
+}, {
+  "method" : "GET",
+  "status" : 200,
+  "response" : "{\"success\":true,\"code\":\"OK\",\"message\":\"success\",\"data\":{\"capabilityId\":\"refund_consultation\",\"channel\":\"customer_service_agent\",\"supportStatus\":\"supported\",\"scope\":\"咨询未发货整单退款是否在客服办理范围内\",\"explanation\":\"当前客服可以办理符合条件的未发货整单退款。是否支持不等于这笔订单已经符合条件，也不等于已经提交申请。\",\"alternatives\":[\"说明订单号后再核验退款资格\"],\"version\":\"service-capabilities-v1\"}}",
+  "path" : "/api/customer-service/capabilities/refund_consultation"
+}, {
+  "method" : "GET",
+  "status" : 200,
+  "response" : "{\"success\":true,\"code\":\"OK\",\"message\":\"success\",\"data\":{\"capabilityId\":\"return_consultation\",\"channel\":\"customer_service_agent\",\"supportStatus\":\"supported\",\"scope\":\"咨询签收后七天无理由退货是否在客服办理范围内\",\"explanation\":\"当前客服可以办理符合条件的签收七天无理由退货。是否支持不等于这笔订单已经符合条件，也不等于已经提交申请。\",\"alternatives\":[\"说明订单号后再核验退货资格\"],\"version\":\"service-capabilities-v1\"}}",
+  "path" : "/api/customer-service/capabilities/return_consultation"
+}, {
+  "method" : "GET",
+  "status" : 200,
+  "response" : "{\"success\":true,\"code\":\"OK\",\"message\":\"success\",\"data\":{\"capabilityId\":\"not_registered\",\"channel\":\"customer_service_agent\",\"supportStatus\":\"unknown\",\"scope\":\"未登记的业务能力\",\"explanation\":\"目前还不能确认是否提供这项服务。\",\"alternatives\":[],\"version\":\"service-capabilities-v1\"}}",
+  "path" : "/api/customer-service/capabilities/not_registered"
+}, {
+  "method" : "GET",
+  "status" : 400,
+  "response" : "{\"success\":false,\"code\":\"BAD_REQUEST\",\"message\":\"能力标识不正确\"}",
+  "path" : "/api/customer-service/capabilities/Bad-ID"
+}, {
+  "method" : "POST",
+  "status" : 403,
+  "response" : "{\"success\":false,\"code\":\"FORBIDDEN\",\"message\":\"当前账号无权访问该资源\"}",
+  "path" : "/api/customer-service/capabilities/inventory_query"
+}, {
+  "method" : "GET",
+  "status" : 200,
+  "response" : "{\"success\":true,\"code\":\"OK\",\"message\":\"success\",\"data\":{\"capabilityId\":\"stock_notification\",\"channel\":\"customer_service_agent\",\"supportStatus\":\"unsupported\",\"scope\":\"到货与补货提醒登记\",\"explanation\":\"当前客服助手不支持到货或补货提醒。\",\"alternatives\":[\"稍后主动查询商品库存\"],\"version\":\"service-capabilities-v1\"}}",
+  "path" : "/api/customer-service/capabilities/stock_notification"
+}, {
+  "method" : "GET",
+  "status" : 403,
+  "response" : "{\"success\":false,\"code\":\"FORBIDDEN\",\"message\":\"当前账号无权访问该资源\"}",
+  "path" : "/api/customer-service/capabilities/inventory_query"
+}, {
+  "method" : "POST",
+  "status" : 200,
+  "response" : "{\"success\":true,\"code\":\"OK\",\"message\":\"success\",\"data\":{\"answer\":\"当前客服助手不支持到货或补货提醒。\",\"sessionId\":\"cap-isolation-0\",\"confirmRequired\":false,\"pendingAction\":\"CAPABILITY_QUERY\",\"actions\":[],\"fallback\":false}}",
+  "path" : "/api/customer-service/chat"
+}, {
+  "method" : "POST",
+  "status" : 200,
+  "response" : "{\"success\":true,\"code\":\"OK\",\"message\":\"success\",\"data\":{\"answer\":\"模拟商品价格199元。当前客服助手不支持到货或补货提醒。\",\"sessionId\":\"cap-isolation-1\",\"confirmRequired\":false,\"pendingAction\":\"PRODUCT_QUERY\",\"actions\":[],\"fallback\":false}}",
+  "path" : "/api/customer-service/chat"
+}, {
+  "method" : "POST",
+  "status" : 200,
+  "response" : "{\"success\":true,\"code\":\"OK\",\"message\":\"success\",\"data\":{\"answer\":\"当前客服可以办理符合条件的未发货整单退款。是否支持不等于这笔订单已经符合条件，也不等于已经提交申请。\",\"sessionId\":\"cap-isolation-2\",\"confirmRequired\":false,\"pendingAction\":\"CAPABILITY_QUERY\",\"actions\":[],\"fallback\":false}}",
+  "path" : "/api/customer-service/chat"
+}, {
+  "method" : "POST",
+  "status" : 200,
+  "response" : "{\"success\":true,\"code\":\"OK\",\"message\":\"success\",\"data\":{\"answer\":\"当前客服可以办理符合条件的签收七天无理由退货。是否支持不等于这笔订单已经符合条件，也不等于已经提交申请。\",\"sessionId\":\"cap-isolation-3\",\"confirmRequired\":false,\"pendingAction\":\"CAPABILITY_QUERY\",\"actions\":[],\"fallback\":false}}",
+  "path" : "/api/customer-service/chat"
+}, {
+  "method" : "POST",
+  "status" : 200,
+  "response" : "{\"success\":true,\"code\":\"OK\",\"message\":\"success\",\"data\":{\"answer\":\"当前客服助手不能办理换货。人工入口仍是占位，确认前往不会接入真人，也不会提交换货申请。\",\"sessionId\":\"cap-isolation-4\",\"confirmRequired\":false,\"pendingAction\":\"CAPABILITY_QUERY\",\"actions\":[],\"fallback\":false}}",
+  "path" : "/api/customer-service/chat"
+}, {
+  "method" : "POST",
+  "status" : 200,
+  "response" : "{\"success\":true,\"code\":\"OK\",\"message\":\"success\",\"data\":{\"answer\":\"当前没有真人客服接管。人工入口只是占位，确认前往不会有人接手，也不会提交售后申请。\",\"sessionId\":\"cap-isolation-5\",\"confirmRequired\":false,\"pendingAction\":\"CAPABILITY_QUERY\",\"actions\":[],\"fallback\":false}}",
+  "path" : "/api/customer-service/chat"
+}, {
+  "method" : "POST",
+  "status" : 200,
+  "response" : "{\"success\":true,\"code\":\"OK\",\"message\":\"success\",\"data\":{\"answer\":\"当前客服可以办理符合条件的未发货整单退款。是否支持不等于这笔订单已经符合条件，也不等于已经提交申请。\",\"sessionId\":\"cap-isolation-6\",\"confirmRequired\":false,\"pendingAction\":\"CAPABILITY_QUERY\",\"actions\":[],\"fallback\":false}}",
+  "path" : "/api/customer-service/chat"
+}, {
+  "method" : "POST",
+  "status" : 200,
+  "response" : "{\"success\":true,\"code\":\"OK\",\"message\":\"success\",\"data\":{\"answer\":\"当前客服可以办理符合条件的未发货整单退款。是否支持不等于这笔订单已经符合条件，也不等于已经提交申请。\",\"sessionId\":\"cap-existing-draft\",\"confirmRequired\":false,\"pendingAction\":\"CAPABILITY_QUERY\",\"actions\":[],\"fallback\":false}}",
+  "path" : "/api/customer-service/chat"
+}, {
+  "method" : "POST",
+  "status" : 200,
+  "response" : "{\"success\":true,\"code\":\"OK\",\"message\":\"success\",\"data\":{\"answer\":\"当前客服可以办理符合条件的未发货整单退款。是否支持不等于这笔订单已经符合条件，也不等于已经提交申请。\",\"sessionId\":\"cap-existing-draft\",\"confirmRequired\":false,\"pendingAction\":\"CAPABILITY_QUERY\",\"actions\":[],\"fallback\":false}}",
+  "path" : "/api/customer-service/chat"
+} ]

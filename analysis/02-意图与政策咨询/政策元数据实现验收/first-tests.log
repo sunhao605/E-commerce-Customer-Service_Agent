@@ -1,0 +1,13 @@
+======================================================================
+ERROR: test_policy_queries_stay_read_only_and_invoice_stays_invoice (test_route_priority.RoutePriorityTest.test_policy_queries_stay_read_only_and_invoice_stays_invoice)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_route_priority.py", line 252, in test_policy_queries_stay_read_only_and_invoice_stays_invoice
+    self.assertFalse(invoice.session_state["cache_hit"])
+                     ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+KeyError: 'cache_hit'
+
+----------------------------------------------------------------------
+Ran 140 tests in 1.184s
+
+FAILED (errors=1)

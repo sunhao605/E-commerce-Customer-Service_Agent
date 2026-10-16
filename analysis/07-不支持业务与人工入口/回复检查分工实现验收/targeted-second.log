@@ -1,0 +1,32 @@
+.......EEE..........
+======================================================================
+ERROR: test_fail_uncertain_and_error_preserve_both_price_and_reminder (test_answer_judge.ReplyGateTest.test_fail_uncertain_and_error_preserve_both_price_and_reminder) (decision='fallback')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_judge.py", line 169, in test_fail_uncertain_and_error_preserve_both_price_and_reminder
+    self.assertEqual(response.session_state["cost"]["model_calls"]["answer_judge"], 1)
+                     ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+KeyError: 'cost'
+
+======================================================================
+ERROR: test_fail_uncertain_and_error_preserve_both_price_and_reminder (test_answer_judge.ReplyGateTest.test_fail_uncertain_and_error_preserve_both_price_and_reminder) (decision='review')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_judge.py", line 169, in test_fail_uncertain_and_error_preserve_both_price_and_reminder
+    self.assertEqual(response.session_state["cost"]["model_calls"]["answer_judge"], 1)
+                     ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+KeyError: 'cost'
+
+======================================================================
+ERROR: test_fail_uncertain_and_error_preserve_both_price_and_reminder (test_answer_judge.ReplyGateTest.test_fail_uncertain_and_error_preserve_both_price_and_reminder) (decision='fallback')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_judge.py", line 169, in test_fail_uncertain_and_error_preserve_both_price_and_reminder
+    self.assertEqual(response.session_state["cost"]["model_calls"]["answer_judge"], 1)
+                     ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+KeyError: 'cost'
+
+----------------------------------------------------------------------
+Ran 18 tests in 0.094s
+
+FAILED (errors=3)

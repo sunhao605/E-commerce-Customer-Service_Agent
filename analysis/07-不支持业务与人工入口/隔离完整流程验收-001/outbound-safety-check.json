@@ -1,0 +1,15 @@
+{
+  "destination": "https://api.deepseek.com/chat/completions",
+  "authorization": "用户明确同意8—10条隔离完整流程验收，真实模型调用属于该验收链路。",
+  "max_remote_calls": 60,
+  "cases": 10,
+  "payload_origin": "本地教学Prompt、户外演示知识、构造商品价格库存和历史申请；无真实客户业务数据。",
+  "synthetic_order_ids": [
+    "ORD9001",
+    "ORD8001"
+  ],
+  "synthetic_user": "ISOLATED_USER",
+  "business_destination": "仅本进程127.0.0.1随机端口只读fixture；禁止业务POST/PUT/PATCH/DELETE，禁止外连其他主机。",
+  "excluded": "不发送真实账号、姓名、手机号、地址、真实订单或业务令牌；模型认证仅在请求头使用，不记录。",
+  "daily_services": "不连接日常8000/8081/数据库，不修改.env，不启用日常enforce。"
+}

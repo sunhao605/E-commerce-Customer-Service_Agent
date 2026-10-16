@@ -1,0 +1,126 @@
+{
+  "existing_and_new_tests": 111,
+  "failures": 0,
+  "errors": 0,
+  "new_tests": 17,
+  "index": {
+    "loaded": true,
+    "version": "lesson41-idx-81e8d9ad64bc",
+    "chunk_count": 85,
+    "files": [
+      "after_sale_policy.md",
+      "payment_invoice_policy.md",
+      "promotion_policy.md",
+      "member_coupon_policy.md",
+      "product_knowledge.md"
+    ],
+    "embedding": "local_token_embedding_for_explicit_offline_course"
+  },
+  "receipts": [
+    {
+      "query": "帐篷里面有水是怎么回事？",
+      "sections": [
+        "3.2 帐内有水：先区分冷凝、外部进水与损伤"
+      ],
+      "citations": [
+        {
+          "source": "knowledge/product_knowledge.md",
+          "title": "荒野户外商品选购、使用与问题排查指南",
+          "snippet": "### 3.2 帐内有水：先区分冷凝、外部进水与损伤  \n顾客说“睡一晚帐篷里面全是水”，先问有没有下雨、水是均匀水珠还是固定位置持续滴落、内外帐是否贴在一起，以及通风口是否关闭。这些信息用于定位问题，不能直接认定质量合格或损坏由顾客造成。  \n潮湿空气接触较冷的帐面可能产生冷凝水；呼吸和湿衣物会增加帐内湿气。保持合理通风、减少帐内湿物，并按说明书拉开内外帐之间的空间，可以帮助减少冷凝。该知识说明一种可能原因，并不排除缝线、面料或部件故障。[通用依据：REI 帐篷冷凝说明](https://www.rei.com/learn/expert-advice/how-to-prevent-condensation-in-a-tent.html)。  \n如果固定缝线处持续渗水、面料存在破口，或正确搭建后仍反复出现异常，请保留使用环境、异常位置和商品照片，进入问题核验。客服不能只引用“可能冷凝”就结束售后，也不应先要求顾客修补后再判断问题。",
+          "score": 0.73,
+          "retrieval_stage": "pre_retrieval",
+          "metadata": {
+            "policy_id": "outdoor_product_guide",
+            "scene_key": "product_knowledge",
+            "version": "2026-10-12.1",
+            "section_id": "outdoor_product_guide-section-4",
+            "section": "3.2 帐内有水：先区分冷凝、外部进水与损伤",
+            "chunk_ids": [
+              "outdoor_product_guide-chunk-64",
+              "outdoor_product_guide-chunk-65"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "query": "帐篷怎么保养？",
+      "sections": [
+        "3.3 清洁、收纳与首次检查"
+      ],
+      "citations": [
+        {
+          "source": "knowledge/product_knowledge.md",
+          "title": "荒野户外商品选购、使用与问题排查指南",
+          "snippet": "### 3.3 清洁、收纳与首次检查  \n出发前在合适位置试搭，核对配件和搭建步骤。使用后先清除砂土和杂物，依说明书清洁并充分晾干再收纳；长期潮湿收纳可能带来霉味和涂层问题。通用帐篷养护建议不使用洗衣机或烘干机强洗，具体型号仍以厂商说明为准。[通用依据：REI 帐篷养护](https://www.rei.com/learn/expert-advice/caring-tent.html)。  \n顾客发现霉味、脱胶或拉链卡顿时，应问首次出现时间、存放条件与异常位置，不凭一张照片判定责任。新收到即有明显破损与使用一段时间后出现问题，所需证据不同，都应保留核验机会。",
+          "score": 0.659,
+          "retrieval_stage": "pre_retrieval",
+          "metadata": {
+            "policy_id": "outdoor_product_guide",
+            "scene_key": "product_knowledge",
+            "version": "2026-10-12.1",
+            "section_id": "outdoor_product_guide-section-5",
+            "section": "3.3 清洁、收纳与首次检查",
+            "chunk_ids": [
+              "outdoor_product_guide-chunk-67"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "query": "睡袋温标怎么看？",
+      "sections": [
+        "5.2 睡袋温标与个人感受"
+      ],
+      "citations": [
+        {
+          "source": "knowledge/product_knowledge.md",
+          "title": "荒野户外商品选购、使用与问题排查指南",
+          "snippet": "### 5.2 睡袋温标与个人感受  \n“贴身露营睡袋”的项目描述没有提供温标。回答“零下五度能不能睡”前，应取得该型号的舒适温度、限制温度及使用条件；没有数据时明确无法确认。  \n温标用于比较，不是人人都会获得相同体感的保证。舒适温度、限制温度与极限温度含义不同，不能把极限值说成舒适使用温度；睡垫、环境与个人状况也影响保暖。[通用依据：deuter 睡袋说明](https://www.deuter.com/se-en/advice/all-about-sleeping-bags/)。  \n顾客收到后觉得填充不均、拉链异常或有污渍，应先核验具体问题。项目对该演示 SKU 的自助无理由资格有限制，不意味着“所有睡袋都不能退”，更不意味着质量问题没有处理路径。",
+          "score": 0.73,
+          "retrieval_stage": "pre_retrieval",
+          "metadata": {
+            "policy_id": "outdoor_product_guide",
+            "scene_key": "product_knowledge",
+            "version": "2026-10-12.1",
+            "section_id": "outdoor_product_guide-section-10",
+            "section": "5.2 睡袋温标与个人感受",
+            "chunk_ids": [
+              "outdoor_product_guide-chunk-76",
+              "outdoor_product_guide-chunk-75",
+              "outdoor_product_guide-chunk-77"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "query": "轻量露营折叠椅：支架怎么展开？",
+      "sections": [
+        "4.1 折叠椅与折叠桌"
+      ],
+      "citations": [
+        {
+          "source": "knowledge/product_knowledge.md",
+          "title": "荒野户外商品选购、使用与问题排查指南",
+          "snippet": "## 4. 营地家具、收纳车与野餐垫  \n### 4.1 折叠椅与折叠桌  \n目录包含“露营折叠椅”“轻量露营折叠椅”“便携折叠桌”。比较时先确认是哪一款，再查重量、承重、座面或桌面尺寸。未公布承重时，不回答“成年人坐肯定没事”；“轻量”也不代表承重更小或更大。  \n顾客问椅子晃动，先核对地面是否平整、支架是否完全展开、锁止部件是否到位。出现裂纹、松脱或结构变形时，先停止继续承重并保留照片，不引导顾客反复坐压来证明问题。缺少收纳袋与支架断裂应分别记录，不能混成一个“配件缺失”。  \n折叠桌边角划伤、桌面不平、连接件缺失或收纳困难，要区分到货时状态与使用后的变化。运输包装有碰撞痕迹时可以保留外箱和开箱照片；没有开箱视频不应让客服直接放弃核验。",
+          "score": 0.775,
+          "retrieval_stage": "pre_retrieval",
+          "metadata": {
+            "policy_id": "outdoor_product_guide",
+            "scene_key": "product_knowledge",
+            "version": "2026-10-12.1",
+            "section_id": "outdoor_product_guide-section-6",
+            "section": "4.1 折叠椅与折叠桌",
+            "chunk_ids": [
+              "outdoor_product_guide-chunk-69",
+              "outdoor_product_guide-chunk-70"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "network_calls": 0
+}

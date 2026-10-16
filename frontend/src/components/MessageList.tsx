@@ -46,15 +46,21 @@ export function MessageList({ messages, isLoading }: MessageListProps) {
                 {message.response.citations.map((citation, citationIndex) => {
                   const title = citation.source_title ?? citation.title ?? citation.chunk_id ?? "知识引用";
                   const source = citation.source_path ?? citation.source ?? citation.chunk_id;
+                  const section = typeof citation.metadata?.section === "string" ? citation.metadata.section : "";
+                  const label = section ? `${title} · ${section}` : title;
                   return (
-                    <div
+                    <details
                       className="citation-card"
                       key={`${citation.citation_id ?? source}-${citation.retrieval_stage ?? "unknown"}-${citationIndex}`}
                     >
-                      <strong>{citation.citation_id ? `${citation.citation_id} · ${title}` : title}</strong>
-                      <span>{citation.snippet}</span>
-                      {source ? <small>{source}</small> : null}
-                    </div>
+                      <summary>
+                        <strong>{citation.citation_id ? `${citation.citation_id} · ${label}` : label}</strong>
+                      </summary>
+                      <div className="citation-body">
+                        <span>{citation.snippet}</span>
+                        {source ? <small>{source}</small> : null}
+                      </div>
+                    </details>
                   );
                 })}
               </div>

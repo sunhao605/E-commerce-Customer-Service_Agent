@@ -1,0 +1,221 @@
+{
+  "kind": "exploratory_real_routes",
+  "rows": [
+    {
+      "id": "P01",
+      "input": "帐篷晒干以后该怎么放回袋子里？",
+      "passed": false,
+      "result": {
+        "intent": "product_query",
+        "used_model": false,
+        "model_name": "deepseek-flash",
+        "fallback_reason": "OpenAIConnectionError",
+        "framework": null,
+        "needs_product_facts": null,
+        "knowledge_domains": null,
+        "clarification_fields": [],
+        "invocation_attempted": true,
+        "elapsed_ms": 170.735,
+        "usage": {}
+      }
+    },
+    {
+      "id": "P02",
+      "input": "别替我推荐款式，告诉我帐篷脏了怎么擦就行。",
+      "passed": false,
+      "result": {
+        "intent": "product_query",
+        "used_model": false,
+        "model_name": "deepseek-flash",
+        "fallback_reason": "OpenAIConnectionError",
+        "framework": null,
+        "needs_product_facts": null,
+        "knowledge_domains": null,
+        "clarification_fields": [],
+        "invocation_attempted": true,
+        "elapsed_ms": 169.607,
+        "usage": {}
+      }
+    },
+    {
+      "id": "P03",
+      "input": "全地形营地收纳车现在卖多少钱？",
+      "passed": false,
+      "result": {
+        "intent": "product_query",
+        "used_model": false,
+        "model_name": "deepseek-flash",
+        "fallback_reason": "OpenAIConnectionError",
+        "framework": null,
+        "needs_product_facts": null,
+        "knowledge_domains": null,
+        "clarification_fields": [],
+        "invocation_attempted": true,
+        "elapsed_ms": 4.332,
+        "usage": {}
+      }
+    },
+    {
+      "id": "P04",
+      "input": "山野四人帐篷的承重具体是多少公斤？",
+      "passed": false,
+      "result": {
+        "intent": "product_query",
+        "used_model": false,
+        "model_name": "deepseek-flash",
+        "fallback_reason": "OpenAIConnectionError",
+        "framework": null,
+        "needs_product_facts": null,
+        "knowledge_domains": null,
+        "clarification_fields": [],
+        "invocation_attempted": true,
+        "elapsed_ms": 5.605,
+        "usage": {}
+      }
+    },
+    {
+      "id": "P05",
+      "input": "山野四人帐篷多少钱，雨后如何收进袋里，山友会员券能和露营季满减一起用吗？",
+      "passed": false,
+      "result": {
+        "intent": "product_query",
+        "used_model": false,
+        "model_name": "deepseek-flash",
+        "fallback_reason": "OpenAIConnectionError",
+        "framework": null,
+        "needs_product_facts": null,
+        "knowledge_domains": null,
+        "clarification_fields": [],
+        "invocation_attempted": true,
+        "elapsed_ms": 3.686,
+        "usage": {}
+      }
+    },
+    {
+      "id": "P06",
+      "input": "露营季满减和平台会员券能同时使用吗？",
+      "passed": false,
+      "result": {
+        "intent": "promotion_query",
+        "used_model": false,
+        "model_name": "deepseek-flash",
+        "fallback_reason": "OpenAIConnectionError",
+        "framework": null,
+        "needs_product_facts": null,
+        "knowledge_domains": null,
+        "clarification_fields": [],
+        "invocation_attempted": true,
+        "elapsed_ms": 3.198,
+        "usage": {}
+      }
+    },
+    {
+      "id": "P07",
+      "input": "平台会员券能不能跟优惠一起用？",
+      "passed": false,
+      "result": {
+        "intent": "promotion_query",
+        "used_model": false,
+        "model_name": "deepseek-flash",
+        "fallback_reason": "OpenAIConnectionError",
+        "framework": null,
+        "needs_product_facts": null,
+        "knowledge_domains": null,
+        "clarification_fields": [],
+        "invocation_attempted": true,
+        "elapsed_ms": 3.432,
+        "usage": {}
+      }
+    },
+    {
+      "id": "P08",
+      "input": "请讲一下签收后七天无理由的退货条件，我还没决定退。",
+      "passed": false,
+      "result": {
+        "intent": "return_policy_query",
+        "used_model": false,
+        "model_name": "deepseek-flash",
+        "fallback_reason": "OpenAIConnectionError",
+        "framework": null,
+        "needs_product_facts": null,
+        "knowledge_domains": null,
+        "clarification_fields": [],
+        "invocation_attempted": true,
+        "elapsed_ms": 3.904,
+        "usage": {}
+      }
+    },
+    {
+      "id": "P09",
+      "input": "我的帐篷漏水了，能退吗？先别提交。",
+      "passed": false,
+      "result": {
+        "intent": "return_policy_query",
+        "used_model": false,
+        "model_name": "deepseek-flash",
+        "fallback_reason": "OpenAIConnectionError",
+        "framework": null,
+        "needs_product_facts": null,
+        "knowledge_domains": null,
+        "clarification_fields": [],
+        "invocation_attempted": true,
+        "elapsed_ms": 3.883,
+        "usage": {}
+      }
+    },
+    {
+      "id": "P10",
+      "input": "ORD1234没发货，我现在要申请退款。",
+      "passed": false,
+      "result": {
+        "intent": "refund_request",
+        "used_model": false,
+        "model_name": "deepseek-flash",
+        "fallback_reason": "OpenAIConnectionError",
+        "framework": null,
+        "needs_product_facts": null,
+        "knowledge_domains": null,
+        "clarification_fields": [],
+        "invocation_attempted": true,
+        "elapsed_ms": 3.446,
+        "usage": {}
+      }
+    },
+    {
+      "id": "P11",
+      "input": "订单完成后发票啥时候能开好？",
+      "passed": false,
+      "result": {
+        "intent": "order_query",
+        "used_model": false,
+        "model_name": "deepseek-flash",
+        "fallback_reason": "OpenAIConnectionError",
+        "framework": null,
+        "needs_product_facts": null,
+        "knowledge_domains": null,
+        "clarification_fields": [],
+        "invocation_attempted": true,
+        "elapsed_ms": 4.584,
+        "usage": {}
+      }
+    },
+    {
+      "id": "P12",
+      "input": "怎么洗？",
+      "passed": false,
+      "result": {
+        "intent": "general_chat",
+        "used_model": false,
+        "model_name": "deepseek-flash",
+        "fallback_reason": "OpenAIConnectionError",
+        "framework": null,
+        "needs_product_facts": null,
+        "knowledge_domains": null,
+        "clarification_fields": [],
+        "invocation_attempted": true,
+        "elapsed_ms": 4.051,
+        "usage": {}
+      }
+    }
+  ]
+}

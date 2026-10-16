@@ -1,0 +1,35 @@
+INFO:     Started server process [44918]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:55551 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55693 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55693 - "GET /sessions/bc20-72115daef56440ea9e15cf91af605295/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55693 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55693 - "GET /sessions/bc20-f6cac1dd2ae14b4891bc9ba53bed19b7/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55693 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55693 - "GET /sessions/bc20-a3fa31212706483d8de2c7b903bc492b/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55693 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55693 - "GET /sessions/bc20-62c2791d247f443facb1e2eeb53cfb2b/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55693 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55693 - "GET /sessions/bc20-b340535fe67a442e85bac2cf263d924b/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55908 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56045 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56613 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60419 - "GET /capabilities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60420 - "GET /capabilities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60420 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60420 - "GET /sessions/session-U1001-6u6bhoik/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60474 - "GET /capabilities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60475 - "GET /capabilities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60475 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60475 - "GET /sessions/session-U1001-vsqeci8s/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60542 - "GET /capabilities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60541 - "GET /capabilities HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60541 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60541 - "GET /sessions/session-U1001-t8xs1qi7/trace HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53493 - "GET /health HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [44918]

@@ -2,19 +2,13 @@
 
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass
 from typing import Any
 
 from api.schemas import *
-from retrieval.documents import load_knowledge_citation
+from retrieval.documents import knowledge_admission, knowledge_time, load_knowledge_citation, policy_block_reason
 from retrieval.hybrid_retrieval import retrieve_knowledge
-from agent.state import COMMON_HIT_CACHE
-
-REFUND_POLICY = load_knowledge_citation("after_sale_policy.md")
-RETURN_POLICY = load_knowledge_citation("received_return_policy.md")
-INVOICE_FAQ = load_knowledge_citation("payment_invoice_policy.md")
-PROMOTION_POLICY = load_knowledge_citation("promotion_policy.md")
-MEMBER_COUPON_POLICY = load_knowledge_citation("member_coupon_policy.md")
 
 
 @dataclass(frozen=True)
@@ -56,9 +50,74 @@ def low_confidence_result(session_id: str, intent: Intent) -> KnowledgePathResul
     )
 
 
-def policy_query_result(session_id: str, intent: Intent) -> KnowledgePathResult:
-    """只读通用退款或退货政策。不读、不写发票缓存，也不准备申请。"""
-    citation = REFUND_POLICY if intent == "refund_policy_query" else RETURN_POLICY
+def _plain_evidence(snippet: str) -> str:
+    text = re.sub(r"(?m)^#{1,6}[^\n]*(?:\n|$)", "", snippet).strip()
+    return re.sub(r"\[([^\]]+)\]\(https?://[^)]+\)", r"\1", text)
+
+
+def policy_query_result(session_id: str, intent: Intent, user_message: str = "") -> KnowledgePathResult:
+    """退款、退货先确认这份政策可用，再把合并后的前几块放进引用。不读、不写发票缓存，也不准备申请。"""
+    filename = "after_sale_policy.md" if intent in {"refund_policy_query", "refund_request"} else "received_return_policy.md"
+    citation = load_knowledge_citation(filename)
+    at = knowledge_time()
+    admission = knowledge_admission(at)
+    reason = policy_block_reason(citation.metadata, at)
+    if reason:
+        return unavailable_policy_result(session_id, intent, {
+            **admission, "mode": "hybrid_chunk_fusion", "reason": reason,
+            "policy_id": citation.metadata["policy_id"],
+        })
+    retrieval = retrieve_knowledge(user_message or str(citation.title), intent)
+    policy_id = citation.metadata["policy_id"]
+    located = [item for item in retrieval.citations if (item.metadata or {}).get("policy_id") == policy_id]
+    if not located:
+        return unavailable_policy_result(session_id, intent, {
+            **retrieval.debug, "mode": "hybrid_chunk_fusion", "reason": "no_matching_section",
+            "policy_id": policy_id,
+        })
+    text = "\n".join(piece for piece in (_plain_evidence(item.snippet) for item in located) if piece)
+    return KnowledgePathResult(
+        answer=text or located[0].snippet,
+        citations=located,
+        risk_level="low",
+        next_action="answer_user",
+        needs_human_approval=False,
+        retrieval_debug={**retrieval.debug, "mode": "hybrid_chunk_fusion"},
+        trace_events=(
+            (
+                "rag_pre_retrieved",
+                {
+                    "session_id": session_id,
+                    "intent": intent,
+                    "hit_count": len(located),
+                    "retrieval_stage": "pre_retrieval",
+                    "policy_id": policy_id,
+                    "section_id": (located[0].metadata or {}).get("section_id"),
+                },
+            ),
+        ),
+    )
+
+
+def unavailable_policy_result(session_id: str, intent: Intent, debug: dict[str, Any]) -> KnowledgePathResult:
+    label = {"promotion_query": "活动或会员规则", "invoice_query": "发票规则",
+             "refund_policy_query": "退款政策", "refund_request": "退款政策"}.get(intent, "退货政策")
+    return KnowledgePathResult(
+        answer=f"目前没有核实到可用于回答的有效{label}，暂不能说明相应政策条件。已核实的商品或订单事实仍以业务查询结果为准。",
+        citations=[], risk_level="medium", next_action="answer_user", needs_human_approval=False,
+        retrieval_debug=debug,
+        trace_events=(("rag_policy_blocked", {"session_id": session_id, "intent": intent, **debug}),),
+    )
+
+
+def designated_policy_result(session_id: str, filename: str, intent: Intent) -> KnowledgePathResult:
+    citation = load_knowledge_citation(filename)
+    at = knowledge_time()
+    debug = {**knowledge_admission(at), "mode": "designated_policy"}
+    reason = policy_block_reason(citation.metadata, at)
+    if reason:
+        return unavailable_policy_result(session_id, intent, {**debug, "reason": reason,
+            "policy_id": citation.metadata["policy_id"]})
     policy_id = (citation.metadata or {}).get("policy_id")
     return KnowledgePathResult(
         answer=citation.snippet,
@@ -66,6 +125,7 @@ def policy_query_result(session_id: str, intent: Intent) -> KnowledgePathResult:
         risk_level="low",
         next_action="answer_user",
         needs_human_approval=False,
+        retrieval_debug=debug,
         trace_events=(
             (
                 "rag_pre_retrieved",
@@ -75,6 +135,7 @@ def policy_query_result(session_id: str, intent: Intent) -> KnowledgePathResult:
                     "hit_count": 1,
                     "retrieval_stage": "pre_retrieval",
                     "policy_id": policy_id,
+                    **debug,
                 },
             ),
         ),
@@ -82,25 +143,16 @@ def policy_query_result(session_id: str, intent: Intent) -> KnowledgePathResult:
 
 
 def invoice_faq_result(session_id: str) -> KnowledgePathResult:
-    """发票咨询读取最终回答缓存；首次模型回答由编排层在生成后写入。"""
-    cache_key = "faq:invoice_issue"
-    cached = COMMON_HIT_CACHE.get(cache_key)
-    if cached:
-        return KnowledgePathResult(
-            answer=str(cached["answer"]),
-            citations=[INVOICE_FAQ],
-            risk_level="low",
-            next_action="answer_user",
-            needs_human_approval=False,
-            cache_hit=True,
-        )
-
+    """每轮先检查政策；停用最终答案缓存，保留底层检索缓存。"""
+    policy = designated_policy_result(session_id, "payment_invoice_policy.md", "invoice_query")
+    if not policy.citations:
+        return policy
     retrieval = retrieve_knowledge("电子发票通常多久能准备好", "invoice_query")
     citation = next(
         (item for item in retrieval.citations if (item.metadata or {}).get("policy_id") == "invoice_issue"),
-        INVOICE_FAQ,
+        policy.citations[0],
     )
-    answer = "电子发票通常在订单完成后 24 小时内开具，你可以在订单详情页查看和下载。"
+    answer = citation.snippet
     return KnowledgePathResult(
         answer=answer,
         citations=[citation],
@@ -122,9 +174,16 @@ def invoice_faq_result(session_id: str) -> KnowledgePathResult:
     )
 
 
-def promotion_policy_result(session_id: str, user_message: str) -> KnowledgePathResult:
+def promotion_policy_result(session_id: str, user_message: str, *, clarification_required: bool | None = None) -> KnowledgePathResult:
     """活动和会员券问题先过证据门，再用课程版 reranker 决定最终引用顺序。"""
     normalized = user_message.replace(" ", "").lower()
+    if clarification_required is True:
+        return KnowledgePathResult(
+            answer="会员券想和哪项优惠叠加？例如露营季满减、商品活动价，还是另一张券？",
+            citations=[], risk_level="low", next_action="ask_clarification", needs_human_approval=False,
+            retrieval_debug={"mode": "clarification_required", "reason": "promotion_combination"},
+            trace_events=(("rag_clarification_required", {"session_id": session_id, "clarification_field": "promotion_combination"}),),
+        )
     if any(term in normalized for term in ("隐藏券", "火星会员", "不存在的活动", "未知活动", "未发布")):
         candidates: list[tuple[Citation, float, list[str]]] = []
         retrieval_debug = {"mode": "evidence_gate_blocked_before_retrieval", "reason": "unsupported_policy_claim"}
@@ -150,6 +209,9 @@ def promotion_policy_result(session_id: str, user_message: str) -> KnowledgePath
     reranked = _rerank_promotion_candidates(user_message, candidates)
     citations = [citation for citation, _score, _reasons in reranked]
     if not citations:
+        if any(policy_id in retrieval_debug.get("blocked_policies", {})
+               for policy_id in _promotion_scope_policy_ids(normalized)):
+            return unavailable_policy_result(session_id, "promotion_query", retrieval_debug)
         result = low_confidence_result(session_id, "promotion_query")
         return KnowledgePathResult(
             answer=result.answer,
@@ -190,7 +252,7 @@ def promotion_policy_result(session_id: str, user_message: str) -> KnowledgePath
                     "session_id": session_id,
                     "hit_count": len(citations),
                     "retrieval_stage": "pre_retrieval",
-                    "policy_id": "promotion_618_stack_rule",
+                    "policy_id": "promotion_camping_season_stack_rule",
                     "candidate_policy_ids": [
                         citation.metadata.get("policy_id") for citation, _score, _reasons in candidates if citation.metadata
                     ],
@@ -210,15 +272,33 @@ def promotion_policy_result(session_id: str, user_message: str) -> KnowledgePath
     )
 
 
+def product_knowledge_result(session_id: str, user_message: str) -> KnowledgePathResult:
+    retrieval = retrieve_knowledge(user_message, "product_query", top_k=3)
+    citations = retrieval.citations
+    if citations:
+        # 回复保留事实与限制；原始 Markdown、来源和版本留在 Citation 中。模型开启时这些小块进入提示词。
+        text = "\n".join(piece for piece in (_plain_evidence(item.snippet) for item in citations) if piece)
+        answer = "通用使用建议（具体型号以说明书为准）：\n" + text
+    else:
+        answer = "没有找到支持这个问题的有效商品使用知识，请补充商品类别和具体问题。"
+    return KnowledgePathResult(
+        answer=answer, citations=citations, risk_level="low", next_action="answer_user",
+        needs_human_approval=False, retrieval_debug=retrieval.debug,
+        trace_events=(("rag_pre_retrieved", {"session_id": session_id, "intent": "product_query",
+            "policy_id": "outdoor_product_guide", "hit_count": len(citations),
+            "section_ids": [(c.metadata or {}).get("section_id") for c in citations]}),),
+    )
+
+
 def _promotion_scope_policy_ids(normalized_query: str) -> set[str]:
     """单一问题只引用对应规则；明确问叠加时才联合两类证据。"""
     asks_promotion = any(term in normalized_query for term in ("露营季", "大促", "活动", "满减", "300减40"))
     asks_member = any(term in normalized_query for term in ("会员", "会员券", "山友", "优惠券"))
     if asks_promotion and not asks_member:
-        return {"promotion_618_stack_rule"}
+        return {"promotion_camping_season_stack_rule"}
     if asks_member and not asks_promotion:
         return {"member_coupon_gold_rule"}
-    return {"promotion_618_stack_rule", "member_coupon_gold_rule"}
+    return {"promotion_camping_season_stack_rule", "member_coupon_gold_rule"}
 
 
 def _rerank_promotion_candidates(
@@ -236,7 +316,7 @@ def _rerank_promotion_candidates(
         policy_id = citation.metadata.get("policy_id") if citation.metadata else ""
         final_score = score
         final_reasons = list(reasons)
-        if policy_id == "promotion_618_stack_rule" and any(term in normalized for term in ("露营季", "满减", "300减40", "大促")):
+        if policy_id == "promotion_camping_season_stack_rule" and any(term in normalized for term in ("露营季", "满减", "300减40", "大促")):
             final_score += 0.18
             final_reasons.append("当前大促规则加权")
         if policy_id == "member_coupon_gold_rule" and any(term in normalized for term in ("山友", "会员券")):
@@ -263,12 +343,12 @@ def _build_rerank_debug(reranked: list[tuple[Citation, float, list[str]]]) -> di
 def _promotion_policy_answer(citations: list[Citation]) -> str:
     """按实际命中的 citation 组织回答，避免单一证据问题被迫套完整叠加规则。"""
     policy_ids = {citation.metadata.get("policy_id") for citation in citations if citation.metadata}
-    if {"promotion_618_stack_rule", "member_coupon_gold_rule"}.issubset(policy_ids):
+    if {"promotion_camping_season_stack_rule", "member_coupon_gold_rule"}.issubset(policy_ids):
         return (
             "根据荒野户外 露营季活动规则，满 300 减 40 可以与平台会员券叠加，"
             "但不能与同类型满减券重复叠加；山友会员券需要在有效期内由本人账号使用。"
         )
-    if "promotion_618_stack_rule" in policy_ids:
+    if "promotion_camping_season_stack_rule" in policy_ids:
         return "根据荒野户外 露营季活动规则，满 300 减 40 活动可用，但不能与同类型满减券重复叠加。"
     if "member_coupon_gold_rule" in policy_ids:
         return "根据荒野户外会员券使用规则，山友会员可领取平台会员券；会员券需在有效期内由本人账号使用，不能转让。"

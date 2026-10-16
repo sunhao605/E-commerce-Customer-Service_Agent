@@ -19,6 +19,7 @@ from pydantic import BaseModel, Field
 ReasoningView = Literal["default", "off", "summary", "teaching"]
 Intent = Literal[
     "general_chat",
+    "service_scope_query",
     "order_query",
     "refund_status_query",
     "after_sale_eligibility_query",
@@ -56,6 +57,12 @@ class ToolCandidate(BaseModel):
     reason: str
 
 
+class RetrievalStrategy(BaseModel):
+    knowledge_domain: str
+    retrieval_mode: Literal["hybrid", "direct_document"]
+    citation_scope: Literal["section", "document", "faq_entry"]
+
+
 class RoutePlan(BaseModel):
     """模型意图经过业务白名单约束后的结构化执行计划。"""
 
@@ -65,6 +72,10 @@ class RoutePlan(BaseModel):
     required_tools: list[str] = Field(default_factory=list)
     tool_candidates: list[ToolCandidate] = Field(default_factory=list)
     knowledge_domains: list[str] = Field(default_factory=list)
+    capability_ids: list[str] = Field(default_factory=list)
+    needs_product_facts: bool | None = None
+    clarification_fields: list[str] = Field(default_factory=list)
+    retrieval_strategies: list[RetrievalStrategy] = Field(default_factory=list)
     entity_refs: list[str] = Field(default_factory=list)
     risk_level: RiskLevel = "low"
     requires_workflow: bool = False
@@ -113,6 +124,8 @@ class ToolCallTrace(BaseModel):
     tool_name: str
     arguments: dict[str, Any]
     output_summary: str
+    # 仅供本轮生成与评审共享，不随公开工具 Trace 返回业务原始字段。
+    review_facts: dict[str, Any] | None = Field(default=None, exclude=True)
     status: Literal["success", "error"]
     tool_source: Literal["function", "mcp", "preload"] | None = "function"
     risk_level: RiskLevel | None = None

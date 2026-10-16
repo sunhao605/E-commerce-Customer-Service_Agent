@@ -1,0 +1,43 @@
+{
+  "mode": "bounded_daily_reload_real_model_and_business_read",
+  "date": "2026-10-14",
+  "final_services_healthy": true,
+  "restored_after_environment_stop": true,
+  "daily_knowledge_loaded": true,
+  "snapshot_version": "knowledge-3524fd57e6c4",
+  "index_version": "lesson41-idx-f370d4501647",
+  "chunk_count": 85,
+  "governed_files": 6,
+  "six_case_route_and_known_fact_passed": 6,
+  "confirmed_response_quality_issues": 1,
+  "issue_id": "BC-020",
+  "issue_fixed": false,
+  "first_parser_structural_passed": 3,
+  "parser_corrected_post_hoc": true,
+  "six_case_model_calls": {
+    "route_planner": 6,
+    "tool_agent": 6,
+    "final_answer": 3,
+    "extra_reasoning": 0
+  },
+  "actual_route_usage_only": {
+    "input_tokens": 13382,
+    "output_tokens": 146,
+    "total_tokens": 13528
+  },
+  "direct_source_probes": 2,
+  "daily_page_probes": 1,
+  "post_restore_smoke_probes": 1,
+  "database_eight_tables_unchanged": true,
+  "product_price_stock_unchanged": true,
+  "business_writes_executed": false,
+  "business_source_hashes_unchanged": true,
+  "rag_embedding_changed": false,
+  "model_config_changed": false,
+  "limits": [
+    "六条构造用例非生产准确率",
+    "发票具体状态读取未验",
+    "本地字符向量未切成语义Embedding",
+    "到期边界仍由此前固定时钟检查证明"
+  ]
+}

@@ -1,0 +1,73 @@
+======================================================================
+ERROR: test_explicit_stock_reminder_request_states_it_is_unsupported (test_product_query.ProductTargetingTest.test_explicit_stock_reminder_request_states_it_is_unsupported)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_product_query.py", line 88, in test_explicit_stock_reminder_request_states_it_is_unsupported
+    response = self.chat("轻量露营折叠椅有货后提醒我，先告诉我价格库存。")
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_product_query.py", line 52, in chat
+    return self.agent.chat(ChatRequest(session_id=session_id, runtime_user_id="U1001",
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        user_message=text, runtime_context=context))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/agent/customer_service_agent.py", line 73, in chat
+    return self._chat(request)
+           ~~~~~~~~~~^^^^^^^^^
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/agent/customer_service_agent.py", line 883, in _chat
+    return ChatResponse(
+        session_id=request.session_id,
+    ...<96 lines>...
+        },
+    )
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/.venv/lib/python3.14/site-packages/pydantic/main.py", line 263, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+pydantic_core._pydantic_core.ValidationError: 1 validation error for ChatResponse
+answer
+  Input should be a valid string [type=string_type, input_value=<MagicMock name='compose_...answer' id='4507025824'>, input_type=MagicMock]
+    For further information visit https://errors.pydantic.dev/2.13/v/string_type
+
+======================================================================
+ERROR: test_stock_reminder_cues_and_rejections (test_product_query.ProductTargetingTest.test_stock_reminder_cues_and_rejections)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_product_query.py", line 102, in test_stock_reminder_cues_and_rejections
+    from agent.product_query import wants_stock_reminder
+ImportError: cannot import name 'wants_stock_reminder' from 'agent.product_query' (/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/agent/product_query.py)
+
+======================================================================
+FAIL: test_verified_stock_answers_never_use_model_service_expansion (test_product_query.ProductTargetingTest.test_verified_stock_answers_never_use_model_service_expansion) (stock=0, query='轻量露营折叠椅目前标价和库存是多少？')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_product_query.py", line 78, in test_verified_stock_answers_never_use_model_service_expansion
+    compose.assert_not_called()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/sunhao/.local/share/uv/python/cpython-3.14.7-macos-aarch64-none/lib/python3.14/unittest/mock.py", line 947, in assert_not_called
+    raise AssertionError(msg)
+AssertionError: Expected 'compose_answer' to not have been called. Called 1 times.
+Calls: [call(request=ChatRequest(session_id='product-test', runtime_user_id='U1001', runtime_nickname=None, runtime_member_level=None, runtime_risk_level=None, user_message='轻量露营折叠椅目前标价和库存是多少？', reasoning_view='default', debug=True, runtime_context=None, history_messages=[]), intent='product_query', deterministic_answer='轻量露营折叠椅 商品标价 899 元，当前无库存。', risk_level='low', next_action='answer_user', tool_calls=[ToolCallTrace(tool_name='search_products', arguments={'keyword': '轻量露营折叠椅', 'product_id': 4, 'product_name': '轻量露营折叠椅', 'fact_source': 'business_api'}, output_summary='轻量露营折叠椅 商品标价 899 元，当前无库存。', status='success', tool_source='function', risk_level='low', needs_human_approval=None, next_action='answer_user', error_type=None, candidates=[], clarification_field=None, clarification_prompt=None)], citations=[], workflow=None, enable_reasoning=False, model_context=['[runtime_context/trusted] member_level=unknown, risk_level=unknown'])].
+
+======================================================================
+FAIL: test_verified_stock_answers_never_use_model_service_expansion (test_product_query.ProductTargetingTest.test_verified_stock_answers_never_use_model_service_expansion) (stock=36, query='轻量露营折叠椅现在多少钱，还有货吗？')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_product_query.py", line 78, in test_verified_stock_answers_never_use_model_service_expansion
+    compose.assert_not_called()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/sunhao/.local/share/uv/python/cpython-3.14.7-macos-aarch64-none/lib/python3.14/unittest/mock.py", line 947, in assert_not_called
+    raise AssertionError(msg)
+AssertionError: Expected 'compose_answer' to not have been called. Called 1 times.
+Calls: [call(request=ChatRequest(session_id='product-test', runtime_user_id='U1001', runtime_nickname=None, runtime_member_level=None, runtime_risk_level=None, user_message='轻量露营折叠椅现在多少钱，还有货吗？', reasoning_view='default', debug=True, runtime_context=None, history_messages=[]), intent='product_query', deterministic_answer='轻量露营折叠椅 商品标价 899 元，库存 36 件。', risk_level='low', next_action='answer_user', tool_calls=[ToolCallTrace(tool_name='search_products', arguments={'keyword': '轻量露营折叠椅', 'product_id': 4, 'product_name': '轻量露营折叠椅', 'fact_source': 'business_api'}, output_summary='轻量露营折叠椅 商品标价 899 元，库存 36 件。', status='success', tool_source='function', risk_level='low', needs_human_approval=None, next_action='answer_user', error_type=None, candidates=[], clarification_field=None, clarification_prompt=None)], citations=[], workflow=None, enable_reasoning=False, model_context=['[runtime_context/trusted] member_level=unknown, risk_level=unknown'])].
+
+======================================================================
+FAIL: test_verified_stock_answers_never_use_model_service_expansion (test_product_query.ProductTargetingTest.test_verified_stock_answers_never_use_model_service_expansion) (stock=36, query='推荐轻量露营折叠椅，说明目前价格库存。')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_product_query.py", line 80, in test_verified_stock_answers_never_use_model_service_expansion
+    self.assertIn("899", response.answer)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '899' not found in '没有找到与“推荐轻量露营折叠椅”匹配的商品。可以补充更完整的商品名称或款式再试。'
+
+----------------------------------------------------------------------
+Ran 23 tests in 0.056s
+
+FAILED (failures=3, errors=2)

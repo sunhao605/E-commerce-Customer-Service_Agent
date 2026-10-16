@@ -1,0 +1,15 @@
+{
+  "index": {
+    "version": "lesson41-idx-5268ea0829cc",
+    "chunks": 85,
+    "embedding": "local_token_embedding_for_explicit_offline_course"
+  },
+  "citation_ids": [
+    "promotion_camping_season_stack_rule",
+    "member_coupon_gold_rule"
+  ],
+  "active_cases": 13,
+  "new_id_expected_in_cases": 2,
+  "old_id_in_active_sources": false,
+  "offline_validation": true
+}

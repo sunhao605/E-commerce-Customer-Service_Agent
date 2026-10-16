@@ -12,8 +12,11 @@ from agent.customer_service_agent import Lesson41Agent
 from agent.ecommerce_client import product_query_keyword
 from agent.hooks import HookManager
 from agent.models.router_client import ModelRouteResult
+from agent.models.answer_client import FinalAnswerModelResult
 from agent.product_query import product_selection_index, unique_name_match
+from agent.service_capabilities import catalog_payload
 from agent.tools.langchain_runtime import LangChainToolResult
+from retrieval.knowledge import KnowledgePathResult
 
 CHAIR_A = {"id": 1, "name": "露营折叠椅", "price": 599.0, "stock": 520, "active": True}
 CHAIR_B = {"id": 4, "name": "轻量露营折叠椅", "price": 899.0, "stock": 36, "active": True}
@@ -42,6 +45,9 @@ class ProductTargetingTest(unittest.TestCase):
             (None, "not_found"),
         )
         self.addCleanup(self.detail.stop)
+        self.capability = patch("agent.customer_service_agent.query_service_capability", side_effect=catalog_payload)
+        self.capability.start()
+        self.addCleanup(self.capability.stop)
 
     def tearDown(self):
         SESSION_MEMORIES.clear()
@@ -65,6 +71,92 @@ class ProductTargetingTest(unittest.TestCase):
         self.assertEqual(response.session_state["product_query"]["product_id"], "4")
         self.assertEqual(response.session_state["product_query"]["product_name"], "轻量露营折叠椅")
 
+    def test_verified_stock_answers_reject_model_service_expansion(self):
+        expanded = FinalAnswerModelResult(answer="我已为你开启到货提醒，并会帮你留意补货。", used_model=True)
+        clean = FinalAnswerModelResult(answer="轻量露营折叠椅标价 899 元，当前无库存。你可以看看其他款式，或稍后再查。", used_model=True)
+        for stock, query in ((0, "轻量露营折叠椅目前标价和库存是多少？"),
+                             (36, "轻量露营折叠椅现在多少钱，还有货吗？"),
+                             (36, "轻量露营折叠椅，请推荐并说明目前价格库存。")):
+            with self.subTest(stock=stock, query=query):
+                SESSION_MEMORIES.clear()
+                self.search_mock.return_value = [{**CHAIR_B, "stock": stock}]
+                with patch.object(self.agent.answer_model_client, "compose_answer", return_value=expanded) as compose:
+                    response = self.chat(query)
+                compose.assert_called()
+                self.assertEqual(response.answer, response.tool_calls[-1].output_summary)
+                self.assertIn("899", response.answer)
+                self.assertNotIn("提醒", response.answer)
+                self.assertEqual(response.session_state["model"]["final_answer"]["fallback_reason"], "unsupported_service_promise")
+                self.assertIsNone(response.session_state["workflow"])
+        SESSION_MEMORIES.clear()
+        self.search_mock.return_value = [{**CHAIR_B, "stock": 0}]
+        with patch.object(self.agent.answer_model_client, "compose_answer", return_value=clean) as compose:
+            kept = self.chat("轻量露营折叠椅目前标价和库存是多少？")
+        compose.assert_called()
+        self.assertEqual(kept.answer, clean.answer)
+        self.assertTrue(kept.session_state["model"]["final_answer"]["used_model"])
+        mixed = FinalAnswerModelResult(
+            answer="轻量露营折叠椅标价 899 元，当前无库存。我已为你开启到货提醒。", used_model=True,
+        )
+        SESSION_MEMORIES.clear()
+        self.search_mock.return_value = [{**CHAIR_B, "stock": 0}]
+        with patch.object(self.agent.answer_model_client, "compose_answer", return_value=mixed):
+            partial = self.chat("轻量露营折叠椅目前标价和库存是多少？")
+        self.assertEqual(partial.answer, "轻量露营折叠椅标价 899 元，当前无库存。")
+        self.assertNotIn("已开启", partial.answer)
+        self.assertEqual(partial.session_state["model"]["final_answer"]["fallback_reason"], "unsupported_service_promise_removed")
+        self.assertTrue(partial.session_state["model"]["final_answer"]["used_model"])
+
+    def test_explicit_stock_reminder_request_states_it_is_unsupported(self):
+        promised = FinalAnswerModelResult(answer="好的，我已为你开启到货提醒。", used_model=True)
+        self.search_mock.return_value = [{**CHAIR_B, "stock": 0}]
+        with patch.object(self.agent.answer_model_client, "compose_answer", return_value=promised) as compose:
+            response = self.chat("轻量露营折叠椅有货后提醒我，先告诉我价格库存。")
+        compose.assert_called()
+        self.assertIn("899", response.answer)
+        self.assertIn("不支持到货或补货提醒", response.answer)
+        self.assertNotIn("已开启", response.answer)
+        self.assertEqual(response.session_state["model"]["final_answer"]["fallback_reason"], "unsupported_service_promise")
+        self.assertIsNone(response.session_state["workflow"])
+        self.detail_mock.side_effect = None
+        self.detail_mock.return_value = (None, "not_found")
+        with patch.object(self.agent.answer_model_client, "compose_answer", return_value=promised) as compose:
+            missing = self.chat("这款有货后提醒我", {"relatedProductId": 999}, session_id="missing-reminder")
+        compose.assert_called()
+        self.assertIn("不支持到货或补货提醒", missing.answer)
+        self.assertNotIn("899", missing.answer)
+        self.assertNotIn("已开启", missing.answer)
+
+    def test_product_knowledge_uses_customer_rewrite(self):
+        rewritten = FinalAnswerModelResult(
+            answer="帐篷使用后先清除砂土，充分晾干再收纳，不要用洗衣机强洗。", used_model=True,
+        )
+        with patch.object(self.agent.answer_model_client, "compose_answer", return_value=rewritten) as compose:
+            response = self.chat("帐篷怎么保养？")
+        compose.assert_called()
+        self.assertEqual(response.answer, rewritten.answer)
+        self.assertNotIn("顾客问", response.answer)
+
+    def test_rejected_reminder_does_not_append_an_unasked_service_notice(self):
+        self.search_mock.return_value = [{**CHAIR_B, "stock": 0}]
+        response = self.chat("轻量露营折叠椅多少钱？不要到货提醒。")
+        self.assertEqual(response.answer, response.tool_calls[-1].output_summary)
+        self.assertNotIn("提醒", response.answer)
+
+    def test_stock_reminder_cues_and_rejections(self):
+        from agent.product_query import promises_unsupported_stock_watch, wants_stock_reminder, without_unperformed_actions
+        for text in ("到货提醒", "补货后通知我", "有货后提醒我", "能给我补货通知吗"):
+            self.assertTrue(wants_stock_reminder(text), text)
+        for text in ("不要到货提醒", "补货后不用通知我", "不需要补货通知", "只查价格库存"):
+            self.assertFalse(wants_stock_reminder(text), text)
+        for text in ("我已为你开启到货提醒，并会帮你留意补货。", "需要的话我可以帮你留意补货。", "有货了我告诉你。"):
+            self.assertTrue(promises_unsupported_stock_watch(text), text)
+        for text in ("目前不支持到货或补货提醒，你可以稍后再查询库存。", "轻量露营折叠椅标价 899 元，当前无库存。"):
+            self.assertFalse(promises_unsupported_stock_watch(text), text)
+        mixed = "轻量露营折叠椅标价 899 元，当前无库存。我已为你开启到货提醒。"
+        self.assertEqual(without_unperformed_actions(mixed), "轻量露营折叠椅标价 899 元，当前无库存。")
+        self.assertFalse(promises_unsupported_stock_watch(without_unperformed_actions(mixed)))
+
     def test_single_result_cannot_discard_requested_variant(self):
         self.search_mock.return_value = [CHAIR_A]
         response = self.chat("轻量露营折叠椅多少钱？")
@@ -78,11 +170,13 @@ class ProductTargetingTest(unittest.TestCase):
     def test_selection_continues_original_promotion_question(self):
         self.search_mock.return_value = [CHAIR_A, CHAIR_B]
         original = "折叠椅多少钱，露营季满减能叠加吗？"
-        self.chat(original)
-        knowledge = SimpleNamespace(answer="通用规则", citations=[], trace_events=[], retrieval_debug=None, rerank=None)
+        knowledge = KnowledgePathResult(answer="通用规则", citations=[], risk_level="low", next_action="answer_user", needs_human_approval=False)
         with patch("agent.customer_service_agent.promotion_policy_result", return_value=knowledge) as policy:
+            first = self.chat(original)
             response = self.chat("第二款")
-        policy.assert_called_once_with("product-test", original)
+        policy.assert_called_once_with("product-test", original, clarification_required=False)
+        self.assertIn("通用规则", first.answer)
+        self.assertEqual(response.session_state["route_plan"]["knowledge_domains"], [])
         self.assertIn("899", response.answer)
 
     def test_explicit_product_id_reads_only_that_object(self):

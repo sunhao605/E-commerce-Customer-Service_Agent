@@ -1,0 +1,39 @@
+{
+  "date": "2026-10-14",
+  "case": "BC-020",
+  "status": "fixed_and_retested_in_product_wording_scope",
+  "baseline_checks": 160,
+  "final_checks": 164,
+  "new_test_methods": 4,
+  "live_cases": 5,
+  "live_passed": 5,
+  "browser_turns": 2,
+  "daily_loaded": true,
+  "final_answer_model_calls_in_live_cases": 0,
+  "business_tables_unchanged": {
+    "order_header": true,
+    "order_item": true,
+    "balance_account": true,
+    "balance_transaction": true,
+    "after_sale_request": true,
+    "approval_record": true,
+    "logistics_info": true,
+    "logistics_event": true
+  },
+  "product_facts_unchanged": true,
+  "new_dependency": false,
+  "model_config_changed": false,
+  "java_restarted": false,
+  "database_restarted": false,
+  "source_sha256": {
+    "backend/agent/customer_service_agent.py": "84edbe66ceb3570c255f44c8d534a56f407cc37ed78d47b985fb682bbf5b8b52",
+    "backend/agent/product_query.py": "5254971db411c962c923efbf59d240931ddeba00b89f5df2b3d3fac007267881",
+    "backend/tests/test_product_query.py": "1a0daf7708a09135fda7fe50d1f7f79e27c5d9febeadc49ef8bfacd6d550f0dc"
+  },
+  "limits": [
+    "仅商品事实回复及明确提醒请求",
+    "提醒请求词规则未覆盖任意复杂表达",
+    "未改变通用推荐算法",
+    "非商品最终生成与旧问题未全量复测"
+  ]
+}

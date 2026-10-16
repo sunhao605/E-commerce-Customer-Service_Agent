@@ -1,0 +1,145 @@
+{
+  "run_id": "CAP-PLAN-LIVE-001",
+  "review_method": "code/state checks plus assistant semantic review against frozen cases; not independent formal evaluation",
+  "cases": [
+    {
+      "id": "PLAN-LIVE-01",
+      "session_id": "cap-plan-live-7c975af7098a4d56a4d44dd848d1c7bf",
+      "input": "支持到货提醒吗？",
+      "elapsed_ms": 1744.8,
+      "answer": "目前客服助手不支持到货或补货提醒，你可以稍后主动查询商品库存。当前客服助手不支持到货或补货提醒。你可以稍后主动查询商品库存。",
+      "automatic_path_checks": {
+        "http_success": true,
+        "one_route": true,
+        "intent_matches": true,
+        "route_and_plan_match": true,
+        "plan_and_actual_match": true,
+        "successful_capability": true,
+        "query_before_final": true,
+        "no_confirmation": true,
+        "no_credential_fields": true,
+        "no_workflow_events": true,
+        "no_internal_reference": true,
+        "no_model_fallback": true,
+        "new_session_no_history": true
+      },
+      "intent": "service_scope_query",
+      "capability_ids": [
+        "stock_notification"
+      ],
+      "fallback_reason": null,
+      "model_calls_trace": {
+        "route_planner": 1,
+        "tool_agent": 0,
+        "final_answer": 1,
+        "extra_reasoning": 0
+      },
+      "route_usage_actual": {
+        "input_tokens": 2691,
+        "output_tokens": 19,
+        "total_tokens": 2710
+      },
+      "full_quality_assistant_review": {
+        "pass": false,
+        "reason": "支持状态和下一步重复两遍；无无关重述要求。",
+        "issue": "BC-023"
+      }
+    },
+    {
+      "id": "PLAN-LIVE-02",
+      "session_id": "cap-plan-live-930d739b484d4dbba5a942b28b122f03",
+      "input": "轻量露营折叠椅现在多少钱，有货后能提醒我吗？",
+      "elapsed_ms": 3742.0,
+      "answer": "轻量露营折叠椅目前标价 199 元，当前无库存。\n\n到货提醒方面，当前客服助手不支持到货或补货提醒。你可以稍后主动查询商品库存。",
+      "automatic_path_checks": {
+        "http_success": true,
+        "one_route": true,
+        "intent_matches": true,
+        "route_and_plan_match": true,
+        "plan_and_actual_match": true,
+        "successful_capability": true,
+        "query_before_final": true,
+        "no_confirmation": true,
+        "no_credential_fields": true,
+        "no_workflow_events": true,
+        "no_internal_reference": true,
+        "no_model_fallback": true,
+        "new_session_no_history": true
+      },
+      "intent": "product_query",
+      "capability_ids": [
+        "stock_notification"
+      ],
+      "fallback_reason": null,
+      "model_calls_trace": {
+        "route_planner": 1,
+        "tool_agent": 2,
+        "final_answer": 1,
+        "extra_reasoning": 0
+      },
+      "route_usage_actual": {
+        "input_tokens": 2700,
+        "output_tokens": 38,
+        "total_tokens": 2738
+      },
+      "full_quality_assistant_review": {
+        "pass": true,
+        "reason": "199元、无库存与本次API相符；明确不支持提醒，呈现一次。",
+        "issue": null
+      }
+    },
+    {
+      "id": "PLAN-LIVE-03",
+      "session_id": "cap-plan-live-aa4f31fca3aa47fdae04da8622e9f04b",
+      "input": "支持退款吗？",
+      "elapsed_ms": 2009.1,
+      "answer": "您好，关于退款：当前客服可以办理符合条件的未发货整单退款。是否支持不等于这笔订单已经符合条件，也不等于已经提交申请。您可以提供订单号，我再帮您核验退款资格。当前客服可以办理符合条件的未发货整单退款。是否支持不等于这笔订单已经符合条件，也不等于已经提交申请。你可以说明订单号后再核验退款资格。",
+      "automatic_path_checks": {
+        "http_success": true,
+        "one_route": true,
+        "intent_matches": true,
+        "route_and_plan_match": true,
+        "plan_and_actual_match": true,
+        "successful_capability": true,
+        "query_before_final": true,
+        "no_confirmation": true,
+        "no_credential_fields": true,
+        "no_workflow_events": true,
+        "no_internal_reference": true,
+        "no_model_fallback": true,
+        "new_session_no_history": true
+      },
+      "intent": "service_scope_query",
+      "capability_ids": [
+        "refund_consultation"
+      ],
+      "fallback_reason": null,
+      "model_calls_trace": {
+        "route_planner": 1,
+        "tool_agent": 0,
+        "final_answer": 1,
+        "extra_reasoning": 0
+      },
+      "route_usage_actual": {
+        "input_tokens": 2689,
+        "output_tokens": 21,
+        "total_tokens": 2710
+      },
+      "full_quality_assistant_review": {
+        "pass": false,
+        "reason": "退款范围、资格边界和可选下一步重复两遍；无申请。",
+        "issue": "BC-023"
+      }
+    }
+  ],
+  "summary": {
+    "path_and_no_application_passed": 3,
+    "full_interaction_passed": 1,
+    "total": 3,
+    "old_BC022_restatement_conflict_observed": false,
+    "business_hashes_unchanged": true,
+    "retries": 0
+  },
+  "raw_model_output_available": false,
+  "supplier_bill_cost": "unknown"
+}

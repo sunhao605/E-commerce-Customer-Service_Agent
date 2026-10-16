@@ -1,0 +1,23 @@
+COMPILE_OK
+CANCEL_CHECK_READY
+INTERACTION_POLICY_CHECK_READY
+checks=19 failed=0
+PASS anonymous interaction-policy is 401: 401
+PASS anonymous capability GET is 401: 401
+PASS interaction-policy GET 200: 200
+PASS interaction-policy success=true
+PASS schemaVersion=interaction_policy_v1
+PASS channel=customer_service_agent
+PASS version present
+PASS one entry
+PASS entry id=human_support
+PASS surface=mall_chat
+PASS status=available
+PASS actor=user
+PASS initiation=message_request
+PASS confirmationRequired=true
+PASS completionEffect=open_entry
+PASS destinationState=placeholder
+PASS human_takeover still resolves via /{capabilityId}: 200
+PASS unknown capability id still unknown
+PASS invalid id still 400: 400

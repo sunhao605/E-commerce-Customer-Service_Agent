@@ -1,0 +1,286 @@
+{
+  "id": "ANSWER-LIVE-002",
+  "method": "代码/状态核验＋助手按冻结标准语义审阅，有限开发验收非独立正式评测",
+  "cases": [
+    {
+      "id": "ANSWER-RECHECK-01",
+      "session_id": "answer-live-9b233ffb58d948fdbf584f1bd0483a60",
+      "input": "支持到货提醒吗？",
+      "answer": "目前客服这边暂时不支持登记到货或补货提醒，所以没法帮您预约到货通知。\n\n您可以稍后再来问我，我帮您查一下商品库存情况。如果您有具体想关注的商品，也可以把商品信息发给我，方便后续帮您核实。",
+      "elapsed_ms": 1961.4,
+      "checks": {
+        "successful": true,
+        "one_route": true,
+        "intent_matches": true,
+        "plan_matches_route": true,
+        "actual_matches_plan": true,
+        "capability_success": true,
+        "evidence_before_generation": true,
+        "no_confirmation": true,
+        "no_credentials": true,
+        "no_workflow": true,
+        "no_internal_marker": true,
+        "no_history": true
+      },
+      "final_model": {
+        "session_id": "answer-live-9b233ffb58d948fdbf584f1bd0483a60",
+        "intent": "service_scope_query",
+        "used_model": true,
+        "model_name": "deepseek-flash",
+        "fallback_reason": null
+      },
+      "route_usage_actual": {
+        "input_tokens": 2691,
+        "output_tokens": 19,
+        "total_tokens": 2710
+      },
+      "model_calls_trace": {
+        "route_planner": 1,
+        "tool_agent": 0,
+        "final_answer": 1,
+        "extra_reasoning": 0
+      },
+      "quality_assistant_review": {
+        "passed": true,
+        "note": "直接说明不支持；可选提供商品信息不阻断答复。"
+      },
+      "screenshot": null,
+      "page_errors": null
+    },
+    {
+      "id": "ANSWER-RECHECK-02",
+      "session_id": "answer-live-95b280ce344440e7a82f5a00ad5ad6d8",
+      "input": "轻量露营折叠椅现在多少钱，有货后能提醒我吗？",
+      "answer": "轻量露营折叠椅目前标价是 199 元，不过现在没有库存。\n\n关于到货提醒，很抱歉，目前客服这边暂时不支持登记到货或补货提醒。您可以稍后主动来查询一下库存情况，有货了就能直接下单。",
+      "elapsed_ms": 4226.5,
+      "checks": {
+        "successful": true,
+        "one_route": true,
+        "intent_matches": true,
+        "plan_matches_route": true,
+        "actual_matches_plan": true,
+        "capability_success": true,
+        "evidence_before_generation": true,
+        "no_confirmation": true,
+        "no_credentials": true,
+        "no_workflow": true,
+        "no_internal_marker": true,
+        "no_history": true
+      },
+      "final_model": {
+        "session_id": "answer-live-95b280ce344440e7a82f5a00ad5ad6d8",
+        "intent": "product_query",
+        "used_model": true,
+        "model_name": "deepseek-flash",
+        "fallback_reason": null
+      },
+      "route_usage_actual": {
+        "input_tokens": 2700,
+        "output_tokens": 38,
+        "total_tokens": 2738
+      },
+      "model_calls_trace": {
+        "route_planner": 1,
+        "tool_agent": 2,
+        "final_answer": 1,
+        "extra_reasoning": 0
+      },
+      "quality_assistant_review": {
+        "passed": true,
+        "note": "199元、无库存与本次API一致，提醒明确回应，无独立重复段。"
+      },
+      "screenshot": null,
+      "page_errors": null
+    },
+    {
+      "id": "ANSWER-RECHECK-03",
+      "session_id": "answer-live-c4b15105cc4047568eedb3b11991d0b6",
+      "input": "支持退款吗？",
+      "answer": "您好，关于退款：目前客服可以办理符合条件的未发货整单退款。不过具体到您的订单是否满足条件，还需要核验后才能确认。\n\n如果您方便，可以提供一下订单号，我帮您核实退款资格。另外说明一下，本次只是咨询，还没有为您提交退款申请。",
+      "elapsed_ms": 2505.5,
+      "checks": {
+        "successful": true,
+        "one_route": true,
+        "intent_matches": true,
+        "plan_matches_route": true,
+        "actual_matches_plan": true,
+        "capability_success": true,
+        "evidence_before_generation": true,
+        "no_confirmation": true,
+        "no_credentials": true,
+        "no_workflow": true,
+        "no_internal_marker": true,
+        "no_history": true
+      },
+      "final_model": {
+        "session_id": "answer-live-c4b15105cc4047568eedb3b11991d0b6",
+        "intent": "service_scope_query",
+        "used_model": true,
+        "model_name": "deepseek-flash",
+        "fallback_reason": null
+      },
+      "route_usage_actual": {
+        "input_tokens": 2689,
+        "output_tokens": 21,
+        "total_tokens": 2710
+      },
+      "model_calls_trace": {
+        "route_planner": 1,
+        "tool_agent": 0,
+        "final_answer": 1,
+        "extra_reasoning": 0
+      },
+      "quality_assistant_review": {
+        "passed": true,
+        "note": "未发货整单范围、具体资格及本次未申请明示，无重复。"
+      },
+      "screenshot": null,
+      "page_errors": null
+    },
+    {
+      "id": "ANSWER-RECHECK-04",
+      "session_id": "answer-live-a5c25ed600c94ad284432f29474ecd35",
+      "input": "露营季满减与平台会员券能叠加吗，支持到货提醒吗？",
+      "answer": "您好，关于您问的两点，分别说明一下：\n\n**关于露营季满减和平台会员券能否叠加**\n\n根据荒野户外露营季活动规则，满 300 减 40 是可以和平台会员券叠加使用的，但同类型的满减券之间不能重复叠加。需要提醒的是，这条规则不自动适用于品类券、定向券或其他未发布的活动，具体能不能叠加、能减多少，还是要以您实际持有的券和活动页面、结算页显示为准。\n\n**关于到货提醒**\n\n很抱歉，目前客服这边暂时不支持登记到货或补货提醒。您可以稍后主动联系我们，帮您查询一下商品的库存情况。\n\n如果您方便提供具体的券或商品信息，我可以帮您进一步核实叠加和库存情况。",
+      "elapsed_ms": 2710.2,
+      "checks": {
+        "successful": true,
+        "one_route": true,
+        "intent_matches": true,
+        "plan_matches_route": true,
+        "actual_matches_plan": true,
+        "capability_success": true,
+        "evidence_before_generation": true,
+        "no_confirmation": true,
+        "no_credentials": true,
+        "no_workflow": true,
+        "no_internal_marker": true,
+        "no_history": true
+      },
+      "final_model": {
+        "session_id": "answer-live-a5c25ed600c94ad284432f29474ecd35",
+        "intent": "promotion_query",
+        "used_model": true,
+        "model_name": "deepseek-flash",
+        "fallback_reason": null
+      },
+      "route_usage_actual": {
+        "input_tokens": 2703,
+        "output_tokens": 24,
+        "total_tokens": 2727
+      },
+      "model_calls_trace": {
+        "route_planner": 1,
+        "tool_agent": 0,
+        "final_answer": 1,
+        "extra_reasoning": 0
+      },
+      "quality_assistant_review": {
+        "passed": true,
+        "note": "通用满减叠加及限制与引用一致，未承诺个人适用或库存监控。"
+      },
+      "screenshot": null,
+      "page_errors": null
+    },
+    {
+      "id": "ANSWER-RECHECK-05",
+      "session_id": "cs-86467219-55f3-4dd6-a029-19d850c99cdf",
+      "input": "你们能提供缺货后的自动消息通知服务吗？",
+      "answer": "当前客服助手不支持到货或补货提醒。你可以稍后主动查询商品库存。",
+      "elapsed_ms": 1888.6,
+      "checks": {
+        "successful": true,
+        "one_route": true,
+        "intent_matches": true,
+        "plan_matches_route": true,
+        "actual_matches_plan": true,
+        "capability_success": true,
+        "evidence_before_generation": true,
+        "no_confirmation": true,
+        "no_credentials": true,
+        "no_workflow": true,
+        "no_internal_marker": true,
+        "no_history": true
+      },
+      "final_model": {
+        "session_id": "cs-86467219-55f3-4dd6-a029-19d850c99cdf",
+        "intent": "service_scope_query",
+        "used_model": false,
+        "model_name": "deepseek-flash",
+        "fallback_reason": "capability_answer_incomplete"
+      },
+      "route_usage_actual": {
+        "input_tokens": 2697,
+        "output_tokens": 19,
+        "total_tokens": 2716
+      },
+      "model_calls_trace": {
+        "route_planner": 1,
+        "tool_agent": 0,
+        "final_answer": 0,
+        "extra_reasoning": 0
+      },
+      "quality_assistant_review": {
+        "passed": true,
+        "note": "完整降级后答复合格；替换前原文未留，无法区分真实漏答和合法表达未被窄检查识别。"
+      },
+      "screenshot": "截图/ANSWER-RECHECK-05.png",
+      "page_errors": []
+    },
+    {
+      "id": "ANSWER-RECHECK-06",
+      "session_id": "cs-e476cb9e-db81-467f-8bfe-0979efa957d4",
+      "input": "轻量露营折叠椅现在的售价是多少？如果重新有货，能自动通知我吗？",
+      "answer": "轻量露营折叠椅目前标价是 199 元，不过现在暂时没有库存。\n\n关于到货自动通知：目前客服这边暂时不支持登记到货或补货提醒，所以没办法帮您设置自动通知。建议您之后再来查询一下库存，或者留意商品页面的补货情况。",
+      "elapsed_ms": 4628.9,
+      "checks": {
+        "successful": true,
+        "one_route": true,
+        "intent_matches": true,
+        "plan_matches_route": true,
+        "actual_matches_plan": true,
+        "capability_success": true,
+        "evidence_before_generation": true,
+        "no_confirmation": true,
+        "no_credentials": true,
+        "no_workflow": true,
+        "no_internal_marker": true,
+        "no_history": true
+      },
+      "final_model": {
+        "session_id": "cs-e476cb9e-db81-467f-8bfe-0979efa957d4",
+        "intent": "product_query",
+        "used_model": true,
+        "model_name": "deepseek-flash",
+        "fallback_reason": null
+      },
+      "route_usage_actual": {
+        "input_tokens": 2704,
+        "output_tokens": 38,
+        "total_tokens": 2742
+      },
+      "model_calls_trace": {
+        "route_planner": 1,
+        "tool_agent": 2,
+        "final_answer": 1,
+        "extra_reasoning": 0
+      },
+      "quality_assistant_review": {
+        "passed": true,
+        "note": "页面完整显示价格库存及不支持自动通知，无错误承诺或确认卡。"
+      },
+      "screenshot": "截图/ANSWER-RECHECK-06.png",
+      "page_errors": []
+    }
+  ],
+  "full_interaction_passed": 6,
+  "total": 6,
+  "normal_model_answer": 5,
+  "whole_fallback_count": 1,
+  "page_passed": 2,
+  "raw_final_model_text_saved": false,
+  "supplier_cost": "unknown",
+  "trace_calls_warning": "降级后used_model=false令final_answer计数为0，但并不等于未发起该生成调用；不把Trace分项当供应商调用账单",
+  "auto_retries": 0,
+  "business_unchanged": true
+}

@@ -1,0 +1,18 @@
+{
+  "health": {
+    "status": "UP"
+  },
+  "capability": {
+    "capabilityId": "stock_notification",
+    "channel": "customer_service_agent",
+    "supportStatus": "unsupported",
+    "scope": "到货与补货提醒登记",
+    "explanation": "当前客服助手不支持到货或补货提醒。",
+    "alternatives": [
+      "稍后主动查询商品库存"
+    ],
+    "version": "service-capabilities-v1"
+  },
+  "image": "sha256:e79ce2a0d734b954009af77f40edc83766213a3cfb15cbe823d036f0bccb18e0",
+  "mysql_started_at": "2026-10-14T09:35:13.733769685Z"
+}

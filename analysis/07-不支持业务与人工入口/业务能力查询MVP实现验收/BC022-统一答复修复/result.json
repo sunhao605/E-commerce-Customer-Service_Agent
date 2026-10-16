@@ -1,0 +1,33 @@
+{
+  "run_id": "BC022-FLOW-001",
+  "type": "offline isolated engineering verification",
+  "changed_files": [
+    "backend/agent/customer_service_agent.py",
+    "backend/agent/service_capabilities.py",
+    "backend/agent/models/answer_client.py",
+    "backend/resources/prompts/final_answer_style.md",
+    "backend/tests/test_service_capabilities.py"
+  ],
+  "new_test_methods": 5,
+  "before_regression": {
+    "command": "unittest four new regression methods before implementation",
+    "result": "5 assertion failures and 1 error across 4 methods, including three failing subtests",
+    "note": "unexpected mocked policy/final-model branch caused the error; not a production exception claim"
+  },
+  "final_check": {
+    "command": "PYTHONPATH=backend AGENT_COURSE_DISABLE_LLM=1 AGENT_COURSE_OFFLINE_RAG=1 AGENT_COURSE_OFFLINE_FACTS=1 .venv/bin/python -m unittest discover -s backend/tests -v",
+    "tests": 188,
+    "passed": 188,
+    "elapsed_seconds": 2.579
+  },
+  "real_model_calls": 0,
+  "daily_services_restarted": false,
+  "business_writes": false,
+  "java_changed": false,
+  "daily_real_acceptance": "not rerun; previous CAP-LIVE-001 2/3 retained",
+  "limitations": [
+    "required references ensure capability coverage, not arbitrary free-text semantic correctness",
+    "actual model reference-format compliance not measured",
+    "keyword-based capability recognition unchanged"
+  ]
+}

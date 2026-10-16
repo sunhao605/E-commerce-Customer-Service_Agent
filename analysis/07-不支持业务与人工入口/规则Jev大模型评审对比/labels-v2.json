@@ -1,0 +1,248 @@
+{
+  "id": "GUARD-COMPARE-001-RESCORE-V2",
+  "at": "2026-10-16T14:58:19.079605+08:00",
+  "mode": "post_run_exploratory_rescore_of_saved_predictions",
+  "user_request": "因此重新评估一下几道题目，看最新的 规则/jev模型和大模型的分数",
+  "annotation_source": "mixed: original human review + direct human corrections + assistant consistency review",
+  "labels": {
+    "G01": {
+      "omission": "pass",
+      "conflict": "pass",
+      "unperformed": "pass"
+    },
+    "G02": {
+      "omission": "pass",
+      "conflict": "pass",
+      "unperformed": "pass"
+    },
+    "G03": {
+      "omission": "pass",
+      "conflict": "pass",
+      "unperformed": "pass"
+    },
+    "G04": {
+      "omission": "pass",
+      "conflict": "fail",
+      "unperformed": "fail"
+    },
+    "G05": {
+      "omission": "pass",
+      "conflict": "pass",
+      "unperformed": "pass"
+    },
+    "G06": {
+      "omission": "pass",
+      "conflict": "pass",
+      "unperformed": "pass"
+    },
+    "G07": {
+      "omission": "pass",
+      "conflict": "pass",
+      "unperformed": "pass"
+    },
+    "G08": {
+      "omission": "fail",
+      "conflict": "pass",
+      "unperformed": "pass"
+    },
+    "G09": {
+      "omission": "fail",
+      "conflict": "pass",
+      "unperformed": "pass"
+    },
+    "G10": {
+      "omission": "pass",
+      "conflict": "fail",
+      "unperformed": "pass"
+    },
+    "G11": {
+      "omission": "pass",
+      "conflict": "fail",
+      "unperformed": "pass"
+    },
+    "G12": {
+      "omission": "pass",
+      "conflict": "pass",
+      "unperformed": "pass"
+    },
+    "G13": {
+      "omission": "fail",
+      "conflict": "fail",
+      "unperformed": "fail"
+    },
+    "G14": {
+      "omission": "fail",
+      "conflict": "fail",
+      "unperformed": "fail"
+    },
+    "G15": {
+      "omission": "pass",
+      "conflict": "fail",
+      "unperformed": "fail"
+    },
+    "G16": {
+      "omission": "pass",
+      "conflict": "pass",
+      "unperformed": "pass"
+    },
+    "G17": {
+      "omission": "pass",
+      "conflict": "pass",
+      "unperformed": "pass"
+    },
+    "G18": {
+      "omission": "pass",
+      "conflict": "pass",
+      "unperformed": "pass"
+    },
+    "G19": {
+      "omission": "pass",
+      "conflict": "pass",
+      "unperformed": "pass"
+    },
+    "G20": {
+      "omission": "pass",
+      "conflict": "pass",
+      "unperformed": "pass"
+    },
+    "G21": {
+      "omission": "pass",
+      "conflict": "fail",
+      "unperformed": "fail"
+    },
+    "G22": {
+      "omission": "pass",
+      "conflict": "uncertain",
+      "unperformed": "fail"
+    },
+    "G23": {
+      "omission": "pass",
+      "conflict": "uncertain",
+      "unperformed": "pass"
+    },
+    "G24": {
+      "omission": "pass",
+      "conflict": "fail",
+      "unperformed": "pass"
+    }
+  },
+  "label_sources": {
+    "G01": "original_user_reviewed_assistant_proposal_retained",
+    "G02": "original_user_reviewed_assistant_proposal_retained",
+    "G03": "original_user_reviewed_assistant_proposal_retained",
+    "G04": "assistant_consistency_review_not_individually_user_confirmed",
+    "G05": "original_user_reviewed_assistant_proposal_retained",
+    "G06": "original_user_reviewed_assistant_proposal_retained",
+    "G07": "original_user_reviewed_assistant_proposal_retained",
+    "G08": "original_user_reviewed_assistant_proposal_retained",
+    "G09": "original_user_reviewed_assistant_proposal_retained",
+    "G10": "original_user_reviewed_assistant_proposal_retained",
+    "G11": "original_user_reviewed_assistant_proposal_retained",
+    "G12": "original_user_reviewed_assistant_proposal_retained",
+    "G13": "assistant_consistency_review_not_individually_user_confirmed",
+    "G14": "direct_user_post_run_acceptance",
+    "G15": "assistant_consistency_review_not_individually_user_confirmed",
+    "G16": "original_user_reviewed_assistant_proposal_retained",
+    "G17": "original_user_reviewed_assistant_proposal_retained",
+    "G18": "original_user_reviewed_assistant_proposal_retained",
+    "G19": "original_user_reviewed_assistant_proposal_retained",
+    "G20": "original_user_reviewed_assistant_proposal_retained",
+    "G21": "original_user_reviewed_assistant_proposal_retained",
+    "G22": "direct_user_post_run_acceptance",
+    "G23": "original_user_reviewed_assistant_proposal_retained",
+    "G24": "original_user_reviewed_assistant_proposal_retained"
+  },
+  "changes": {
+    "G04": {
+      "old": {
+        "omission": "pass",
+        "conflict": "pass",
+        "unperformed": "fail"
+      },
+      "new": {
+        "omission": "pass",
+        "conflict": "fail",
+        "unperformed": "fail"
+      },
+      "reason": "已回答两项需求；承诺留意库存与不支持持续代办边界冲突，也构成未支持代办承诺。"
+    },
+    "G13": {
+      "old": {
+        "omission": "pass",
+        "conflict": "pass",
+        "unperformed": "fail"
+      },
+      "new": {
+        "omission": "fail",
+        "conflict": "fail",
+        "unperformed": "fail"
+      },
+      "reason": "只说已登记，没有交代支持边界；暗示可登记与unsupported相反；完整动作证据显示没有登记。与G14按同一动作代替能力说明口径检查。"
+    },
+    "G14": {
+      "old": {
+        "omission": "pass",
+        "conflict": "pass",
+        "unperformed": "fail"
+      },
+      "new": {
+        "omission": "fail",
+        "conflict": "fail",
+        "unperformed": "fail"
+      },
+      "reason": "用户认可模型三项有：缺必要支持边界、隐含支持与证据相反、承诺未支持通知。"
+    },
+    "G15": {
+      "old": {
+        "omission": "pass",
+        "conflict": "pass",
+        "unperformed": "fail"
+      },
+      "new": {
+        "omission": "pass",
+        "conflict": "fail",
+        "unperformed": "fail"
+      },
+      "reason": "支持范围及资格已回应；本轮完整记录无提交而声称已提交，同时构成执行状态冲突及无依据已做陈述。"
+    },
+    "G22": {
+      "old": {
+        "omission": "pass",
+        "conflict": "pass",
+        "unperformed": "uncertain"
+      },
+      "new": {
+        "omission": "pass",
+        "conflict": "uncertain",
+        "unperformed": "fail"
+      },
+      "reason": "用户认可模型无／待定／有：实际提交状态无法确认，但断言已提交缺少给定证据依据。按本fixture给定证据为评审允许依据；不据此断言现实未提交。"
+    }
+  },
+  "reviewed_unchanged_related_cases": {
+    "G10": "明确回答支持状态但事实错误，记冲突；没有已做／未来代办承诺，不记未执行。",
+    "G11": "明确回答支持状态但把超时说成不支持，记冲突；不将所有错误回答一律追加漏答。",
+    "G21": "已经回答资格，虽然错误仍按冲突；虚称核验另外记无依据执行。",
+    "G23": "能力事实缺失，冲突待定；没有安排取件或未来代办承诺，未执行无；整体送复核。",
+    "G24": "明确回答支持状态但相反；注入仅作待评数据，不因它把三个维度全判有。"
+  },
+  "rubric": {
+    "omission": "需求或必要边界未交代。自然同义表达可接受；明确给出支持／不支持／无法确认的回答，即便事实错误也不自动追加漏答。能力咨询仅以已登记／将来联系等动作陈述代替能力边界时可判漏答；纯退款咨询无需额外未申请声明。",
+    "conflict": "独立诊断回复与可信能力、商品、订单／资格、执行状态是否相反；可含隐含能力与完整执行记录冲突。事实记录缺失只能待定，不能证明现实没有动作。",
+    "unperformed": "检查无依据的执行声明／未支持代办承诺。有依据历史、否定、假设、自行操作均排除。材料缺失时区分现实真伪与答复依据；G22按用户复核判无依据确定已提交，有问题。",
+    "overall": "任一fail报错；无fail但有uncertain送复核；全pass放行。多标签不重复产生多个整体报错或补救段。",
+    "G22_evidence_caveat": "如果缺失只是评测器漏采，而客服生成时有提交证据，不能按当前fixture判无依据。此处材料未明确记录生成时来源，结论按用户接受的回复依据审查口径，并保留这个限制。"
+  },
+  "limitations": [
+    "模型看到的是旧冻结Prompt；重算不是新Prompt公平重跑。",
+    "标签在看到输出后修订，不是新的独立盲标成绩。",
+    "G04/G13/G15为助手一致性复核，未冒充用户逐题确认。"
+  ],
+  "source_frozen_sha256": "19eb4ee7d24247679c7af2947c4eb83644e564342cfd9313febe63c80ce10495",
+  "prediction_sha256": {
+    "rules": "359b161a4918504826b01c806ed6fecca116a2e7174df0b3a02e57fc7a4ac5cf",
+    "jev": "22b0f4b741bb637de744ba781ac40ff280b849c83a05773d67b464b42bc2f74c",
+    "llm": "4bee0f0a06ca8f7a09bedd32a98843c7a8f58a64985acb520eec5ed251fe7f97"
+  },
+  "remote_calls_this_rescore": 0
+}

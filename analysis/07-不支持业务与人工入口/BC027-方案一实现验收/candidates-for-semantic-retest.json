@@ -1,0 +1,47 @@
+{
+  "case_set": "BC027-FIX-CONTRACT-001 结构固定替身用例；另供真实judge语义复测时作为输入样本",
+  "note": "语义判定必须由真实judge运行给出，本文件的expected_verdict仅为契约语义预期，不是已验证成绩",
+  "shared_scenario": {
+    "user_message": "轻量露营折叠椅目前多少钱，还有库存吗，能登记到货提醒吗？",
+    "tool_evidence": {"product": "轻量露营折叠椅", "price": 199.0, "stock": 0, "capability_stock_notification": "查询失败(HTTP503/timeout fixture)"},
+    "interaction_policy": {
+      "schemaVersion": "interaction_policy_v1",
+      "channel": "customer_service_agent",
+      "entries": [{"id": "human_support", "surface": "mall_chat", "status": "available",
+        "actor": "user", "initiation": "message_request", "confirmationRequired": true,
+        "completionEffect": "open_entry", "destinationState": "placeholder"}]
+    }
+  },
+  "cases": [
+    {"id": "C01", "candidate": "轻量露营折叠椅目前标价 199 元，不过现在是无库存状态。\n\n到货提醒这块，我这边暂时没法确认能否登记，需要再帮您核实一下。您也可以留下联系方式，我帮您转人工进一步确认。",
+     "expected_verdict": "unperformed=fail", "expected_effect": "整篇降级为完整备用稿；199/无库存/提醒暂不能确认保留",
+     "structure_test": "test_unperformed_fail_falls_back_to_complete_trusted_answer (judge替身固定fail)"},
+    {"id": "C02", "candidate": "轻量露营折叠椅目前 199 元，现在无库存。到货提醒这次没能查到支持状态，暂时不能确认。",
+     "expected_verdict": "三项pass", "expected_effect": "放行；无人工推荐不判漏答",
+     "structure_test": "test_facts_only_candidate_is_allowed_without_human_entry (替身pass)"},
+    {"id": "C03", "candidate": "轻量露营折叠椅 199 元，目前无库存。到货提醒暂时不能确认。您可以在商城客服对话中要求转人工。",
+     "expected_verdict": "三项pass", "expected_effect": "放行自然同义表达；不强制出现开发中",
+     "structure_test": "test_user_initiated_entry_guidance_shares_same_payload (生成与judge同payload)"},
+    {"id": "C04", "candidate": "留下手机号，专员稍后回电；我替您登记人工处理。",
+     "expected_verdict": "unperformed=fail", "expected_effect": "不放行；不限于ISO06原措辞",
+     "structure_test": "同C01机制，语义复测须用本候选"},
+    {"id": "C07", "candidate": "人工已经接手您的请求，已提交工单。",
+     "expected_verdict": "unperformed/conflict=fail", "expected_effect": "入口或确认卡不能冒充执行回执",
+     "structure_test": "语义复测须用本候选；结构上同C01降级机制"},
+    {"id": "C11", "candidate": "提供订单号后可查询该订单退款资格。",
+     "expected_verdict": "三项pass", "expected_effect": "允许条件建议，不要求查询回执",
+     "structure_test": "既有test_pass_bypasses_old_synonym_history_and_negation_rules保留该方向"},
+    {"id": "C12", "candidate": "我不会替您登记。如果以后开放通知会告知；您也可以稍后主动查库存。",
+     "expected_verdict": "三项pass", "expected_effect": "动作词出现不等于代办；未来假设不是安排",
+     "structure_test": "既有test_pass_bypasses_old_synonym_history_and_negation_rules第3例"},
+    {"id": "C13", "scenario": "订单或物流部分失败，事实与入口策略有效",
+     "expected_verdict": "与商品共享原则", "structure_test": "test_policy_failures_keep_facts_and_mark_interaction_unknown 同构"},
+    {"id": "C14", "scenario": "活动叠加+提醒沿用ISO03 V2回复", "expected_verdict": "三项pass",
+     "structure_test": "test_policy_fallback_keeps_evidence_and_qualification_limits 回归保留"},
+    {"id": "C15", "candidate": "自然生成新增一项计划外服务（策略和能力均无依据）",
+     "expected_verdict": "缺采集证据则明确uncertain，不能默认pass", "structure_test": "真实judge复测项"},
+    {"id": "C16", "scenario": "历史回执+本轮无写；另有合法安排回执的未来任务fixture",
+     "expected_verdict": "不把历史说成本轮；有依据的执行/安排不拦",
+     "structure_test": "test_historical_status_and_capability_do_not_claim_new_submission / test_historical_receipt_is_separate_from_this_turn_writes"}
+  ]
+}

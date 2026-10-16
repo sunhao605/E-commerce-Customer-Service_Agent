@@ -1,0 +1,65 @@
+{
+  "version": "service-capabilities-v1",
+  "channel": "customer_service_agent",
+  "capabilities": [
+    {
+      "capabilityId": "inventory_query",
+      "supportStatus": "supported",
+      "scope": "查询在售商品的当前价格和库存",
+      "explanation": "当前客服可以查询在售商品的价格和库存。这次查询只说明有这项能力，不代表某一件商品有货，也不锁定库存。",
+      "alternatives": []
+    },
+    {
+      "capabilityId": "stock_notification",
+      "supportStatus": "unsupported",
+      "scope": "到货与补货提醒登记",
+      "explanation": "当前客服助手不支持到货或补货提醒。",
+      "alternatives": ["稍后主动查询商品库存"]
+    },
+    {
+      "capabilityId": "exchange_handling",
+      "supportStatus": "unsupported",
+      "scope": "客服助手办理换货",
+      "explanation": "当前客服助手不能办理换货。人工入口仍是占位，确认前往不会接入真人，也不会提交换货申请。",
+      "alternatives": ["继续咨询商品、退款或退货"]
+    },
+    {
+      "capabilityId": "human_takeover",
+      "supportStatus": "unsupported",
+      "scope": "真人客服接管当前对话",
+      "explanation": "当前没有真人客服接管。人工入口只是占位，确认前往不会有人接手，也不会提交售后申请。",
+      "alternatives": ["继续由当前客服助手处理已经支持的查询"]
+    },
+    {
+      "capabilityId": "refund_consultation",
+      "supportStatus": "supported",
+      "scope": "咨询未发货整单退款是否在客服办理范围内",
+      "explanation": "当前客服可以办理符合条件的未发货整单退款。是否支持不等于这笔订单已经符合条件，也不等于已经提交申请。",
+      "alternatives": ["说明订单号后再核验退款资格"]
+    },
+    {
+      "capabilityId": "return_consultation",
+      "supportStatus": "supported",
+      "scope": "咨询签收后七天无理由退货是否在客服办理范围内",
+      "explanation": "当前客服可以办理符合条件的签收七天无理由退货。是否支持不等于这笔订单已经符合条件，也不等于已经提交申请。",
+      "alternatives": ["说明订单号后再核验退货资格"]
+    }
+  ],
+  "interactionPolicy": {
+    "schemaVersion": "interaction_policy_v1",
+    "channel": "customer_service_agent",
+    "version": "service-capabilities-v1",
+    "entries": [
+      {
+        "id": "human_support",
+        "surface": "mall_chat",
+        "status": "available",
+        "actor": "user",
+        "initiation": "message_request",
+        "confirmationRequired": true,
+        "completionEffect": "open_entry",
+        "destinationState": "placeholder"
+      }
+    ]
+  }
+}

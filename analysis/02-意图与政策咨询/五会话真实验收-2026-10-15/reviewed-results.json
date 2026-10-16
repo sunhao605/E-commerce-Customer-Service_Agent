@@ -1,0 +1,323 @@
+{
+  "run_id": "RAG-LIVE-005",
+  "review_method": "结构按公开Trace和API核对，语义由助手对照事前标准与实际原文审阅；非独立人工评委或模型评分",
+  "passed": 4,
+  "total": 5,
+  "structural_passed": 5,
+  "model_calls": {
+    "route_planner": 5,
+    "tool_agent": 4,
+    "final_answer": 5,
+    "extra_reasoning": 0
+  },
+  "route_usage_actual": {
+    "input_tokens": 11163,
+    "output_tokens": 89
+  },
+  "full_vendor_usage_and_cost": "未留存所有阶段供应商usage，未计算费用；Trace成本含估算，不当实际扣费",
+  "business_state_unchanged": true,
+  "source_manifest_unchanged": true,
+  "results": [
+    {
+      "id": "LIVE5-01",
+      "session_id": "live5-426a461be92847e2b684cdfa73ea6a36",
+      "input": "露营季满300减40能和平台会员券一起用吗？我只了解一般规则。",
+      "answer": "露营季满 300 减 40 和平台会员券，按现有规则是可以叠加的，但同类型的满减券不能重复叠加。\n\n需要提醒的是，具体活动是否正在进行、您的订单和商品是否满足条件、会员券是否在有效期内，以及最终能减多少，都要以活动页和结算页显示为准。如果您方便提供具体订单或券的信息，我可以帮您进一步核实。",
+      "elapsed_ms": 2560.4,
+      "checks": {
+        "http_gateway_success": true,
+        "five_session_isolation": true,
+        "real_route": true,
+        "expected_intent": true,
+        "real_final_rewrite": true,
+        "no_confirmation": true,
+        "no_workflow": true,
+        "expected_policy_ids": true,
+        "citation_current_metadata": true,
+        "citations_located_chunks": true,
+        "expected_business_tool_path": true,
+        "no_answer_cache": true,
+        "same_runtime_index": true
+      },
+      "structural_passed": true,
+      "semantic_review": {
+        "passed": true,
+        "reason": "叠加结论与活动第4节、会员第6节一致，保留具体适用条件。"
+      },
+      "passed": true,
+      "final_model": {
+        "session_id": "live5-426a461be92847e2b684cdfa73ea6a36",
+        "intent": "promotion_query",
+        "used_model": true,
+        "model_name": "deepseek-flash",
+        "fallback_reason": null
+      },
+      "citations": [
+        {
+          "source": "knowledge/promotion_policy.md",
+          "section": "1. 本文件说明什么",
+          "chunk_ids": [
+            "promotion_camping_season_stack_rule-chunk-21"
+          ],
+          "characters": 180,
+          "snippet": "露营季活动期间，满 300 减 40 活动可以与平台会员券叠加，但不能与同类型满减券重复叠加。  \n# 荒野户外露营季活动客服知识  \n## 1. 本文件说明什么  \n本文是项目演示知识，保留既有满减和会员券叠加规则，补充活动范围、价格差异和异常咨询的处理方法。具体活动是否正在进行、哪件商品参与、活动价、会员门槛、优惠券状态和最终金额需要查询活动及结算数据。"
+        },
+        {
+          "source": "knowledge/promotion_policy.md",
+          "section": "4. 满 300 减 40 与叠加边界",
+          "chunk_ids": [
+            "promotion_camping_season_stack_rule-chunk-28"
+          ],
+          "characters": 130,
+          "snippet": "## 4. 满 300 减 40 与叠加边界  \n现有通用政策说明：符合露营季活动条件时，满 300 减 40 可以与平台会员券叠加；同类型满减券不能重复叠加。它没有定义“每满 300 减 40”、所有订单无限次参加、其他券种一律兼容等规则，不应补出这些结论。"
+        },
+        {
+          "source": "knowledge/member_coupon_policy.md",
+          "section": "6. 叠加、退单与优惠恢复",
+          "chunk_ids": [
+            "member_coupon_gold_rule-chunk-55"
+          ],
+          "characters": 138,
+          "snippet": "## 6. 叠加、退单与优惠恢复  \n本项目已有通用规则允许露营季满 300 减 40 与平台会员券叠加，同时禁止同类型满减券重复叠加。该规则不自动覆盖品类券、定向券或未发布的其他活动；具体组合仍需活动和券的证据。详见 [活动规则](promotion_policy.md)。"
+        },
+        {
+          "source": "knowledge/promotion_policy.md",
+          "section": "8. 常见客服场景",
+          "chunk_ids": [
+            "promotion_camping_season_stack_rule-chunk-38"
+          ],
+          "characters": 199,
+          "snippet": "## 8. 常见客服场景  \n以下为模拟问法，分别检验活动对象、账号条件、门槛和跨文档证据。  \n| 顾客问题 | 正确的处理方向 | 不应给出的结论 |\n|---|---|---|\n| “露营季满减能叠我的山友券吗？” | 取得具体券，结合通用叠加规则和券条件 | 任意券都能叠加 |\n| “双十一也和这次一样吗？” | 明确缺少双十一政策，不能沿用露营季 | 双十一也是满 300 减 40 |"
+        }
+      ]
+    },
+    {
+      "id": "LIVE5-02",
+      "session_id": "live5-e6d3f12552f64aafb15721a7282c6c9b",
+      "input": "未发货订单退款一般什么时候到账？先问问，不申请退款。",
+      "answer": "您好，理解您只是想先了解一下，不申请退款，我这边不会为您创建任何退款申请。\n\n关于未发货订单退款到账时间，目前能确认的是：这类退款需要先核对订单状态、支付情况和具体申请进度，在未取得可信的订单与支付信息前，我们无法承诺具体的到账时限，也无法确认是否原路退回银行卡、支付宝或微信。所以具体多久到账，暂时不能给您一个准确数字。\n\n如果您之后想针对某一笔订单确认是否符合条件，可以提供订单号，我帮您做只读查询，再根据实际状态说明。",
+      "elapsed_ms": 4125.1,
+      "checks": {
+        "http_gateway_success": true,
+        "five_session_isolation": true,
+        "real_route": true,
+        "expected_intent": true,
+        "real_final_rewrite": true,
+        "no_confirmation": true,
+        "no_workflow": true,
+        "expected_policy_ids": true,
+        "citation_current_metadata": true,
+        "citations_located_chunks": true,
+        "expected_business_tool_path": true,
+        "no_answer_cache": true,
+        "same_runtime_index": true
+      },
+      "structural_passed": true,
+      "semantic_review": {
+        "passed": true,
+        "reason": "实际引用第1节的外部渠道到账限制，答案没有虚构时限；不要求必须命中第6节。第一块为定制商品内容，排序仍有噪音。"
+      },
+      "passed": true,
+      "final_model": {
+        "session_id": "live5-e6d3f12552f64aafb15721a7282c6c9b",
+        "intent": "refund_policy_query",
+        "used_model": true,
+        "model_name": "deepseek-flash",
+        "fallback_reason": null
+      },
+      "citations": [
+        {
+          "source": "knowledge/after_sale_policy.md",
+          "section": "7. 暂不支持的请求与人工入口",
+          "chunk_ids": [
+            "refund_before_shipping-chunk-15"
+          ],
+          "characters": 73,
+          "snippet": "定制商品尚未发货时，也应核对当前订单状态、制作情况和业务限制。定制商品的无理由限制不等于未发货退款一定能办或一定不能办，不能只凭商品类别跳过核验。"
+        },
+        {
+          "source": "knowledge/after_sale_policy.md",
+          "section": "1. 适用范围与项目边界",
+          "chunk_ids": [
+            "refund_before_shipping-chunk-2"
+          ],
+          "characters": 184,
+          "snippet": "本项目的资金验证使用演示余额和资金流水，不能据此承诺真实银行卡、支付宝或微信的原路退回与到账时限。未取得可信订单、支付与申请状态时，客服不能以顾客截图或旧聊天内容代替当前资格。  \n签收后七天无理由退货见 [退货政策](received_return_policy.md)。已经发货、运输中或只退部分商品，不在本文件的自动整单退款范围内，仍可以解释问题和保留核验方向。"
+        },
+        {
+          "source": "knowledge/after_sale_policy.md",
+          "section": "2. 先区分顾客是在咨询还是要申请",
+          "chunk_ids": [
+            "refund_before_shipping-chunk-3"
+          ],
+          "characters": 182,
+          "snippet": "## 2. 先区分顾客是在咨询还是要申请  \n“未发货能退款吗”“退款怎么审核”“大概什么时候到账”属于咨询，不因出现退款两个字就创建申请。通用政策可以先说明；顾客问具体订单是否符合条件，则只读查询本人订单。  \n“我决定退这笔订单”“帮我申请退款”表达申请意愿，但仍需要确定订单、核验事实并展示确认信息。准备申请与实际提交分开；顾客最后确认前，不应说申请已提交。"
+        },
+        {
+          "source": "knowledge/after_sale_policy.md",
+          "section": "2. 先区分顾客是在咨询还是要申请",
+          "chunk_ids": [
+            "refund_before_shipping-chunk-4"
+          ],
+          "characters": 84,
+          "snippet": "“先别申请，我只是问问”“只查退款进度”明确限制动作。顾客先前讨论过退款，后来只是提供订单号，也不能自动认为授权退款；应结合当前待办阶段确认它是在补充信息还是切换任务。"
+        }
+      ]
+    },
+    {
+      "id": "LIVE5-03",
+      "session_id": "live5-76cb4243f2074bc5a1a8d9008002a855",
+      "input": "签收后七天无理由退货，寄回运费谁承担？只是咨询，不申请退货。",
+      "answer": "您好，关于七天无理由退货寄回运费由谁承担，目前我们这边没有统一的运费补贴、运费险理赔或寄回费用报销规则，所以暂时无法直接确认这笔运费由哪一方承担，需要以对应业务政策为准。\n\n另外也说明一下：七天无理由只是申请类型，不需要您另外填写退货理由；但具体订单是否符合条件，仍需以订单实际核验结果为准。如果后续申请通过、商家提供退回地址后由您寄回，也请在寄回前先确认商家的寄回要求，我们无法在未核对前承诺到付一定会被接收。\n\n如果您已经支付过邮费，建议保留好订单和支付凭据，后续可据此提出诉求，但具体能否报销或如何处理，仍需以对应政策核实为准。您这次只是咨询，我先不为您提交任何申请。",
+      "elapsed_ms": 5971.5,
+      "checks": {
+        "http_gateway_success": true,
+        "five_session_isolation": true,
+        "real_route": true,
+        "expected_intent": true,
+        "real_final_rewrite": true,
+        "no_confirmation": true,
+        "no_workflow": true,
+        "expected_policy_ids": true,
+        "citation_current_metadata": true,
+        "citations_located_chunks": true,
+        "expected_business_tool_path": true,
+        "no_answer_cache": true,
+        "same_runtime_index": true
+      },
+      "structural_passed": true,
+      "semantic_review": {
+        "passed": true,
+        "reason": "引用含第7节运费/到付条款，正确说明无统一承担或报销规则。"
+      },
+      "passed": true,
+      "final_model": {
+        "session_id": "live5-76cb4243f2074bc5a1a8d9008002a855",
+        "intent": "return_policy_query",
+        "used_model": true,
+        "model_name": "deepseek-flash",
+        "fallback_reason": null
+      },
+      "citations": [
+        {
+          "source": "knowledge/received_return_policy.md",
+          "section": "1. 文档范围",
+          "chunk_ids": [
+            "return_after_delivery-chunk-92"
+          ],
+          "characters": 192,
+          "snippet": "七天无理由退货适用于已支付并签收、申请提交时仍在签收后七天窗口内，且整单商品在购买时均支持七天无理由退货的订单。七天无理由是申请类型，用户无需另外填写退货理由；具体订单是否符合条件仍需核验可信订单事实，不得自动承诺退货成功。  \n用户核对并确认提交后，申请进入待审核；管理员同意退货并提供退回地址后，由用户寄回并填写退回物流。商家收到商品且验收通过后才退款，同意退货不等于退款已完成。"
+        },
+        {
+          "source": "knowledge/received_return_policy.md",
+          "section": "7. 运费、货到付款与保价询问",
+          "chunk_ids": [
+            "return_after_delivery-chunk-106"
+          ],
+          "characters": 170,
+          "snippet": "## 7. 运费、货到付款与保价询问  \n现有项目没有统一实现运费补贴、运费险理赔、到付接收或寄回费用报销规则。顾客问“谁承担运费”，应明确还需对应业务政策，不能因为无理由或质量问题标签就直接保证免费。  \n在未核对商家寄回要求前，不承诺到付一定会接收。顾客已经支付邮费时，可以保留订单、凭据和诉求，但不说“已报销”或“退款里会自动加上”。"
+        },
+        {
+          "source": "knowledge/received_return_policy.md",
+          "section": "4. 无理由、质量问题与运输破损分流",
+          "chunk_ids": [
+            "return_after_delivery-chunk-101"
+          ],
+          "characters": 138,
+          "snippet": "| 运输中想退回 | 当前履约状态 | 运输拦截不在当前自动受理范围，不先提供退回地址 |  \n七天无理由申请类型本身已经说明无需另填理由。质量问题等其他售后仍需要描述具体问题，这两条口径不冲突。客服不能把所有问题都自动转换成无理由，也不能为了进入整单流程让顾客改变原本诉求。"
+        },
+        {
+          "source": "knowledge/received_return_policy.md",
+          "section": "1. 文档范围",
+          "chunk_ids": [
+            "return_after_delivery-chunk-93"
+          ],
+          "characters": 195,
+          "snippet": "商品不支持七天无理由、超出窗口或资格事实缺失时，不进入这条无理由退货流程；质量问题等其他售后需说明具体问题并另行核验，不能一律认定为无法办理任何售后。  \n# 荒野户外签收退货、问题核验与寄回客服知识  \n## 1. 文档范围  \n本文用于项目演示商城，核心流程与当前整单七天无理由实现对齐。商品例子来自项目目录，客服问法和处理说明为模拟素材，不是法律条文、真实品牌承诺或已发生的客服案件。"
+        }
+      ]
+    },
+    {
+      "id": "LIVE5-04",
+      "session_id": "live5-8c5e425ef4f344308473aff91fdab9f7",
+      "input": "轻量露营折叠椅现在多少钱，还有库存吗？",
+      "answer": "轻量露营折叠椅目前标价 199 元，不过现在是无库存状态，暂时无法下单购买。",
+      "elapsed_ms": 3739.9,
+      "checks": {
+        "http_gateway_success": true,
+        "five_session_isolation": true,
+        "real_route": true,
+        "expected_intent": true,
+        "real_final_rewrite": true,
+        "no_confirmation": true,
+        "no_workflow": true,
+        "expected_policy_ids": true,
+        "citation_current_metadata": true,
+        "citations_located_chunks": true,
+        "expected_business_tool_path": true,
+        "no_answer_cache": true,
+        "real_tool_no_fallback": true,
+        "product_id": true,
+        "facts_match_current_api": true
+      },
+      "structural_passed": true,
+      "semantic_review": {
+        "passed": true,
+        "reason": "199元、无库存与当前商品API一致，无提醒承诺。暂时无法下单与库存0一致。"
+      },
+      "passed": true,
+      "final_model": {
+        "session_id": "live5-8c5e425ef4f344308473aff91fdab9f7",
+        "intent": "product_query",
+        "used_model": true,
+        "model_name": "deepseek-flash",
+        "fallback_reason": null
+      },
+      "citations": []
+    },
+    {
+      "id": "LIVE5-05",
+      "session_id": "live5-b7d0f4a8d82248729ad26b879e124d38",
+      "input": "轻量露营折叠椅现在多少钱，有货后能提醒我吗？",
+      "answer": "轻量露营折叠椅目前标价是 199 元，不过现在暂时没有库存。",
+      "elapsed_ms": 4717.6,
+      "checks": {
+        "http_gateway_success": true,
+        "five_session_isolation": true,
+        "real_route": true,
+        "expected_intent": true,
+        "real_final_rewrite": true,
+        "no_confirmation": true,
+        "no_workflow": true,
+        "expected_policy_ids": true,
+        "citation_current_metadata": true,
+        "citations_located_chunks": true,
+        "expected_business_tool_path": true,
+        "no_answer_cache": true,
+        "real_tool_no_fallback": true,
+        "product_id": true,
+        "facts_match_current_api": true
+      },
+      "structural_passed": true,
+      "semantic_review": {
+        "passed": false,
+        "reason": "未回答提醒能力边界；仅剩价格与无库存。触发unsupported_service_promise_removed，未补回不支持说明。"
+      },
+      "passed": false,
+      "final_model": {
+        "session_id": "live5-b7d0f4a8d82248729ad26b879e124d38",
+        "intent": "product_query",
+        "used_model": true,
+        "model_name": "deepseek-flash",
+        "fallback_reason": "unsupported_service_promise_removed"
+      },
+      "citations": []
+    }
+  ],
+  "limits": [
+    "每类一条构造输入，一次运行，无重复稳定性或独立留存集结论",
+    "通过真实商城HTTP网关；未检查浏览器布局/折叠/小屏",
+    "原始最终模型文本未进入公开Trace，不还原被删句的具体措辞",
+    "公开商品工具Trace含工具名、Hook成功、对象编号，不含完整fact_source字段；与本轮业务API及无fallback记录交叉核对"
+  ]
+}

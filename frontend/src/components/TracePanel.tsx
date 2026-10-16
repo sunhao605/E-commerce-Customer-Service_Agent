@@ -499,6 +499,10 @@ function DecisionBoundarySection({ response }: { response?: ChatResponse }) {
           items={[
             ["下一步", nextAction],
             ["意图", intent],
+            ["商品事实需求", boolLabel(routePlan?.needs_product_facts)],
+            ["知识域", compactJson(routePlan?.knowledge_domains)],
+            ["能力查询", compactJson(routePlan?.capability_ids)],
+            ["检索策略", compactJson(routePlan?.retrieval_strategies)],
             ["风险", riskLevel],
             ["需要人工", boolLabel(needsHumanApproval)],
             ["降级", boolLabel(degraded)],
@@ -572,6 +576,7 @@ function RagSection({
   const costRag = asRecord(response?.session_state.cost_summary?.rag) ?? asRecord(response?.cost_summary?.rag);
   const hitCount = asNumber(rag?.hit_count) ?? response?.session_state.rag_hit_count ?? asNumber(costRag?.hit_count);
   const hasRagSummary = rag || costRag || hitCount !== undefined;
+  const admission = asRecord(rag?.admission);
 
   return (
     <div className="trace-section">
@@ -582,6 +587,9 @@ function RagSection({
             items={[
               ["低置信", boolLabel(rag?.low_confidence)],
               ["命中数", numberValue(hitCount)],
+              ["判断时刻", stringValue(admission?.judged_at)],
+              ["知识快照", stringValue(admission?.snapshot_version)],
+              ["不可用政策", compactJson(admission?.blocked_policies)],
             ]}
           />
         </div>
@@ -593,6 +601,17 @@ function RagSection({
             key={`${citationSource(citation)}-${citation.retrieval_stage ?? "unknown"}-${citationIndex}`}
           >
             <strong>{citation.title ?? citation.source_title ?? citation.chunk_id ?? "知识引用"}</strong>
+            <MetaList
+              items={[
+                ["政策", stringValue(citation.metadata?.policy_id)],
+                ["条款", stringValue(citation.metadata?.section)],
+                ["版本", stringValue(citation.metadata?.version)],
+                ["发布状态", stringValue(citation.metadata?.publication_status)],
+                ["开始生效", stringValue(citation.metadata?.effective_from)],
+                ["截止（不含）", citation.metadata?.effective_to === null ? "无固定截止" : stringValue(citation.metadata?.effective_to)],
+                ["快照", stringValue(citation.metadata?.snapshot_version)],
+              ]}
+            />
             <span>{citation.snippet}</span>
             <small>
               {citationSource(citation)} · score {citation.score.toFixed(2)}

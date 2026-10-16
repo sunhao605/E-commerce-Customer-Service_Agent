@@ -1,0 +1,10 @@
+Browser tab: 1, Title: "荒野户外商城", URL: "http://127.0.0.1:5174/".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+~				269 text 荒野户外 · 露营季
+~				270 heading 下一站，去户外。, Value: 2
+~					271 text 下一站，去户外。
+~				272 text 从一把折叠椅到一套营地装备，露营季活动已开启。活动条件与会员权益以商品详情和结算页为准。 15 款参与活动 具体可享价格以会员等级、活动条件和结算页为准。
+~			266 text 您好，我是荒野户外的客服助手，请问有什么可以帮您？ 轻量露营折叠椅目前标价和库存是多少？ 轻量露营折叠椅 商品标价 199 元，当前无库存。
++			273 text field (settable)
+~			268 button 发送
+The focused UI element is 0 AXWebArea 荒野户外商城, URL: 127.0.0.1:5174/

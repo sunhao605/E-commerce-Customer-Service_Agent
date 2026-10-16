@@ -1,0 +1,280 @@
+{
+  "kind": "exploratory_real_routes",
+  "rows": [
+    {
+      "id": "P01",
+      "input": "帐篷晒干以后该怎么放回袋子里？",
+      "passed": false,
+      "result": {
+        "intent": "product_query",
+        "used_model": false,
+        "model_name": "deepseek-flash",
+        "fallback_reason": "invalid_model_route",
+        "framework": null,
+        "needs_product_facts": null,
+        "knowledge_domains": null,
+        "clarification_fields": [],
+        "invocation_attempted": true,
+        "elapsed_ms": 828.425,
+        "usage": {
+          "input_tokens": 1947,
+          "output_tokens": 28,
+          "total_tokens": 1975
+        }
+      }
+    },
+    {
+      "id": "P02",
+      "input": "别替我推荐款式，告诉我帐篷脏了怎么擦就行。",
+      "passed": true,
+      "result": {
+        "intent": "product_query",
+        "used_model": true,
+        "model_name": "deepseek-flash",
+        "fallback_reason": null,
+        "framework": "langchain_runnable_sequence",
+        "needs_product_facts": false,
+        "knowledge_domains": [
+          "product_knowledge"
+        ],
+        "clarification_fields": [],
+        "invocation_attempted": true,
+        "elapsed_ms": 1118.846,
+        "usage": {
+          "input_tokens": 1950,
+          "output_tokens": 33,
+          "total_tokens": 1983
+        }
+      }
+    },
+    {
+      "id": "P03",
+      "input": "全地形营地收纳车现在卖多少钱？",
+      "passed": true,
+      "result": {
+        "intent": "product_query",
+        "used_model": true,
+        "model_name": "deepseek-flash",
+        "fallback_reason": null,
+        "framework": "langchain_runnable_sequence",
+        "needs_product_facts": true,
+        "knowledge_domains": [],
+        "clarification_fields": [],
+        "invocation_attempted": true,
+        "elapsed_ms": 645.664,
+        "usage": {
+          "input_tokens": 1946,
+          "output_tokens": 28,
+          "total_tokens": 1974
+        }
+      }
+    },
+    {
+      "id": "P04",
+      "input": "山野四人帐篷的承重具体是多少公斤？",
+      "passed": true,
+      "result": {
+        "intent": "product_query",
+        "used_model": true,
+        "model_name": "deepseek-flash",
+        "fallback_reason": null,
+        "framework": "langchain_runnable_sequence",
+        "needs_product_facts": true,
+        "knowledge_domains": [],
+        "clarification_fields": [],
+        "invocation_attempted": true,
+        "elapsed_ms": 1215.777,
+        "usage": {
+          "input_tokens": 1948,
+          "output_tokens": 28,
+          "total_tokens": 1976
+        }
+      }
+    },
+    {
+      "id": "P05",
+      "input": "山野四人帐篷多少钱，雨后如何收进袋里，山友会员券能和露营季满减一起用吗？",
+      "passed": true,
+      "result": {
+        "intent": "product_query",
+        "used_model": true,
+        "model_name": "deepseek-flash",
+        "fallback_reason": null,
+        "framework": "langchain_runnable_sequence",
+        "needs_product_facts": true,
+        "knowledge_domains": [
+          "product_knowledge",
+          "promotion_and_member_policy"
+        ],
+        "clarification_fields": [],
+        "invocation_attempted": true,
+        "elapsed_ms": 761.633,
+        "usage": {
+          "input_tokens": 1963,
+          "output_tokens": 41,
+          "total_tokens": 2004
+        }
+      }
+    },
+    {
+      "id": "P06",
+      "input": "露营季满减和平台会员券能同时使用吗？",
+      "passed": false,
+      "result": {
+        "intent": "promotion_query",
+        "used_model": true,
+        "model_name": "deepseek-flash",
+        "fallback_reason": null,
+        "framework": "langchain_runnable_sequence",
+        "needs_product_facts": null,
+        "knowledge_domains": null,
+        "clarification_fields": [
+          "promotion_combination"
+        ],
+        "invocation_attempted": true,
+        "elapsed_ms": 816.947,
+        "usage": {
+          "input_tokens": 1950,
+          "output_tokens": 19,
+          "total_tokens": 1969
+        }
+      }
+    },
+    {
+      "id": "P07",
+      "input": "平台会员券能不能跟优惠一起用？",
+      "passed": true,
+      "result": {
+        "intent": "promotion_query",
+        "used_model": true,
+        "model_name": "deepseek-flash",
+        "fallback_reason": null,
+        "framework": "langchain_runnable_sequence",
+        "needs_product_facts": null,
+        "knowledge_domains": null,
+        "clarification_fields": [
+          "promotion_combination"
+        ],
+        "invocation_attempted": true,
+        "elapsed_ms": 810.477,
+        "usage": {
+          "input_tokens": 1946,
+          "output_tokens": 19,
+          "total_tokens": 1965
+        }
+      }
+    },
+    {
+      "id": "P08",
+      "input": "请讲一下签收后七天无理由的退货条件，我还没决定退。",
+      "passed": true,
+      "result": {
+        "intent": "return_policy_query",
+        "used_model": true,
+        "model_name": "deepseek-flash",
+        "fallback_reason": null,
+        "framework": "langchain_runnable_sequence",
+        "needs_product_facts": null,
+        "knowledge_domains": null,
+        "clarification_fields": [],
+        "invocation_attempted": true,
+        "elapsed_ms": 651.322,
+        "usage": {
+          "input_tokens": 1955,
+          "output_tokens": 9,
+          "total_tokens": 1964
+        }
+      }
+    },
+    {
+      "id": "P09",
+      "input": "我的帐篷漏水了，能退吗？先别提交。",
+      "passed": true,
+      "result": {
+        "intent": "after_sale_eligibility_query",
+        "used_model": true,
+        "model_name": "deepseek-flash",
+        "fallback_reason": null,
+        "framework": "langchain_runnable_sequence",
+        "needs_product_facts": null,
+        "knowledge_domains": null,
+        "clarification_fields": [],
+        "invocation_attempted": true,
+        "elapsed_ms": 624.371,
+        "usage": {
+          "input_tokens": 1950,
+          "output_tokens": 12,
+          "total_tokens": 1962
+        }
+      }
+    },
+    {
+      "id": "P10",
+      "input": "ORD1234没发货，我现在要申请退款。",
+      "passed": true,
+      "result": {
+        "intent": "refund_request",
+        "used_model": true,
+        "model_name": "deepseek-flash",
+        "fallback_reason": null,
+        "framework": "langchain_runnable_sequence",
+        "needs_product_facts": null,
+        "knowledge_domains": null,
+        "clarification_fields": [],
+        "invocation_attempted": true,
+        "elapsed_ms": 699.669,
+        "usage": {
+          "input_tokens": 1948,
+          "output_tokens": 8,
+          "total_tokens": 1956
+        }
+      }
+    },
+    {
+      "id": "P11",
+      "input": "订单完成后发票啥时候能开好？",
+      "passed": true,
+      "result": {
+        "intent": "invoice_query",
+        "used_model": true,
+        "model_name": "deepseek-flash",
+        "fallback_reason": null,
+        "framework": "langchain_runnable_sequence",
+        "needs_product_facts": null,
+        "knowledge_domains": null,
+        "clarification_fields": [],
+        "invocation_attempted": true,
+        "elapsed_ms": 854.54,
+        "usage": {
+          "input_tokens": 1946,
+          "output_tokens": 7,
+          "total_tokens": 1953
+        }
+      }
+    },
+    {
+      "id": "P12",
+      "input": "怎么洗？",
+      "passed": true,
+      "result": {
+        "intent": "product_query",
+        "used_model": true,
+        "model_name": "deepseek-flash",
+        "fallback_reason": null,
+        "framework": "langchain_runnable_sequence",
+        "needs_product_facts": false,
+        "knowledge_domains": [
+          "product_knowledge"
+        ],
+        "clarification_fields": [],
+        "invocation_attempted": true,
+        "elapsed_ms": 628.358,
+        "usage": {
+          "input_tokens": 1971,
+          "output_tokens": 33,
+          "total_tokens": 2004
+        }
+      }
+    }
+  ]
+}

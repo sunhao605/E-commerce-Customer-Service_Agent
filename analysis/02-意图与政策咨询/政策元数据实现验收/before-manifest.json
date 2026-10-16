@@ -1,0 +1,17 @@
+{
+  "backend/retrieval/documents.py": "447c233aab8198cf28bfab3bb31defe12fd8e1971d5f617bd0f6e81180bad667",
+  "backend/retrieval/hybrid_retrieval.py": "f9850225c57e1a196d9a16ef719aac8e0e68f22c7ea0b049ba713d82ce545b3c",
+  "backend/retrieval/knowledge.py": "f87135d52052e0c99823e80c0948dd2b01bffb75da50cc55d919a55c9474615b",
+  "backend/agent/customer_service_agent.py": "67f45de4cd7ff028b02416653c8d01423bc2b2ff07b69657deb1b51a77b7d90f",
+  "backend/api/routes.py": "a678ca7ed7d56e5f58a5409e7dfd8854bdf07367335514b9fa78724a4751d151",
+  "backend/agent/trace.py": "97e82848efa6aff57e895bf6dcb71858875e1ab2c0e452958ded1d2ace7d0803",
+  "frontend/src/components/TracePanel.tsx": "5c260b49e9804ee7d0f0390ff200e368b48c3ff7f537f61b55ec77402e4b9ccc",
+  "backend/tests/test_route_priority.py": "6830d0b011b5c3cde8a5f669b5f35cd1e3ff5463138d44bdd1bb5e230bddee56",
+  "backend/tests/test_product_knowledge.py": "c722757beb0a890b3a26e82fb3f96d729ec72cdf2694b146fa001aae02e36d4c",
+  "backend/resources/knowledge/payment_invoice_policy.md": "937295a77b115c8bf72322f98548ba5a0e8f501335e3e1b63606068910d8c388",
+  "backend/resources/knowledge/received_return_policy.md": "f293ed81d1337927b1d1abb2a49ac84fa70dcb02269d6b66a1ad656cab153c20",
+  "backend/resources/knowledge/product_knowledge.md": "8d867decf8f6705f31618bbf336477a6bca609a5b50e48c71f391ebd60399d16",
+  "backend/resources/knowledge/member_coupon_policy.md": "1df1763bc01cc4edf458f0d8ec23776427be92a15ab0abe1b63fca6c9891391c",
+  "backend/resources/knowledge/promotion_policy.md": "c4b70a7e72e8872f802f67eff38fd3661317143be047bae9e962f5afbf07d973",
+  "backend/resources/knowledge/after_sale_policy.md": "7fc38bf89214ef9d78fc29d02599a94d47f6f0c43e2e4890ceb53eb9a8c72253"
+}

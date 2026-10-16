@@ -1,0 +1,13 @@
+======================================================================
+FAIL: test_sleeping_bag_missing_temperature_is_not_invented (test_product_knowledge.ProductKnowledgeTest.test_sleeping_bag_missing_temperature_is_not_invented)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_product_knowledge.py", line 44, in test_sleeping_bag_missing_temperature_is_not_invented
+    self.assertTrue(all(c.metadata.get('version')=='2026-10-12.1' for c in cites))
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true
+
+----------------------------------------------------------------------
+Ran 140 tests in 1.183s
+
+FAILED (failures=1)

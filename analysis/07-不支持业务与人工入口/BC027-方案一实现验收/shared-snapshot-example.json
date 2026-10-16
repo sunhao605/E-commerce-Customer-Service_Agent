@@ -1,0 +1,133 @@
+{
+  "context": {
+    "user_message": "轻量露营折叠椅目前多少钱，还有库存吗，能登记到货提醒吗？",
+    "intent": "product_query",
+    "route_plan": {
+      "intent": "product_query",
+      "required_tools": [
+        "search_products"
+      ],
+      "knowledge_domains": [],
+      "capability_ids": [
+        "stock_notification"
+      ],
+      "needs_product_facts": true
+    },
+    "required_points_source": "原请求与受控计划，不是人工金标；必须回看原请求检查计划漏项",
+    "capability_results": [
+      {
+        "capabilityId": "stock_notification",
+        "channel": null,
+        "supportStatus": null,
+        "scope": null,
+        "explanation": null,
+        "alternatives": null,
+        "version": null,
+        "failure": "error"
+      }
+    ],
+    "evidence": [
+      {
+        "id": "request",
+        "kind": "request",
+        "text": "轻量露营折叠椅目前多少钱，还有库存吗，能登记到货提醒吗？"
+      },
+      {
+        "id": "history",
+        "kind": "unverified_conversation",
+        "text": []
+      },
+      {
+        "id": "tool:0",
+        "kind": "tool",
+        "tool": "search_products",
+        "object_id": 4,
+        "source": "business_api",
+        "status": "success",
+        "error": null,
+        "facts": {
+          "product_id": 4,
+          "name": "轻量露营折叠椅",
+          "price": 199.0,
+          "stock": 0,
+          "active": true
+        },
+        "summary": "轻量露营折叠椅 商品标价 199 元，当前无库存。",
+        "complete": true
+      },
+      {
+        "id": "capability:stock_notification",
+        "kind": "capability",
+        "facts": {
+          "capabilityId": "stock_notification",
+          "channel": null,
+          "supportStatus": null,
+          "scope": null,
+          "explanation": null,
+          "alternatives": null,
+          "version": null,
+          "failure": "error"
+        }
+      },
+      {
+        "id": "execution",
+        "kind": "execution",
+        "this_turn": {
+          "write_actions": [],
+          "read_checks": [
+            {
+              "evidence_id": "tool:0",
+              "tool": "search_products",
+              "object_id": 4,
+              "status": "success"
+            }
+          ],
+          "complete": true,
+          "scope": "本轮受控只读编排，未提交申请或登记通知；不证明历史无申请"
+        },
+        "historical": [],
+        "historical_complete": false
+      },
+      {
+        "id": "interaction_policy",
+        "kind": "interaction_policy",
+        "facts": {
+          "schemaVersion": "interaction_policy_v1",
+          "channel": "customer_service_agent",
+          "version": "service-capabilities-v1",
+          "entries": [
+            {
+              "id": "human_support",
+              "surface": "mall_chat",
+              "status": "available",
+              "actor": "user",
+              "initiation": "message_request",
+              "confirmationRequired": true,
+              "completionEffect": "open_entry",
+              "destinationState": "placeholder"
+            }
+          ]
+        }
+      }
+    ],
+    "allowed_next_steps": [
+      {
+        "id": "entry:human_support",
+        "actor": "user",
+        "stage": "request_entry",
+        "surface": "mall_chat",
+        "requires_user_confirmation": true,
+        "permitted_effect": "open_entry",
+        "evidence_ids": [
+          "interaction_policy"
+        ]
+      }
+    ],
+    "allowed_next_steps_source": "由代码依据受控交互策略与已注册只读路径组装，不接受模型自报的步骤列表",
+    "verified_summary": "",
+    "generation_evidence_complete": true,
+    "observed_at": "2026-10-16T10:46:56.864629+00:00"
+  },
+  "fallback": "轻量露营折叠椅 商品标价 199 元，当前无库存。\n\n到货与补货提醒这次没有查到支持状态，暂时不能确认是否提供。请稍后再问。",
+  "issues": []
+}

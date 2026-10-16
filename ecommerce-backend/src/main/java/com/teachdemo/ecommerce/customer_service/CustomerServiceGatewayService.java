@@ -117,7 +117,8 @@ public class CustomerServiceGatewayService {
             session.setCancellationJudged(false);
             String message = request.getMessage();
             String unsupported = unsupportedServiceReason(message);
-            if (unsupported != null || wantsHumanSupport(message)) {
+            if ((unsupported != null || wantsHumanSupport(message))
+                && !ServiceCapabilityCatalog.isCapabilityConsultation(message)) {
                 boolean replaceDraft = unsupported != null && !isServicePolicyQuestion(message);
                 CustomerServiceResponse response = humanSupportResponse(session,
                     unsupported == null ? "你希望联系人工客服。" : "你希望咨询或办理" + unsupported + "，当前客服助手暂不能办理这类业务。",
@@ -183,6 +184,14 @@ public class CustomerServiceGatewayService {
                 if (agentResponse != null && "product_query".equals(agentResponse.path("session_state").path("intent").asText())) {
                     CustomerServiceResponse response = new CustomerServiceResponse(text(agentResponse, "answer", FALLBACK_ANSWER),
                         sessionId, false, "PRODUCT_QUERY", null, null, null, null, null, List.of(), false);
+                    rememberTurn(session, message, response.getAnswer());
+                    return response;
+                }
+                // 能力咨询只返回查询结果：不准备申请，不重发待确认卡，也不清掉原草稿。
+                if (agentResponse != null && ("service_scope_query".equals(agentResponse.path("session_state").path("intent").asText())
+                    || ServiceCapabilityCatalog.isCapabilityConsultation(message))) {
+                    CustomerServiceResponse response = new CustomerServiceResponse(text(agentResponse, "answer", FALLBACK_ANSWER),
+                        sessionId, false, "CAPABILITY_QUERY", null, null, null, null, null, List.of(), false);
                     rememberTurn(session, message, response.getAnswer());
                     return response;
                 }

@@ -1,0 +1,83 @@
+ M README.md
+ M analysis/02-意图与政策咨询/README.md
+ M analysis/06-工具故障反馈/工具故障反馈实现验收/加载本地服务/python-default.log
+ M analysis/99-参考与讲解素材/README.md
+ M backend/agent/cost.py
+ M backend/agent/customer_service_agent.py
+ M backend/agent/models/answer_client.py
+ M backend/agent/models/router_client.py
+ M backend/agent/product_query.py
+ M backend/agent/tools/planning.py
+ M backend/agent/trace.py
+ M backend/api/routes.py
+ M backend/api/schemas.py
+ M backend/resources/cases.yml
+ M backend/resources/knowledge/after_sale_policy.md
+ M backend/resources/knowledge/member_coupon_policy.md
+ M backend/resources/knowledge/payment_invoice_policy.md
+ M backend/resources/knowledge/promotion_policy.md
+ M backend/resources/knowledge/received_return_policy.md
+ M backend/resources/prompts/final_answer_style.md
+ M backend/resources/prompts/rag_answering.md
+ M backend/resources/prompts/route_contract.md
+ M backend/retrieval/documents.py
+ M backend/retrieval/hybrid_retrieval.py
+ M backend/retrieval/knowledge.py
+ M backend/settings.py
+ M backend/tests/test_outdoor_scenario.py
+ M backend/tests/test_product_query.py
+ M backend/tests/test_route_priority.py
+ M docs/01-项目概览/项目交接.md
+ M docs/01-项目概览/项目导读.md
+ M docs/02-产品设计/README.md
+ M docs/03-评测与问题/问题台账.md
+ M docs/03-评测与问题/项目评测记录.md
+ M docs/04-学习与复盘/README.md
+ M docs/04-学习与复盘/产品设计学习.md
+ M ecommerce-backend/src/main/java/com/teachdemo/ecommerce/config/SecurityConfig.java
+ M ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/CustomerServiceGatewayService.java
+ M frontend/src/components/MessageList.tsx
+ M frontend/src/components/TracePanel.tsx
+ M frontend/src/styles.css
+?? .claude/
+?? analysis/02-意图与政策咨询/五会话真实验收-2026-10-15/
+?? analysis/02-意图与政策咨询/引用片段与展示设计核验/
+?? analysis/02-意图与政策咨询/政策元数据实现验收/
+?? analysis/02-意图与政策咨询/政策元数据日常加载验收/
+?? analysis/02-意图与政策咨询/证据需求与检索策略实现验收/
+?? analysis/06-工具故障反馈/BC020-话术边界修复/
+?? analysis/07-不支持业务与人工入口/业务能力查询MVP实现验收/
+?? analysis/07-不支持业务与人工入口/统一最终答复实现验收/
+?? analysis/99-参考与讲解素材/RAG设计审查更新-2026-10-13/
+?? analysis/99-参考与讲解素材/RAG重载核验-2026-10-13/
+?? analysis/99-参考与讲解素材/商品知识接入与加载/
+?? analysis/99-参考与讲解素材/知识库长文扩展/
+?? analysis/99-参考与讲解素材/露营季政策ID改名-2026-10-13/
+?? analysis/工具故障反馈实现验收/
+?? backend/agent/service_capabilities.py
+?? backend/resources/knowledge/README.md
+?? backend/resources/knowledge/product_knowledge.md
+?? backend/resources/knowledge/release-manifest.json
+?? backend/tests/test_embedding_config.py
+?? backend/tests/test_evidence_routing.py
+?? backend/tests/test_policy_metadata.py
+?? backend/tests/test_product_knowledge.py
+?? backend/tests/test_service_capabilities.py
+?? docs/02-产品设计/02-意图与政策咨询/意图识别与证据检索产品需求规划.md
+?? docs/02-产品设计/02-意图与政策咨询/政策元数据MVP产品需求规划.md
+?? docs/02-产品设计/07-不支持业务与人工入口/统一最终答复产品需求规划.md
+?? docs/03-评测与问题/RAG知识库重载核验-2026-10-13.html
+?? docs/03-评测与问题/RAG知识库重载核验-2026-10-13.md
+?? docs/03-评测与问题/RAG设计审查与优化建议.html
+?? docs/03-评测与问题/RAG设计审查与优化建议.md
+?? docs/04-学习与复盘/商品知识接入与加载说明.md
+?? docs/04-学习与复盘/当前进度与产品决策-2026-10-14.html
+?? docs/04-学习与复盘/当前进度与产品决策-2026-10-14.md
+?? docs/04-学习与复盘/政策元数据MVP-AI产品经理审阅指南.html
+?? docs/04-学习与复盘/政策元数据MVP-AI产品经理审阅指南.md
+?? docs/04-学习与复盘/知识库扩展说明.md
+?? docs/04-学习与复盘/露营季政策ID改名说明.md
+?? ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/ServiceCapabilityCatalog.java
+?? ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/ServiceCapabilityController.java
+?? ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/ServiceCapabilityResponse.java
+?? ecommerce-backend/src/main/resources/service-capabilities.json

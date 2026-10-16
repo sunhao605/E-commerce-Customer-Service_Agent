@@ -97,7 +97,9 @@ def get_order_detail(
         )
     arguments["fact_source"] = order.get("_fact_source", "runtime_context")
     summary = f"订单 {order_no(order)} 当前状态为{order_status_label(order)}，物流状态为{logistics_status_label(order)}，商品 {item_names(order)[0]}。"
-    return order, ToolCallTrace(tool_name="get_order_detail", arguments=arguments, output_summary=summary, status="success", risk_level="low")
+    return order, ToolCallTrace(tool_name="get_order_detail", arguments=arguments, output_summary=summary, status="success", risk_level="low",
+        review_facts={"order_id": order_no(order), "status": order_status(order),
+                      "logistics_status": logistics_status_from_order(order)})
 
 
 def get_order_logistics(order: dict[str, Any]) -> ToolCallTrace:
@@ -105,6 +107,7 @@ def get_order_logistics(order: dict[str, Any]) -> ToolCallTrace:
     return ToolCallTrace(
         tool_name="get_order_logistics",
         arguments={"order_id": order_no(order)},
+        review_facts={"order_id": order_no(order), "logistics_status": logistics_status_from_order(order)},
         output_summary=f"物流状态为{logistics_status_label(order)}，订单状态为{order_status_label(order)}。",
         status="success",
         risk_level="low",
@@ -129,6 +132,7 @@ def get_refund_status(order: dict[str, Any], runtime_user_id: str) -> ToolCallTr
     if not refund_requests:
         return ToolCallTrace(
             tool_name="get_refund_status",
+            review_facts={"order_id": order_no(order), "historical": [], "complete": True},
             arguments={"order_id": order_no(order), "fact_source": order.get("_fact_source", "runtime_context")},
             output_summary=f"订单 {order_no(order)} 暂未查询到退款申请记录。",
             status="success",
@@ -146,6 +150,9 @@ def get_refund_status(order: dict[str, Any], runtime_user_id: str) -> ToolCallTr
     return ToolCallTrace(
         tool_name="get_refund_status",
         arguments={"order_id": order_no(order), "fact_source": latest.get("_fact_source", "business_api")},
+        review_facts={"order_id": order_no(order), "historical": [{"request_id": request_id, "status": status,
+            "updated_at": latest.get("updatedAt"), "created_at": latest.get("createdAt")}],
+            "complete": True, "scope": "latest_refund_or_return_request"},
         output_summary=f"退款申请 {request_id} 当前状态为{status_label}。",
         status="success",
         risk_level="low",
@@ -244,6 +251,12 @@ def _product_summary(product: dict[str, Any]) -> tuple[str, list[str]]:
     return summary, missing
 
 
+def _product_review_facts(product: dict[str, Any]) -> dict[str, Any]:
+    return {"product_id": product.get("id"), "name": product_name(product),
+            "price": _valid_price(product.get("price")), "stock": _valid_stock(product.get("stock")),
+            "active": product.get("active")}
+
+
 def search_products(
     keyword: str | None = None,
     *,
@@ -263,6 +276,7 @@ def search_products(
         return [product], ToolCallTrace(
             tool_name="search_products",
             arguments=arguments,
+            review_facts=_product_review_facts(product),
             output_summary=summary,
             status="success",
             risk_level="low",
@@ -303,6 +317,7 @@ def search_products(
         return [selected], ToolCallTrace(
             tool_name="search_products",
             arguments=arguments,
+            review_facts=_product_review_facts(selected),
             output_summary=summary,
             status="success",
             risk_level="low",

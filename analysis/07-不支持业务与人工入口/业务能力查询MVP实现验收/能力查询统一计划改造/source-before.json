@@ -1,0 +1,13 @@
+{
+  "backend/api/schemas.py": "758d8342b607abd6658296fc85ce67e338bcdc1061e8505d516e1947f1d15506",
+  "backend/agent/models/router_client.py": "505d4867fffb1b390d3fa26128658286f114a5073bb8cdacad96cceb9d7a012d",
+  "backend/resources/prompts/route_contract.md": "a7acd2f1a851b6e7f5a26cd9c3c68274f6df70d5546d73a8d3bb6f2f6ca8f674",
+  "backend/agent/tools/planning.py": "93356158bdf391499199878f11d934ee42198bc37cdb1241dc866f3a14cffc4d",
+  "backend/agent/customer_service_agent.py": "0f9ff66bb9326c410c519ec55d3e748441f19fe54ba27a9051afc58180702126",
+  "backend/agent/service_capabilities.py": "9b4fa2858b4618e6c653fd431901dd37a6aaea3f7226177e83db7035c2ea4ed9",
+  "backend/tests/test_service_capabilities.py": "fbec01fa989fade2b471e2fd3730828c1300dfe8cff6cdf23b9232949b52e177",
+  "backend/tests/test_evidence_routing.py": "2035007e1fad9fe2f7204a982a25cc01af0813df003e94269779184861ae2e3f",
+  "frontend/src/components/TracePanel.tsx": "79949e891c3fef0e15ca048bba389544127a6ccca7242e4066d999ea0a5853c1",
+  "backend/agent/trace.py": "5fe6326f02072b77679fdea39929bf96404a0d1cbac491f888ab937c1168337f",
+  "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/CustomerServiceGatewayService.java": "0d26199bed2ec1f94b9ae883316dd8964809439d69e44ce2b50cb4198485df2d"
+}

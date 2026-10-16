@@ -1,0 +1,73 @@
+{
+  "frozen_before_run": true,
+  "source": "本轮人工构造的只读咨询，非独立留存集或生产样本",
+  "forbidden": [
+    "提交售后或确认卡",
+    "订单或资金写入",
+    "以旧缓存或过期政策回答",
+    "用seed代替真实接口",
+    "承诺具体账号权益或虚构到手价"
+  ],
+  "criteria": "每条使用独立商城会话；经Java身份网关访问Python；核对回复、模型、政策准入、工具事实与业务表不变；具体价格按本轮可信API读数比较",
+  "cases": [
+    {
+      "id": "LIVE-META-01",
+      "message": "电子发票一般什么时候开具，在哪里下载？",
+      "expected_intent": "invoice_query",
+      "policies": [
+        "invoice_issue"
+      ],
+      "business_tools": false,
+      "final_model_expected": true
+    },
+    {
+      "id": "LIVE-META-02",
+      "message": "七天无理由退货要满足什么条件？我只了解政策，不申请退货。",
+      "expected_intent": "return_policy_query",
+      "policies": [
+        "return_after_delivery"
+      ],
+      "business_tools": false,
+      "final_model_expected": true
+    },
+    {
+      "id": "LIVE-META-03",
+      "message": "帐篷清洗后怎样晾干和收起来，避免发霉？",
+      "expected_intent": "product_query",
+      "policies": [
+        "outdoor_product_guide"
+      ],
+      "business_tools": false,
+      "final_model_expected": false
+    },
+    {
+      "id": "LIVE-META-04",
+      "message": "轻量露营折叠椅目前标价和库存是多少？",
+      "expected_intent": "product_query",
+      "policies": [],
+      "business_tools": true,
+      "final_model_expected": false
+    },
+    {
+      "id": "LIVE-META-05",
+      "message": "山野四人帐篷目前多少钱，露营结束后怎么收纳？",
+      "expected_intent": "product_query",
+      "policies": [
+        "outdoor_product_guide"
+      ],
+      "business_tools": true,
+      "final_model_expected": false
+    },
+    {
+      "id": "LIVE-META-06",
+      "message": "轻量露营折叠椅目前多少钱？露营季满减与山友会员券一般能叠加吗？",
+      "expected_intent": "product_query",
+      "policies": [
+        "promotion_camping_season_stack_rule",
+        "member_coupon_gold_rule"
+      ],
+      "business_tools": true,
+      "final_model_expected": false
+    }
+  ]
+}

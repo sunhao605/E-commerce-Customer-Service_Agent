@@ -292,10 +292,52 @@ h1 {
 }
 
 .citation-card {
+  border-radius: 8px;
+}
+
+.citation-card summary {
+  min-height: 44px;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  padding: 10px 12px;
+  cursor: pointer;
+}
+
+.citation-card summary::-webkit-details-marker {
+  display: none;
+}
+
+.citation-card summary::after {
+  content: "查看依据";
+  flex: 0 0 auto;
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.citation-card[open] summary::after {
+  content: "收起依据";
+}
+
+.citation-card summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.citation-card:not([open]) > :not(summary) {
+  display: none;
+}
+
+.citation-body {
   display: grid;
   gap: 6px;
-  padding: 12px;
-  border-radius: 8px;
+  padding: 0 12px 12px;
+}
+
+.citation-body > span {
+  white-space: pre-wrap;
 }
 
 .trace-panel {

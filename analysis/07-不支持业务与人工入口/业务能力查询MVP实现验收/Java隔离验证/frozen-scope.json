@@ -1,0 +1,17 @@
+{
+  "run_id": "CAP-JAVA-001",
+  "date": "2026-10-15",
+  "kind": "synthetic isolated Java HTTP verification",
+  "expected": [
+    "all current business Java sources compile with release 17",
+    "six capability responses match the versioned resource catalog",
+    "anonymous and invalid service token return 401; user and valid service token may read; admin-only role returns 403",
+    "unknown id returns 200 with unknown; invalid id returns 400; service token cannot POST",
+    "reminder, refund, return, exchange and human capability consultation return without creating application state",
+    "mixed price plus reminder returns through existing product query gateway path",
+    "existing synthetic draft and token survive capability consultation",
+    "eight H2 business tables have equal before and after hashes"
+  ],
+  "prohibited": ["daily database access", "daily service restart", "external model calls", "external network", "production deployment"],
+  "limits": "Fixed Agent response; does not exercise Python HTTP consumption or real model understanding. No browser verification. javac compilation and Spring HTTP startup, not a Maven package test."
+}

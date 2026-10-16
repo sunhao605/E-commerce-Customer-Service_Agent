@@ -1,0 +1,79 @@
+{
+  "checked_at": "2026-10-14T17:36:25.343918+08:00",
+  "services": {
+    "agent": {
+      "pids": [
+        28614
+      ],
+      "status_code": 200,
+      "body": {
+        "status": "ok",
+        "lesson": "41",
+        "rag_index": {
+          "loaded": true,
+          "version": "lesson41-idx-f370d4501647",
+          "chunk_count": 85,
+          "files": [
+            "after_sale_policy.md",
+            "payment_invoice_policy.md",
+            "promotion_policy.md",
+            "member_coupon_policy.md",
+            "product_knowledge.md"
+          ],
+          "embedding": "local_token_embedding_for_explicit_offline_course",
+          "governed_files": [
+            "after_sale_policy.md",
+            "payment_invoice_policy.md",
+            "promotion_policy.md",
+            "member_coupon_policy.md",
+            "product_knowledge.md",
+            "received_return_policy.md"
+          ],
+          "snapshot_version": "knowledge-3524fd57e6c4",
+          "judged_at": "2026-10-14T17:36:26.775543+08:00",
+          "available_policy_signature": "0d705f48ae1a",
+          "available_policies": {
+            "refund_before_shipping": "2026-10-14.2",
+            "invoice_issue": "2026-10-14.2",
+            "promotion_camping_season_stack_rule": "2026-10-14.2",
+            "member_coupon_gold_rule": "2026-10-14.2",
+            "outdoor_product_guide": "2026-10-14.2",
+            "return_after_delivery": "2026-10-14.2"
+          },
+          "blocked_policies": {}
+        }
+      }
+    },
+    "workbench": {
+      "pids": [
+        28633
+      ],
+      "status_code": 200,
+      "body": {
+        "html_bytes": 578
+      }
+    },
+    "mall": {
+      "pids": [
+        28644
+      ],
+      "status_code": 200,
+      "body": {
+        "html_bytes": 568
+      }
+    },
+    "java": {
+      "status": "UP"
+    }
+  },
+  "settings": {
+    "AGENT_COURSE_ENV": "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/.env.model.local",
+    "AGENT_COURSE_OFFLINE_RAG": "1",
+    "AGENT_COURSE_DISABLE_LLM": "0",
+    "AGENT_COURSE_OFFLINE_FACTS": "0",
+    "CANCEL_INTENT_EXECUTE": "0",
+    "CANCEL_SCORE_MIN": "0.9",
+    "LANGCHAIN_TRACING_V2": "false",
+    "LANGSMITH_TRACING": "false"
+  }
+}

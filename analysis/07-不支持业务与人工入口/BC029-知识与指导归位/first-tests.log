@@ -1,0 +1,32 @@
+...............................................................................................................F...................F......................F...............................................................................................
+======================================================================
+FAIL: test_long_policy_citation_is_located_section (test_policy_metadata.PolicyMetadataTest.test_long_policy_citation_is_located_section)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_policy_metadata.py", line 379, in test_long_policy_citation_is_located_section
+    self.assertIn("4.", promotion.metadata["section"])
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '4.' not found in '1. 适用范围'
+
+======================================================================
+FAIL: test_refund_and_return_answers_use_indexed_sections (test_policy_metadata.PolicyMetadataTest.test_refund_and_return_answers_use_indexed_sections)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_policy_metadata.py", line 402, in test_refund_and_return_answers_use_indexed_sections
+    self.assertTrue(all("## 9." not in item.snippet for item in refund.citations))
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_startup_preloads_index_for_health (test_product_knowledge.ProductKnowledgeTest.test_startup_preloads_index_for_health)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_product_knowledge.py", line 113, in test_startup_preloads_index_for_health
+    self.assertGreater(health['rag_index']['chunk_count'],56)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 53 not greater than 56
+
+----------------------------------------------------------------------
+Ran 250 tests in 1.581s
+
+FAILED (failures=3)
