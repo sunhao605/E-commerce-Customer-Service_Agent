@@ -1,0 +1,185 @@
+{
+  "cases": [
+    {
+      "id": "PT01",
+      "question": "会员券能和优惠叠加吗？另外发票多久开好？",
+      "expected": "优惠组合未明确时可澄清该项，但发票答案（24小时/订单详情下载）必须保留并给出；不能只发澄清丢发票",
+      "budget": 6
+    },
+    {
+      "id": "PT02",
+      "question": "火星会员有什么优惠？发票多久开好？",
+      "expected": "优惠无已发布规则时说明未知，但发票答案必须保留；不全局降级到转人工吞掉发票",
+      "budget": 6
+    },
+    {
+      "id": "PT03",
+      "question": "帐篷怎么清洗？发票多久开好？",
+      "expected": "商品知识作答；发票答案保留；不说\"发票未取得规则\"",
+      "budget": 5
+    },
+    {
+      "id": "PT04",
+      "seed_draft": true,
+      "question": "会员券能和优惠叠加吗？另外发票多久开好？",
+      "expected": "优惠澄清+发票答案保留；原退款待办（ORD9801/ORD9802 候选）完整保留",
+      "budget": 6
+    },
+    {
+      "id": "PT05",
+      "question": "会员券能和优惠叠加吗？另外发票多久开好？",
+      "injection": "generation_failure",
+      "expected": "注入生成故障后走无模型备用；发票答案与优惠澄清均保留，不只发澄清",
+      "budget": 2
+    }
+  ],
+  "fixtures": {
+    "products": [
+      {
+        "id": 4,
+        "name": "山野四人帐篷",
+        "price": 899.0,
+        "stock": 3,
+        "active": true,
+        "returnable": true
+      }
+    ],
+    "pending_draft": {
+      "intent": "refund_request",
+      "pending_slot": "order_id",
+      "candidates": [
+        {
+          "value": "ORD9801",
+          "label": "ORD9801",
+          "hint": "帐篷 899元"
+        },
+        {
+          "value": "ORD9802",
+          "label": "ORD9802",
+          "hint": "野餐垫 199元"
+        }
+      ]
+    },
+    "interaction_policy": {
+      "schemaVersion": "interaction_policy_v1",
+      "channel": "customer_service_agent",
+      "version": "service-capabilities-v1",
+      "entries": [
+        {
+          "id": "human_support",
+          "surface": "mall_chat",
+          "status": "available",
+          "actor": "user",
+          "initiation": "message_request",
+          "confirmationRequired": true,
+          "completionEffect": "open_entry",
+          "destinationState": "placeholder"
+        }
+      ],
+      "source": "controlled_http",
+      "elapsed_ms": 1.0
+    }
+  },
+  "config": {
+    "host": "api.deepseek.com",
+    "model": "deepseek-flash",
+    "judge_model": "deepseek-flash",
+    "judge_timeout_seconds": 5.0,
+    "mode": "enforce",
+    "max_model_http": 30,
+    "stop_before_next_request_at_tokens": 90000,
+    "automatic_retries": 0,
+    "offline_rag": true,
+    "business_fixtures": true,
+    "generation_temperature": 0.2,
+    "judge_temperature": 0
+  },
+  "source_sha256": {
+    "backend/agent/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "backend/agent/answer_review.py": "532433f06e27deefe49965d02b48cdfcf5231cbea48931a0a7f5d6318eab549b",
+    "backend/agent/cancellation.py": "f5f4fd7f3219c1e49f95c4a9f6475bc829d712867f274845f8fe328f22b42b6f",
+    "backend/agent/context.py": "72096263a40dec9664b8459a8256a02e5202c411de01c25b102a4050c6460763",
+    "backend/agent/cost.py": "aae7c9cf75eb9ecf365ad42f017cebd9dfe88bd263b9f1f1fd32820b7247764c",
+    "backend/agent/customer_service_agent.py": "ec07422026ac1373de5c851537ce352c2fbeda91cd3a5f817df0819431310112",
+    "backend/agent/ecommerce_client.py": "68a2c496fb0c3ef55f708917dc59a391fb9c410d0a0f075560d1152e83611bd4",
+    "backend/agent/hooks.py": "1ae64e2183a739073b44ea18d5a0052c382a59c19d3702502e4e00c532cbbfd0",
+    "backend/agent/mcp_catalog.py": "153a2728a69d02bfb9cd5958293b34bf93ff4e0f903eeb86edd39bda143e4f7e",
+    "backend/agent/models/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "backend/agent/models/answer_client.py": "aeb5d6c087ebc909058b4bfc7822b4300e241d08dcb584f0f9e9650c4e6eb78e",
+    "backend/agent/models/judge_client.py": "fe43689646f7f3b00809e4081d28e1a680eba2eb9d3b708423353577db3e5e61",
+    "backend/agent/models/router_client.py": "dbbb1da3a617afebd0392dbacbaa21880ca95027a0dfd8b38f76a47d5638dc3d",
+    "backend/agent/product_query.py": "03a8d9cb93505233ec12cf43ee440b5b4babf29f6d7df088a8beb1e4ad5dd57d",
+    "backend/agent/prompts.py": "6317cd97c8482db38fce18f885ced91edd95a2172256fa41e3280be75279d425",
+    "backend/agent/service_capabilities.py": "6e19ca37a99ee4c6d0f00473c860250f829bdd579e571dc8b281999912649d53",
+    "backend/agent/source_guard.py": "27b5fee4162ba5538c165cc243a4ba24838d13c620fe434aa7eb5cba3001c7a4",
+    "backend/agent/state.py": "084150d57ae8b2258b5105e3951ca16d13889e9c10612105049f71abc6247540",
+    "backend/agent/tools/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "backend/agent/tools/langchain_runtime.py": "023236123dc1712a5f1e59dac148cd5f991e374049db6b6ab0fd8ac7a574b9ce",
+    "backend/agent/tools/planning.py": "d6233e596614fe6ba95c5bcb0d81a398487fb8ecc0bdfc4e040a66d59cdd7ec9",
+    "backend/agent/tools/runtime_context.py": "4989622c79716c4505dffc6e3e26e507f09aab206590330c86d7d1c6077e6a88",
+    "backend/agent/tools/tool_runtime.py": "969d45fbaee2c653649d33d9635981a2907c9dd1801466879efbf7a0c6befcc1",
+    "backend/agent/trace.py": "e2d1d2654b637cf44fb002b23c188009234c58bb27c5e02e306bc754c3962ab5",
+    "backend/agent/workflows/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "backend/agent/workflows/after_sale_graph.py": "e99d407b35fbead3a9c9c75f8bc025730afee2d4b68ce46117a20034e6622019",
+    "backend/agent/workflows/resume.py": "ec0a188d3a0759af154b7f134aef63f37365c9a578d57bec44834aaa6a4f67f4",
+    "backend/api/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "backend/api/routes.py": "e5938e8af25acb6f71f9fa2cfe769af3668cc6682e7b42605211085961b8f0ec",
+    "backend/api/schemas.py": "f35fe1ac66522ae4eb5f49a2066bc7fc6eabc56a714d2f109f23b578762e90ec",
+    "backend/evals/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "backend/evals/feedback.py": "aa783e73616aa9f48e4b2c77eacc8868a5950579cae01533f6ba4bdbbdfd80dd",
+    "backend/evals/runner.py": "60a0b14e88f08c5deaf896fc19018ca5543dda53b13a3c7da5ddb5c6e46793e0",
+    "backend/main.py": "588e938575b8b1fbee8a92eae6fb62631be2084fa40b5de622c706f8950b45ce",
+    "backend/resources/agent_capabilities.json": "f1a54926107b95904f794074101fb504cd5b3070995d658966a883dafdc89a7d",
+    "backend/resources/cases.yml": "ef137cdf11f396096601ea8075a483c7b6d9227089e068f04432642ae92d389f",
+    "backend/resources/knowledge/README.md": "b9b31848edc2a80dca4fa67fbd50f3eac9cc6af1d2f12566db1c74978651808d",
+    "backend/resources/knowledge/after_sale_policy.md": "ed4a880e50b3cd41c92d9498d39d65b3b41ce1017b195ef536d5a6a75e2ae24d",
+    "backend/resources/knowledge/member_coupon_policy.md": "5d15e17693991daf377af315387d6bffba2cc90b61c8a87315fca113fdd1b136",
+    "backend/resources/knowledge/payment_invoice_policy.md": "43c816bf19b130dda312d655819188f2fb3663657805b8400d6ea7a3f25b71a3",
+    "backend/resources/knowledge/product_knowledge.md": "b1f2d2bb6ed98cf851b5b967450ab8b2630e6901b695b209ed232b3c2bd1f508",
+    "backend/resources/knowledge/promotion_policy.md": "6dbf92bec23f4ab220dbcb324a2678ee1d03fdbccbce4bc9c9e8f7c24c73f125",
+    "backend/resources/knowledge/received_return_policy.md": "f8d364b3d66f9786f01912dd53ec739a10a9159de5dab65af4c13cf23d3ad525",
+    "backend/resources/knowledge/release-manifest.json": "20d382acd281446a9d36dcaa9ef2140bc997badd095fdc961368eb50d99d1fc0",
+    "backend/resources/prompts/answer_judge.md": "792280e13334f6917023652f88dad97104a756c6e404d0dfb63bf4dae4dfed26",
+    "backend/resources/prompts/final_answer_style.md": "d6e4d97c7b487d4616cf38363a3c22debc45ac0d1f3b9da27760e349fd60fcf6",
+    "backend/resources/prompts/high_risk_after_sale.md": "ea3f62c63e62339cee771306c16fd04911102d6886a205b943b61f6ab43c90c3",
+    "backend/resources/prompts/prompt_registry.yml": "54b780df092398276fd22ba733dc7cbaeb0df3c0ff273881ef7a2700b9942cce",
+    "backend/resources/prompts/prompt_security.md": "aa37fbc52dfb1593617d61145f42d1c37b31c24ad76aee03a16b61f76f40640c",
+    "backend/resources/prompts/rag_answering.md": "f68ba18907f89048a263fe2ae688c84428d06ce1ef7c475198391de96988966d",
+    "backend/resources/prompts/route_contract.md": "e0c3c20e099fafadaba1b959487dd8334717b4472eb880205660abadbf15ef15",
+    "backend/resources/prompts/system_customer_service.md": "24dde154a0106f06dbbe6e759536d1b676e081ad816697e68bda8c9196166949",
+    "backend/resources/prompts/tool_usage.md": "e5cc7487d09d8713140bed939e189e70861e95c452e02cc82c9a03ef3496e090",
+    "backend/retrieval/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "backend/retrieval/documents.py": "e8aae8e61c751d5681599a4cd7bf92440f32fffcabde10f3981cafe319f1b695",
+    "backend/retrieval/hybrid_retrieval.py": "67265ad4b94b84c14450ca78327bcf877ab1618642f111d89a619441c4da313c",
+    "backend/retrieval/knowledge.py": "8804b6371445bdbf5242885c705550cd765ee858cb3e52957f491e0ac248bd24",
+    "backend/retrieval/rules.py": "1fb0f875066dbb9372973e4ee785392c8cba230ef8b66fd9f482a32888d82d63",
+    "backend/settings.py": "c69be8b457d3a4ff284c9bc2f3ae9264461550b955946cae22579514ba2c4ed3",
+    "backend/tests/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "backend/tests/test_answer_content.py": "a152be011e32ccff54447925eeb71715d938de1c770b32dd8be3e0925d8f07a0",
+    "backend/tests/test_answer_judge.py": "db8c1ba853d1a614dbb788300f1edabb2d00a4253f17ed83491fdf9603bc6c11",
+    "backend/tests/test_cancellation_contract.py": "f2c89c537c2b26c4dc3026c6d379bcf1ed4bcb13a865dc9b513516392b5a869b",
+    "backend/tests/test_cancelled_draft.py": "25d046f346a4b8cfea94cea8a0ee8f26678c99c32c280e8e90383bf4f623d2b0",
+    "backend/tests/test_candidate_selection.py": "5b5cdee35dd5d3a5c8ca70155a6ef3560a38601b15e7d1e64bf7c44d9fd7243e",
+    "backend/tests/test_deepseek_config.py": "ab99fcc05a2cbb1692377d4cf52291bb20296f07a834822ff690c52fc66e9f16",
+    "backend/tests/test_domain_dispatch.py": "3d89812be232c2e05cb3780290199b7f3ec55b070bbd88432985ccc1866a8a43",
+    "backend/tests/test_eligibility_query.py": "b1b18af9304502cf3458ff99f09d7c1655b9eb3687b5441b3168bef5cceac8e9",
+    "backend/tests/test_embedding_config.py": "c5d9f3d0f85c369ec28d18133546b32c9e34ae0e3a452ba01aa7c69b50cc2136",
+    "backend/tests/test_eval_contract.py": "1465660ffb97cd56ec1b5fca8afa32317f3de555205427ab78c5ad0c3beb0315",
+    "backend/tests/test_evidence_routing.py": "6f9b6090975affaa64f610bdfe7992738d052e8cd27ec4f6e8c6597f8d55cccc",
+    "backend/tests/test_outdoor_scenario.py": "5cd35a5fdb6f3dc981e89f98002e0243c0b56e3bfc96ddebc057705614f7d937",
+    "backend/tests/test_policy_metadata.py": "efa8862046d884c99e0f747fd0dff936f03aa6b4e5036b3f67c0cbb3ada70378",
+    "backend/tests/test_product_fault_feedback.py": "5ffe74cf8af1c005f9624429f7ccf30d3386090e40984bc8a834b5b57c48237e",
+    "backend/tests/test_product_knowledge.py": "03ddffa1d36c6f9a374cdd9a096fd8bf31bf6fc798fab78ec3a99187f5dd468a",
+    "backend/tests/test_product_query.py": "08236bf9311c149db488f5f1193f0e9d416d9a2c7c6e991b6cb2c770b211e3c7",
+    "backend/tests/test_refund_submission_boundary.py": "7665c5a54f8d1450cd96c313fc45eb55d217d0d36283e793ae9ba6be2e7fa01f",
+    "backend/tests/test_resume_guard.py": "4116919e7b7bde947d5626e35e1b5d6b89530ee22de6950f108af99e25c23f25",
+    "backend/tests/test_route_priority.py": "dc5818703a191d4238d63da93d95fb578d4a1cd5ae078585b008c34b18e1c88e",
+    "backend/tests/test_service_capabilities.py": "be80e15a4ebe0fe1a7e51845ac6b36eff0128c3e684602c4c205036929600cc5",
+    "backend/tests/test_task_lifecycle.py": "202ca5b6ec2425be0a2414898a23d5014988261cac2b64b61c6737ddbad149a5"
+  },
+  "runner_sha256": "3da0d170e5e45db861a18545fe42901e8c95017a7d6d6c941280010e50a48eef",
+  "guard_sha256": "2072b4500e8c452519d75fc81731cec3ee53989d320b8ee1448e7985beaad8a2",
+  "knowledge_snapshot": "knowledge-669e2fc4af88",
+  "scope": "5条自然请求（含1条生成故障注入）；真实路由/最终生成/judge；离线知识检索＋构造业务事实；非在线Embedding或Java/MySQL/页面验收",
+  "judging": "运行前预期由助手冻结；模型不看expected；运行后按①已知项答案保留②澄清/失败项不阻塞③业务状态保留逐题判定，judge pass不替代验收；首次失败不重跑挑结果。"
+}
