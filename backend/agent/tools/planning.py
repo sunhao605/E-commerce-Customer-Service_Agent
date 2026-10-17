@@ -150,6 +150,9 @@ def build_route_plan(
     model_used: bool,
     evidence: dict[str, Any] | None = None,
     capability_ids: list[str] | None = None,
+    inquiry_topics: list[str] | None = None,
+    topic_status: str = "missing",
+    answer_order: list[str] | None = None,
 ) -> RoutePlan:
     """把意图收敛成白名单 RoutePlan，模型不能自由增加工具或高风险动作。"""
     from agent.service_capabilities import asked_capability_ids
@@ -231,18 +234,29 @@ def build_route_plan(
     elif intent in {"security_request", "degradation_request"}:
         risk_level = "high" if intent == "security_request" else "medium"
 
+    from retrieval.rules import validate_topics, topic_catalog
+    topics, checked = validate_topics(inquiry_topics, present=inquiry_topics is not None)
+    if checked != "valid" and topic_status == "valid":
+        topic_status = checked
+    if not model_used:
+        topics, topic_status = [], "no_model"
+    # 所有只读入口按同一主题目录补齐知识计划；原工具与办理权限不变。
+    if not requires_workflow and intent not in {"security_request", "degradation_request"}:
+        knowledge_domains = list(dict.fromkeys([*knowledge_domains, *(topic_catalog()[t] for t in topics)]))
+    allowed_topics = topics
+    allowed_order = {*("topic:" + t for t in allowed_topics),
+                     *("capability:" + cid for cid in planned_capabilities)}
+    if required_tools:
+        allowed_order.add("facts")
+    ordered = list(dict.fromkeys(item for item in (answer_order or []) if item in allowed_order))
     # 缺少订单号时保留候选工具，但不允许模型凭空生成参数并执行。
     order_bound_tools = {"get_order_detail", "get_order_logistics", "get_refund_status", "get_after_sale_eligibility"}
     executable_tools = required_tools if order_id or not any(name in order_bound_tools for name in required_tools) else []
-    strategies = {
-        "product_knowledge": ("hybrid", "section"),
-        "promotion_and_member_policy": ("hybrid", "section"),
-        "after_sale_policy": ("hybrid", "section"),
-        "received_return_policy": ("hybrid", "section"),
-        "invoice": ("hybrid", "section"),
-    }
     return RoutePlan(
         intent=intent,
+        inquiry_topics=allowed_topics,
+        topic_status=topic_status,
+        answer_order=ordered,
         needs_rag=bool(knowledge_domains),
         needs_business_tools=bool(required_tools or planned_capabilities),
         required_tools=executable_tools,
@@ -251,7 +265,8 @@ def build_route_plan(
         capability_ids=planned_capabilities,
         needs_product_facts=product_facts,
         clarification_fields=clarification_fields,
-        retrieval_strategies=[RetrievalStrategy(knowledge_domain=domain, retrieval_mode=strategies[domain][0], citation_scope=strategies[domain][1]) for domain in knowledge_domains if domain in strategies],
+        retrieval_strategies=[RetrievalStrategy(knowledge_domain=domain, retrieval_mode="hybrid", citation_scope="section")
+                              for domain in knowledge_domains],
         entity_refs=[order_id] if order_id else [],
         risk_level=risk_level,
         requires_workflow=requires_workflow,

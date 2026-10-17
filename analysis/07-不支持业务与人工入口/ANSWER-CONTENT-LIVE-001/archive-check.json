@@ -1,0 +1,10 @@
+{
+  "completed": 15,
+  "actual_http": 45,
+  "all_http_200": true,
+  "workflow_executions": 0,
+  "source_unchanged_after_report": true,
+  "frozen_and_runner_unchanged": true,
+  "review_counts_consistent": true,
+  "scope": "归档一致性检查，联网0，不是新增模型验收样本"
+}

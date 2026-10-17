@@ -1,0 +1,360 @@
+..............FF..........FF...........................................................................FFFFFFFFFFFFFFFFFFF............................F.F............................EF........................F.........................................................F......................................................
+======================================================================
+ERROR: test_pm11_valid_invoice_queries_check_admission_without_final_cache (test_policy_metadata.PolicyMetadataTest.test_pm11_valid_invoice_queries_check_admission_without_final_cache)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_policy_metadata.py", line 244, in test_pm11_valid_invoice_queries_check_admission_without_final_cache
+    self.assertEqual(response.citations[0].metadata["policy_id"], "invoice_issue")
+                     ~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+
+======================================================================
+FAIL: test_cross_domain_consultation_answers_all_topics (test_answer_content.ContentPipelineTest.test_cross_domain_consultation_answers_all_topics) (intent='invoice_query')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_content.py", line 391, in test_cross_domain_consultation_answers_all_topics
+    self.assertIn(item, response.answer)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '24 小时' not found in '当前退款使用演示余额和资金流水，不提供真实银行卡、支付宝或微信退款的到账时限保证。\n\n本轮未能核实发票规则，暂不能确认相关内容。'
+
+======================================================================
+FAIL: test_cross_domain_consultation_answers_all_topics (test_answer_content.ContentPipelineTest.test_cross_domain_consultation_answers_all_topics) (intent='refund_policy_query')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_content.py", line 391, in test_cross_domain_consultation_answers_all_topics
+    self.assertIn(item, response.answer)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '24 小时' not found in '当前退款使用演示余额和资金流水，不提供真实银行卡、支付宝或微信退款的到账时限保证。\n\n本轮未能核实发票规则，暂不能确认相关内容。\n\n以上为通用售后规则，具体订单资格仍需核验，不代表已经提交申请。'
+
+======================================================================
+FAIL: test_scope_consultation_retrieves_each_planned_domain (test_answer_content.ContentPipelineTest.test_scope_consultation_retrieves_each_planned_domain) (topic='invoice_issue')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_content.py", line 363, in test_scope_consultation_retrieves_each_planned_domain
+    self.assertIn(expected, response.answer)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '24 小时' not found in '本轮未能核实发票规则，暂不能确认相关内容。\n\n当前客服助手不支持到货或补货提醒。你可以稍后主动查询商品库存。'
+
+======================================================================
+FAIL: test_short_followup_gets_history_and_replaces_old_topic (test_answer_content.ContentPipelineTest.test_short_followup_gets_history_and_replaces_old_topic)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_content.py", line 302, in test_short_followup_gets_history_and_replaces_old_topic
+    self.assertIn('24 小时', response.answer); self.assertNotIn('退款', response.answer)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '24 小时' not found in '本轮未能核实发票规则，暂不能确认相关内容。'
+
+======================================================================
+FAIL: test_cross_domain_query_keeps_background_after_sale_state (test_domain_dispatch.DomainDispatchTest.test_cross_domain_query_keeps_background_after_sale_state)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 112, in test_cross_domain_query_keeps_background_after_sale_state
+    self.assert_domains(response, domains)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 46, in assert_domains
+    self.assertEqual(result['status'], 'answered')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'error' != 'answered'
+- error
++ answered
+
+
+======================================================================
+FAIL: test_exception_is_local_and_not_retried (test_domain_dispatch.DomainDispatchTest.test_exception_is_local_and_not_retried)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 101, in test_exception_is_local_and_not_retried
+    self.assertIn('24 小时', response.answer)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '24 小时' not found in '本轮未能核实发票规则，暂不能确认相关内容。\n\n本轮未能核实商品使用知识，暂不能确认相关内容。'
+
+======================================================================
+FAIL: test_five_single_domains_and_all_ten_pairs_in_both_orders (test_domain_dispatch.DomainDispatchTest.test_five_single_domains_and_all_ten_pairs_in_both_orders) (domains=('invoice',))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 59, in test_five_single_domains_and_all_ten_pairs_in_both_orders
+    self.assert_domains(response, domains)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 46, in assert_domains
+    self.assertEqual(result['status'], 'answered')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'error' != 'answered'
+- error
++ answered
+
+
+======================================================================
+FAIL: test_five_single_domains_and_all_ten_pairs_in_both_orders (test_domain_dispatch.DomainDispatchTest.test_five_single_domains_and_all_ten_pairs_in_both_orders) (domains=('after_sale_policy', 'invoice'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 59, in test_five_single_domains_and_all_ten_pairs_in_both_orders
+    self.assert_domains(response, domains)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 46, in assert_domains
+    self.assertEqual(result['status'], 'answered')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'error' != 'answered'
+- error
++ answered
+
+
+======================================================================
+FAIL: test_five_single_domains_and_all_ten_pairs_in_both_orders (test_domain_dispatch.DomainDispatchTest.test_five_single_domains_and_all_ten_pairs_in_both_orders) (domains=('invoice', 'after_sale_policy'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 59, in test_five_single_domains_and_all_ten_pairs_in_both_orders
+    self.assert_domains(response, domains)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 46, in assert_domains
+    self.assertEqual(result['status'], 'answered')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'error' != 'answered'
+- error
++ answered
+
+
+======================================================================
+FAIL: test_five_single_domains_and_all_ten_pairs_in_both_orders (test_domain_dispatch.DomainDispatchTest.test_five_single_domains_and_all_ten_pairs_in_both_orders) (domains=('received_return_policy', 'invoice'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 59, in test_five_single_domains_and_all_ten_pairs_in_both_orders
+    self.assert_domains(response, domains)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 46, in assert_domains
+    self.assertEqual(result['status'], 'answered')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'error' != 'answered'
+- error
++ answered
+
+
+======================================================================
+FAIL: test_five_single_domains_and_all_ten_pairs_in_both_orders (test_domain_dispatch.DomainDispatchTest.test_five_single_domains_and_all_ten_pairs_in_both_orders) (domains=('invoice', 'received_return_policy'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 59, in test_five_single_domains_and_all_ten_pairs_in_both_orders
+    self.assert_domains(response, domains)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 46, in assert_domains
+    self.assertEqual(result['status'], 'answered')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'error' != 'answered'
+- error
++ answered
+
+
+======================================================================
+FAIL: test_five_single_domains_and_all_ten_pairs_in_both_orders (test_domain_dispatch.DomainDispatchTest.test_five_single_domains_and_all_ten_pairs_in_both_orders) (domains=('invoice', 'promotion_and_member_policy'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 59, in test_five_single_domains_and_all_ten_pairs_in_both_orders
+    self.assert_domains(response, domains)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 46, in assert_domains
+    self.assertEqual(result['status'], 'answered')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'error' != 'answered'
+- error
++ answered
+
+
+======================================================================
+FAIL: test_five_single_domains_and_all_ten_pairs_in_both_orders (test_domain_dispatch.DomainDispatchTest.test_five_single_domains_and_all_ten_pairs_in_both_orders) (domains=('promotion_and_member_policy', 'invoice'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 59, in test_five_single_domains_and_all_ten_pairs_in_both_orders
+    self.assert_domains(response, domains)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 46, in assert_domains
+    self.assertEqual(result['status'], 'answered')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'error' != 'answered'
+- error
++ answered
+
+
+======================================================================
+FAIL: test_five_single_domains_and_all_ten_pairs_in_both_orders (test_domain_dispatch.DomainDispatchTest.test_five_single_domains_and_all_ten_pairs_in_both_orders) (domains=('invoice', 'product_knowledge'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 59, in test_five_single_domains_and_all_ten_pairs_in_both_orders
+    self.assert_domains(response, domains)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 46, in assert_domains
+    self.assertEqual(result['status'], 'answered')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'error' != 'answered'
+- error
++ answered
+
+
+======================================================================
+FAIL: test_five_single_domains_and_all_ten_pairs_in_both_orders (test_domain_dispatch.DomainDispatchTest.test_five_single_domains_and_all_ten_pairs_in_both_orders) (domains=('product_knowledge', 'invoice'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 59, in test_five_single_domains_and_all_ten_pairs_in_both_orders
+    self.assert_domains(response, domains)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 46, in assert_domains
+    self.assertEqual(result['status'], 'answered')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'error' != 'answered'
+- error
++ answered
+
+
+======================================================================
+FAIL: test_partial_clarification_keeps_invoice_and_pending_question (test_domain_dispatch.DomainDispatchTest.test_partial_clarification_keeps_invoice_and_pending_question)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 71, in test_partial_clarification_keeps_invoice_and_pending_question
+    self.assertIn('24 小时', response.answer)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '24 小时' not found in '会员券想和哪项优惠叠加？例如露营季满减、商品活动价，还是另一张券？\n\n本轮未能核实发票规则，暂不能确认相关内容。'
+
+======================================================================
+FAIL: test_partial_failure_keeps_invoice_and_does_not_claim_unsupported (test_domain_dispatch.DomainDispatchTest.test_partial_failure_keeps_invoice_and_does_not_claim_unsupported)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 80, in test_partial_failure_keeps_invoice_and_does_not_claim_unsupported
+    self.assertIn('24 小时', response.answer)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '24 小时' not found in '没有检索到荒野户外已发布的可信活动或会员规则，我不能编造隐藏券规则。建议以活动页和结算页展示为准，或转人工客服进一步核实。\n\n本轮未能核实发票规则，暂不能确认相关内容。'
+
+======================================================================
+FAIL: test_three_domains_and_all_consultation_entries_use_same_providers (test_domain_dispatch.DomainDispatchTest.test_three_domains_and_all_consultation_entries_use_same_providers) (intent='invoice_query')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 65, in test_three_domains_and_all_consultation_entries_use_same_providers
+    self.assert_domains(self.chat(self.prepare(domains, intent)), domains)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 46, in assert_domains
+    self.assertEqual(result['status'], 'answered')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'error' != 'answered'
+- error
++ answered
+
+
+======================================================================
+FAIL: test_three_domains_and_all_consultation_entries_use_same_providers (test_domain_dispatch.DomainDispatchTest.test_three_domains_and_all_consultation_entries_use_same_providers) (intent='promotion_query')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 65, in test_three_domains_and_all_consultation_entries_use_same_providers
+    self.assert_domains(self.chat(self.prepare(domains, intent)), domains)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 46, in assert_domains
+    self.assertEqual(result['status'], 'answered')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'error' != 'answered'
+- error
++ answered
+
+
+======================================================================
+FAIL: test_three_domains_and_all_consultation_entries_use_same_providers (test_domain_dispatch.DomainDispatchTest.test_three_domains_and_all_consultation_entries_use_same_providers) (intent='product_query')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 65, in test_three_domains_and_all_consultation_entries_use_same_providers
+    self.assert_domains(self.chat(self.prepare(domains, intent)), domains)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 46, in assert_domains
+    self.assertEqual(result['status'], 'answered')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'error' != 'answered'
+- error
++ answered
+
+
+======================================================================
+FAIL: test_three_domains_and_all_consultation_entries_use_same_providers (test_domain_dispatch.DomainDispatchTest.test_three_domains_and_all_consultation_entries_use_same_providers) (intent='service_scope_query')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 65, in test_three_domains_and_all_consultation_entries_use_same_providers
+    self.assert_domains(self.chat(self.prepare(domains, intent)), domains)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 46, in assert_domains
+    self.assertEqual(result['status'], 'answered')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'error' != 'answered'
+- error
++ answered
+
+
+======================================================================
+FAIL: test_valid_topics_extend_order_query_plan_without_authorizing_other_tools (test_domain_dispatch.DomainDispatchTest.test_valid_topics_extend_order_query_plan_without_authorizing_other_tools)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 122, in test_valid_topics_extend_order_query_plan_without_authorizing_other_tools
+    self.assertIn('24 小时', response.answer)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '24 小时' not found in '出发前在合适位置试搭，核对配件和搭建步骤。使用后先清除砂土和杂物，依说明书清洁并充分晾干再收纳；长期潮湿收纳可能带来霉味和涂层问题。通用帐篷养护建议不使用洗衣机或烘干机强洗，具体型号仍以厂商说明为准。通用依据：REI 帐篷养护。\n\n霉味、脱胶或拉链卡顿可能与不同因素有关，首次出现时间、存放条件与异常位置有助于核验；单张照片不能独立确定责任。\n\n本指南提供通用选购、使用与问题排查知识。具体型号的参数、配件和使用条件以说明书及可信商品资料为准；通用指南不证明具体商品的价格、库存、活动资格或订单可退资格。\n\n商品名称不能代替承重、防水等级、容量、续航或睡袋温标等参数。型号资料没有公布的数字，当前无法确认。\n\n本轮未能核实发票规则，暂不能确认相关内容。\n\n你要查询哪一个订单？请选择订单号，或直接补充订单号。\n\n以上为通用使用知识，具体型号参数以说明书为准。'
+
+======================================================================
+FAIL: test_wrong_source_is_rejected_before_selection_and_generation (test_domain_dispatch.DomainDispatchTest.test_wrong_source_is_rejected_before_selection_and_generation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 91, in test_wrong_source_is_rejected_before_selection_and_generation
+    self.assertIn('24 小时', response.answer)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '24 小时' not found in '本轮未能核实商品使用知识，暂不能确认相关内容。\n\n本轮未能核实发票规则，暂不能确认相关内容。'
+
+======================================================================
+FAIL: test_order_eligibility_guard_discards_product_policy_fields (test_evidence_routing.EvidenceExecutionTest.test_order_eligibility_guard_discards_product_policy_fields)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_evidence_routing.py", line 142, in test_order_eligibility_guard_discards_product_policy_fields
+    self.assertEqual(response.session_state["route_plan"]["knowledge_domains"], [])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: ['promotion_and_member_policy'] != []
+
+First list contains 1 additional elements.
+First extra element 0:
+'promotion_and_member_policy'
+
+- ['promotion_and_member_policy']
++ []
+
+======================================================================
+FAIL: test_page_identity_failure_does_not_reuse_old_guide (test_evidence_routing.EvidenceExecutionTest.test_page_identity_failure_does_not_reuse_old_guide)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_evidence_routing.py", line 302, in test_page_identity_failure_does_not_reuse_old_guide
+    self.assertEqual(response.session_state["next_action"], "answer_user")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'ask_clarification' != 'answer_user'
+- ask_clarification
++ answer_user
+
+
+======================================================================
+FAIL: test_pm12_live_price_preserved_when_promotion_unavailable (test_policy_metadata.PolicyMetadataTest.test_pm12_live_price_preserved_when_promotion_unavailable)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_policy_metadata.py", line 260, in test_pm12_live_price_preserved_when_promotion_unavailable
+    self.assertIn("暂不能确认", response.answer)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '暂不能确认' not found in '轻量露营折叠椅 商品标价 899 元，库存 3 件。\n\n目前没有核实到可用于回答的有效活动或会员规则，暂不能说明相应政策条件。已核实的商品或订单事实仍以业务查询结果为准。'
+
+======================================================================
+FAIL: test_price_only_does_not_append_guide (test_product_knowledge.ProductKnowledgeTest.test_price_only_does_not_append_guide)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_product_knowledge.py", line 57, in test_price_only_does_not_append_guide
+    self.assertIn('899',r.answer);self.assertFalse(self.guide_citations(r))
+                                  ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: [Citation(source='knowledge/product_knowledge.md', title='荒野户外商品选购、使用与问题排查指南', snippet='### 3.3 清洁、收纳与首次检查\n\n出发前在合适位置试搭，核对配件和搭建步骤。使用后先清除砂土和杂物，依说明书清洁并充分晾干再收纳；长期潮湿收纳可能带来霉味和涂层问题。通用帐篷养护建议不使用洗衣机或烘干机强洗，具体型号仍以厂商说明为准。[通用依据：REI 帐篷养护](https://www.rei.com/learn/expert-advice/caring-tent.html)。\n\n霉味、脱胶或拉链卡顿可能与不同因素有关，首次出现时间、存放条件与异常位置有助于核验；单张照片不能独立确定责任。', score=0.9, retrieval_stage='pre_retrieval', metadata={'rule_issues': [], 'policy_id': 'outdoor_product_guide', 'scene_key': 'product_knowledge', 'version': '2026-10-17.1', 'publication_status': 'published', 'effective_from': '2025-01-01T00:00:00+08:00', 'effective_to': '2028-01-01T00:00:00+08:00', 'snapshot_version': 'knowledge-669e2fc4af88', 'rule_id': 'tent_care', 'rule_topics': ['tent_care'], 'required_rules': ['product_scope'], 'scope': 'mall_demo', 'rule_sources': [{'source': 'knowledge/product_knowledge.md', 'policy_id': 'outdoor_product_guide', 'version': '2026-10-17.1'}], 'section_id': 'tent_care', 'section': '### 3.3 清洁、收纳与首次检查', 'answer_topic': 'tent_care'}), Citation(source='knowledge/product_knowledge.md', title='荒野户外商品选购、使用与问题排查指南', snippet='## 1. 适用范围\n\n本指南提供通用选购、使用与问题排查知识。具体型号的参数、配件和使用条件以说明书及可信商品资料为准；通用指南不证明具体商品的价格、库存、活动资格或订单可退资格。\n\n商品名称不能代替承重、防水等级、容量、续航或睡袋温标等参数。型号资料没有公布的数字，当前无法确认。', score=0.9, retrieval_stage='pre_retrieval', metadata={'rule_issues': [], 'policy_id': 'outdoor_product_guide', 'scene_key': 'product_knowledge', 'version': '2026-10-17.1', 'publication_status': 'published', 'effective_from': '2025-01-01T00:00:00+08:00', 'effective_to': '2028-01-01T00:00:00+08:00', 'snapshot_version': 'knowledge-669e2fc4af88', 'rule_id': 'product_scope', 'rule_topics': ['product_scope'], 'required_rules': [], 'scope': 'mall_demo', 'rule_sources': [{'source': 'knowledge/product_knowledge.md', 'policy_id': 'outdoor_product_guide', 'version': '2026-10-17.1'}], 'section_id': 'product_scope', 'section': '## 1. 适用范围', 'answer_topic': 'tent_care'})] is not false
+
+======================================================================
+FAIL: test_policy_queries_stay_read_only_and_invoice_stays_invoice (test_route_priority.RoutePriorityTest.test_policy_queries_stay_read_only_and_invoice_stays_invoice)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_route_priority.py", line 253, in test_policy_queries_stay_read_only_and_invoice_stays_invoice
+    self.assertIn("下载", invoice.answer)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '下载' not found in '本轮未能核实发票规则，暂不能确认相关内容。'
+
+----------------------------------------------------------------------
+Ran 308 tests in 2.576s
+
+FAILED (failures=28, errors=1)

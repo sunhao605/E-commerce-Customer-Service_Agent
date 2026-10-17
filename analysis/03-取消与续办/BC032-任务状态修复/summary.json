@@ -1,0 +1,29 @@
+{
+  "id": "BC032-STATE-001",
+  "date": "2026-10-17",
+  "scope": "task_lifecycle_and_clarification_focus",
+  "offline_backend_passed": 298,
+  "java_compiled_sources": 164,
+  "java_h2_checks_passed": 21,
+  "real_model_calls": 0,
+  "daily_services_loaded": false,
+  "source_files": {
+    "backend/agent/context.py": "d47bfa16e37e4dbdb2319abec7b7cb23894359ccaf30085b0106ecd6d03a492c",
+    "backend/agent/customer_service_agent.py": "7e12f81edb3475189cfc1f8f26a66f7dbec41a680795ceb0abbb686ad00416cf",
+    "backend/agent/models/router_client.py": "dbbb1da3a617afebd0392dbacbaa21880ca95027a0dfd8b38f76a47d5638dc3d",
+    "backend/resources/prompts/route_contract.md": "e0c3c20e099fafadaba1b959487dd8334717b4472eb880205660abadbf15ef15",
+    "backend/tests/test_answer_content.py": "a152be011e32ccff54447925eeb71715d938de1c770b32dd8be3e0925d8f07a0",
+    "backend/tests/test_product_query.py": "e6820f908c53801f2e5b494b9db6e8f103e046bf4dcfa0e69ee0f0f601c794eb",
+    "backend/tests/test_route_priority.py": "dc5818703a191d4238d63da93d95fb578d4a1cd5ae078585b008c34b18e1c88e",
+    "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/CustomerServiceGatewayService.java": "01ea4900f869097eee5bfd215a254d099ff021cfcfd221ef727d0fca91c24be6",
+    "backend/tests/test_task_lifecycle.py": "dc3f976a8c78b3925fb11c284df73347b41f0f60159da5db57e090ce2e4cfeab"
+  },
+  "unexpected_changes_relative_to_review": [],
+  "other_findings": "not_fixed",
+  "limitations": [
+    "fixed_route_and_model_fixtures",
+    "no_real_natural_dialogue",
+    "no_browser_acceptance",
+    "no_daily_load"
+  ]
+}

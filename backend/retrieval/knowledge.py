@@ -3,11 +3,12 @@
 from __future__ import annotations
 
 import re
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from typing import Any
 
 from api.schemas import *
-from retrieval.documents import knowledge_admission, knowledge_time, load_knowledge_citation, policy_block_reason
+from retrieval.documents import (knowledge_admission, knowledge_time, load_knowledge_citation,
+                                 policy_block_reason, get_knowledge_snapshot, citation_is_current)
 from retrieval.hybrid_retrieval import retrieve_knowledge
 
 
@@ -353,3 +354,64 @@ def _promotion_policy_answer(citations: list[Citation]) -> str:
     if "member_coupon_gold_rule" in policy_ids:
         return "根据荒野户外会员券使用规则，山友会员可领取平台会员券；会员券需在有效期内由本人账号使用，不能转让。"
     return "没有检索到荒野户外已发布的可信活动或会员规则，我不能编造隐藏券规则。建议以活动页和结算页展示为准，或转人工客服进一步核实。"
+
+
+# 领域职责只在此维护；主意图不参与分发，查询函数仍保留各自的准入规则。
+KNOWLEDGE_PROVIDERS = {
+    "after_sale_policy": ("退款政策", "policy_query_result", ("after_sale_refund",),
+        lambda sid, question, clarify: policy_query_result(sid, "refund_policy_query", question)),
+    "received_return_policy": ("退货政策", "policy_query_result", ("after_sale_return",),
+        lambda sid, question, clarify: policy_query_result(sid, "return_policy_query", question)),
+    "invoice": ("发票规则", "invoice_faq_result", ("payment_invoice",),
+        lambda sid, question, clarify: invoice_faq_result(sid)),
+    "promotion_and_member_policy": ("活动或会员规则", "promotion_policy_result", ("promotion", "member_coupon"),
+        lambda sid, question, clarify: promotion_policy_result(sid, question, clarification_required=clarify)),
+    "product_knowledge": ("商品使用知识", "product_knowledge_result", ("product_knowledge",),
+        lambda sid, question, clarify: product_knowledge_result(sid, question)),
+}
+
+
+def query_knowledge_domain(session_id: str, domain: str, question: str, *,
+                           clarification_required: bool = False, pending_message: str | None = None,
+                           topics: list[str] | None = None,
+                           pending_action: NextAction = "ask_clarification") -> KnowledgePathResult:
+    """按受控领域取证并核对真实来源；一项失败不改变其他项及业务任务。"""
+    spec = KNOWLEDGE_PROVIDERS.get(domain)
+    label, provider, allowed_sources, query = spec or ("所问事项", None, (), None)
+    failure = None
+    source_domains = []
+    if pending_message:
+        result = KnowledgePathResult(pending_message, [], "low", pending_action, False)
+    else:
+        try:
+            if query is None:
+                raise ValueError("unknown_knowledge_domain")
+            result = query(session_id, question, clarification_required)
+            snapshot = get_knowledge_snapshot()
+            for citation in result.citations:
+                canonical = snapshot.citations.get(citation.source.removeprefix("knowledge/"))
+                metadata = citation.metadata or {}
+                scene = canonical.metadata.get("scene_key") if canonical else None
+                source_domains.append(scene)
+                if (scene not in allowed_sources or metadata.get("scene_key") != scene
+                    or not citation_is_current(citation, knowledge_time())
+                    or policy_block_reason(canonical.metadata, knowledge_time())):
+                    raise ValueError("knowledge_source_mismatch")
+        except Exception as exc:
+            failure = str(exc) if isinstance(exc, ValueError) and str(exc) in {
+                "unknown_knowledge_domain", "knowledge_source_mismatch"} else type(exc).__name__
+            result = KnowledgePathResult(f"本轮未能核实{label}，暂不能确认相关内容。", [], "medium", "answer_user", False)
+    status = ("error" if failure else "pending" if result.next_action == "ask_clarification"
+              else "answered" if result.citations else "no_evidence")
+    coverage, gaps = [], []
+    if topics and result.citations:
+        from retrieval.rules import select_rules
+        selected, selection = select_rules(result.citations, topics, [domain])
+        coverage = [topic for topic in topics if any(topic in c.metadata.get("rule_topics", []) for c in selected)]
+        gaps = selection["gaps"]
+        if gaps:
+            status = "partial" if coverage else "no_evidence"
+    debug = {**(result.retrieval_debug or {}), "knowledge_domain": domain, "provider": provider,
+             "source_domains": list(dict.fromkeys(source_domains)), "status": status,
+             "failure": failure, "topics": topics or [], "covered_topics": coverage, "gaps": gaps}
+    return replace(result, retrieval_debug=debug)

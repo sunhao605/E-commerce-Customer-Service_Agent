@@ -1,0 +1,8 @@
+{
+  "run_id": "BC032-LIVE-002",
+  "confirmed_by": "user:本轮聊天明确确认",
+  "confirmed_at": "2026-10-17T19:17:03+0800",
+  "max_model_http": 120,
+  "stop_before_next_request_at_tokens": 300000,
+  "note": "LIVE-002 专用；口径修复与候选展示修复已冻结；不覆盖 LIVE-001 结果。"
+}

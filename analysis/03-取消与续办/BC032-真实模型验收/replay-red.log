@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/analysis/03-取消与续办/BC032-真实模型验收/replay-口径修订.py", line 72, in <module>
+    main()
+    ~~~~^^
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/analysis/03-取消与续办/BC032-真实模型验收/replay-口径修订.py", line 61, in main
+    assert by_turn[turn]["verdict"] == "PASS", (turn, by_turn[turn])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ('G02-T3', {'turn': 'G02-T3', 'original_verdict': 'FAIL', 'original_failed': ['Python澄清焦点'], 'verdict': 'FAIL', 'failed': ['Python澄清焦点'], 'blocking': []})

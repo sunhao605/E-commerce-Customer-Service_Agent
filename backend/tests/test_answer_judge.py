@@ -336,7 +336,7 @@ class ReplyGateTest(unittest.TestCase):
 
     def test_policy_fallback_keeps_evidence_and_qualification_limits(self):
         with patch.object(self.agent.route_model_client, "plan_intent", return_value=ModelRouteResult(
-                intent="promotion_query", used_model=True, capability_ids=["stock_notification"])):
+                intent="promotion_query", used_model=True, inquiry_topics=["promotion_stacking"], topic_status="valid", capability_ids=["stock_notification"])):
             response, judge = self.chat("露营季满减与平台会员券能叠加吗，支持到货提醒吗？", "我们帮您留意库存。",
                 AnswerJudgeResult(status="success", decision="fallback", checks=verdicts("fail")))
         judge.assert_called_once()
@@ -489,11 +489,12 @@ class ReviewEvidenceTest(unittest.TestCase):
                     "snippet": f"## {heading}\n会员券仅限本人账号在有效期内使用，不得转让。"})
                 request = ChatRequest(session_id="policy-heading", runtime_user_id="U1001", user_message="会员券怎么用？")
                 plan = build_route_plan(intent="promotion_query", user_message=request.user_message,
-                                        order_id=None, model_used=False)
+                                        order_id=None, model_used=True, inquiry_topics=["coupon_basic"], topic_status="valid")
                 _, fallback, issues = build_review_context(request=request, plan=plan, answer="",
                     tool_calls=[], citations=[citation], capabilities=[], history=[])
                 self.assertFalse(issues)
-                self.assertIn("会员券仅限本人账号在有效期内使用，不得转让。", fallback)
+                self.assertIn("会员券需要在有效期内使用，且不能转让给其他账号", fallback)
+                self.assertNotIn("会员券仅限", fallback)  # 使用快照原文，不信任被替换的片段。
                 self.assertNotIn("##", fallback)
 
     def context(self, tools=(), caps=None):

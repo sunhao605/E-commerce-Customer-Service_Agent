@@ -1,0 +1,11 @@
+{
+  "head": "351b12b6b2bc7e79273e9ea297a2d0c0225cf5f6",
+  "files": {
+    "backend/agent/tools/planning.py": "0137f59ab72c2bb4bff7089f0530612734861cf828910ec1ce0c7c3cbf5e708f",
+    "backend/agent/customer_service_agent.py": "f245d2d71520dc1a83d9d5d989cbf6ad6d60f39ed53985944b61667d5cca1738",
+    "backend/tests/test_answer_content.py": "5a214e818af3f3957d6044eb43b91b852a655933eae06b3d2728bb6d6d2b30e8",
+    "analysis/07-\u4e0d\u652f\u6301\u4e1a\u52a1\u4e0e\u4eba\u5de5\u5165\u53e3/BC031-032-\u672c\u5730\u4fee\u590d/replay.py": "ecc71d7c27bcd1b5a1c20cccda1d7ac817ef020288c0060b18988693410c56e9"
+  },
+  "local_links": "pass",
+  "guide_body": "present"
+}

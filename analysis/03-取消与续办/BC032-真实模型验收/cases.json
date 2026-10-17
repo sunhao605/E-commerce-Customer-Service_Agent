@@ -1,0 +1,547 @@
+{
+  "scope": "BC032-LIVE-001：六组多轮自然输入，真实路由/必要工具选择/生成/judge；隔离Python→Java内存H2与页面。构造初态在seed中标明，不冒称自然建单。",
+  "orders": {
+    "A": "ORD9801",
+    "B": "ORD9802",
+    "C": "ORD9803",
+    "D": "ORD9804",
+    "E": "ORD9805",
+    "mapping": "A/B/C/D为本人已支付未发货订单；E为本人已签收1分钟、商品可退的七天无理由退货订单。A/B是默认候选前两位；C只作页面订单；D只作近期资格查询对象。"
+  },
+  "budget": {
+    "max_model_http": 120,
+    "stop_before_next_request_at_tokens": 300000,
+    "max_natural_turns": 30,
+    "note": "建议值，执行前须由用户在本轮聊天确认；未确认不发付费请求。"
+  },
+  "cases": [
+    {
+      "id": "G01",
+      "title": "插问与客套",
+      "driver": "api",
+      "seed": {
+        "java": {"pending": "REFUND_ORDER_REQUIRED", "actionType": "REFUND", "revision": 3, "expiresMinutes": 30},
+        "python": {
+          "open_task": {"intent": "refund_request", "pending_slot": "order_id", "version": 3,
+            "candidates": [{"value": "ORD9801", "label": "ORD9801"}, {"value": "ORD9802", "label": "ORD9802"}]},
+          "clarification_focus": "open_task"
+        }
+      },
+      "turns": [
+        {
+          "id": "G01-T1",
+          "message": "朋友把山友会员券截图发给我，我能拿来用吗？这张券还没到使用时间。",
+          "page": {"type": "HOME"},
+          "check": {
+            "python_open_task": "unchanged",
+            "java_same": true,
+            "java_card": "none",
+            "answer_terms": {"any": ["券", "本人", "账号"]},
+            "answer_absent": ["已取消", "已提交", "退款申请已登记"]
+          }
+        },
+        {
+          "id": "G01-T2",
+          "message": "谢谢，我再想想。",
+          "page": {"type": "HOME"},
+          "check": {
+            "python_open_task": "unchanged",
+            "python_focus": "unchanged",
+            "java_same": true,
+            "java_card": "none",
+            "answer_absent": ["已取消", "已提交", "退款申请已登记"]
+          }
+        }
+      ],
+      "allowed": "咨询答复；原退款待办、A/B候选和版本完整保留；客套不取消、不办理、不重发确认卡。",
+      "forbidden": ["清空或覆盖原退款待办", "新建申请或确认卡", "宣称已取消或已提交"]
+    },
+    {
+      "id": "G02",
+      "title": "给当前查询补订单（页面路径）",
+      "driver": "browser",
+      "seed": {},
+      "turns": [
+        {
+          "id": "G02-T1",
+          "message": "我要退款。",
+          "page": {"type": "HOME"},
+          "check": {
+            "python_open_task": {"intent": "refund_request", "pending_slot": "order_id", "candidates": ["ORD9801", "ORD9802"]},
+            "java_card": "none",
+            "page": {"no_confirm_card": true, "candidates": ["ORD9801", "ORD9802"]},
+            "answer_absent": ["已提交", "退款申请已登记"]
+          }
+        },
+        {
+          "id": "G02-T2",
+          "message": "退款先放着，我想查一下物流到哪了",
+          "page": {"type": "HOME"},
+          "check": {
+            "python_open_task": {"intent": "refund_request", "pending_slot": "order_id", "candidates": ["ORD9801", "ORD9802"]},
+            "python_focus": "order_query",
+            "java_card": "none",
+            "page": {"no_confirm_card": true, "candidates": ["ORD9801", "ORD9802"]},
+            "answer_absent": ["退款申请已登记", "已取消退款"]
+          }
+        },
+        {
+          "id": "G02-T3",
+          "message": "ORD9801",
+          "page": {"type": "HOME"},
+          "check": {
+            "python_open_task": "unchanged",
+            "python_focus": null,
+            "intent": ["order_query", "refund_status_query"],
+            "chosen": "ORD9801",
+            "java_card": "none",
+            "answer_terms": {"all": ["ORD9801", "物流"]},
+            "answer_absent": ["退款申请已登记", "确认提交"]
+          }
+        }
+      ],
+      "allowed": "补的是物流查询；Python焦点与只读工具绑定ORD9801；Java退款业务字段不变；“先放着”不等于已取消。",
+      "forbidden": ["把订单号当成退款续办", "修改退款草稿或凭证", "出现售后确认卡", "宣称已取消"]
+    },
+    {
+      "id": "G02B",
+      "title": "查询候选后选第二笔（构造初态）",
+      "driver": "api",
+      "seed": {
+        "java": {"pending": "REFUND_ORDER_REQUIRED", "actionType": "REFUND", "revision": 3, "expiresMinutes": 30},
+        "python": {
+          "open_task": {"intent": "refund_request", "pending_slot": "order_id", "version": 3,
+            "candidates": [{"value": "ORD9801", "label": "ORD9801"}, {"value": "ORD9802", "label": "ORD9802"}]},
+          "clarification_focus": "open_task"
+        }
+      },
+      "turns": [
+        {
+          "id": "G02B-T1",
+          "message": "退款先放着，我想查一下物流到哪了",
+          "page": {"type": "HOME"},
+          "check": {
+            "python_open_task": "unchanged",
+            "python_focus": "order_query",
+            "java_same": true,
+            "java_card": "none",
+            "answer_absent": ["退款申请已登记", "已取消退款"]
+          }
+        },
+        {
+          "id": "G02B-T2",
+          "message": "第二笔",
+          "page": {"type": "HOME"},
+          "check": {
+            "python_open_task": "unchanged",
+            "python_focus": null,
+            "intent": ["order_query", "refund_status_query"],
+            "chosen": "ORD9802",
+            "java_same": true,
+            "java_card": "none",
+            "answer_terms": {"all": ["ORD9802"]},
+            "answer_absent": ["退款申请已登记", "确认提交"]
+          }
+        }
+      ],
+      "allowed": "查询独立候选ORD9801/ORD9802；选第二笔只绑定查询；后台退款不动。",
+      "forbidden": ["把第二笔当成退款续办", "修改退款草稿或凭证", "售后确认卡"]
+    },
+    {
+      "id": "G03A",
+      "title": "明确回原任务：原草稿A＋资格查询D＋页面C",
+      "driver": "api",
+      "seed": {
+        "java": {"pending": "CONFIRM_SUBMIT", "actionType": "REFUND", "order": "ORD9801", "reason": "买错了",
+          "amount": "200.00", "item": "隔离露营椅", "revision": 3, "expiresMinutes": 30,
+          "afterSaleQuery": {"intent": "after_sale_eligibility_query", "order_id": "ORD9804",
+            "application_type": "REFUND", "pending_slot": null, "candidates": []}},
+        "python": {
+          "open_task": null,
+          "last_order_id": "ORD9804",
+          "eligibility_query": {"intent": "after_sale_eligibility_query", "order_id": "ORD9804",
+            "application_type": "REFUND", "pending_slot": null, "candidates": []},
+          "clarification_focus": "eligibility_query"
+        }
+      },
+      "turns": [
+        {
+          "id": "G03A-T1",
+          "message": "继续刚才那笔退款",
+          "page": {"type": "ORDER_DETAIL", "orderNo": "ORD9803"},
+          "check": {
+            "python_focus": "unchanged",
+            "intent": ["refund_request"],
+            "chosen": "ORD9801",
+            "java_card": {"order": "ORD9801", "type": "REFUND"},
+            "record": ["task_relation"],
+            "answer_absent": ["已提交", "退款申请已登记"]
+          }
+        }
+      ],
+      "allowed": "从原有效草稿恢复A；页面C和资格查询D都不能替代A；只重发原确认卡，不提交。",
+      "forbidden": ["采用C或D", "被无关资格查询冲突误拦", "新建申请", "提交或资金动作"]
+    },
+    {
+      "id": "G03B",
+      "title": "未选单恢复原候选（页面路径）",
+      "driver": "browser",
+      "seed": {},
+      "turns": [
+        {
+          "id": "G03B-T1",
+          "message": "我要退款。",
+          "page": {"type": "HOME"},
+          "check": {
+            "python_open_task": {"intent": "refund_request", "pending_slot": "order_id", "candidates": ["ORD9801", "ORD9802"]},
+            "java_card": "none",
+            "page": {"no_confirm_card": true, "candidates": ["ORD9801", "ORD9802"]}
+          }
+        },
+        {
+          "id": "G03B-T2",
+          "message": "继续刚才退款",
+          "page": {"type": "HOME"},
+          "check": {
+            "python_open_task": {"intent": "refund_request", "pending_slot": "order_id", "candidates": ["ORD9801", "ORD9802"]},
+            "chosen": null,
+            "java_card": "none",
+            "page": {"no_confirm_card": true, "candidates": ["ORD9801", "ORD9802"]},
+            "answer_absent": ["已提交", "退款申请已登记"]
+          }
+        },
+        {
+          "id": "G03B-T3",
+          "message": "第二笔",
+          "page": {"type": "HOME"},
+          "check": {
+            "python_open_task": "unchanged",
+            "intent": ["refund_request"],
+            "chosen": "ORD9802",
+            "java_card": "none",
+            "page": {"no_confirm_card": true},
+            "answer_terms": {"all": ["ORD9802"]},
+            "answer_absent": ["已提交", "退款申请已登记"]
+          }
+        }
+      ],
+      "allowed": "未选单时继续展示原A/B候选，不自动采用页面或最近订单；选第二笔后绑定B并要求补原因；不提交。",
+      "forbidden": ["自动采用C或最近订单", "越界或错误对象", "出现确认卡", "提交"]
+    },
+    {
+      "id": "G03C",
+      "title": "越界序号再有效选择（构造初态）",
+      "driver": "api",
+      "seed": {
+        "java": {"pending": "REFUND_ORDER_REQUIRED", "actionType": "REFUND", "revision": 3, "expiresMinutes": 30},
+        "python": {
+          "open_task": {"intent": "refund_request", "pending_slot": "order_id", "version": 3,
+            "candidates": [{"value": "ORD9801", "label": "ORD9801"}, {"value": "ORD9802", "label": "ORD9802"}]},
+          "clarification_focus": "open_task"
+        }
+      },
+      "turns": [
+        {
+          "id": "G03C-T1",
+          "message": "继续刚才退款，第三笔",
+          "page": {"type": "HOME"},
+          "check": {
+            "python_open_task": "unchanged",
+            "chosen": null,
+            "java_card": "none",
+            "answer_terms": {"any": ["ORD9801", "订单号"]},
+            "answer_absent": ["已提交", "退款申请已登记"]
+          }
+        },
+        {
+          "id": "G03C-T2",
+          "message": "第二笔",
+          "page": {"type": "HOME"},
+          "check": {
+            "python_open_task": "unchanged",
+            "intent": ["refund_request"],
+            "chosen": "ORD9802",
+            "java_card": "none",
+            "answer_terms": {"all": ["ORD9802"]},
+            "answer_absent": ["已提交", "退款申请已登记"]
+          }
+        }
+      ],
+      "allowed": "越界不换候选或版本、不回落其他订单；有效第二笔仍重新核归属/资格，不等于已提交。",
+      "forbidden": ["越界触发页面或最近订单兜底", "改写原候选", "出现确认卡", "提交"]
+    },
+    {
+      "id": "G04A",
+      "title": "商品候选跨插问保留",
+      "driver": "api",
+      "seed": {
+        "java": {"pending": "REFUND_ORDER_REQUIRED", "actionType": "REFUND", "revision": 3, "expiresMinutes": 30},
+        "python": {
+          "open_task": {"intent": "refund_request", "pending_slot": "order_id", "version": 3,
+            "candidates": [{"value": "ORD9801", "label": "ORD9801"}, {"value": "ORD9802", "label": "ORD9802"}]},
+          "clarification_focus": "open_task"
+        }
+      },
+      "turns": [
+        {
+          "id": "G04A-T1",
+          "message": "折叠椅多少钱？",
+          "page": {"type": "HOME"},
+          "check": {
+            "python_product": {"candidates": 2, "names": ["露营折叠椅", "轻量露营折叠椅"]},
+            "python_open_task": "unchanged",
+            "java_same": true,
+            "java_card": "none"
+          }
+        },
+        {
+          "id": "G04A-T2",
+          "message": "订单发票怎么开？",
+          "page": {"type": "HOME"},
+          "check": {
+            "python_product": "unchanged",
+            "python_open_task": "unchanged",
+            "java_same": true,
+            "java_card": "none"
+          }
+        },
+        {
+          "id": "G04A-T3",
+          "message": "第二款",
+          "page": {"type": "HOME"},
+          "check": {
+            "python_product": {"selected_name": "轻量露营折叠椅", "candidates_cleared": true},
+            "python_open_task": "unchanged",
+            "java_same": true,
+            "java_card": "none",
+            "answer_terms": {"all": ["轻量露营折叠椅"]}
+          }
+        }
+      ],
+      "allowed": "商品候选、原问题、售后待办各自保留；补充落到商品咨询，不触发售后办理。",
+      "forbidden": ["插问清空商品候选", "商品选择落到退款", "售后确认卡", "修改退款草稿"]
+    },
+    {
+      "id": "G04B",
+      "title": "优惠待补条件跨插问保留",
+      "driver": "api",
+      "seed": {
+        "java": {"pending": "REFUND_ORDER_REQUIRED", "actionType": "REFUND", "revision": 3, "expiresMinutes": 30},
+        "python": {
+          "open_task": {"intent": "refund_request", "pending_slot": "order_id", "version": 3,
+            "candidates": [{"value": "ORD9801", "label": "ORD9801"}, {"value": "ORD9802", "label": "ORD9802"}]},
+          "clarification_focus": "open_task"
+        }
+      },
+      "turns": [
+        {
+          "id": "G04B-T1",
+          "message": "会员券和优惠能一起用吗？",
+          "page": {"type": "HOME"},
+          "check": {
+            "python_promotion": "present",
+            "python_open_task": "unchanged",
+            "java_same": true,
+            "java_card": "none",
+            "answer_terms": {"any": ["哪项", "哪个", "叠加"]}
+          }
+        },
+        {
+          "id": "G04B-T2",
+          "message": "谢谢，我再想想。",
+          "page": {"type": "HOME"},
+          "check": {
+            "python_promotion": "present",
+            "python_open_task": "unchanged",
+            "java_same": true,
+            "java_card": "none"
+          }
+        },
+        {
+          "id": "G04B-T3",
+          "message": "和露营季满减一起用。",
+          "page": {"type": "HOME"},
+          "check": {
+            "python_promotion": "cleared",
+            "python_open_task": "unchanged",
+            "java_same": true,
+            "java_card": "none",
+            "answer_absent": ["已提交", "退款申请已登记"]
+          }
+        }
+      ],
+      "allowed": "优惠待补条件跨客套保留，补充落到原优惠组合；不触发售后办理。",
+      "forbidden": ["插问清空优惠条件", "补充落到退款", "硬套后台状态", "售后确认卡"]
+    },
+    {
+      "id": "G05",
+      "title": "关系判断不等于执行",
+      "driver": "api",
+      "seed": {
+        "java": {"pending": "REFUND_ORDER_REQUIRED", "actionType": "REFUND", "revision": 3, "expiresMinutes": 30},
+        "python": {
+          "open_task": {"intent": "refund_request", "pending_slot": "order_id", "version": 3,
+            "candidates": [{"value": "ORD9801", "label": "ORD9801"}, {"value": "ORD9802", "label": "ORD9802"}]},
+          "clarification_focus": "open_task"
+        }
+      },
+      "turns": [
+        {
+          "id": "G05-T1",
+          "message": "不是要取消退款，我只是先问下发票",
+          "page": {"type": "HOME"},
+          "check": {
+            "python_open_task": "unchanged",
+            "java_same": true,
+            "java_card": "none",
+            "answer_absent": ["已取消", "退款申请已登记"],
+            "record": ["task_relation"]
+          }
+        },
+        {
+          "id": "G05-T2",
+          "message": "谢谢，退款我再想想",
+          "page": {"type": "HOME"},
+          "check": {
+            "python_open_task": "unchanged",
+            "java_same": true,
+            "java_card": "none",
+            "answer_absent": ["已取消", "已提交"]
+          }
+        },
+        {
+          "id": "G05-T3",
+          "message": "不退了",
+          "reset": true,
+          "page": {"type": "HOME"},
+          "check": {
+            "java_cancelled": true,
+            "java_card": "none",
+            "record": ["python_open_task", "task_relation"]
+          }
+        },
+        {
+          "id": "G05-T4",
+          "message": "谢谢",
+          "page": {"type": "HOME"},
+          "check": {
+            "python_open_task": null,
+            "java_cancelled": true,
+            "java_card": "none",
+            "answer_absent": ["已提交", "退款申请已登记"]
+          }
+        },
+        {
+          "id": "G05-T5",
+          "message": "先停掉原退款，改办另一笔退货",
+          "reset": true,
+          "page": {"type": "HOME"},
+          "check": {
+            "python_open_task": "unchanged",
+            "java_same": true,
+            "java_card": "none",
+            "answer_absent": ["已取消", "已停止", "退货申请已登记"],
+            "record": ["task_relation", "task_control_requested"]
+          }
+        }
+      ],
+      "allowed": "否定/犹豫不清草稿；“不退了”走Java原明确取消并记录；停止提案不宣称完成、不偷偷准备新申请。",
+      "forbidden": ["把关系判断当执行回执", "取消后复活", "无授权新申请", "把未执行说成已取消"]
+    },
+    {
+      "id": "G06A",
+      "title": "退货任务跨插问恢复",
+      "driver": "api",
+      "seed": {
+        "java": {"pending": "CONFIRM_SUBMIT", "actionType": "RETURN", "order": "ORD9805", "reason": "七天无理由退货",
+          "amount": "200.00", "item": "隔离露营椅", "revision": 3, "expiresMinutes": 30},
+        "python": {
+          "open_task": {"intent": "return_request", "order_id": "ORD9805", "pending_slot": "reason", "version": 3, "candidates": []},
+          "clarification_focus": "open_task"
+        }
+      },
+      "turns": [
+        {
+          "id": "G06A-T1",
+          "message": "订单发票怎么开？",
+          "page": {"type": "HOME"},
+          "check": {
+            "python_open_task": "unchanged",
+            "java_same": true,
+            "java_card": "none"
+          }
+        },
+        {
+          "id": "G06A-T2",
+          "message": "继续刚才的退货",
+          "page": {"type": "HOME"},
+          "check": {
+            "python_open_task": "unchanged",
+            "intent": ["return_request"],
+            "chosen": "ORD9805",
+            "java_card": {"order": "ORD9805", "type": "RETURN"},
+            "answer_absent": ["已提交", "退货申请已登记"],
+            "record": ["task_relation"]
+          }
+        }
+      ],
+      "allowed": "退货沿同一任务原则；插问只影响咨询；恢复原退货确认卡，不改退款、不提交。",
+      "forbidden": ["改成退款", "误清任务", "误选页面订单", "提交"]
+    },
+    {
+      "id": "G06B",
+      "title": "故障边界：路由/只读工具/生成各注入一次",
+      "driver": "api",
+      "seed": {
+        "java": {"pending": "REFUND_ORDER_REQUIRED", "actionType": "REFUND", "revision": 3, "expiresMinutes": 30},
+        "python": {
+          "open_task": {"intent": "refund_request", "pending_slot": "order_id", "version": 3,
+            "candidates": [{"value": "ORD9801", "label": "ORD9801"}, {"value": "ORD9802", "label": "ORD9802"}]},
+          "clarification_focus": "open_task"
+        }
+      },
+      "turns": [
+        {
+          "id": "G06B-T1",
+          "message": "ORD9801 现在物流到哪了？",
+          "page": {"type": "HOME"},
+          "inject": "route",
+          "check": {
+            "python_open_task": "unchanged",
+            "java_same": true,
+            "java_card": "none",
+            "record": ["injection"]
+          }
+        },
+        {
+          "id": "G06B-T2",
+          "message": "ORD9801 现在物流到哪了？",
+          "reset": true,
+          "page": {"type": "HOME"},
+          "inject": "tool",
+          "check": {
+            "python_open_task": "unchanged",
+            "java_same": true,
+            "java_card": "none",
+            "record": ["injection"]
+          }
+        },
+        {
+          "id": "G06B-T3",
+          "message": "ORD9801 现在物流到哪了？",
+          "reset": true,
+          "page": {"type": "HOME"},
+          "inject": "generation",
+          "check": {
+            "python_open_task": "unchanged",
+            "java_same": true,
+            "java_card": "none",
+            "record": ["injection"]
+          }
+        }
+      ],
+      "allowed": "故障只影响依赖事项；原待办不清、不误选页面订单；关系不足允许保留并澄清。",
+      "forbidden": ["故障清空原待办", "故障后误发确认卡", "把注入故障称自然失败率"]
+    }
+  ]
+}

@@ -1,0 +1,1303 @@
+{
+  "cases": [
+    {
+      "id": "C01",
+      "question": "露营季满300减40能和平台会员券叠加吗？另外支持到货提醒吗？",
+      "intent": "promotion_query",
+      "injection": null,
+      "expected": "答清可叠加、同类券限制、个人适用待核验及提醒不支持；正常放行或真实修复后放行。",
+      "budget": 4
+    },
+    {
+      "id": "C02",
+      "question": "露营季满300减40能和平台会员券叠加吗？另外支持到货提醒吗？",
+      "intent": "promotion_query",
+      "injection": "first_generation",
+      "expected": "真实judge拒绝注入的登记承诺；基于同一证据真实修复并复查，至多修复一次。",
+      "budget": 3
+    },
+    {
+      "id": "C03",
+      "question": "露营季满300减40能和平台会员券叠加吗？另外支持到货提醒吗？",
+      "intent": "promotion_query",
+      "injection": "judge_timeout",
+      "expected": "注入judge调用不可用后不修复，发送无模型备用稿；保留有效政策与提醒范围。",
+      "budget": 1
+    },
+    {
+      "id": "C04",
+      "question": "未发货退款什么时候到账？",
+      "intent": "refund_policy_query",
+      "injection": null,
+      "expected": "先说明当前演示余额／真实渠道无到账时限保证及具体结果需核验；只是咨询、未申请，不展开无关办理细节。",
+      "budget": 4
+    }
+  ],
+  "forbidden": [
+    "无依据代办或主动通知承诺",
+    "教学说明／模拟问法进入正文",
+    "同一结论反复堆叠",
+    "未问政策整段带入",
+    "丢失影响结论的条件或未知边界"
+  ],
+  "bad_candidate": "露营季满300减40可以和平台会员券叠加，同类型满减券不能重复叠加，具体适用需核验。我已为您登记到货提醒，到货后会主动通知您。",
+  "max_calls": 12,
+  "model": "deepseek-flash",
+  "judge_model": "deepseek-flash",
+  "generation_temperature": 0.2,
+  "judge_temperature": 0,
+  "judge_timeout_seconds": 5,
+  "retries": 0,
+  "source_sha256": {
+    "backend/agent/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "backend/agent/answer_review.py": "e7e30dd27b59ba37d68c0044fd26fa813b048743ee958c67a7c6977dc1cac433",
+    "backend/agent/cancellation.py": "f5f4fd7f3219c1e49f95c4a9f6475bc829d712867f274845f8fe328f22b42b6f",
+    "backend/agent/context.py": "8125e7b5aac0d8c15771016ac93821e824a08abe808586ef0460d1d53f7f491a",
+    "backend/agent/cost.py": "aae7c9cf75eb9ecf365ad42f017cebd9dfe88bd263b9f1f1fd32820b7247764c",
+    "backend/agent/customer_service_agent.py": "06289d149258ae33f250dccfd0ffaf74150953ceaa71dc1599720ee24c38df02",
+    "backend/agent/ecommerce_client.py": "68a2c496fb0c3ef55f708917dc59a391fb9c410d0a0f075560d1152e83611bd4",
+    "backend/agent/hooks.py": "1ae64e2183a739073b44ea18d5a0052c382a59c19d3702502e4e00c532cbbfd0",
+    "backend/agent/mcp_catalog.py": "153a2728a69d02bfb9cd5958293b34bf93ff4e0f903eeb86edd39bda143e4f7e",
+    "backend/agent/models/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "backend/agent/models/answer_client.py": "aeb5d6c087ebc909058b4bfc7822b4300e241d08dcb584f0f9e9650c4e6eb78e",
+    "backend/agent/models/judge_client.py": "fe43689646f7f3b00809e4081d28e1a680eba2eb9d3b708423353577db3e5e61",
+    "backend/agent/models/router_client.py": "2ed74c6276afb22ef7fb9146e60c1f40d1f36e40d2449585ae8a353daf3e4d82",
+    "backend/agent/product_query.py": "03a8d9cb93505233ec12cf43ee440b5b4babf29f6d7df088a8beb1e4ad5dd57d",
+    "backend/agent/prompts.py": "6317cd97c8482db38fce18f885ced91edd95a2172256fa41e3280be75279d425",
+    "backend/agent/service_capabilities.py": "6e19ca37a99ee4c6d0f00473c860250f829bdd579e571dc8b281999912649d53",
+    "backend/agent/source_guard.py": "27b5fee4162ba5538c165cc243a4ba24838d13c620fe434aa7eb5cba3001c7a4",
+    "backend/agent/state.py": "084150d57ae8b2258b5105e3951ca16d13889e9c10612105049f71abc6247540",
+    "backend/agent/tools/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "backend/agent/tools/langchain_runtime.py": "023236123dc1712a5f1e59dac148cd5f991e374049db6b6ab0fd8ac7a574b9ce",
+    "backend/agent/tools/planning.py": "76712c5313b143ec770d1137a1740d55b677d2cee5b51f9f7b9524d391c355a5",
+    "backend/agent/tools/runtime_context.py": "4989622c79716c4505dffc6e3e26e507f09aab206590330c86d7d1c6077e6a88",
+    "backend/agent/tools/tool_runtime.py": "4a57a6eccbdbedb2562ba8ed5c8506df9439ce05472cd98e08d49269c81b03ef",
+    "backend/agent/trace.py": "e2d1d2654b637cf44fb002b23c188009234c58bb27c5e02e306bc754c3962ab5",
+    "backend/agent/workflows/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "backend/agent/workflows/after_sale_graph.py": "e99d407b35fbead3a9c9c75f8bc025730afee2d4b68ce46117a20034e6622019",
+    "backend/agent/workflows/resume.py": "ec0a188d3a0759af154b7f134aef63f37365c9a578d57bec44834aaa6a4f67f4",
+    "backend/api/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "backend/api/routes.py": "e5938e8af25acb6f71f9fa2cfe769af3668cc6682e7b42605211085961b8f0ec",
+    "backend/api/schemas.py": "983388da64072b349a6e0b923f05505371aa8be7673337483d67905f1e4fd56c",
+    "backend/evals/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "backend/evals/feedback.py": "aa783e73616aa9f48e4b2c77eacc8868a5950579cae01533f6ba4bdbbdfd80dd",
+    "backend/evals/runner.py": "60a0b14e88f08c5deaf896fc19018ca5543dda53b13a3c7da5ddb5c6e46793e0",
+    "backend/main.py": "588e938575b8b1fbee8a92eae6fb62631be2084fa40b5de622c706f8950b45ce",
+    "backend/resources/agent_capabilities.json": "f1a54926107b95904f794074101fb504cd5b3070995d658966a883dafdc89a7d",
+    "backend/resources/cases.yml": "ef137cdf11f396096601ea8075a483c7b6d9227089e068f04432642ae92d389f",
+    "backend/resources/knowledge/README.md": "59a7a57561174d956a239162113c027a2f8174c1779bbc7f144d76d2417eef44",
+    "backend/resources/knowledge/after_sale_policy.md": "eac40c0ffc4c96bcf6144a12a5379ee71059f74769b877e41525d812fc8df659",
+    "backend/resources/knowledge/member_coupon_policy.md": "f55008064d30d4a2fbf5dfe871fa767115ddf67fb6cc939566a7655262144163",
+    "backend/resources/knowledge/payment_invoice_policy.md": "6ea411835ca688cc2b6bf03ebd7751d9d941098f61622b6ccf438d3b5c0fb815",
+    "backend/resources/knowledge/product_knowledge.md": "7f1c89ea400a0018c64d7848a317a4022cd134ee7f6aa5ddbb556ea009aae80f",
+    "backend/resources/knowledge/promotion_policy.md": "1e7f6016dbaa6e9e05623fedb2f8d32d64fdf51588dff2506e51acfe17fe63c2",
+    "backend/resources/knowledge/received_return_policy.md": "1093e25c370315e423c43b73d1f9247d90cbf9cee4240ba05c9a3e4877eae471",
+    "backend/resources/knowledge/release-manifest.json": "a34bc23b46d2c5abefb4d6226bcd9dc816273546730b81a002ffc4d831e7cf95",
+    "backend/resources/prompts/answer_judge.md": "792280e13334f6917023652f88dad97104a756c6e404d0dfb63bf4dae4dfed26",
+    "backend/resources/prompts/final_answer_style.md": "a862185a054792c27ba7e45fee45cb304600e16692b2828eeb871d945be5adcc",
+    "backend/resources/prompts/high_risk_after_sale.md": "ea3f62c63e62339cee771306c16fd04911102d6886a205b943b61f6ab43c90c3",
+    "backend/resources/prompts/prompt_registry.yml": "54b780df092398276fd22ba733dc7cbaeb0df3c0ff273881ef7a2700b9942cce",
+    "backend/resources/prompts/prompt_security.md": "aa37fbc52dfb1593617d61145f42d1c37b31c24ad76aee03a16b61f76f40640c",
+    "backend/resources/prompts/rag_answering.md": "f68ba18907f89048a263fe2ae688c84428d06ce1ef7c475198391de96988966d",
+    "backend/resources/prompts/route_contract.md": "682d64acfc926597a46239eda39158663aeef08d478cb05b84bf5156344c01c3",
+    "backend/resources/prompts/system_customer_service.md": "24dde154a0106f06dbbe6e759536d1b676e081ad816697e68bda8c9196166949",
+    "backend/resources/prompts/tool_usage.md": "e5cc7487d09d8713140bed939e189e70861e95c452e02cc82c9a03ef3496e090",
+    "backend/retrieval/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "backend/retrieval/documents.py": "6b2115aa01f3fa65b40ae9d9e7969bf71bd44b066643a7a3577358e8b3f1c6d8",
+    "backend/retrieval/hybrid_retrieval.py": "ff2ff0c70eee51351984f33211b69a68e0aabeeb290153d8511c086239e2fe93",
+    "backend/retrieval/knowledge.py": "d3d993b7657c72ee4c0c80f6c97bf2afef5727cf7a962cf75e8285729c40c80c",
+    "backend/settings.py": "c69be8b457d3a4ff284c9bc2f3ae9264461550b955946cae22579514ba2c4ed3",
+    "backend/tests/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "backend/tests/test_answer_judge.py": "8a8f272c21b288119a55bcb8e2da99b0add599132746d3500ebee0b42b6baf85",
+    "backend/tests/test_cancellation_contract.py": "f2c89c537c2b26c4dc3026c6d379bcf1ed4bcb13a865dc9b513516392b5a869b",
+    "backend/tests/test_cancelled_draft.py": "25d046f346a4b8cfea94cea8a0ee8f26678c99c32c280e8e90383bf4f623d2b0",
+    "backend/tests/test_candidate_selection.py": "5b5cdee35dd5d3a5c8ca70155a6ef3560a38601b15e7d1e64bf7c44d9fd7243e",
+    "backend/tests/test_deepseek_config.py": "ab99fcc05a2cbb1692377d4cf52291bb20296f07a834822ff690c52fc66e9f16",
+    "backend/tests/test_eligibility_query.py": "b1b18af9304502cf3458ff99f09d7c1655b9eb3687b5441b3168bef5cceac8e9",
+    "backend/tests/test_embedding_config.py": "c5d9f3d0f85c369ec28d18133546b32c9e34ae0e3a452ba01aa7c69b50cc2136",
+    "backend/tests/test_eval_contract.py": "1465660ffb97cd56ec1b5fca8afa32317f3de555205427ab78c5ad0c3beb0315",
+    "backend/tests/test_evidence_routing.py": "2035007e1fad9fe2f7204a982a25cc01af0813df003e94269779184861ae2e3f",
+    "backend/tests/test_outdoor_scenario.py": "5cd35a5fdb6f3dc981e89f98002e0243c0b56e3bfc96ddebc057705614f7d937",
+    "backend/tests/test_policy_metadata.py": "a27c0d8ab7c94731881f00b67b8baf1ebf901573d73f15e47c302e484eceb5d4",
+    "backend/tests/test_product_fault_feedback.py": "5ffe74cf8af1c005f9624429f7ccf30d3386090e40984bc8a834b5b57c48237e",
+    "backend/tests/test_product_knowledge.py": "9db10fb3065e10ce75b9558a528677900df0b989cd7c11bd76a73e6a0ff3d5bb",
+    "backend/tests/test_product_query.py": "a680f1fdf531deecdb2767c65d51d6de5b27658820da5ab008eb3baf2db17c0b",
+    "backend/tests/test_refund_submission_boundary.py": "7665c5a54f8d1450cd96c313fc45eb55d217d0d36283e793ae9ba6be2e7fa01f",
+    "backend/tests/test_resume_guard.py": "4116919e7b7bde947d5626e35e1b5d6b89530ee22de6950f108af99e25c23f25",
+    "backend/tests/test_route_priority.py": "9c8ef16adcbea1040dbc42667127ea72fe243c0bd27e07fe66d65895bfe8b9da",
+    "backend/tests/test_service_capabilities.py": "4d879b25b1c0cebf128654ae470aca11854d8d02939c1315f8a2b9b5c783379d"
+  },
+  "runner_sha256": "2072b4500e8c452519d75fc81731cec3ee53989d320b8ee1448e7985beaad8a2",
+  "scope": "当前离线检索＋固定RoutePlan＋构造能力和入口策略＋真实最终生成/judge，非在线RAG/商城全链路",
+  "inputs": [
+    {
+      "id": "C01",
+      "knowledge": "根据荒野户外 露营季活动规则，满 300 减 40 可以与平台会员券叠加，但不能与同类型满减券重复叠加；山友会员券需要在有效期内由本人账号使用。",
+      "citations": [
+        {
+          "source": "knowledge/member_coupon_policy.md",
+          "title": "荒野户外会员券使用规则",
+          "snippet": "## 6. 叠加、退单与优惠恢复  \n露营季满 300 减 40 可以与平台会员券叠加，但不能与同类型满减券重复叠加。该规则不自动覆盖品类券、定向券或未发布的其他活动；具体组合仍需活动和券的依据。  \n退款不自动代表优惠券已退回或有效期已延长。返券、延期与部分退款后的优惠分摊需要各自的规则，当前没有统一的自动恢复承诺。",
+          "score": 1.0,
+          "retrieval_stage": "pre_retrieval",
+          "metadata": {
+            "policy_id": "member_coupon_gold_rule",
+            "scene_key": "member_coupon",
+            "version": "2026-10-16.1",
+            "publication_status": "published",
+            "effective_from": "2025-01-01T00:00:00+08:00",
+            "effective_to": "2028-01-01T00:00:00+08:00",
+            "snapshot_version": "knowledge-d8e495a59835",
+            "chunk_ids": [
+              "member_coupon_gold_rule-chunk-24"
+            ],
+            "section_id": "member_coupon_gold_rule-section-6",
+            "section": "6. 叠加、退单与优惠恢复"
+          }
+        },
+        {
+          "source": "knowledge/promotion_policy.md",
+          "title": "荒野户外 露营季活动规则",
+          "snippet": "## 4. 满 300 减 40 与叠加边界  \n符合露营季活动条件时，满 300 减 40 可以与平台会员券叠加；同类型满减券不能重复叠加。该规则没有定义“每满 300 减 40”、所有订单无限次参加或其他券种一律兼容。  \n是否达到300元取决于活动计入的金额和商品范围。运费、未选中商品或其他活动商品是否计入，当前通用规则没有统一保证。  \n满600元不自动表示减80元；不同券种能否组合，仍以对应券及活动规则为准。",
+          "score": 1.0,
+          "retrieval_stage": "pre_retrieval",
+          "metadata": {
+            "policy_id": "promotion_camping_season_stack_rule",
+            "scene_key": "promotion",
+            "version": "2026-10-16.1",
+            "publication_status": "published",
+            "effective_from": "2025-01-01T00:00:00+08:00",
+            "effective_to": "2028-01-01T00:00:00+08:00",
+            "snapshot_version": "knowledge-d8e495a59835",
+            "chunk_ids": [
+              "promotion_camping_season_stack_rule-chunk-14"
+            ],
+            "section_id": "promotion_camping_season_stack_rule-section-4",
+            "section": "4. 满 300 减 40 与叠加边界"
+          }
+        },
+        {
+          "source": "knowledge/promotion_policy.md",
+          "title": "荒野户外 露营季活动规则",
+          "snippet": "露营季活动期间，满 300 减 40 活动可以与平台会员券叠加，但不能与同类型满减券重复叠加。  \n# 荒野户外露营季活动规则  \n## 1. 适用范围  \n活动是否正在进行、具体参与商品、活动价、会员门槛、优惠券状态与最终金额，以对应活动、商品及结算信息为准。  \n露营季不代表固定月份，也没有覆盖全部商品的永久活动周期。文档更新时间不代表活动开始时间，以上规则不包含未发布的其他活动或隐藏券。",
+          "score": 0.976,
+          "retrieval_stage": "pre_retrieval",
+          "metadata": {
+            "policy_id": "promotion_camping_season_stack_rule",
+            "scene_key": "promotion",
+            "version": "2026-10-16.1",
+            "publication_status": "published",
+            "effective_from": "2025-01-01T00:00:00+08:00",
+            "effective_to": "2028-01-01T00:00:00+08:00",
+            "snapshot_version": "knowledge-d8e495a59835",
+            "chunk_ids": [
+              "promotion_camping_season_stack_rule-chunk-11"
+            ],
+            "section_id": "promotion_camping_season_stack_rule-section-1",
+            "section": "1. 适用范围"
+          }
+        },
+        {
+          "source": "knowledge/member_coupon_policy.md",
+          "title": "荒野户外会员券使用规则",
+          "snippet": "## 2. 会员活动与券的区别  \n会员专享活动价、平台会员券和品类券是不同优惠。活动可能直接提供符合条件的商品价格，券优惠则依赖本人实际持有的具体券；不能仅凭面额相加确定成交价。  \n“全场券”仍有账号、时间、状态和门槛等条件；“是会员”或看到了券后价，不单独证明本人可以享受该价格。",
+          "score": 0.953,
+          "retrieval_stage": "pre_retrieval",
+          "metadata": {
+            "policy_id": "member_coupon_gold_rule",
+            "scene_key": "member_coupon",
+            "version": "2026-10-16.1",
+            "publication_status": "published",
+            "effective_from": "2025-01-01T00:00:00+08:00",
+            "effective_to": "2028-01-01T00:00:00+08:00",
+            "snapshot_version": "knowledge-d8e495a59835",
+            "chunk_ids": [
+              "member_coupon_gold_rule-chunk-20"
+            ],
+            "section_id": "member_coupon_gold_rule-section-2",
+            "section": "2. 会员活动与券的区别"
+          }
+        }
+      ],
+      "capabilities": [
+        {
+          "capabilityId": "stock_notification",
+          "channel": "customer_service_agent",
+          "supportStatus": "unsupported",
+          "scope": "到货与补货提醒登记",
+          "explanation": "当前客服助手不支持到货或补货提醒。",
+          "alternatives": [
+            "稍后主动查询商品库存"
+          ],
+          "version": "service-capabilities-v1"
+        }
+      ],
+      "plan": {
+        "intent": "promotion_query",
+        "needs_rag": true,
+        "needs_business_tools": true,
+        "required_tools": [],
+        "tool_candidates": [],
+        "knowledge_domains": [
+          "promotion_and_member_policy"
+        ],
+        "capability_ids": [
+          "stock_notification"
+        ],
+        "needs_product_facts": null,
+        "clarification_fields": [],
+        "retrieval_strategies": [
+          {
+            "knowledge_domain": "promotion_and_member_policy",
+            "retrieval_mode": "hybrid",
+            "citation_scope": "section"
+          }
+        ],
+        "entity_refs": [],
+        "risk_level": "low",
+        "requires_workflow": false,
+        "confidence": 0.75,
+        "source": "deterministic_fallback",
+        "fallback_policy": "safe_deterministic_path"
+      }
+    },
+    {
+      "id": "C02",
+      "knowledge": "根据荒野户外 露营季活动规则，满 300 减 40 可以与平台会员券叠加，但不能与同类型满减券重复叠加；山友会员券需要在有效期内由本人账号使用。",
+      "citations": [
+        {
+          "source": "knowledge/member_coupon_policy.md",
+          "title": "荒野户外会员券使用规则",
+          "snippet": "## 6. 叠加、退单与优惠恢复  \n露营季满 300 减 40 可以与平台会员券叠加，但不能与同类型满减券重复叠加。该规则不自动覆盖品类券、定向券或未发布的其他活动；具体组合仍需活动和券的依据。  \n退款不自动代表优惠券已退回或有效期已延长。返券、延期与部分退款后的优惠分摊需要各自的规则，当前没有统一的自动恢复承诺。",
+          "score": 1.0,
+          "retrieval_stage": "pre_retrieval",
+          "metadata": {
+            "policy_id": "member_coupon_gold_rule",
+            "scene_key": "member_coupon",
+            "version": "2026-10-16.1",
+            "publication_status": "published",
+            "effective_from": "2025-01-01T00:00:00+08:00",
+            "effective_to": "2028-01-01T00:00:00+08:00",
+            "snapshot_version": "knowledge-d8e495a59835",
+            "chunk_ids": [
+              "member_coupon_gold_rule-chunk-24"
+            ],
+            "section_id": "member_coupon_gold_rule-section-6",
+            "section": "6. 叠加、退单与优惠恢复"
+          }
+        },
+        {
+          "source": "knowledge/promotion_policy.md",
+          "title": "荒野户外 露营季活动规则",
+          "snippet": "## 4. 满 300 减 40 与叠加边界  \n符合露营季活动条件时，满 300 减 40 可以与平台会员券叠加；同类型满减券不能重复叠加。该规则没有定义“每满 300 减 40”、所有订单无限次参加或其他券种一律兼容。  \n是否达到300元取决于活动计入的金额和商品范围。运费、未选中商品或其他活动商品是否计入，当前通用规则没有统一保证。  \n满600元不自动表示减80元；不同券种能否组合，仍以对应券及活动规则为准。",
+          "score": 1.0,
+          "retrieval_stage": "pre_retrieval",
+          "metadata": {
+            "policy_id": "promotion_camping_season_stack_rule",
+            "scene_key": "promotion",
+            "version": "2026-10-16.1",
+            "publication_status": "published",
+            "effective_from": "2025-01-01T00:00:00+08:00",
+            "effective_to": "2028-01-01T00:00:00+08:00",
+            "snapshot_version": "knowledge-d8e495a59835",
+            "chunk_ids": [
+              "promotion_camping_season_stack_rule-chunk-14"
+            ],
+            "section_id": "promotion_camping_season_stack_rule-section-4",
+            "section": "4. 满 300 减 40 与叠加边界"
+          }
+        },
+        {
+          "source": "knowledge/promotion_policy.md",
+          "title": "荒野户外 露营季活动规则",
+          "snippet": "露营季活动期间，满 300 减 40 活动可以与平台会员券叠加，但不能与同类型满减券重复叠加。  \n# 荒野户外露营季活动规则  \n## 1. 适用范围  \n活动是否正在进行、具体参与商品、活动价、会员门槛、优惠券状态与最终金额，以对应活动、商品及结算信息为准。  \n露营季不代表固定月份，也没有覆盖全部商品的永久活动周期。文档更新时间不代表活动开始时间，以上规则不包含未发布的其他活动或隐藏券。",
+          "score": 0.976,
+          "retrieval_stage": "pre_retrieval",
+          "metadata": {
+            "policy_id": "promotion_camping_season_stack_rule",
+            "scene_key": "promotion",
+            "version": "2026-10-16.1",
+            "publication_status": "published",
+            "effective_from": "2025-01-01T00:00:00+08:00",
+            "effective_to": "2028-01-01T00:00:00+08:00",
+            "snapshot_version": "knowledge-d8e495a59835",
+            "chunk_ids": [
+              "promotion_camping_season_stack_rule-chunk-11"
+            ],
+            "section_id": "promotion_camping_season_stack_rule-section-1",
+            "section": "1. 适用范围"
+          }
+        },
+        {
+          "source": "knowledge/member_coupon_policy.md",
+          "title": "荒野户外会员券使用规则",
+          "snippet": "## 2. 会员活动与券的区别  \n会员专享活动价、平台会员券和品类券是不同优惠。活动可能直接提供符合条件的商品价格，券优惠则依赖本人实际持有的具体券；不能仅凭面额相加确定成交价。  \n“全场券”仍有账号、时间、状态和门槛等条件；“是会员”或看到了券后价，不单独证明本人可以享受该价格。",
+          "score": 0.953,
+          "retrieval_stage": "pre_retrieval",
+          "metadata": {
+            "policy_id": "member_coupon_gold_rule",
+            "scene_key": "member_coupon",
+            "version": "2026-10-16.1",
+            "publication_status": "published",
+            "effective_from": "2025-01-01T00:00:00+08:00",
+            "effective_to": "2028-01-01T00:00:00+08:00",
+            "snapshot_version": "knowledge-d8e495a59835",
+            "chunk_ids": [
+              "member_coupon_gold_rule-chunk-20"
+            ],
+            "section_id": "member_coupon_gold_rule-section-2",
+            "section": "2. 会员活动与券的区别"
+          }
+        }
+      ],
+      "capabilities": [
+        {
+          "capabilityId": "stock_notification",
+          "channel": "customer_service_agent",
+          "supportStatus": "unsupported",
+          "scope": "到货与补货提醒登记",
+          "explanation": "当前客服助手不支持到货或补货提醒。",
+          "alternatives": [
+            "稍后主动查询商品库存"
+          ],
+          "version": "service-capabilities-v1"
+        }
+      ],
+      "plan": {
+        "intent": "promotion_query",
+        "needs_rag": true,
+        "needs_business_tools": true,
+        "required_tools": [],
+        "tool_candidates": [],
+        "knowledge_domains": [
+          "promotion_and_member_policy"
+        ],
+        "capability_ids": [
+          "stock_notification"
+        ],
+        "needs_product_facts": null,
+        "clarification_fields": [],
+        "retrieval_strategies": [
+          {
+            "knowledge_domain": "promotion_and_member_policy",
+            "retrieval_mode": "hybrid",
+            "citation_scope": "section"
+          }
+        ],
+        "entity_refs": [],
+        "risk_level": "low",
+        "requires_workflow": false,
+        "confidence": 0.75,
+        "source": "deterministic_fallback",
+        "fallback_policy": "safe_deterministic_path"
+      }
+    },
+    {
+      "id": "C03",
+      "knowledge": "根据荒野户外 露营季活动规则，满 300 减 40 可以与平台会员券叠加，但不能与同类型满减券重复叠加；山友会员券需要在有效期内由本人账号使用。",
+      "citations": [
+        {
+          "source": "knowledge/member_coupon_policy.md",
+          "title": "荒野户外会员券使用规则",
+          "snippet": "## 6. 叠加、退单与优惠恢复  \n露营季满 300 减 40 可以与平台会员券叠加，但不能与同类型满减券重复叠加。该规则不自动覆盖品类券、定向券或未发布的其他活动；具体组合仍需活动和券的依据。  \n退款不自动代表优惠券已退回或有效期已延长。返券、延期与部分退款后的优惠分摊需要各自的规则，当前没有统一的自动恢复承诺。",
+          "score": 1.0,
+          "retrieval_stage": "pre_retrieval",
+          "metadata": {
+            "policy_id": "member_coupon_gold_rule",
+            "scene_key": "member_coupon",
+            "version": "2026-10-16.1",
+            "publication_status": "published",
+            "effective_from": "2025-01-01T00:00:00+08:00",
+            "effective_to": "2028-01-01T00:00:00+08:00",
+            "snapshot_version": "knowledge-d8e495a59835",
+            "chunk_ids": [
+              "member_coupon_gold_rule-chunk-24"
+            ],
+            "section_id": "member_coupon_gold_rule-section-6",
+            "section": "6. 叠加、退单与优惠恢复"
+          }
+        },
+        {
+          "source": "knowledge/promotion_policy.md",
+          "title": "荒野户外 露营季活动规则",
+          "snippet": "## 4. 满 300 减 40 与叠加边界  \n符合露营季活动条件时，满 300 减 40 可以与平台会员券叠加；同类型满减券不能重复叠加。该规则没有定义“每满 300 减 40”、所有订单无限次参加或其他券种一律兼容。  \n是否达到300元取决于活动计入的金额和商品范围。运费、未选中商品或其他活动商品是否计入，当前通用规则没有统一保证。  \n满600元不自动表示减80元；不同券种能否组合，仍以对应券及活动规则为准。",
+          "score": 1.0,
+          "retrieval_stage": "pre_retrieval",
+          "metadata": {
+            "policy_id": "promotion_camping_season_stack_rule",
+            "scene_key": "promotion",
+            "version": "2026-10-16.1",
+            "publication_status": "published",
+            "effective_from": "2025-01-01T00:00:00+08:00",
+            "effective_to": "2028-01-01T00:00:00+08:00",
+            "snapshot_version": "knowledge-d8e495a59835",
+            "chunk_ids": [
+              "promotion_camping_season_stack_rule-chunk-14"
+            ],
+            "section_id": "promotion_camping_season_stack_rule-section-4",
+            "section": "4. 满 300 减 40 与叠加边界"
+          }
+        },
+        {
+          "source": "knowledge/promotion_policy.md",
+          "title": "荒野户外 露营季活动规则",
+          "snippet": "露营季活动期间，满 300 减 40 活动可以与平台会员券叠加，但不能与同类型满减券重复叠加。  \n# 荒野户外露营季活动规则  \n## 1. 适用范围  \n活动是否正在进行、具体参与商品、活动价、会员门槛、优惠券状态与最终金额，以对应活动、商品及结算信息为准。  \n露营季不代表固定月份，也没有覆盖全部商品的永久活动周期。文档更新时间不代表活动开始时间，以上规则不包含未发布的其他活动或隐藏券。",
+          "score": 0.976,
+          "retrieval_stage": "pre_retrieval",
+          "metadata": {
+            "policy_id": "promotion_camping_season_stack_rule",
+            "scene_key": "promotion",
+            "version": "2026-10-16.1",
+            "publication_status": "published",
+            "effective_from": "2025-01-01T00:00:00+08:00",
+            "effective_to": "2028-01-01T00:00:00+08:00",
+            "snapshot_version": "knowledge-d8e495a59835",
+            "chunk_ids": [
+              "promotion_camping_season_stack_rule-chunk-11"
+            ],
+            "section_id": "promotion_camping_season_stack_rule-section-1",
+            "section": "1. 适用范围"
+          }
+        },
+        {
+          "source": "knowledge/member_coupon_policy.md",
+          "title": "荒野户外会员券使用规则",
+          "snippet": "## 2. 会员活动与券的区别  \n会员专享活动价、平台会员券和品类券是不同优惠。活动可能直接提供符合条件的商品价格，券优惠则依赖本人实际持有的具体券；不能仅凭面额相加确定成交价。  \n“全场券”仍有账号、时间、状态和门槛等条件；“是会员”或看到了券后价，不单独证明本人可以享受该价格。",
+          "score": 0.953,
+          "retrieval_stage": "pre_retrieval",
+          "metadata": {
+            "policy_id": "member_coupon_gold_rule",
+            "scene_key": "member_coupon",
+            "version": "2026-10-16.1",
+            "publication_status": "published",
+            "effective_from": "2025-01-01T00:00:00+08:00",
+            "effective_to": "2028-01-01T00:00:00+08:00",
+            "snapshot_version": "knowledge-d8e495a59835",
+            "chunk_ids": [
+              "member_coupon_gold_rule-chunk-20"
+            ],
+            "section_id": "member_coupon_gold_rule-section-2",
+            "section": "2. 会员活动与券的区别"
+          }
+        }
+      ],
+      "capabilities": [
+        {
+          "capabilityId": "stock_notification",
+          "channel": "customer_service_agent",
+          "supportStatus": "unsupported",
+          "scope": "到货与补货提醒登记",
+          "explanation": "当前客服助手不支持到货或补货提醒。",
+          "alternatives": [
+            "稍后主动查询商品库存"
+          ],
+          "version": "service-capabilities-v1"
+        }
+      ],
+      "plan": {
+        "intent": "promotion_query",
+        "needs_rag": true,
+        "needs_business_tools": true,
+        "required_tools": [],
+        "tool_candidates": [],
+        "knowledge_domains": [
+          "promotion_and_member_policy"
+        ],
+        "capability_ids": [
+          "stock_notification"
+        ],
+        "needs_product_facts": null,
+        "clarification_fields": [],
+        "retrieval_strategies": [
+          {
+            "knowledge_domain": "promotion_and_member_policy",
+            "retrieval_mode": "hybrid",
+            "citation_scope": "section"
+          }
+        ],
+        "entity_refs": [],
+        "risk_level": "low",
+        "requires_workflow": false,
+        "confidence": 0.75,
+        "source": "deterministic_fallback",
+        "fallback_policy": "safe_deterministic_path"
+      }
+    },
+    {
+      "id": "C04",
+      "knowledge": "已支付且未出库、未发货的订单，可以发起退款申请；资金类动作必须进入售后审批。  \n当前自助退款支持本人已支付、尚未出库且未发货订单的整单退款。签收后的七天无理由退货、已发货或运输中的订单、部分商品退款，适用不同的条件和处理范围。  \n当前退款使用演示余额和资金流水，不提供真实银行卡、支付宝或微信退款的到账时限保证。\n申请资格以本人订单的当前支付、出库、发货状态及可信资金记录为准。物流尚未更新不等于尚未出库或发货；资格事实缺失时暂不能确认。  \n申请金额以该笔订单实际支付与已有退款记录为依据，与今天的商品标价或后来变化的活动价不同。当前支持整单；部分退款、仅退运费和差价补偿不在这条自助流程范围内。  \n定制商品的无理由退货限制，不直接决定未发货退款资格；仍取决于该订单状态、制作情况与适用规则。\n确认信息包括订单、商品、整单范围、可验证实付金额和下一步。未发货退款申请需要填写问题或原因；签收后七天无理由无需另填原因的规定不自动适用于其他售后。  \n顾客确认前申请尚未提交。提交时会重新核验资格与金额；准备确认后订单已发货、金额变化或出现重复申请，可能导致原确认信息不能继续使用。\n购买后活动价变化不改变本笔实际支付记录。返券、价保与退款属于不同规则；退款完成不自动表示优惠券已退回。",
+      "citations": [
+        {
+          "source": "knowledge/after_sale_policy.md",
+          "title": "荒野户外未发货退款 SOP",
+          "snippet": "已支付且未出库、未发货的订单，可以发起退款申请；资金类动作必须进入售后审批。  \n# 荒野户外未发货退款与申请状态  \n## 1. 适用范围  \n当前自助退款支持本人已支付、尚未出库且未发货订单的整单退款。签收后的七天无理由退货、已发货或运输中的订单、部分商品退款，适用不同的条件和处理范围。  \n当前退款使用演示余额和资金流水，不提供真实银行卡、支付宝或微信退款的到账时限保证。",
+          "score": 1.0,
+          "retrieval_stage": "pre_retrieval",
+          "metadata": {
+            "policy_id": "refund_before_shipping",
+            "scene_key": "after_sale_refund",
+            "version": "2026-10-16.1",
+            "publication_status": "published",
+            "effective_from": "2025-01-01T00:00:00+08:00",
+            "effective_to": "2028-01-01T00:00:00+08:00",
+            "snapshot_version": "knowledge-d8e495a59835",
+            "chunk_ids": [
+              "refund_before_shipping-chunk-1"
+            ],
+            "section_id": "refund_before_shipping-section-1",
+            "section": "1. 适用范围"
+          }
+        },
+        {
+          "source": "knowledge/after_sale_policy.md",
+          "title": "荒野户外未发货退款 SOP",
+          "snippet": "## 3. 订单资格与金额依据  \n申请资格以本人订单的当前支付、出库、发货状态及可信资金记录为准。物流尚未更新不等于尚未出库或发货；资格事实缺失时暂不能确认。  \n申请金额以该笔订单实际支付与已有退款记录为依据，与今天的商品标价或后来变化的活动价不同。当前支持整单；部分退款、仅退运费和差价补偿不在这条自助流程范围内。  \n定制商品的无理由退货限制，不直接决定未发货退款资格；仍取决于该订单状态、制作情况与适用规则。",
+          "score": 0.976,
+          "retrieval_stage": "pre_retrieval",
+          "metadata": {
+            "policy_id": "refund_before_shipping",
+            "scene_key": "after_sale_refund",
+            "version": "2026-10-16.1",
+            "publication_status": "published",
+            "effective_from": "2025-01-01T00:00:00+08:00",
+            "effective_to": "2028-01-01T00:00:00+08:00",
+            "snapshot_version": "knowledge-d8e495a59835",
+            "chunk_ids": [
+              "refund_before_shipping-chunk-3"
+            ],
+            "section_id": "refund_before_shipping-section-3",
+            "section": "3. 订单资格与金额依据"
+          }
+        },
+        {
+          "source": "knowledge/after_sale_policy.md",
+          "title": "荒野户外未发货退款 SOP",
+          "snippet": "## 4. 确认与提交  \n确认信息包括订单、商品、整单范围、可验证实付金额和下一步。未发货退款申请需要填写问题或原因；签收后七天无理由无需另填原因的规定不自动适用于其他售后。  \n顾客确认前申请尚未提交。提交时会重新核验资格与金额；准备确认后订单已发货、金额变化或出现重复申请，可能导致原确认信息不能继续使用。",
+          "score": 0.961,
+          "retrieval_stage": "pre_retrieval",
+          "metadata": {
+            "policy_id": "refund_before_shipping",
+            "scene_key": "after_sale_refund",
+            "version": "2026-10-16.1",
+            "publication_status": "published",
+            "effective_from": "2025-01-01T00:00:00+08:00",
+            "effective_to": "2028-01-01T00:00:00+08:00",
+            "snapshot_version": "knowledge-d8e495a59835",
+            "chunk_ids": [
+              "refund_before_shipping-chunk-4"
+            ],
+            "section_id": "refund_before_shipping-section-4",
+            "section": "4. 确认与提交"
+          }
+        },
+        {
+          "source": "knowledge/after_sale_policy.md",
+          "title": "荒野户外未发货退款 SOP",
+          "snippet": "## 9. 优惠与退款的关系  \n购买后活动价变化不改变本笔实际支付记录。返券、价保与退款属于不同规则；退款完成不自动表示优惠券已退回。",
+          "score": 0.946,
+          "retrieval_stage": "pre_retrieval",
+          "metadata": {
+            "policy_id": "refund_before_shipping",
+            "scene_key": "after_sale_refund",
+            "version": "2026-10-16.1",
+            "publication_status": "published",
+            "effective_from": "2025-01-01T00:00:00+08:00",
+            "effective_to": "2028-01-01T00:00:00+08:00",
+            "snapshot_version": "knowledge-d8e495a59835",
+            "chunk_ids": [
+              "refund_before_shipping-chunk-9"
+            ],
+            "section_id": "refund_before_shipping-section-8",
+            "section": "9. 优惠与退款的关系"
+          }
+        }
+      ],
+      "capabilities": [],
+      "plan": {
+        "intent": "refund_policy_query",
+        "needs_rag": true,
+        "needs_business_tools": false,
+        "required_tools": [],
+        "tool_candidates": [],
+        "knowledge_domains": [
+          "after_sale_policy"
+        ],
+        "capability_ids": [],
+        "needs_product_facts": null,
+        "clarification_fields": [],
+        "retrieval_strategies": [
+          {
+            "knowledge_domain": "after_sale_policy",
+            "retrieval_mode": "hybrid",
+            "citation_scope": "section"
+          }
+        ],
+        "entity_refs": [],
+        "risk_level": "low",
+        "requires_workflow": false,
+        "confidence": 0.75,
+        "source": "deterministic_fallback",
+        "fallback_policy": "safe_deterministic_path"
+      }
+    }
+  ],
+  "generation_contexts": [
+    {
+      "user_message": "露营季满300减40能和平台会员券叠加吗？另外支持到货提醒吗？",
+      "intent": "promotion_query",
+      "route_plan": {
+        "intent": "promotion_query",
+        "required_tools": [],
+        "knowledge_domains": [
+          "promotion_and_member_policy"
+        ],
+        "capability_ids": [
+          "stock_notification"
+        ],
+        "needs_product_facts": null
+      },
+      "required_points_source": "原请求与受控计划，不是人工金标；必须回看原请求检查计划漏项",
+      "capability_results": [
+        {
+          "capabilityId": "stock_notification",
+          "channel": "customer_service_agent",
+          "supportStatus": "unsupported",
+          "scope": "到货与补货提醒登记",
+          "explanation": "当前客服助手不支持到货或补货提醒。",
+          "alternatives": [
+            "稍后主动查询商品库存"
+          ],
+          "version": "service-capabilities-v1",
+          "failure": null
+        }
+      ],
+      "evidence": [
+        {
+          "id": "request",
+          "kind": "request",
+          "text": "露营季满300减40能和平台会员券叠加吗？另外支持到货提醒吗？"
+        },
+        {
+          "id": "history",
+          "kind": "unverified_conversation",
+          "text": []
+        },
+        {
+          "id": "capability:stock_notification",
+          "kind": "capability",
+          "facts": {
+            "capabilityId": "stock_notification",
+            "channel": "customer_service_agent",
+            "supportStatus": "unsupported",
+            "scope": "到货与补货提醒登记",
+            "explanation": "当前客服助手不支持到货或补货提醒。",
+            "alternatives": [
+              "稍后主动查询商品库存"
+            ],
+            "version": "service-capabilities-v1",
+            "failure": null
+          }
+        },
+        {
+          "id": "policy:0",
+          "kind": "policy",
+          "text": "## 6. 叠加、退单与优惠恢复  \n露营季满 300 减 40 可以与平台会员券叠加，但不能与同类型满减券重复叠加。该规则不自动覆盖品类券、定向券或未发布的其他活动；具体组合仍需活动和券的依据。  \n退款不自动代表优惠券已退回或有效期已延长。返券、延期与部分退款后的优惠分摊需要各自的规则，当前没有统一的自动恢复承诺。",
+          "source": "knowledge/member_coupon_policy.md",
+          "metadata": {
+            "policy_id": "member_coupon_gold_rule",
+            "version": "2026-10-16.1",
+            "section_id": "member_coupon_gold_rule-section-6",
+            "effective_from": "2025-01-01T00:00:00+08:00",
+            "effective_to": "2028-01-01T00:00:00+08:00",
+            "publication_status": "published",
+            "snapshot_version": "knowledge-d8e495a59835",
+            "scope": null
+          }
+        },
+        {
+          "id": "policy:1",
+          "kind": "policy",
+          "text": "## 4. 满 300 减 40 与叠加边界  \n符合露营季活动条件时，满 300 减 40 可以与平台会员券叠加；同类型满减券不能重复叠加。该规则没有定义“每满 300 减 40”、所有订单无限次参加或其他券种一律兼容。  \n是否达到300元取决于活动计入的金额和商品范围。运费、未选中商品或其他活动商品是否计入，当前通用规则没有统一保证。  \n满600元不自动表示减80元；不同券种能否组合，仍以对应券及活动规则为准。",
+          "source": "knowledge/promotion_policy.md",
+          "metadata": {
+            "policy_id": "promotion_camping_season_stack_rule",
+            "version": "2026-10-16.1",
+            "section_id": "promotion_camping_season_stack_rule-section-4",
+            "effective_from": "2025-01-01T00:00:00+08:00",
+            "effective_to": "2028-01-01T00:00:00+08:00",
+            "publication_status": "published",
+            "snapshot_version": "knowledge-d8e495a59835",
+            "scope": null
+          }
+        },
+        {
+          "id": "policy:2",
+          "kind": "policy",
+          "text": "露营季活动期间，满 300 减 40 活动可以与平台会员券叠加，但不能与同类型满减券重复叠加。  \n# 荒野户外露营季活动规则  \n## 1. 适用范围  \n活动是否正在进行、具体参与商品、活动价、会员门槛、优惠券状态与最终金额，以对应活动、商品及结算信息为准。  \n露营季不代表固定月份，也没有覆盖全部商品的永久活动周期。文档更新时间不代表活动开始时间，以上规则不包含未发布的其他活动或隐藏券。",
+          "source": "knowledge/promotion_policy.md",
+          "metadata": {
+            "policy_id": "promotion_camping_season_stack_rule",
+            "version": "2026-10-16.1",
+            "section_id": "promotion_camping_season_stack_rule-section-1",
+            "effective_from": "2025-01-01T00:00:00+08:00",
+            "effective_to": "2028-01-01T00:00:00+08:00",
+            "publication_status": "published",
+            "snapshot_version": "knowledge-d8e495a59835",
+            "scope": null
+          }
+        },
+        {
+          "id": "policy:3",
+          "kind": "policy",
+          "text": "## 2. 会员活动与券的区别  \n会员专享活动价、平台会员券和品类券是不同优惠。活动可能直接提供符合条件的商品价格，券优惠则依赖本人实际持有的具体券；不能仅凭面额相加确定成交价。  \n“全场券”仍有账号、时间、状态和门槛等条件；“是会员”或看到了券后价，不单独证明本人可以享受该价格。",
+          "source": "knowledge/member_coupon_policy.md",
+          "metadata": {
+            "policy_id": "member_coupon_gold_rule",
+            "version": "2026-10-16.1",
+            "section_id": "member_coupon_gold_rule-section-2",
+            "effective_from": "2025-01-01T00:00:00+08:00",
+            "effective_to": "2028-01-01T00:00:00+08:00",
+            "publication_status": "published",
+            "snapshot_version": "knowledge-d8e495a59835",
+            "scope": null
+          }
+        },
+        {
+          "id": "execution",
+          "kind": "execution",
+          "this_turn": {
+            "write_actions": [],
+            "read_checks": [],
+            "complete": true,
+            "scope": "本轮受控只读编排，未提交申请或登记通知；不证明历史无申请"
+          },
+          "historical": [],
+          "historical_complete": false
+        },
+        {
+          "id": "interaction_policy",
+          "kind": "interaction_policy",
+          "facts": {
+            "schemaVersion": "interaction_policy_v1",
+            "channel": "customer_service_agent",
+            "version": "service-capabilities-v1",
+            "entries": [
+              {
+                "id": "human_support",
+                "surface": "mall_chat",
+                "status": "available",
+                "actor": "user",
+                "initiation": "message_request",
+                "confirmationRequired": true,
+                "completionEffect": "open_entry",
+                "destinationState": "placeholder"
+              }
+            ]
+          }
+        }
+      ],
+      "allowed_next_steps": [
+        {
+          "id": "entry:human_support",
+          "actor": "user",
+          "stage": "request_entry",
+          "surface": "mall_chat",
+          "requires_user_confirmation": true,
+          "permitted_effect": "open_entry",
+          "evidence_ids": [
+            "interaction_policy"
+          ]
+        }
+      ],
+      "allowed_next_steps_source": "由代码依据受控交互策略与已注册只读路径组装，不接受模型自报的步骤列表",
+      "verified_summary": "根据荒野户外 露营季活动规则，满 300 减 40 可以与平台会员券叠加，但不能与同类型满减券重复叠加；山友会员券需要在有效期内由本人账号使用。",
+      "generation_evidence_complete": true,
+      "observed_at": "2026-10-17T03:41:18.552968+00:00"
+    },
+    {
+      "user_message": "露营季满300减40能和平台会员券叠加吗？另外支持到货提醒吗？",
+      "intent": "promotion_query",
+      "route_plan": {
+        "intent": "promotion_query",
+        "required_tools": [],
+        "knowledge_domains": [
+          "promotion_and_member_policy"
+        ],
+        "capability_ids": [
+          "stock_notification"
+        ],
+        "needs_product_facts": null
+      },
+      "required_points_source": "原请求与受控计划，不是人工金标；必须回看原请求检查计划漏项",
+      "capability_results": [
+        {
+          "capabilityId": "stock_notification",
+          "channel": "customer_service_agent",
+          "supportStatus": "unsupported",
+          "scope": "到货与补货提醒登记",
+          "explanation": "当前客服助手不支持到货或补货提醒。",
+          "alternatives": [
+            "稍后主动查询商品库存"
+          ],
+          "version": "service-capabilities-v1",
+          "failure": null
+        }
+      ],
+      "evidence": [
+        {
+          "id": "request",
+          "kind": "request",
+          "text": "露营季满300减40能和平台会员券叠加吗？另外支持到货提醒吗？"
+        },
+        {
+          "id": "history",
+          "kind": "unverified_conversation",
+          "text": []
+        },
+        {
+          "id": "capability:stock_notification",
+          "kind": "capability",
+          "facts": {
+            "capabilityId": "stock_notification",
+            "channel": "customer_service_agent",
+            "supportStatus": "unsupported",
+            "scope": "到货与补货提醒登记",
+            "explanation": "当前客服助手不支持到货或补货提醒。",
+            "alternatives": [
+              "稍后主动查询商品库存"
+            ],
+            "version": "service-capabilities-v1",
+            "failure": null
+          }
+        },
+        {
+          "id": "policy:0",
+          "kind": "policy",
+          "text": "## 6. 叠加、退单与优惠恢复  \n露营季满 300 减 40 可以与平台会员券叠加，但不能与同类型满减券重复叠加。该规则不自动覆盖品类券、定向券或未发布的其他活动；具体组合仍需活动和券的依据。  \n退款不自动代表优惠券已退回或有效期已延长。返券、延期与部分退款后的优惠分摊需要各自的规则，当前没有统一的自动恢复承诺。",
+          "source": "knowledge/member_coupon_policy.md",
+          "metadata": {
+            "policy_id": "member_coupon_gold_rule",
+            "version": "2026-10-16.1",
+            "section_id": "member_coupon_gold_rule-section-6",
+            "effective_from": "2025-01-01T00:00:00+08:00",
+            "effective_to": "2028-01-01T00:00:00+08:00",
+            "publication_status": "published",
+            "snapshot_version": "knowledge-d8e495a59835",
+            "scope": null
+          }
+        },
+        {
+          "id": "policy:1",
+          "kind": "policy",
+          "text": "## 4. 满 300 减 40 与叠加边界  \n符合露营季活动条件时，满 300 减 40 可以与平台会员券叠加；同类型满减券不能重复叠加。该规则没有定义“每满 300 减 40”、所有订单无限次参加或其他券种一律兼容。  \n是否达到300元取决于活动计入的金额和商品范围。运费、未选中商品或其他活动商品是否计入，当前通用规则没有统一保证。  \n满600元不自动表示减80元；不同券种能否组合，仍以对应券及活动规则为准。",
+          "source": "knowledge/promotion_policy.md",
+          "metadata": {
+            "policy_id": "promotion_camping_season_stack_rule",
+            "version": "2026-10-16.1",
+            "section_id": "promotion_camping_season_stack_rule-section-4",
+            "effective_from": "2025-01-01T00:00:00+08:00",
+            "effective_to": "2028-01-01T00:00:00+08:00",
+            "publication_status": "published",
+            "snapshot_version": "knowledge-d8e495a59835",
+            "scope": null
+          }
+        },
+        {
+          "id": "policy:2",
+          "kind": "policy",
+          "text": "露营季活动期间，满 300 减 40 活动可以与平台会员券叠加，但不能与同类型满减券重复叠加。  \n# 荒野户外露营季活动规则  \n## 1. 适用范围  \n活动是否正在进行、具体参与商品、活动价、会员门槛、优惠券状态与最终金额，以对应活动、商品及结算信息为准。  \n露营季不代表固定月份，也没有覆盖全部商品的永久活动周期。文档更新时间不代表活动开始时间，以上规则不包含未发布的其他活动或隐藏券。",
+          "source": "knowledge/promotion_policy.md",
+          "metadata": {
+            "policy_id": "promotion_camping_season_stack_rule",
+            "version": "2026-10-16.1",
+            "section_id": "promotion_camping_season_stack_rule-section-1",
+            "effective_from": "2025-01-01T00:00:00+08:00",
+            "effective_to": "2028-01-01T00:00:00+08:00",
+            "publication_status": "published",
+            "snapshot_version": "knowledge-d8e495a59835",
+            "scope": null
+          }
+        },
+        {
+          "id": "policy:3",
+          "kind": "policy",
+          "text": "## 2. 会员活动与券的区别  \n会员专享活动价、平台会员券和品类券是不同优惠。活动可能直接提供符合条件的商品价格，券优惠则依赖本人实际持有的具体券；不能仅凭面额相加确定成交价。  \n“全场券”仍有账号、时间、状态和门槛等条件；“是会员”或看到了券后价，不单独证明本人可以享受该价格。",
+          "source": "knowledge/member_coupon_policy.md",
+          "metadata": {
+            "policy_id": "member_coupon_gold_rule",
+            "version": "2026-10-16.1",
+            "section_id": "member_coupon_gold_rule-section-2",
+            "effective_from": "2025-01-01T00:00:00+08:00",
+            "effective_to": "2028-01-01T00:00:00+08:00",
+            "publication_status": "published",
+            "snapshot_version": "knowledge-d8e495a59835",
+            "scope": null
+          }
+        },
+        {
+          "id": "execution",
+          "kind": "execution",
+          "this_turn": {
+            "write_actions": [],
+            "read_checks": [],
+            "complete": true,
+            "scope": "本轮受控只读编排，未提交申请或登记通知；不证明历史无申请"
+          },
+          "historical": [],
+          "historical_complete": false
+        },
+        {
+          "id": "interaction_policy",
+          "kind": "interaction_policy",
+          "facts": {
+            "schemaVersion": "interaction_policy_v1",
+            "channel": "customer_service_agent",
+            "version": "service-capabilities-v1",
+            "entries": [
+              {
+                "id": "human_support",
+                "surface": "mall_chat",
+                "status": "available",
+                "actor": "user",
+                "initiation": "message_request",
+                "confirmationRequired": true,
+                "completionEffect": "open_entry",
+                "destinationState": "placeholder"
+              }
+            ]
+          }
+        }
+      ],
+      "allowed_next_steps": [
+        {
+          "id": "entry:human_support",
+          "actor": "user",
+          "stage": "request_entry",
+          "surface": "mall_chat",
+          "requires_user_confirmation": true,
+          "permitted_effect": "open_entry",
+          "evidence_ids": [
+            "interaction_policy"
+          ]
+        }
+      ],
+      "allowed_next_steps_source": "由代码依据受控交互策略与已注册只读路径组装，不接受模型自报的步骤列表",
+      "verified_summary": "根据荒野户外 露营季活动规则，满 300 减 40 可以与平台会员券叠加，但不能与同类型满减券重复叠加；山友会员券需要在有效期内由本人账号使用。",
+      "generation_evidence_complete": true,
+      "observed_at": "2026-10-17T03:41:18.554439+00:00"
+    },
+    {
+      "user_message": "露营季满300减40能和平台会员券叠加吗？另外支持到货提醒吗？",
+      "intent": "promotion_query",
+      "route_plan": {
+        "intent": "promotion_query",
+        "required_tools": [],
+        "knowledge_domains": [
+          "promotion_and_member_policy"
+        ],
+        "capability_ids": [
+          "stock_notification"
+        ],
+        "needs_product_facts": null
+      },
+      "required_points_source": "原请求与受控计划，不是人工金标；必须回看原请求检查计划漏项",
+      "capability_results": [
+        {
+          "capabilityId": "stock_notification",
+          "channel": "customer_service_agent",
+          "supportStatus": "unsupported",
+          "scope": "到货与补货提醒登记",
+          "explanation": "当前客服助手不支持到货或补货提醒。",
+          "alternatives": [
+            "稍后主动查询商品库存"
+          ],
+          "version": "service-capabilities-v1",
+          "failure": null
+        }
+      ],
+      "evidence": [
+        {
+          "id": "request",
+          "kind": "request",
+          "text": "露营季满300减40能和平台会员券叠加吗？另外支持到货提醒吗？"
+        },
+        {
+          "id": "history",
+          "kind": "unverified_conversation",
+          "text": []
+        },
+        {
+          "id": "capability:stock_notification",
+          "kind": "capability",
+          "facts": {
+            "capabilityId": "stock_notification",
+            "channel": "customer_service_agent",
+            "supportStatus": "unsupported",
+            "scope": "到货与补货提醒登记",
+            "explanation": "当前客服助手不支持到货或补货提醒。",
+            "alternatives": [
+              "稍后主动查询商品库存"
+            ],
+            "version": "service-capabilities-v1",
+            "failure": null
+          }
+        },
+        {
+          "id": "policy:0",
+          "kind": "policy",
+          "text": "## 6. 叠加、退单与优惠恢复  \n露营季满 300 减 40 可以与平台会员券叠加，但不能与同类型满减券重复叠加。该规则不自动覆盖品类券、定向券或未发布的其他活动；具体组合仍需活动和券的依据。  \n退款不自动代表优惠券已退回或有效期已延长。返券、延期与部分退款后的优惠分摊需要各自的规则，当前没有统一的自动恢复承诺。",
+          "source": "knowledge/member_coupon_policy.md",
+          "metadata": {
+            "policy_id": "member_coupon_gold_rule",
+            "version": "2026-10-16.1",
+            "section_id": "member_coupon_gold_rule-section-6",
+            "effective_from": "2025-01-01T00:00:00+08:00",
+            "effective_to": "2028-01-01T00:00:00+08:00",
+            "publication_status": "published",
+            "snapshot_version": "knowledge-d8e495a59835",
+            "scope": null
+          }
+        },
+        {
+          "id": "policy:1",
+          "kind": "policy",
+          "text": "## 4. 满 300 减 40 与叠加边界  \n符合露营季活动条件时，满 300 减 40 可以与平台会员券叠加；同类型满减券不能重复叠加。该规则没有定义“每满 300 减 40”、所有订单无限次参加或其他券种一律兼容。  \n是否达到300元取决于活动计入的金额和商品范围。运费、未选中商品或其他活动商品是否计入，当前通用规则没有统一保证。  \n满600元不自动表示减80元；不同券种能否组合，仍以对应券及活动规则为准。",
+          "source": "knowledge/promotion_policy.md",
+          "metadata": {
+            "policy_id": "promotion_camping_season_stack_rule",
+            "version": "2026-10-16.1",
+            "section_id": "promotion_camping_season_stack_rule-section-4",
+            "effective_from": "2025-01-01T00:00:00+08:00",
+            "effective_to": "2028-01-01T00:00:00+08:00",
+            "publication_status": "published",
+            "snapshot_version": "knowledge-d8e495a59835",
+            "scope": null
+          }
+        },
+        {
+          "id": "policy:2",
+          "kind": "policy",
+          "text": "露营季活动期间，满 300 减 40 活动可以与平台会员券叠加，但不能与同类型满减券重复叠加。  \n# 荒野户外露营季活动规则  \n## 1. 适用范围  \n活动是否正在进行、具体参与商品、活动价、会员门槛、优惠券状态与最终金额，以对应活动、商品及结算信息为准。  \n露营季不代表固定月份，也没有覆盖全部商品的永久活动周期。文档更新时间不代表活动开始时间，以上规则不包含未发布的其他活动或隐藏券。",
+          "source": "knowledge/promotion_policy.md",
+          "metadata": {
+            "policy_id": "promotion_camping_season_stack_rule",
+            "version": "2026-10-16.1",
+            "section_id": "promotion_camping_season_stack_rule-section-1",
+            "effective_from": "2025-01-01T00:00:00+08:00",
+            "effective_to": "2028-01-01T00:00:00+08:00",
+            "publication_status": "published",
+            "snapshot_version": "knowledge-d8e495a59835",
+            "scope": null
+          }
+        },
+        {
+          "id": "policy:3",
+          "kind": "policy",
+          "text": "## 2. 会员活动与券的区别  \n会员专享活动价、平台会员券和品类券是不同优惠。活动可能直接提供符合条件的商品价格，券优惠则依赖本人实际持有的具体券；不能仅凭面额相加确定成交价。  \n“全场券”仍有账号、时间、状态和门槛等条件；“是会员”或看到了券后价，不单独证明本人可以享受该价格。",
+          "source": "knowledge/member_coupon_policy.md",
+          "metadata": {
+            "policy_id": "member_coupon_gold_rule",
+            "version": "2026-10-16.1",
+            "section_id": "member_coupon_gold_rule-section-2",
+            "effective_from": "2025-01-01T00:00:00+08:00",
+            "effective_to": "2028-01-01T00:00:00+08:00",
+            "publication_status": "published",
+            "snapshot_version": "knowledge-d8e495a59835",
+            "scope": null
+          }
+        },
+        {
+          "id": "execution",
+          "kind": "execution",
+          "this_turn": {
+            "write_actions": [],
+            "read_checks": [],
+            "complete": true,
+            "scope": "本轮受控只读编排，未提交申请或登记通知；不证明历史无申请"
+          },
+          "historical": [],
+          "historical_complete": false
+        },
+        {
+          "id": "interaction_policy",
+          "kind": "interaction_policy",
+          "facts": {
+            "schemaVersion": "interaction_policy_v1",
+            "channel": "customer_service_agent",
+            "version": "service-capabilities-v1",
+            "entries": [
+              {
+                "id": "human_support",
+                "surface": "mall_chat",
+                "status": "available",
+                "actor": "user",
+                "initiation": "message_request",
+                "confirmationRequired": true,
+                "completionEffect": "open_entry",
+                "destinationState": "placeholder"
+              }
+            ]
+          }
+        }
+      ],
+      "allowed_next_steps": [
+        {
+          "id": "entry:human_support",
+          "actor": "user",
+          "stage": "request_entry",
+          "surface": "mall_chat",
+          "requires_user_confirmation": true,
+          "permitted_effect": "open_entry",
+          "evidence_ids": [
+            "interaction_policy"
+          ]
+        }
+      ],
+      "allowed_next_steps_source": "由代码依据受控交互策略与已注册只读路径组装，不接受模型自报的步骤列表",
+      "verified_summary": "根据荒野户外 露营季活动规则，满 300 减 40 可以与平台会员券叠加，但不能与同类型满减券重复叠加；山友会员券需要在有效期内由本人账号使用。",
+      "generation_evidence_complete": true,
+      "observed_at": "2026-10-17T03:41:18.555692+00:00"
+    },
+    {
+      "user_message": "未发货退款什么时候到账？",
+      "intent": "refund_policy_query",
+      "route_plan": {
+        "intent": "refund_policy_query",
+        "required_tools": [],
+        "knowledge_domains": [
+          "after_sale_policy"
+        ],
+        "capability_ids": [],
+        "needs_product_facts": null
+      },
+      "required_points_source": "原请求与受控计划，不是人工金标；必须回看原请求检查计划漏项",
+      "capability_results": [],
+      "evidence": [
+        {
+          "id": "request",
+          "kind": "request",
+          "text": "未发货退款什么时候到账？"
+        },
+        {
+          "id": "history",
+          "kind": "unverified_conversation",
+          "text": []
+        },
+        {
+          "id": "policy:0",
+          "kind": "policy",
+          "text": "已支付且未出库、未发货的订单，可以发起退款申请；资金类动作必须进入售后审批。  \n# 荒野户外未发货退款与申请状态  \n## 1. 适用范围  \n当前自助退款支持本人已支付、尚未出库且未发货订单的整单退款。签收后的七天无理由退货、已发货或运输中的订单、部分商品退款，适用不同的条件和处理范围。  \n当前退款使用演示余额和资金流水，不提供真实银行卡、支付宝或微信退款的到账时限保证。",
+          "source": "knowledge/after_sale_policy.md",
+          "metadata": {
+            "policy_id": "refund_before_shipping",
+            "version": "2026-10-16.1",
+            "section_id": "refund_before_shipping-section-1",
+            "effective_from": "2025-01-01T00:00:00+08:00",
+            "effective_to": "2028-01-01T00:00:00+08:00",
+            "publication_status": "published",
+            "snapshot_version": "knowledge-d8e495a59835",
+            "scope": null
+          }
+        },
+        {
+          "id": "policy:1",
+          "kind": "policy",
+          "text": "## 3. 订单资格与金额依据  \n申请资格以本人订单的当前支付、出库、发货状态及可信资金记录为准。物流尚未更新不等于尚未出库或发货；资格事实缺失时暂不能确认。  \n申请金额以该笔订单实际支付与已有退款记录为依据，与今天的商品标价或后来变化的活动价不同。当前支持整单；部分退款、仅退运费和差价补偿不在这条自助流程范围内。  \n定制商品的无理由退货限制，不直接决定未发货退款资格；仍取决于该订单状态、制作情况与适用规则。",
+          "source": "knowledge/after_sale_policy.md",
+          "metadata": {
+            "policy_id": "refund_before_shipping",
+            "version": "2026-10-16.1",
+            "section_id": "refund_before_shipping-section-3",
+            "effective_from": "2025-01-01T00:00:00+08:00",
+            "effective_to": "2028-01-01T00:00:00+08:00",
+            "publication_status": "published",
+            "snapshot_version": "knowledge-d8e495a59835",
+            "scope": null
+          }
+        },
+        {
+          "id": "policy:2",
+          "kind": "policy",
+          "text": "## 4. 确认与提交  \n确认信息包括订单、商品、整单范围、可验证实付金额和下一步。未发货退款申请需要填写问题或原因；签收后七天无理由无需另填原因的规定不自动适用于其他售后。  \n顾客确认前申请尚未提交。提交时会重新核验资格与金额；准备确认后订单已发货、金额变化或出现重复申请，可能导致原确认信息不能继续使用。",
+          "source": "knowledge/after_sale_policy.md",
+          "metadata": {
+            "policy_id": "refund_before_shipping",
+            "version": "2026-10-16.1",
+            "section_id": "refund_before_shipping-section-4",
+            "effective_from": "2025-01-01T00:00:00+08:00",
+            "effective_to": "2028-01-01T00:00:00+08:00",
+            "publication_status": "published",
+            "snapshot_version": "knowledge-d8e495a59835",
+            "scope": null
+          }
+        },
+        {
+          "id": "policy:3",
+          "kind": "policy",
+          "text": "## 9. 优惠与退款的关系  \n购买后活动价变化不改变本笔实际支付记录。返券、价保与退款属于不同规则；退款完成不自动表示优惠券已退回。",
+          "source": "knowledge/after_sale_policy.md",
+          "metadata": {
+            "policy_id": "refund_before_shipping",
+            "version": "2026-10-16.1",
+            "section_id": "refund_before_shipping-section-8",
+            "effective_from": "2025-01-01T00:00:00+08:00",
+            "effective_to": "2028-01-01T00:00:00+08:00",
+            "publication_status": "published",
+            "snapshot_version": "knowledge-d8e495a59835",
+            "scope": null
+          }
+        },
+        {
+          "id": "execution",
+          "kind": "execution",
+          "this_turn": {
+            "write_actions": [],
+            "read_checks": [],
+            "complete": true,
+            "scope": "本轮受控只读编排，未提交申请或登记通知；不证明历史无申请"
+          },
+          "historical": [],
+          "historical_complete": false
+        },
+        {
+          "id": "interaction_policy",
+          "kind": "interaction_policy",
+          "facts": {
+            "schemaVersion": "interaction_policy_v1",
+            "channel": "customer_service_agent",
+            "version": "service-capabilities-v1",
+            "entries": [
+              {
+                "id": "human_support",
+                "surface": "mall_chat",
+                "status": "available",
+                "actor": "user",
+                "initiation": "message_request",
+                "confirmationRequired": true,
+                "completionEffect": "open_entry",
+                "destinationState": "placeholder"
+              }
+            ]
+          }
+        }
+      ],
+      "allowed_next_steps": [
+        {
+          "id": "entry:human_support",
+          "actor": "user",
+          "stage": "request_entry",
+          "surface": "mall_chat",
+          "requires_user_confirmation": true,
+          "permitted_effect": "open_entry",
+          "evidence_ids": [
+            "interaction_policy"
+          ]
+        }
+      ],
+      "allowed_next_steps_source": "由代码依据受控交互策略与已注册只读路径组装，不接受模型自报的步骤列表",
+      "verified_summary": "已支付且未出库、未发货的订单，可以发起退款申请；资金类动作必须进入售后审批。  \n当前自助退款支持本人已支付、尚未出库且未发货订单的整单退款。签收后的七天无理由退货、已发货或运输中的订单、部分商品退款，适用不同的条件和处理范围。  \n当前退款使用演示余额和资金流水，不提供真实银行卡、支付宝或微信退款的到账时限保证。\n申请资格以本人订单的当前支付、出库、发货状态及可信资金记录为准。物流尚未更新不等于尚未出库或发货；资格事实缺失时暂不能确认。  \n申请金额以该笔订单实际支付与已有退款记录为依据，与今天的商品标价或后来变化的活动价不同。当前支持整单；部分退款、仅退运费和差价补偿不在这条自助流程范围内。  \n定制商品的无理由退货限制，不直接决定未发货退款资格；仍取决于该订单状态、制作情况与适用规则。\n确认信息包括订单、商品、整单范围、可验证实付金额和下一步。未发货退款申请需要填写问题或原因；签收后七天无理由无需另填原因的规定不自动适用于其他售后。  \n顾客确认前申请尚未提交。提交时会重新核验资格与金额；准备确认后订单已发货、金额变化或出现重复申请，可能导致原确认信息不能继续使用。\n购买后活动价变化不改变本笔实际支付记录。返券、价保与退款属于不同规则；退款完成不自动表示优惠券已退回。",
+      "generation_evidence_complete": true,
+      "observed_at": "2026-10-17T03:41:18.556434+00:00"
+    }
+  ]
+}

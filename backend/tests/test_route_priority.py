@@ -92,7 +92,7 @@ class RoutePriorityTest(unittest.TestCase):
         def fake_plan(message, *, fallback_intent, task_note=None):
             seen.append(task_note)
             if "不要退款" in message:
-                return ModelRouteResult(intent="order_query", used_model=True, model_name="test")
+                return ModelRouteResult(intent="order_query", task_relation="switch", used_model=True, model_name="test")
             return ModelRouteResult(intent="refund_request", used_model=True, model_name="test")
 
         with patch.object(agent.route_model_client, "plan_intent", side_effect=fake_plan):
@@ -104,7 +104,10 @@ class RoutePriorityTest(unittest.TestCase):
         self.assertIn("任务：refund_request", seen[1])
         self.assertIn("缺少：order_id", seen[1])
         self.assertEqual(switched.session_state["intent"], "order_query")
-        self.assertEqual(current_memory("t-open", "u1")["open_task"]["intent"], "order_query")
+        # 改口先交原拥有方核验；本地没有取消回执，查询不能占掉原售后。
+        self.assertEqual(current_memory("t-open", "u1")["open_task"]["intent"], "refund_request")
+        self.assertEqual(current_memory("t-open", "u1")["order_query"]["intent"], "order_query")
+        self.assertTrue(switched.session_state['task_control_requested'])
 
     def test_model_failure_keeps_the_open_task_for_a_slot_reply(self):
         agent = Lesson41Agent()
@@ -172,7 +175,8 @@ class RoutePriorityTest(unittest.TestCase):
         }
 
         def use_fallback(message, *, fallback_intent, task_note=None):
-            return ModelRouteResult(intent=fallback_intent, used_model=False, fallback_reason="invalid_model_route")
+            return ModelRouteResult(intent=fallback_intent, used_model=True,
+                inquiry_topics={"refund_policy_query": ["refund_conditions"], "return_policy_query": ["return_conditions"], "invoice_query": ["invoice_issue"]}.get(fallback_intent, []), topic_status="valid")
 
         try:
             with patch.object(agent.route_model_client, "plan_intent", side_effect=use_fallback), patch.object(

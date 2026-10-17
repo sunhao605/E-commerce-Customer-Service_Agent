@@ -10,9 +10,11 @@ from typing import Any
 from api.schemas import *
 from settings import load_course_env, answer_judge_settings
 from agent.answer_review import REVIEW_INTENTS, READ_TOOLS, build_review_context, record_review, redact_review
+
 from agent.models.judge_client import AnswerJudgeClient, AnswerJudgeResult
 from agent.cancellation import observe_cancellation
-from agent.context import SESSION_MEMORIES, _redact_history, build_context, current_memory, update_memory
+from agent.context import (SESSION_MEMORIES, _redact_history, build_context, current_memory,
+                           focused_order_task, update_memory, update_pending_tasks)
 from agent.cost import build_cost_summary
 from agent.hooks import HookManager
 from agent.ecommerce_client import has_product_term, product_query_keyword
@@ -36,11 +38,8 @@ from agent.service_capabilities import (
 )
 from agent.trace import TraceEventNormalizer, public_trace_summary, record_initial_chat_trace, record_trace_events, trace_store
 from retrieval.knowledge import (
-    invoice_faq_result,
+    query_knowledge_domain, KnowledgePathResult,
     low_confidence_result,
-    policy_query_result,
-    promotion_policy_result,
-    product_knowledge_result,
 )
 from agent.source_guard import inspect_source
 from agent.state import MESSAGE_COUNT_BY_SESSION
@@ -93,16 +92,23 @@ class Lesson41Agent:
         # 商城在网关取消草稿；下一轮先清理Python待办，避免旧候选复活。
         if (request.runtime_context or {}).get("cancelledAfterSaleDraft") is True:
             memory["open_task"] = None
+            if memory.get('clarification_focus') == 'open_task':
+                memory['clarification_focus'] = None
         open_task = memory.get("open_task")
         runtime = request.runtime_context or {}
         if runtime.get("mallAfterSaleRouting"):
             open_task = runtime.get("afterSaleOpenTask")
+            stored_task = memory.get('open_task') or {}
+            if open_task and all(open_task.get(k) == stored_task.get(k) for k in ('intent', 'pending_slot')):
+                open_task = {**stored_task, **open_task}
         query_task = runtime.get("afterSaleQuery") if "afterSaleQuery" in runtime else memory.get("eligibility_query")
         selection_message = (request.runtime_context or {}).get("userMessage") or request.user_message
         product_state = memory.get("product_query") or {}
         policy_state = memory.get("promotion_query") or {}
-        active_task = query_task if query_task and query_task.get("pending_slot") else open_task
+        active_task = focused_order_task(memory, open_task, query_task)
         task_note = format_open_task(active_task)
+        if open_task and active_task != open_task:
+            task_note = (task_note or '') + '\n后台售后任务（插问不表示撤回）：' + (format_open_task(open_task) or '')
         if query_task and query_task.get("order_id"):
             task_note = (task_note or "") + f"\n上一轮只读资格查询的订单：{query_task['order_id']}，业务类型：{query_task.get('application_type') or '尚未核实'}。只有明确申请才办理，好的或知道了不算申请。"
         if product_state or policy_state:
@@ -118,13 +124,26 @@ class Lesson41Agent:
             fallback_intent=fallback_intent,
             task_note=task_note,
         )
-        if not route_result.used_model and active_task and is_slot_reply(selection_message):
+        if active_task and is_slot_reply(selection_message):
             route_result = route_result.model_copy(
                 update={"intent": active_task["intent"], "fallback_reason": "open_task_slot"}
             )
         intent = route_result.intent
+        task_control_requested = bool(open_task and route_result.task_relation in {'stop', 'switch'})
+        if (open_task and route_result.task_relation == 'resume' and not is_slot_reply(selection_message)
+            and open_task.get('intent') in {'refund_request', 'return_request'}):
+            intent = open_task['intent']
+            route_result = route_result.model_copy(update={'intent': intent})
+        if (open_task and intent in {'refund_request', 'return_request'}
+            and (route_result.task_relation in {'unrelated', 'uncertain'}
+                 or (not route_result.used_model and not is_slot_reply(selection_message)))):
+            intent = 'unknown'
+            route_result = route_result.model_copy(update={'intent': intent, 'fallback_reason': 'task_relation_unconfirmed'})
+        if route_result.task_relation in {'stop', 'switch'} and intent in {'refund_request', 'return_request'}:
+            intent = 'general_chat'
+            route_result = route_result.model_copy(update={'intent': intent})
         if is_specific_eligibility_question(selection_message) or (
-            query_task and is_slot_reply(selection_message)
+            active_task and active_task.get('intent') == 'after_sale_eligibility_query' and is_slot_reply(selection_message)
         ):
             intent = "after_sale_eligibility_query"
             route_result = route_result.model_copy(update={"intent": intent})
@@ -149,39 +168,52 @@ class Lesson41Agent:
         elif policy_followup and policy_state.get("question"):
             intent = "promotion_query"
             policy_question = policy_state["question"] + "；优惠组合补充：" + selection_message
-        elif intent not in {"promotion_query", "service_scope_query"}:
-            memory.pop("promotion_query", None)
         # 商品待选期间的纯序号选择即使被模型判成闲聊也续接商品任务；“先不看了”只结束商品待选。
         if intent != "product_query" and (
             product_selection_index(selection_message) is not None
-            or (product_state.get("pending_candidates") and STOP_PENDING_PATTERN.fullmatch(selection_message.strip()))
+            or (product_state.get("pending_candidates")
+                and memory.get('clarification_focus', 'product_query') == 'product_query'
+                and STOP_PENDING_PATTERN.fullmatch(selection_message.strip()))
         ):
             intent = "product_query"
             route_result = route_result.model_copy(update={"intent": intent, "fallback_reason": "product_pending_selection"})
         if intent == "product_query" and product_selection_index(selection_message) is not None and product_state.get("pending_candidates"):
             evidence = product_state.get("pending_evidence") or evidence
-        if intent not in {"product_query", "general_chat", "unknown", "service_scope_query"}:
-            product_state["pending_candidates"] = None
-            product_state["original_question"] = None
-            product_state.pop("pending_evidence", None)
-            product_state.pop("pending_policy_question", None)
-            product_state.pop("pending_identity", None)
         if intent != "after_sale_eligibility_query" and not (request.runtime_context or {}).get("mallAfterSaleRouting"):
             observation = observe_cancellation(request, open_task)
             if observation is not None:
                 trace_store.add(request.session_id, "cancellation_intent_observed", observation)
         explicit_order_id = extract_order_id(selection_message)
+        selection_task = active_task or {}
+        if intent in {'refund_request', 'return_request'}:
+            selection_task = open_task or {}
+        elif intent == 'after_sale_eligibility_query':
+            selection_task = query_task or {}
+        elif intent in {'order_query', 'refund_status_query'}:
+            selection_task = memory.get('order_query') or {}
         order_id, context_report, compression_report = build_context(
-            request, explicit_order_id, query_task=query_task, eligibility_query=intent == "after_sale_eligibility_query"
+            request, explicit_order_id, query_task=query_task, eligibility_query=intent == "after_sale_eligibility_query",
+            selection_task=selection_task, allow_embedded_selection=route_result.task_relation == 'resume'
         )
-        if intent in {"refund_request", "return_request"} and query_task and query_task.get("order_id") and not explicit_order_id:
+        if task_control_requested:
+            context_report['model_context'].append('用户请求改变原售后任务，但本轮尚无执行回执，不能宣称已停止或切换。')
+        if (intent in {"refund_request", "return_request"} and query_task and query_task.get("order_id")
+            and not explicit_order_id and not context_report['candidate_selection']
+            and not (route_result.task_relation == 'resume' and open_task)):
             page_order = runtime.get("current_order_id") or runtime.get("relatedOrderNo")
             if not page_order or page_order == query_task["order_id"]:
                 order_id = query_task["order_id"]
                 context_report["chosen_order_id"] = order_id
         draft = runtime.get("afterSaleDraft") or {}
+        if (route_result.task_relation == 'resume' and intent in {'refund_request', 'return_request'}
+            and not explicit_order_id and not context_report['candidate_selection']):
+            bound_order = (open_task or {}).get('order_id') or (
+                draft.get('order') if draft.get('valid') is True and draft.get('ownerVerified') is True else None)
+            if bound_order:
+                order_id = str(bound_order)
+                context_report['chosen_order_id'] = order_id
         if runtime.get("mallAfterSaleRouting") and intent in {"refund_request", "return_request"} \
-                and not order_id and not query_task and not is_slot_reply(selection_message) \
+                and not order_id and not query_task and not context_report['candidate_selection'] and not is_slot_reply(selection_message) \
                 and draft.get("valid") is True and draft.get("ownerVerified") is True and draft.get("order"):
             order_id = str(draft["order"])
             context_report["chosen_order_id"] = order_id
@@ -192,6 +224,9 @@ class Lesson41Agent:
             order_id=order_id,
             model_used=route_result.used_model,
             capability_ids=route_result.capability_ids,
+            inquiry_topics=route_result.inquiry_topics,
+            topic_status=route_result.topic_status,
+            answer_order=route_result.answer_order,
             evidence=evidence if intent == "product_query" else {"clarification_fields": [] if policy_followup else route_result.clarification_fields},
         )
         product_resolution = None
@@ -215,6 +250,11 @@ class Lesson41Agent:
                 route_plan.required_tools = ["search_products"]
                 route_plan.tool_candidates = [ToolCandidate(name="search_products", domain="product", risk_level="low", reason="核对已指向商品的类别，为通用指南定位对象。")]
                 route_plan.needs_business_tools = True
+            if product_resolution["kind"] == "end_pending":
+                route_plan = route_plan.model_copy(update={
+                    "needs_rag": False, "knowledge_domains": [], "retrieval_strategies": [],
+                    "inquiry_topics": [], "topic_status": "empty", "answer_order": [],
+                })
         runtime_context = runtime_context_summary(request)
         uses_runtime_identity = is_runtime_identity_query(request.user_message)
         citations: list[Citation] = []
@@ -229,10 +269,17 @@ class Lesson41Agent:
         rag_retrieval: dict[str, Any] | None = None
         rag_retrieval_by_domain: dict[str, Any] = {}
         knowledge_result = None
+        knowledge_results: dict[str, KnowledgePathResult] = {}
+        pending_answer = ""
         verified_order_id: str | None = None
         verified_product_name: str | None = None
         verified_product_id: str | None = None
         clarification = build_order_clarification(request, route_plan)
+        if (clarification and selection_task.get('intent') == intent
+            and selection_task.get('pending_slot') == clarification.clarification_field
+            and selection_task.get('candidates')):
+            clarification.candidates = [ClarificationCandidate(value=c['value'], label=c['label'], hint=c.get('hint', ''))
+                                        for c in selection_task['candidates']]
         hooks = HookManager()
         tool_calling_state: dict[str, Any] = {
             "create_agent": False,
@@ -347,43 +394,11 @@ class Lesson41Agent:
             risk_level = knowledge_result.risk_level
             next_action = knowledge_result.next_action
             needs_human_approval = knowledge_result.needs_human_approval
-        elif intent == "invoice_query":
-            knowledge_result = invoice_faq_result(request.session_id)
-            record_trace_events(request.session_id, knowledge_result.trace_events)
-            answer = knowledge_result.answer
-            citations = knowledge_result.citations
-            risk_level = knowledge_result.risk_level
-            next_action = knowledge_result.next_action
-            needs_human_approval = knowledge_result.needs_human_approval
-            cache_hit = knowledge_result.cache_hit
-            rag_retrieval = knowledge_result.retrieval_debug
-        elif intent in {"refund_policy_query", "return_policy_query"}:
-            knowledge_result = policy_query_result(request.session_id, intent, request.user_message)
-            record_trace_events(request.session_id, knowledge_result.trace_events)
-            answer = knowledge_result.answer
-            if order_id:
-                answer = f"{answer} 这轮只说明通用规则，没有核验这笔订单，也没有准备申请。"
-            citations = knowledge_result.citations
-            risk_level = knowledge_result.risk_level
-            next_action = knowledge_result.next_action
-            needs_human_approval = knowledge_result.needs_human_approval
-            rag_retrieval = knowledge_result.retrieval_debug
-        elif intent == "promotion_query":
-            knowledge_result = promotion_policy_result(request.session_id, policy_question, clarification_required="promotion_combination" in route_plan.clarification_fields)
-            if knowledge_result.next_action == "ask_clarification":
-                memory["promotion_query"] = {"question": policy_question}
-            else:
-                memory.pop("promotion_query", None)
-            if not knowledge_result.citations and knowledge_result.next_action != "ask_clarification":
-                intent = "low_confidence_query"
-            record_trace_events(request.session_id, knowledge_result.trace_events)
-            answer = knowledge_result.answer
-            citations = knowledge_result.citations
-            rag_rerank = knowledge_result.rerank
-            rag_retrieval = knowledge_result.retrieval_debug
-            risk_level = knowledge_result.risk_level
-            next_action = knowledge_result.next_action
-            needs_human_approval = knowledge_result.needs_human_approval
+        elif intent in {"invoice_query", "refund_policy_query", "return_policy_query", "promotion_query"}:
+            answer = ""
+            risk_level = "low"
+            next_action = "answer_user"
+            needs_human_approval = False
         elif intent == "after_sale_eligibility_query":
             if clarification:
                 answer = clarification.message + "这轮只查资格，不准备申请。"
@@ -407,6 +422,12 @@ class Lesson41Agent:
         elif (request.runtime_context or {}).get("mallAfterSaleRouting") and intent in {"refund_request", "return_request"}:
             # 商城先分流，再由Java核验与准备；路由阶段不生成模拟审批草稿。
             answer = clarification.message if clarification else "已识别申请诉求，待商城核验最新资格并准备确认。"
+            if clarification and clarification.candidates:
+                choices = "；".join(
+                    f"{candidate.value}（{candidate.hint or candidate.label}）"
+                    for candidate in clarification.candidates
+                )
+                answer = f"{answer} 当前账号下可选订单：{choices}。"
             risk_level = "high"
             next_action = "ask_clarification" if clarification else "answer_user"
             needs_human_approval = False
@@ -445,7 +466,7 @@ class Lesson41Agent:
                 else:
                     verified_order_id = order_no(order)
                     return_reason = extract_return_reason(request.user_message)
-                    policy_result = policy_query_result(request.session_id, intent, request.user_message)
+                    policy_result = query_knowledge_domain(request.session_id, "received_return_policy", request.user_message)
                     citations.extend(policy_result.citations)
                     rag_retrieval = policy_result.retrieval_debug
                     record_trace_events(request.session_id, policy_result.trace_events)
@@ -497,10 +518,8 @@ class Lesson41Agent:
                         "source": "product_tool_read_failure",
                     },
                 )
-            citations.extend(outcome["citations"])
-            rag_rerank = outcome.get("rag_rerank")
-            rag_retrieval = outcome.get("rag_retrieval")
-            rag_retrieval_by_domain = outcome.get("rag_retrieval_by_domain", {})
+            knowledge_results.update(outcome["knowledge_results"])
+            pending_answer = outcome.get("pending_answer", "")
         elif intent in {"order_query", "refund_status_query", "refund_request"}:
             tool_result = self.langchain_tool_runner.run(
                 request=request,
@@ -634,7 +653,7 @@ class Lesson41Agent:
                     degraded = True
                     degradation_reason = status_call.error_type or "refund_status_unavailable"
             elif intent == "refund_request":
-                policy_result = policy_query_result(request.session_id, intent, request.user_message)
+                policy_result = query_knowledge_domain(request.session_id, "after_sale_policy", request.user_message)
                 citations.extend(policy_result.citations)
                 rag_retrieval = policy_result.retrieval_debug
                 record_trace_events(request.session_id, policy_result.trace_events)
@@ -726,6 +745,74 @@ class Lesson41Agent:
             next_action = "answer_user"
             needs_human_approval = False
 
+        # 所有只读入口共享分发与结果消费；商品入口只额外准备对象参数和咨询状态。
+        if (not uses_runtime_identity and not route_plan.requires_workflow
+            and intent not in {"security_request", "degradation_request"}
+            and (intent != "low_confidence_query" or route_plan.inquiry_topics)):
+            if clarification and next_action == "ask_clarification":
+                pending_answer = answer
+            from retrieval.rules import topic_catalog
+            catalog = topic_catalog()
+            per_domain_topics: dict[str, list[str]] = {}
+            for t in route_plan.inquiry_topics:
+                d = catalog.get(t)
+                if d:
+                    per_domain_topics.setdefault(d, []).append(t)
+            for strategy in route_plan.retrieval_strategies:
+                domain = strategy.knowledge_domain
+                if domain not in knowledge_results:
+                    query = policy_question if domain == "promotion_and_member_policy" else selection_message
+                    pending = None
+                    if domain == "product_knowledge" and not has_product_term(query):
+                        name = product_state.get("product_name") or product_state.get("knowledge_topic")
+                        if name:
+                            query = f"{name}：{query}"
+                        else:
+                            pending = "请补充商品类别或名称，我再说明对应的使用知识。"
+                    knowledge_results[domain] = query_knowledge_domain(request.session_id, domain, query,
+                        clarification_required="promotion_combination" in route_plan.clarification_fields,
+                        pending_message=pending,
+                        topics=per_domain_topics.get(domain, []))
+                result = knowledge_results[domain]
+                record_trace_events(request.session_id, result.trace_events)
+                citations.extend(result.citations)
+                rag_retrieval_by_domain[domain] = result.retrieval_debug
+                rag_retrieval = rag_retrieval or result.retrieval_debug
+                rag_rerank = rag_rerank or result.rerank
+                cache_hit = cache_hit or result.cache_hit
+                trace_store.add(request.session_id, "evidence_domain_completed", {
+                    **strategy.model_dump(), **result.retrieval_debug,
+                    "citations": [c.model_dump() for c in result.citations],
+                })
+                if domain == "promotion_and_member_policy" and intent != "product_query":
+                    if result.next_action == "ask_clarification":
+                        memory["promotion_query"] = {"question": policy_question}
+                    else:
+                        memory.pop("promotion_query", None)
+                if result.next_action == "ask_clarification":
+                    next_action = "ask_clarification"
+                if result.risk_level == "medium":
+                    risk_level = "medium"
+            if knowledge_results:
+                if intent != "product_query":
+                    answer = "\n\n".join(filter(None, [answer, *(r.answer for r in knowledge_results.values())]))
+                has_answered = any(r.citations for r in knowledge_results.values())
+                if len(knowledge_results) == 1 and not tool_calls and not clarification and intent != "product_query":
+                    knowledge_result = next(iter(knowledge_results.values()))
+                    if not knowledge_result.citations and knowledge_result.risk_level == "medium":
+                        # 单域政策无命中：保留知识组件的风险与答案，直接降级，不调用生成/judge。
+                        next_action = knowledge_result.next_action
+                        risk_level = "medium"
+                    else:
+                        next_action = knowledge_result.next_action
+                        risk_level = knowledge_result.risk_level
+                        if intent == "promotion_query" and not knowledge_result.citations and next_action != "ask_clarification":
+                            intent = "low_confidence_query"
+                elif next_action == "transfer_to_human" and has_answered:
+                    next_action = "answer_user"
+                elif next_action == "ask_clarification" and has_answered:
+                    next_action = "answer_user"
+
         # Tool/RAG 文本也是外部数据，进入最终模型前必须按来源做污染检查。
         external_reports: list[dict[str, Any]] = []
         for call in tool_calls:
@@ -757,15 +844,6 @@ class Lesson41Agent:
                 },
             )
 
-        if knowledge_result is not None and route_plan.retrieval_strategies:
-            strategy = route_plan.retrieval_strategies[0]
-            rag_retrieval_by_domain[strategy.knowledge_domain] = knowledge_result.retrieval_debug or {"mode": strategy.retrieval_mode, "cache_hit": cache_hit}
-            trace_store.add(request.session_id, "evidence_domain_completed", {
-                **strategy.model_dump(),
-                "status": "pending" if knowledge_result.next_action == "ask_clarification" else ("answered" if knowledge_result.citations else "no_evidence"),
-                "retrieval": rag_retrieval_by_domain[strategy.knowledge_domain],
-                "citations": [c.model_dump() for c in knowledge_result.citations],
-            })
         if rag_retrieval:
             trace_store.add(
                 request.session_id,
@@ -809,6 +887,7 @@ class Lesson41Agent:
             cache_hit=cache_hit,
             degraded=degraded,
             skip_final_model=uses_runtime_identity or intent == "after_sale_eligibility_query"
+                or bool(product_resolution and product_resolution["kind"] == "end_pending")
                 or bool(knowledge_result is not None and not knowledge_result.citations
                         and knowledge_result.next_action == "answer_user")
                 or bool(intent in {"refund_request", "return_request"} and not citations)
@@ -818,6 +897,7 @@ class Lesson41Agent:
             context_report=context_report,
             capability_results=capability_results,
             route_plan=route_plan,
+            knowledge_results=knowledge_results, pending_answer=pending_answer,
         )
         answer = model_answer.answer
         if model_answer.reviewed_citations is not None:
@@ -845,33 +925,9 @@ class Lesson41Agent:
             )
 
         stored = current_memory(request.session_id, request.runtime_user_id)
-        if intent == "after_sale_eligibility_query":
-            queried = next((call for call in tool_calls if call.tool_name == "get_after_sale_eligibility" and call.status == "success"), None)
-            stored["eligibility_query"] = {
-                "intent": intent, "order_id": order_id if queried else None,
-                "application_type": eligibility.get("applicationType") if eligibility else None,
-                "pending_slot": "order_id" if clarification else None,
-                "candidates": [{"value": item.value, "label": item.label} for item in (clarification.candidates if clarification else [])],
-            }
-        elif intent == "product_query":
-            # 商品任务状态独立保存在 product_query，不新建、也不清掉退款待办。
-            pass
-        elif route_plan.capability_ids or intent == "service_scope_query":
-            # 能力咨询不覆盖原售后待办，也不新建申请。
-            pass
-        elif intent == "promotion_query" and next_action == "ask_clarification":
-            pass
-        elif next_action == "ask_clarification" and intent not in {"unknown", "general_chat", "product_query"}:
-            stored["open_task"] = {
-                "intent": intent,
-                "pending_slot": clarification.clarification_field if clarification else "order_id",
-                "candidates": [
-                    {"value": item.value, "label": item.label}
-                    for item in (clarification.candidates if clarification else [])
-                ],
-            }
-        else:
-            stored["open_task"] = None
+        update_pending_tasks(stored, plan=route_plan, clarification=clarification, next_action=next_action,
+                             verified_order_id=verified_order_id, workflow=workflow,
+                             eligibility=eligibility, order_id=order_id)
         memory = update_memory(
             session_id=request.session_id,
             runtime_user_id=request.runtime_user_id,
@@ -943,6 +999,14 @@ class Lesson41Agent:
                 "agent_version": "lesson-41-final-rehearsal",
                 "message_count": message_count,
                 "intent": intent,
+                'task_control_requested': task_control_requested,
+                'task_relation': route_result.task_relation,
+                # 没有办理计划或任务控制请求的轮次，不允许网关顺带改售后草稿。
+                "read_only_turn": bool(
+                    not route_plan.requires_workflow and not task_control_requested
+                    and workflow is None
+                    and not needs_human_approval
+                ),
                 "eligibility_query": stored.get("eligibility_query"),
                 "product_query": stored.get("product_query"),
                 "model": {
@@ -1086,7 +1150,6 @@ class Lesson41Agent:
             "risk_level": "low",
             "next_action": "answer_user",
             "tool_calls": [],
-            "citations": [],
             "verified_product_id": None,
             "verified_product_name": None,
             "degraded": False,
@@ -1103,9 +1166,7 @@ class Lesson41Agent:
             },
             "prompt_fragments": [],
             "model_calls": 0,
-            "rag_rerank": None,
-            "rag_retrieval": None,
-            "rag_retrieval_by_domain": {},
+            "knowledge_results": {},
         }
 
         def _finish_product_call(call: ToolCallTrace) -> None:
@@ -1236,58 +1297,41 @@ class Lesson41Agent:
                 outcome["next_action"] = call.next_action or "answer_user"
                 outcome["risk_level"] = "medium"
             _finish_product_call(call)
+        outcome["pending_answer"] = outcome["answer"] if outcome["next_action"] == "ask_clarification" else ""
         pending_domains: list[str] = []
         pending_fields: list[str] = []
+        from retrieval.rules import topic_catalog
+        catalog = topic_catalog()
         for strategy in route_plan.retrieval_strategies:
             domain = strategy.knowledge_domain
-            result = None
-            if domain == "product_knowledge" and strategy.retrieval_mode == "hybrid":
+            query = (policy_question or question) if domain == "promotion_and_member_policy" else question
+            pending = None
+            if domain == "product_knowledge":
                 name = outcome.get("verified_product_name") or (None if route_plan.required_tools and route_plan.needs_product_facts is False else pstate.get("product_name") or pstate.get("knowledge_topic"))
-                if has_product_term(question) or name:
-                    if has_product_term(question):
-                        pstate["knowledge_topic"] = product_query_keyword(question)
-                    query = question if has_product_term(question) else f"{name}：{question}"
-                    result = product_knowledge_result(request.session_id, query)
+                if has_product_term(question):
+                    pstate["knowledge_topic"] = product_query_keyword(question)
+                elif name:
+                    query = f"{name}：{question}"
                 else:
-                    if pstate.get("pending_identity") is not None:
-                        text = ("当前商品编号未查到，不能提供对应指南，请核对商品编号或名称。"
-                            if outcome["tool_calls"] and outcome["tool_calls"][-1].error_type == "product_not_found"
-                            else "页面商品类别暂未核实，尚不能提供对应指南，可以稍后重试。")
-                    else:
-                        text = "请补充商品类别或名称，我再说明对应的使用知识。"
-                        outcome["next_action"] = "ask_clarification"
-                    outcome["answer"] = "\n\n".join(filter(None, (outcome["answer"], text)))
-                    pending_domains.append(domain)
-            elif domain == "promotion_and_member_policy" and strategy.retrieval_mode == "hybrid":
-                result = promotion_policy_result(request.session_id, policy_question or question,
-                    clarification_required="promotion_combination" in route_plan.clarification_fields)
+                    pending = ("当前商品编号未查到，不能提供对应指南，请核对商品编号或名称。"
+                        if pstate.get("pending_identity") is not None
+                        else "请补充商品类别或名称，我再说明对应的使用知识。")
+            result = query_knowledge_domain(request.session_id, domain, query,
+                clarification_required="promotion_combination" in route_plan.clarification_fields,
+                pending_message=pending,
+                pending_action=outcome["next_action"] if pstate.get("pending_identity") is not None else "ask_clarification",
+                topics=[t for t in route_plan.inquiry_topics if catalog.get(t) == domain])
+            outcome["knowledge_results"][domain] = result
+            outcome["answer"] = "\n\n".join(filter(None, (outcome["answer"], result.answer)))
+            if result.next_action == "ask_clarification":
+                pending_domains.append(domain)
+                outcome["next_action"] = "ask_clarification"
+            if domain == "promotion_and_member_policy":
                 if result.next_action == "ask_clarification":
-                    pending_domains.append(domain)
                     pending_fields.append("promotion_combination")
                     pstate["pending_policy_question"] = policy_question or question
                 else:
                     pstate.pop("pending_policy_question", None)
-            if result is not None:
-                record_trace_events(request.session_id, result.trace_events)
-                outcome["citations"].extend(result.citations)
-                outcome["rag_retrieval"] = result.retrieval_debug
-                outcome["rag_retrieval_by_domain"][domain] = result.retrieval_debug
-                text = result.answer
-                if domain == "promotion_and_member_policy" and result.citations:
-                    text = "平台通用规则：" + text + "\n这不代表该规则一定适用于当前商品或本人优惠券，具体组合以商品页和结算页为准。"
-                outcome["answer"] = "\n\n".join(filter(None, (outcome["answer"], text)))
-                if result.next_action == "ask_clarification":
-                    outcome["next_action"] = "ask_clarification"
-                outcome["risk_level"] = "medium" if result.risk_level == "medium" else outcome["risk_level"]
-                if result.rerank:
-                    outcome["rag_rerank"] = result.rerank
-            trace_store.add(request.session_id, "evidence_domain_completed", {
-                "knowledge_domain": domain, "retrieval_mode": strategy.retrieval_mode,
-                "citation_scope": strategy.citation_scope,
-                "status": "pending" if domain in pending_domains else ("answered" if result and result.citations else "no_evidence"),
-                "retrieval": result.retrieval_debug if result else None,
-                "citations": [c.model_dump() for c in result.citations] if result else [],
-            })
         pending_facts = route_plan.needs_product_facts if status != "answered" else False
         if pending_facts is not False or pending_domains:
             pstate["pending_evidence"] = {
@@ -1332,9 +1376,31 @@ class Lesson41Agent:
         context_report: dict[str, Any],
         capability_results: list[dict[str, Any]],
         route_plan: RoutePlan,
+        knowledge_results: dict[str, KnowledgePathResult] | None = None,
+        pending_answer: str = "",
     ) -> FinalAnswerModelResult:
         """让真实模型生成最终话术，但安全、低置信、降级和缓存命中保留确定性边界。"""
-        fallback_answer = compose_capability_fallback(answer, capability_results)
+        from retrieval.rules import select_rules
+        content_selection = None
+        content_context = None
+        content_eligible = (intent in REVIEW_INTENTS and workflow is None and risk_level != "high"
+                            and (next_action == "answer_user" or bool(knowledge_results))
+                            and all(call.tool_name in READ_TOOLS for call in tool_calls))
+        has_answered_knowledge = bool(knowledge_results) and any(r.citations for r in knowledge_results.values())
+        single_domain_unavailable = (bool(knowledge_results) and len(knowledge_results) == 1
+                                     and not has_answered_knowledge
+                                     and next(iter(knowledge_results.values())).risk_level == "medium")
+        if content_eligible and (route_plan.needs_rag or citations or route_plan.topic_status in {
+            "invalid_type", "unknown_id", "duplicate", "too_many", "incompatible"
+        }):
+            citations, content_selection = select_rules(citations, route_plan.inquiry_topics,
+                route_plan.knowledge_domains, route_plan.topic_status)
+            content_context, answer, _ = build_review_context(
+                request=request, plan=route_plan, answer="", tool_calls=tool_calls,
+                citations=citations, capabilities=capability_results,
+                history=context_report["model_context"], content_selection=content_selection,
+                knowledge_results=knowledge_results, pending_answer=pending_answer)
+        fallback_answer = answer if content_context is not None else compose_capability_fallback(answer, capability_results)
         skip_reason: str | None = None
         if skip_final_model:
             skip_reason = "runtime_context_direct_answer"
@@ -1342,9 +1408,11 @@ class Lesson41Agent:
             skip_reason = "degraded_path"
         elif preserve_tool_wording:
             skip_reason = "verified_tool_wording"
-        elif next_action == "ask_clarification":
+        elif next_action == "ask_clarification" and not has_answered_knowledge:
             skip_reason = "clarification_required"
-        elif intent in {"security_request", "low_confidence_query"}:
+        elif single_domain_unavailable:
+            skip_reason = "single_domain_policy_unavailable"
+        elif intent in {"security_request", "low_confidence_query"} and not has_answered_knowledge:
             skip_reason = "safety_or_low_confidence_boundary"
         elif intent == "unknown" and not (tool_calls or citations or capability_results):
             skip_reason = "unclear_task"
@@ -1358,11 +1426,14 @@ class Lesson41Agent:
                 "model_answer_skipped",
                 {"session_id": request.session_id, "intent": intent, "reason": skip_reason},
             )
+            if content_selection is not None:
+                result.reviewed_citations = citations
+                result.answer_judge["review_id"] = record_review(content_context, "", result.answer,
+                    {"status": "skipped", "reason": skip_reason, "decision": "not_reviewed"})
             return result
 
         mode, judge_model, judge_timeout = answer_judge_settings()
-        eligible = (intent in REVIEW_INTENTS and workflow is None and next_action == "answer_user"
-                    and risk_level != "high" and all(call.tool_name in READ_TOOLS for call in tool_calls))
+        eligible = content_eligible
         review_context = None
         hard_issues: list[str] = []
         if mode != "off" and eligible:
@@ -1373,7 +1444,8 @@ class Lesson41Agent:
             review_context, trusted_fallback, hard_issues = build_review_context(
                 request=request, plan=route_plan, answer=answer, tool_calls=tool_calls,
                 citations=citations, capabilities=capability_results, history=context_report["model_context"],
-                interaction_policy=interaction_policy)
+                interaction_policy=interaction_policy, content_selection=content_selection,
+                knowledge_results=knowledge_results, pending_answer=pending_answer)
             trace_store.add(request.session_id, "interaction_policy_queried", {
                 "session_id": request.session_id,
                 "failure": interaction_policy.get("failure"),
@@ -1398,7 +1470,7 @@ class Lesson41Agent:
             enable_reasoning=enable_reasoning,
             model_context=context_report["model_context"],
             capability_results=capability_results,
-            review_context=review_context if mode == "enforce" else None,
+            review_context=review_context if mode == "enforce" else content_context,
         )
         reviews = []
         generation_calls = 0
@@ -1428,6 +1500,7 @@ class Lesson41Agent:
             reviews.append(review)
             if (attempt == 0 and mode == "enforce" and review_context is not None
                     and not hard_issues
+                    and not (content_selection or {}).get("gaps")
                     and not any((item.get("facts") or {}).get("failure")
                                 or (item.get("facts") or {}).get("supportStatus") == "unknown"
                                 or item.get("status") in {"error", "invalid"}
@@ -1479,10 +1552,11 @@ class Lesson41Agent:
                 "reasoning_source": None,
             })
         # 公开Trace只放结论和计量；原文、理由、证据留内部有界审阅记录。
-        review_id = record_review(review_context, original_candidate, result.answer,
+        audit_context = review_context or content_context
+        review_id = record_review(audit_context, original_candidate, result.answer,
             {"mode": mode, "hard_issues": hard_issues, **review.model_dump(),
              "attempts": [item.model_dump() for item in reviews],
-             "repaired_candidate": candidate if repair_feedback is not None else None}) if review_context is not None else None
+             "repaired_candidate": candidate if repair_feedback is not None else None}) if audit_context is not None else None
         result.answer_judge = {"mode": mode, "review_id": review_id, "hard_issues": hard_issues,
             **review.model_dump(exclude={"checks"}),
             "verdicts": {key: check["verdict"] for key, check in review.checks.items()},
@@ -1493,7 +1567,7 @@ class Lesson41Agent:
             "elapsed_ms": sum(item.elapsed_ms for item in reviews),
             "usage": {key: sum(item.usage.get(key, 0) for item in reviews)
                       for key in {key for item in reviews for key in item.usage}}}
-        if mode == "enforce" and review_context is not None:
+        if content_selection is not None or (mode == "enforce" and review_context is not None):
             result.reviewed_citations = [item for item in citations if citation_is_current(item, knowledge_time())]
         trace_store.add(request.session_id, "answer_judged", result.answer_judge)
         trace_store.add(

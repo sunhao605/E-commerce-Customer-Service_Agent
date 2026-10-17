@@ -1,0 +1,11 @@
+{
+  "head": "351b12b6b2bc7e79273e9ea297a2d0c0225cf5f6",
+  "files": {
+    "backend/agent/customer_service_agent.py": "e296bab90a95ff4217828a7cc3500a788fa1ec31123821a1e60fd5d75d579e0a",
+    "backend/agent/context.py": "8125e7b5aac0d8c15771016ac93821e824a08abe808586ef0460d1d53f7f491a",
+    "backend/agent/models/router_client.py": "4243008e5017c6cd9c9e4106fa0f4f99007b8a06ab9c73558760cf082b8d52b6",
+    "backend/resources/prompts/route_contract.md": "5c5effdfc8c6188c3d3ecd90ea146dd1aa09747581b93aacfebeaa6e1982d448",
+    "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/CustomerServiceGatewayService.java": "bf3a46bc3d4b468421cf930362ac01e39d121d46b7224e946172e898593c1f1a",
+    "backend/tests/test_route_priority.py": "c6a0fc2ee1c8a522a69e73707971ea2e0218d522c37d5010296c5612ee1ee2bc"
+  }
+}

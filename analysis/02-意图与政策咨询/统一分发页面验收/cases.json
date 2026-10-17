@@ -1,0 +1,135 @@
+{
+  "scope": "DISPATCH-PAGE-001：统一分发商城页面验收。复用BC032-LIVE-002环境组织；验证组合答复页面展示、插问保留原退款、澄清展示、单域对照。构造初态在seed中标明。",
+  "orders": {
+    "A": "ORD9801",
+    "B": "ORD9802",
+    "C": "ORD9803",
+    "mapping": "A/B为本人已支付未发货订单（退款候选）；C为页面另笔订单。"
+  },
+  "budget": {
+    "max_model_http": 40,
+    "stop_before_next_request_at_tokens": 120000,
+    "max_natural_turns": 10,
+    "note": "用户已在本轮聊天确认：页面验证无新增模型预算授权，复用DISPATCH-LIVE-001的真实响应离线回放；若需新调用须另行确认。"
+  },
+  "cases": [
+    {
+      "id": "P01",
+      "title": "组合答复页面展示（发票＋优惠）",
+      "driver": "browser",
+      "seed": {
+        "java": null,
+        "python": null
+      },
+      "turns": [
+        {
+          "id": "P01-T1",
+          "message": "发票多久开好？露营季满减和平台会员券能叠加吗？",
+          "page": {"type": "HOME"},
+          "reply_from": "D01",
+          "check": {
+            "answer_terms": {"all": ["发票", "叠加"]},
+            "answer_absent": ["退货政策", "七天无理由"],
+            "java_card": "none",
+            "page_display_terms": {"all": ["发票", "叠加"]},
+            "page_display_absent": ["退货政策", "七天无理由"]
+          }
+        }
+      ],
+      "allowed": "页面完整展示组合答复（发票＋优惠两项），无退货政策混入；不出现售后确认卡。",
+      "forbidden": ["答复被截断或只显示一项", "知识插问被当作售后办理", "重发确认卡"]
+    },
+    {
+      "id": "P02",
+      "title": "售后待办下插问商品知识（状态保留＋页面无卡）",
+      "driver": "browser",
+      "seed": {
+        "java": {"pending": "REFUND_ORDER_REQUIRED", "actionType": "REFUND", "revision": 3, "expiresMinutes": 30},
+        "python": {
+          "open_task": {"intent": "refund_request", "pending_slot": "order_id", "version": 3,
+            "candidates": [{"value": "ORD9801", "label": "ORD9801"}, {"value": "ORD9802", "label": "ORD9802"}]},
+          "clarification_focus": "open_task"
+        }
+      },
+      "turns": [
+        {
+          "id": "P02-T1",
+          "message": "先问一下，帐篷怎么清洗收纳？",
+          "page": {"type": "HOME"},
+          "reply_from": "D04",
+          "check": {
+            "java_card": "none",
+            "answer_terms": {"any": ["帐篷", "清洗", "收纳", "晾干"]},
+            "answer_absent": ["退款", "取消"],
+            "page_no_confirm_card": true,
+            "page_display_terms": {"any": ["帐篷", "清洗", "晾干"]}
+          }
+        },
+        {
+          "id": "P02-T2",
+          "message": "继续刚才那笔退款，选第一笔。原因：买错了。",
+          "page": {"type": "HOME"},
+          "live_model": true,
+          "check": {
+            "java_card": {"order": "ORD9801", "type": "REFUND"},
+            "answer_terms": {"any": ["核对", "确认"]}
+          }
+        }
+      ],
+      "allowed": "插问只答商品知识，原退款待办（候选A/B、版本3）保留；续办走原业务规则绑定ORD9801并展示确认卡。",
+      "forbidden": ["插问清空或覆盖原退款待办", "知识答复里出现退款内容或误当退款原因", "插问触发确认卡或新申请"]
+    },
+    {
+      "id": "P03",
+      "title": "优惠澄清与发票独立作答的页面展示",
+      "driver": "browser",
+      "seed": {
+        "java": null,
+        "python": null
+      },
+      "turns": [
+        {
+          "id": "P03-T1",
+          "message": "会员券能和优惠叠加吗？另外发票多久开好？",
+          "page": {"type": "HOME"},
+          "reply_from": "D03",
+          "check": {
+            "answer_terms": {"all": ["发票", "叠加"]},
+            "answer_absent": ["退货政策"],
+            "java_card": "none",
+            "page_display_terms": {"all": ["发票", "叠加"]},
+            "page_no_confirm_card": true
+          }
+        }
+      ],
+      "allowed": "页面同时展示发票答案与优惠澄清问句，两项可见。",
+      "forbidden": ["只发澄清丢发票答案", "澄清被当作售后或取消"]
+    },
+    {
+      "id": "P04",
+      "title": "单域发票对照",
+      "driver": "browser",
+      "seed": {
+        "java": null,
+        "python": null
+      },
+      "turns": [
+        {
+          "id": "P04-T1",
+          "message": "电子发票多久开好？",
+          "page": {"type": "HOME"},
+          "reply_from": "D05",
+          "check": {
+            "answer_terms": {"all": ["发票"]},
+            "answer_absent": ["退货政策", "叠加", "会员券"],
+            "java_card": "none",
+            "page_display_terms": {"all": ["发票"]},
+            "page_no_confirm_card": true
+          }
+        }
+      ],
+      "allowed": "单域答复原样展示，无其他领域内容混入。",
+      "forbidden": ["其他领域资料混入页面"]
+    }
+  ]
+}

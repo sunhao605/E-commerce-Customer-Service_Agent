@@ -1,0 +1,439 @@
+{
+  "id": "DOMAIN-DISPATCH-DESIGN-001",
+  "type": "fixed_route_offline_diagnostic",
+  "real_model_calls": 0,
+  "real_business_calls": 0,
+  "source_hashes": {
+    "backend/agent/customer_service_agent.py": "7e12f81edb3475189cfc1f8f26a66f7dbec41a680795ceb0abbb686ad00416cf",
+    "backend/agent/tools/planning.py": "862d6280ae9c0ba27a12e47593b828aff3163f651c3c6d8b38adc155abd1aef4",
+    "backend/retrieval/knowledge.py": "d3d993b7657c72ee4c0c80f6c97bf2afef5727cf7a962cf75e8285729c40c80c",
+    "backend/retrieval/hybrid_retrieval.py": "67265ad4b94b84c14450ca78327bcf877ab1618642f111d89a619441c4da313c",
+    "backend/retrieval/rules.py": "1fb0f875066dbb9372973e4ee785392c8cba230ef8b66fd9f482a32888d82d63",
+    "backend/agent/answer_review.py": "8b59369d7e6b97cc40be99022f00086f1726670445c32867fd07422c0b707cd7"
+  },
+  "source_unchanged": true,
+  "cases": [
+    {
+      "id": "invoice_promotion",
+      "question": "发票多久开好？露营季满减和平台会员券能叠加吗？",
+      "fixed_route": {
+        "intent": "invoice_query",
+        "capability_ids": [],
+        "inquiry_topics": [
+          "invoice_issue",
+          "promotion_stacking"
+        ]
+      },
+      "planned_domains": [
+        "invoice",
+        "promotion_and_member_policy"
+      ],
+      "calls": [
+        {
+          "provider": "invoice_faq_result",
+          "input_intent": null,
+          "actual_retrieval_domains": [
+            "invoice"
+          ],
+          "policy_ids": [
+            "invoice_issue"
+          ]
+        },
+        {
+          "provider": "policy_query_result",
+          "input_intent": "return_policy_query",
+          "actual_retrieval_domains": [
+            "after_sale_return"
+          ],
+          "policy_ids": [
+            "return_after_delivery",
+            "return_after_delivery",
+            "return_after_delivery",
+            "return_after_delivery"
+          ]
+        }
+      ],
+      "recorded_domains": [],
+      "citations": [
+        {
+          "source": "knowledge/payment_invoice_policy.md",
+          "title": "荒野户外发票 FAQ",
+          "snippet": "电子发票通常在订单完成后 24 小时内开具，可在订单详情页查看和下载。",
+          "score": 0.9,
+          "retrieval_stage": "pre_retrieval",
+          "metadata": {
+            "rule_issues": [],
+            "policy_id": "invoice_issue",
+            "scene_key": "payment_invoice",
+            "version": "2026-10-17.1",
+            "publication_status": "published",
+            "effective_from": "2025-01-01T00:00:00+08:00",
+            "effective_to": "2028-01-01T00:00:00+08:00",
+            "snapshot_version": "knowledge-669e2fc4af88",
+            "rule_id": "invoice_issue",
+            "rule_topics": [
+              "invoice_issue"
+            ],
+            "required_rules": [],
+            "scope": "mall_demo",
+            "rule_sources": [
+              {
+                "source": "knowledge/payment_invoice_policy.md",
+                "policy_id": "invoice_issue",
+                "version": "2026-10-17.1"
+              }
+            ],
+            "section_id": "invoice_issue",
+            "section": "发票开具与下载",
+            "answer_topic": "invoice_issue"
+          }
+        }
+      ],
+      "answer": "电子发票通常在订单完成后 24 小时内开具，可在订单详情页查看和下载。\n\n关于满减与会员券叠加，本轮未取得完整且一致的有效规则，暂不能确认。",
+      "next_action": "answer_user"
+    },
+    {
+      "id": "refund_product",
+      "question": "退款多久到账？帐篷怎么清洁收纳？",
+      "fixed_route": {
+        "intent": "refund_policy_query",
+        "capability_ids": [],
+        "inquiry_topics": [
+          "refund_arrival",
+          "tent_care"
+        ]
+      },
+      "planned_domains": [
+        "after_sale_policy",
+        "product_knowledge"
+      ],
+      "calls": [
+        {
+          "provider": "policy_query_result",
+          "input_intent": "refund_policy_query",
+          "actual_retrieval_domains": [
+            "after_sale_refund"
+          ],
+          "policy_ids": [
+            "refund_before_shipping",
+            "refund_before_shipping",
+            "refund_before_shipping",
+            "refund_before_shipping"
+          ]
+        },
+        {
+          "provider": "promotion_policy_result",
+          "input_intent": null,
+          "actual_retrieval_domains": [
+            "promotion",
+            "member_coupon"
+          ],
+          "policy_ids": [
+            "promotion_camping_season_stack_rule",
+            "member_coupon_gold_rule",
+            "member_coupon_gold_rule",
+            "promotion_camping_season_stack_rule"
+          ]
+        }
+      ],
+      "recorded_domains": [],
+      "citations": [
+        {
+          "source": "knowledge/after_sale_policy.md",
+          "title": "荒野户外未发货退款 SOP",
+          "snippet": "当前退款使用演示余额和资金流水，不提供真实银行卡、支付宝或微信退款的到账时限保证。",
+          "score": 0.92,
+          "retrieval_stage": "pre_retrieval",
+          "metadata": {
+            "rule_issues": [],
+            "policy_id": "refund_before_shipping",
+            "scene_key": "after_sale_refund",
+            "version": "2026-10-17.1",
+            "publication_status": "published",
+            "effective_from": "2025-01-01T00:00:00+08:00",
+            "effective_to": "2028-01-01T00:00:00+08:00",
+            "snapshot_version": "knowledge-669e2fc4af88",
+            "rule_id": "refund_arrival",
+            "rule_topics": [
+              "refund_arrival"
+            ],
+            "required_rules": [],
+            "scope": "mall_demo",
+            "rule_sources": [
+              {
+                "source": "knowledge/after_sale_policy.md",
+                "policy_id": "refund_before_shipping",
+                "version": "2026-10-17.1"
+              }
+            ],
+            "section_id": "refund_arrival",
+            "section": "退款到账",
+            "answer_topic": "refund_arrival"
+          }
+        }
+      ],
+      "answer": "当前退款使用演示余额和资金流水，不提供真实银行卡、支付宝或微信退款的到账时限保证。\n\n关于清洁、收纳与首次检查，本轮未取得完整且一致的有效规则，暂不能确认。\n\n以上为通用售后规则，具体订单资格仍需核验，不代表已经提交申请。",
+      "next_action": "answer_user"
+    },
+    {
+      "id": "promotion_product",
+      "question": "露营季满减和平台会员券能叠加吗？帐篷怎么清洗？",
+      "fixed_route": {
+        "intent": "promotion_query",
+        "capability_ids": [],
+        "inquiry_topics": [
+          "promotion_stacking",
+          "tent_care"
+        ],
+        "clarification_fields": []
+      },
+      "planned_domains": [
+        "promotion_and_member_policy",
+        "product_knowledge"
+      ],
+      "calls": [
+        {
+          "provider": "promotion_policy_result",
+          "input_intent": null,
+          "actual_retrieval_domains": [
+            "promotion",
+            "member_coupon"
+          ],
+          "policy_ids": [
+            "promotion_camping_season_stack_rule",
+            "member_coupon_gold_rule",
+            "member_coupon_gold_rule",
+            "member_coupon_gold_rule"
+          ]
+        },
+        {
+          "provider": "policy_query_result",
+          "input_intent": "return_policy_query",
+          "actual_retrieval_domains": [
+            "after_sale_return"
+          ],
+          "policy_ids": [
+            "return_after_delivery",
+            "return_after_delivery",
+            "return_after_delivery",
+            "return_after_delivery"
+          ]
+        }
+      ],
+      "recorded_domains": [],
+      "citations": [
+        {
+          "source": "knowledge/promotion_policy.md",
+          "title": "荒野户外 露营季活动规则",
+          "snippet": "## 4. 满 300 减 40 与叠加边界\n\n符合露营季活动条件时，满 300 减 40 可以与平台会员券叠加；同类型满减券不能重复叠加。该规则没有定义“每满 300 减 40”、所有订单无限次参加或其他券种一律兼容。\n\n是否达到300元取决于活动计入的金额和商品范围。运费、未选中商品或其他活动商品是否计入，当前通用规则没有统一保证。\n\n满600元不自动表示减80元；不同券种能否组合，仍以对应券及活动规则为准。该规则不自动覆盖品类券、定向券或未发布的其他活动。",
+          "score": 0.91,
+          "retrieval_stage": "pre_retrieval",
+          "metadata": {
+            "rule_issues": [],
+            "policy_id": "promotion_camping_season_stack_rule",
+            "scene_key": "promotion",
+            "version": "2026-10-17.1",
+            "publication_status": "published",
+            "effective_from": "2025-01-01T00:00:00+08:00",
+            "effective_to": "2028-01-01T00:00:00+08:00",
+            "snapshot_version": "knowledge-669e2fc4af88",
+            "rule_id": "promotion_stacking",
+            "rule_topics": [
+              "promotion_stacking"
+            ],
+            "required_rules": [
+              "coupon_conditions",
+              "promotion_scope"
+            ],
+            "scope": "mall_demo",
+            "rule_sources": [
+              {
+                "source": "knowledge/promotion_policy.md",
+                "policy_id": "promotion_camping_season_stack_rule",
+                "version": "2026-10-17.1"
+              },
+              {
+                "source": "knowledge/member_coupon_policy.md",
+                "policy_id": "member_coupon_gold_rule",
+                "version": "2026-10-17.1"
+              }
+            ],
+            "section_id": "promotion_stacking",
+            "section": "## 4. 满 300 减 40 与叠加边界",
+            "answer_topic": "promotion_stacking"
+          }
+        },
+        {
+          "source": "knowledge/member_coupon_policy.md",
+          "title": "荒野户外会员券使用规则",
+          "snippet": "## 3. 优惠券使用条件\n\n具体券能否使用，取决于所属账号、状态、开始和截止时间、满额门槛、适用品类或商品范围，以及本次订单条件。\n\n未到使用时间、已过期、已使用或不属于本人账号的券不等于本人当前可用券。朋友的券截图不会改变归属；当前没有口头延期或转移权益的办理能力。\n\n品类券不能默认用于全部商品；多张券分别满足使用条件不代表可以组合，组合条件引用活动叠加规则。",
+          "score": 0.89,
+          "retrieval_stage": "pre_retrieval",
+          "metadata": {
+            "rule_issues": [],
+            "policy_id": "member_coupon_gold_rule",
+            "scene_key": "member_coupon",
+            "version": "2026-10-17.1",
+            "publication_status": "published",
+            "effective_from": "2025-01-01T00:00:00+08:00",
+            "effective_to": "2028-01-01T00:00:00+08:00",
+            "snapshot_version": "knowledge-669e2fc4af88",
+            "rule_id": "coupon_conditions",
+            "rule_topics": [
+              "coupon_conditions"
+            ],
+            "required_rules": [],
+            "scope": "mall_demo",
+            "rule_sources": [
+              {
+                "source": "knowledge/member_coupon_policy.md",
+                "policy_id": "member_coupon_gold_rule",
+                "version": "2026-10-17.1"
+              }
+            ],
+            "section_id": "coupon_conditions",
+            "section": "## 3. 优惠券使用条件",
+            "answer_topic": "promotion_stacking"
+          }
+        },
+        {
+          "source": "knowledge/promotion_policy.md",
+          "title": "荒野户外 露营季活动规则",
+          "snippet": "## 1. 适用范围\n\n活动是否正在进行、具体参与商品、活动价、会员门槛、优惠券状态与最终金额，以对应活动、商品及结算信息为准。\n\n露营季不代表固定月份，也没有覆盖全部商品的永久活动周期。文档更新时间不代表活动开始时间，以上规则不包含未发布的其他活动或隐藏券。",
+          "score": 0.91,
+          "retrieval_stage": "pre_retrieval",
+          "metadata": {
+            "rule_issues": [],
+            "policy_id": "promotion_camping_season_stack_rule",
+            "scene_key": "promotion",
+            "version": "2026-10-17.1",
+            "publication_status": "published",
+            "effective_from": "2025-01-01T00:00:00+08:00",
+            "effective_to": "2028-01-01T00:00:00+08:00",
+            "snapshot_version": "knowledge-669e2fc4af88",
+            "rule_id": "promotion_scope",
+            "rule_topics": [
+              "promotion_scope"
+            ],
+            "required_rules": [],
+            "scope": "mall_demo",
+            "rule_sources": [
+              {
+                "source": "knowledge/promotion_policy.md",
+                "policy_id": "promotion_camping_season_stack_rule",
+                "version": "2026-10-17.1"
+              }
+            ],
+            "section_id": "promotion_scope",
+            "section": "## 1. 适用范围",
+            "answer_topic": "promotion_stacking"
+          }
+        }
+      ],
+      "answer": "符合露营季活动条件时，满 300 减 40 可以与平台会员券叠加；同类型满减券不能重复叠加。该规则没有定义“每满 300 减 40”、所有订单无限次参加或其他券种一律兼容。\n\n是否达到300元取决于活动计入的金额和商品范围。运费、未选中商品或其他活动商品是否计入，当前通用规则没有统一保证。\n\n满600元不自动表示减80元；不同券种能否组合，仍以对应券及活动规则为准。该规则不自动覆盖品类券、定向券或未发布的其他活动。\n\n具体券能否使用，取决于所属账号、状态、开始和截止时间、满额门槛、适用品类或商品范围，以及本次订单条件。\n\n未到使用时间、已过期、已使用或不属于本人账号的券不等于本人当前可用券。朋友的券截图不会改变归属；当前没有口头延期或转移权益的办理能力。\n\n品类券不能默认用于全部商品；多张券分别满足使用条件不代表可以组合，组合条件引用活动叠加规则。\n\n活动是否正在进行、具体参与商品、活动价、会员门槛、优惠券状态与最终金额，以对应活动、商品及结算信息为准。\n\n露营季不代表固定月份，也没有覆盖全部商品的永久活动周期。文档更新时间不代表活动开始时间，以上规则不包含未发布的其他活动或隐藏券。\n\n关于清洁、收纳与首次检查，本轮未取得完整且一致的有效规则，暂不能确认。\n\n以上为平台通用规则，不代表当前商品参与活动或本人优惠券已适用，具体组合以商品页和结算条件为准。",
+      "next_action": "answer_user"
+    },
+    {
+      "id": "capability_product_control",
+      "question": "支持到货提醒吗？帐篷怎么清洗？",
+      "fixed_route": {
+        "intent": "service_scope_query",
+        "capability_ids": [
+          "stock_notification"
+        ],
+        "inquiry_topics": [
+          "tent_care"
+        ]
+      },
+      "planned_domains": [
+        "product_knowledge"
+      ],
+      "calls": [
+        {
+          "provider": "product_knowledge_result",
+          "input_intent": null,
+          "actual_retrieval_domains": [
+            "product_knowledge"
+          ],
+          "policy_ids": [
+            "outdoor_product_guide",
+            "outdoor_product_guide"
+          ]
+        }
+      ],
+      "recorded_domains": [],
+      "citations": [
+        {
+          "source": "knowledge/product_knowledge.md",
+          "title": "荒野户外商品选购、使用与问题排查指南",
+          "snippet": "### 3.3 清洁、收纳与首次检查\n\n出发前在合适位置试搭，核对配件和搭建步骤。使用后先清除砂土和杂物，依说明书清洁并充分晾干再收纳；长期潮湿收纳可能带来霉味和涂层问题。通用帐篷养护建议不使用洗衣机或烘干机强洗，具体型号仍以厂商说明为准。[通用依据：REI 帐篷养护](https://www.rei.com/learn/expert-advice/caring-tent.html)。\n\n霉味、脱胶或拉链卡顿可能与不同因素有关，首次出现时间、存放条件与异常位置有助于核验；单张照片不能独立确定责任。",
+          "score": 0.9,
+          "retrieval_stage": "pre_retrieval",
+          "metadata": {
+            "rule_issues": [],
+            "policy_id": "outdoor_product_guide",
+            "scene_key": "product_knowledge",
+            "version": "2026-10-17.1",
+            "publication_status": "published",
+            "effective_from": "2025-01-01T00:00:00+08:00",
+            "effective_to": "2028-01-01T00:00:00+08:00",
+            "snapshot_version": "knowledge-669e2fc4af88",
+            "rule_id": "tent_care",
+            "rule_topics": [
+              "tent_care"
+            ],
+            "required_rules": [
+              "product_scope"
+            ],
+            "scope": "mall_demo",
+            "rule_sources": [
+              {
+                "source": "knowledge/product_knowledge.md",
+                "policy_id": "outdoor_product_guide",
+                "version": "2026-10-17.1"
+              }
+            ],
+            "section_id": "tent_care",
+            "section": "### 3.3 清洁、收纳与首次检查",
+            "answer_topic": "tent_care"
+          }
+        },
+        {
+          "source": "knowledge/product_knowledge.md",
+          "title": "荒野户外商品选购、使用与问题排查指南",
+          "snippet": "## 1. 适用范围\n\n本指南提供通用选购、使用与问题排查知识。具体型号的参数、配件和使用条件以说明书及可信商品资料为准；通用指南不证明具体商品的价格、库存、活动资格或订单可退资格。\n\n商品名称不能代替承重、防水等级、容量、续航或睡袋温标等参数。型号资料没有公布的数字，当前无法确认。",
+          "score": 0.9,
+          "retrieval_stage": "pre_retrieval",
+          "metadata": {
+            "rule_issues": [],
+            "policy_id": "outdoor_product_guide",
+            "scene_key": "product_knowledge",
+            "version": "2026-10-17.1",
+            "publication_status": "published",
+            "effective_from": "2025-01-01T00:00:00+08:00",
+            "effective_to": "2028-01-01T00:00:00+08:00",
+            "snapshot_version": "knowledge-669e2fc4af88",
+            "rule_id": "product_scope",
+            "rule_topics": [
+              "product_scope"
+            ],
+            "required_rules": [],
+            "scope": "mall_demo",
+            "rule_sources": [
+              {
+                "source": "knowledge/product_knowledge.md",
+                "policy_id": "outdoor_product_guide",
+                "version": "2026-10-17.1"
+              }
+            ],
+            "section_id": "product_scope",
+            "section": "## 1. 适用范围",
+            "answer_topic": "tent_care"
+          }
+        }
+      ],
+      "answer": "出发前在合适位置试搭，核对配件和搭建步骤。使用后先清除砂土和杂物，依说明书清洁并充分晾干再收纳；长期潮湿收纳可能带来霉味和涂层问题。通用帐篷养护建议不使用洗衣机或烘干机强洗，具体型号仍以厂商说明为准。通用依据：REI 帐篷养护。\n\n霉味、脱胶或拉链卡顿可能与不同因素有关，首次出现时间、存放条件与异常位置有助于核验；单张照片不能独立确定责任。\n\n本指南提供通用选购、使用与问题排查知识。具体型号的参数、配件和使用条件以说明书及可信商品资料为准；通用指南不证明具体商品的价格、库存、活动资格或订单可退资格。\n\n商品名称不能代替承重、防水等级、容量、续航或睡袋温标等参数。型号资料没有公布的数字，当前无法确认。\n\n以上为通用使用知识，具体型号参数以说明书为准。\n\n当前客服助手不支持到货或补货提醒。你可以稍后主动查询商品库存。",
+      "next_action": "answer_user"
+    }
+  ]
+}

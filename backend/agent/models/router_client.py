@@ -6,7 +6,7 @@ import json
 import os
 import re
 import time
-from typing import Any, get_args
+from typing import Any, Literal, get_args
 
 from pydantic import BaseModel, Field
 
@@ -19,6 +19,10 @@ class ModelRouteResult(BaseModel):
     """模型路由结果。不可用或输出不可信时回退到课程规则路由。"""
 
     intent: Intent
+    task_relation: Literal['resume', 'stop', 'switch', 'unrelated', 'uncertain'] | None = None
+    inquiry_topics: list[str] = Field(default_factory=list)
+    topic_status: str = "missing"
+    answer_order: list[str] = Field(default_factory=list)
     used_model: bool = False
     model_name: str | None = None
     fallback_reason: str | None = None
@@ -65,6 +69,10 @@ class RouteModelClient:
             model = self._create_chat_model(temperature=0)
             fragments = self.prompt_manager.select_fragments({"phase": "route"})
             system_prompt = self.prompt_manager.render_system_prompt(fragments)
+            from retrieval.rules import topic_catalog
+            from retrieval.documents import get_knowledge_snapshot
+            labels = {t: r["label"] for c in get_knowledge_snapshot().citations.values() for r in c.metadata.get("rules", []) for t in r["topics"]}
+            system_prompt += "\n受控询问主题（ID:含义）：" + json.dumps(labels, ensure_ascii=False)
             if task_note:
                 system_prompt = f"{system_prompt}\n\n{task_note}"
             attempted = True
@@ -117,7 +125,17 @@ class RouteModelClient:
                 return None
         if not isinstance(payload, dict) or not isinstance(payload.get("intent"), str) or payload["intent"] not in allowed:
             return None
+        from retrieval.rules import validate_topics
+        topics, topic_status = validate_topics(payload.get("inquiry_topics"), present="inquiry_topics" in payload)
+        payload.pop("inquiry_topics", None)
+        answer_order = payload.pop("answer_order", None)
+        if answer_order is not None and (not isinstance(answer_order, list) or len(answer_order) > 32
+                                        or any(not isinstance(item, str) for item in answer_order)):
+            answer_order = []
         intent = payload["intent"]
+        task_relation = payload.pop('task_relation', None)
+        if not isinstance(task_relation, str) or task_relation not in {'resume', 'stop', 'switch', 'unrelated', 'uncertain'}:
+            task_relation = None
         fields = {"intent"}
         if "capability_ids" in payload:
             ids = payload["capability_ids"]
@@ -144,7 +162,11 @@ class RouteModelClient:
                 return None
             if payload["needs_product_facts"] is False and not domains:
                 return None
-        return payload if set(payload) == fields else None
+        if set(payload) != fields:
+            return None
+        return {**payload, "inquiry_topics": topics, "topic_status": topic_status,
+                **({'task_relation': task_relation} if task_relation is not None else {}),
+                **({"answer_order": list(dict.fromkeys(answer_order))} if answer_order is not None else {})}
 
     @staticmethod
     def _extract_intent(content: str) -> Intent | None:
@@ -166,7 +188,7 @@ class RouteModelClient:
             base_url=openai_base_url(),
             temperature=temperature,
             extra_body=deepseek_extra_body(),
-            max_tokens=256,
+            max_tokens=512,
             timeout=30,
             max_retries=0,
         )

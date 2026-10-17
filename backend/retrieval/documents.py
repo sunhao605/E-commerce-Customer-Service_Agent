@@ -84,13 +84,17 @@ def _parse_citation(name: str, raw: str) -> Citation:
             raise ValueError("effective_to must be later than effective_from")
     except ValueError as error:
         raise ValueError(f"{name}: {error}") from error
+    from retrieval.rules import parse_rules, RULE_PATTERN
+    rules, rule_issues = parse_rules(body)
     return Citation(
         source=f"knowledge/{name}",
         title=str(metadata["title"]),
-        snippet=body.strip(),
+        snippet=RULE_PATTERN.sub(lambda match: match[2].strip(), body).strip(),
         score=float(metadata["score"]),
         retrieval_stage=metadata.get("retrieval_stage"),
         metadata={
+            "rules": rules,
+            "rule_issues": rule_issues,
             "policy_id": str(metadata["policy_id"]),
             "scene_key": str(metadata["scene_key"]),
             **{key: metadata[key] for key in POLICY_FIELDS},
@@ -140,7 +144,10 @@ def get_knowledge_snapshot() -> KnowledgeSnapshot:
 def load_knowledge_citation(name: str) -> Citation:
     if name not in KNOWLEDGE_FILES:
         raise ValueError(f"Invalid knowledge name: {name}")
-    return get_knowledge_snapshot().citations[name].model_copy(deep=True)
+    citation = get_knowledge_snapshot().citations[name].model_copy(deep=True)
+    citation.metadata.pop("rules", None)
+    citation.metadata.pop("rule_issues", None)
+    return citation
 
 
 def policy_block_reason(metadata: dict[str, Any], at: datetime) -> str | None:

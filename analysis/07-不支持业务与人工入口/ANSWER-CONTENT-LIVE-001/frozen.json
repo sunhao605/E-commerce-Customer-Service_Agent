@@ -1,0 +1,273 @@
+{
+  "cases": [
+    {
+      "id": "N01",
+      "question": "露营季满300减40能和平台会员券叠加吗？另外支持到货提醒吗？",
+      "expected": "可叠加及同类券/本人/有效时间/适用边界；提醒不支持；无退券扩写",
+      "budget": 5
+    },
+    {
+      "id": "N02",
+      "question": "先问一下，售罄以后能给我个信儿吗？再问露营季满减和平台会员券是不是能一起用？",
+      "expected": "先回应提醒不支持，再回应叠加及条件；不承诺盯库存",
+      "budget": 5
+    },
+    {
+      "id": "N03",
+      "question": "露营季满减和平台会员券可以叠加吗？如果订单退款，券会自动退回并延长有效期吗？",
+      "expected": "同时回答叠加条件和退券/延期没有统一自动恢复承诺",
+      "budget": 5
+    },
+    {
+      "id": "N04",
+      "question": "我只了解未发货退款的到账时间，银行卡或微信一般几天能到账？不申请退款。",
+      "expected": "演示余额与真实渠道分开；没有真实渠道时限保证；不扩写整套申请流程",
+      "budget": 5
+    },
+    {
+      "id": "N05",
+      "session": "refund-followup",
+      "question": "未发货订单申请退款，需要满足哪些条件？我先了解，不办理。",
+      "expected": "本人已支付、未出库未发货、整单及资格待核验，不创建申请",
+      "budget": 5
+    },
+    {
+      "id": "N06",
+      "session": "refund-followup",
+      "history_from": "N05",
+      "question": "那多久到账？",
+      "expected": "结合前轮按退款到账回答；不问在说哪个主题，不重复退款条件",
+      "budget": 5
+    },
+    {
+      "id": "N07",
+      "question": "未发货退款从确认到商家审核，大概经过哪些步骤？这里只咨询流程。",
+      "expected": "确认提交、待审核、审批与实际资金结果区分，不宣称已申请或到账",
+      "budget": 5
+    },
+    {
+      "id": "N08",
+      "question": "签收后退货，寄回运费谁承担？商家能收到付件吗？",
+      "expected": "无统一运费补贴/到付接收保证，依对应订单与商家要求；不扩写全部七天资格",
+      "budget": 5
+    },
+    {
+      "id": "N09",
+      "question": "订单完成以后，电子发票多久开好，去哪里下载？",
+      "expected": "通常24小时内；订单详情查看下载，无退款政策",
+      "budget": 5
+    },
+    {
+      "id": "N10",
+      "question": "贴身露营睡袋能在零下五度睡吗？舒适温度和极限温度有什么区别？",
+      "expected": "现有资料无温标，不能确认适用；极限不等于舒适，保留环境/个人差异",
+      "budget": 5
+    },
+    {
+      "id": "N11",
+      "question": "山野四人帐篷现在多少钱、还有货吗？用完怎么清洗收纳？露营季满减能和平台会员券一起用吗？另外支持到货提醒吗？",
+      "expected": "fixture899元库存3；清洁晾干及安全限制；叠加条件；提醒不支持，不保证具体结算已适用",
+      "budget": 6
+    },
+    {
+      "id": "N12",
+      "question": "朋友把山友会员券截图发给我，我能拿来用吗？这张券还没到使用时间。",
+      "seed_draft": true,
+      "expected": "券归属本人账号，不转让，未到使用时间不算本人可用；不清已有退款待办",
+      "budget": 5
+    },
+    {
+      "id": "F01",
+      "question": "露营季满300减40能和平台会员券叠加吗？另外支持到货提醒吗？",
+      "injection": "first_generation",
+      "expected": "真实路由；首稿为注入登记承诺；真实judge拒绝，至多一次真实修复和复查；不重跑查询",
+      "budget": 4
+    },
+    {
+      "id": "F02",
+      "question": "露营季满300减40能和平台会员券叠加吗？另外支持到货提醒吗？",
+      "injection": "judge_timeout",
+      "expected": "真实路由和生成；本地注入judge超时，发送规则要点，无修复；不计自然超时",
+      "budget": 2
+    },
+    {
+      "id": "F03",
+      "question": "露营季满300减40能和平台会员券叠加吗？另外支持到货提醒吗？",
+      "injection": "generation_failure",
+      "expected": "真实路由；本地注入生成故障，发送完整要点，不发送错误候选",
+      "budget": 1
+    }
+  ],
+  "fixtures": {
+    "products": [
+      {
+        "id": 4,
+        "name": "山野四人帐篷",
+        "price": 899.0,
+        "stock": 3,
+        "active": true,
+        "returnable": true
+      }
+    ],
+    "pending_draft": {
+      "intent": "refund_request",
+      "pending_slot": "order_id",
+      "candidates": []
+    },
+    "bad_candidate": "露营季满300减40可以和平台会员券叠加，同类型满减券不能重复叠加，具体适用需核验。我已为您登记到货提醒，到货后会主动通知您。",
+    "capabilities": {
+      "stock_notification": {
+        "capabilityId": "stock_notification",
+        "channel": "customer_service_agent",
+        "supportStatus": "unsupported",
+        "scope": "到货与补货提醒登记",
+        "explanation": "当前客服助手不支持到货或补货提醒。",
+        "alternatives": [
+          "稍后主动查询商品库存"
+        ],
+        "version": "service-capabilities-v1"
+      },
+      "refund_consultation": {
+        "capabilityId": "refund_consultation",
+        "channel": "customer_service_agent",
+        "supportStatus": "supported",
+        "scope": "咨询未发货整单退款是否在客服办理范围内",
+        "explanation": "当前客服可以办理符合条件的未发货整单退款。是否支持不等于这笔订单已经符合条件，也不等于已经提交申请。",
+        "alternatives": [
+          "说明订单号后再核验退款资格"
+        ],
+        "version": "service-capabilities-v1"
+      },
+      "return_consultation": {
+        "capabilityId": "return_consultation",
+        "channel": "customer_service_agent",
+        "supportStatus": "supported",
+        "scope": "咨询签收后七天无理由退货是否在客服办理范围内",
+        "explanation": "当前客服可以办理符合条件的签收七天无理由退货。是否支持不等于这笔订单已经符合条件，也不等于已经提交申请。",
+        "alternatives": [
+          "说明订单号后再核验退货资格"
+        ],
+        "version": "service-capabilities-v1"
+      }
+    },
+    "interaction_policy": {
+      "schemaVersion": "interaction_policy_v1",
+      "channel": "customer_service_agent",
+      "version": "service-capabilities-v1",
+      "entries": [
+        {
+          "id": "human_support",
+          "surface": "mall_chat",
+          "status": "available",
+          "actor": "user",
+          "initiation": "message_request",
+          "confirmationRequired": true,
+          "completionEffect": "open_entry",
+          "destinationState": "placeholder"
+        }
+      ],
+      "source": "controlled_http",
+      "elapsed_ms": 1.0
+    }
+  },
+  "config": {
+    "host": "api.deepseek.com",
+    "model": "deepseek-flash",
+    "judge_model": "deepseek-flash",
+    "judge_timeout_seconds": 5.0,
+    "mode": "enforce",
+    "max_model_http": 60,
+    "stop_before_next_request_at_tokens": 180000,
+    "automatic_retries": 0,
+    "offline_rag": true,
+    "business_fixtures": true,
+    "generation_temperature": 0.2,
+    "judge_temperature": 0
+  },
+  "source_sha256": {
+    "backend/agent/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "backend/agent/answer_review.py": "8b59369d7e6b97cc40be99022f00086f1726670445c32867fd07422c0b707cd7",
+    "backend/agent/cancellation.py": "f5f4fd7f3219c1e49f95c4a9f6475bc829d712867f274845f8fe328f22b42b6f",
+    "backend/agent/context.py": "8125e7b5aac0d8c15771016ac93821e824a08abe808586ef0460d1d53f7f491a",
+    "backend/agent/cost.py": "aae7c9cf75eb9ecf365ad42f017cebd9dfe88bd263b9f1f1fd32820b7247764c",
+    "backend/agent/customer_service_agent.py": "3bf280ca98741f66a953e8950f2f0fcc179cbe03ff5109544d60f9b48105888b",
+    "backend/agent/ecommerce_client.py": "68a2c496fb0c3ef55f708917dc59a391fb9c410d0a0f075560d1152e83611bd4",
+    "backend/agent/hooks.py": "1ae64e2183a739073b44ea18d5a0052c382a59c19d3702502e4e00c532cbbfd0",
+    "backend/agent/mcp_catalog.py": "153a2728a69d02bfb9cd5958293b34bf93ff4e0f903eeb86edd39bda143e4f7e",
+    "backend/agent/models/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "backend/agent/models/answer_client.py": "aeb5d6c087ebc909058b4bfc7822b4300e241d08dcb584f0f9e9650c4e6eb78e",
+    "backend/agent/models/judge_client.py": "fe43689646f7f3b00809e4081d28e1a680eba2eb9d3b708423353577db3e5e61",
+    "backend/agent/models/router_client.py": "4243008e5017c6cd9c9e4106fa0f4f99007b8a06ab9c73558760cf082b8d52b6",
+    "backend/agent/product_query.py": "03a8d9cb93505233ec12cf43ee440b5b4babf29f6d7df088a8beb1e4ad5dd57d",
+    "backend/agent/prompts.py": "6317cd97c8482db38fce18f885ced91edd95a2172256fa41e3280be75279d425",
+    "backend/agent/service_capabilities.py": "6e19ca37a99ee4c6d0f00473c860250f829bdd579e571dc8b281999912649d53",
+    "backend/agent/source_guard.py": "27b5fee4162ba5538c165cc243a4ba24838d13c620fe434aa7eb5cba3001c7a4",
+    "backend/agent/state.py": "084150d57ae8b2258b5105e3951ca16d13889e9c10612105049f71abc6247540",
+    "backend/agent/tools/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "backend/agent/tools/langchain_runtime.py": "023236123dc1712a5f1e59dac148cd5f991e374049db6b6ab0fd8ac7a574b9ce",
+    "backend/agent/tools/planning.py": "0cf777b1bc961371ee5ae92e5a0f3365fe88389b281c884f2f1a5488210bd86a",
+    "backend/agent/tools/runtime_context.py": "4989622c79716c4505dffc6e3e26e507f09aab206590330c86d7d1c6077e6a88",
+    "backend/agent/tools/tool_runtime.py": "4a57a6eccbdbedb2562ba8ed5c8506df9439ce05472cd98e08d49269c81b03ef",
+    "backend/agent/trace.py": "e2d1d2654b637cf44fb002b23c188009234c58bb27c5e02e306bc754c3962ab5",
+    "backend/agent/workflows/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "backend/agent/workflows/after_sale_graph.py": "e99d407b35fbead3a9c9c75f8bc025730afee2d4b68ce46117a20034e6622019",
+    "backend/agent/workflows/resume.py": "ec0a188d3a0759af154b7f134aef63f37365c9a578d57bec44834aaa6a4f67f4",
+    "backend/api/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "backend/api/routes.py": "e5938e8af25acb6f71f9fa2cfe769af3668cc6682e7b42605211085961b8f0ec",
+    "backend/api/schemas.py": "f35fe1ac66522ae4eb5f49a2066bc7fc6eabc56a714d2f109f23b578762e90ec",
+    "backend/evals/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "backend/evals/feedback.py": "aa783e73616aa9f48e4b2c77eacc8868a5950579cae01533f6ba4bdbbdfd80dd",
+    "backend/evals/runner.py": "60a0b14e88f08c5deaf896fc19018ca5543dda53b13a3c7da5ddb5c6e46793e0",
+    "backend/main.py": "588e938575b8b1fbee8a92eae6fb62631be2084fa40b5de622c706f8950b45ce",
+    "backend/resources/agent_capabilities.json": "f1a54926107b95904f794074101fb504cd5b3070995d658966a883dafdc89a7d",
+    "backend/resources/cases.yml": "ef137cdf11f396096601ea8075a483c7b6d9227089e068f04432642ae92d389f",
+    "backend/resources/knowledge/README.md": "b9b31848edc2a80dca4fa67fbd50f3eac9cc6af1d2f12566db1c74978651808d",
+    "backend/resources/knowledge/after_sale_policy.md": "ed4a880e50b3cd41c92d9498d39d65b3b41ce1017b195ef536d5a6a75e2ae24d",
+    "backend/resources/knowledge/member_coupon_policy.md": "5d15e17693991daf377af315387d6bffba2cc90b61c8a87315fca113fdd1b136",
+    "backend/resources/knowledge/payment_invoice_policy.md": "43c816bf19b130dda312d655819188f2fb3663657805b8400d6ea7a3f25b71a3",
+    "backend/resources/knowledge/product_knowledge.md": "b1f2d2bb6ed98cf851b5b967450ab8b2630e6901b695b209ed232b3c2bd1f508",
+    "backend/resources/knowledge/promotion_policy.md": "6dbf92bec23f4ab220dbcb324a2678ee1d03fdbccbce4bc9c9e8f7c24c73f125",
+    "backend/resources/knowledge/received_return_policy.md": "f8d364b3d66f9786f01912dd53ec739a10a9159de5dab65af4c13cf23d3ad525",
+    "backend/resources/knowledge/release-manifest.json": "20d382acd281446a9d36dcaa9ef2140bc997badd095fdc961368eb50d99d1fc0",
+    "backend/resources/prompts/answer_judge.md": "792280e13334f6917023652f88dad97104a756c6e404d0dfb63bf4dae4dfed26",
+    "backend/resources/prompts/final_answer_style.md": "d6e4d97c7b487d4616cf38363a3c22debc45ac0d1f3b9da27760e349fd60fcf6",
+    "backend/resources/prompts/high_risk_after_sale.md": "ea3f62c63e62339cee771306c16fd04911102d6886a205b943b61f6ab43c90c3",
+    "backend/resources/prompts/prompt_registry.yml": "54b780df092398276fd22ba733dc7cbaeb0df3c0ff273881ef7a2700b9942cce",
+    "backend/resources/prompts/prompt_security.md": "aa37fbc52dfb1593617d61145f42d1c37b31c24ad76aee03a16b61f76f40640c",
+    "backend/resources/prompts/rag_answering.md": "f68ba18907f89048a263fe2ae688c84428d06ce1ef7c475198391de96988966d",
+    "backend/resources/prompts/route_contract.md": "5c5effdfc8c6188c3d3ecd90ea146dd1aa09747581b93aacfebeaa6e1982d448",
+    "backend/resources/prompts/system_customer_service.md": "24dde154a0106f06dbbe6e759536d1b676e081ad816697e68bda8c9196166949",
+    "backend/resources/prompts/tool_usage.md": "e5cc7487d09d8713140bed939e189e70861e95c452e02cc82c9a03ef3496e090",
+    "backend/retrieval/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "backend/retrieval/documents.py": "e8aae8e61c751d5681599a4cd7bf92440f32fffcabde10f3981cafe319f1b695",
+    "backend/retrieval/hybrid_retrieval.py": "67265ad4b94b84c14450ca78327bcf877ab1618642f111d89a619441c4da313c",
+    "backend/retrieval/knowledge.py": "d3d993b7657c72ee4c0c80f6c97bf2afef5727cf7a962cf75e8285729c40c80c",
+    "backend/retrieval/rules.py": "1fb0f875066dbb9372973e4ee785392c8cba230ef8b66fd9f482a32888d82d63",
+    "backend/settings.py": "c69be8b457d3a4ff284c9bc2f3ae9264461550b955946cae22579514ba2c4ed3",
+    "backend/tests/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "backend/tests/test_answer_content.py": "083c82150665b599fee12438cc6e435287502dd8c8ca3604c941922b640a9019",
+    "backend/tests/test_answer_judge.py": "db8c1ba853d1a614dbb788300f1edabb2d00a4253f17ed83491fdf9603bc6c11",
+    "backend/tests/test_cancellation_contract.py": "f2c89c537c2b26c4dc3026c6d379bcf1ed4bcb13a865dc9b513516392b5a869b",
+    "backend/tests/test_cancelled_draft.py": "25d046f346a4b8cfea94cea8a0ee8f26678c99c32c280e8e90383bf4f623d2b0",
+    "backend/tests/test_candidate_selection.py": "5b5cdee35dd5d3a5c8ca70155a6ef3560a38601b15e7d1e64bf7c44d9fd7243e",
+    "backend/tests/test_deepseek_config.py": "ab99fcc05a2cbb1692377d4cf52291bb20296f07a834822ff690c52fc66e9f16",
+    "backend/tests/test_eligibility_query.py": "b1b18af9304502cf3458ff99f09d7c1655b9eb3687b5441b3168bef5cceac8e9",
+    "backend/tests/test_embedding_config.py": "c5d9f3d0f85c369ec28d18133546b32c9e34ae0e3a452ba01aa7c69b50cc2136",
+    "backend/tests/test_eval_contract.py": "1465660ffb97cd56ec1b5fca8afa32317f3de555205427ab78c5ad0c3beb0315",
+    "backend/tests/test_evidence_routing.py": "b51a1ea1a6e7492359ce6fc10b5241319152fcf82ee9fe6cfc8065feb9f2492c",
+    "backend/tests/test_outdoor_scenario.py": "5cd35a5fdb6f3dc981e89f98002e0243c0b56e3bfc96ddebc057705614f7d937",
+    "backend/tests/test_policy_metadata.py": "04c0b3488139c253793fd51739c6aca355f4949474ca076af4cd84abcfdb70ec",
+    "backend/tests/test_product_fault_feedback.py": "5ffe74cf8af1c005f9624429f7ccf30d3386090e40984bc8a834b5b57c48237e",
+    "backend/tests/test_product_knowledge.py": "24656a83241463e88a82c59355cf33c49f8af9779701265d098085295af82c54",
+    "backend/tests/test_product_query.py": "a680f1fdf531deecdb2767c65d51d6de5b27658820da5ab008eb3baf2db17c0b",
+    "backend/tests/test_refund_submission_boundary.py": "7665c5a54f8d1450cd96c313fc45eb55d217d0d36283e793ae9ba6be2e7fa01f",
+    "backend/tests/test_resume_guard.py": "4116919e7b7bde947d5626e35e1b5d6b89530ee22de6950f108af99e25c23f25",
+    "backend/tests/test_route_priority.py": "c6a0fc2ee1c8a522a69e73707971ea2e0218d522c37d5010296c5612ee1ee2bc",
+    "backend/tests/test_service_capabilities.py": "f884f90814919b30f01d7cb4cb5c4b3149512bf7a5b88646af9ace5e28227832"
+  },
+  "runner_sha256": "44b7d6a40c341db1dbfa5c67814d6ace9b685e7aca579717bec701b3b16a317a",
+  "guard_sha256": "2072b4500e8c452519d75fc81731cec3ee53989d320b8ee1448e7985beaad8a2",
+  "knowledge_snapshot": "knowledge-669e2fc4af88",
+  "scope": "12条自然请求＋3条故障注入；真实路由/必要的工具选择/最终生成/judge；离线知识检索＋构造业务事实，非在线Embedding或Java/MySQL/页面验收",
+  "judging": "运行前预期由助手冻结；模型不看expected或标签；运行后逐题人工式复核需求、事实动作、条件、相关重复、表达。judge三维pass不替代体验验收；首次失败不重跑挑结果。"
+}

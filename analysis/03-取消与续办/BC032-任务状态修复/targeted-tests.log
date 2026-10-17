@@ -1,0 +1,26 @@
+................E...F......
+======================================================================
+ERROR: test_query_candidates_are_independent_of_application_candidates (backend.tests.test_eligibility_query.EligibilityQueryTest.test_query_candidates_are_independent_of_application_candidates)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_eligibility_query.py", line 69, in test_query_candidates_are_independent_of_application_candidates
+    self.assertIsNone(asked.session_state["eligibility_query"]["order_id"])
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+KeyError: 'order_id'
+
+======================================================================
+FAIL: test_collecting_turn_passes_the_open_task_and_keeps_a_model_switch (backend.tests.test_route_priority.RoutePriorityTest.test_collecting_turn_passes_the_open_task_and_keeps_a_model_switch)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_route_priority.py", line 107, in test_collecting_turn_passes_the_open_task_and_keeps_a_model_switch
+    self.assertEqual(current_memory("t-open", "u1")["open_task"]["intent"], "order_query")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'refund_request' != 'order_query'
+- refund_request
++ order_query
+
+
+----------------------------------------------------------------------
+Ran 27 tests in 0.115s
+
+FAILED (failures=1, errors=1)

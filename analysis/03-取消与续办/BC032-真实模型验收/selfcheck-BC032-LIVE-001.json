@@ -1,0 +1,18 @@
+{
+  "mode": "offline",
+  "model_calls": 0,
+  "http_status": 200,
+  "seed_revision": 3,
+  "pending": "REFUND_ORDER_REQUIRED",
+  "open_task_present": true,
+  "python_turn_captured": true,
+  "inject_set": "route",
+  "tables_unchanged": true,
+  "no_after_sale_row_written": true,
+  "browser": {
+    "status": 200,
+    "answer": "你好，我是荒野户外的客服 Agent。你可以把订单号、物流问题、活动优惠或售后诉求发给我，我会优先根据荒野户外的订单事实和公开规则回答。",
+    "confirm_cards": 0
+  },
+  "ports_free_after_stop": true
+}

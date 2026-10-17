@@ -5,7 +5,7 @@ from __future__ import annotations
 import re
 from typing import Any
 
-from api.schemas import ChatRequest, HistoryMessage, Intent
+from api.schemas import ChatRequest, HistoryMessage, Intent, ClarificationRequest, RoutePlan
 from agent.source_guard import inspect_source
 from agent.tools.planning import estimate_tokens
 
@@ -37,11 +37,76 @@ def current_memory(session_id: str, runtime_user_id: str | None = None) -> dict[
         SESSION_MEMORIES[session_id] = memory
     elif runtime_user_id and memory.get("runtime_user_id") is None:
         memory["runtime_user_id"] = runtime_user_id
+    old_task = memory.get('open_task') or {}
+    if old_task.get('intent') in {'order_query', 'refund_status_query'}:
+        memory.setdefault('order_query', old_task)
+        memory['open_task'] = None
+        memory.setdefault('clarification_focus', 'order_query')
     return memory
 
 
+def focused_order_task(memory: dict[str, Any], open_task: dict[str, Any] | None,
+                       eligibility_query: dict[str, Any] | None) -> dict[str, Any] | None:
+    tasks = {'open_task': open_task, 'order_query': memory.get('order_query'),
+             'eligibility_query': eligibility_query}
+    # 旧会话没有焦点字段；显式None表示上一项已完成，不自动恢复后台售后。
+    focus = memory.get('clarification_focus', 'eligibility_query'
+                       if (eligibility_query or {}).get('pending_slot') else 'open_task')
+    task = tasks.get(focus)
+    return task if task and task.get('pending_slot') else None
+
+
+def update_pending_tasks(memory: dict[str, Any], *, plan: RoutePlan,
+                         clarification: ClarificationRequest | None, next_action: str,
+                         verified_order_id: str | None, workflow: dict[str, Any] | None,
+                         eligibility: dict[str, Any] | None, order_id: str | None) -> None:
+    """只由目标组件更新其状态；没有合法进展事件就保留原售后。"""
+    if plan.requires_workflow:
+        key = 'open_task'
+    elif plan.intent in {'order_query', 'refund_status_query', 'after_sale_eligibility_query'}:
+        key = 'eligibility_query' if plan.intent == 'after_sale_eligibility_query' else 'order_query'
+    elif plan.intent == 'product_query':
+        key = 'product_query'
+        if next_action == 'ask_clarification':
+            memory['clarification_focus'] = key
+        elif memory.get('clarification_focus') == key:
+            memory['clarification_focus'] = None
+        return
+    elif plan.intent == 'promotion_query':
+        if next_action == 'ask_clarification':
+            memory['clarification_focus'] = 'promotion_query'
+        elif memory.get('clarification_focus') == 'promotion_query':
+            memory['clarification_focus'] = None
+        return
+    else:
+        return
+    if clarification is not None and next_action == 'ask_clarification':
+        previous = memory.get(key) or {}
+        previous = previous if previous.get('intent') == plan.intent else {}
+        memory[key] = {**previous, 'intent': plan.intent, 'pending_slot': clarification.clarification_field,
+                       'candidates': [{'value': c.value, 'label': c.label} for c in clarification.candidates]}
+        if key != 'open_task':
+            memory[key]['order_id'] = None
+        if key == 'eligibility_query':
+            memory[key].update(order_id=None, application_type=None)
+        memory['clarification_focus'] = key
+    elif key == 'open_task':
+        if workflow is not None and verified_order_id:
+            memory[key] = None
+            if memory.get('clarification_focus') == key:
+                memory['clarification_focus'] = None
+    elif verified_order_id or eligibility is not None:
+        memory[key] = {'intent': plan.intent, 'order_id': order_id,
+                       'pending_slot': None, 'candidates': []}
+        if key == 'eligibility_query':
+            memory[key]['application_type'] = (eligibility or {}).get('applicationType')
+        if memory.get('clarification_focus') == key:
+            memory['clarification_focus'] = None
+
+
 def build_context(request: ChatRequest, explicit_order_id: str | None, *, query_task: dict[str, Any] | None = None,
-                  eligibility_query: bool = False) -> tuple[str | None, dict[str, Any], dict[str, Any]]:
+                  eligibility_query: bool = False, selection_task: dict[str, Any] | None = None,
+                  allow_embedded_selection: bool = False) -> tuple[str | None, dict[str, Any], dict[str, Any]]:
     """明确订单或候选选择优先；无效候选选择不得回落到页面或历史订单。"""
     memory = current_memory(request.session_id, request.runtime_user_id)
     page = request.runtime_context or {}
@@ -50,16 +115,23 @@ def build_context(request: ChatRequest, explicit_order_id: str | None, *, query_
     chosen_order_id = explicit_order_id or page_order_id or remembered_order
     selection_message = page.get("userMessage") or request.user_message
     selection = re.fullmatch(r"(?:我选择\s*)?第([0-9一二三四五六七八九十]{1,3})笔[。！!？?\s]*", selection_message.strip())
+    if not selection and allow_embedded_selection:
+        selections = list(re.finditer(r"第([0-9一二三四五六七八九十]{1,3})笔", selection_message))
+        selection = selections[0] if len(selections) == 1 else None
     if selection:
         numeral = selection.group(1)
         # shortcut: 中文序号只支持一至十（商城默认展示十笔），扩容候选时再扩展。
         index = int(numeral) if numeral.isascii() and numeral.isdigit() else {word: i for i, word in enumerate("一二三四五六七八九十", 1)}.get(numeral, 0)
-        candidates = ((query_task or {}) if eligibility_query else memory.get("open_task") or {}).get("candidates") or []
+        task = selection_task if selection_task is not None else ((query_task or {}) if eligibility_query else memory.get("open_task") or {})
+        candidates = task.get("candidates") or []
         chosen_order_id = candidates[index - 1]["value"] if 1 <= index <= len(candidates) else None
+    elif allow_embedded_selection and not explicit_order_id and (selection_task or {}).get('pending_slot') == 'order_id':
+        # 明确恢复仍待选单的任务，不能用页面或最近订单代替用户选择。
+        chosen_order_id = selection_task.get('order_id')
     conflicts: list[str] = []
     if selection:
         conflicts.append("order_id: 按本会话已展示候选解析序号，不使用页面或历史订单兜底。")
-    elif page_order_id and memory.get("last_order_id") and page_order_id != memory["last_order_id"] and not explicit_order_id:
+    elif page_order_id and chosen_order_id == page_order_id and memory.get("last_order_id") and page_order_id != memory["last_order_id"] and not explicit_order_id:
         conflicts.append("order_id: 页面 Runtime Context 与 Session Memory 冲突，采用页面订单。")
     if any(term in request.user_message for term in ("我是VIP", "我是 VIP", "我是黑卡")):
         if (request.runtime_member_level or "unknown").lower() not in {"vip", "black", "黑卡"}:
@@ -86,6 +158,7 @@ def build_context(request: ChatRequest, explicit_order_id: str | None, *, query_
         "sources": ["runtime_context", "session_memory", "history_messages", "user_message"],
         "trust_order": ["runtime_context", "verified_tool_fact", "session_memory", "history_messages", "user_message"],
         "chosen_order_id": chosen_order_id,
+        'candidate_selection': bool(selection),
         "conflict_resolutions": conflicts,
         "model_context": model_context,
         "source_safety": {

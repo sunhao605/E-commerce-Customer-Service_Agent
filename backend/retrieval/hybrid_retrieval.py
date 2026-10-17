@@ -40,6 +40,7 @@ _KNOWLEDGE_INDEX: "KnowledgeIndex | None" = None
 @dataclass
 class KnowledgeIndex:
     version: str
+    snapshot_version: str
     vector_store: InMemoryVectorStore
     documents: list[Document]
     embedding_mode: str
@@ -141,14 +142,14 @@ def build_retrieval_plan(query: str, intent: Intent) -> dict[str, Any]:
 def get_knowledge_index() -> tuple[KnowledgeIndex, bool]:
     """按真实 Markdown 内容构建一次切块和向量索引，后续请求复用。"""
     global _KNOWLEDGE_INDEX
-    if _KNOWLEDGE_INDEX is not None:
+    if _KNOWLEDGE_INDEX is not None and _KNOWLEDGE_INDEX.snapshot_version == get_knowledge_snapshot().version:
         return _KNOWLEDGE_INDEX, True
 
     source_documents: list[Document] = []
     snapshot = get_knowledge_snapshot()
     fingerprint_parts = [snapshot.version]
     for filename in KNOWLEDGE_FILES:
-        citation = load_knowledge_citation(filename)
+        citation = snapshot.citations[filename]
         if citation.metadata["publication_status"] != "published":
             continue
         source_documents.append(
@@ -179,10 +180,11 @@ def get_knowledge_index() -> tuple[KnowledgeIndex, bool]:
     if chunks:
         vector_store.add_documents(chunks)
     fingerprint_parts.append(f"embedding:{embedding_mode}")
-    fingerprint_parts.append("splitter:recursive-220-30|markdown-section-v3")
+    fingerprint_parts.append("splitter:recursive-220-30|complete-rule-v1")
     fingerprint = hashlib.sha256("\n".join(fingerprint_parts).encode("utf-8")).hexdigest()[:12]
     _KNOWLEDGE_INDEX = KnowledgeIndex(
         version=f"lesson41-idx-{fingerprint}",
+        snapshot_version=snapshot.version,
         vector_store=vector_store,
         documents=chunks,
         embedding_mode=embedding_mode,
@@ -198,6 +200,14 @@ _BM25_B = 0.75
 
 
 def _section_documents(document: Document) -> list[Document]:
+    rules = document.metadata.get("rules", [])
+    if rules:
+        return [Document(page_content=rule["text"], metadata={
+            **{k: v for k, v in document.metadata.items() if k != "rules"},
+            "rule_id": rule["id"], "section_id": rule["id"], "section_text": rule["text"],
+            "rule_topics": rule["topics"], "scope": rule["scope"],
+            "section": rule["text"].split("\n", 1)[0],
+        }) for rule in rules if not rule.get("ref")]
     text = document.page_content
     if "## " not in text and not text.startswith("##"):
         return [document]
@@ -319,13 +329,16 @@ def retrieve_knowledge(query: str, intent: Intent, *, top_k: int = 4) -> HybridR
         document = by_chunk[chunk_id]
         policy_id = policy_of(chunk_id)
         citation = load_knowledge_citation(str(document.metadata["filename"]))
-        metadata = {**(citation.metadata or {}), "chunk_ids": [chunk_id]}
+        metadata = {**{k: v for k, v in (citation.metadata or {}).items() if k != "rules"}, "chunk_ids": [chunk_id]}
+        for key in ("rule_id", "rule_topics", "scope"):
+            if key in document.metadata:
+                metadata[key] = document.metadata[key]
         section_id = document.metadata.get("section_id")
         if section_id:
             metadata["section_id"] = section_id
             metadata["section"] = document.metadata.get("subsection") or document.metadata.get("section") or "文首说明"
         display = round(rrf / top_rrf, 3)
-        citations.append(citation.model_copy(update={"score": display, "snippet": document.page_content.strip(), "metadata": metadata}))
+        citations.append(citation.model_copy(update={"score": display, "snippet": document.metadata.get("section_text", document.page_content).strip(), "metadata": metadata}))
         current = source_scores.get(policy_id)
         if current:
             current["final"] = max(current["final"], display)

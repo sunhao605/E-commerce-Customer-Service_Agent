@@ -1,0 +1,9 @@
+[PASS] 登录zhangsan: status=200
+[PASS] 预置退货草稿出确认卡: pendingAction=CONFIRM_SUBMIT
+[PASS] 插问发票不重发确认卡: pendingAction=READ_ONLY_CONSULTATION
+[PASS] 插问答复为发票内容
+[PASS] 插问退款政策不重发确认卡
+[PASS] 会话存在
+[PASS] 草稿 pendingAction 保留: CONFIRM_SUBMIT
+[PASS] 草稿绑定订单保留: ORD9803
+TOTAL=8 FAIL=0

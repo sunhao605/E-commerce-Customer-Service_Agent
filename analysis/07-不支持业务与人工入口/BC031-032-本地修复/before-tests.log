@@ -1,0 +1,889 @@
+....................FFFFFFFFFFFF.FF....FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+======================================================================
+FAIL: test_policy_consultation_preserves_full_draft_across_answer_exits (backend.tests.test_answer_content.ContentPipelineTest.test_policy_consultation_preserves_full_draft_across_answer_exits) (intent='promotion_query', exit_path='normal')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_content.py", line 363, in test_policy_consultation_preserves_full_draft_across_answer_exits
+    self.assertEqual(memory['open_task'], draft)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: None != {'intent': 'refund_request', 'pending_slo[102 chars]笔'}]}
+
+======================================================================
+FAIL: test_policy_consultation_preserves_full_draft_across_answer_exits (backend.tests.test_answer_content.ContentPipelineTest.test_policy_consultation_preserves_full_draft_across_answer_exits) (intent='promotion_query', exit_path='repair')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_content.py", line 363, in test_policy_consultation_preserves_full_draft_across_answer_exits
+    self.assertEqual(memory['open_task'], draft)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: None != {'intent': 'refund_request', 'pending_slo[102 chars]笔'}]}
+
+======================================================================
+FAIL: test_policy_consultation_preserves_full_draft_across_answer_exits (backend.tests.test_answer_content.ContentPipelineTest.test_policy_consultation_preserves_full_draft_across_answer_exits) (intent='promotion_query', exit_path='fallback')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_content.py", line 363, in test_policy_consultation_preserves_full_draft_across_answer_exits
+    self.assertEqual(memory['open_task'], draft)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: None != {'intent': 'refund_request', 'pending_slo[102 chars]笔'}]}
+
+======================================================================
+FAIL: test_policy_consultation_preserves_full_draft_across_answer_exits (backend.tests.test_answer_content.ContentPipelineTest.test_policy_consultation_preserves_full_draft_across_answer_exits) (intent='refund_policy_query', exit_path='normal')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_content.py", line 363, in test_policy_consultation_preserves_full_draft_across_answer_exits
+    self.assertEqual(memory['open_task'], draft)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: None != {'intent': 'refund_request', 'pending_slo[102 chars]笔'}]}
+
+======================================================================
+FAIL: test_policy_consultation_preserves_full_draft_across_answer_exits (backend.tests.test_answer_content.ContentPipelineTest.test_policy_consultation_preserves_full_draft_across_answer_exits) (intent='refund_policy_query', exit_path='repair')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_content.py", line 363, in test_policy_consultation_preserves_full_draft_across_answer_exits
+    self.assertEqual(memory['open_task'], draft)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: None != {'intent': 'refund_request', 'pending_slo[102 chars]笔'}]}
+
+======================================================================
+FAIL: test_policy_consultation_preserves_full_draft_across_answer_exits (backend.tests.test_answer_content.ContentPipelineTest.test_policy_consultation_preserves_full_draft_across_answer_exits) (intent='refund_policy_query', exit_path='fallback')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_content.py", line 363, in test_policy_consultation_preserves_full_draft_across_answer_exits
+    self.assertEqual(memory['open_task'], draft)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: None != {'intent': 'refund_request', 'pending_slo[102 chars]笔'}]}
+
+======================================================================
+FAIL: test_policy_consultation_preserves_full_draft_across_answer_exits (backend.tests.test_answer_content.ContentPipelineTest.test_policy_consultation_preserves_full_draft_across_answer_exits) (intent='return_policy_query', exit_path='normal')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_content.py", line 363, in test_policy_consultation_preserves_full_draft_across_answer_exits
+    self.assertEqual(memory['open_task'], draft)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: None != {'intent': 'refund_request', 'pending_slo[102 chars]笔'}]}
+
+======================================================================
+FAIL: test_policy_consultation_preserves_full_draft_across_answer_exits (backend.tests.test_answer_content.ContentPipelineTest.test_policy_consultation_preserves_full_draft_across_answer_exits) (intent='return_policy_query', exit_path='repair')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_content.py", line 363, in test_policy_consultation_preserves_full_draft_across_answer_exits
+    self.assertEqual(memory['open_task'], draft)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: None != {'intent': 'refund_request', 'pending_slo[102 chars]笔'}]}
+
+======================================================================
+FAIL: test_policy_consultation_preserves_full_draft_across_answer_exits (backend.tests.test_answer_content.ContentPipelineTest.test_policy_consultation_preserves_full_draft_across_answer_exits) (intent='return_policy_query', exit_path='fallback')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_content.py", line 363, in test_policy_consultation_preserves_full_draft_across_answer_exits
+    self.assertEqual(memory['open_task'], draft)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: None != {'intent': 'refund_request', 'pending_slo[102 chars]笔'}]}
+
+======================================================================
+FAIL: test_policy_consultation_preserves_full_draft_across_answer_exits (backend.tests.test_answer_content.ContentPipelineTest.test_policy_consultation_preserves_full_draft_across_answer_exits) (intent='invoice_query', exit_path='normal')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_content.py", line 363, in test_policy_consultation_preserves_full_draft_across_answer_exits
+    self.assertEqual(memory['open_task'], draft)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: None != {'intent': 'refund_request', 'pending_slo[102 chars]笔'}]}
+
+======================================================================
+FAIL: test_policy_consultation_preserves_full_draft_across_answer_exits (backend.tests.test_answer_content.ContentPipelineTest.test_policy_consultation_preserves_full_draft_across_answer_exits) (intent='invoice_query', exit_path='repair')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_content.py", line 363, in test_policy_consultation_preserves_full_draft_across_answer_exits
+    self.assertEqual(memory['open_task'], draft)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: None != {'intent': 'refund_request', 'pending_slo[102 chars]笔'}]}
+
+======================================================================
+FAIL: test_policy_consultation_preserves_full_draft_across_answer_exits (backend.tests.test_answer_content.ContentPipelineTest.test_policy_consultation_preserves_full_draft_across_answer_exits) (intent='invoice_query', exit_path='fallback')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_content.py", line 363, in test_policy_consultation_preserves_full_draft_across_answer_exits
+    self.assertEqual(memory['open_task'], draft)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: None != {'intent': 'refund_request', 'pending_slo[102 chars]笔'}]}
+
+======================================================================
+FAIL: test_scope_and_promotion_keep_both_demands_in_either_order (backend.tests.test_answer_content.ContentPipelineTest.test_scope_and_promotion_keep_both_demands_in_either_order) (text='先问一下，售罄以后能给我个信儿吗？再问露营季满减和平台会员券是不是能一起用？')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_content.py", line 332, in test_scope_and_promotion_keep_both_demands_in_either_order
+    self.assertEqual(plan['topic_status'], 'valid')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'incompatible' != 'valid'
+- incompatible
++ valid
+
+
+======================================================================
+FAIL: test_scope_and_promotion_keep_both_demands_in_either_order (backend.tests.test_answer_content.ContentPipelineTest.test_scope_and_promotion_keep_both_demands_in_either_order) (text='露营季满减和平台会员券是不是能一起用？售罄以后能给我个信儿吗？')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_content.py", line 332, in test_scope_and_promotion_keep_both_demands_in_either_order
+    self.assertEqual(plan['topic_status'], 'valid')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'incompatible' != 'valid'
+- incompatible
++ valid
+
+
+======================================================================
+FAIL: test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools (backend.tests.test_answer_content.TopicContractTest.test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools) (topic='refund_conditions')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_content.py", line 73, in test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools
+    self.assertEqual(plan.inquiry_topics, [topic])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [] != ['refund_conditions']
+
+Second list contains 1 additional elements.
+First extra element 0:
+'refund_conditions'
+
+- []
++ ['refund_conditions']
+
+======================================================================
+FAIL: test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools (backend.tests.test_answer_content.TopicContractTest.test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools) (topic='refund_arrival')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_content.py", line 73, in test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools
+    self.assertEqual(plan.inquiry_topics, [topic])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [] != ['refund_arrival']
+
+Second list contains 1 additional elements.
+First extra element 0:
+'refund_arrival'
+
+- []
++ ['refund_arrival']
+
+======================================================================
+FAIL: test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools (backend.tests.test_answer_content.TopicContractTest.test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools) (topic='refund_process')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_content.py", line 73, in test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools
+    self.assertEqual(plan.inquiry_topics, [topic])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [] != ['refund_process']
+
+Second list contains 1 additional elements.
+First extra element 0:
+'refund_process'
+
+- []
++ ['refund_process']
+
+======================================================================
+FAIL: test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools (backend.tests.test_answer_content.TopicContractTest.test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools) (topic='refund_progress')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_content.py", line 73, in test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools
+    self.assertEqual(plan.inquiry_topics, [topic])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [] != ['refund_progress']
+
+Second list contains 1 additional elements.
+First extra element 0:
+'refund_progress'
+
+- []
++ ['refund_progress']
+
+======================================================================
+FAIL: test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools (backend.tests.test_answer_content.TopicContractTest.test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools) (topic='refund_services')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_content.py", line 73, in test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools
+    self.assertEqual(plan.inquiry_topics, [topic])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [] != ['refund_services']
+
+Second list contains 1 additional elements.
+First extra element 0:
+'refund_services'
+
+- []
++ ['refund_services']
+
+======================================================================
+FAIL: test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools (backend.tests.test_answer_content.TopicContractTest.test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools) (topic='refund_discounts')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_content.py", line 73, in test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools
+    self.assertEqual(plan.inquiry_topics, [topic])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [] != ['refund_discounts']
+
+Second list contains 1 additional elements.
+First extra element 0:
+'refund_discounts'
+
+- []
++ ['refund_discounts']
+
+======================================================================
+FAIL: test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools (backend.tests.test_answer_content.TopicContractTest.test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools) (topic='invoice_issue')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_content.py", line 73, in test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools
+    self.assertEqual(plan.inquiry_topics, [topic])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [] != ['invoice_issue']
+
+Second list contains 1 additional elements.
+First extra element 0:
+'invoice_issue'
+
+- []
++ ['invoice_issue']
+
+======================================================================
+FAIL: test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools (backend.tests.test_answer_content.TopicContractTest.test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools) (topic='promotion_scope')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_content.py", line 73, in test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools
+    self.assertEqual(plan.inquiry_topics, [topic])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [] != ['promotion_scope']
+
+Second list contains 1 additional elements.
+First extra element 0:
+'promotion_scope'
+
+- []
++ ['promotion_scope']
+
+======================================================================
+FAIL: test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools (backend.tests.test_answer_content.TopicContractTest.test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools) (topic='promotion_eligibility')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_content.py", line 73, in test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools
+    self.assertEqual(plan.inquiry_topics, [topic])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [] != ['promotion_eligibility']
+
+Second list contains 1 additional elements.
+First extra element 0:
+'promotion_eligibility'
+
+- []
++ ['promotion_eligibility']
+
+======================================================================
+FAIL: test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools (backend.tests.test_answer_content.TopicContractTest.test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools) (topic='promotion_types')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_content.py", line 73, in test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools
+    self.assertEqual(plan.inquiry_topics, [topic])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [] != ['promotion_types']
+
+Second list contains 1 additional elements.
+First extra element 0:
+'promotion_types'
+
+- []
++ ['promotion_types']
+
+======================================================================
+FAIL: test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools (backend.tests.test_answer_content.TopicContractTest.test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools) (topic='promotion_stacking')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_content.py", line 73, in test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools
+    self.assertEqual(plan.inquiry_topics, [topic])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [] != ['promotion_stacking']
+
+Second list contains 1 additional elements.
+First extra element 0:
+'promotion_stacking'
+
+- []
++ ['promotion_stacking']
+
+======================================================================
+FAIL: test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools (backend.tests.test_answer_content.TopicContractTest.test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools) (topic='promotion_price')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_content.py", line 73, in test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools
+    self.assertEqual(plan.inquiry_topics, [topic])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [] != ['promotion_price']
+
+Second list contains 1 additional elements.
+First extra element 0:
+'promotion_price'
+
+- []
++ ['promotion_price']
+
+======================================================================
+FAIL: test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools (backend.tests.test_answer_content.TopicContractTest.test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools) (topic='promotion_status')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_content.py", line 73, in test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools
+    self.assertEqual(plan.inquiry_topics, [topic])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [] != ['promotion_status']
+
+Second list contains 1 additional elements.
+First extra element 0:
+'promotion_status'
+
+- []
++ ['promotion_status']
+
+======================================================================
+FAIL: test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools (backend.tests.test_answer_content.TopicContractTest.test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools) (topic='promotion_refund')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_content.py", line 73, in test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools
+    self.assertEqual(plan.inquiry_topics, [topic])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [] != ['promotion_refund']
+
+Second list contains 1 additional elements.
+First extra element 0:
+'promotion_refund'
+
+- []
++ ['promotion_refund']
+
+======================================================================
+FAIL: test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools (backend.tests.test_answer_content.TopicContractTest.test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools) (topic='promotion_evidence')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_content.py", line 73, in test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools
+    self.assertEqual(plan.inquiry_topics, [topic])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [] != ['promotion_evidence']
+
+Second list contains 1 additional elements.
+First extra element 0:
+'promotion_evidence'
+
+- []
++ ['promotion_evidence']
+
+======================================================================
+FAIL: test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools (backend.tests.test_answer_content.TopicContractTest.test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools) (topic='coupon_basic')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_content.py", line 73, in test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools
+    self.assertEqual(plan.inquiry_topics, [topic])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [] != ['coupon_basic']
+
+Second list contains 1 additional elements.
+First extra element 0:
+'coupon_basic'
+
+- []
++ ['coupon_basic']
+
+======================================================================
+FAIL: test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools (backend.tests.test_answer_content.TopicContractTest.test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools) (topic='member_benefits')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_content.py", line 73, in test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools
+    self.assertEqual(plan.inquiry_topics, [topic])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [] != ['member_benefits']
+
+Second list contains 1 additional elements.
+First extra element 0:
+'member_benefits'
+
+- []
++ ['member_benefits']
+
+======================================================================
+FAIL: test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools (backend.tests.test_answer_content.TopicContractTest.test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools) (topic='coupon_types')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_content.py", line 73, in test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools
+    self.assertEqual(plan.inquiry_topics, [topic])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [] != ['coupon_types']
+
+Second list contains 1 additional elements.
+First extra element 0:
+'coupon_types'
+
+- []
++ ['coupon_types']
+
+======================================================================
+FAIL: test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools (backend.tests.test_answer_content.TopicContractTest.test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools) (topic='coupon_conditions')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_content.py", line 73, in test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools
+    self.assertEqual(plan.inquiry_topics, [topic])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [] != ['coupon_conditions']
+
+Second list contains 1 additional elements.
+First extra element 0:
+'coupon_conditions'
+
+- []
++ ['coupon_conditions']
+
+======================================================================
+FAIL: test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools (backend.tests.test_answer_content.TopicContractTest.test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools) (topic='coupon_threshold')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_content.py", line 73, in test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools
+    self.assertEqual(plan.inquiry_topics, [topic])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [] != ['coupon_threshold']
+
+Second list contains 1 additional elements.
+First extra element 0:
+'coupon_threshold'
+
+- []
++ ['coupon_threshold']
+
+======================================================================
+FAIL: test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools (backend.tests.test_answer_content.TopicContractTest.test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools) (topic='coupon_status')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_content.py", line 73, in test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools
+    self.assertEqual(plan.inquiry_topics, [topic])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [] != ['coupon_status']
+
+Second list contains 1 additional elements.
+First extra element 0:
+'coupon_status'
+
+- []
++ ['coupon_status']
+
+======================================================================
+FAIL: test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools (backend.tests.test_answer_content.TopicContractTest.test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools) (topic='coupon_recovery')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_content.py", line 73, in test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools
+    self.assertEqual(plan.inquiry_topics, [topic])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [] != ['coupon_recovery']
+
+Second list contains 1 additional elements.
+First extra element 0:
+'coupon_recovery'
+
+- []
++ ['coupon_recovery']
+
+======================================================================
+FAIL: test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools (backend.tests.test_answer_content.TopicContractTest.test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools) (topic='coupon_scope')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_content.py", line 73, in test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools
+    self.assertEqual(plan.inquiry_topics, [topic])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [] != ['coupon_scope']
+
+Second list contains 1 additional elements.
+First extra element 0:
+'coupon_scope'
+
+- []
++ ['coupon_scope']
+
+======================================================================
+FAIL: test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools (backend.tests.test_answer_content.TopicContractTest.test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools) (topic='product_scope')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_content.py", line 73, in test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools
+    self.assertEqual(plan.inquiry_topics, [topic])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [] != ['product_scope']
+
+Second list contains 1 additional elements.
+First extra element 0:
+'product_scope'
+
+- []
++ ['product_scope']
+
+======================================================================
+FAIL: test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools (backend.tests.test_answer_content.TopicContractTest.test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools) (topic='product_selection')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_content.py", line 73, in test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools
+    self.assertEqual(plan.inquiry_topics, [topic])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [] != ['product_selection']
+
+Second list contains 1 additional elements.
+First extra element 0:
+'product_selection'
+
+- []
++ ['product_selection']
+
+======================================================================
+FAIL: test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools (backend.tests.test_answer_content.TopicContractTest.test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools) (topic='tent_accessories')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_content.py", line 73, in test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools
+    self.assertEqual(plan.inquiry_topics, [topic])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [] != ['tent_accessories']
+
+Second list contains 1 additional elements.
+First extra element 0:
+'tent_accessories'
+
+- []
++ ['tent_accessories']
+
+======================================================================
+FAIL: test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools (backend.tests.test_answer_content.TopicContractTest.test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools) (topic='tent_condensation')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_content.py", line 73, in test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools
+    self.assertEqual(plan.inquiry_topics, [topic])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [] != ['tent_condensation']
+
+Second list contains 1 additional elements.
+First extra element 0:
+'tent_condensation'
+
+- []
++ ['tent_condensation']
+
+======================================================================
+FAIL: test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools (backend.tests.test_answer_content.TopicContractTest.test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools) (topic='tent_care')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_content.py", line 73, in test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools
+    self.assertEqual(plan.inquiry_topics, [topic])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [] != ['tent_care']
+
+Second list contains 1 additional elements.
+First extra element 0:
+'tent_care'
+
+- []
++ ['tent_care']
+
+======================================================================
+FAIL: test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools (backend.tests.test_answer_content.TopicContractTest.test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools) (topic='furniture_safety')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_content.py", line 73, in test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools
+    self.assertEqual(plan.inquiry_topics, [topic])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [] != ['furniture_safety']
+
+Second list contains 1 additional elements.
+First extra element 0:
+'furniture_safety'
+
+- []
++ ['furniture_safety']
+
+======================================================================
+FAIL: test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools (backend.tests.test_answer_content.TopicContractTest.test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools) (topic='cart_use')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_content.py", line 73, in test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools
+    self.assertEqual(plan.inquiry_topics, [topic])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [] != ['cart_use']
+
+Second list contains 1 additional elements.
+First extra element 0:
+'cart_use'
+
+- []
++ ['cart_use']
+
+======================================================================
+FAIL: test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools (backend.tests.test_answer_content.TopicContractTest.test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools) (topic='cabinet_assembly')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_content.py", line 73, in test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools
+    self.assertEqual(plan.inquiry_topics, [topic])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [] != ['cabinet_assembly']
+
+Second list contains 1 additional elements.
+First extra element 0:
+'cabinet_assembly'
+
+- []
++ ['cabinet_assembly']
+
+======================================================================
+FAIL: test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools (backend.tests.test_answer_content.TopicContractTest.test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools) (topic='waterproof_storage')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_content.py", line 73, in test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools
+    self.assertEqual(plan.inquiry_topics, [topic])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [] != ['waterproof_storage']
+
+Second list contains 1 additional elements.
+First extra element 0:
+'waterproof_storage'
+
+- []
++ ['waterproof_storage']
+
+======================================================================
+FAIL: test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools (backend.tests.test_answer_content.TopicContractTest.test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools) (topic='backpack_specs')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_content.py", line 73, in test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools
+    self.assertEqual(plan.inquiry_topics, [topic])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [] != ['backpack_specs']
+
+Second list contains 1 additional elements.
+First extra element 0:
+'backpack_specs'
+
+- []
++ ['backpack_specs']
+
+======================================================================
+FAIL: test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools (backend.tests.test_answer_content.TopicContractTest.test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools) (topic='trekking_poles_safety')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_content.py", line 73, in test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools
+    self.assertEqual(plan.inquiry_topics, [topic])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [] != ['trekking_poles_safety']
+
+Second list contains 1 additional elements.
+First extra element 0:
+'trekking_poles_safety'
+
+- []
++ ['trekking_poles_safety']
+
+======================================================================
+FAIL: test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools (backend.tests.test_answer_content.TopicContractTest.test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools) (topic='sleeping_bag')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_content.py", line 73, in test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools
+    self.assertEqual(plan.inquiry_topics, [topic])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [] != ['sleeping_bag']
+
+Second list contains 1 additional elements.
+First extra element 0:
+'sleeping_bag'
+
+- []
++ ['sleeping_bag']
+
+======================================================================
+FAIL: test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools (backend.tests.test_answer_content.TopicContractTest.test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools) (topic='lighting_specs')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_content.py", line 73, in test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools
+    self.assertEqual(plan.inquiry_topics, [topic])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [] != ['lighting_specs']
+
+Second list contains 1 additional elements.
+First extra element 0:
+'lighting_specs'
+
+- []
++ ['lighting_specs']
+
+======================================================================
+FAIL: test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools (backend.tests.test_answer_content.TopicContractTest.test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools) (topic='cookware_compatibility')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_content.py", line 73, in test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools
+    self.assertEqual(plan.inquiry_topics, [topic])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [] != ['cookware_compatibility']
+
+Second list contains 1 additional elements.
+First extra element 0:
+'cookware_compatibility'
+
+- []
++ ['cookware_compatibility']
+
+======================================================================
+FAIL: test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools (backend.tests.test_answer_content.TopicContractTest.test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools) (topic='custom_product')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_content.py", line 73, in test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools
+    self.assertEqual(plan.inquiry_topics, [topic])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [] != ['custom_product']
+
+Second list contains 1 additional elements.
+First extra element 0:
+'custom_product'
+
+- []
++ ['custom_product']
+
+======================================================================
+FAIL: test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools (backend.tests.test_answer_content.TopicContractTest.test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools) (topic='product_after_sale')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_content.py", line 73, in test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools
+    self.assertEqual(plan.inquiry_topics, [topic])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [] != ['product_after_sale']
+
+Second list contains 1 additional elements.
+First extra element 0:
+'product_after_sale'
+
+- []
++ ['product_after_sale']
+
+======================================================================
+FAIL: test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools (backend.tests.test_answer_content.TopicContractTest.test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools) (topic='return_conditions')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_content.py", line 73, in test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools
+    self.assertEqual(plan.inquiry_topics, [topic])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [] != ['return_conditions']
+
+Second list contains 1 additional elements.
+First extra element 0:
+'return_conditions'
+
+- []
++ ['return_conditions']
+
+======================================================================
+FAIL: test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools (backend.tests.test_answer_content.TopicContractTest.test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools) (topic='return_process')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_content.py", line 73, in test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools
+    self.assertEqual(plan.inquiry_topics, [topic])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [] != ['return_process']
+
+Second list contains 1 additional elements.
+First extra element 0:
+'return_process'
+
+- []
++ ['return_process']
+
+======================================================================
+FAIL: test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools (backend.tests.test_answer_content.TopicContractTest.test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools) (topic='return_scope')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_content.py", line 73, in test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools
+    self.assertEqual(plan.inquiry_topics, [topic])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [] != ['return_scope']
+
+Second list contains 1 additional elements.
+First extra element 0:
+'return_scope'
+
+- []
++ ['return_scope']
+
+======================================================================
+FAIL: test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools (backend.tests.test_answer_content.TopicContractTest.test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools) (topic='return_quality')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_content.py", line 73, in test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools
+    self.assertEqual(plan.inquiry_topics, [topic])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [] != ['return_quality']
+
+Second list contains 1 additional elements.
+First extra element 0:
+'return_quality'
+
+- []
++ ['return_quality']
+
+======================================================================
+FAIL: test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools (backend.tests.test_answer_content.TopicContractTest.test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools) (topic='return_approval')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_content.py", line 73, in test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools
+    self.assertEqual(plan.inquiry_topics, [topic])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [] != ['return_approval']
+
+Second list contains 1 additional elements.
+First extra element 0:
+'return_approval'
+
+- []
++ ['return_approval']
+
+======================================================================
+FAIL: test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools (backend.tests.test_answer_content.TopicContractTest.test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools) (topic='return_shipping')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_content.py", line 73, in test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools
+    self.assertEqual(plan.inquiry_topics, [topic])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [] != ['return_shipping']
+
+Second list contains 1 additional elements.
+First extra element 0:
+'return_shipping'
+
+- []
++ ['return_shipping']
+
+======================================================================
+FAIL: test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools (backend.tests.test_answer_content.TopicContractTest.test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools) (topic='return_shipping_cost')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_content.py", line 73, in test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools
+    self.assertEqual(plan.inquiry_topics, [topic])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [] != ['return_shipping_cost']
+
+Second list contains 1 additional elements.
+First extra element 0:
+'return_shipping_cost'
+
+- []
++ ['return_shipping_cost']
+
+======================================================================
+FAIL: test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools (backend.tests.test_answer_content.TopicContractTest.test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools) (topic='return_payment')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_content.py", line 73, in test_scope_consultation_keeps_controlled_knowledge_without_authorizing_tools
+    self.assertEqual(plan.inquiry_topics, [topic])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [] != ['return_payment']
+
+Second list contains 1 additional elements.
+First extra element 0:
+'return_payment'
+
+- []
++ ['return_payment']
+
+----------------------------------------------------------------------
+Ran 28 tests in 0.135s
+
+FAILED (failures=61)

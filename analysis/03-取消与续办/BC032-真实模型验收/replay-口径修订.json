@@ -1,0 +1,278 @@
+{
+  "summary": {
+    "total": 29,
+    "pass": 25,
+    "fail": [
+      "G02-T1",
+      "G03B-T1",
+      "G03B-T2",
+      "G05-T4"
+    ],
+    "reclassified": [
+      "G02-T3",
+      "G02B-T2",
+      "G03B-T3",
+      "G03C-T2"
+    ]
+  },
+  "rows": [
+    {
+      "turn": "G01-T1",
+      "original_verdict": "PASS",
+      "original_failed": [],
+      "verdict": "PASS",
+      "failed": [],
+      "blocking": []
+    },
+    {
+      "turn": "G01-T2",
+      "original_verdict": "PASS",
+      "original_failed": [],
+      "verdict": "PASS",
+      "failed": [],
+      "blocking": []
+    },
+    {
+      "turn": "G02-T1",
+      "original_verdict": "FAIL",
+      "original_failed": [
+        "页面候选顺序"
+      ],
+      "verdict": "FAIL",
+      "failed": [
+        "页面候选顺序"
+      ],
+      "blocking": []
+    },
+    {
+      "turn": "G02-T2",
+      "original_verdict": "PASS",
+      "original_failed": [],
+      "verdict": "PASS",
+      "failed": [],
+      "blocking": []
+    },
+    {
+      "turn": "G02-T3",
+      "original_verdict": "FAIL",
+      "original_failed": [
+        "Python澄清焦点"
+      ],
+      "verdict": "PASS",
+      "failed": [],
+      "blocking": []
+    },
+    {
+      "turn": "G02B-T1",
+      "original_verdict": "PASS",
+      "original_failed": [],
+      "verdict": "PASS",
+      "failed": [],
+      "blocking": []
+    },
+    {
+      "turn": "G02B-T2",
+      "original_verdict": "FAIL",
+      "original_failed": [
+        "Python澄清焦点"
+      ],
+      "verdict": "PASS",
+      "failed": [],
+      "blocking": []
+    },
+    {
+      "turn": "G03A-T1",
+      "original_verdict": "PASS",
+      "original_failed": [],
+      "verdict": "PASS",
+      "failed": [],
+      "blocking": []
+    },
+    {
+      "turn": "G03B-T1",
+      "original_verdict": "FAIL",
+      "original_failed": [
+        "页面候选顺序"
+      ],
+      "verdict": "FAIL",
+      "failed": [
+        "页面候选顺序"
+      ],
+      "blocking": []
+    },
+    {
+      "turn": "G03B-T2",
+      "original_verdict": "FAIL",
+      "original_failed": [
+        "页面候选顺序"
+      ],
+      "verdict": "FAIL",
+      "failed": [
+        "页面候选顺序"
+      ],
+      "blocking": []
+    },
+    {
+      "turn": "G03B-T3",
+      "original_verdict": "FAIL",
+      "original_failed": [
+        "答复包含['ORD9802']"
+      ],
+      "verdict": "PASS",
+      "failed": [],
+      "blocking": []
+    },
+    {
+      "turn": "G03C-T1",
+      "original_verdict": "PASS",
+      "original_failed": [],
+      "verdict": "PASS",
+      "failed": [],
+      "blocking": []
+    },
+    {
+      "turn": "G03C-T2",
+      "original_verdict": "FAIL",
+      "original_failed": [
+        "答复包含['ORD9802']"
+      ],
+      "verdict": "PASS",
+      "failed": [],
+      "blocking": []
+    },
+    {
+      "turn": "G04A-T1",
+      "original_verdict": "PASS",
+      "original_failed": [],
+      "verdict": "PASS",
+      "failed": [],
+      "blocking": []
+    },
+    {
+      "turn": "G04A-T2",
+      "original_verdict": "PASS",
+      "original_failed": [],
+      "verdict": "PASS",
+      "failed": [],
+      "blocking": []
+    },
+    {
+      "turn": "G04A-T3",
+      "original_verdict": "PASS",
+      "original_failed": [],
+      "verdict": "PASS",
+      "failed": [],
+      "blocking": []
+    },
+    {
+      "turn": "G04B-T1",
+      "original_verdict": "PASS",
+      "original_failed": [],
+      "verdict": "PASS",
+      "failed": [],
+      "blocking": []
+    },
+    {
+      "turn": "G04B-T2",
+      "original_verdict": "PASS",
+      "original_failed": [],
+      "verdict": "PASS",
+      "failed": [],
+      "blocking": []
+    },
+    {
+      "turn": "G04B-T3",
+      "original_verdict": "PASS",
+      "original_failed": [],
+      "verdict": "PASS",
+      "failed": [],
+      "blocking": []
+    },
+    {
+      "turn": "G05-T1",
+      "original_verdict": "PASS",
+      "original_failed": [],
+      "verdict": "PASS",
+      "failed": [],
+      "blocking": []
+    },
+    {
+      "turn": "G05-T2",
+      "original_verdict": "PASS",
+      "original_failed": [],
+      "verdict": "PASS",
+      "failed": [],
+      "blocking": []
+    },
+    {
+      "turn": "G05-T3",
+      "original_verdict": "PASS",
+      "original_failed": [],
+      "verdict": "PASS",
+      "failed": [],
+      "blocking": []
+    },
+    {
+      "turn": "G05-T4",
+      "original_verdict": "FAIL",
+      "original_failed": [
+        "Python原待办=None",
+        "Java原明确取消已记录"
+      ],
+      "verdict": "FAIL",
+      "failed": [
+        "Python原待办=None",
+        "Java原明确取消已记录"
+      ],
+      "blocking": []
+    },
+    {
+      "turn": "G05-T5",
+      "original_verdict": "PASS",
+      "original_failed": [],
+      "verdict": "PASS",
+      "failed": [],
+      "blocking": []
+    },
+    {
+      "turn": "G06A-T1",
+      "original_verdict": "PASS",
+      "original_failed": [],
+      "verdict": "PASS",
+      "failed": [],
+      "blocking": []
+    },
+    {
+      "turn": "G06A-T2",
+      "original_verdict": "PASS",
+      "original_failed": [],
+      "verdict": "PASS",
+      "failed": [],
+      "blocking": []
+    },
+    {
+      "turn": "G06B-T1",
+      "original_verdict": "PASS",
+      "original_failed": [],
+      "verdict": "PASS",
+      "failed": [],
+      "blocking": []
+    },
+    {
+      "turn": "G06B-T2",
+      "original_verdict": "PASS",
+      "original_failed": [],
+      "verdict": "PASS",
+      "failed": [],
+      "blocking": []
+    },
+    {
+      "turn": "G06B-T3",
+      "original_verdict": "PASS",
+      "original_failed": [],
+      "verdict": "PASS",
+      "failed": [],
+      "blocking": []
+    }
+  ]
+}

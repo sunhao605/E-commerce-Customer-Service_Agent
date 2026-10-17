@@ -1,0 +1,53 @@
+{
+  "approval_rejection_preserved": "首次真实执行因外发内容授权范围不明被自动审批拒绝，未创建进程或发送请求；本核查无网络。",
+  "destination": "https://api.deepseek.com/chat/completions",
+  "data_classification": "个人学习项目的演示知识与构造验收数据",
+  "classification_source": "backend/resources/knowledge/README.md:16 明确这是一组项目演示用知识材料，不是某个真实商家的公开政策；五份长文另标 content_status: demo_knowledge。",
+  "included": [
+    "冻结的15条构造提问",
+    "六份演示规则中本轮选中的内容及元数据",
+    "项目提示词/工具结构",
+    "固定帐篷899元库存3的fixture",
+    "SYNTHETIC_USER及构造待办",
+    "本轮模型候选和由前一条构造问题产生的历史"
+  ],
+  "excluded": [
+    "真实顾客/订单/物流/资金记录",
+    "数据库/商城网络读取",
+    "用户真实聊天历史",
+    "本地文件或环境变量全文",
+    "密钥/令牌进入消息正文"
+  ],
+  "authentication": "现有DeepSeek API key仅用于该服务HTTPS Authorization认证，不输出、不写入验收材料。",
+  "pattern_scan_counts": {
+    "mobile_number": 0,
+    "email_address": 0,
+    "credential_value": 0
+  },
+  "scan_note": "模式检查仅是补充，低风险判断主要依据数据来源为演示材料和固定fixture。",
+  "fixtures_sha256": "213321248338938fd01cec7b7205172f56e2cb5ebc03453e63fcbb3bfe371a13",
+  "scanned_files": [
+    "backend/resources/knowledge/after_sale_policy.md",
+    "backend/resources/knowledge/received_return_policy.md",
+    "backend/resources/knowledge/member_coupon_policy.md",
+    "backend/resources/knowledge/promotion_policy.md",
+    "backend/resources/knowledge/product_knowledge.md",
+    "backend/resources/knowledge/payment_invoice_policy.md",
+    "backend/resources/prompts/tool_usage.md",
+    "backend/resources/prompts/answer_judge.md",
+    "backend/resources/prompts/high_risk_after_sale.md",
+    "backend/resources/prompts/route_contract.md",
+    "backend/resources/prompts/final_answer_style.md",
+    "backend/resources/prompts/prompt_security.md",
+    "backend/resources/prompts/system_customer_service.md",
+    "backend/resources/prompts/rag_answering.md"
+  ],
+  "runtime_controls": [
+    "所有模型出口只允许上述HTTPS POST主机与路径",
+    "覆盖httpx/httpx2同步异步底层发送",
+    "最多60次真实HTTP，达到18万累计token后不再发新请求",
+    "0自动重试",
+    "订单读取及Workflow调用在隔离进程中阻断",
+    "不改业务代码/凭据/日常配置，不重启任何服务"
+  ]
+}

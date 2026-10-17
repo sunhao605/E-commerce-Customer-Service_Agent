@@ -1,0 +1,4384 @@
+{
+  "run_id": "BC032-LIVE-001",
+  "rows": [
+    {
+      "run": "BC032-LIVE-001",
+      "case": "G01",
+      "turn": "G01-T1",
+      "session": "bc032-g01-001",
+      "message": "朋友把山友会员券截图发给我，我能拿来用吗？这张券还没到使用时间。",
+      "request_page": {
+        "type": "HOME"
+      },
+      "response": {
+        "answer": "这张券是朋友账号里的，截图不能改变券的归属，所以不能直接拿来用。而且这张券还没到使用时间，目前也不属于可用状态。\n\n优惠券能否使用，要看它所属的账号、当前状态、开始和截止时间、满额门槛、适用品类或商品范围，以及本次订单条件。朋友的券截图不能证明它在您账号下有效，目前也没有把权益转给他人或口头延期的办理方式。\n\n如果您想确认自己账号下有没有可用的券，可以在商城查看本人账号的优惠券记录，并以结算页显示的条件为准。",
+        "sessionId": "bc032-g01-001",
+        "confirmRequired": false,
+        "pendingAction": "READ_ONLY_CONSULTATION",
+        "actions": [],
+        "fallback": false
+      },
+      "python": {
+        "intent": "promotion_query",
+        "task_relation": "unrelated",
+        "chosen_order_id": null,
+        "answer": "这张券是朋友账号里的，截图不能改变券的归属，所以不能直接拿来用。而且这张券还没到使用时间，目前也不属于可用状态。\n\n优惠券能否使用，要看它所属的账号、当前状态、开始和截止时间、满额门槛、适用品类或商品范围，以及本次订单条件。朋友的券截图不能证明它在您账号下有效，目前也没有把权益转给他人或口头延期的办理方式。\n\n如果您想确认自己账号下有没有可用的券，可以在商城查看本人账号的优惠券记录，并以结算页显示的条件为准。"
+      },
+      "memory": {
+        "open_task": {
+          "intent": "refund_request",
+          "pending_slot": "order_id",
+          "version": 3,
+          "candidates": [
+            {
+              "value": "ORD9801",
+              "label": "ORD9801"
+            },
+            {
+              "value": "ORD9802",
+              "label": "ORD9802"
+            }
+          ]
+        },
+        "order_query": null,
+        "eligibility_query": null,
+        "product_query": null,
+        "promotion_query": null,
+        "clarification_focus": "open_task",
+        "last_order_id": null
+      },
+      "before_memory": {
+        "open_task": {
+          "intent": "refund_request",
+          "pending_slot": "order_id",
+          "version": 3,
+          "candidates": [
+            {
+              "value": "ORD9801",
+              "label": "ORD9801"
+            },
+            {
+              "value": "ORD9802",
+              "label": "ORD9802"
+            }
+          ]
+        },
+        "order_query": null,
+        "eligibility_query": null,
+        "product_query": null,
+        "promotion_query": null,
+        "clarification_focus": "open_task",
+        "last_order_id": null
+      },
+      "java": {
+        "before": {
+          "pending": "REFUND_ORDER_REQUIRED",
+          "handled": false,
+          "actionType": "REFUND",
+          "expiresAt": "2026-10-17T10:43:26.141067247",
+          "revision": 3,
+          "tokenSha256": "b29272a21ce496ae741e639e6419e0588e2c6e5dba2886beb01df845e295612d",
+          "workflowSha256": "12c8134517783565263ad3233611e08821ae68fd5345ae225e32eac9c911668b"
+        },
+        "after": {
+          "pending": "REFUND_ORDER_REQUIRED",
+          "handled": false,
+          "actionType": "REFUND",
+          "expiresAt": "2026-10-17T10:43:26.141067247",
+          "revision": 3,
+          "tokenSha256": "b29272a21ce496ae741e639e6419e0588e2c6e5dba2886beb01df845e295612d",
+          "workflowSha256": "12c8134517783565263ad3233611e08821ae68fd5345ae225e32eac9c911668b"
+        }
+      },
+      "page": {
+        "driver": "api"
+      },
+      "checks": [
+        {
+          "check": "Python原待办=unchanged",
+          "passed": true,
+          "detail": {
+            "actual": {
+              "intent": "refund_request",
+              "pending_slot": "order_id",
+              "version": 3,
+              "candidates": [
+                {
+                  "value": "ORD9801",
+                  "label": "ORD9801"
+                },
+                {
+                  "value": "ORD9802",
+                  "label": "ORD9802"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "check": "Java售后业务字段不变",
+          "passed": true,
+          "detail": {}
+        },
+        {
+          "check": "未重发售后确认卡",
+          "passed": true,
+          "detail": {
+            "pendingAction": "READ_ONLY_CONSULTATION"
+          }
+        },
+        {
+          "check": "答复包含['券', '本人', '账号']",
+          "passed": true,
+          "detail": {
+            "answer": "这张券是朋友账号里的，截图不能改变券的归属，所以不能直接拿来用。而且这张券还没到使用时间，目前也不属于可用状态。\n\n优惠券能否使用，要看它所属的账号、当前状态、开始和截止时间、满额门槛、适用品类或商品范围，以及本次订单条件。朋友的券截图不能证明它在您账号下有效，目前也没有把权益转给他人或口头延期的办理方式。\n\n如果您想确认自己账号下有没有可用的券，可以在商城查看本人账号的优惠券记录，并以结算页显示的条件为准。"
+          }
+        },
+        {
+          "check": "答复无禁止表述",
+          "passed": true,
+          "detail": {
+            "hits": []
+          }
+        }
+      ],
+      "failed": [],
+      "blocking": [],
+      "recorded": {},
+      "verdict": "PASS"
+    },
+    {
+      "run": "BC032-LIVE-001",
+      "case": "G01",
+      "turn": "G01-T2",
+      "session": "bc032-g01-001",
+      "message": "谢谢，我再想想。",
+      "request_page": {
+        "type": "HOME"
+      },
+      "response": {
+        "answer": "好的，您慢慢考虑，有需要随时找我。后续如果想查询订单、物流、活动优惠或售后问题，把相关信息发给我就行。",
+        "sessionId": "bc032-g01-001",
+        "confirmRequired": false,
+        "pendingAction": "READ_ONLY_CONSULTATION",
+        "actions": [],
+        "fallback": false
+      },
+      "python": {
+        "intent": "general_chat",
+        "task_relation": "uncertain",
+        "chosen_order_id": null,
+        "answer": "好的，您慢慢考虑，有需要随时找我。后续如果想查询订单、物流、活动优惠或售后问题，把相关信息发给我就行。"
+      },
+      "memory": {
+        "open_task": {
+          "intent": "refund_request",
+          "pending_slot": "order_id",
+          "version": 3,
+          "candidates": [
+            {
+              "value": "ORD9801",
+              "label": "ORD9801"
+            },
+            {
+              "value": "ORD9802",
+              "label": "ORD9802"
+            }
+          ]
+        },
+        "order_query": null,
+        "eligibility_query": null,
+        "product_query": null,
+        "promotion_query": null,
+        "clarification_focus": "open_task",
+        "last_order_id": null
+      },
+      "before_memory": {
+        "open_task": {
+          "intent": "refund_request",
+          "pending_slot": "order_id",
+          "version": 3,
+          "candidates": [
+            {
+              "value": "ORD9801",
+              "label": "ORD9801"
+            },
+            {
+              "value": "ORD9802",
+              "label": "ORD9802"
+            }
+          ]
+        },
+        "order_query": null,
+        "eligibility_query": null,
+        "product_query": null,
+        "promotion_query": null,
+        "clarification_focus": "open_task",
+        "last_order_id": null
+      },
+      "java": {
+        "before": {
+          "pending": "REFUND_ORDER_REQUIRED",
+          "handled": false,
+          "actionType": "REFUND",
+          "expiresAt": "2026-10-17T10:43:26.141067247",
+          "revision": 3,
+          "tokenSha256": "b29272a21ce496ae741e639e6419e0588e2c6e5dba2886beb01df845e295612d",
+          "workflowSha256": "12c8134517783565263ad3233611e08821ae68fd5345ae225e32eac9c911668b"
+        },
+        "after": {
+          "pending": "REFUND_ORDER_REQUIRED",
+          "handled": false,
+          "actionType": "REFUND",
+          "expiresAt": "2026-10-17T10:43:26.141067247",
+          "revision": 3,
+          "tokenSha256": "b29272a21ce496ae741e639e6419e0588e2c6e5dba2886beb01df845e295612d",
+          "workflowSha256": "12c8134517783565263ad3233611e08821ae68fd5345ae225e32eac9c911668b"
+        }
+      },
+      "page": {
+        "driver": "api"
+      },
+      "checks": [
+        {
+          "check": "Python原待办=unchanged",
+          "passed": true,
+          "detail": {
+            "actual": {
+              "intent": "refund_request",
+              "pending_slot": "order_id",
+              "version": 3,
+              "candidates": [
+                {
+                  "value": "ORD9801",
+                  "label": "ORD9801"
+                },
+                {
+                  "value": "ORD9802",
+                  "label": "ORD9802"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "check": "Python澄清焦点",
+          "passed": true,
+          "detail": {
+            "expected": "unchanged",
+            "actual": "open_task"
+          }
+        },
+        {
+          "check": "Java售后业务字段不变",
+          "passed": true,
+          "detail": {}
+        },
+        {
+          "check": "未重发售后确认卡",
+          "passed": true,
+          "detail": {
+            "pendingAction": "READ_ONLY_CONSULTATION"
+          }
+        },
+        {
+          "check": "答复无禁止表述",
+          "passed": true,
+          "detail": {
+            "hits": []
+          }
+        }
+      ],
+      "failed": [],
+      "blocking": [],
+      "recorded": {},
+      "verdict": "PASS"
+    },
+    {
+      "run": "BC032-LIVE-001",
+      "case": "G02",
+      "turn": "G02-T1",
+      "session": "cs-13ad4e59-da09-4fa0-b939-603ae8dfda4e",
+      "message": "我要退款。",
+      "request_page": {
+        "type": "HOME"
+      },
+      "response": {
+        "answer": "你要退款哪一个订单？请选择订单号，或直接补充订单号。",
+        "sessionId": "cs-13ad4e59-da09-4fa0-b939-603ae8dfda4e",
+        "confirmRequired": false,
+        "pendingAction": "REFUND_ORDER_REQUIRED",
+        "actions": [],
+        "fallback": false
+      },
+      "python": {
+        "intent": "refund_request",
+        "task_relation": null,
+        "chosen_order_id": null,
+        "answer": "你要退款哪一个订单？请选择订单号，或直接补充订单号。"
+      },
+      "memory": {
+        "open_task": {
+          "intent": "refund_request",
+          "pending_slot": "order_id",
+          "candidates": [
+            {
+              "value": "ORD9801",
+              "label": "ORD9801"
+            },
+            {
+              "value": "ORD9802",
+              "label": "ORD9802"
+            }
+          ]
+        },
+        "order_query": null,
+        "eligibility_query": null,
+        "product_query": null,
+        "promotion_query": null,
+        "clarification_focus": "open_task",
+        "last_order_id": null
+      },
+      "before_memory": {},
+      "java": {
+        "before": null,
+        "after": {
+          "pending": "REFUND_ORDER_REQUIRED",
+          "handled": false,
+          "actionType": "REFUND",
+          "expiresAt": "2026-10-17T10:43:36.198009712",
+          "revision": 1
+        }
+      },
+      "page": {
+        "driver": "browser",
+        "confirm_cards": 0,
+        "answer": "你要退款哪一个订单？请选择订单号，或直接补充订单号。"
+      },
+      "checks": [
+        {
+          "check": "Python原待办={'intent': 'refund_request', 'pending_slot': 'order_id', 'candidates': ['ORD9801', 'ORD9802']}",
+          "passed": true,
+          "detail": {
+            "actual": {
+              "intent": "refund_request",
+              "pending_slot": "order_id",
+              "candidates": [
+                {
+                  "value": "ORD9801",
+                  "label": "ORD9801"
+                },
+                {
+                  "value": "ORD9802",
+                  "label": "ORD9802"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "check": "未重发售后确认卡",
+          "passed": true,
+          "detail": {
+            "pendingAction": "REFUND_ORDER_REQUIRED"
+          }
+        },
+        {
+          "check": "答复无禁止表述",
+          "passed": true,
+          "detail": {
+            "hits": []
+          }
+        },
+        {
+          "check": "页面未重发确认卡",
+          "passed": true,
+          "detail": {
+            "cards": 0
+          }
+        },
+        {
+          "check": "页面候选顺序",
+          "passed": false,
+          "detail": {
+            "candidates": [
+              "ORD9801",
+              "ORD9802"
+            ],
+            "answer": "你要退款哪一个订单？请选择订单号，或直接补充订单号。"
+          }
+        }
+      ],
+      "failed": [
+        "页面候选顺序"
+      ],
+      "blocking": [],
+      "recorded": {},
+      "verdict": "FAIL"
+    },
+    {
+      "run": "BC032-LIVE-001",
+      "case": "G02",
+      "turn": "G02-T2",
+      "session": "cs-13ad4e59-da09-4fa0-b939-603ae8dfda4e",
+      "message": "退款先放着，我想查一下物流到哪了",
+      "request_page": {
+        "type": "HOME"
+      },
+      "response": {
+        "answer": "你要查询哪一个订单？请选择订单号，或直接补充订单号。 当前账号下可选订单：ORD9801（隔离露营椅）；ORD9802（隔离露营椅）。",
+        "sessionId": "cs-13ad4e59-da09-4fa0-b939-603ae8dfda4e",
+        "confirmRequired": false,
+        "pendingAction": "TASK_CONTROL_PENDING",
+        "actions": [],
+        "fallback": false
+      },
+      "python": {
+        "intent": "order_query",
+        "task_relation": "stop",
+        "chosen_order_id": null,
+        "answer": "你要查询哪一个订单？请选择订单号，或直接补充订单号。 当前账号下可选订单：ORD9801（隔离露营椅）；ORD9802（隔离露营椅）。"
+      },
+      "memory": {
+        "open_task": {
+          "intent": "refund_request",
+          "pending_slot": "order_id",
+          "candidates": [
+            {
+              "value": "ORD9801",
+              "label": "ORD9801"
+            },
+            {
+              "value": "ORD9802",
+              "label": "ORD9802"
+            }
+          ]
+        },
+        "order_query": {
+          "intent": "order_query",
+          "pending_slot": "order_id",
+          "candidates": [
+            {
+              "value": "ORD9801",
+              "label": "ORD9801"
+            },
+            {
+              "value": "ORD9802",
+              "label": "ORD9802"
+            }
+          ],
+          "order_id": null
+        },
+        "eligibility_query": null,
+        "product_query": null,
+        "promotion_query": null,
+        "clarification_focus": "order_query",
+        "last_order_id": null
+      },
+      "before_memory": {
+        "open_task": {
+          "intent": "refund_request",
+          "pending_slot": "order_id",
+          "candidates": [
+            {
+              "value": "ORD9801",
+              "label": "ORD9801"
+            },
+            {
+              "value": "ORD9802",
+              "label": "ORD9802"
+            }
+          ]
+        },
+        "order_query": null,
+        "eligibility_query": null,
+        "product_query": null,
+        "promotion_query": null,
+        "clarification_focus": "open_task",
+        "last_order_id": null
+      },
+      "java": {
+        "before": {
+          "pending": "REFUND_ORDER_REQUIRED",
+          "handled": false,
+          "actionType": "REFUND",
+          "expiresAt": "2026-10-17T10:43:36.198009712",
+          "revision": 1
+        },
+        "after": {
+          "pending": "REFUND_ORDER_REQUIRED",
+          "handled": false,
+          "actionType": "REFUND",
+          "expiresAt": "2026-10-17T10:43:36.198009712",
+          "revision": 1
+        }
+      },
+      "page": {
+        "driver": "browser",
+        "confirm_cards": 0,
+        "answer": "你要查询哪一个订单？请选择订单号，或直接补充订单号。 当前账号下可选订单：ORD9801（隔离露营椅）；ORD9802（隔离露营椅）。"
+      },
+      "checks": [
+        {
+          "check": "Python原待办={'intent': 'refund_request', 'pending_slot': 'order_id', 'candidates': ['ORD9801', 'ORD9802']}",
+          "passed": true,
+          "detail": {
+            "actual": {
+              "intent": "refund_request",
+              "pending_slot": "order_id",
+              "candidates": [
+                {
+                  "value": "ORD9801",
+                  "label": "ORD9801"
+                },
+                {
+                  "value": "ORD9802",
+                  "label": "ORD9802"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "check": "Python澄清焦点",
+          "passed": true,
+          "detail": {
+            "expected": "order_query",
+            "actual": "order_query"
+          }
+        },
+        {
+          "check": "未重发售后确认卡",
+          "passed": true,
+          "detail": {
+            "pendingAction": "TASK_CONTROL_PENDING"
+          }
+        },
+        {
+          "check": "答复无禁止表述",
+          "passed": true,
+          "detail": {
+            "hits": []
+          }
+        },
+        {
+          "check": "页面未重发确认卡",
+          "passed": true,
+          "detail": {
+            "cards": 0
+          }
+        },
+        {
+          "check": "页面候选顺序",
+          "passed": true,
+          "detail": {
+            "candidates": [
+              "ORD9801",
+              "ORD9802"
+            ],
+            "answer": "你要查询哪一个订单？请选择订单号，或直接补充订单号。 当前账号下可选订单：ORD9801（隔离露营椅）；ORD9802（隔离露营椅）。"
+          }
+        }
+      ],
+      "failed": [],
+      "blocking": [],
+      "recorded": {},
+      "verdict": "PASS"
+    },
+    {
+      "run": "BC032-LIVE-001",
+      "case": "G02",
+      "turn": "G02-T3",
+      "session": "cs-13ad4e59-da09-4fa0-b939-603ae8dfda4e",
+      "message": "ORD9801",
+      "request_page": {
+        "type": "HOME"
+      },
+      "response": {
+        "answer": "订单 ORD9801 目前是待发货状态，物流显示暂未发货，商品为隔离露营椅。\n\n目前还没有更多物流更新。您可以稍后再查询；如果希望人工协助，也可以在商城客服对话中提出转人工，确认后会为您打开人工入口。",
+        "sessionId": "cs-13ad4e59-da09-4fa0-b939-603ae8dfda4e",
+        "confirmRequired": false,
+        "pendingAction": "READ_ONLY_CONSULTATION",
+        "actions": [],
+        "fallback": false
+      },
+      "python": {
+        "intent": "order_query",
+        "task_relation": "resume",
+        "chosen_order_id": "ORD9801",
+        "answer": "订单 ORD9801 目前是待发货状态，物流显示暂未发货，商品为隔离露营椅。\n\n目前还没有更多物流更新。您可以稍后再查询；如果希望人工协助，也可以在商城客服对话中提出转人工，确认后会为您打开人工入口。"
+      },
+      "memory": {
+        "open_task": {
+          "intent": "refund_request",
+          "pending_slot": "order_id",
+          "candidates": [
+            {
+              "value": "ORD9801",
+              "label": "ORD9801"
+            },
+            {
+              "value": "ORD9802",
+              "label": "ORD9802"
+            }
+          ]
+        },
+        "order_query": {
+          "intent": "order_query",
+          "order_id": "ORD9801",
+          "pending_slot": null,
+          "candidates": []
+        },
+        "eligibility_query": null,
+        "product_query": null,
+        "promotion_query": null,
+        "clarification_focus": null,
+        "last_order_id": "ORD9801"
+      },
+      "before_memory": {
+        "open_task": {
+          "intent": "refund_request",
+          "pending_slot": "order_id",
+          "candidates": [
+            {
+              "value": "ORD9801",
+              "label": "ORD9801"
+            },
+            {
+              "value": "ORD9802",
+              "label": "ORD9802"
+            }
+          ]
+        },
+        "order_query": {
+          "intent": "order_query",
+          "pending_slot": "order_id",
+          "candidates": [
+            {
+              "value": "ORD9801",
+              "label": "ORD9801"
+            },
+            {
+              "value": "ORD9802",
+              "label": "ORD9802"
+            }
+          ],
+          "order_id": null
+        },
+        "eligibility_query": null,
+        "product_query": null,
+        "promotion_query": null,
+        "clarification_focus": "order_query",
+        "last_order_id": null
+      },
+      "java": {
+        "before": {
+          "pending": "REFUND_ORDER_REQUIRED",
+          "handled": false,
+          "actionType": "REFUND",
+          "expiresAt": "2026-10-17T10:43:36.198009712",
+          "revision": 1
+        },
+        "after": {
+          "pending": "REFUND_ORDER_REQUIRED",
+          "handled": false,
+          "actionType": "REFUND",
+          "expiresAt": "2026-10-17T10:43:36.198009712",
+          "revision": 1
+        }
+      },
+      "page": {
+        "driver": "browser",
+        "confirm_cards": 0,
+        "answer": "订单 ORD9801 目前是待发货状态，物流显示暂未发货，商品为隔离露营椅。\n\n目前还没有更多物流更新。您可以稍后再查询；如果希望人工协助，也可以在商城客服对话中提出转人工，确认后会为您打开人工入口。"
+      },
+      "checks": [
+        {
+          "check": "Python原待办=unchanged",
+          "passed": true,
+          "detail": {
+            "actual": {
+              "intent": "refund_request",
+              "pending_slot": "order_id",
+              "candidates": [
+                {
+                  "value": "ORD9801",
+                  "label": "ORD9801"
+                },
+                {
+                  "value": "ORD9802",
+                  "label": "ORD9802"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "check": "Python澄清焦点",
+          "passed": false,
+          "detail": {
+            "expected": "order_query",
+            "actual": null
+          }
+        },
+        {
+          "check": "未重发售后确认卡",
+          "passed": true,
+          "detail": {
+            "pendingAction": "READ_ONLY_CONSULTATION"
+          }
+        },
+        {
+          "check": "Python意图",
+          "passed": true,
+          "detail": {
+            "expected": [
+              "order_query",
+              "refund_status_query"
+            ],
+            "actual": "order_query"
+          }
+        },
+        {
+          "check": "绑定订单",
+          "passed": true,
+          "detail": {
+            "expected": "ORD9801",
+            "actual": "ORD9801"
+          }
+        },
+        {
+          "check": "答复包含['ORD9801', '物流']",
+          "passed": true,
+          "detail": {
+            "answer": "订单 ORD9801 目前是待发货状态，物流显示暂未发货，商品为隔离露营椅。\n\n目前还没有更多物流更新。您可以稍后再查询；如果希望人工协助，也可以在商城客服对话中提出转人工，确认后会为您打开人工入口。"
+          }
+        },
+        {
+          "check": "答复无禁止表述",
+          "passed": true,
+          "detail": {
+            "hits": []
+          }
+        }
+      ],
+      "failed": [
+        "Python澄清焦点"
+      ],
+      "blocking": [],
+      "recorded": {},
+      "verdict": "FAIL"
+    },
+    {
+      "run": "BC032-LIVE-001",
+      "case": "G02B",
+      "turn": "G02B-T1",
+      "session": "bc032-g02b-001",
+      "message": "退款先放着，我想查一下物流到哪了",
+      "request_page": {
+        "type": "HOME"
+      },
+      "response": {
+        "answer": "你要查询哪一个订单？请选择订单号，或直接补充订单号。 当前账号下可选订单：ORD9801（隔离露营椅）；ORD9802（隔离露营椅）。",
+        "sessionId": "bc032-g02b-001",
+        "confirmRequired": false,
+        "pendingAction": "TASK_CONTROL_PENDING",
+        "actions": [],
+        "fallback": false
+      },
+      "python": {
+        "intent": "order_query",
+        "task_relation": "stop",
+        "chosen_order_id": null,
+        "answer": "你要查询哪一个订单？请选择订单号，或直接补充订单号。 当前账号下可选订单：ORD9801（隔离露营椅）；ORD9802（隔离露营椅）。"
+      },
+      "memory": {
+        "open_task": {
+          "intent": "refund_request",
+          "pending_slot": "order_id",
+          "version": 3,
+          "candidates": [
+            {
+              "value": "ORD9801",
+              "label": "ORD9801"
+            },
+            {
+              "value": "ORD9802",
+              "label": "ORD9802"
+            }
+          ]
+        },
+        "order_query": {
+          "intent": "order_query",
+          "pending_slot": "order_id",
+          "candidates": [
+            {
+              "value": "ORD9801",
+              "label": "ORD9801"
+            },
+            {
+              "value": "ORD9802",
+              "label": "ORD9802"
+            }
+          ],
+          "order_id": null
+        },
+        "eligibility_query": null,
+        "product_query": null,
+        "promotion_query": null,
+        "clarification_focus": "order_query",
+        "last_order_id": null
+      },
+      "before_memory": {
+        "open_task": {
+          "intent": "refund_request",
+          "pending_slot": "order_id",
+          "version": 3,
+          "candidates": [
+            {
+              "value": "ORD9801",
+              "label": "ORD9801"
+            },
+            {
+              "value": "ORD9802",
+              "label": "ORD9802"
+            }
+          ]
+        },
+        "order_query": null,
+        "eligibility_query": null,
+        "product_query": null,
+        "promotion_query": null,
+        "clarification_focus": "open_task",
+        "last_order_id": null
+      },
+      "java": {
+        "before": {
+          "pending": "REFUND_ORDER_REQUIRED",
+          "handled": false,
+          "actionType": "REFUND",
+          "expiresAt": "2026-10-17T10:43:44.403443290",
+          "revision": 3,
+          "tokenSha256": "5eea62022f9e53df24f1012c0610bea04683ac4de16bf928b23b849a1a6a74b9",
+          "workflowSha256": "45028907e0804820fd1cc6af560f8e80b46087fa35fda67f906ce580f696587f"
+        },
+        "after": {
+          "pending": "REFUND_ORDER_REQUIRED",
+          "handled": false,
+          "actionType": "REFUND",
+          "expiresAt": "2026-10-17T10:43:44.403443290",
+          "revision": 3,
+          "tokenSha256": "5eea62022f9e53df24f1012c0610bea04683ac4de16bf928b23b849a1a6a74b9",
+          "workflowSha256": "45028907e0804820fd1cc6af560f8e80b46087fa35fda67f906ce580f696587f"
+        }
+      },
+      "page": {
+        "driver": "api"
+      },
+      "checks": [
+        {
+          "check": "Python原待办=unchanged",
+          "passed": true,
+          "detail": {
+            "actual": {
+              "intent": "refund_request",
+              "pending_slot": "order_id",
+              "version": 3,
+              "candidates": [
+                {
+                  "value": "ORD9801",
+                  "label": "ORD9801"
+                },
+                {
+                  "value": "ORD9802",
+                  "label": "ORD9802"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "check": "Python澄清焦点",
+          "passed": true,
+          "detail": {
+            "expected": "order_query",
+            "actual": "order_query"
+          }
+        },
+        {
+          "check": "Java售后业务字段不变",
+          "passed": true,
+          "detail": {}
+        },
+        {
+          "check": "未重发售后确认卡",
+          "passed": true,
+          "detail": {
+            "pendingAction": "TASK_CONTROL_PENDING"
+          }
+        },
+        {
+          "check": "答复无禁止表述",
+          "passed": true,
+          "detail": {
+            "hits": []
+          }
+        }
+      ],
+      "failed": [],
+      "blocking": [],
+      "recorded": {},
+      "verdict": "PASS"
+    },
+    {
+      "run": "BC032-LIVE-001",
+      "case": "G02B",
+      "turn": "G02B-T2",
+      "session": "bc032-g02b-001",
+      "message": "第二笔",
+      "request_page": {
+        "type": "HOME"
+      },
+      "response": {
+        "answer": "您这笔订单（ORD9802，商品为隔离露营椅）目前是待发货状态，物流显示暂未发货，还没有发出。您可以再耐心等待一下；如果后续需要人工协助，可以在商城客服对话中提出转人工，确认后会为您打开人工入口。",
+        "sessionId": "bc032-g02b-001",
+        "confirmRequired": false,
+        "pendingAction": "READ_ONLY_CONSULTATION",
+        "actions": [],
+        "fallback": false
+      },
+      "python": {
+        "intent": "order_query",
+        "task_relation": "resume",
+        "chosen_order_id": "ORD9802",
+        "answer": "您这笔订单（ORD9802，商品为隔离露营椅）目前是待发货状态，物流显示暂未发货，还没有发出。您可以再耐心等待一下；如果后续需要人工协助，可以在商城客服对话中提出转人工，确认后会为您打开人工入口。"
+      },
+      "memory": {
+        "open_task": {
+          "intent": "refund_request",
+          "pending_slot": "order_id",
+          "version": 3,
+          "candidates": [
+            {
+              "value": "ORD9801",
+              "label": "ORD9801"
+            },
+            {
+              "value": "ORD9802",
+              "label": "ORD9802"
+            }
+          ]
+        },
+        "order_query": {
+          "intent": "order_query",
+          "order_id": "ORD9802",
+          "pending_slot": null,
+          "candidates": []
+        },
+        "eligibility_query": null,
+        "product_query": null,
+        "promotion_query": null,
+        "clarification_focus": null,
+        "last_order_id": "ORD9802"
+      },
+      "before_memory": {
+        "open_task": {
+          "intent": "refund_request",
+          "pending_slot": "order_id",
+          "version": 3,
+          "candidates": [
+            {
+              "value": "ORD9801",
+              "label": "ORD9801"
+            },
+            {
+              "value": "ORD9802",
+              "label": "ORD9802"
+            }
+          ]
+        },
+        "order_query": {
+          "intent": "order_query",
+          "pending_slot": "order_id",
+          "candidates": [
+            {
+              "value": "ORD9801",
+              "label": "ORD9801"
+            },
+            {
+              "value": "ORD9802",
+              "label": "ORD9802"
+            }
+          ],
+          "order_id": null
+        },
+        "eligibility_query": null,
+        "product_query": null,
+        "promotion_query": null,
+        "clarification_focus": "order_query",
+        "last_order_id": null
+      },
+      "java": {
+        "before": {
+          "pending": "REFUND_ORDER_REQUIRED",
+          "handled": false,
+          "actionType": "REFUND",
+          "expiresAt": "2026-10-17T10:43:44.403443290",
+          "revision": 3,
+          "tokenSha256": "5eea62022f9e53df24f1012c0610bea04683ac4de16bf928b23b849a1a6a74b9",
+          "workflowSha256": "45028907e0804820fd1cc6af560f8e80b46087fa35fda67f906ce580f696587f"
+        },
+        "after": {
+          "pending": "REFUND_ORDER_REQUIRED",
+          "handled": false,
+          "actionType": "REFUND",
+          "expiresAt": "2026-10-17T10:43:44.403443290",
+          "revision": 3,
+          "tokenSha256": "5eea62022f9e53df24f1012c0610bea04683ac4de16bf928b23b849a1a6a74b9",
+          "workflowSha256": "45028907e0804820fd1cc6af560f8e80b46087fa35fda67f906ce580f696587f"
+        }
+      },
+      "page": {
+        "driver": "api"
+      },
+      "checks": [
+        {
+          "check": "Python原待办=unchanged",
+          "passed": true,
+          "detail": {
+            "actual": {
+              "intent": "refund_request",
+              "pending_slot": "order_id",
+              "version": 3,
+              "candidates": [
+                {
+                  "value": "ORD9801",
+                  "label": "ORD9801"
+                },
+                {
+                  "value": "ORD9802",
+                  "label": "ORD9802"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "check": "Python澄清焦点",
+          "passed": false,
+          "detail": {
+            "expected": "order_query",
+            "actual": null
+          }
+        },
+        {
+          "check": "Java售后业务字段不变",
+          "passed": true,
+          "detail": {}
+        },
+        {
+          "check": "未重发售后确认卡",
+          "passed": true,
+          "detail": {
+            "pendingAction": "READ_ONLY_CONSULTATION"
+          }
+        },
+        {
+          "check": "Python意图",
+          "passed": true,
+          "detail": {
+            "expected": [
+              "order_query",
+              "refund_status_query"
+            ],
+            "actual": "order_query"
+          }
+        },
+        {
+          "check": "绑定订单",
+          "passed": true,
+          "detail": {
+            "expected": "ORD9802",
+            "actual": "ORD9802"
+          }
+        },
+        {
+          "check": "答复包含['ORD9802']",
+          "passed": true,
+          "detail": {
+            "answer": "您这笔订单（ORD9802，商品为隔离露营椅）目前是待发货状态，物流显示暂未发货，还没有发出。您可以再耐心等待一下；如果后续需要人工协助，可以在商城客服对话中提出转人工，确认后会为您打开人工入口。"
+          }
+        },
+        {
+          "check": "答复无禁止表述",
+          "passed": true,
+          "detail": {
+            "hits": []
+          }
+        }
+      ],
+      "failed": [
+        "Python澄清焦点"
+      ],
+      "blocking": [],
+      "recorded": {},
+      "verdict": "FAIL"
+    },
+    {
+      "run": "BC032-LIVE-001",
+      "case": "G03A",
+      "turn": "G03A-T1",
+      "session": "bc032-g03a-001",
+      "message": "继续刚才那笔退款",
+      "request_page": {
+        "type": "ORDER_DETAIL",
+        "orderNo": "ORD9803"
+      },
+      "response": {
+        "answer": "请核对申请，确认提交后等待后台审核。",
+        "sessionId": "bc032-g03a-001",
+        "confirmRequired": true,
+        "pendingAction": "CONFIRM_SUBMIT",
+        "confirmationTitle": "确认提交退款申请",
+        "confirmationSummary": "订单：ORD9801；商品：隔离露营椅 x1；范围：整单退款；实付金额：200.00 元；原因：买错了；状态：等待本人确认，尚未提交。确认后等待审核，提交不代表退款成功。",
+        "relatedOrderNo": "ORD9801",
+        "resumeToken": null,
+        "actions": [
+          {
+            "code": "CONFIRM_SUBMIT",
+            "label": "确认提交申请"
+          },
+          {
+            "code": "CANCEL_SUBMIT",
+            "label": "取消本次申请"
+          }
+        ],
+        "fallback": false,
+        "resumeTokenSha256": "3968363ba036ba0b3706c82597af75b216bb923941fe8e869921e00a94d0d5ba"
+      },
+      "python": {
+        "intent": "refund_request",
+        "task_relation": "resume",
+        "chosen_order_id": "ORD9801",
+        "answer": "已识别申请诉求，待商城核验最新资格并准备确认。"
+      },
+      "memory": {
+        "open_task": null,
+        "order_query": null,
+        "eligibility_query": {
+          "intent": "after_sale_eligibility_query",
+          "order_id": "ORD9804",
+          "application_type": "REFUND",
+          "pending_slot": null,
+          "candidates": []
+        },
+        "product_query": null,
+        "promotion_query": null,
+        "clarification_focus": "eligibility_query",
+        "last_order_id": "ORD9804"
+      },
+      "before_memory": {
+        "open_task": null,
+        "order_query": null,
+        "eligibility_query": {
+          "intent": "after_sale_eligibility_query",
+          "order_id": "ORD9804",
+          "application_type": "REFUND",
+          "pending_slot": null,
+          "candidates": []
+        },
+        "product_query": null,
+        "promotion_query": null,
+        "clarification_focus": "eligibility_query",
+        "last_order_id": "ORD9804"
+      },
+      "java": {
+        "before": {
+          "pending": "CONFIRM_SUBMIT",
+          "handled": false,
+          "actionType": "REFUND",
+          "order": "ORD9801",
+          "reason": "买错了",
+          "amount": "200.00",
+          "item": "隔离露营椅",
+          "expiresAt": "2026-10-17T10:43:50.206630014",
+          "revision": 3,
+          "tokenSha256": "ba096676ea1af00e7cf739d9210769f8a4c75a146067b264e6aa0e21fb5d8a0e",
+          "workflowSha256": "aa3b5a0b86ac14c72238aa9cb06e800bd3b1a027746bb38e2015686c7ddab683",
+          "afterSaleQuery": {
+            "intent": "after_sale_eligibility_query",
+            "order_id": "ORD9804",
+            "application_type": "REFUND",
+            "candidates": []
+          }
+        },
+        "after": {
+          "pending": "CONFIRM_SUBMIT",
+          "handled": false,
+          "actionType": "REFUND",
+          "order": "ORD9801",
+          "reason": "买错了",
+          "amount": "200.00",
+          "item": "隔离露营椅 x1",
+          "expiresAt": "2026-10-17T10:43:50.206630014",
+          "revision": 4,
+          "tokenSha256": "3968363ba036ba0b3706c82597af75b216bb923941fe8e869921e00a94d0d5ba",
+          "workflowSha256": "39eed0293fbf906a5cfb585167f7a86fc8620d4a58de194de463ac39f5551e2f"
+        }
+      },
+      "page": {
+        "driver": "api"
+      },
+      "checks": [
+        {
+          "check": "Python澄清焦点",
+          "passed": true,
+          "detail": {
+            "expected": "unchanged",
+            "actual": "eligibility_query"
+          }
+        },
+        {
+          "check": "确认卡对象与类型",
+          "passed": true,
+          "detail": {
+            "title": "确认提交退款申请",
+            "order": "ORD9801"
+          }
+        },
+        {
+          "check": "Python意图",
+          "passed": true,
+          "detail": {
+            "expected": [
+              "refund_request"
+            ],
+            "actual": "refund_request"
+          }
+        },
+        {
+          "check": "绑定订单",
+          "passed": true,
+          "detail": {
+            "expected": "ORD9801",
+            "actual": "ORD9801"
+          }
+        },
+        {
+          "check": "答复无禁止表述",
+          "passed": true,
+          "detail": {
+            "hits": []
+          }
+        }
+      ],
+      "failed": [],
+      "blocking": [],
+      "recorded": {
+        "task_relation": "resume"
+      },
+      "verdict": "PASS"
+    },
+    {
+      "run": "BC032-LIVE-001",
+      "case": "G03B",
+      "turn": "G03B-T1",
+      "session": "cs-17e39f75-4958-425e-b183-933bada96609",
+      "message": "我要退款。",
+      "request_page": {
+        "type": "HOME"
+      },
+      "response": {
+        "answer": "你要退款哪一个订单？请选择订单号，或直接补充订单号。",
+        "sessionId": "cs-17e39f75-4958-425e-b183-933bada96609",
+        "confirmRequired": false,
+        "pendingAction": "REFUND_ORDER_REQUIRED",
+        "actions": [],
+        "fallback": false
+      },
+      "python": {
+        "intent": "refund_request",
+        "task_relation": null,
+        "chosen_order_id": null,
+        "answer": "你要退款哪一个订单？请选择订单号，或直接补充订单号。"
+      },
+      "memory": {
+        "open_task": {
+          "intent": "refund_request",
+          "pending_slot": "order_id",
+          "candidates": [
+            {
+              "value": "ORD9801",
+              "label": "ORD9801"
+            },
+            {
+              "value": "ORD9802",
+              "label": "ORD9802"
+            }
+          ]
+        },
+        "order_query": null,
+        "eligibility_query": null,
+        "product_query": null,
+        "promotion_query": null,
+        "clarification_focus": "open_task",
+        "last_order_id": null
+      },
+      "before_memory": {},
+      "java": {
+        "before": null,
+        "after": {
+          "pending": "REFUND_ORDER_REQUIRED",
+          "handled": false,
+          "actionType": "REFUND",
+          "expiresAt": "2026-10-17T10:43:53.954804202",
+          "revision": 1
+        }
+      },
+      "page": {
+        "driver": "browser",
+        "confirm_cards": 0,
+        "answer": "你要退款哪一个订单？请选择订单号，或直接补充订单号。"
+      },
+      "checks": [
+        {
+          "check": "Python原待办={'intent': 'refund_request', 'pending_slot': 'order_id', 'candidates': ['ORD9801', 'ORD9802']}",
+          "passed": true,
+          "detail": {
+            "actual": {
+              "intent": "refund_request",
+              "pending_slot": "order_id",
+              "candidates": [
+                {
+                  "value": "ORD9801",
+                  "label": "ORD9801"
+                },
+                {
+                  "value": "ORD9802",
+                  "label": "ORD9802"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "check": "未重发售后确认卡",
+          "passed": true,
+          "detail": {
+            "pendingAction": "REFUND_ORDER_REQUIRED"
+          }
+        },
+        {
+          "check": "页面未重发确认卡",
+          "passed": true,
+          "detail": {
+            "cards": 0
+          }
+        },
+        {
+          "check": "页面候选顺序",
+          "passed": false,
+          "detail": {
+            "candidates": [
+              "ORD9801",
+              "ORD9802"
+            ],
+            "answer": "你要退款哪一个订单？请选择订单号，或直接补充订单号。"
+          }
+        }
+      ],
+      "failed": [
+        "页面候选顺序"
+      ],
+      "blocking": [],
+      "recorded": {},
+      "verdict": "FAIL"
+    },
+    {
+      "run": "BC032-LIVE-001",
+      "case": "G03B",
+      "turn": "G03B-T2",
+      "session": "cs-17e39f75-4958-425e-b183-933bada96609",
+      "message": "继续刚才退款",
+      "request_page": {
+        "type": "HOME"
+      },
+      "response": {
+        "answer": "你要退款哪一个订单？请选择订单号，或直接补充订单号。",
+        "sessionId": "cs-17e39f75-4958-425e-b183-933bada96609",
+        "confirmRequired": false,
+        "pendingAction": "REFUND_ORDER_REQUIRED",
+        "actions": [],
+        "fallback": false
+      },
+      "python": {
+        "intent": "refund_request",
+        "task_relation": "resume",
+        "chosen_order_id": null,
+        "answer": "你要退款哪一个订单？请选择订单号，或直接补充订单号。"
+      },
+      "memory": {
+        "open_task": {
+          "intent": "refund_request",
+          "pending_slot": "order_id",
+          "candidates": [
+            {
+              "value": "ORD9801",
+              "label": "ORD9801"
+            },
+            {
+              "value": "ORD9802",
+              "label": "ORD9802"
+            }
+          ]
+        },
+        "order_query": null,
+        "eligibility_query": null,
+        "product_query": null,
+        "promotion_query": null,
+        "clarification_focus": "open_task",
+        "last_order_id": null
+      },
+      "before_memory": {
+        "open_task": {
+          "intent": "refund_request",
+          "pending_slot": "order_id",
+          "candidates": [
+            {
+              "value": "ORD9801",
+              "label": "ORD9801"
+            },
+            {
+              "value": "ORD9802",
+              "label": "ORD9802"
+            }
+          ]
+        },
+        "order_query": null,
+        "eligibility_query": null,
+        "product_query": null,
+        "promotion_query": null,
+        "clarification_focus": "open_task",
+        "last_order_id": null
+      },
+      "java": {
+        "before": {
+          "pending": "REFUND_ORDER_REQUIRED",
+          "handled": false,
+          "actionType": "REFUND",
+          "expiresAt": "2026-10-17T10:43:53.954804202",
+          "revision": 1
+        },
+        "after": {
+          "pending": "REFUND_ORDER_REQUIRED",
+          "handled": false,
+          "actionType": "REFUND",
+          "expiresAt": "2026-10-17T10:43:55.558169617",
+          "revision": 2
+        }
+      },
+      "page": {
+        "driver": "browser",
+        "confirm_cards": 0,
+        "answer": "你要退款哪一个订单？请选择订单号，或直接补充订单号。"
+      },
+      "checks": [
+        {
+          "check": "Python原待办={'intent': 'refund_request', 'pending_slot': 'order_id', 'candidates': ['ORD9801', 'ORD9802']}",
+          "passed": true,
+          "detail": {
+            "actual": {
+              "intent": "refund_request",
+              "pending_slot": "order_id",
+              "candidates": [
+                {
+                  "value": "ORD9801",
+                  "label": "ORD9801"
+                },
+                {
+                  "value": "ORD9802",
+                  "label": "ORD9802"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "check": "未重发售后确认卡",
+          "passed": true,
+          "detail": {
+            "pendingAction": "REFUND_ORDER_REQUIRED"
+          }
+        },
+        {
+          "check": "绑定订单",
+          "passed": true,
+          "detail": {
+            "expected": null,
+            "actual": null
+          }
+        },
+        {
+          "check": "答复无禁止表述",
+          "passed": true,
+          "detail": {
+            "hits": []
+          }
+        },
+        {
+          "check": "页面未重发确认卡",
+          "passed": true,
+          "detail": {
+            "cards": 0
+          }
+        },
+        {
+          "check": "页面候选顺序",
+          "passed": false,
+          "detail": {
+            "candidates": [
+              "ORD9801",
+              "ORD9802"
+            ],
+            "answer": "你要退款哪一个订单？请选择订单号，或直接补充订单号。"
+          }
+        }
+      ],
+      "failed": [
+        "页面候选顺序"
+      ],
+      "blocking": [],
+      "recorded": {},
+      "verdict": "FAIL"
+    },
+    {
+      "run": "BC032-LIVE-001",
+      "case": "G03B",
+      "turn": "G03B-T3",
+      "session": "cs-17e39f75-4958-425e-b183-933bada96609",
+      "message": "第二笔",
+      "request_page": {
+        "type": "HOME"
+      },
+      "response": {
+        "answer": "订单 ORD9802 的整单实付金额为 200.00 元。请补充退款原因，例如“原因：买错了”。本次尚未提交。",
+        "sessionId": "cs-17e39f75-4958-425e-b183-933bada96609",
+        "confirmRequired": false,
+        "pendingAction": "REFUND_REASON_REQUIRED",
+        "relatedOrderNo": "ORD9802",
+        "actions": [],
+        "fallback": false
+      },
+      "python": {
+        "intent": "refund_request",
+        "task_relation": "resume",
+        "chosen_order_id": "ORD9802",
+        "answer": "已识别申请诉求，待商城核验最新资格并准备确认。"
+      },
+      "memory": {
+        "open_task": {
+          "intent": "refund_request",
+          "pending_slot": "order_id",
+          "candidates": [
+            {
+              "value": "ORD9801",
+              "label": "ORD9801"
+            },
+            {
+              "value": "ORD9802",
+              "label": "ORD9802"
+            }
+          ]
+        },
+        "order_query": null,
+        "eligibility_query": null,
+        "product_query": null,
+        "promotion_query": null,
+        "clarification_focus": "open_task",
+        "last_order_id": null
+      },
+      "before_memory": {
+        "open_task": {
+          "intent": "refund_request",
+          "pending_slot": "order_id",
+          "candidates": [
+            {
+              "value": "ORD9801",
+              "label": "ORD9801"
+            },
+            {
+              "value": "ORD9802",
+              "label": "ORD9802"
+            }
+          ]
+        },
+        "order_query": null,
+        "eligibility_query": null,
+        "product_query": null,
+        "promotion_query": null,
+        "clarification_focus": "open_task",
+        "last_order_id": null
+      },
+      "java": {
+        "before": {
+          "pending": "REFUND_ORDER_REQUIRED",
+          "handled": false,
+          "actionType": "REFUND",
+          "expiresAt": "2026-10-17T10:43:55.558169617",
+          "revision": 2
+        },
+        "after": {
+          "pending": "REFUND_REASON_REQUIRED",
+          "handled": false,
+          "actionType": "REFUND",
+          "order": "ORD9802",
+          "amount": "200.00",
+          "item": "隔离露营椅 x1",
+          "expiresAt": "2026-10-17T10:43:56.961323379",
+          "revision": 3,
+          "tokenSha256": "c1c1d490be34a95700d7ec1a272526c269dd8067c9e0c007a389bb77f9dedb0a",
+          "workflowSha256": "26132ddc358a79709575d06b89922b055befe417057546aa0f9e791ebe0f5a68"
+        }
+      },
+      "page": {
+        "driver": "browser",
+        "confirm_cards": 0,
+        "answer": "订单 ORD9802 的整单实付金额为 200.00 元。请补充退款原因，例如“原因：买错了”。本次尚未提交。"
+      },
+      "checks": [
+        {
+          "check": "Python原待办=unchanged",
+          "passed": true,
+          "detail": {
+            "actual": {
+              "intent": "refund_request",
+              "pending_slot": "order_id",
+              "candidates": [
+                {
+                  "value": "ORD9801",
+                  "label": "ORD9801"
+                },
+                {
+                  "value": "ORD9802",
+                  "label": "ORD9802"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "check": "未重发售后确认卡",
+          "passed": true,
+          "detail": {
+            "pendingAction": "REFUND_REASON_REQUIRED"
+          }
+        },
+        {
+          "check": "Python意图",
+          "passed": true,
+          "detail": {
+            "expected": [
+              "refund_request"
+            ],
+            "actual": "refund_request"
+          }
+        },
+        {
+          "check": "绑定订单",
+          "passed": true,
+          "detail": {
+            "expected": "ORD9802",
+            "actual": "ORD9802"
+          }
+        },
+        {
+          "check": "答复包含['ORD9802']",
+          "passed": false,
+          "detail": {
+            "answer": "已识别申请诉求，待商城核验最新资格并准备确认。"
+          }
+        },
+        {
+          "check": "答复无禁止表述",
+          "passed": true,
+          "detail": {
+            "hits": []
+          }
+        },
+        {
+          "check": "页面未重发确认卡",
+          "passed": true,
+          "detail": {
+            "cards": 0
+          }
+        }
+      ],
+      "failed": [
+        "答复包含['ORD9802']"
+      ],
+      "blocking": [],
+      "recorded": {},
+      "verdict": "FAIL"
+    },
+    {
+      "run": "BC032-LIVE-001",
+      "case": "G03C",
+      "turn": "G03C-T1",
+      "session": "bc032-g03c-001",
+      "message": "继续刚才退款，第三笔",
+      "request_page": {
+        "type": "HOME"
+      },
+      "response": {
+        "answer": "你要退款哪一个订单？请选择订单号，或直接补充订单号。",
+        "sessionId": "bc032-g03c-001",
+        "confirmRequired": false,
+        "pendingAction": "REFUND_ORDER_REQUIRED",
+        "actions": [],
+        "fallback": false
+      },
+      "python": {
+        "intent": "refund_request",
+        "task_relation": "resume",
+        "chosen_order_id": null,
+        "answer": "你要退款哪一个订单？请选择订单号，或直接补充订单号。"
+      },
+      "memory": {
+        "open_task": {
+          "intent": "refund_request",
+          "pending_slot": "order_id",
+          "version": 3,
+          "candidates": [
+            {
+              "value": "ORD9801",
+              "label": "ORD9801"
+            },
+            {
+              "value": "ORD9802",
+              "label": "ORD9802"
+            }
+          ]
+        },
+        "order_query": null,
+        "eligibility_query": null,
+        "product_query": null,
+        "promotion_query": null,
+        "clarification_focus": "open_task",
+        "last_order_id": null
+      },
+      "before_memory": {
+        "open_task": {
+          "intent": "refund_request",
+          "pending_slot": "order_id",
+          "version": 3,
+          "candidates": [
+            {
+              "value": "ORD9801",
+              "label": "ORD9801"
+            },
+            {
+              "value": "ORD9802",
+              "label": "ORD9802"
+            }
+          ]
+        },
+        "order_query": null,
+        "eligibility_query": null,
+        "product_query": null,
+        "promotion_query": null,
+        "clarification_focus": "open_task",
+        "last_order_id": null
+      },
+      "java": {
+        "before": {
+          "pending": "REFUND_ORDER_REQUIRED",
+          "handled": false,
+          "actionType": "REFUND",
+          "expiresAt": "2026-10-17T10:43:57.637667646",
+          "revision": 3,
+          "tokenSha256": "4cd8f6700fd781c53b71337f0a7d82aac29205901334b2403048b7f1d0142132",
+          "workflowSha256": "63819af4edb964a2f91764564ec68e2b461b91690cf91d3299a7a726de33939f"
+        },
+        "after": {
+          "pending": "REFUND_ORDER_REQUIRED",
+          "handled": false,
+          "actionType": "REFUND",
+          "expiresAt": "2026-10-17T10:43:58.614730527",
+          "revision": 4,
+          "tokenSha256": "4cd8f6700fd781c53b71337f0a7d82aac29205901334b2403048b7f1d0142132",
+          "workflowSha256": "63819af4edb964a2f91764564ec68e2b461b91690cf91d3299a7a726de33939f"
+        }
+      },
+      "page": {
+        "driver": "api"
+      },
+      "checks": [
+        {
+          "check": "Python原待办=unchanged",
+          "passed": true,
+          "detail": {
+            "actual": {
+              "intent": "refund_request",
+              "pending_slot": "order_id",
+              "version": 3,
+              "candidates": [
+                {
+                  "value": "ORD9801",
+                  "label": "ORD9801"
+                },
+                {
+                  "value": "ORD9802",
+                  "label": "ORD9802"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "check": "未重发售后确认卡",
+          "passed": true,
+          "detail": {
+            "pendingAction": "REFUND_ORDER_REQUIRED"
+          }
+        },
+        {
+          "check": "绑定订单",
+          "passed": true,
+          "detail": {
+            "expected": null,
+            "actual": null
+          }
+        },
+        {
+          "check": "答复包含['ORD9801', '订单号']",
+          "passed": true,
+          "detail": {
+            "answer": "你要退款哪一个订单？请选择订单号，或直接补充订单号。"
+          }
+        },
+        {
+          "check": "答复无禁止表述",
+          "passed": true,
+          "detail": {
+            "hits": []
+          }
+        }
+      ],
+      "failed": [],
+      "blocking": [],
+      "recorded": {},
+      "verdict": "PASS"
+    },
+    {
+      "run": "BC032-LIVE-001",
+      "case": "G03C",
+      "turn": "G03C-T2",
+      "session": "bc032-g03c-001",
+      "message": "第二笔",
+      "request_page": {
+        "type": "HOME"
+      },
+      "response": {
+        "answer": "订单 ORD9802 的整单实付金额为 200.00 元。请补充退款原因，例如“原因：买错了”。本次尚未提交。",
+        "sessionId": "bc032-g03c-001",
+        "confirmRequired": false,
+        "pendingAction": "REFUND_REASON_REQUIRED",
+        "relatedOrderNo": "ORD9802",
+        "actions": [],
+        "fallback": false
+      },
+      "python": {
+        "intent": "refund_request",
+        "task_relation": "resume",
+        "chosen_order_id": "ORD9802",
+        "answer": "已识别申请诉求，待商城核验最新资格并准备确认。"
+      },
+      "memory": {
+        "open_task": {
+          "intent": "refund_request",
+          "pending_slot": "order_id",
+          "version": 3,
+          "candidates": [
+            {
+              "value": "ORD9801",
+              "label": "ORD9801"
+            },
+            {
+              "value": "ORD9802",
+              "label": "ORD9802"
+            }
+          ]
+        },
+        "order_query": null,
+        "eligibility_query": null,
+        "product_query": null,
+        "promotion_query": null,
+        "clarification_focus": "open_task",
+        "last_order_id": null
+      },
+      "before_memory": {
+        "open_task": {
+          "intent": "refund_request",
+          "pending_slot": "order_id",
+          "version": 3,
+          "candidates": [
+            {
+              "value": "ORD9801",
+              "label": "ORD9801"
+            },
+            {
+              "value": "ORD9802",
+              "label": "ORD9802"
+            }
+          ]
+        },
+        "order_query": null,
+        "eligibility_query": null,
+        "product_query": null,
+        "promotion_query": null,
+        "clarification_focus": "open_task",
+        "last_order_id": null
+      },
+      "java": {
+        "before": {
+          "pending": "REFUND_ORDER_REQUIRED",
+          "handled": false,
+          "actionType": "REFUND",
+          "expiresAt": "2026-10-17T10:43:58.614730527",
+          "revision": 4,
+          "tokenSha256": "4cd8f6700fd781c53b71337f0a7d82aac29205901334b2403048b7f1d0142132",
+          "workflowSha256": "63819af4edb964a2f91764564ec68e2b461b91690cf91d3299a7a726de33939f"
+        },
+        "after": {
+          "pending": "REFUND_REASON_REQUIRED",
+          "handled": false,
+          "actionType": "REFUND",
+          "order": "ORD9802",
+          "amount": "200.00",
+          "item": "隔离露营椅 x1",
+          "expiresAt": "2026-10-17T10:43:59.636364180",
+          "revision": 5,
+          "tokenSha256": "bd9737803c33d27c2e2a500815de7aa7d6fde06b248a913f28f5c90c90909ad1",
+          "workflowSha256": "f4f2e754a148176b7ee082fdc9f2349c9fa6e0a63437dab35f32b3e425cda14d"
+        }
+      },
+      "page": {
+        "driver": "api"
+      },
+      "checks": [
+        {
+          "check": "Python原待办=unchanged",
+          "passed": true,
+          "detail": {
+            "actual": {
+              "intent": "refund_request",
+              "pending_slot": "order_id",
+              "version": 3,
+              "candidates": [
+                {
+                  "value": "ORD9801",
+                  "label": "ORD9801"
+                },
+                {
+                  "value": "ORD9802",
+                  "label": "ORD9802"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "check": "未重发售后确认卡",
+          "passed": true,
+          "detail": {
+            "pendingAction": "REFUND_REASON_REQUIRED"
+          }
+        },
+        {
+          "check": "Python意图",
+          "passed": true,
+          "detail": {
+            "expected": [
+              "refund_request"
+            ],
+            "actual": "refund_request"
+          }
+        },
+        {
+          "check": "绑定订单",
+          "passed": true,
+          "detail": {
+            "expected": "ORD9802",
+            "actual": "ORD9802"
+          }
+        },
+        {
+          "check": "答复包含['ORD9802']",
+          "passed": false,
+          "detail": {
+            "answer": "已识别申请诉求，待商城核验最新资格并准备确认。"
+          }
+        },
+        {
+          "check": "答复无禁止表述",
+          "passed": true,
+          "detail": {
+            "hits": []
+          }
+        }
+      ],
+      "failed": [
+        "答复包含['ORD9802']"
+      ],
+      "blocking": [],
+      "recorded": {},
+      "verdict": "FAIL"
+    },
+    {
+      "run": "BC032-LIVE-001",
+      "case": "G04A",
+      "turn": "G04A-T1",
+      "session": "bc032-g04a-001",
+      "message": "折叠椅多少钱？",
+      "request_page": {
+        "type": "HOME"
+      },
+      "response": {
+        "answer": "找到多款折叠椅，请告诉我要咨询哪一款：\n1. 露营折叠椅\n2. 轻量露营折叠椅\n回复“第一款”或“第二款”即可，也可以直接补充完整商品名。",
+        "sessionId": "bc032-g04a-001",
+        "confirmRequired": false,
+        "pendingAction": "PRODUCT_QUERY",
+        "actions": [],
+        "fallback": false
+      },
+      "python": {
+        "intent": "product_query",
+        "task_relation": "unrelated",
+        "chosen_order_id": null,
+        "answer": "找到多款折叠椅，请告诉我要咨询哪一款：\n1. 露营折叠椅\n2. 轻量露营折叠椅\n回复“第一款”或“第二款”即可，也可以直接补充完整商品名。"
+      },
+      "memory": {
+        "open_task": {
+          "intent": "refund_request",
+          "pending_slot": "order_id",
+          "version": 3,
+          "candidates": [
+            {
+              "value": "ORD9801",
+              "label": "ORD9801"
+            },
+            {
+              "value": "ORD9802",
+              "label": "ORD9802"
+            }
+          ]
+        },
+        "order_query": null,
+        "eligibility_query": null,
+        "product_query": {
+          "product_id": null,
+          "product_name": null,
+          "pending_candidates": [
+            {
+              "id": "1",
+              "name": "露营折叠椅"
+            },
+            {
+              "id": "4",
+              "name": "轻量露营折叠椅"
+            }
+          ],
+          "original_question": "折叠椅多少钱？",
+          "pending_evidence": {
+            "needs_product_facts": true,
+            "knowledge_domains": [],
+            "clarification_fields": []
+          }
+        },
+        "promotion_query": null,
+        "clarification_focus": "product_query",
+        "last_order_id": null
+      },
+      "before_memory": {
+        "open_task": {
+          "intent": "refund_request",
+          "pending_slot": "order_id",
+          "version": 3,
+          "candidates": [
+            {
+              "value": "ORD9801",
+              "label": "ORD9801"
+            },
+            {
+              "value": "ORD9802",
+              "label": "ORD9802"
+            }
+          ]
+        },
+        "order_query": null,
+        "eligibility_query": null,
+        "product_query": null,
+        "promotion_query": null,
+        "clarification_focus": "open_task",
+        "last_order_id": null
+      },
+      "java": {
+        "before": {
+          "pending": "REFUND_ORDER_REQUIRED",
+          "handled": false,
+          "actionType": "REFUND",
+          "expiresAt": "2026-10-17T10:43:59.687169703",
+          "revision": 3,
+          "tokenSha256": "888962d1e4ae14f97c9b102f5fa5d31bde9327a8da34cb5397a8f116cb0d3cd2",
+          "workflowSha256": "db27820a9c6e1f2481d7ece5103be33af0299824cf968bb3d0d943f7401019b8"
+        },
+        "after": {
+          "pending": "REFUND_ORDER_REQUIRED",
+          "handled": false,
+          "actionType": "REFUND",
+          "expiresAt": "2026-10-17T10:43:59.687169703",
+          "revision": 3,
+          "tokenSha256": "888962d1e4ae14f97c9b102f5fa5d31bde9327a8da34cb5397a8f116cb0d3cd2",
+          "workflowSha256": "db27820a9c6e1f2481d7ece5103be33af0299824cf968bb3d0d943f7401019b8"
+        }
+      },
+      "page": {
+        "driver": "api"
+      },
+      "checks": [
+        {
+          "check": "Python原待办=unchanged",
+          "passed": true,
+          "detail": {
+            "actual": {
+              "intent": "refund_request",
+              "pending_slot": "order_id",
+              "version": 3,
+              "candidates": [
+                {
+                  "value": "ORD9801",
+                  "label": "ORD9801"
+                },
+                {
+                  "value": "ORD9802",
+                  "label": "ORD9802"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "check": "Python商品咨询状态",
+          "passed": true,
+          "detail": {
+            "names": [
+              "露营折叠椅",
+              "轻量露营折叠椅"
+            ],
+            "product": null
+          }
+        },
+        {
+          "check": "Java售后业务字段不变",
+          "passed": true,
+          "detail": {}
+        },
+        {
+          "check": "未重发售后确认卡",
+          "passed": true,
+          "detail": {
+            "pendingAction": "PRODUCT_QUERY"
+          }
+        }
+      ],
+      "failed": [],
+      "blocking": [],
+      "recorded": {},
+      "verdict": "PASS"
+    },
+    {
+      "run": "BC032-LIVE-001",
+      "case": "G04A",
+      "turn": "G04A-T2",
+      "session": "bc032-g04a-001",
+      "message": "订单发票怎么开？",
+      "request_page": {
+        "type": "HOME"
+      },
+      "response": {
+        "answer": "电子发票一般在订单完成后 24 小时内开具，开好后可以在订单详情页查看和下载。\n\n具体到您的订单，目前还没有查到开票记录，需要您提供订单号，我帮您核实一下。",
+        "sessionId": "bc032-g04a-001",
+        "confirmRequired": false,
+        "pendingAction": "READ_ONLY_CONSULTATION",
+        "actions": [],
+        "fallback": false
+      },
+      "python": {
+        "intent": "invoice_query",
+        "task_relation": "unrelated",
+        "chosen_order_id": null,
+        "answer": "电子发票一般在订单完成后 24 小时内开具，开好后可以在订单详情页查看和下载。\n\n具体到您的订单，目前还没有查到开票记录，需要您提供订单号，我帮您核实一下。"
+      },
+      "memory": {
+        "open_task": {
+          "intent": "refund_request",
+          "pending_slot": "order_id",
+          "version": 3,
+          "candidates": [
+            {
+              "value": "ORD9801",
+              "label": "ORD9801"
+            },
+            {
+              "value": "ORD9802",
+              "label": "ORD9802"
+            }
+          ]
+        },
+        "order_query": null,
+        "eligibility_query": null,
+        "product_query": {
+          "product_id": null,
+          "product_name": null,
+          "pending_candidates": [
+            {
+              "id": "1",
+              "name": "露营折叠椅"
+            },
+            {
+              "id": "4",
+              "name": "轻量露营折叠椅"
+            }
+          ],
+          "original_question": "折叠椅多少钱？",
+          "pending_evidence": {
+            "needs_product_facts": true,
+            "knowledge_domains": [],
+            "clarification_fields": []
+          }
+        },
+        "promotion_query": null,
+        "clarification_focus": "product_query",
+        "last_order_id": null
+      },
+      "before_memory": {
+        "open_task": {
+          "intent": "refund_request",
+          "pending_slot": "order_id",
+          "version": 3,
+          "candidates": [
+            {
+              "value": "ORD9801",
+              "label": "ORD9801"
+            },
+            {
+              "value": "ORD9802",
+              "label": "ORD9802"
+            }
+          ]
+        },
+        "order_query": null,
+        "eligibility_query": null,
+        "product_query": {
+          "product_id": null,
+          "product_name": null,
+          "pending_candidates": [
+            {
+              "id": "1",
+              "name": "露营折叠椅"
+            },
+            {
+              "id": "4",
+              "name": "轻量露营折叠椅"
+            }
+          ],
+          "original_question": "折叠椅多少钱？",
+          "pending_evidence": {
+            "needs_product_facts": true,
+            "knowledge_domains": [],
+            "clarification_fields": []
+          }
+        },
+        "promotion_query": null,
+        "clarification_focus": "product_query",
+        "last_order_id": null
+      },
+      "java": {
+        "before": {
+          "pending": "REFUND_ORDER_REQUIRED",
+          "handled": false,
+          "actionType": "REFUND",
+          "expiresAt": "2026-10-17T10:43:59.687169703",
+          "revision": 3,
+          "tokenSha256": "888962d1e4ae14f97c9b102f5fa5d31bde9327a8da34cb5397a8f116cb0d3cd2",
+          "workflowSha256": "db27820a9c6e1f2481d7ece5103be33af0299824cf968bb3d0d943f7401019b8"
+        },
+        "after": {
+          "pending": "REFUND_ORDER_REQUIRED",
+          "handled": false,
+          "actionType": "REFUND",
+          "expiresAt": "2026-10-17T10:43:59.687169703",
+          "revision": 3,
+          "tokenSha256": "888962d1e4ae14f97c9b102f5fa5d31bde9327a8da34cb5397a8f116cb0d3cd2",
+          "workflowSha256": "db27820a9c6e1f2481d7ece5103be33af0299824cf968bb3d0d943f7401019b8"
+        }
+      },
+      "page": {
+        "driver": "api"
+      },
+      "checks": [
+        {
+          "check": "Python原待办=unchanged",
+          "passed": true,
+          "detail": {
+            "actual": {
+              "intent": "refund_request",
+              "pending_slot": "order_id",
+              "version": 3,
+              "candidates": [
+                {
+                  "value": "ORD9801",
+                  "label": "ORD9801"
+                },
+                {
+                  "value": "ORD9802",
+                  "label": "ORD9802"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "check": "Python商品候选保留",
+          "passed": true,
+          "detail": {
+            "actual": 2
+          }
+        },
+        {
+          "check": "Java售后业务字段不变",
+          "passed": true,
+          "detail": {}
+        },
+        {
+          "check": "未重发售后确认卡",
+          "passed": true,
+          "detail": {
+            "pendingAction": "READ_ONLY_CONSULTATION"
+          }
+        }
+      ],
+      "failed": [],
+      "blocking": [],
+      "recorded": {},
+      "verdict": "PASS"
+    },
+    {
+      "run": "BC032-LIVE-001",
+      "case": "G04A",
+      "turn": "G04A-T3",
+      "session": "bc032-g04a-001",
+      "message": "第二款",
+      "request_page": {
+        "type": "HOME"
+      },
+      "response": {
+        "answer": "您问的第二款是轻量露营折叠椅，商品标价 199 元，目前无库存。您可以稍后再关注补货情况，或看看其他款式。",
+        "sessionId": "bc032-g04a-001",
+        "confirmRequired": false,
+        "pendingAction": "PRODUCT_QUERY",
+        "actions": [],
+        "fallback": false
+      },
+      "python": {
+        "intent": "product_query",
+        "task_relation": "unrelated",
+        "chosen_order_id": null,
+        "answer": "您问的第二款是轻量露营折叠椅，商品标价 199 元，目前无库存。您可以稍后再关注补货情况，或看看其他款式。"
+      },
+      "memory": {
+        "open_task": {
+          "intent": "refund_request",
+          "pending_slot": "order_id",
+          "version": 3,
+          "candidates": [
+            {
+              "value": "ORD9801",
+              "label": "ORD9801"
+            },
+            {
+              "value": "ORD9802",
+              "label": "ORD9802"
+            }
+          ]
+        },
+        "order_query": null,
+        "eligibility_query": null,
+        "product_query": {
+          "product_id": "4",
+          "product_name": "轻量露营折叠椅",
+          "pending_candidates": null,
+          "original_question": null
+        },
+        "promotion_query": null,
+        "clarification_focus": null,
+        "last_order_id": null
+      },
+      "before_memory": {
+        "open_task": {
+          "intent": "refund_request",
+          "pending_slot": "order_id",
+          "version": 3,
+          "candidates": [
+            {
+              "value": "ORD9801",
+              "label": "ORD9801"
+            },
+            {
+              "value": "ORD9802",
+              "label": "ORD9802"
+            }
+          ]
+        },
+        "order_query": null,
+        "eligibility_query": null,
+        "product_query": {
+          "product_id": null,
+          "product_name": null,
+          "pending_candidates": [
+            {
+              "id": "1",
+              "name": "露营折叠椅"
+            },
+            {
+              "id": "4",
+              "name": "轻量露营折叠椅"
+            }
+          ],
+          "original_question": "折叠椅多少钱？",
+          "pending_evidence": {
+            "needs_product_facts": true,
+            "knowledge_domains": [],
+            "clarification_fields": []
+          }
+        },
+        "promotion_query": null,
+        "clarification_focus": "product_query",
+        "last_order_id": null
+      },
+      "java": {
+        "before": {
+          "pending": "REFUND_ORDER_REQUIRED",
+          "handled": false,
+          "actionType": "REFUND",
+          "expiresAt": "2026-10-17T10:43:59.687169703",
+          "revision": 3,
+          "tokenSha256": "888962d1e4ae14f97c9b102f5fa5d31bde9327a8da34cb5397a8f116cb0d3cd2",
+          "workflowSha256": "db27820a9c6e1f2481d7ece5103be33af0299824cf968bb3d0d943f7401019b8"
+        },
+        "after": {
+          "pending": "REFUND_ORDER_REQUIRED",
+          "handled": false,
+          "actionType": "REFUND",
+          "expiresAt": "2026-10-17T10:43:59.687169703",
+          "revision": 3,
+          "tokenSha256": "888962d1e4ae14f97c9b102f5fa5d31bde9327a8da34cb5397a8f116cb0d3cd2",
+          "workflowSha256": "db27820a9c6e1f2481d7ece5103be33af0299824cf968bb3d0d943f7401019b8"
+        }
+      },
+      "page": {
+        "driver": "api"
+      },
+      "checks": [
+        {
+          "check": "Python原待办=unchanged",
+          "passed": true,
+          "detail": {
+            "actual": {
+              "intent": "refund_request",
+              "pending_slot": "order_id",
+              "version": 3,
+              "candidates": [
+                {
+                  "value": "ORD9801",
+                  "label": "ORD9801"
+                },
+                {
+                  "value": "ORD9802",
+                  "label": "ORD9802"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "check": "Python商品咨询状态",
+          "passed": true,
+          "detail": {
+            "names": [],
+            "product": "轻量露营折叠椅"
+          }
+        },
+        {
+          "check": "Java售后业务字段不变",
+          "passed": true,
+          "detail": {}
+        },
+        {
+          "check": "未重发售后确认卡",
+          "passed": true,
+          "detail": {
+            "pendingAction": "PRODUCT_QUERY"
+          }
+        },
+        {
+          "check": "答复包含['轻量露营折叠椅']",
+          "passed": true,
+          "detail": {
+            "answer": "您问的第二款是轻量露营折叠椅，商品标价 199 元，目前无库存。您可以稍后再关注补货情况，或看看其他款式。"
+          }
+        }
+      ],
+      "failed": [],
+      "blocking": [],
+      "recorded": {},
+      "verdict": "PASS"
+    },
+    {
+      "run": "BC032-LIVE-001",
+      "case": "G04B",
+      "turn": "G04B-T1",
+      "session": "bc032-g04b-001",
+      "message": "会员券和优惠能一起用吗？",
+      "request_page": {
+        "type": "HOME"
+      },
+      "response": {
+        "answer": "会员券想和哪项优惠叠加？例如露营季满减、商品活动价，还是另一张券？",
+        "sessionId": "bc032-g04b-001",
+        "confirmRequired": false,
+        "pendingAction": "READ_ONLY_CONSULTATION",
+        "actions": [],
+        "fallback": false
+      },
+      "python": {
+        "intent": "promotion_query",
+        "task_relation": "unrelated",
+        "chosen_order_id": null,
+        "answer": "会员券想和哪项优惠叠加？例如露营季满减、商品活动价，还是另一张券？"
+      },
+      "memory": {
+        "open_task": {
+          "intent": "refund_request",
+          "pending_slot": "order_id",
+          "version": 3,
+          "candidates": [
+            {
+              "value": "ORD9801",
+              "label": "ORD9801"
+            },
+            {
+              "value": "ORD9802",
+              "label": "ORD9802"
+            }
+          ]
+        },
+        "order_query": null,
+        "eligibility_query": null,
+        "product_query": null,
+        "promotion_query": {
+          "question": "会员券和优惠能一起用吗？"
+        },
+        "clarification_focus": "promotion_query",
+        "last_order_id": null
+      },
+      "before_memory": {
+        "open_task": {
+          "intent": "refund_request",
+          "pending_slot": "order_id",
+          "version": 3,
+          "candidates": [
+            {
+              "value": "ORD9801",
+              "label": "ORD9801"
+            },
+            {
+              "value": "ORD9802",
+              "label": "ORD9802"
+            }
+          ]
+        },
+        "order_query": null,
+        "eligibility_query": null,
+        "product_query": null,
+        "promotion_query": null,
+        "clarification_focus": "open_task",
+        "last_order_id": null
+      },
+      "java": {
+        "before": {
+          "pending": "REFUND_ORDER_REQUIRED",
+          "handled": false,
+          "actionType": "REFUND",
+          "expiresAt": "2026-10-17T10:44:09.939091455",
+          "revision": 3,
+          "tokenSha256": "82a7825dc09880b26a5c1399ca11d1e89cefa7f257f12dbc0482e544da153da3",
+          "workflowSha256": "33e9f0720defd9168dbf8e7c230e9df5113e1eca0d329c58a708e283d6d327a1"
+        },
+        "after": {
+          "pending": "REFUND_ORDER_REQUIRED",
+          "handled": false,
+          "actionType": "REFUND",
+          "expiresAt": "2026-10-17T10:44:09.939091455",
+          "revision": 3,
+          "tokenSha256": "82a7825dc09880b26a5c1399ca11d1e89cefa7f257f12dbc0482e544da153da3",
+          "workflowSha256": "33e9f0720defd9168dbf8e7c230e9df5113e1eca0d329c58a708e283d6d327a1"
+        }
+      },
+      "page": {
+        "driver": "api"
+      },
+      "checks": [
+        {
+          "check": "Python原待办=unchanged",
+          "passed": true,
+          "detail": {
+            "actual": {
+              "intent": "refund_request",
+              "pending_slot": "order_id",
+              "version": 3,
+              "candidates": [
+                {
+                  "value": "ORD9801",
+                  "label": "ORD9801"
+                },
+                {
+                  "value": "ORD9802",
+                  "label": "ORD9802"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "check": "Python优惠待补条件",
+          "passed": true,
+          "detail": {
+            "present": true,
+            "value": {
+              "question": "会员券和优惠能一起用吗？"
+            }
+          }
+        },
+        {
+          "check": "Java售后业务字段不变",
+          "passed": true,
+          "detail": {}
+        },
+        {
+          "check": "未重发售后确认卡",
+          "passed": true,
+          "detail": {
+            "pendingAction": "READ_ONLY_CONSULTATION"
+          }
+        },
+        {
+          "check": "答复包含['哪项', '哪个', '叠加']",
+          "passed": true,
+          "detail": {
+            "answer": "会员券想和哪项优惠叠加？例如露营季满减、商品活动价，还是另一张券？"
+          }
+        }
+      ],
+      "failed": [],
+      "blocking": [],
+      "recorded": {},
+      "verdict": "PASS"
+    },
+    {
+      "run": "BC032-LIVE-001",
+      "case": "G04B",
+      "turn": "G04B-T2",
+      "session": "bc032-g04b-001",
+      "message": "谢谢，我再想想。",
+      "request_page": {
+        "type": "HOME"
+      },
+      "response": {
+        "answer": "好的，您慢慢考虑，有需要随时找我。后续如果想咨询订单、物流、活动优惠或售后问题，把相关信息发给我就行。",
+        "sessionId": "bc032-g04b-001",
+        "confirmRequired": false,
+        "pendingAction": "READ_ONLY_CONSULTATION",
+        "actions": [],
+        "fallback": false
+      },
+      "python": {
+        "intent": "general_chat",
+        "task_relation": "uncertain",
+        "chosen_order_id": null,
+        "answer": "好的，您慢慢考虑，有需要随时找我。后续如果想咨询订单、物流、活动优惠或售后问题，把相关信息发给我就行。"
+      },
+      "memory": {
+        "open_task": {
+          "intent": "refund_request",
+          "pending_slot": "order_id",
+          "version": 3,
+          "candidates": [
+            {
+              "value": "ORD9801",
+              "label": "ORD9801"
+            },
+            {
+              "value": "ORD9802",
+              "label": "ORD9802"
+            }
+          ]
+        },
+        "order_query": null,
+        "eligibility_query": null,
+        "product_query": null,
+        "promotion_query": {
+          "question": "会员券和优惠能一起用吗？"
+        },
+        "clarification_focus": "promotion_query",
+        "last_order_id": null
+      },
+      "before_memory": {
+        "open_task": {
+          "intent": "refund_request",
+          "pending_slot": "order_id",
+          "version": 3,
+          "candidates": [
+            {
+              "value": "ORD9801",
+              "label": "ORD9801"
+            },
+            {
+              "value": "ORD9802",
+              "label": "ORD9802"
+            }
+          ]
+        },
+        "order_query": null,
+        "eligibility_query": null,
+        "product_query": null,
+        "promotion_query": {
+          "question": "会员券和优惠能一起用吗？"
+        },
+        "clarification_focus": "promotion_query",
+        "last_order_id": null
+      },
+      "java": {
+        "before": {
+          "pending": "REFUND_ORDER_REQUIRED",
+          "handled": false,
+          "actionType": "REFUND",
+          "expiresAt": "2026-10-17T10:44:09.939091455",
+          "revision": 3,
+          "tokenSha256": "82a7825dc09880b26a5c1399ca11d1e89cefa7f257f12dbc0482e544da153da3",
+          "workflowSha256": "33e9f0720defd9168dbf8e7c230e9df5113e1eca0d329c58a708e283d6d327a1"
+        },
+        "after": {
+          "pending": "REFUND_ORDER_REQUIRED",
+          "handled": false,
+          "actionType": "REFUND",
+          "expiresAt": "2026-10-17T10:44:09.939091455",
+          "revision": 3,
+          "tokenSha256": "82a7825dc09880b26a5c1399ca11d1e89cefa7f257f12dbc0482e544da153da3",
+          "workflowSha256": "33e9f0720defd9168dbf8e7c230e9df5113e1eca0d329c58a708e283d6d327a1"
+        }
+      },
+      "page": {
+        "driver": "api"
+      },
+      "checks": [
+        {
+          "check": "Python原待办=unchanged",
+          "passed": true,
+          "detail": {
+            "actual": {
+              "intent": "refund_request",
+              "pending_slot": "order_id",
+              "version": 3,
+              "candidates": [
+                {
+                  "value": "ORD9801",
+                  "label": "ORD9801"
+                },
+                {
+                  "value": "ORD9802",
+                  "label": "ORD9802"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "check": "Python优惠待补条件",
+          "passed": true,
+          "detail": {
+            "present": true,
+            "value": {
+              "question": "会员券和优惠能一起用吗？"
+            }
+          }
+        },
+        {
+          "check": "Java售后业务字段不变",
+          "passed": true,
+          "detail": {}
+        },
+        {
+          "check": "未重发售后确认卡",
+          "passed": true,
+          "detail": {
+            "pendingAction": "READ_ONLY_CONSULTATION"
+          }
+        }
+      ],
+      "failed": [],
+      "blocking": [],
+      "recorded": {},
+      "verdict": "PASS"
+    },
+    {
+      "run": "BC032-LIVE-001",
+      "case": "G04B",
+      "turn": "G04B-T3",
+      "session": "bc032-g04b-001",
+      "message": "和露营季满减一起用。",
+      "request_page": {
+        "type": "HOME"
+      },
+      "response": {
+        "answer": "符合露营季活动条件时，满 300 减 40 可以与平台会员券叠加；同类型满减券不能重复叠加。该规则没有定义“每满 300 减 40”、所有订单无限次参加或其他券种一律兼容。\n\n是否达到300元取决于活动计入的金额和商品范围。运费、未选中商品或其他活动商品是否计入，当前通用规则没有统一保证。\n\n满600元不自动表示减80元；不同券种能否组合，仍以对应券及活动规则为准。该规则不自动覆盖品类券、定向券或未发布的其他活动。\n\n具体券能否使用，取决于所属账号、状态、开始和截止时间、满额门槛、适用品类或商品范围，以及本次订单条件。\n\n未到使用时间、已过期、已使用或不属于本人账号的券不等于本人当前可用券。朋友的券截图不会改变归属；当前没有口头延期或转移权益的办理能力。\n\n品类券不能默认用于全部商品；多张券分别满足使用条件不代表可以组合，组合条件引用活动叠加规则。\n\n活动是否正在进行、具体参与商品、活动价、会员门槛、优惠券状态与最终金额，以对应活动、商品及结算信息为准。\n\n露营季不代表固定月份，也没有覆盖全部商品的永久活动周期。文档更新时间不代表活动开始时间，以上规则不包含未发布的其他活动或隐藏券。\n\n以上为平台通用规则，不代表当前商品参与活动或本人优惠券已适用，具体组合以商品页和结算条件为准。",
+        "sessionId": "bc032-g04b-001",
+        "confirmRequired": false,
+        "pendingAction": "READ_ONLY_CONSULTATION",
+        "actions": [],
+        "fallback": false
+      },
+      "python": {
+        "intent": "promotion_query",
+        "task_relation": "unrelated",
+        "chosen_order_id": null,
+        "answer": "符合露营季活动条件时，满 300 减 40 可以与平台会员券叠加；同类型满减券不能重复叠加。该规则没有定义“每满 300 减 40”、所有订单无限次参加或其他券种一律兼容。\n\n是否达到300元取决于活动计入的金额和商品范围。运费、未选中商品或其他活动商品是否计入，当前通用规则没有统一保证。\n\n满600元不自动表示减80元；不同券种能否组合，仍以对应券及活动规则为准。该规则不自动覆盖品类券、定向券或未发布的其他活动。\n\n具体券能否使用，取决于所属账号、状态、开始和截止时间、满额门槛、适用品类或商品范围，以及本次订单条件。\n\n未到使用时间、已过期、已使用或不属于本人账号的券不等于本人当前可用券。朋友的券截图不会改变归属；当前没有口头延期或转移权益的办理能力。\n\n品类券不能默认用于全部商品；多张券分别满足使用条件不代表可以组合，组合条件引用活动叠加规则。\n\n活动是否正在进行、具体参与商品、活动价、会员门槛、优惠券状态与最终金额，以对应活动、商品及结算信息为准。\n\n露营季不代表固定月份，也没有覆盖全部商品的永久活动周期。文档更新时间不代表活动开始时间，以上规则不包含未发布的其他活动或隐藏券。\n\n以上为平台通用规则，不代表当前商品参与活动或本人优惠券已适用，具体组合以商品页和结算条件为准。"
+      },
+      "memory": {
+        "open_task": {
+          "intent": "refund_request",
+          "pending_slot": "order_id",
+          "version": 3,
+          "candidates": [
+            {
+              "value": "ORD9801",
+              "label": "ORD9801"
+            },
+            {
+              "value": "ORD9802",
+              "label": "ORD9802"
+            }
+          ]
+        },
+        "order_query": null,
+        "eligibility_query": null,
+        "product_query": null,
+        "promotion_query": null,
+        "clarification_focus": null,
+        "last_order_id": null
+      },
+      "before_memory": {
+        "open_task": {
+          "intent": "refund_request",
+          "pending_slot": "order_id",
+          "version": 3,
+          "candidates": [
+            {
+              "value": "ORD9801",
+              "label": "ORD9801"
+            },
+            {
+              "value": "ORD9802",
+              "label": "ORD9802"
+            }
+          ]
+        },
+        "order_query": null,
+        "eligibility_query": null,
+        "product_query": null,
+        "promotion_query": {
+          "question": "会员券和优惠能一起用吗？"
+        },
+        "clarification_focus": "promotion_query",
+        "last_order_id": null
+      },
+      "java": {
+        "before": {
+          "pending": "REFUND_ORDER_REQUIRED",
+          "handled": false,
+          "actionType": "REFUND",
+          "expiresAt": "2026-10-17T10:44:09.939091455",
+          "revision": 3,
+          "tokenSha256": "82a7825dc09880b26a5c1399ca11d1e89cefa7f257f12dbc0482e544da153da3",
+          "workflowSha256": "33e9f0720defd9168dbf8e7c230e9df5113e1eca0d329c58a708e283d6d327a1"
+        },
+        "after": {
+          "pending": "REFUND_ORDER_REQUIRED",
+          "handled": false,
+          "actionType": "REFUND",
+          "expiresAt": "2026-10-17T10:44:09.939091455",
+          "revision": 3,
+          "tokenSha256": "82a7825dc09880b26a5c1399ca11d1e89cefa7f257f12dbc0482e544da153da3",
+          "workflowSha256": "33e9f0720defd9168dbf8e7c230e9df5113e1eca0d329c58a708e283d6d327a1"
+        }
+      },
+      "page": {
+        "driver": "api"
+      },
+      "checks": [
+        {
+          "check": "Python原待办=unchanged",
+          "passed": true,
+          "detail": {
+            "actual": {
+              "intent": "refund_request",
+              "pending_slot": "order_id",
+              "version": 3,
+              "candidates": [
+                {
+                  "value": "ORD9801",
+                  "label": "ORD9801"
+                },
+                {
+                  "value": "ORD9802",
+                  "label": "ORD9802"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "check": "Python优惠待补条件",
+          "passed": true,
+          "detail": {
+            "present": false,
+            "value": null
+          }
+        },
+        {
+          "check": "Java售后业务字段不变",
+          "passed": true,
+          "detail": {}
+        },
+        {
+          "check": "未重发售后确认卡",
+          "passed": true,
+          "detail": {
+            "pendingAction": "READ_ONLY_CONSULTATION"
+          }
+        },
+        {
+          "check": "答复无禁止表述",
+          "passed": true,
+          "detail": {
+            "hits": []
+          }
+        }
+      ],
+      "failed": [],
+      "blocking": [],
+      "recorded": {},
+      "verdict": "PASS"
+    },
+    {
+      "run": "BC032-LIVE-001",
+      "case": "G05",
+      "turn": "G05-T1",
+      "session": "bc032-g05-001",
+      "message": "不是要取消退款，我只是先问下发票",
+      "request_page": {
+        "type": "HOME"
+      },
+      "response": {
+        "answer": "明白，您不是要取消退款，只是想先了解发票的情况。\n\n电子发票通常在订单完成后 24 小时内开具，您可以在订单详情页查看和下载。具体到您这笔订单的开具进度，我这边暂时查不到，需要您提供订单号才能进一步核实。",
+        "sessionId": "bc032-g05-001",
+        "confirmRequired": false,
+        "pendingAction": "READ_ONLY_CONSULTATION",
+        "actions": [],
+        "fallback": false
+      },
+      "python": {
+        "intent": "invoice_query",
+        "task_relation": "unrelated",
+        "chosen_order_id": null,
+        "answer": "明白，您不是要取消退款，只是想先了解发票的情况。\n\n电子发票通常在订单完成后 24 小时内开具，您可以在订单详情页查看和下载。具体到您这笔订单的开具进度，我这边暂时查不到，需要您提供订单号才能进一步核实。"
+      },
+      "memory": {
+        "open_task": {
+          "intent": "refund_request",
+          "pending_slot": "order_id",
+          "version": 3,
+          "candidates": [
+            {
+              "value": "ORD9801",
+              "label": "ORD9801"
+            },
+            {
+              "value": "ORD9802",
+              "label": "ORD9802"
+            }
+          ]
+        },
+        "order_query": null,
+        "eligibility_query": null,
+        "product_query": null,
+        "promotion_query": null,
+        "clarification_focus": "open_task",
+        "last_order_id": null
+      },
+      "before_memory": {
+        "open_task": {
+          "intent": "refund_request",
+          "pending_slot": "order_id",
+          "version": 3,
+          "candidates": [
+            {
+              "value": "ORD9801",
+              "label": "ORD9801"
+            },
+            {
+              "value": "ORD9802",
+              "label": "ORD9802"
+            }
+          ]
+        },
+        "order_query": null,
+        "eligibility_query": null,
+        "product_query": null,
+        "promotion_query": null,
+        "clarification_focus": "open_task",
+        "last_order_id": null
+      },
+      "java": {
+        "before": {
+          "pending": "REFUND_ORDER_REQUIRED",
+          "handled": false,
+          "actionType": "REFUND",
+          "expiresAt": "2026-10-17T10:44:16.405880840",
+          "revision": 3,
+          "tokenSha256": "13f424e27e5428094df3854b5822018e5ac337e295153b12038d9c62060e52f6",
+          "workflowSha256": "1c81043b0716aed0f0813ed5347736238b92e8fe5cb22448d0c57936e7b3f95b"
+        },
+        "after": {
+          "pending": "REFUND_ORDER_REQUIRED",
+          "handled": false,
+          "actionType": "REFUND",
+          "expiresAt": "2026-10-17T10:44:16.405880840",
+          "revision": 3,
+          "tokenSha256": "13f424e27e5428094df3854b5822018e5ac337e295153b12038d9c62060e52f6",
+          "workflowSha256": "1c81043b0716aed0f0813ed5347736238b92e8fe5cb22448d0c57936e7b3f95b"
+        }
+      },
+      "page": {
+        "driver": "api"
+      },
+      "checks": [
+        {
+          "check": "Python原待办=unchanged",
+          "passed": true,
+          "detail": {
+            "actual": {
+              "intent": "refund_request",
+              "pending_slot": "order_id",
+              "version": 3,
+              "candidates": [
+                {
+                  "value": "ORD9801",
+                  "label": "ORD9801"
+                },
+                {
+                  "value": "ORD9802",
+                  "label": "ORD9802"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "check": "Java售后业务字段不变",
+          "passed": true,
+          "detail": {}
+        },
+        {
+          "check": "未重发售后确认卡",
+          "passed": true,
+          "detail": {
+            "pendingAction": "READ_ONLY_CONSULTATION"
+          }
+        },
+        {
+          "check": "答复无禁止表述",
+          "passed": true,
+          "detail": {
+            "hits": []
+          }
+        }
+      ],
+      "failed": [],
+      "blocking": [],
+      "recorded": {
+        "task_relation": "unrelated"
+      },
+      "verdict": "PASS"
+    },
+    {
+      "run": "BC032-LIVE-001",
+      "case": "G05",
+      "turn": "G05-T2",
+      "session": "bc032-g05-001",
+      "message": "谢谢，退款我再想想",
+      "request_page": {
+        "type": "HOME"
+      },
+      "response": {
+        "answer": "好的，退款的事您慢慢考虑，不着急。之后想继续处理退款，或者有订单、物流、活动优惠、售后方面的问题，随时把订单号或具体情况发给我就行。",
+        "sessionId": "bc032-g05-001",
+        "confirmRequired": false,
+        "pendingAction": "READ_ONLY_CONSULTATION",
+        "actions": [],
+        "fallback": false
+      },
+      "python": {
+        "intent": "general_chat",
+        "task_relation": "uncertain",
+        "chosen_order_id": null,
+        "answer": "好的，退款的事您慢慢考虑，不着急。之后想继续处理退款，或者有订单、物流、活动优惠、售后方面的问题，随时把订单号或具体情况发给我就行。"
+      },
+      "memory": {
+        "open_task": {
+          "intent": "refund_request",
+          "pending_slot": "order_id",
+          "version": 3,
+          "candidates": [
+            {
+              "value": "ORD9801",
+              "label": "ORD9801"
+            },
+            {
+              "value": "ORD9802",
+              "label": "ORD9802"
+            }
+          ]
+        },
+        "order_query": null,
+        "eligibility_query": null,
+        "product_query": null,
+        "promotion_query": null,
+        "clarification_focus": "open_task",
+        "last_order_id": null
+      },
+      "before_memory": {
+        "open_task": {
+          "intent": "refund_request",
+          "pending_slot": "order_id",
+          "version": 3,
+          "candidates": [
+            {
+              "value": "ORD9801",
+              "label": "ORD9801"
+            },
+            {
+              "value": "ORD9802",
+              "label": "ORD9802"
+            }
+          ]
+        },
+        "order_query": null,
+        "eligibility_query": null,
+        "product_query": null,
+        "promotion_query": null,
+        "clarification_focus": "open_task",
+        "last_order_id": null
+      },
+      "java": {
+        "before": {
+          "pending": "REFUND_ORDER_REQUIRED",
+          "handled": false,
+          "actionType": "REFUND",
+          "expiresAt": "2026-10-17T10:44:16.405880840",
+          "revision": 3,
+          "tokenSha256": "13f424e27e5428094df3854b5822018e5ac337e295153b12038d9c62060e52f6",
+          "workflowSha256": "1c81043b0716aed0f0813ed5347736238b92e8fe5cb22448d0c57936e7b3f95b"
+        },
+        "after": {
+          "pending": "REFUND_ORDER_REQUIRED",
+          "handled": false,
+          "actionType": "REFUND",
+          "expiresAt": "2026-10-17T10:44:16.405880840",
+          "revision": 3,
+          "tokenSha256": "13f424e27e5428094df3854b5822018e5ac337e295153b12038d9c62060e52f6",
+          "workflowSha256": "1c81043b0716aed0f0813ed5347736238b92e8fe5cb22448d0c57936e7b3f95b"
+        }
+      },
+      "page": {
+        "driver": "api"
+      },
+      "checks": [
+        {
+          "check": "Python原待办=unchanged",
+          "passed": true,
+          "detail": {
+            "actual": {
+              "intent": "refund_request",
+              "pending_slot": "order_id",
+              "version": 3,
+              "candidates": [
+                {
+                  "value": "ORD9801",
+                  "label": "ORD9801"
+                },
+                {
+                  "value": "ORD9802",
+                  "label": "ORD9802"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "check": "Java售后业务字段不变",
+          "passed": true,
+          "detail": {}
+        },
+        {
+          "check": "未重发售后确认卡",
+          "passed": true,
+          "detail": {
+            "pendingAction": "READ_ONLY_CONSULTATION"
+          }
+        },
+        {
+          "check": "答复无禁止表述",
+          "passed": true,
+          "detail": {
+            "hits": []
+          }
+        }
+      ],
+      "failed": [],
+      "blocking": [],
+      "recorded": {},
+      "verdict": "PASS"
+    },
+    {
+      "run": "BC032-LIVE-001",
+      "case": "G05",
+      "turn": "G05-T3",
+      "session": "bc032-g05-001-g05-t3",
+      "message": "不退了",
+      "request_page": {
+        "type": "HOME"
+      },
+      "response": {
+        "answer": "本次售后申请已取消，未提交。",
+        "sessionId": "bc032-g05-001-g05-t3",
+        "confirmRequired": false,
+        "pendingAction": "CANCELLED",
+        "actions": [],
+        "fallback": false
+      },
+      "python": {
+        "intent": null,
+        "task_relation": null,
+        "chosen_order_id": null,
+        "answer": null
+      },
+      "memory": {
+        "open_task": {
+          "intent": "refund_request",
+          "pending_slot": "order_id",
+          "version": 3,
+          "candidates": [
+            {
+              "value": "ORD9801",
+              "label": "ORD9801"
+            },
+            {
+              "value": "ORD9802",
+              "label": "ORD9802"
+            }
+          ]
+        },
+        "order_query": null,
+        "eligibility_query": null,
+        "product_query": null,
+        "promotion_query": null,
+        "clarification_focus": "open_task",
+        "last_order_id": null
+      },
+      "before_memory": {
+        "open_task": {
+          "intent": "refund_request",
+          "pending_slot": "order_id",
+          "version": 3,
+          "candidates": [
+            {
+              "value": "ORD9801",
+              "label": "ORD9801"
+            },
+            {
+              "value": "ORD9802",
+              "label": "ORD9802"
+            }
+          ]
+        },
+        "order_query": null,
+        "eligibility_query": null,
+        "product_query": null,
+        "promotion_query": null,
+        "clarification_focus": "open_task",
+        "last_order_id": null
+      },
+      "java": {
+        "before": {
+          "pending": "REFUND_ORDER_REQUIRED",
+          "handled": false,
+          "actionType": "REFUND",
+          "expiresAt": "2026-10-17T10:44:22.262582663",
+          "revision": 3,
+          "tokenSha256": "18684a8552be98c2c08382cbddb6bcc46b7a0dac09c50055dcac0c3fafe4bae8",
+          "workflowSha256": "2ce3ca401aebae8644ca6469b178398c8dc690099173be112285c8619596e72c"
+        },
+        "after": {
+          "pending": "CANCELLED",
+          "handled": true,
+          "revision": 4
+        }
+      },
+      "page": {
+        "driver": "api"
+      },
+      "checks": [
+        {
+          "check": "未重发售后确认卡",
+          "passed": true,
+          "detail": {
+            "pendingAction": "CANCELLED"
+          }
+        },
+        {
+          "check": "Java原明确取消已记录",
+          "passed": true,
+          "detail": {
+            "pending": "CANCELLED"
+          }
+        }
+      ],
+      "failed": [],
+      "blocking": [],
+      "recorded": {
+        "python_open_task": null,
+        "task_relation": null
+      },
+      "verdict": "PASS"
+    },
+    {
+      "run": "BC032-LIVE-001",
+      "case": "G05",
+      "turn": "G05-T4",
+      "session": "bc032-g05-001-g05-t3",
+      "message": "谢谢",
+      "request_page": {
+        "type": "HOME"
+      },
+      "response": {
+        "answer": "不客气，张三！如果之后有订单、物流、活动优惠或售后方面的问题，随时发给我，我会根据订单信息和公开规则帮你核实处理。",
+        "sessionId": "bc032-g05-001-g05-t3",
+        "confirmRequired": false,
+        "pendingAction": "READ_ONLY_CONSULTATION",
+        "actions": [],
+        "fallback": false
+      },
+      "python": {
+        "intent": "general_chat",
+        "task_relation": "unrelated",
+        "chosen_order_id": null,
+        "answer": "不客气，张三！如果之后有订单、物流、活动优惠或售后方面的问题，随时发给我，我会根据订单信息和公开规则帮你核实处理。"
+      },
+      "memory": {
+        "open_task": {
+          "intent": "refund_request",
+          "pending_slot": "order_id",
+          "version": 3,
+          "candidates": [
+            {
+              "value": "ORD9801",
+              "label": "ORD9801"
+            },
+            {
+              "value": "ORD9802",
+              "label": "ORD9802"
+            }
+          ]
+        },
+        "order_query": null,
+        "eligibility_query": null,
+        "product_query": null,
+        "promotion_query": null,
+        "clarification_focus": "open_task",
+        "last_order_id": null
+      },
+      "before_memory": {
+        "open_task": {
+          "intent": "refund_request",
+          "pending_slot": "order_id",
+          "version": 3,
+          "candidates": [
+            {
+              "value": "ORD9801",
+              "label": "ORD9801"
+            },
+            {
+              "value": "ORD9802",
+              "label": "ORD9802"
+            }
+          ]
+        },
+        "order_query": null,
+        "eligibility_query": null,
+        "product_query": null,
+        "promotion_query": null,
+        "clarification_focus": "open_task",
+        "last_order_id": null
+      },
+      "java": {
+        "before": {
+          "pending": "REFUND_ORDER_REQUIRED",
+          "handled": false,
+          "actionType": "REFUND",
+          "expiresAt": "2026-10-17T10:44:22.356055993",
+          "revision": 4,
+          "tokenSha256": "18684a8552be98c2c08382cbddb6bcc46b7a0dac09c50055dcac0c3fafe4bae8",
+          "workflowSha256": "2ce3ca401aebae8644ca6469b178398c8dc690099173be112285c8619596e72c"
+        },
+        "after": {
+          "pending": "REFUND_ORDER_REQUIRED",
+          "handled": false,
+          "actionType": "REFUND",
+          "expiresAt": "2026-10-17T10:44:22.356055993",
+          "revision": 4,
+          "tokenSha256": "18684a8552be98c2c08382cbddb6bcc46b7a0dac09c50055dcac0c3fafe4bae8",
+          "workflowSha256": "2ce3ca401aebae8644ca6469b178398c8dc690099173be112285c8619596e72c"
+        }
+      },
+      "page": {
+        "driver": "api"
+      },
+      "checks": [
+        {
+          "check": "Python原待办=None",
+          "passed": false,
+          "detail": {
+            "actual": {
+              "intent": "refund_request",
+              "pending_slot": "order_id",
+              "version": 3,
+              "candidates": [
+                {
+                  "value": "ORD9801",
+                  "label": "ORD9801"
+                },
+                {
+                  "value": "ORD9802",
+                  "label": "ORD9802"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "check": "未重发售后确认卡",
+          "passed": true,
+          "detail": {
+            "pendingAction": "READ_ONLY_CONSULTATION"
+          }
+        },
+        {
+          "check": "Java原明确取消已记录",
+          "passed": false,
+          "detail": {
+            "pending": "REFUND_ORDER_REQUIRED"
+          }
+        },
+        {
+          "check": "答复无禁止表述",
+          "passed": true,
+          "detail": {
+            "hits": []
+          }
+        }
+      ],
+      "failed": [
+        "Python原待办=None",
+        "Java原明确取消已记录"
+      ],
+      "blocking": [],
+      "recorded": {},
+      "verdict": "FAIL"
+    },
+    {
+      "run": "BC032-LIVE-001",
+      "case": "G05",
+      "turn": "G05-T5",
+      "session": "bc032-g05-001-g05-t5",
+      "message": "先停掉原退款，改办另一笔退货",
+      "request_page": {
+        "type": "HOME"
+      },
+      "response": {
+        "answer": "您好，关于您提出的“先停掉原退款、改办另一笔退货”，我需要先说明：本轮我还没有查到任何已执行的停止或切换记录，因此不能确认原退款已经停止，也不能确认新的退货已经登记。\n\n要办理这两件事，需要先核实具体订单。请您提供原退款对应的订单号，以及想改办退货的那笔订单号；我核实订单和售后状态后，再告诉您下一步怎么处理。",
+        "sessionId": "bc032-g05-001-g05-t5",
+        "confirmRequired": false,
+        "pendingAction": "TASK_CONTROL_PENDING",
+        "actions": [],
+        "fallback": false
+      },
+      "python": {
+        "intent": "general_chat",
+        "task_relation": "switch",
+        "chosen_order_id": null,
+        "answer": "您好，关于您提出的“先停掉原退款、改办另一笔退货”，我需要先说明：本轮我还没有查到任何已执行的停止或切换记录，因此不能确认原退款已经停止，也不能确认新的退货已经登记。\n\n要办理这两件事，需要先核实具体订单。请您提供原退款对应的订单号，以及想改办退货的那笔订单号；我核实订单和售后状态后，再告诉您下一步怎么处理。"
+      },
+      "memory": {
+        "open_task": {
+          "intent": "refund_request",
+          "pending_slot": "order_id",
+          "version": 3,
+          "candidates": [
+            {
+              "value": "ORD9801",
+              "label": "ORD9801"
+            },
+            {
+              "value": "ORD9802",
+              "label": "ORD9802"
+            }
+          ]
+        },
+        "order_query": null,
+        "eligibility_query": null,
+        "product_query": null,
+        "promotion_query": null,
+        "clarification_focus": "open_task",
+        "last_order_id": null
+      },
+      "before_memory": {
+        "open_task": {
+          "intent": "refund_request",
+          "pending_slot": "order_id",
+          "version": 3,
+          "candidates": [
+            {
+              "value": "ORD9801",
+              "label": "ORD9801"
+            },
+            {
+              "value": "ORD9802",
+              "label": "ORD9802"
+            }
+          ]
+        },
+        "order_query": null,
+        "eligibility_query": null,
+        "product_query": null,
+        "promotion_query": null,
+        "clarification_focus": "open_task",
+        "last_order_id": null
+      },
+      "java": {
+        "before": {
+          "pending": "REFUND_ORDER_REQUIRED",
+          "handled": false,
+          "actionType": "REFUND",
+          "expiresAt": "2026-10-17T10:44:24.149539948",
+          "revision": 3,
+          "tokenSha256": "14153b6a94ce35658e063d28784b1a1305305c974b44c5c81a95f9541007966c",
+          "workflowSha256": "17983711c28d896dfbdd803973d34b9c4b2a85527b0bb243886d12830d8c9a24"
+        },
+        "after": {
+          "pending": "REFUND_ORDER_REQUIRED",
+          "handled": false,
+          "actionType": "REFUND",
+          "expiresAt": "2026-10-17T10:44:24.149539948",
+          "revision": 3,
+          "tokenSha256": "14153b6a94ce35658e063d28784b1a1305305c974b44c5c81a95f9541007966c",
+          "workflowSha256": "17983711c28d896dfbdd803973d34b9c4b2a85527b0bb243886d12830d8c9a24"
+        }
+      },
+      "page": {
+        "driver": "api"
+      },
+      "checks": [
+        {
+          "check": "Python原待办=unchanged",
+          "passed": true,
+          "detail": {
+            "actual": {
+              "intent": "refund_request",
+              "pending_slot": "order_id",
+              "version": 3,
+              "candidates": [
+                {
+                  "value": "ORD9801",
+                  "label": "ORD9801"
+                },
+                {
+                  "value": "ORD9802",
+                  "label": "ORD9802"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "check": "Java售后业务字段不变",
+          "passed": true,
+          "detail": {}
+        },
+        {
+          "check": "未重发售后确认卡",
+          "passed": true,
+          "detail": {
+            "pendingAction": "TASK_CONTROL_PENDING"
+          }
+        },
+        {
+          "check": "答复无禁止表述",
+          "passed": true,
+          "detail": {
+            "hits": []
+          }
+        }
+      ],
+      "failed": [],
+      "blocking": [],
+      "recorded": {
+        "task_relation": "switch",
+        "task_control_requested": true
+      },
+      "verdict": "PASS"
+    },
+    {
+      "run": "BC032-LIVE-001",
+      "case": "G06A",
+      "turn": "G06A-T1",
+      "session": "bc032-g06a-001",
+      "message": "订单发票怎么开？",
+      "request_page": {
+        "type": "HOME"
+      },
+      "response": {
+        "answer": "电子发票通常在订单完成后 24 小时内开具，您可以在订单详情页查看和下载。\n\n具体到您的订单，开具时间仍以订单详情页显示的状态为准。如果您需要进一步协助，可以在商城客服对话中提出转人工，确认后即可打开人工入口。",
+        "sessionId": "bc032-g06a-001",
+        "confirmRequired": false,
+        "pendingAction": "READ_ONLY_CONSULTATION",
+        "actions": [],
+        "fallback": false
+      },
+      "python": {
+        "intent": "invoice_query",
+        "task_relation": "unrelated",
+        "chosen_order_id": null,
+        "answer": "电子发票通常在订单完成后 24 小时内开具，您可以在订单详情页查看和下载。\n\n具体到您的订单，开具时间仍以订单详情页显示的状态为准。如果您需要进一步协助，可以在商城客服对话中提出转人工，确认后即可打开人工入口。"
+      },
+      "memory": {
+        "open_task": {
+          "intent": "return_request",
+          "order_id": "ORD9805",
+          "pending_slot": "reason",
+          "version": 3,
+          "candidates": []
+        },
+        "order_query": null,
+        "eligibility_query": null,
+        "product_query": null,
+        "promotion_query": null,
+        "clarification_focus": "open_task",
+        "last_order_id": null
+      },
+      "before_memory": {
+        "open_task": {
+          "intent": "return_request",
+          "order_id": "ORD9805",
+          "pending_slot": "reason",
+          "version": 3,
+          "candidates": []
+        },
+        "order_query": null,
+        "eligibility_query": null,
+        "product_query": null,
+        "promotion_query": null,
+        "clarification_focus": "open_task",
+        "last_order_id": null
+      },
+      "java": {
+        "before": {
+          "pending": "CONFIRM_SUBMIT",
+          "handled": false,
+          "actionType": "RETURN",
+          "order": "ORD9805",
+          "reason": "七天无理由退货",
+          "amount": "200.00",
+          "item": "隔离露营椅",
+          "expiresAt": "2026-10-17T10:44:26.137063688",
+          "revision": 3,
+          "tokenSha256": "59dbc8c99c6d1985555d03ded45e7a9605763f1eb50a08be7739ba1fc3e96286",
+          "workflowSha256": "ba117a9edbae89573d9d57219d9d8c9c8af63bc60462bc8b690dddd4cfc9a06c"
+        },
+        "after": {
+          "pending": "CONFIRM_SUBMIT",
+          "handled": false,
+          "actionType": "RETURN",
+          "order": "ORD9805",
+          "reason": "七天无理由退货",
+          "amount": "200.00",
+          "item": "隔离露营椅",
+          "expiresAt": "2026-10-17T10:44:26.137063688",
+          "revision": 3,
+          "tokenSha256": "59dbc8c99c6d1985555d03ded45e7a9605763f1eb50a08be7739ba1fc3e96286",
+          "workflowSha256": "ba117a9edbae89573d9d57219d9d8c9c8af63bc60462bc8b690dddd4cfc9a06c"
+        }
+      },
+      "page": {
+        "driver": "api"
+      },
+      "checks": [
+        {
+          "check": "Python原待办=unchanged",
+          "passed": true,
+          "detail": {
+            "actual": {
+              "intent": "return_request",
+              "order_id": "ORD9805",
+              "pending_slot": "reason",
+              "version": 3,
+              "candidates": []
+            }
+          }
+        },
+        {
+          "check": "Java售后业务字段不变",
+          "passed": true,
+          "detail": {}
+        },
+        {
+          "check": "未重发售后确认卡",
+          "passed": true,
+          "detail": {
+            "pendingAction": "READ_ONLY_CONSULTATION"
+          }
+        }
+      ],
+      "failed": [],
+      "blocking": [],
+      "recorded": {},
+      "verdict": "PASS"
+    },
+    {
+      "run": "BC032-LIVE-001",
+      "case": "G06A",
+      "turn": "G06A-T2",
+      "session": "bc032-g06a-001",
+      "message": "继续刚才的退货",
+      "request_page": {
+        "type": "HOME"
+      },
+      "response": {
+        "answer": "请核对申请，确认提交后等待后台审核。",
+        "sessionId": "bc032-g06a-001",
+        "confirmRequired": true,
+        "pendingAction": "CONFIRM_SUBMIT",
+        "confirmationTitle": "确认提交退货退款申请",
+        "confirmationSummary": "订单：ORD9805；商品：隔离露营椅 x1；范围：整单退货退款；实付金额：200.00 元；原因：七天无理由退货；状态：等待本人确认，尚未提交。确认后等待审核，提交不代表退款成功。同意退货后按地址寄回商品、配件及赠品；请保持完好，商家实际收到且验收通过后才退款。",
+        "relatedOrderNo": "ORD9805",
+        "resumeToken": null,
+        "actions": [
+          {
+            "code": "CONFIRM_SUBMIT",
+            "label": "确认提交申请"
+          },
+          {
+            "code": "CANCEL_SUBMIT",
+            "label": "取消本次申请"
+          }
+        ],
+        "fallback": false,
+        "resumeTokenSha256": "05f30be982def8306ca1b1de4258cfeacac8499766c0f16f9f0d08598c653637"
+      },
+      "python": {
+        "intent": "return_request",
+        "task_relation": "resume",
+        "chosen_order_id": "ORD9805",
+        "answer": "已识别申请诉求，待商城核验最新资格并准备确认。"
+      },
+      "memory": {
+        "open_task": {
+          "intent": "return_request",
+          "order_id": "ORD9805",
+          "pending_slot": "reason",
+          "version": 3,
+          "candidates": []
+        },
+        "order_query": null,
+        "eligibility_query": null,
+        "product_query": null,
+        "promotion_query": null,
+        "clarification_focus": "open_task",
+        "last_order_id": null
+      },
+      "before_memory": {
+        "open_task": {
+          "intent": "return_request",
+          "order_id": "ORD9805",
+          "pending_slot": "reason",
+          "version": 3,
+          "candidates": []
+        },
+        "order_query": null,
+        "eligibility_query": null,
+        "product_query": null,
+        "promotion_query": null,
+        "clarification_focus": "open_task",
+        "last_order_id": null
+      },
+      "java": {
+        "before": {
+          "pending": "CONFIRM_SUBMIT",
+          "handled": false,
+          "actionType": "RETURN",
+          "order": "ORD9805",
+          "reason": "七天无理由退货",
+          "amount": "200.00",
+          "item": "隔离露营椅",
+          "expiresAt": "2026-10-17T10:44:26.137063688",
+          "revision": 3,
+          "tokenSha256": "59dbc8c99c6d1985555d03ded45e7a9605763f1eb50a08be7739ba1fc3e96286",
+          "workflowSha256": "ba117a9edbae89573d9d57219d9d8c9c8af63bc60462bc8b690dddd4cfc9a06c"
+        },
+        "after": {
+          "pending": "CONFIRM_SUBMIT",
+          "handled": false,
+          "actionType": "RETURN",
+          "order": "ORD9805",
+          "reason": "七天无理由退货",
+          "amount": "200.00",
+          "item": "隔离露营椅 x1",
+          "expiresAt": "2026-10-17T10:44:26.137063688",
+          "revision": 4,
+          "tokenSha256": "05f30be982def8306ca1b1de4258cfeacac8499766c0f16f9f0d08598c653637",
+          "workflowSha256": "14e87aeffc03a18ef04182565fd46e408ae8c010ec9fbba3223186485d508378"
+        }
+      },
+      "page": {
+        "driver": "api"
+      },
+      "checks": [
+        {
+          "check": "Python原待办=unchanged",
+          "passed": true,
+          "detail": {
+            "actual": {
+              "intent": "return_request",
+              "order_id": "ORD9805",
+              "pending_slot": "reason",
+              "version": 3,
+              "candidates": []
+            }
+          }
+        },
+        {
+          "check": "确认卡对象与类型",
+          "passed": true,
+          "detail": {
+            "title": "确认提交退货退款申请",
+            "order": "ORD9805"
+          }
+        },
+        {
+          "check": "Python意图",
+          "passed": true,
+          "detail": {
+            "expected": [
+              "return_request"
+            ],
+            "actual": "return_request"
+          }
+        },
+        {
+          "check": "绑定订单",
+          "passed": true,
+          "detail": {
+            "expected": "ORD9805",
+            "actual": "ORD9805"
+          }
+        },
+        {
+          "check": "答复无禁止表述",
+          "passed": true,
+          "detail": {
+            "hits": []
+          }
+        }
+      ],
+      "failed": [],
+      "blocking": [],
+      "recorded": {
+        "task_relation": "resume"
+      },
+      "verdict": "PASS"
+    },
+    {
+      "run": "BC032-LIVE-001",
+      "case": "G06B",
+      "turn": "G06B-T1",
+      "session": "bc032-g06b-001",
+      "message": "ORD9801 现在物流到哪了？",
+      "request_page": {
+        "type": "HOME"
+      },
+      "response": {
+        "answer": "客服服务暂时繁忙，您可以稍后再试，或联系人工客服继续处理。",
+        "sessionId": "bc032-g06b-001",
+        "confirmRequired": false,
+        "actions": [],
+        "fallback": true
+      },
+      "python": {
+        "intent": null,
+        "task_relation": null,
+        "chosen_order_id": null,
+        "answer": null
+      },
+      "memory": {
+        "open_task": {
+          "intent": "refund_request",
+          "pending_slot": "order_id",
+          "version": 3,
+          "candidates": [
+            {
+              "value": "ORD9801",
+              "label": "ORD9801"
+            },
+            {
+              "value": "ORD9802",
+              "label": "ORD9802"
+            }
+          ]
+        },
+        "order_query": null,
+        "eligibility_query": null,
+        "product_query": null,
+        "promotion_query": null,
+        "clarification_focus": "open_task",
+        "last_order_id": null
+      },
+      "before_memory": {
+        "open_task": {
+          "intent": "refund_request",
+          "pending_slot": "order_id",
+          "version": 3,
+          "candidates": [
+            {
+              "value": "ORD9801",
+              "label": "ORD9801"
+            },
+            {
+              "value": "ORD9802",
+              "label": "ORD9802"
+            }
+          ]
+        },
+        "order_query": null,
+        "eligibility_query": null,
+        "product_query": null,
+        "promotion_query": null,
+        "clarification_focus": "open_task",
+        "last_order_id": null
+      },
+      "java": {
+        "before": {
+          "pending": "REFUND_ORDER_REQUIRED",
+          "handled": false,
+          "actionType": "REFUND",
+          "expiresAt": "2026-10-17T10:44:30.394949662",
+          "revision": 3,
+          "tokenSha256": "15a64e4d87f1fac54e8d2686dad7b1e452a3b14a9840af2216367341e3b1f553",
+          "workflowSha256": "0fef0b1750a6aa5d6eead0fddd33780067ae2d0861e148f4332f453eb1f1c513"
+        },
+        "after": {
+          "pending": "REFUND_ORDER_REQUIRED",
+          "handled": false,
+          "actionType": "REFUND",
+          "expiresAt": "2026-10-17T10:44:30.394949662",
+          "revision": 3,
+          "tokenSha256": "15a64e4d87f1fac54e8d2686dad7b1e452a3b14a9840af2216367341e3b1f553",
+          "workflowSha256": "0fef0b1750a6aa5d6eead0fddd33780067ae2d0861e148f4332f453eb1f1c513"
+        }
+      },
+      "page": {
+        "driver": "api"
+      },
+      "checks": [
+        {
+          "check": "Python原待办=unchanged",
+          "passed": true,
+          "detail": {
+            "actual": {
+              "intent": "refund_request",
+              "pending_slot": "order_id",
+              "version": 3,
+              "candidates": [
+                {
+                  "value": "ORD9801",
+                  "label": "ORD9801"
+                },
+                {
+                  "value": "ORD9802",
+                  "label": "ORD9802"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "check": "Java售后业务字段不变",
+          "passed": true,
+          "detail": {}
+        },
+        {
+          "check": "未重发售后确认卡",
+          "passed": true,
+          "detail": {
+            "pendingAction": null
+          }
+        }
+      ],
+      "failed": [],
+      "blocking": [],
+      "recorded": {
+        "injection": "route"
+      },
+      "verdict": "PASS"
+    },
+    {
+      "run": "BC032-LIVE-001",
+      "case": "G06B",
+      "turn": "G06B-T2",
+      "session": "bc032-g06b-001-g06b-t2",
+      "message": "ORD9801 现在物流到哪了？",
+      "request_page": {
+        "type": "HOME"
+      },
+      "response": {
+        "answer": "客服服务暂时繁忙，您可以稍后再试，或联系人工客服继续处理。",
+        "sessionId": "bc032-g06b-001-g06b-t2",
+        "confirmRequired": false,
+        "actions": [],
+        "fallback": true
+      },
+      "python": {
+        "intent": null,
+        "task_relation": null,
+        "chosen_order_id": null,
+        "answer": null
+      },
+      "memory": {
+        "open_task": {
+          "intent": "refund_request",
+          "pending_slot": "order_id",
+          "version": 3,
+          "candidates": [
+            {
+              "value": "ORD9801",
+              "label": "ORD9801"
+            },
+            {
+              "value": "ORD9802",
+              "label": "ORD9802"
+            }
+          ]
+        },
+        "order_query": null,
+        "eligibility_query": null,
+        "product_query": null,
+        "promotion_query": null,
+        "clarification_focus": "open_task",
+        "last_order_id": null
+      },
+      "before_memory": {
+        "open_task": {
+          "intent": "refund_request",
+          "pending_slot": "order_id",
+          "version": 3,
+          "candidates": [
+            {
+              "value": "ORD9801",
+              "label": "ORD9801"
+            },
+            {
+              "value": "ORD9802",
+              "label": "ORD9802"
+            }
+          ]
+        },
+        "order_query": null,
+        "eligibility_query": null,
+        "product_query": null,
+        "promotion_query": null,
+        "clarification_focus": "open_task",
+        "last_order_id": null
+      },
+      "java": {
+        "before": {
+          "pending": "REFUND_ORDER_REQUIRED",
+          "handled": false,
+          "actionType": "REFUND",
+          "expiresAt": "2026-10-17T10:44:30.545372746",
+          "revision": 3,
+          "tokenSha256": "ff4990046eb0c38f89176cc653fa4732fd2929db3835b3abe3f5895558b982c7",
+          "workflowSha256": "4faf1f66de24824981b9c33c66ca803dbb47697e22a0c12c6702c35d8f0681d1"
+        },
+        "after": {
+          "pending": "REFUND_ORDER_REQUIRED",
+          "handled": false,
+          "actionType": "REFUND",
+          "expiresAt": "2026-10-17T10:44:30.545372746",
+          "revision": 3,
+          "tokenSha256": "ff4990046eb0c38f89176cc653fa4732fd2929db3835b3abe3f5895558b982c7",
+          "workflowSha256": "4faf1f66de24824981b9c33c66ca803dbb47697e22a0c12c6702c35d8f0681d1"
+        }
+      },
+      "page": {
+        "driver": "api"
+      },
+      "checks": [
+        {
+          "check": "Python原待办=unchanged",
+          "passed": true,
+          "detail": {
+            "actual": {
+              "intent": "refund_request",
+              "pending_slot": "order_id",
+              "version": 3,
+              "candidates": [
+                {
+                  "value": "ORD9801",
+                  "label": "ORD9801"
+                },
+                {
+                  "value": "ORD9802",
+                  "label": "ORD9802"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "check": "Java售后业务字段不变",
+          "passed": true,
+          "detail": {}
+        },
+        {
+          "check": "未重发售后确认卡",
+          "passed": true,
+          "detail": {
+            "pendingAction": null
+          }
+        }
+      ],
+      "failed": [],
+      "blocking": [],
+      "recorded": {
+        "injection": "tool"
+      },
+      "verdict": "PASS"
+    },
+    {
+      "run": "BC032-LIVE-001",
+      "case": "G06B",
+      "turn": "G06B-T3",
+      "session": "bc032-g06b-001-g06b-t3",
+      "message": "ORD9801 现在物流到哪了？",
+      "request_page": {
+        "type": "HOME"
+      },
+      "response": {
+        "answer": "订单 ORD9801 当前状态为待发货，物流状态为暂未发货，商品 隔离露营椅。\n\n物流状态为暂未发货，订单状态为待发货。",
+        "sessionId": "bc032-g06b-001-g06b-t3",
+        "confirmRequired": false,
+        "pendingAction": "TASK_CONTROL_PENDING",
+        "actions": [],
+        "fallback": false
+      },
+      "python": {
+        "intent": "order_query",
+        "task_relation": "switch",
+        "chosen_order_id": "ORD9801",
+        "answer": "订单 ORD9801 当前状态为待发货，物流状态为暂未发货，商品 隔离露营椅。\n\n物流状态为暂未发货，订单状态为待发货。"
+      },
+      "memory": {
+        "open_task": {
+          "intent": "refund_request",
+          "pending_slot": "order_id",
+          "version": 3,
+          "candidates": [
+            {
+              "value": "ORD9801",
+              "label": "ORD9801"
+            },
+            {
+              "value": "ORD9802",
+              "label": "ORD9802"
+            }
+          ]
+        },
+        "order_query": {
+          "intent": "order_query",
+          "order_id": "ORD9801",
+          "pending_slot": null,
+          "candidates": []
+        },
+        "eligibility_query": null,
+        "product_query": null,
+        "promotion_query": null,
+        "clarification_focus": "open_task",
+        "last_order_id": "ORD9801"
+      },
+      "before_memory": {
+        "open_task": {
+          "intent": "refund_request",
+          "pending_slot": "order_id",
+          "version": 3,
+          "candidates": [
+            {
+              "value": "ORD9801",
+              "label": "ORD9801"
+            },
+            {
+              "value": "ORD9802",
+              "label": "ORD9802"
+            }
+          ]
+        },
+        "order_query": null,
+        "eligibility_query": null,
+        "product_query": null,
+        "promotion_query": null,
+        "clarification_focus": "open_task",
+        "last_order_id": null
+      },
+      "java": {
+        "before": {
+          "pending": "REFUND_ORDER_REQUIRED",
+          "handled": false,
+          "actionType": "REFUND",
+          "expiresAt": "2026-10-17T10:44:31.526919413",
+          "revision": 3,
+          "tokenSha256": "4a7490edc93535e167155b5cceb34f2b0b96055619f20a30eba90ca318ff5f27",
+          "workflowSha256": "88dd0c58dab4e89be6bf5640f1cb7456c062aa501406b7eb79ed2097b7c1d4a8"
+        },
+        "after": {
+          "pending": "REFUND_ORDER_REQUIRED",
+          "handled": false,
+          "actionType": "REFUND",
+          "expiresAt": "2026-10-17T10:44:31.526919413",
+          "revision": 3,
+          "tokenSha256": "4a7490edc93535e167155b5cceb34f2b0b96055619f20a30eba90ca318ff5f27",
+          "workflowSha256": "88dd0c58dab4e89be6bf5640f1cb7456c062aa501406b7eb79ed2097b7c1d4a8"
+        }
+      },
+      "page": {
+        "driver": "api"
+      },
+      "checks": [
+        {
+          "check": "Python原待办=unchanged",
+          "passed": true,
+          "detail": {
+            "actual": {
+              "intent": "refund_request",
+              "pending_slot": "order_id",
+              "version": 3,
+              "candidates": [
+                {
+                  "value": "ORD9801",
+                  "label": "ORD9801"
+                },
+                {
+                  "value": "ORD9802",
+                  "label": "ORD9802"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "check": "Java售后业务字段不变",
+          "passed": true,
+          "detail": {}
+        },
+        {
+          "check": "未重发售后确认卡",
+          "passed": true,
+          "detail": {
+            "pendingAction": "TASK_CONTROL_PENDING"
+          }
+        }
+      ],
+      "failed": [],
+      "blocking": [],
+      "recorded": {
+        "injection": "generation"
+      },
+      "verdict": "PASS"
+    }
+  ],
+  "stop_reason": null,
+  "tables_unchanged": true,
+  "model_calls": 56,
+  "tokens": 160862,
+  "blocked": [],
+  "failed": [
+    "G02-T1",
+    "G02-T3",
+    "G02B-T2",
+    "G03B-T1",
+    "G03B-T2",
+    "G03B-T3",
+    "G03C-T2",
+    "G05-T4"
+  ],
+  "passed": [
+    "G01-T1",
+    "G01-T2",
+    "G02-T2",
+    "G02B-T1",
+    "G03A-T1",
+    "G03C-T1",
+    "G04A-T1",
+    "G04A-T2",
+    "G04A-T3",
+    "G04B-T1",
+    "G04B-T2",
+    "G04B-T3",
+    "G05-T1",
+    "G05-T2",
+    "G05-T3",
+    "G05-T5",
+    "G06A-T1",
+    "G06A-T2",
+    "G06B-T1",
+    "G06B-T2",
+    "G06B-T3"
+  ]
+}

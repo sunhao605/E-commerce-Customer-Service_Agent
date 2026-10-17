@@ -14,17 +14,20 @@ class ProductKnowledgeTest(unittest.TestCase):
     def setUp(self):
         SESSION_MEMORIES.clear();hybrid.reset_hybrid_index_and_cache()
         self.agent=Lesson41Agent()
+        self.topics=["tent_care"]
         for target,method in [(self.agent.route_model_client,'plan_intent'),(self.agent.answer_model_client,'can_call_model'),(self.agent.langchain_tool_runner,'can_call_model')]:
-            mock=patch.object(target,method,side_effect=(lambda message,**kw:ModelRouteResult(intent=kw['fallback_intent'],used_model=False)) if method=='plan_intent' else None,return_value=False)
+            mock=patch.object(target,method,side_effect=(lambda message,**kw:ModelRouteResult(intent=kw['fallback_intent'],used_model=True,inquiry_topics=self.topics,topic_status='valid')) if method=='plan_intent' else None,return_value=False)
             mock.start();self.addCleanup(mock.stop)
         self.search=patch('agent.tools.tool_runtime.products_from_ecommerce',return_value=[CHAIR]);self.search_mock=self.search.start();self.addCleanup(self.search.stop)
         self.detail=patch('agent.tools.tool_runtime.product_detail_from_ecommerce',return_value=({**CHAIR,'_fact_source':'business_api'},None));self.detail_mock=self.detail.start();self.addCleanup(self.detail.stop)
 
-    def chat(self,message):return self.agent.chat(ChatRequest(session_id='product-knowledge-test',runtime_user_id='U1001',user_message=message))
+    def chat(self,message,topics=None):
+        self.topics=topics if topics is not None else ['tent_care']
+        return self.agent.chat(ChatRequest(session_id='product-knowledge-test',runtime_user_id='U1001',user_message=message))
     def guide_citations(self,r):return [c for c in r.citations if c.metadata.get('policy_id')=='outdoor_product_guide']
 
     def test_general_tent_condensation_needs_no_product_lookup(self):
-        r=self.chat('帐篷里面有水是怎么回事？')
+        r=self.chat('帐篷里面有水是怎么回事？',['tent_condensation'])
         self.assertTrue(self.guide_citations(r));self.assertIn('冷凝',r.answer)
         self.assertEqual(r.tool_calls,[]);self.search_mock.assert_not_called();self.detail_mock.assert_not_called()
         self.assertNotIn('899',r.answer)
@@ -36,21 +39,21 @@ class ProductKnowledgeTest(unittest.TestCase):
         self.assertTrue(mixed.needs_rag);self.assertTrue(mixed.needs_business_tools)
 
     def test_sleeping_bag_missing_temperature_is_not_invented(self):
-        r=self.chat('睡袋零下五度能睡吗，温标怎么看？')
+        r=self.chat('睡袋零下五度能睡吗，温标怎么看？',['sleeping_bag'])
         cites=self.guide_citations(r);self.assertTrue(cites)
         self.assertIn('温标',r.answer);self.assertIn('没有',r.answer)
         self.assertTrue(any('睡袋' in c.metadata['section'] for c in cites))
         self.assertTrue(all(len(c.snippet)<1500 for c in cites))
-        self.assertTrue(all(c.metadata.get('version')=='2026-10-16.1' for c in cites))
+        self.assertTrue(all(c.metadata.get('version')=='2026-10-17.1' for c in cites))
 
     def test_price_with_knowledge_keeps_live_facts(self):
-        r=self.chat('轻量露营折叠椅多少钱，支架怎么展开？')
+        r=self.chat('轻量露营折叠椅多少钱，支架怎么展开？',['furniture_safety'])
         self.assertIn('899',r.answer);self.assertIn('库存 3 件',r.answer)
         self.assertTrue(self.guide_citations(r));self.assertIn('支架',r.answer)
         self.assertEqual(r.session_state['product_query']['product_id'],'4')
 
     def test_price_only_does_not_append_guide(self):
-        r=self.chat('轻量露营折叠椅多少钱？')
+        r=self.chat('轻量露营折叠椅多少钱？', [])
         self.assertIn('899',r.answer);self.assertFalse(self.guide_citations(r))
 
     def test_general_knowledge_does_not_change_refund_draft(self):
@@ -61,7 +64,7 @@ class ProductKnowledgeTest(unittest.TestCase):
 
     def test_failed_price_lookup_keeps_failure_and_independent_knowledge(self):
         self.search_mock.return_value=None
-        r=self.chat('轻量露营折叠椅多少钱，支架怎么展开？')
+        r=self.chat('轻量露营折叠椅多少钱，支架怎么展开？',['furniture_safety'])
         self.assertTrue(r.session_state['degraded']);self.assertTrue(self.guide_citations(r));self.assertNotIn('899',r.answer)
         self.assertIn('没有成功', r.answer)
 
@@ -91,9 +94,9 @@ class ProductKnowledgeTest(unittest.TestCase):
         self.assertIn('晾干',r.answer)
 
     def test_sleeping_bag_does_not_retrieve_other_topics(self):
-        r=self.chat('睡袋温标怎么看？')
+        r=self.chat('睡袋温标怎么看？',['sleeping_bag'])
         self.assertTrue(r.citations)
-        self.assertTrue(all('5.2' in c.metadata['section'] for c in r.citations))
+        self.assertEqual({c.metadata['rule_id'] for c in r.citations}, {'sleeping_bag', 'product_scope'})
         self.assertNotIn('会员券',r.answer)
 
     def test_policy_multi_chunk_score_keeps_best_match(self):

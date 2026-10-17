@@ -1,0 +1,10 @@
+{
+  "run_id": "BC032-LIVE-002",
+  "max_model_http": 120,
+  "stop_before_next_request_at_tokens": 300000,
+  "natural_turns": 29,
+  "frozen_sha256": "b42fd1857e98a6751b0115ff0a7e16c1a3a49fd399fcf800103a23cb50cc9961",
+  "status": "已确认：用户在本轮聊天明确确认（确认后执行）",
+  "confirmed_by": "user:本轮聊天明确确认",
+  "confirmed_at": "2026-10-17T19:17:03+08:00"
+}

@@ -1,0 +1,419 @@
+..............FFEEEEEEEEEEEEFEEEEEFEEEFEEFFEEFEFF
+======================================================================
+ERROR: test_five_single_domains_and_all_ten_pairs_in_both_orders (backend.tests.test_domain_dispatch.DomainDispatchTest.test_five_single_domains_and_all_ten_pairs_in_both_orders) (domains=('after_sale_policy',))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 58, in test_five_single_domains_and_all_ten_pairs_in_both_orders
+    self.assert_domains(response, domains)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 44, in assert_domains
+    self.assertEqual(result['provider'], DOMAINS[domain][3])
+                     ~~~~~~^^^^^^^^^^^^
+KeyError: 'provider'
+
+======================================================================
+ERROR: test_five_single_domains_and_all_ten_pairs_in_both_orders (backend.tests.test_domain_dispatch.DomainDispatchTest.test_five_single_domains_and_all_ten_pairs_in_both_orders) (domains=('received_return_policy',))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 58, in test_five_single_domains_and_all_ten_pairs_in_both_orders
+    self.assert_domains(response, domains)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 44, in assert_domains
+    self.assertEqual(result['provider'], DOMAINS[domain][3])
+                     ~~~~~~^^^^^^^^^^^^
+KeyError: 'provider'
+
+======================================================================
+ERROR: test_five_single_domains_and_all_ten_pairs_in_both_orders (backend.tests.test_domain_dispatch.DomainDispatchTest.test_five_single_domains_and_all_ten_pairs_in_both_orders) (domains=('invoice',))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 58, in test_five_single_domains_and_all_ten_pairs_in_both_orders
+    self.assert_domains(response, domains)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 44, in assert_domains
+    self.assertEqual(result['provider'], DOMAINS[domain][3])
+                     ~~~~~~^^^^^^^^^^^^
+KeyError: 'provider'
+
+======================================================================
+ERROR: test_five_single_domains_and_all_ten_pairs_in_both_orders (backend.tests.test_domain_dispatch.DomainDispatchTest.test_five_single_domains_and_all_ten_pairs_in_both_orders) (domains=('promotion_and_member_policy',))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 58, in test_five_single_domains_and_all_ten_pairs_in_both_orders
+    self.assert_domains(response, domains)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 44, in assert_domains
+    self.assertEqual(result['provider'], DOMAINS[domain][3])
+                     ~~~~~~^^^^^^^^^^^^
+KeyError: 'provider'
+
+======================================================================
+ERROR: test_five_single_domains_and_all_ten_pairs_in_both_orders (backend.tests.test_domain_dispatch.DomainDispatchTest.test_five_single_domains_and_all_ten_pairs_in_both_orders) (domains=('product_knowledge',))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 58, in test_five_single_domains_and_all_ten_pairs_in_both_orders
+    self.assert_domains(response, domains)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 44, in assert_domains
+    self.assertEqual(result['provider'], DOMAINS[domain][3])
+                     ~~~~~~^^^^^^^^^^^^
+KeyError: 'provider'
+
+======================================================================
+ERROR: test_five_single_domains_and_all_ten_pairs_in_both_orders (backend.tests.test_domain_dispatch.DomainDispatchTest.test_five_single_domains_and_all_ten_pairs_in_both_orders) (domains=('after_sale_policy', 'received_return_policy'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 58, in test_five_single_domains_and_all_ten_pairs_in_both_orders
+    self.assert_domains(response, domains)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 44, in assert_domains
+    self.assertEqual(result['provider'], DOMAINS[domain][3])
+                     ~~~~~~^^^^^^^^^^^^
+KeyError: 'provider'
+
+======================================================================
+ERROR: test_five_single_domains_and_all_ten_pairs_in_both_orders (backend.tests.test_domain_dispatch.DomainDispatchTest.test_five_single_domains_and_all_ten_pairs_in_both_orders) (domains=('received_return_policy', 'after_sale_policy'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 58, in test_five_single_domains_and_all_ten_pairs_in_both_orders
+    self.assert_domains(response, domains)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 44, in assert_domains
+    self.assertEqual(result['provider'], DOMAINS[domain][3])
+                     ~~~~~~^^^^^^^^^^^^
+KeyError: 'provider'
+
+======================================================================
+ERROR: test_five_single_domains_and_all_ten_pairs_in_both_orders (backend.tests.test_domain_dispatch.DomainDispatchTest.test_five_single_domains_and_all_ten_pairs_in_both_orders) (domains=('after_sale_policy', 'invoice'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 58, in test_five_single_domains_and_all_ten_pairs_in_both_orders
+    self.assert_domains(response, domains)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 44, in assert_domains
+    self.assertEqual(result['provider'], DOMAINS[domain][3])
+                     ~~~~~~^^^^^^^^^^^^
+KeyError: 'provider'
+
+======================================================================
+ERROR: test_five_single_domains_and_all_ten_pairs_in_both_orders (backend.tests.test_domain_dispatch.DomainDispatchTest.test_five_single_domains_and_all_ten_pairs_in_both_orders) (domains=('invoice', 'after_sale_policy'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 58, in test_five_single_domains_and_all_ten_pairs_in_both_orders
+    self.assert_domains(response, domains)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 44, in assert_domains
+    self.assertEqual(result['provider'], DOMAINS[domain][3])
+                     ~~~~~~^^^^^^^^^^^^
+KeyError: 'provider'
+
+======================================================================
+ERROR: test_five_single_domains_and_all_ten_pairs_in_both_orders (backend.tests.test_domain_dispatch.DomainDispatchTest.test_five_single_domains_and_all_ten_pairs_in_both_orders) (domains=('after_sale_policy', 'promotion_and_member_policy'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 58, in test_five_single_domains_and_all_ten_pairs_in_both_orders
+    self.assert_domains(response, domains)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 44, in assert_domains
+    self.assertEqual(result['provider'], DOMAINS[domain][3])
+                     ~~~~~~^^^^^^^^^^^^
+KeyError: 'provider'
+
+======================================================================
+ERROR: test_five_single_domains_and_all_ten_pairs_in_both_orders (backend.tests.test_domain_dispatch.DomainDispatchTest.test_five_single_domains_and_all_ten_pairs_in_both_orders) (domains=('promotion_and_member_policy', 'after_sale_policy'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 58, in test_five_single_domains_and_all_ten_pairs_in_both_orders
+    self.assert_domains(response, domains)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 44, in assert_domains
+    self.assertEqual(result['provider'], DOMAINS[domain][3])
+                     ~~~~~~^^^^^^^^^^^^
+KeyError: 'provider'
+
+======================================================================
+ERROR: test_five_single_domains_and_all_ten_pairs_in_both_orders (backend.tests.test_domain_dispatch.DomainDispatchTest.test_five_single_domains_and_all_ten_pairs_in_both_orders) (domains=('after_sale_policy', 'product_knowledge'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 58, in test_five_single_domains_and_all_ten_pairs_in_both_orders
+    self.assert_domains(response, domains)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 44, in assert_domains
+    self.assertEqual(result['provider'], DOMAINS[domain][3])
+                     ~~~~~~^^^^^^^^^^^^
+KeyError: 'provider'
+
+======================================================================
+ERROR: test_five_single_domains_and_all_ten_pairs_in_both_orders (backend.tests.test_domain_dispatch.DomainDispatchTest.test_five_single_domains_and_all_ten_pairs_in_both_orders) (domains=('received_return_policy', 'invoice'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 58, in test_five_single_domains_and_all_ten_pairs_in_both_orders
+    self.assert_domains(response, domains)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 44, in assert_domains
+    self.assertEqual(result['provider'], DOMAINS[domain][3])
+                     ~~~~~~^^^^^^^^^^^^
+KeyError: 'provider'
+
+======================================================================
+ERROR: test_five_single_domains_and_all_ten_pairs_in_both_orders (backend.tests.test_domain_dispatch.DomainDispatchTest.test_five_single_domains_and_all_ten_pairs_in_both_orders) (domains=('invoice', 'received_return_policy'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 58, in test_five_single_domains_and_all_ten_pairs_in_both_orders
+    self.assert_domains(response, domains)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 44, in assert_domains
+    self.assertEqual(result['provider'], DOMAINS[domain][3])
+                     ~~~~~~^^^^^^^^^^^^
+KeyError: 'provider'
+
+======================================================================
+ERROR: test_five_single_domains_and_all_ten_pairs_in_both_orders (backend.tests.test_domain_dispatch.DomainDispatchTest.test_five_single_domains_and_all_ten_pairs_in_both_orders) (domains=('received_return_policy', 'promotion_and_member_policy'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 58, in test_five_single_domains_and_all_ten_pairs_in_both_orders
+    self.assert_domains(response, domains)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 44, in assert_domains
+    self.assertEqual(result['provider'], DOMAINS[domain][3])
+                     ~~~~~~^^^^^^^^^^^^
+KeyError: 'provider'
+
+======================================================================
+ERROR: test_five_single_domains_and_all_ten_pairs_in_both_orders (backend.tests.test_domain_dispatch.DomainDispatchTest.test_five_single_domains_and_all_ten_pairs_in_both_orders) (domains=('promotion_and_member_policy', 'received_return_policy'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 58, in test_five_single_domains_and_all_ten_pairs_in_both_orders
+    self.assert_domains(response, domains)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 44, in assert_domains
+    self.assertEqual(result['provider'], DOMAINS[domain][3])
+                     ~~~~~~^^^^^^^^^^^^
+KeyError: 'provider'
+
+======================================================================
+ERROR: test_five_single_domains_and_all_ten_pairs_in_both_orders (backend.tests.test_domain_dispatch.DomainDispatchTest.test_five_single_domains_and_all_ten_pairs_in_both_orders) (domains=('received_return_policy', 'product_knowledge'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 58, in test_five_single_domains_and_all_ten_pairs_in_both_orders
+    self.assert_domains(response, domains)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 44, in assert_domains
+    self.assertEqual(result['provider'], DOMAINS[domain][3])
+                     ~~~~~~^^^^^^^^^^^^
+KeyError: 'provider'
+
+======================================================================
+ERROR: test_five_single_domains_and_all_ten_pairs_in_both_orders (backend.tests.test_domain_dispatch.DomainDispatchTest.test_five_single_domains_and_all_ten_pairs_in_both_orders) (domains=('invoice', 'promotion_and_member_policy'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 58, in test_five_single_domains_and_all_ten_pairs_in_both_orders
+    self.assert_domains(response, domains)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 44, in assert_domains
+    self.assertEqual(result['provider'], DOMAINS[domain][3])
+                     ~~~~~~^^^^^^^^^^^^
+KeyError: 'provider'
+
+======================================================================
+ERROR: test_five_single_domains_and_all_ten_pairs_in_both_orders (backend.tests.test_domain_dispatch.DomainDispatchTest.test_five_single_domains_and_all_ten_pairs_in_both_orders) (domains=('promotion_and_member_policy', 'invoice'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 58, in test_five_single_domains_and_all_ten_pairs_in_both_orders
+    self.assert_domains(response, domains)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 44, in assert_domains
+    self.assertEqual(result['provider'], DOMAINS[domain][3])
+                     ~~~~~~^^^^^^^^^^^^
+KeyError: 'provider'
+
+======================================================================
+ERROR: test_five_single_domains_and_all_ten_pairs_in_both_orders (backend.tests.test_domain_dispatch.DomainDispatchTest.test_five_single_domains_and_all_ten_pairs_in_both_orders) (domains=('invoice', 'product_knowledge'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 58, in test_five_single_domains_and_all_ten_pairs_in_both_orders
+    self.assert_domains(response, domains)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 44, in assert_domains
+    self.assertEqual(result['provider'], DOMAINS[domain][3])
+                     ~~~~~~^^^^^^^^^^^^
+KeyError: 'provider'
+
+======================================================================
+ERROR: test_five_single_domains_and_all_ten_pairs_in_both_orders (backend.tests.test_domain_dispatch.DomainDispatchTest.test_five_single_domains_and_all_ten_pairs_in_both_orders) (domains=('promotion_and_member_policy', 'product_knowledge'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 58, in test_five_single_domains_and_all_ten_pairs_in_both_orders
+    self.assert_domains(response, domains)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 44, in assert_domains
+    self.assertEqual(result['provider'], DOMAINS[domain][3])
+                     ~~~~~~^^^^^^^^^^^^
+KeyError: 'provider'
+
+======================================================================
+ERROR: test_five_single_domains_and_all_ten_pairs_in_both_orders (backend.tests.test_domain_dispatch.DomainDispatchTest.test_five_single_domains_and_all_ten_pairs_in_both_orders) (domains=('product_knowledge', 'promotion_and_member_policy'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 58, in test_five_single_domains_and_all_ten_pairs_in_both_orders
+    self.assert_domains(response, domains)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 44, in assert_domains
+    self.assertEqual(result['provider'], DOMAINS[domain][3])
+                     ~~~~~~^^^^^^^^^^^^
+KeyError: 'provider'
+
+======================================================================
+ERROR: test_three_domains_and_all_consultation_entries_use_same_providers (backend.tests.test_domain_dispatch.DomainDispatchTest.test_three_domains_and_all_consultation_entries_use_same_providers) (intent='invoice_query')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 64, in test_three_domains_and_all_consultation_entries_use_same_providers
+    self.assert_domains(self.chat(self.prepare(domains, intent)), domains)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 44, in assert_domains
+    self.assertEqual(result['provider'], DOMAINS[domain][3])
+                     ~~~~~~^^^^^^^^^^^^
+KeyError: 'provider'
+
+======================================================================
+ERROR: test_three_domains_and_all_consultation_entries_use_same_providers (backend.tests.test_domain_dispatch.DomainDispatchTest.test_three_domains_and_all_consultation_entries_use_same_providers) (intent='promotion_query')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 64, in test_three_domains_and_all_consultation_entries_use_same_providers
+    self.assert_domains(self.chat(self.prepare(domains, intent)), domains)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 44, in assert_domains
+    self.assertEqual(result['provider'], DOMAINS[domain][3])
+                     ~~~~~~^^^^^^^^^^^^
+KeyError: 'provider'
+
+======================================================================
+ERROR: test_three_domains_and_all_consultation_entries_use_same_providers (backend.tests.test_domain_dispatch.DomainDispatchTest.test_three_domains_and_all_consultation_entries_use_same_providers) (intent='service_scope_query')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 64, in test_three_domains_and_all_consultation_entries_use_same_providers
+    self.assert_domains(self.chat(self.prepare(domains, intent)), domains)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 44, in assert_domains
+    self.assertEqual(result['provider'], DOMAINS[domain][3])
+                     ~~~~~~^^^^^^^^^^^^
+KeyError: 'provider'
+
+======================================================================
+FAIL: test_cross_domain_query_keeps_background_after_sale_state (backend.tests.test_domain_dispatch.DomainDispatchTest.test_cross_domain_query_keeps_background_after_sale_state)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 111, in test_cross_domain_query_keeps_background_after_sale_state
+    self.assert_domains(response, domains)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 40, in assert_domains
+    self.assertEqual(set(response.session_state['route_plan']['knowledge_domains']), set(domains))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Items in the second set but not the first:
+'invoice'
+
+======================================================================
+FAIL: test_exception_is_local_and_not_retried (backend.tests.test_domain_dispatch.DomainDispatchTest.test_exception_is_local_and_not_retried)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 99, in test_exception_is_local_and_not_retried
+    provider.assert_called_once()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/sunhao/.local/share/uv/python/cpython-3.14.7-macos-aarch64-none/lib/python3.14/unittest/mock.py", line 965, in assert_called_once
+    raise AssertionError(msg)
+AssertionError: Expected 'product_knowledge_result' to have been called once. Called 0 times.
+
+======================================================================
+FAIL: test_five_single_domains_and_all_ten_pairs_in_both_orders (backend.tests.test_domain_dispatch.DomainDispatchTest.test_five_single_domains_and_all_ten_pairs_in_both_orders) (domains=('product_knowledge', 'after_sale_policy'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 58, in test_five_single_domains_and_all_ten_pairs_in_both_orders
+    self.assert_domains(response, domains)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 40, in assert_domains
+    self.assertEqual(set(response.session_state['route_plan']['knowledge_domains']), set(domains))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Items in the second set but not the first:
+'after_sale_policy'
+
+======================================================================
+FAIL: test_five_single_domains_and_all_ten_pairs_in_both_orders (backend.tests.test_domain_dispatch.DomainDispatchTest.test_five_single_domains_and_all_ten_pairs_in_both_orders) (domains=('product_knowledge', 'received_return_policy'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 58, in test_five_single_domains_and_all_ten_pairs_in_both_orders
+    self.assert_domains(response, domains)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 40, in assert_domains
+    self.assertEqual(set(response.session_state['route_plan']['knowledge_domains']), set(domains))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Items in the second set but not the first:
+'received_return_policy'
+
+======================================================================
+FAIL: test_five_single_domains_and_all_ten_pairs_in_both_orders (backend.tests.test_domain_dispatch.DomainDispatchTest.test_five_single_domains_and_all_ten_pairs_in_both_orders) (domains=('product_knowledge', 'invoice'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 58, in test_five_single_domains_and_all_ten_pairs_in_both_orders
+    self.assert_domains(response, domains)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 40, in assert_domains
+    self.assertEqual(set(response.session_state['route_plan']['knowledge_domains']), set(domains))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Items in the second set but not the first:
+'invoice'
+
+======================================================================
+FAIL: test_partial_clarification_keeps_invoice_and_pending_question (backend.tests.test_domain_dispatch.DomainDispatchTest.test_partial_clarification_keeps_invoice_and_pending_question)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 70, in test_partial_clarification_keeps_invoice_and_pending_question
+    self.assertIn('24 小时', response.answer)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '24 小时' not found in '会员券想和哪项优惠叠加？例如露营季满减、商品活动价，还是另一张券？'
+
+======================================================================
+FAIL: test_partial_failure_keeps_invoice_and_does_not_claim_unsupported (backend.tests.test_domain_dispatch.DomainDispatchTest.test_partial_failure_keeps_invoice_and_does_not_claim_unsupported)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 79, in test_partial_failure_keeps_invoice_and_does_not_claim_unsupported
+    self.assertIn('24 小时', response.answer)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '24 小时' not found in '没有检索到荒野户外已发布的可信活动或会员规则，我不能编造隐藏券规则。建议以活动页和结算页展示为准，或转人工客服进一步核实。'
+
+======================================================================
+FAIL: test_three_domains_and_all_consultation_entries_use_same_providers (backend.tests.test_domain_dispatch.DomainDispatchTest.test_three_domains_and_all_consultation_entries_use_same_providers) (intent='product_query')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 64, in test_three_domains_and_all_consultation_entries_use_same_providers
+    self.assert_domains(self.chat(self.prepare(domains, intent)), domains)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 40, in assert_domains
+    self.assertEqual(set(response.session_state['route_plan']['knowledge_domains']), set(domains))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Items in the second set but not the first:
+'invoice'
+
+======================================================================
+FAIL: test_valid_topics_extend_order_query_plan_without_authorizing_other_tools (backend.tests.test_domain_dispatch.DomainDispatchTest.test_valid_topics_extend_order_query_plan_without_authorizing_other_tools)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 118, in test_valid_topics_extend_order_query_plan_without_authorizing_other_tools
+    self.assertEqual(set(plan['knowledge_domains']), {'invoice', 'product_knowledge'})
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Items in the second set but not the first:
+'product_knowledge'
+'invoice'
+
+======================================================================
+FAIL: test_wrong_source_is_rejected_before_selection_and_generation (backend.tests.test_domain_dispatch.DomainDispatchTest.test_wrong_source_is_rejected_before_selection_and_generation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 90, in test_wrong_source_is_rejected_before_selection_and_generation
+    self.assertIn('24 小时', response.answer)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '24 小时' not found in '出发前在合适位置试搭，核对配件和搭建步骤。使用后先清除砂土和杂物，依说明书清洁并充分晾干再收纳；长期潮湿收纳可能带来霉味和涂层问题。通用帐篷养护建议不使用洗衣机或烘干机强洗，具体型号仍以厂商说明为准。通用依据：REI 帐篷养护。\n\n霉味、脱胶或拉链卡顿可能与不同因素有关，首次出现时间、存放条件与异常位置有助于核验；单张照片不能独立确定责任。\n\n本指南提供通用选购、使用与问题排查知识。具体型号的参数、配件和使用条件以说明书及可信商品资料为准；通用指南不证明具体商品的价格、库存、活动资格或订单可退资格。\n\n商品名称不能代替承重、防水等级、容量、续航或睡袋温标等参数。型号资料没有公布的数字，当前无法确认。\n\n关于发票开具与下载，本轮未取得完整且一致的有效规则，暂不能确认。\n\n以上为通用使用知识，具体型号参数以说明书为准。'
+
+----------------------------------------------------------------------
+Ran 22 tests in 0.410s
+
+FAILED (failures=10, errors=25)

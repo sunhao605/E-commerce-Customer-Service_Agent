@@ -1,0 +1,38 @@
+{
+  "completed_cases": 15,
+  "natural_cases": 12,
+  "injected_cases": 3,
+  "actual_http": 45,
+  "http_by_stage": {
+    "route": 15,
+    "generation": 14,
+    "judge": 14,
+    "tool_selection": 2
+  },
+  "http_status": {
+    "200": 45
+  },
+  "usage": {
+    "prompt_tokens": 141214,
+    "completion_tokens": 6337,
+    "total_tokens": 147551,
+    "prompt_cache_hit_tokens": 76928,
+    "prompt_cache_miss_tokens": 64286
+  },
+  "natural_chat_ms": {
+    "p50": 4159.97,
+    "p95": 6131.976
+  },
+  "real_judge_http_ms": {
+    "p50": 1793.0,
+    "p95": 2258.9
+  },
+  "natural_route_model_used": 12,
+  "route_model_used_all": 15,
+  "natural_judge_allowed": 12,
+  "source_unchanged": true,
+  "runner_unchanged": true,
+  "frozen_unchanged": true,
+  "natural_provider_errors": 0,
+  "price_fixture_read_count": 1
+}

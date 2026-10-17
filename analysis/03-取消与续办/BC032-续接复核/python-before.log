@@ -1,0 +1,14 @@
+.......F....
+======================================================================
+FAIL: test_resume_without_selection_does_not_choose_page_or_recent_order (backend.tests.test_task_lifecycle.TaskLifecycleTest.test_resume_without_selection_does_not_choose_page_or_recent_order)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_task_lifecycle.py", line 112, in test_resume_without_selection_does_not_choose_page_or_recent_order
+    self.assertIsNone(response.session_state['context_report']['chosen_order_id'])
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'ORD9999' is not None
+
+----------------------------------------------------------------------
+Ran 12 tests in 0.076s
+
+FAILED (failures=1)

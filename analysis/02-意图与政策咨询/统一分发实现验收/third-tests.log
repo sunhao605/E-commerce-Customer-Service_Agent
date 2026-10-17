@@ -1,0 +1,32 @@
+..........................................................................................................EEE.............................................................................................................................................................................................................
+======================================================================
+ERROR: test_normal_repair_and_fallback_share_valid_sources_without_reretrieval (test_domain_dispatch.DomainDispatchTest.test_normal_repair_and_fallback_share_valid_sources_without_reretrieval) (mode='normal')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 188, in test_normal_repair_and_fallback_share_valid_sources_without_reretrieval
+    self.assertEqual(response.session_state['answer_judge']['repair_attempted'], mode == 'repair')
+                     ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+KeyError: 'answer_judge'
+
+======================================================================
+ERROR: test_normal_repair_and_fallback_share_valid_sources_without_reretrieval (test_domain_dispatch.DomainDispatchTest.test_normal_repair_and_fallback_share_valid_sources_without_reretrieval) (mode='repair')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 188, in test_normal_repair_and_fallback_share_valid_sources_without_reretrieval
+    self.assertEqual(response.session_state['answer_judge']['repair_attempted'], mode == 'repair')
+                     ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+KeyError: 'answer_judge'
+
+======================================================================
+ERROR: test_normal_repair_and_fallback_share_valid_sources_without_reretrieval (test_domain_dispatch.DomainDispatchTest.test_normal_repair_and_fallback_share_valid_sources_without_reretrieval) (mode='fallback')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_domain_dispatch.py", line 188, in test_normal_repair_and_fallback_share_valid_sources_without_reretrieval
+    self.assertEqual(response.session_state['answer_judge']['repair_attempted'], mode == 'repair')
+                     ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+KeyError: 'answer_judge'
+
+----------------------------------------------------------------------
+Ran 312 tests in 2.250s
+
+FAILED (errors=3)

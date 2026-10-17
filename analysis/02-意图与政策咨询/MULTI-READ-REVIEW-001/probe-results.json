@@ -1,0 +1,543 @@
+{
+  "kind": "offline_fixed_route_generation_failure_injection",
+  "real_model_calls": 0,
+  "real_business_calls": 0,
+  "rows": [
+    {
+      "id": "invoice_promo",
+      "question": "发票多久开好，露营季满减能和平台会员券一起用吗？",
+      "fixed_route": {
+        "intent": "invoice_query",
+        "capability_ids": [],
+        "inquiry_topics": [
+          "invoice_issue",
+          "promotion_stacking"
+        ]
+      },
+      "expected_marker": "可以与平台会员券叠加",
+      "marker_found": false,
+      "answer": "电子发票通常在订单完成后 24 小时内开具，可在订单详情页查看和下载。\n\n关于满减与会员券叠加，本轮未取得完整且一致的有效规则，暂不能确认。",
+      "plan": {
+        "intent": "invoice_query",
+        "needs_rag": true,
+        "inquiry_topics": [
+          "invoice_issue",
+          "promotion_stacking"
+        ],
+        "topic_status": "valid",
+        "answer_order": [],
+        "needs_business_tools": false,
+        "required_tools": [],
+        "tool_candidates": [],
+        "knowledge_domains": [
+          "invoice",
+          "promotion_and_member_policy"
+        ],
+        "capability_ids": [],
+        "needs_product_facts": null,
+        "clarification_fields": [],
+        "retrieval_strategies": [
+          {
+            "knowledge_domain": "invoice",
+            "retrieval_mode": "hybrid",
+            "citation_scope": "section"
+          },
+          {
+            "knowledge_domain": "promotion_and_member_policy",
+            "retrieval_mode": "hybrid",
+            "citation_scope": "section"
+          }
+        ],
+        "entity_refs": [],
+        "risk_level": "low",
+        "requires_workflow": false,
+        "confidence": 0.9,
+        "source": "llm_with_policy_constraints",
+        "fallback_policy": "safe_deterministic_path"
+      },
+      "retrieval_domains": [
+        "invoice",
+        "promotion_and_member_policy"
+      ],
+      "citations": [
+        {
+          "source": "knowledge/payment_invoice_policy.md",
+          "title": "荒野户外发票 FAQ",
+          "snippet": "电子发票通常在订单完成后 24 小时内开具，可在订单详情页查看和下载。",
+          "score": 0.9,
+          "retrieval_stage": "pre_retrieval",
+          "metadata": {
+            "rule_issues": [],
+            "policy_id": "invoice_issue",
+            "scene_key": "payment_invoice",
+            "version": "2026-10-17.1",
+            "publication_status": "published",
+            "effective_from": "2025-01-01T00:00:00+08:00",
+            "effective_to": "2028-01-01T00:00:00+08:00",
+            "snapshot_version": "knowledge-669e2fc4af88",
+            "rule_id": "invoice_issue",
+            "rule_topics": [
+              "invoice_issue"
+            ],
+            "required_rules": [],
+            "scope": "mall_demo",
+            "rule_sources": [
+              {
+                "source": "knowledge/payment_invoice_policy.md",
+                "policy_id": "invoice_issue",
+                "version": "2026-10-17.1"
+              }
+            ],
+            "section_id": "invoice_issue",
+            "section": "发票开具与下载",
+            "answer_topic": "invoice_issue"
+          }
+        }
+      ],
+      "next_action": "answer_user",
+      "read_only_turn": true,
+      "workflow": null,
+      "answer_model": {
+        "used_model": false,
+        "model_name": "Qwen/Qwen3-8B",
+        "fallback_reason": "answer_judge_generation_not_available",
+        "prompt_fragments": []
+      }
+    },
+    {
+      "id": "refund_tent",
+      "question": "退款多久到账？帐篷怎么清洁收纳？",
+      "fixed_route": {
+        "intent": "refund_policy_query",
+        "capability_ids": [],
+        "inquiry_topics": [
+          "refund_arrival",
+          "tent_care"
+        ]
+      },
+      "expected_marker": "不使用洗衣机",
+      "marker_found": false,
+      "answer": "当前退款使用演示余额和资金流水，不提供真实银行卡、支付宝或微信退款的到账时限保证。\n\n关于清洁、收纳与首次检查，本轮未取得完整且一致的有效规则，暂不能确认。\n\n以上为通用售后规则，具体订单资格仍需核验，不代表已经提交申请。",
+      "plan": {
+        "intent": "refund_policy_query",
+        "needs_rag": true,
+        "inquiry_topics": [
+          "refund_arrival",
+          "tent_care"
+        ],
+        "topic_status": "valid",
+        "answer_order": [],
+        "needs_business_tools": false,
+        "required_tools": [],
+        "tool_candidates": [],
+        "knowledge_domains": [
+          "after_sale_policy",
+          "product_knowledge"
+        ],
+        "capability_ids": [],
+        "needs_product_facts": null,
+        "clarification_fields": [],
+        "retrieval_strategies": [
+          {
+            "knowledge_domain": "after_sale_policy",
+            "retrieval_mode": "hybrid",
+            "citation_scope": "section"
+          },
+          {
+            "knowledge_domain": "product_knowledge",
+            "retrieval_mode": "hybrid",
+            "citation_scope": "section"
+          }
+        ],
+        "entity_refs": [],
+        "risk_level": "low",
+        "requires_workflow": false,
+        "confidence": 0.9,
+        "source": "llm_with_policy_constraints",
+        "fallback_policy": "safe_deterministic_path"
+      },
+      "retrieval_domains": [
+        "after_sale_policy",
+        "product_knowledge"
+      ],
+      "citations": [
+        {
+          "source": "knowledge/after_sale_policy.md",
+          "title": "荒野户外未发货退款 SOP",
+          "snippet": "当前退款使用演示余额和资金流水，不提供真实银行卡、支付宝或微信退款的到账时限保证。",
+          "score": 0.92,
+          "retrieval_stage": "pre_retrieval",
+          "metadata": {
+            "rule_issues": [],
+            "policy_id": "refund_before_shipping",
+            "scene_key": "after_sale_refund",
+            "version": "2026-10-17.1",
+            "publication_status": "published",
+            "effective_from": "2025-01-01T00:00:00+08:00",
+            "effective_to": "2028-01-01T00:00:00+08:00",
+            "snapshot_version": "knowledge-669e2fc4af88",
+            "rule_id": "refund_arrival",
+            "rule_topics": [
+              "refund_arrival"
+            ],
+            "required_rules": [],
+            "scope": "mall_demo",
+            "rule_sources": [
+              {
+                "source": "knowledge/after_sale_policy.md",
+                "policy_id": "refund_before_shipping",
+                "version": "2026-10-17.1"
+              }
+            ],
+            "section_id": "refund_arrival",
+            "section": "退款到账",
+            "answer_topic": "refund_arrival"
+          }
+        }
+      ],
+      "next_action": "answer_user",
+      "read_only_turn": true,
+      "workflow": null,
+      "answer_model": {
+        "used_model": false,
+        "model_name": "Qwen/Qwen3-8B",
+        "fallback_reason": "answer_judge_generation_not_available",
+        "prompt_fragments": []
+      }
+    },
+    {
+      "id": "promo_clarify_invoice",
+      "question": "会员券能和优惠叠加吗？另外发票多久开好？",
+      "fixed_route": {
+        "intent": "promotion_query",
+        "capability_ids": [],
+        "inquiry_topics": [
+          "promotion_stacking",
+          "invoice_issue"
+        ],
+        "clarification_fields": [
+          "promotion_combination"
+        ]
+      },
+      "expected_marker": "24 小时",
+      "marker_found": false,
+      "answer": "会员券想和哪项优惠叠加？例如露营季满减、商品活动价，还是另一张券？",
+      "plan": {
+        "intent": "promotion_query",
+        "needs_rag": true,
+        "inquiry_topics": [
+          "promotion_stacking",
+          "invoice_issue"
+        ],
+        "topic_status": "valid",
+        "answer_order": [],
+        "needs_business_tools": false,
+        "required_tools": [],
+        "tool_candidates": [],
+        "knowledge_domains": [
+          "promotion_and_member_policy",
+          "invoice"
+        ],
+        "capability_ids": [],
+        "needs_product_facts": null,
+        "clarification_fields": [
+          "promotion_combination"
+        ],
+        "retrieval_strategies": [
+          {
+            "knowledge_domain": "promotion_and_member_policy",
+            "retrieval_mode": "hybrid",
+            "citation_scope": "section"
+          },
+          {
+            "knowledge_domain": "invoice",
+            "retrieval_mode": "hybrid",
+            "citation_scope": "section"
+          }
+        ],
+        "entity_refs": [],
+        "risk_level": "low",
+        "requires_workflow": false,
+        "confidence": 0.9,
+        "source": "llm_with_policy_constraints",
+        "fallback_policy": "safe_deterministic_path"
+      },
+      "retrieval_domains": [
+        "promotion_and_member_policy",
+        "invoice"
+      ],
+      "citations": [
+        {
+          "source": "knowledge/payment_invoice_policy.md",
+          "title": "荒野户外发票 FAQ",
+          "snippet": "电子发票通常在订单完成后 24 小时内开具，可在订单详情页查看和下载。",
+          "score": 1.0,
+          "retrieval_stage": "pre_retrieval",
+          "metadata": {
+            "policy_id": "invoice_issue",
+            "scene_key": "payment_invoice",
+            "version": "2026-10-17.1",
+            "publication_status": "published",
+            "effective_from": "2025-01-01T00:00:00+08:00",
+            "effective_to": "2028-01-01T00:00:00+08:00",
+            "snapshot_version": "knowledge-669e2fc4af88",
+            "chunk_ids": [
+              "invoice_issue-chunk-12"
+            ],
+            "rule_id": "invoice_issue",
+            "rule_topics": [
+              "invoice_issue"
+            ],
+            "scope": "mall_demo",
+            "section_id": "invoice_issue",
+            "section": "电子发票通常在订单完成后 24 小时内开具，可在订单详情页查看和下载。"
+          }
+        }
+      ],
+      "next_action": "ask_clarification",
+      "read_only_turn": true,
+      "workflow": null,
+      "answer_model": {
+        "used_model": false,
+        "model_name": null,
+        "fallback_reason": "clarification_required",
+        "prompt_fragments": []
+      }
+    },
+    {
+      "id": "promo_failed_invoice",
+      "question": "火星会员有什么优惠？发票多久开好？",
+      "fixed_route": {
+        "intent": "promotion_query",
+        "capability_ids": [],
+        "inquiry_topics": [
+          "coupon_conditions",
+          "invoice_issue"
+        ],
+        "clarification_fields": []
+      },
+      "expected_marker": "24 小时",
+      "marker_found": false,
+      "answer": "没有检索到荒野户外已发布的可信活动或会员规则，我不能编造隐藏券规则。建议以活动页和结算页展示为准，或转人工客服进一步核实。",
+      "plan": {
+        "intent": "promotion_query",
+        "needs_rag": true,
+        "inquiry_topics": [
+          "coupon_conditions",
+          "invoice_issue"
+        ],
+        "topic_status": "valid",
+        "answer_order": [],
+        "needs_business_tools": false,
+        "required_tools": [],
+        "tool_candidates": [],
+        "knowledge_domains": [
+          "promotion_and_member_policy",
+          "invoice"
+        ],
+        "capability_ids": [],
+        "needs_product_facts": null,
+        "clarification_fields": [],
+        "retrieval_strategies": [
+          {
+            "knowledge_domain": "promotion_and_member_policy",
+            "retrieval_mode": "hybrid",
+            "citation_scope": "section"
+          },
+          {
+            "knowledge_domain": "invoice",
+            "retrieval_mode": "hybrid",
+            "citation_scope": "section"
+          }
+        ],
+        "entity_refs": [],
+        "risk_level": "low",
+        "requires_workflow": false,
+        "confidence": 0.9,
+        "source": "llm_with_policy_constraints",
+        "fallback_policy": "safe_deterministic_path"
+      },
+      "retrieval_domains": [
+        "promotion_and_member_policy",
+        "invoice"
+      ],
+      "citations": [
+        {
+          "source": "knowledge/payment_invoice_policy.md",
+          "title": "荒野户外发票 FAQ",
+          "snippet": "电子发票通常在订单完成后 24 小时内开具，可在订单详情页查看和下载。",
+          "score": 1.0,
+          "retrieval_stage": "pre_retrieval",
+          "metadata": {
+            "policy_id": "invoice_issue",
+            "scene_key": "payment_invoice",
+            "version": "2026-10-17.1",
+            "publication_status": "published",
+            "effective_from": "2025-01-01T00:00:00+08:00",
+            "effective_to": "2028-01-01T00:00:00+08:00",
+            "snapshot_version": "knowledge-669e2fc4af88",
+            "chunk_ids": [
+              "invoice_issue-chunk-12"
+            ],
+            "rule_id": "invoice_issue",
+            "rule_topics": [
+              "invoice_issue"
+            ],
+            "scope": "mall_demo",
+            "section_id": "invoice_issue",
+            "section": "电子发票通常在订单完成后 24 小时内开具，可在订单详情页查看和下载。"
+          }
+        }
+      ],
+      "next_action": "transfer_to_human",
+      "read_only_turn": true,
+      "workflow": null,
+      "answer_model": {
+        "used_model": false,
+        "model_name": null,
+        "fallback_reason": "safety_or_low_confidence_boundary",
+        "prompt_fragments": []
+      }
+    },
+    {
+      "id": "product_invoice",
+      "question": "帐篷怎么清洗？发票多久开好？",
+      "fixed_route": {
+        "intent": "product_query",
+        "capability_ids": [],
+        "inquiry_topics": [
+          "tent_care",
+          "invoice_issue"
+        ],
+        "needs_product_facts": false,
+        "knowledge_domains": [
+          "product_knowledge"
+        ],
+        "clarification_fields": []
+      },
+      "expected_marker": "24 小时",
+      "marker_found": false,
+      "answer": "出发前在合适位置试搭，核对配件和搭建步骤。使用后先清除砂土和杂物，依说明书清洁并充分晾干再收纳；长期潮湿收纳可能带来霉味和涂层问题。通用帐篷养护建议不使用洗衣机或烘干机强洗，具体型号仍以厂商说明为准。通用依据：REI 帐篷养护。\n\n霉味、脱胶或拉链卡顿可能与不同因素有关，首次出现时间、存放条件与异常位置有助于核验；单张照片不能独立确定责任。\n\n本指南提供通用选购、使用与问题排查知识。具体型号的参数、配件和使用条件以说明书及可信商品资料为准；通用指南不证明具体商品的价格、库存、活动资格或订单可退资格。\n\n商品名称不能代替承重、防水等级、容量、续航或睡袋温标等参数。型号资料没有公布的数字，当前无法确认。\n\n关于发票开具与下载，本轮未取得完整且一致的有效规则，暂不能确认。\n\n以上为通用使用知识，具体型号参数以说明书为准。",
+      "plan": {
+        "intent": "product_query",
+        "needs_rag": true,
+        "inquiry_topics": [
+          "tent_care",
+          "invoice_issue"
+        ],
+        "topic_status": "valid",
+        "answer_order": [],
+        "needs_business_tools": false,
+        "required_tools": [],
+        "tool_candidates": [],
+        "knowledge_domains": [
+          "product_knowledge"
+        ],
+        "capability_ids": [],
+        "needs_product_facts": false,
+        "clarification_fields": [],
+        "retrieval_strategies": [
+          {
+            "knowledge_domain": "product_knowledge",
+            "retrieval_mode": "hybrid",
+            "citation_scope": "section"
+          }
+        ],
+        "entity_refs": [],
+        "risk_level": "low",
+        "requires_workflow": false,
+        "confidence": 0.9,
+        "source": "llm_with_policy_constraints",
+        "fallback_policy": "safe_deterministic_path"
+      },
+      "retrieval_domains": [
+        "product_knowledge"
+      ],
+      "citations": [
+        {
+          "source": "knowledge/product_knowledge.md",
+          "title": "荒野户外商品选购、使用与问题排查指南",
+          "snippet": "### 3.3 清洁、收纳与首次检查\n\n出发前在合适位置试搭，核对配件和搭建步骤。使用后先清除砂土和杂物，依说明书清洁并充分晾干再收纳；长期潮湿收纳可能带来霉味和涂层问题。通用帐篷养护建议不使用洗衣机或烘干机强洗，具体型号仍以厂商说明为准。[通用依据：REI 帐篷养护](https://www.rei.com/learn/expert-advice/caring-tent.html)。\n\n霉味、脱胶或拉链卡顿可能与不同因素有关，首次出现时间、存放条件与异常位置有助于核验；单张照片不能独立确定责任。",
+          "score": 0.9,
+          "retrieval_stage": "pre_retrieval",
+          "metadata": {
+            "rule_issues": [],
+            "policy_id": "outdoor_product_guide",
+            "scene_key": "product_knowledge",
+            "version": "2026-10-17.1",
+            "publication_status": "published",
+            "effective_from": "2025-01-01T00:00:00+08:00",
+            "effective_to": "2028-01-01T00:00:00+08:00",
+            "snapshot_version": "knowledge-669e2fc4af88",
+            "rule_id": "tent_care",
+            "rule_topics": [
+              "tent_care"
+            ],
+            "required_rules": [
+              "product_scope"
+            ],
+            "scope": "mall_demo",
+            "rule_sources": [
+              {
+                "source": "knowledge/product_knowledge.md",
+                "policy_id": "outdoor_product_guide",
+                "version": "2026-10-17.1"
+              }
+            ],
+            "section_id": "tent_care",
+            "section": "### 3.3 清洁、收纳与首次检查",
+            "answer_topic": "tent_care"
+          }
+        },
+        {
+          "source": "knowledge/product_knowledge.md",
+          "title": "荒野户外商品选购、使用与问题排查指南",
+          "snippet": "## 1. 适用范围\n\n本指南提供通用选购、使用与问题排查知识。具体型号的参数、配件和使用条件以说明书及可信商品资料为准；通用指南不证明具体商品的价格、库存、活动资格或订单可退资格。\n\n商品名称不能代替承重、防水等级、容量、续航或睡袋温标等参数。型号资料没有公布的数字，当前无法确认。",
+          "score": 0.9,
+          "retrieval_stage": "pre_retrieval",
+          "metadata": {
+            "rule_issues": [],
+            "policy_id": "outdoor_product_guide",
+            "scene_key": "product_knowledge",
+            "version": "2026-10-17.1",
+            "publication_status": "published",
+            "effective_from": "2025-01-01T00:00:00+08:00",
+            "effective_to": "2028-01-01T00:00:00+08:00",
+            "snapshot_version": "knowledge-669e2fc4af88",
+            "rule_id": "product_scope",
+            "rule_topics": [
+              "product_scope"
+            ],
+            "required_rules": [],
+            "scope": "mall_demo",
+            "rule_sources": [
+              {
+                "source": "knowledge/product_knowledge.md",
+                "policy_id": "outdoor_product_guide",
+                "version": "2026-10-17.1"
+              }
+            ],
+            "section_id": "product_scope",
+            "section": "## 1. 适用范围",
+            "answer_topic": "tent_care"
+          }
+        }
+      ],
+      "next_action": "answer_user",
+      "read_only_turn": true,
+      "workflow": null,
+      "answer_model": {
+        "used_model": false,
+        "model_name": "Qwen/Qwen3-8B",
+        "fallback_reason": "answer_judge_generation_not_available",
+        "prompt_fragments": []
+      }
+    }
+  ],
+  "source_hashes": {
+    "backend/agent/customer_service_agent.py": "e296bab90a95ff4217828a7cc3500a788fa1ec31123821a1e60fd5d75d579e0a",
+    "backend/agent/tools/planning.py": "862d6280ae9c0ba27a12e47593b828aff3163f651c3c6d8b38adc155abd1aef4",
+    "backend/tests/test_answer_content.py": "ec19adaca64a325454f6815f7a727e7963231e925dbb7c73e104d2494340c4a5",
+    "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/CustomerServiceGatewayService.java": "bf3a46bc3d4b468421cf930362ac01e39d121d46b7224e946172e898593c1f1a"
+  }
+}

@@ -4,24 +4,31 @@ scene_key: after_sale_return
 title: 荒野户外签收后退货 SOP
 score: 0.94
 retrieval_stage: pre_retrieval
-version: "2026-10-16.1"
+version: "2026-10-17.1"
 content_status: demo_knowledge
 publication_status: published
 effective_from: "2025-01-01T00:00:00+08:00"
 effective_to: "2028-01-01T00:00:00+08:00"
 ---
+<!-- rule {"id":"return_conditions","topics":["return_conditions"],"domain":"received_return_policy","scope":"mall_demo","requires":["return_scope"],"label":"退货条件"} -->
 七天无理由退货适用于已支付并签收、申请提交时仍在签收后七天窗口内，且整单商品在购买时均支持七天无理由退货的订单。七天无理由是申请类型，用户无需另外填写退货理由；具体订单是否符合条件仍需核验可信订单事实。
+<!-- /rule -->
 
+<!-- rule {"id":"return_process","topics":["return_process"],"domain":"received_return_policy","scope":"mall_demo","requires":[],"label":"退货流程"} -->
 用户核对并确认提交后，申请进入待审核；管理员同意退货并提供退回地址后，由用户寄回并填写退回物流。商家收到商品且验收通过后才退款，同意退货不等于退款已完成。
 
 # 荒野户外签收退货与寄回规则
+<!-- /rule -->
 
+<!-- rule {"id":"return_scope","topics":["return_scope"],"domain":"received_return_policy","scope":"mall_demo","requires":[],"label":"适用范围"} -->
 ## 1. 适用范围
 
 当前自助无理由退货支持整单。商品不支持七天无理由、超出窗口或资格事实缺失时，不能通过这条流程直接办理；质量问题、运输损坏和制作差异仍需另行核验。
 
 具体订单资格、签收时间、实付金额与申请进度以业务系统为准，当前商品页的可退标识不能覆盖购买时的记录。
+<!-- /rule -->
 
+<!-- rule {"id":"return_window","topics":["return_conditions"],"domain":"received_return_policy","scope":"mall_demo","requires":[],"label":"七天窗口"} -->
 ## 2. 七天窗口
 
 七天窗口以申请实际提交时刻核验，按上海日期比较签收日期，而非严格168小时。首次聊天、打开客服页面或准备确认卡不会锁定期限。
@@ -29,7 +36,9 @@ effective_to: "2028-01-01T00:00:00+08:00"
 在期限内打开确认卡、跨过期限才提交时，仍以提交时资格为准。签收时间缺失、晚于提交时刻或存在争议时，资格暂不能确认。
 
 快递代签日期与实际拿到商品的日期可能不同，需结合可信签收记录及具体情况核验；聊天中新提供的日期不自动替换原记录。
+<!-- /rule -->
 
+<!-- rule {"id":"return_eligibility","topics":["return_conditions"],"domain":"received_return_policy","scope":"mall_demo","requires":[],"label":"整单资格、购买记录与例外"} -->
 ## 3. 整单资格、购买记录与例外
 
 整单商品在购买时均有可信可退记录，才满足这条整单无理由流程的商品条件。仅其中一件可退不足以支持整单，部分退货也不等于同意退掉全部商品。
@@ -39,7 +48,9 @@ effective_to: "2028-01-01T00:00:00+08:00"
 满足线上申请条件后，仍需审核和收货检查；照片或资格查询结果不等于实物验收已通过。
 
 使用、拆封、包装损坏与缺件是不同情况。拆开外包装不自动证明已使用；缺少外箱、收纳袋或开箱视频，也不单独证明质量问题不成立。
+<!-- /rule -->
 
+<!-- rule {"id":"return_quality","topics":["return_quality"],"domain":"received_return_policy","scope":"mall_demo","requires":[],"label":"无理由与质量问题"} -->
 ## 4. 无理由与质量问题
 
 七天无理由无需另填原因。质量问题、运输破损或制作与确认稿不符，需要说明具体异常并另行核验，适用无理由限制不等于其他售后均不成立。
@@ -47,13 +58,17 @@ effective_to: "2028-01-01T00:00:00+08:00"
 固定位置反复漏水不能仅凭通用冷凝知识判定为无质量问题。超过无理由窗口的故障、定制商品的制作差异，仍需按具体问题核验。
 
 运输中的拦截不在当前自动受理范围内。当前不支持部分商品的自动无理由退货，也没有仅凭异常描述自动赔偿或换货的结果。
+<!-- /rule -->
 
+<!-- rule {"id":"return_approval","topics":["return_approval"],"domain":"received_return_policy","scope":"mall_demo","requires":[],"label":"顾客确认与商家审核"} -->
 ## 5. 顾客确认与商家审核
 
 顾客核对订单、整单范围、金额和申请类型并确认后，申请进入待审核。客户确认、商家同意退货和资金处理完成是不同阶段。
 
 商家同意退货后提供退回地址、商家收件联系人和电话，申请进入等待寄回。驳回或材料不足的具体原因以申请记录为准；材料不足不等于已判定顾客责任。
+<!-- /rule -->
 
+<!-- rule {"id":"return_shipping","topics":["return_shipping"],"domain":"received_return_policy","scope":"mall_demo","requires":[],"label":"寄回与物流填写"} -->
 ## 6. 寄回与物流填写
 
 请按对应申请提供的退回地址和要求寄回商品与附件，并填写寄回快递公司和单号。商家收件信息与顾客寄回物流属于不同字段。
@@ -63,7 +78,9 @@ effective_to: "2028-01-01T00:00:00+08:00"
 填写单号只表示已提供寄回信息；快递已签收不代表商家验收通过，也不代表退款完成。物流信息缺失不能单独证明包裹丢失。
 
 当前不包含自动改寄、补件或理赔服务。
+<!-- /rule -->
 
+<!-- rule {"id":"return_shipping_cost","topics":["return_shipping_cost"],"domain":"received_return_policy","scope":"mall_demo","requires":[],"label":"运费、到付与保价"} -->
 ## 7. 运费、到付与保价
 
 当前没有统一的退货运费补贴、运费险理赔、到付接收或寄回费用报销规则。费用由对应订单和适用政策决定，无理由或质量问题标签不单独保证免费退货。
@@ -71,7 +88,9 @@ effective_to: "2028-01-01T00:00:00+08:00"
 到付能否接收以商家寄回要求为准。已支付邮费不代表费用已报销或将自动加入退款。
 
 保价额度、承运条款及损失赔偿需另行核对，退货金额不能直接代替赔偿金额。部分退货的优惠分摊、返券和赠品处理同样需要独立规则。
+<!-- /rule -->
 
+<!-- rule {"id":"return_payment","topics":["return_payment"],"domain":"received_return_policy","scope":"mall_demo","requires":[],"label":"收货验收与资金处理"} -->
 ## 8. 收货验收与资金处理
 
 当前流程为待审核、等待寄回、寄回运输中、商家收货验收、退款。商家同意退货仅表示允许按安排寄回。
@@ -79,3 +98,4 @@ effective_to: "2028-01-01T00:00:00+08:00"
 验收以实际收到的商品、数量、附件及问题为依据。验收不通过会保留原因并进入问题处理；验收通过后仍需核对支付、申请金额及是否已处理。
 
 当前演示余额入账与真实外部支付渠道不同，没有银行卡或第三方渠道到账时限保证。同一笔已完成退款不能重复处理。
+<!-- /rule -->

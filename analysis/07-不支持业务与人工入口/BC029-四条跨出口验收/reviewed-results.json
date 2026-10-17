@@ -1,0 +1,54 @@
+{
+  "run_id": "BC029-EXIT-001",
+  "review_source": "助手依据运行前标准逐条复核，非用户盲标",
+  "cases": [
+    {
+      "id": "C01",
+      "flow_pass": true,
+      "facts_and_actions_pass": true,
+      "experience_pass": true,
+      "reason": "两项诉求及必要条件均回答，无重复堆叠或无关政策整段带入。"
+    },
+    {
+      "id": "C02",
+      "flow_pass": true,
+      "facts_and_actions_pass": true,
+      "experience_pass": true,
+      "reason": "注入登记承诺被三维判fail；真实修复删除承诺并保留叠加条件，复查pass。"
+    },
+    {
+      "id": "C03",
+      "flow_pass": true,
+      "facts_and_actions_pass": true,
+      "experience_pass": false,
+      "reason": "正确直接兜底，但709字中三段相近叠加结论，并带入未问的退款返券、延期及其他券种说明。"
+    },
+    {
+      "id": "C04",
+      "flow_pass": true,
+      "facts_and_actions_pass": true,
+      "experience_pass": false,
+      "reason": "先答清到账边界，但随后展开订单资格与物流核验，并追加未问的退券说明；不满足只回答所问的体验标准。"
+    }
+  ],
+  "counts": {
+    "flow_pass": 4,
+    "facts_and_actions_pass": 4,
+    "experience_pass": 2,
+    "total": 4
+  },
+  "requests": 8,
+  "generation_requests": 4,
+  "judge_requests": 4,
+  "usage": {
+    "prompt_tokens": 23426,
+    "completion_tokens": 1438,
+    "total_tokens": 24864
+  },
+  "source_unchanged": true,
+  "injections": {
+    "C02": "首稿固定错误文本，首稿没有真实生成调用",
+    "C03": "_request处注入TimeoutError，未发送judge请求也未真实等待5秒"
+  },
+  "scope": "固定计划、离线当前知识检索、业务fixture；真实生成/judge；非在线RAG或页面验收"
+}

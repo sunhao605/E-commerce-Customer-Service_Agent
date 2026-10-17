@@ -1,0 +1,119 @@
+............................................................................................F..F..F.FF.........FFFF..........................F..............F........F..............................................................................................
+======================================================================
+FAIL: test_guide_can_use_page_context_without_this_item_phrase (test_evidence_routing.EvidenceExecutionTest.test_guide_can_use_page_context_without_this_item_phrase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_evidence_routing.py", line 307, in test_guide_can_use_page_context_without_this_item_phrase
+    self.assertTrue(any("3.3" in item.metadata["section"] for item in response.citations))
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_missing_policy_keeps_verified_price_without_inventing_discount (test_evidence_routing.EvidenceExecutionTest.test_missing_policy_keeps_verified_price_without_inventing_discount)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_evidence_routing.py", line 177, in test_missing_policy_keeps_verified_price_without_inventing_discount
+    self.assertIn("暂不能确认", response.answer)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '暂不能确认' not found in '山野四人帐篷 商品标价 899 元，库存 3 件。\n\n本轮尚未明确您要咨询的具体规则，请补充想了解的事项；已核实的其他结果仍然有效。'
+
+======================================================================
+FAIL: test_new_page_guide_does_not_use_previous_product (test_evidence_routing.EvidenceExecutionTest.test_new_page_guide_does_not_use_previous_product)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_evidence_routing.py", line 290, in test_new_page_guide_does_not_use_previous_product
+    self.assertTrue(any("3.3" in item.metadata["section"] for item in response.citations))
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_page_guide_lookup_only_resolves_identity_not_price (test_evidence_routing.EvidenceExecutionTest.test_page_guide_lookup_only_resolves_identity_not_price)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_evidence_routing.py", line 282, in test_page_guide_lookup_only_resolves_identity_not_price
+    self.assertTrue(any("3.3" in item.metadata["section"] for item in response.citations))
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_page_identity_failure_does_not_reuse_old_guide (test_evidence_routing.EvidenceExecutionTest.test_page_identity_failure_does_not_reuse_old_guide)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_evidence_routing.py", line 299, in test_page_identity_failure_does_not_reuse_old_guide
+    self.assertEqual(response.citations, [])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [Citation(source='knowledge/product_knowle[1710 chars]围'})] != []
+
+First list contains 2 additional elements.
+First extra element 0:
+Citation(source='knowledge/product_knowledge.md', title='荒野户外商品选购、使用与问题排查指南', snippet='### 3.3 清洁、收纳与首次检查\n\n出发前在合适位置试搭，核对配件和搭建步骤。使用后先清除砂土和杂物，依说明书清洁并充分晾干再收纳；长期潮湿收纳可能带来霉味和涂层问题。通用帐篷养护建议不使用洗衣机或烘干机强洗，具体型号仍以厂商说明为准。[通用依据：REI 帐篷养护](https://www.rei.com/learn/expert-advice/caring-tent.html)。\n\n霉味、脱胶或拉链卡顿可能与不同因素有关，首次出现时间、存放条件与异常位置有助于核验；单张照片不能独立确定责任。', score=0.9, retrieval_stage='pre_retrieval', metadata={'policy_id': 'outdoor_product_guide', 'scene_key': 'product_knowledge', 'version': '2026-10-17.1', 'publication_status': 'published', 'effective_from': '2025-01-01T00:00:00+08:00', 'effective_to': '2028-01-01T00:00:00+08:00', 'snapshot_version': 'knowledge-13827b6eb64d', 'rule_id': 'tent_care', 'rule_topics': ['tent_care'], 'scope': 'mall_demo', 'rule_sources': [{'source': 'knowledge/product_knowledge.md', 'policy_id': 'outdoor_product_guide', 'version': '2026-10-17.1'}], 'section_id': 'tent_care', 'section': '清洁、收纳与首次检查'})
+
+Diff is 1768 characters long. Set self.maxDiff to None to see it.
+
+======================================================================
+FAIL: test_synonyms_and_simple_followup_reach_care_section (test_evidence_routing.EvidenceExecutionTest.test_synonyms_and_simple_followup_reach_care_section) (term='保养')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_evidence_routing.py", line 110, in test_synonyms_and_simple_followup_reach_care_section
+    self.assertIn("3.3", response.citations[0].metadata["section"])
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '3.3' not found in '清洁、收纳与首次检查'
+
+======================================================================
+FAIL: test_synonyms_and_simple_followup_reach_care_section (test_evidence_routing.EvidenceExecutionTest.test_synonyms_and_simple_followup_reach_care_section) (term='清洗')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_evidence_routing.py", line 110, in test_synonyms_and_simple_followup_reach_care_section
+    self.assertIn("3.3", response.citations[0].metadata["section"])
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '3.3' not found in '清洁、收纳与首次检查'
+
+======================================================================
+FAIL: test_synonyms_and_simple_followup_reach_care_section (test_evidence_routing.EvidenceExecutionTest.test_synonyms_and_simple_followup_reach_care_section) (term='打理')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_evidence_routing.py", line 110, in test_synonyms_and_simple_followup_reach_care_section
+    self.assertIn("3.3", response.citations[0].metadata["section"])
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '3.3' not found in '清洁、收纳与首次检查'
+
+======================================================================
+FAIL: test_synonyms_and_simple_followup_reach_care_section (test_evidence_routing.EvidenceExecutionTest.test_synonyms_and_simple_followup_reach_care_section)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_evidence_routing.py", line 113, in test_synonyms_and_simple_followup_reach_care_section
+    self.assertIn("3.3", followup.citations[0].metadata["section"])
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '3.3' not found in '清洁、收纳与首次检查'
+
+======================================================================
+FAIL: test_refund_and_return_answers_use_indexed_sections (test_policy_metadata.PolicyMetadataTest.test_refund_and_return_answers_use_indexed_sections)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_policy_metadata.py", line 400, in test_refund_and_return_answers_use_indexed_sections
+    self.assertIn("7.", returned.citations[0].metadata["section"])
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '7.' not found in '七天无理由退货适用于已支付并签收、申请提交时仍在签收后七天窗口内，且整单商品在购买时均支持七天无理由退货的订单。七天无理由是申请类型，用户无需另外填写退货理由；具体订单是否符合条件仍需核验可信订单事实。'
+
+======================================================================
+FAIL: test_mixed_query_answers_storage_section_not_product_overview (test_product_knowledge.ProductKnowledgeTest.test_mixed_query_answers_storage_section_not_product_overview)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_product_knowledge.py", line 125, in test_mixed_query_answers_storage_section_not_product_overview
+    self.assertTrue(any('3.3' in c.metadata['section'] for c in self.guide_citations(r)))
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_tent_care_retrieves_operational_section_first (test_product_knowledge.ProductKnowledgeTest.test_tent_care_retrieves_operational_section_first)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_product_knowledge.py", line 93, in test_tent_care_retrieves_operational_section_first
+    self.assertIn('3.3',r.citations[0].metadata['section'])
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '3.3' not found in '清洁、收纳与首次检查'
+
+----------------------------------------------------------------------
+Ran 257 tests in 2.143s
+
+FAILED (failures=12)

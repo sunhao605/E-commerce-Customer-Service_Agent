@@ -1,0 +1,8 @@
+{
+  "run_id": "BC032-LIVE-001",
+  "confirmed_by": "user:本轮聊天明确确认",
+  "confirmed_at": "2026-10-17T18:05:00+0800",
+  "max_model_http": 120,
+  "stop_before_next_request_at_tokens": 300000,
+  "note": "本轮专用；不沿用旧 60 次/18 万 tokens。"
+}

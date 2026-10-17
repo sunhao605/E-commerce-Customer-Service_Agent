@@ -10,11 +10,13 @@ from uuid import uuid4
 from api.schemas import ChatRequest, Citation, RoutePlan, ToolCallTrace
 from agent.service_capabilities import CHANNEL, capability_answer_text
 from retrieval.documents import knowledge_time, citation_is_current
-from retrieval.knowledge import _plain_evidence
+from retrieval.knowledge import _plain_evidence, KnowledgePathResult
+from retrieval.rules import select_rules, rules_answer
 
 REVIEW_INTENTS = {"service_scope_query", "product_query", "promotion_query", "invoice_query",
-                  "refund_policy_query", "return_policy_query", "order_query", "refund_status_query"}
-READ_TOOLS = {"search_products", "get_order_detail", "get_order_logistics", "get_refund_status"}
+                  "refund_policy_query", "return_policy_query", "order_query", "refund_status_query",
+                  "after_sale_eligibility_query"}
+READ_TOOLS = {"search_products", "get_order_detail", "get_order_logistics", "get_refund_status", "get_after_sale_eligibility"}
 # shortcut: 内部脱敏审阅只保留最近100条进程内记录；真实灰度需持久留存时再接有权限的审计存储。
 review_audit: deque[dict[str, Any]] = deque(maxlen=100)
 
@@ -36,13 +38,17 @@ def redact_review(value: Any) -> Any:
 def build_review_context(*, request: ChatRequest, plan: RoutePlan, answer: str,
                          tool_calls: list[ToolCallTrace], citations: list[Citation],
                          capabilities: list[dict[str, Any]], history: list[str],
-                         interaction_policy: dict[str, Any] | None = None) -> tuple[dict[str, Any], str, list[str]]:
+                         interaction_policy: dict[str, Any] | None = None,
+                         content_selection: dict[str, Any] | None = None,
+                         knowledge_results: dict[str, KnowledgePathResult] | None = None,
+                         pending_answer: str = "") -> tuple[dict[str, Any], str, list[str]]:
     """只整理已经取得的事实，不补查、不从候选或模型结论反推事实。"""
     evidence: list[dict[str, Any]] = [
         {"id": "request", "kind": "request", "text": request.user_message},
         {"id": "history", "kind": "unverified_conversation", "text": history},
     ]
     blocks: list[str] = []
+    ordered_blocks: dict[str, list[str]] = {}
     issues: list[str] = []
     reads: list[dict[str, Any]] = []
     historical: list[dict[str, Any]] = []
@@ -64,8 +70,13 @@ def build_review_context(*, request: ChatRequest, plan: RoutePlan, answer: str,
                 "status": call.status if valid else "invalid", "error": call.error_type,
                 "facts": facts if valid and call.status == "success" else None,
                 "summary": summary, "complete": valid and facts is not None}
+        if call.tool_name == "search_products" and plan.needs_product_facts is False and item["facts"]:
+            item["facts"] = {key: item["facts"][key] for key in ("product_id", "name") if key in item["facts"]}
+            summary = "已核实当前商品对象，仅用于匹配使用知识。"
+            item["summary"] = summary
         evidence.append(item)
         blocks.append(summary)
+        ordered_blocks.setdefault("facts", []).append(summary)
         reads.append({"evidence_id": item["id"], "tool": call.tool_name, "object_id": object_id,
                       "status": item["status"]})
         if call.tool_name == "get_refund_status":
@@ -92,7 +103,13 @@ def build_review_context(*, request: ChatRequest, plan: RoutePlan, answer: str,
             safe_capabilities.append({"capabilityId": cid, "supportStatus": None, "failure": "evidence_missing"})
     for item in safe_capabilities:
         evidence.append({"id": f"capability:{item['capabilityId']}", "kind": "capability", "facts": item})
-        blocks.append(capability_answer_text(item))
+    capability_blocks = [capability_answer_text(item) for item in safe_capabilities]
+    for item, block in zip(safe_capabilities, capability_blocks):
+        ordered_blocks["capability:" + item["capabilityId"]] = [block]
+    if content_selection is None and (plan.needs_rag or citations):
+        citations, content_selection = select_rules(citations, plan.inquiry_topics, plan.knowledge_domains, plan.topic_status)
+    if content_selection and content_selection.get("invalid_candidates"):
+        issues.append("invalid_policy_evidence")
     valid_citations = []
     for index, citation in enumerate(citations):
         metadata = citation.metadata or {}
@@ -103,8 +120,29 @@ def build_review_context(*, request: ChatRequest, plan: RoutePlan, answer: str,
         evidence.append({"id": f"policy:{index}", "kind": "policy", "text": citation.snippet,
             "source": citation.source, "metadata": {key: metadata.get(key) for key in (
                 "policy_id", "version", "section_id", "effective_from", "effective_to", "publication_status",
-                "snapshot_version", "scope")}})
-        blocks.append(_plain_evidence(citation.snippet))
+                "snapshot_version", "scope", "rule_id", "rule_sources")}})
+        block = _plain_evidence(citation.snippet)
+        blocks.append(block)
+        ordered_blocks.setdefault("topic:" + metadata.get("answer_topic", ""), []).append(block)
+    # 缺参/取证故障用实际局部结果说明，避免再给同一项追加笼统的“未取到规则”。
+    from retrieval.rules import topic_catalog
+    catalog = topic_catalog()
+    unavailable_domains = {domain for domain, result in (knowledge_results or {}).items()
+                           if not result.citations}
+    if content_selection and content_selection["gaps"]:
+        visible_gaps = [gap for gap in content_selection["gaps"]
+                        if catalog.get(gap.split(":", 1)[-1]) not in unavailable_domains]
+        blocks.append(rules_answer([], {**content_selection, "gaps": visible_gaps}))
+    for domain, result in (knowledge_results or {}).items():
+        debug = result.retrieval_debug or {}
+        if not result.citations:
+            evidence.append({"id": "knowledge:" + domain, "kind": "knowledge_gap",
+                "status": debug.get("status"), "summary": result.answer,
+                "topics": debug.get("topics", []), "failure": bool(debug.get("failure"))})
+            blocks.append(result.answer)
+    if pending_answer:
+        evidence.append({"id": "clarification", "kind": "clarification", "summary": pending_answer})
+        blocks.append(pending_answer)
     policy_ids = {(item.metadata or {}).get("policy_id") for item in valid_citations}
     if policy_ids & {"promotion_camping_season_stack_rule", "member_coupon_gold_rule"}:
         blocks.append("以上为平台通用规则，不代表当前商品参与活动或本人优惠券已适用，具体组合以商品页和结算条件为准。")
@@ -115,8 +153,9 @@ def build_review_context(*, request: ChatRequest, plan: RoutePlan, answer: str,
     if plan.needs_product_facts and not any(call.tool_name == "search_products" for call in tool_calls):
         issues.append("product_evidence_missing")
         blocks.append("本轮尚未核实商品价格和库存。")
-    if plan.needs_rag and not valid_citations:
+    if plan.needs_rag and not valid_citations and not (content_selection or {}).get("gaps"):
         blocks.append("本轮尚未取得能回答该问题的有效知识依据，暂不能确认相关规则。")
+    blocks.extend(capability_blocks)
     evidence.append({"id": "execution", "kind": "execution", "this_turn": {
         "write_actions": [], "read_checks": reads, "complete": True,
         "scope": "本轮受控只读编排，未提交申请或登记通知；不证明历史无申请"},
@@ -147,14 +186,23 @@ def build_review_context(*, request: ChatRequest, plan: RoutePlan, answer: str,
                     "permitted_effect": entry["completionEffect"],
                     "evidence_ids": ["interaction_policy"],
                 })
+    remaining = list(blocks)
+    ordered = []
+    for key in plan.answer_order:
+        for block in ordered_blocks.get(key, []):
+            if block in remaining:
+                ordered.append(block)
+                remaining.remove(block)
+    blocks = [*ordered, *remaining]
     context = {"user_message": request.user_message, "intent": plan.intent,
         "route_plan": {key: getattr(plan, key) for key in (
-            "intent", "required_tools", "knowledge_domains", "capability_ids", "needs_product_facts")},
+            "intent", "required_tools", "knowledge_domains", "capability_ids", "needs_product_facts", "inquiry_topics", "topic_status", "answer_order")},
         "required_points_source": "原请求与受控计划，不是人工金标；必须回看原请求检查计划漏项",
         "capability_results": safe_capabilities, "evidence": evidence,
         "allowed_next_steps": allowed_next_steps,
         "allowed_next_steps_source": "由代码依据受控交互策略与已注册只读路径组装，不接受模型自报的步骤列表",
-        "verified_summary": answer if not issues else "证据有缺口，仅依据下列有效证据说明能确认的部分。",
+        "content_selection": content_selection,
+        "verified_summary": "\n\n".join(dict.fromkeys(block.strip() for block in blocks if block.strip())),
         "generation_evidence_complete": True, "observed_at": datetime.now(timezone.utc).isoformat()}
     fallback = "\n\n".join(dict.fromkeys(block.strip() for block in blocks if block.strip()))
     return redact_review(context), fallback or "本轮没有取得足够的业务依据，暂不能确认所问结果。", list(dict.fromkeys(issues))

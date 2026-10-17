@@ -1,0 +1,171 @@
+{
+  "id": "MULTI-REQUEST-REVIEW-001",
+  "date": "2026-10-17",
+  "kind": "static_plan_construction_with_fixed_inputs",
+  "not_natural_language_or_model_evaluation": true,
+  "real_model_calls": 0,
+  "business_calls": 0,
+  "source_unchanged_from_fix": {
+    "backend/agent/tools/planning.py": true,
+    "backend/agent/customer_service_agent.py": true,
+    "backend/tests/test_answer_content.py": true,
+    "analysis/07-不支持业务与人工入口/BC031-032-本地修复/replay.py": true
+  },
+  "rows": [
+    {
+      "intent": "service_scope_query",
+      "input_topics": [
+        "promotion_stacking"
+      ],
+      "plan": {
+        "intent": "service_scope_query",
+        "needs_rag": true,
+        "inquiry_topics": [
+          "promotion_stacking"
+        ],
+        "topic_status": "valid",
+        "answer_order": [],
+        "needs_business_tools": false,
+        "required_tools": [],
+        "tool_candidates": [],
+        "knowledge_domains": [
+          "promotion_and_member_policy"
+        ],
+        "capability_ids": [],
+        "needs_product_facts": null,
+        "clarification_fields": [],
+        "retrieval_strategies": [
+          {
+            "knowledge_domain": "promotion_and_member_policy",
+            "retrieval_mode": "hybrid",
+            "citation_scope": "section"
+          }
+        ],
+        "entity_refs": [],
+        "risk_level": "low",
+        "requires_workflow": false,
+        "confidence": 0.9,
+        "source": "llm_with_policy_constraints",
+        "fallback_policy": "safe_deterministic_path"
+      },
+      "all_topics_preserved": true
+    },
+    {
+      "intent": "invoice_query",
+      "input_topics": [
+        "invoice_issue",
+        "refund_arrival"
+      ],
+      "plan": {
+        "intent": "invoice_query",
+        "needs_rag": true,
+        "inquiry_topics": [
+          "invoice_issue"
+        ],
+        "topic_status": "incompatible",
+        "answer_order": [],
+        "needs_business_tools": false,
+        "required_tools": [],
+        "tool_candidates": [],
+        "knowledge_domains": [
+          "invoice"
+        ],
+        "capability_ids": [],
+        "needs_product_facts": null,
+        "clarification_fields": [],
+        "retrieval_strategies": [
+          {
+            "knowledge_domain": "invoice",
+            "retrieval_mode": "hybrid",
+            "citation_scope": "section"
+          }
+        ],
+        "entity_refs": [],
+        "risk_level": "low",
+        "requires_workflow": false,
+        "confidence": 0.9,
+        "source": "llm_with_policy_constraints",
+        "fallback_policy": "safe_deterministic_path"
+      },
+      "all_topics_preserved": false
+    },
+    {
+      "intent": "promotion_query",
+      "input_topics": [
+        "promotion_stacking",
+        "refund_arrival"
+      ],
+      "plan": {
+        "intent": "promotion_query",
+        "needs_rag": true,
+        "inquiry_topics": [
+          "promotion_stacking"
+        ],
+        "topic_status": "incompatible",
+        "answer_order": [],
+        "needs_business_tools": false,
+        "required_tools": [],
+        "tool_candidates": [],
+        "knowledge_domains": [
+          "promotion_and_member_policy"
+        ],
+        "capability_ids": [],
+        "needs_product_facts": null,
+        "clarification_fields": [],
+        "retrieval_strategies": [
+          {
+            "knowledge_domain": "promotion_and_member_policy",
+            "retrieval_mode": "hybrid",
+            "citation_scope": "section"
+          }
+        ],
+        "entity_refs": [],
+        "risk_level": "low",
+        "requires_workflow": false,
+        "confidence": 0.9,
+        "source": "llm_with_policy_constraints",
+        "fallback_policy": "safe_deterministic_path"
+      },
+      "all_topics_preserved": false
+    },
+    {
+      "intent": "refund_policy_query",
+      "input_topics": [
+        "refund_arrival",
+        "invoice_issue"
+      ],
+      "plan": {
+        "intent": "refund_policy_query",
+        "needs_rag": true,
+        "inquiry_topics": [
+          "refund_arrival"
+        ],
+        "topic_status": "incompatible",
+        "answer_order": [],
+        "needs_business_tools": false,
+        "required_tools": [],
+        "tool_candidates": [],
+        "knowledge_domains": [
+          "after_sale_policy"
+        ],
+        "capability_ids": [],
+        "needs_product_facts": null,
+        "clarification_fields": [],
+        "retrieval_strategies": [
+          {
+            "knowledge_domain": "after_sale_policy",
+            "retrieval_mode": "hybrid",
+            "citation_scope": "section"
+          }
+        ],
+        "entity_refs": [],
+        "risk_level": "low",
+        "requires_workflow": false,
+        "confidence": 0.9,
+        "source": "llm_with_policy_constraints",
+        "fallback_policy": "safe_deterministic_path"
+      },
+      "all_topics_preserved": false
+    }
+  ]
+}

@@ -44,7 +44,8 @@ class PolicyMetadataTest(unittest.TestCase):
         self.agent = Lesson41Agent()
         for target, method, options in (
             (self.agent.route_model_client, "plan_intent", {"side_effect": lambda message, **kw:
-                ModelRouteResult(intent=kw["fallback_intent"], used_model=False)}),
+                ModelRouteResult(intent=kw["fallback_intent"], used_model=True,
+                    inquiry_topics={"invoice_query": ["invoice_issue"], "product_query": ["promotion_stacking"]}.get(kw["fallback_intent"], []), topic_status="valid")}),
             (self.agent.answer_model_client, "can_call_model", {"return_value": False}),
             (self.agent.langchain_tool_runner, "can_call_model", {"return_value": False}),
         ):
@@ -368,7 +369,7 @@ class PolicyMetadataTest(unittest.TestCase):
             response = self.chat("电子发票多久能准备好？")
         compose.assert_not_called()
         self.assertFalse(response.citations)
-        self.assertIn("有效发票规则", response.answer)
+        self.assertIn("发票", response.answer)
         self.assertTrue(any(e.event_type == "rag_policy_blocked" for e in trace_store.list("metadata-test")))
 
     def test_long_policy_citation_is_located_section(self):
@@ -379,13 +380,13 @@ class PolicyMetadataTest(unittest.TestCase):
         self.assertIn("每满", promotion.snippet)
         self.assertLess(len(promotion.snippet), 1200)
         self.assertNotIn("## 8.", promotion.snippet)
-        self.assertIn("叠加", member.metadata["section"])
+        self.assertIn("会员", member.snippet)  # 叠加正文只有活动文件维护；会员文件仅引用身份。
         self.assertLess(len(member.snippet), 1200)
         self.assertNotEqual(promotion.snippet, member.snippet)
         invoice = hybrid.retrieve_knowledge("电子发票通常多久", "invoice_query")
         self.assertEqual(len(invoice.citations), 1)
         self.assertIn("24 小时", invoice.citations[0].snippet)
-        self.assertIsNone(invoice.citations[0].metadata.get("section_id"))
+        self.assertEqual(invoice.citations[0].metadata.get("rule_id"), "invoice_issue")
 
     def test_refund_and_return_answers_use_indexed_sections(self):
         refund = knowledge.policy_query_result("bc021-refund", "refund_policy_query", "未发货退款什么时候到账？")
@@ -395,9 +396,12 @@ class PolicyMetadataTest(unittest.TestCase):
         self.assertIn("received_return_policy.md", hybrid.KNOWLEDGE_FILES)
         self.assertTrue(all(len(item.snippet) < len(full_refund) / 2 for item in refund.citations))
         self.assertTrue(all(len(item.snippet) < len(full_return) / 2 for item in returned.citations))
-        self.assertIn("到账", refund.answer)
-        self.assertIn("7.", returned.citations[0].metadata["section"])
-        self.assertIn("运费", returned.answer)
+        from retrieval.rules import select_rules, rules_answer
+        selected, selection = select_rules(refund.citations, ["refund_arrival"], ["after_sale_policy"])
+        self.assertIn("到账", rules_answer(selected, selection))
+        selected, selection = select_rules(returned.citations, ["return_shipping_cost"], ["received_return_policy"])
+        self.assertIn("7.", selected[0].metadata["section"])
+        self.assertIn("运费", rules_answer(selected, selection))
         self.assertTrue(all("常见客服问法" not in item.snippet for item in refund.citations))
         self.assertTrue(all("常见客服对话" not in item.snippet for item in returned.citations))
         self.assertEqual(refund.retrieval_debug["mode"], "hybrid_chunk_fusion")

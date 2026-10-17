@@ -1,0 +1,109 @@
+{
+  "id": "MULTI-READ-001-REPRO",
+  "kind": "offline_plan_construction_fixed_inputs",
+  "real_model_calls": 0,
+  "business_calls": 0,
+  "all_pass": true,
+  "rows": [
+    {
+      "id": "MR02a",
+      "intent": "invoice_query",
+      "input_topics": [
+        "invoice_issue",
+        "refund_arrival"
+      ],
+      "kept_topics": [
+        "invoice_issue",
+        "refund_arrival"
+      ],
+      "topic_status": "valid",
+      "knowledge_domains": [
+        "invoice",
+        "after_sale_policy"
+      ],
+      "answer_order": [
+        "topic:invoice_issue",
+        "topic:refund_arrival"
+      ],
+      "all_topics_preserved": true,
+      "expect_all": true,
+      "pass": true,
+      "note": "发票为主意图仍须保留退款到账主题"
+    },
+    {
+      "id": "MR02b",
+      "intent": "refund_policy_query",
+      "input_topics": [
+        "refund_arrival",
+        "invoice_issue"
+      ],
+      "kept_topics": [
+        "refund_arrival",
+        "invoice_issue"
+      ],
+      "topic_status": "valid",
+      "knowledge_domains": [
+        "after_sale_policy",
+        "invoice"
+      ],
+      "answer_order": [
+        "topic:refund_arrival",
+        "topic:invoice_issue"
+      ],
+      "all_topics_preserved": true,
+      "expect_all": true,
+      "pass": true,
+      "note": "退款政策为主意图仍须保留发票主题"
+    },
+    {
+      "id": "MR03",
+      "intent": "promotion_query",
+      "input_topics": [
+        "promotion_stacking",
+        "refund_arrival",
+        "invoice_issue"
+      ],
+      "kept_topics": [
+        "promotion_stacking",
+        "refund_arrival",
+        "invoice_issue"
+      ],
+      "topic_status": "valid",
+      "knowledge_domains": [
+        "promotion_and_member_policy",
+        "after_sale_policy",
+        "invoice"
+      ],
+      "answer_order": [
+        "topic:promotion_stacking",
+        "topic:refund_arrival",
+        "topic:invoice_issue"
+      ],
+      "all_topics_preserved": true,
+      "expect_all": true,
+      "pass": true,
+      "note": "三项跨域需求不能截断或丢失"
+    },
+    {
+      "id": "MR01",
+      "intent": "service_scope_query",
+      "input_topics": [
+        "promotion_stacking"
+      ],
+      "kept_topics": [
+        "promotion_stacking"
+      ],
+      "topic_status": "valid",
+      "knowledge_domains": [
+        "promotion_and_member_policy"
+      ],
+      "answer_order": [
+        "topic:promotion_stacking"
+      ],
+      "all_topics_preserved": true,
+      "expect_all": true,
+      "pass": true,
+      "note": "能力入口已保留知识主题（对照组）"
+    }
+  ]
+}

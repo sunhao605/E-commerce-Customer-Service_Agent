@@ -1,0 +1,59 @@
+{
+  "kind": "offline_mocked_route_and_evidence",
+  "real_model_calls": 0,
+  "real_business_calls": 0,
+  "rows": [
+    {
+      "id": "single_policy_no_evidence",
+      "answer": "固定模型答复",
+      "risk_level": "low",
+      "generation_calls": 1,
+      "judge_calls": 1,
+      "is_single_comparison": false
+    },
+    {
+      "id": "task_preservation_order_query",
+      "before": {
+        "intent": "refund_request",
+        "pending_slot": "order_id",
+        "candidates": [
+          {
+            "value": "ORD9801",
+            "label": "第一笔"
+          },
+          {
+            "value": "ORD9802",
+            "label": "第二笔"
+          }
+        ]
+      },
+      "after": {
+        "intent": "order_query",
+        "pending_slot": "order_id",
+        "candidates": []
+      },
+      "read_only_turn": false,
+      "answer": "你要查询哪一个订单？请选择订单号，或直接补充订单号。"
+    },
+    {
+      "id": "task_preservation_general_chat",
+      "before": {
+        "intent": "refund_request",
+        "pending_slot": "order_id",
+        "candidates": [
+          {
+            "value": "ORD9801",
+            "label": "第一笔"
+          },
+          {
+            "value": "ORD9802",
+            "label": "第二笔"
+          }
+        ]
+      },
+      "after": null,
+      "read_only_turn": false,
+      "answer": "固定模型答复"
+    }
+  ]
+}

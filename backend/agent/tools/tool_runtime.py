@@ -53,6 +53,8 @@ def get_after_sale_eligibility(order_id: str | None, runtime_user_id: str) -> tu
             reason = str(result.get('reason') or '资格事实不完整，请稍后重试').rstrip('。；')
             summary = f"订单 {order_id} {prefix}：{reason}。这轮只查资格，没有准备申请。"
         return result, ToolCallTrace(tool_name="get_after_sale_eligibility", arguments=arguments,
+            review_facts={"order_id": order_id, **{key: result.get(key) for key in (
+                "status", "applicationType", "amount", "reason")}},
             output_summary=summary, status="success", risk_level="low", next_action="answer_user")
     return None, ToolCallTrace(tool_name="get_after_sale_eligibility", arguments=arguments, output_summary=summary,
         status="error", error_type=error, risk_level="low",

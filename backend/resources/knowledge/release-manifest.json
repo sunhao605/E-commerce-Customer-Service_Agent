@@ -1,32 +1,32 @@
 {
   "payment_invoice_policy.md": {
     "policy_id": "invoice_issue",
-    "version": "2026-10-14.2",
-    "sha256": "6ea411835ca688cc2b6bf03ebd7751d9d941098f61622b6ccf438d3b5c0fb815"
+    "version": "2026-10-17.1",
+    "sha256": "43c816bf19b130dda312d655819188f2fb3663657805b8400d6ea7a3f25b71a3"
   },
   "received_return_policy.md": {
     "policy_id": "return_after_delivery",
-    "version": "2026-10-16.1",
-    "sha256": "1093e25c370315e423c43b73d1f9247d90cbf9cee4240ba05c9a3e4877eae471"
+    "version": "2026-10-17.1",
+    "sha256": "f8d364b3d66f9786f01912dd53ec739a10a9159de5dab65af4c13cf23d3ad525"
   },
   "product_knowledge.md": {
     "policy_id": "outdoor_product_guide",
-    "version": "2026-10-16.1",
-    "sha256": "7f1c89ea400a0018c64d7848a317a4022cd134ee7f6aa5ddbb556ea009aae80f"
+    "version": "2026-10-17.1",
+    "sha256": "b1f2d2bb6ed98cf851b5b967450ab8b2630e6901b695b209ed232b3c2bd1f508"
   },
   "member_coupon_policy.md": {
     "policy_id": "member_coupon_gold_rule",
-    "version": "2026-10-16.1",
-    "sha256": "f55008064d30d4a2fbf5dfe871fa767115ddf67fb6cc939566a7655262144163"
+    "version": "2026-10-17.1",
+    "sha256": "5d15e17693991daf377af315387d6bffba2cc90b61c8a87315fca113fdd1b136"
   },
   "promotion_policy.md": {
     "policy_id": "promotion_camping_season_stack_rule",
-    "version": "2026-10-16.1",
-    "sha256": "1e7f6016dbaa6e9e05623fedb2f8d32d64fdf51588dff2506e51acfe17fe63c2"
+    "version": "2026-10-17.1",
+    "sha256": "6dbf92bec23f4ab220dbcb324a2678ee1d03fdbccbce4bc9c9e8f7c24c73f125"
   },
   "after_sale_policy.md": {
     "policy_id": "refund_before_shipping",
-    "version": "2026-10-16.1",
-    "sha256": "eac40c0ffc4c96bcf6144a12a5379ee71059f74769b877e41525d812fc8df659"
+    "version": "2026-10-17.1",
+    "sha256": "ed4a880e50b3cd41c92d9498d39d65b3b41ce1017b195ef536d5a6a75e2ae24d"
   }
 }

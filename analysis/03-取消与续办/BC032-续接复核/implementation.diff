@@ -1,0 +1,88 @@
+--- before/backend/agent/context.py
++++ after/backend/agent/context.py
+@@ -125,10 +125,13 @@
+         task = selection_task if selection_task is not None else ((query_task or {}) if eligibility_query else memory.get("open_task") or {})
+         candidates = task.get("candidates") or []
+         chosen_order_id = candidates[index - 1]["value"] if 1 <= index <= len(candidates) else None
++    elif allow_embedded_selection and not explicit_order_id and (selection_task or {}).get('pending_slot') == 'order_id':
++        # 明确恢复仍待选单的任务，不能用页面或最近订单代替用户选择。
++        chosen_order_id = selection_task.get('order_id')
+     conflicts: list[str] = []
+     if selection:
+         conflicts.append("order_id: 按本会话已展示候选解析序号，不使用页面或历史订单兜底。")
+-    elif page_order_id and memory.get("last_order_id") and page_order_id != memory["last_order_id"] and not explicit_order_id:
++    elif page_order_id and chosen_order_id == page_order_id and memory.get("last_order_id") and page_order_id != memory["last_order_id"] and not explicit_order_id:
+         conflicts.append("order_id: 页面 Runtime Context 与 Session Memory 冲突，采用页面订单。")
+     if any(term in request.user_message for term in ("我是VIP", "我是 VIP", "我是黑卡")):
+         if (request.runtime_member_level or "unknown").lower() not in {"vip", "black", "黑卡"}:
+--- before/backend/tests/test_task_lifecycle.py
++++ after/backend/tests/test_task_lifecycle.py
+@@ -88,6 +88,36 @@
+                 self.assertTrue(response.session_state['task_control_requested'])
+                 self.assertFalse(response.session_state['read_only_turn'])
+ 
++    def test_order_number_reply_uses_query_focus_before_background_refund(self):
++        draft = self.seed_draft()
++        memory = current_memory('content-pipeline', 'U1001')
++        memory['order_query'] = {'intent': 'order_query', 'pending_slot': 'order_id', 'candidates': []}
++        memory['clarification_focus'] = 'order_query'
++        self.route_as('refund_request', task_relation='resume')
++        response = self.chat('ORD9812')
++        self.assertEqual(response.session_state['intent'], 'order_query')
++        self.assertEqual(response.session_state['context_report']['chosen_order_id'], 'ORD9812')
++        self.assertEqual(memory['open_task'], draft)
++        self.assertTrue(response.session_state['read_only_turn'])
++        self.assertIsNone(response.session_state['workflow'])
++
++    def test_resume_without_selection_does_not_choose_page_or_recent_order(self):
++        draft = self.seed_draft()
++        memory = current_memory('content-pipeline', 'U1001')
++        memory['last_order_id'] = 'ORD9899'
++        self.route_as('refund_request', task_relation='resume')
++        for page in ({'relatedOrderNo': 'ORD9999'}, {}):
++            with self.subTest(page=page):
++                response = self.agent.chat(ChatRequest(session_id='content-pipeline', runtime_user_id='U1001',
++                    user_message='继续刚才退款', runtime_context={'mallAfterSaleRouting': True,
++                        'afterSaleOpenTask': draft, **page}))
++                report = response.session_state['context_report']
++                self.assertIsNone(report['chosen_order_id'])
++                self.assertFalse(any('[order_reference/session]' in item for item in report['model_context']))
++                self.assertFalse(any('采用页面订单' in item for item in report['conflict_resolutions']))
++                self.assertEqual([c.value for c in response.clarification.candidates], ['ORD9801', 'ORD9802'])
++                self.assertEqual(memory['open_task'], draft)
++
+     def test_invalid_selection_keeps_original_task_version_and_candidates(self):
+         draft = self.seed_draft()
+         self.route_as('refund_request', task_relation='resume')
+--- before/ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/CustomerServiceGatewayService.java
++++ after/ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/CustomerServiceGatewayService.java
+@@ -131,9 +131,8 @@
+                 rememberTurn(session, message, response.getAnswer());
+                 return response;
+             }
+-            // 独立取消和已知办理的纯订单输入仍走原续接；查询选单不走办理续接。
+-            if (CANCEL_DRAFT.matcher(message.trim()).matches() || session.getAfterSaleQuery() == null
+-                && "REFUND_ORDER_REQUIRED".equals(session.getPendingAction()) && ORDER_NO.matcher(message.trim()).matches()) {
++            // 纯订单输入先由当前澄清焦点路由，不能抢先续办后台退款。
++            if (CANCEL_DRAFT.matcher(message.trim()).matches()) {
+                 CustomerServiceResponse followup = refundFollowup(session, message, pageContext, profile.getUserId(), false);
+                 if (followup != null) {
+                     rememberTurn(session, message, followup.getAnswer());
+@@ -206,12 +205,16 @@
+                 String followupMessage = message;
+                 String selected = agentResponse == null ? null : text(agentResponse.path("session_state").path("context_report"), "chosen_order_id", null);
+                 String intent = agentResponse == null ? null : text(agentResponse.path("session_state"), "intent", null);
++                boolean resumingCurrentDraft = agentResponse != null
++                    && "resume".equals(agentResponse.path("session_state").path("task_relation").asText())
++                    && session.getPendingAction() != null && !session.isHandled() && !session.isExpired(LocalDateTime.now())
++                    && selected != null && selected.equals(session.getRelatedOrderNo());
+                 if (Set.of("refund_request", "return_request").contains(intent == null ? "" : intent) && selected != null
+                     && extractOrderNo(message) == null) {
+                     followupMessage += " " + selected;
+                 }
+                 if (Set.of("refund_request", "return_request").contains(intent == null ? "" : intent)
+-                    && session.getAfterSaleQuery() != null && extractOrderNo(message) == null && pageContext != null
++                    && !resumingCurrentDraft && session.getAfterSaleQuery() != null && extractOrderNo(message) == null && pageContext != null
+                     && pageContext.getOrderNo() != null && session.getAfterSaleQuery().get("order_id") != null
+                     && !Objects.equals(pageContext.getOrderNo(), session.getAfterSaleQuery().get("order_id"))) {
+                     CustomerServiceResponse response = new CustomerServiceResponse("当前页面订单与刚查询的订单不同，请明确要申请哪一笔订单。尚未准备新申请。",

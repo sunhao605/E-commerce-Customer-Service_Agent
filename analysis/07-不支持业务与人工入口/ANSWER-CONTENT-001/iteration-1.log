@@ -1,0 +1,428 @@
+............................F...F........FFF............................................F.....F.FFFFF.F....F.F...EEEEF.F.F.F...........EF......F.........FF.FFF...F.FF.F...................................................F...F............F......................FFF..
+======================================================================
+ERROR: test_synonyms_and_simple_followup_reach_care_section (test_evidence_routing.EvidenceExecutionTest.test_synonyms_and_simple_followup_reach_care_section) (term='保养')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_evidence_routing.py", line 108, in test_synonyms_and_simple_followup_reach_care_section
+    self.assertIn("3.3", response.citations[0].metadata["section"])
+                         ~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+
+======================================================================
+ERROR: test_synonyms_and_simple_followup_reach_care_section (test_evidence_routing.EvidenceExecutionTest.test_synonyms_and_simple_followup_reach_care_section) (term='清洗')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_evidence_routing.py", line 108, in test_synonyms_and_simple_followup_reach_care_section
+    self.assertIn("3.3", response.citations[0].metadata["section"])
+                         ~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+
+======================================================================
+ERROR: test_synonyms_and_simple_followup_reach_care_section (test_evidence_routing.EvidenceExecutionTest.test_synonyms_and_simple_followup_reach_care_section) (term='打理')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_evidence_routing.py", line 108, in test_synonyms_and_simple_followup_reach_care_section
+    self.assertIn("3.3", response.citations[0].metadata["section"])
+                         ~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+
+======================================================================
+ERROR: test_synonyms_and_simple_followup_reach_care_section (test_evidence_routing.EvidenceExecutionTest.test_synonyms_and_simple_followup_reach_care_section)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_evidence_routing.py", line 111, in test_synonyms_and_simple_followup_reach_care_section
+    self.assertIn("3.3", followup.citations[0].metadata["section"])
+                         ~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+
+======================================================================
+ERROR: test_pm11_valid_invoice_queries_check_admission_without_final_cache (test_policy_metadata.PolicyMetadataTest.test_pm11_valid_invoice_queries_check_admission_without_final_cache)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_policy_metadata.py", line 243, in test_pm11_valid_invoice_queries_check_admission_without_final_cache
+    self.assertEqual(response.citations[0].metadata["policy_id"], "invoice_issue")
+                     ~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+
+======================================================================
+FAIL: test_invalid_policy_is_removed_from_both_body_and_public_citations (test_answer_judge.ReplyGateTest.test_invalid_policy_is_removed_from_both_body_and_public_citations)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_judge.py", line 404, in test_invalid_policy_is_removed_from_both_body_and_public_citations
+    judge.assert_not_called()
+    ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/sunhao/.local/share/uv/python/cpython-3.14.7-macos-aarch64-none/lib/python3.14/unittest/mock.py", line 947, in assert_not_called
+    raise AssertionError(msg)
+AssertionError: Expected 'judge' to not have been called. Called 1 times.
+Calls: [call({'user_message': '露营季满减条件是什么？', 'intent': 'promotion_query', 'route_plan': {'intent': 'promotion_query', 'required_tools': [], 'knowledge_domains': ['promotion_and_member_policy'], 'capability_ids': [], 'needs_product_facts': None, 'inquiry_topics': [], 'topic_status': 'no_model'}, 'required_points_source': '原请求与受控计划，不是人工金标；必须回看原请求检查计划漏项', 'capability_results': [], 'evidence': [{'id': 'request', 'kind': 'request', 'text': '露营季满减条件是什么？'}, {'id': 'history', 'kind': 'unverified_conversation', 'text': []}, {'id': 'execution', 'kind': 'execution', 'this_turn': {'write_actions': [], 'read_checks': [], 'complete': True, 'scope': '本轮受控只读编排，未提交申请或登记通知；不证明历史无申请'}, 'historical': [], 'historical_complete': False}, {'id': 'interaction_policy', 'kind': 'interaction_policy', 'facts': {'schemaVersion': 'interaction_policy_v1', 'channel': 'customer_service_agent', 'version': 'service-capabilities-v1', 'entries': [{'id': 'human_support', 'surface': 'mall_chat', 'status': 'available', 'actor': 'user', 'initiation': 'message_request', 'confirmationRequired': True, 'completionEffect': 'open_entry', 'destinationState': 'placeholder'}]}}], 'allowed_next_steps': [{'id': 'entry:human_support', 'actor': 'user', 'stage': 'request_entry', 'surface': 'mall_chat', 'requires_user_confirmation': True, 'permitted_effect': 'open_entry', 'evidence_ids': ['interaction_policy']}], 'allowed_next_steps_source': '由代码依据受控交互策略与已注册只读路径组装，不接受模型自报的步骤列表', 'content_selection': {'topics': [], 'topic_status': 'no_model', 'selected_rules': [], 'gaps': ['topics_no_model'], 'retrieved_candidates': [{'source': 'knowledge/promotion_policy.md', 'section_id': None, 'reason': 'selected_by_governed_topic_and_complete_rule'}], 'snapshot_version': 'knowledge-68d812ec3ddb'}, 'verified_summary': '本轮尚未明确您要咨询的具体规则，请补充想了解的事项；已核实的其他结果仍然有效。\n\n本轮尚未取得能回答该问题的有效知识依据，暂不能确认相关规则。', 'generation_evidence_complete': True, 'observed_at': '2026-10-17T04:21:25.805491+00:00'}, '错误旧规则', model='deepseek-flash', timeout=3.0),
+ call().decision.__ne__('allow'),
+ call().checks.get('omission', {}),
+ call().checks.get().get('verdict'),
+ call().checks.get().get().__hash__(),
+ call().reason.__bool__(),
+ call().reason.__radd__('answer_judge_'),
+ call().model_dump(),
+ call().model_dump().keys(),
+ call().model_dump().keys().__iter__(),
+ call().model_dump(),
+ call().model_dump(exclude={'checks'}),
+ call().model_dump().keys(),
+ call().model_dump().keys().__iter__(),
+ call().checks.items(),
+ call().checks.items().__iter__(),
+ call().invocation_attempted.__int__(),
+ call().elapsed_ms.__radd__(0),
+ call().usage.__iter__()].
+
+======================================================================
+FAIL: test_policy_fallback_keeps_evidence_and_qualification_limits (test_answer_judge.ReplyGateTest.test_policy_fallback_keeps_evidence_and_qualification_limits)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_judge.py", line 343, in test_policy_fallback_keeps_evidence_and_qualification_limits
+    self.assertIn("300", response.answer); self.assertIn("40", response.answer)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '300' not found in '当前客服助手不支持到货或补货提醒。你可以稍后主动查询商品库存。\n\n本轮尚未明确您要咨询的具体规则，请补充想了解的事项；已核实的其他结果仍然有效。\n\n本轮尚未取得能回答该问题的有效知识依据，暂不能确认相关规则。\n您所问的其他尚未在以上内容中说明的事项，本轮还没有取得足够依据，暂不能确认。'
+
+======================================================================
+FAIL: test_customer_policy_is_preserved_regardless_of_heading (test_answer_judge.ReviewEvidenceTest.test_customer_policy_is_preserved_regardless_of_heading) (heading='常见问法')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_judge.py", line 496, in test_customer_policy_is_preserved_regardless_of_heading
+    self.assertIn("会员券仅限本人账号在有效期内使用，不得转让。", fallback)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '会员券仅限本人账号在有效期内使用，不得转让。' not found in '本轮尚未明确您要咨询的具体规则，请补充想了解的事项；已核实的其他结果仍然有效。\n\n本轮尚未取得能回答该问题的有效知识依据，暂不能确认相关规则。'
+
+======================================================================
+FAIL: test_customer_policy_is_preserved_regardless_of_heading (test_answer_judge.ReviewEvidenceTest.test_customer_policy_is_preserved_regardless_of_heading) (heading='业务规则')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_judge.py", line 496, in test_customer_policy_is_preserved_regardless_of_heading
+    self.assertIn("会员券仅限本人账号在有效期内使用，不得转让。", fallback)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '会员券仅限本人账号在有效期内使用，不得转让。' not found in '本轮尚未明确您要咨询的具体规则，请补充想了解的事项；已核实的其他结果仍然有效。\n\n本轮尚未取得能回答该问题的有效知识依据，暂不能确认相关规则。'
+
+======================================================================
+FAIL: test_customer_policy_is_preserved_regardless_of_heading (test_answer_judge.ReviewEvidenceTest.test_customer_policy_is_preserved_regardless_of_heading) (heading='操作示例')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_answer_judge.py", line 496, in test_customer_policy_is_preserved_regardless_of_heading
+    self.assertIn("会员券仅限本人账号在有效期内使用，不得转让。", fallback)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '会员券仅限本人账号在有效期内使用，不得转让。' not found in '本轮尚未明确您要咨询的具体规则，请补充想了解的事项；已核实的其他结果仍然有效。\n\n本轮尚未取得能回答该问题的有效知识依据，暂不能确认相关规则。'
+
+======================================================================
+FAIL: test_conditional_fields_are_strict (test_evidence_routing.EvidenceContractTest.test_conditional_fields_are_strict)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_evidence_routing.py", line 40, in test_conditional_fields_are_strict
+    self.assertEqual(RouteModelClient._extract_decision(json.dumps(valid)), valid)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'int[110 chars]n_fields': [], 'inquiry_topics': [], 'topic_status': 'missing'} != {'int[110 chars]n_fields': []}
+  {'clarification_fields': [],
+-  'inquiry_topics': [],
+   'intent': 'product_query',
+   'knowledge_domains': ['product_knowledge'],
+-  'needs_product_facts': False,
+?                              ^
+
++  'needs_product_facts': False}
+?                              ^
+
+-  'topic_status': 'missing'}
+
+======================================================================
+FAIL: test_guide_can_use_page_context_without_this_item_phrase (test_evidence_routing.EvidenceExecutionTest.test_guide_can_use_page_context_without_this_item_phrase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_evidence_routing.py", line 304, in test_guide_can_use_page_context_without_this_item_phrase
+    self.assertTrue(any("3.3" in item.metadata["section"] for item in response.citations))
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_missing_combination_asks_and_resumes_without_fake_order_task (test_evidence_routing.EvidenceExecutionTest.test_missing_combination_asks_and_resumes_without_fake_order_task)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_evidence_routing.py", line 193, in test_missing_combination_asks_and_resumes_without_fake_order_task
+    self.assertIn("满 300 减 40", second.answer)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '满 300 减 40' not found in '本轮尚未明确您要咨询的具体规则，请补充想了解的事项；已核实的其他结果仍然有效。\n\n本轮尚未取得能回答该问题的有效知识依据，暂不能确认相关规则。'
+
+======================================================================
+FAIL: test_missing_policy_keeps_verified_price_without_inventing_discount (test_evidence_routing.EvidenceExecutionTest.test_missing_policy_keeps_verified_price_without_inventing_discount)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_evidence_routing.py", line 174, in test_missing_policy_keeps_verified_price_without_inventing_discount
+    self.assertIn("不能编造", response.answer)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '不能编造' not found in '山野四人帐篷 商品标价 899 元，库存 3 件。\n\n本轮尚未明确您要咨询的具体规则，请补充想了解的事项；已核实的其他结果仍然有效。\n\n本轮尚未取得能回答该问题的有效知识依据，暂不能确认相关规则。'
+
+======================================================================
+FAIL: test_mixed_request_keeps_both_knowledge_domains (test_evidence_routing.EvidenceExecutionTest.test_mixed_request_keeps_both_knowledge_domains)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_evidence_routing.py", line 148, in test_mixed_request_keeps_both_knowledge_domains
+    self.assertIn("晾干", response.answer)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '晾干' not found in '山野四人帐篷 商品标价 899 元，库存 3 件。\n\n本轮尚未明确您要咨询的具体规则，请补充想了解的事项；已核实的其他结果仍然有效。\n\n本轮尚未取得能回答该问题的有效知识依据，暂不能确认相关规则。'
+
+======================================================================
+FAIL: test_negated_fact_keyword_does_not_override_model (test_evidence_routing.EvidenceExecutionTest.test_negated_fact_keyword_does_not_override_model)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_evidence_routing.py", line 102, in test_negated_fact_keyword_does_not_override_model
+    self.assertIn("晾干", response.answer)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '晾干' not found in '本轮尚未明确您要咨询的具体规则，请补充想了解的事项；已核实的其他结果仍然有效。\n\n本轮尚未取得能回答该问题的有效知识依据，暂不能确认相关规则。'
+
+======================================================================
+FAIL: test_new_page_guide_does_not_use_previous_product (test_evidence_routing.EvidenceExecutionTest.test_new_page_guide_does_not_use_previous_product)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_evidence_routing.py", line 287, in test_new_page_guide_does_not_use_previous_product
+    self.assertTrue(any("3.3" in item.metadata["section"] for item in response.citations))
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_page_guide_lookup_only_resolves_identity_not_price (test_evidence_routing.EvidenceExecutionTest.test_page_guide_lookup_only_resolves_identity_not_price)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_evidence_routing.py", line 279, in test_page_guide_lookup_only_resolves_identity_not_price
+    self.assertTrue(any("3.3" in item.metadata["section"] for item in response.citations))
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_price_completed_before_policy_reply_is_not_queried_again (test_evidence_routing.EvidenceExecutionTest.test_price_completed_before_policy_reply_is_not_queried_again)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_evidence_routing.py", line 206, in test_price_completed_before_policy_reply_is_not_queried_again
+    self.assertIn("满 300 减 40", second.answer)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '满 300 减 40' not found in '本轮尚未明确您要咨询的具体规则，请补充想了解的事项；已核实的其他结果仍然有效。\n\n本轮尚未取得能回答该问题的有效知识依据，暂不能确认相关规则。'
+
+======================================================================
+FAIL: test_read_failure_does_not_block_independent_knowledge (test_evidence_routing.EvidenceExecutionTest.test_read_failure_does_not_block_independent_knowledge)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_evidence_routing.py", line 166, in test_read_failure_does_not_block_independent_knowledge
+    self.assertIn("晾干", response.answer)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '晾干' not found in '这次商品信息查询没有成功，暂时无法核实。请稍后重试。\n\n本轮尚未明确您要咨询的具体规则，请补充想了解的事项；已核实的其他结果仍然有效。\n\n本轮尚未取得能回答该问题的有效知识依据，暂不能确认相关规则。'
+
+======================================================================
+FAIL: test_two_missing_objects_can_be_filled_in_either_order (test_evidence_routing.EvidenceExecutionTest.test_two_missing_objects_can_be_filled_in_either_order) (policy_first=False)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_evidence_routing.py", line 225, in test_two_missing_objects_can_be_filled_in_either_order
+    self.assertIn("满 300 减 40", response.answer)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '满 300 减 40' not found in '本轮尚未明确您要咨询的具体规则，请补充想了解的事项；已核实的其他结果仍然有效。\n\n本轮尚未取得能回答该问题的有效知识依据，暂不能确认相关规则。'
+
+======================================================================
+FAIL: test_withdrawn_price_need_does_not_execute_old_plan (test_evidence_routing.EvidenceExecutionTest.test_withdrawn_price_need_does_not_execute_old_plan)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_evidence_routing.py", line 236, in test_withdrawn_price_need_does_not_execute_old_plan
+    self.assertIn("晾干", second.answer)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '晾干' not found in '本轮尚未明确您要咨询的具体规则，请补充想了解的事项；已核实的其他结果仍然有效。\n\n本轮尚未取得能回答该问题的有效知识依据，暂不能确认相关规则。'
+
+======================================================================
+FAIL: test_blocked_invoice_never_reaches_final_model (test_policy_metadata.PolicyMetadataTest.test_blocked_invoice_never_reaches_final_model)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_policy_metadata.py", line 371, in test_blocked_invoice_never_reaches_final_model
+    self.assertIn("有效发票规则", response.answer)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '有效发票规则' not found in '本轮尚未明确您要咨询的具体规则，请补充想了解的事项；已核实的其他结果仍然有效。\n\n本轮尚未取得能回答该问题的有效知识依据，暂不能确认相关规则。'
+
+======================================================================
+FAIL: test_long_policy_citation_is_located_section (test_policy_metadata.PolicyMetadataTest.test_long_policy_citation_is_located_section)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_policy_metadata.py", line 382, in test_long_policy_citation_is_located_section
+    self.assertIn("叠加", member.metadata["section"])
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '叠加' not found in '山友会员可领取平台会员券；会员券需要在有效期内使用，且不能转让给其他账号。'
+
+======================================================================
+FAIL: test_pm12_live_price_preserved_when_promotion_unavailable (test_policy_metadata.PolicyMetadataTest.test_pm12_live_price_preserved_when_promotion_unavailable)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_policy_metadata.py", line 259, in test_pm12_live_price_preserved_when_promotion_unavailable
+    self.assertIn("没有核实", response.answer)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '没有核实' not found in '轻量露营折叠椅 商品标价 899 元，库存 3 件。\n\n本轮尚未明确您要咨询的具体规则，请补充想了解的事项；已核实的其他结果仍然有效。\n\n本轮尚未取得能回答该问题的有效知识依据，暂不能确认相关规则。'
+
+======================================================================
+FAIL: test_refund_and_return_answers_use_indexed_sections (test_policy_metadata.PolicyMetadataTest.test_refund_and_return_answers_use_indexed_sections)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_policy_metadata.py", line 398, in test_refund_and_return_answers_use_indexed_sections
+    self.assertIn("到账", refund.answer)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '到账' not found in '已支付且未出库、未发货的订单，可以发起退款申请；资金类动作必须进入售后审批。\n当前自助退款支持本人已支付、尚未出库且未发货订单的整单退款。签收后的七天无理由退货、已发货或运输中的订单、部分商品退款，适用不同的条件和处理范围。\n申请资格以本人订单的当前支付、出库、发货状态及可信资金记录为准。物流尚未更新不等于尚未出库或发货；资格事实缺失时暂不能确认。\n\n申请金额以该笔订单实际支付与已有退款记录为依据，与今天的商品标价或后来变化的活动价不同。当前支持整单；部分退款、仅退运费和差价补偿不在这条自助流程范围内。\n\n定制商品的无理由退货限制，不直接决定未发货退款资格；仍取决于该订单状态、制作情况与适用规则。\n确认信息包括订单、商品、整单范围、可验证实付金额和下一步。未发货退款申请需要填写问题或原因；签收后七天无理由无需另填原因的规定不自动适用于其他售后。\n\n顾客确认前申请尚未提交。提交时会重新核验资格与金额；准备确认后订单已发货、金额变化或出现重复申请，可能导致原确认信息不能继续使用。'
+
+======================================================================
+FAIL: test_customer_answer_does_not_copy_markdown_headers (test_product_knowledge.ProductKnowledgeTest.test_customer_answer_does_not_copy_markdown_headers)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_product_knowledge.py", line 127, in test_customer_answer_does_not_copy_markdown_headers
+    self.assertGreaterEqual(len(r.citations),1)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 not greater than or equal to 1
+
+======================================================================
+FAIL: test_failed_price_lookup_keeps_failure_and_independent_knowledge (test_product_knowledge.ProductKnowledgeTest.test_failed_price_lookup_keeps_failure_and_independent_knowledge)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_product_knowledge.py", line 65, in test_failed_price_lookup_keeps_failure_and_independent_knowledge
+    self.assertTrue(r.session_state['degraded']);self.assertTrue(self.guide_citations(r));self.assertNotIn('899',r.answer)
+                                                 ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: [] is not true
+
+======================================================================
+FAIL: test_general_knowledge_does_not_change_refund_draft (test_product_knowledge.ProductKnowledgeTest.test_general_knowledge_does_not_change_refund_draft)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_product_knowledge.py", line 59, in test_general_knowledge_does_not_change_refund_draft
+    self.assertTrue(self.guide_citations(r));self.assertEqual(memory['open_task'],draft)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: [] is not true
+
+======================================================================
+FAIL: test_general_tent_condensation_needs_no_product_lookup (test_product_knowledge.ProductKnowledgeTest.test_general_tent_condensation_needs_no_product_lookup)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_product_knowledge.py", line 28, in test_general_tent_condensation_needs_no_product_lookup
+    self.assertTrue(self.guide_citations(r));self.assertIn('冷凝',r.answer)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: [] is not true
+
+======================================================================
+FAIL: test_mixed_query_answers_storage_section_not_product_overview (test_product_knowledge.ProductKnowledgeTest.test_mixed_query_answers_storage_section_not_product_overview)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_product_knowledge.py", line 121, in test_mixed_query_answers_storage_section_not_product_overview
+    self.assertTrue(self.guide_citations(r))
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: [] is not true
+
+======================================================================
+FAIL: test_price_with_knowledge_keeps_live_facts (test_product_knowledge.ProductKnowledgeTest.test_price_with_knowledge_keeps_live_facts)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_product_knowledge.py", line 49, in test_price_with_knowledge_keeps_live_facts
+    self.assertTrue(self.guide_citations(r));self.assertIn('支架',r.answer)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: [] is not true
+
+======================================================================
+FAIL: test_sleeping_bag_does_not_retrieve_other_topics (test_product_knowledge.ProductKnowledgeTest.test_sleeping_bag_does_not_retrieve_other_topics)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_product_knowledge.py", line 95, in test_sleeping_bag_does_not_retrieve_other_topics
+    self.assertTrue(r.citations)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+AssertionError: [] is not true
+
+======================================================================
+FAIL: test_sleeping_bag_missing_temperature_is_not_invented (test_product_knowledge.ProductKnowledgeTest.test_sleeping_bag_missing_temperature_is_not_invented)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_product_knowledge.py", line 40, in test_sleeping_bag_missing_temperature_is_not_invented
+    cites=self.guide_citations(r);self.assertTrue(cites)
+                                  ~~~~~~~~~~~~~~~^^^^^^^
+AssertionError: [] is not true
+
+======================================================================
+FAIL: test_tent_care_retrieves_operational_section_first (test_product_knowledge.ProductKnowledgeTest.test_tent_care_retrieves_operational_section_first)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_product_knowledge.py", line 89, in test_tent_care_retrieves_operational_section_first
+    self.assertTrue(self.guide_citations(r))
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: [] is not true
+
+======================================================================
+FAIL: test_policy_queries_stay_read_only_and_invoice_stays_invoice (test_route_priority.RoutePriorityTest.test_policy_queries_stay_read_only_and_invoice_stays_invoice)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_route_priority.py", line 240, in test_policy_queries_stay_read_only_and_invoice_stays_invoice
+    self.assertTrue(response.citations)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+AssertionError: [] is not true
+
+======================================================================
+FAIL: test_capability_query_is_reusable_from_a_policy_intent (test_service_capabilities.CapabilityAnswerTest.test_capability_query_is_reusable_from_a_policy_intent)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_service_capabilities.py", line 397, in test_capability_query_is_reusable_from_a_policy_intent
+    self.assertTrue(compose.call_args.kwargs["citations"])
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: [] is not true
+
+======================================================================
+FAIL: test_policy_and_multiple_capabilities_share_one_natural_reply (test_service_capabilities.CapabilityAnswerTest.test_policy_and_multiple_capabilities_share_one_natural_reply)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_service_capabilities.py", line 305, in test_policy_and_multiple_capabilities_share_one_natural_reply
+    self.assertTrue(compose.call_args.kwargs["citations"])
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: [] is not true
+
+======================================================================
+FAIL: test_route_contract_carries_capability_evidence_for_any_intent (test_service_capabilities.CapabilityContractTest.test_route_contract_carries_capability_evidence_for_any_intent) (payload={'intent': 'service_scope_query', 'capability_ids': ['stock_notification']})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_service_capabilities.py", line 52, in test_route_contract_carries_capability_evidence_for_any_intent
+    self.assertEqual(RouteModelClient._extract_decision(json.dumps(payload)), payload)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'int[56 chars]otification'], 'inquiry_topics': [], 'topic_status': 'missing'} != {'int[56 chars]otification']}
++ {'capability_ids': ['stock_notification'], 'intent': 'service_scope_query'}
+- {'capability_ids': ['stock_notification'],
+-  'inquiry_topics': [],
+-  'intent': 'service_scope_query',
+-  'topic_status': 'missing'}
+
+======================================================================
+FAIL: test_route_contract_carries_capability_evidence_for_any_intent (test_service_capabilities.CapabilityContractTest.test_route_contract_carries_capability_evidence_for_any_intent) (payload={'intent': 'product_query', 'needs_product_facts': True, 'knowledge_domains': [], 'clarification_fields': [], 'capability_ids': ['stock_notification']})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_service_capabilities.py", line 52, in test_route_contract_carries_capability_evidence_for_any_intent
+    self.assertEqual(RouteModelClient._extract_decision(json.dumps(payload)), payload)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'int[132 chars]otification'], 'inquiry_topics': [], 'topic_status': 'missing'} != {'int[132 chars]otification']}
+  {'capability_ids': ['stock_notification'],
+   'clarification_fields': [],
+-  'inquiry_topics': [],
+   'intent': 'product_query',
+   'knowledge_domains': [],
+-  'needs_product_facts': True,
+?                             ^
+
++  'needs_product_facts': True}
+?                             ^
+
+-  'topic_status': 'missing'}
+
+======================================================================
+FAIL: test_route_contract_carries_capability_evidence_for_any_intent (test_service_capabilities.CapabilityContractTest.test_route_contract_carries_capability_evidence_for_any_intent) (payload={'intent': 'refund_policy_query', 'capability_ids': ['refund_consultation']})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_service_capabilities.py", line 52, in test_route_contract_carries_capability_evidence_for_any_intent
+    self.assertEqual(RouteModelClient._extract_decision(json.dumps(payload)), payload)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'int[57 chars]onsultation'], 'inquiry_topics': [], 'topic_status': 'missing'} != {'int[57 chars]onsultation']}
++ {'capability_ids': ['refund_consultation'], 'intent': 'refund_policy_query'}
+- {'capability_ids': ['refund_consultation'],
+-  'inquiry_topics': [],
+-  'intent': 'refund_policy_query',
+-  'topic_status': 'missing'}
+
+----------------------------------------------------------------------
+Ran 257 tests in 2.143s
+
+FAILED (failures=36, errors=5)

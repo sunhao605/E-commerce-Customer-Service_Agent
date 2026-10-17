@@ -1,0 +1,20 @@
+{
+  "id": "DOMAIN-DISPATCH-PRD-001",
+  "date": "2026-10-17",
+  "document": "docs/02-产品设计/02-意图与政策咨询/跨领域知识取证统一分发产品设计.md",
+  "source_files_checked": 265,
+  "source_fingerprints_unchanged": true,
+  "chapter_count": 12,
+  "functional_sections": 6,
+  "product_principles": 6,
+  "acceptance_cases": 16,
+  "acceptance_status": "not_run",
+  "real_model_calls": 0,
+  "engineering_tests_run": false,
+  "daily_services_loaded": false,
+  "local_links_checked": 90,
+  "markdown_anchors_checked": 7,
+  "records_and_guide_present": true,
+  "code_fences_paired": true,
+  "unique_current_handoff": true
+}

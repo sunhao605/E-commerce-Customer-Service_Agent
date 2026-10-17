@@ -1,0 +1,144 @@
+{
+  "scope": "离线检索＋人工固定主题＋真实内容选择与备用稿；非真实模型质量成绩",
+  "snapshot": "knowledge-669e2fc4af88",
+  "examples": [
+    {
+      "question": "露营季满减和会员券能叠加吗，支持到货提醒吗？",
+      "route_topics_fixed_fixture": [
+        "promotion_stacking"
+      ],
+      "answer": "符合露营季活动条件时，满 300 减 40 可以与平台会员券叠加；同类型满减券不能重复叠加。该规则没有定义“每满 300 减 40”、所有订单无限次参加或其他券种一律兼容。\n\n是否达到300元取决于活动计入的金额和商品范围。运费、未选中商品或其他活动商品是否计入，当前通用规则没有统一保证。\n\n满600元不自动表示减80元；不同券种能否组合，仍以对应券及活动规则为准。该规则不自动覆盖品类券、定向券或未发布的其他活动。\n\n具体券能否使用，取决于所属账号、状态、开始和截止时间、满额门槛、适用品类或商品范围，以及本次订单条件。\n\n未到使用时间、已过期、已使用或不属于本人账号的券不等于本人当前可用券。朋友的券截图不会改变归属；当前没有口头延期或转移权益的办理能力。\n\n品类券不能默认用于全部商品；多张券分别满足使用条件不代表可以组合，组合条件引用活动叠加规则。\n\n活动是否正在进行、具体参与商品、活动价、会员门槛、优惠券状态与最终金额，以对应活动、商品及结算信息为准。\n\n露营季不代表固定月份，也没有覆盖全部商品的永久活动周期。文档更新时间不代表活动开始时间，以上规则不包含未发布的其他活动或隐藏券。\n\n以上为平台通用规则，不代表当前商品参与活动或本人优惠券已适用，具体组合以商品页和结算条件为准。\n\n到货与补货提醒这次没有查到支持状态，暂时不能确认是否提供。请稍后再问。",
+      "selection": {
+        "topics": [
+          "promotion_stacking"
+        ],
+        "topic_status": "valid",
+        "selected_rules": [
+          "promotion_stacking",
+          "coupon_conditions",
+          "promotion_scope"
+        ],
+        "gaps": [],
+        "invalid_candidates": [],
+        "retrieved_candidates": [
+          {
+            "source": "knowledge/promotion_policy.md",
+            "section_id": "promotion_stacking",
+            "reason": "selected_by_governed_topic_and_complete_rule"
+          },
+          {
+            "source": "knowledge/member_coupon_policy.md",
+            "section_id": "coupon_types",
+            "reason": "selected_by_governed_topic_and_complete_rule"
+          },
+          {
+            "source": "knowledge/member_coupon_policy.md",
+            "section_id": "coupon_basic",
+            "reason": "selected_by_governed_topic_and_complete_rule"
+          },
+          {
+            "source": "knowledge/promotion_policy.md",
+            "section_id": "promotion_scope",
+            "reason": "selected_by_governed_topic_and_complete_rule"
+          }
+        ],
+        "snapshot_version": "knowledge-669e2fc4af88"
+      },
+      "hard_issues": [
+        "capability_evidence_missing"
+      ],
+      "characters": 585
+    },
+    {
+      "question": "露营季满减和会员券能叠加吗，退款后会退券吗？",
+      "route_topics_fixed_fixture": [
+        "promotion_stacking",
+        "coupon_recovery"
+      ],
+      "answer": "符合露营季活动条件时，满 300 减 40 可以与平台会员券叠加；同类型满减券不能重复叠加。该规则没有定义“每满 300 减 40”、所有订单无限次参加或其他券种一律兼容。\n\n是否达到300元取决于活动计入的金额和商品范围。运费、未选中商品或其他活动商品是否计入，当前通用规则没有统一保证。\n\n满600元不自动表示减80元；不同券种能否组合，仍以对应券及活动规则为准。该规则不自动覆盖品类券、定向券或未发布的其他活动。\n\n具体券能否使用，取决于所属账号、状态、开始和截止时间、满额门槛、适用品类或商品范围，以及本次订单条件。\n\n未到使用时间、已过期、已使用或不属于本人账号的券不等于本人当前可用券。朋友的券截图不会改变归属；当前没有口头延期或转移权益的办理能力。\n\n品类券不能默认用于全部商品；多张券分别满足使用条件不代表可以组合，组合条件引用活动叠加规则。\n\n活动是否正在进行、具体参与商品、活动价、会员门槛、优惠券状态与最终金额，以对应活动、商品及结算信息为准。\n\n露营季不代表固定月份，也没有覆盖全部商品的永久活动周期。文档更新时间不代表活动开始时间，以上规则不包含未发布的其他活动或隐藏券。\n\n退款不自动代表优惠券已退回或有效期已延长。返券、延期与部分退款后的优惠分摊需要各自的规则，当前没有统一的自动恢复承诺。\n\n以上为平台通用规则，不代表当前商品参与活动或本人优惠券已适用，具体组合以商品页和结算条件为准。",
+      "selection": {
+        "topics": [
+          "promotion_stacking",
+          "coupon_recovery"
+        ],
+        "topic_status": "valid",
+        "selected_rules": [
+          "promotion_stacking",
+          "coupon_conditions",
+          "promotion_scope",
+          "coupon_recovery"
+        ],
+        "gaps": [],
+        "invalid_candidates": [],
+        "retrieved_candidates": [
+          {
+            "source": "knowledge/member_coupon_policy.md",
+            "section_id": "coupon_recovery",
+            "reason": "selected_by_governed_topic_and_complete_rule"
+          },
+          {
+            "source": "knowledge/promotion_policy.md",
+            "section_id": "promotion_refund",
+            "reason": "selected_by_governed_topic_and_complete_rule"
+          },
+          {
+            "source": "knowledge/promotion_policy.md",
+            "section_id": "promotion_stacking",
+            "reason": "selected_by_governed_topic_and_complete_rule"
+          },
+          {
+            "source": "knowledge/member_coupon_policy.md",
+            "section_id": "coupon_basic",
+            "reason": "selected_by_governed_topic_and_complete_rule"
+          }
+        ],
+        "snapshot_version": "knowledge-669e2fc4af88"
+      },
+      "hard_issues": [],
+      "characters": 609
+    },
+    {
+      "question": "未发货退款多久到账？",
+      "route_topics_fixed_fixture": [
+        "refund_arrival"
+      ],
+      "answer": "当前退款使用演示余额和资金流水，不提供真实银行卡、支付宝或微信退款的到账时限保证。\n\n以上为通用售后规则，具体订单资格仍需核验，不代表已经提交申请。",
+      "selection": {
+        "topics": [
+          "refund_arrival"
+        ],
+        "topic_status": "valid",
+        "selected_rules": [
+          "refund_arrival"
+        ],
+        "gaps": [],
+        "invalid_candidates": [],
+        "retrieved_candidates": [
+          {
+            "source": "knowledge/after_sale_policy.md",
+            "section_id": "refund_conditions",
+            "reason": "selected_by_governed_topic_and_complete_rule"
+          },
+          {
+            "source": "knowledge/after_sale_policy.md",
+            "section_id": "refund_scope",
+            "reason": "selected_by_governed_topic_and_complete_rule"
+          },
+          {
+            "source": "knowledge/after_sale_policy.md",
+            "section_id": "refund_eligibility",
+            "reason": "selected_by_governed_topic_and_complete_rule"
+          },
+          {
+            "source": "knowledge/after_sale_policy.md",
+            "section_id": "refund_submit",
+            "reason": "selected_by_governed_topic_and_complete_rule"
+          }
+        ],
+        "snapshot_version": "knowledge-669e2fc4af88"
+      },
+      "hard_issues": [],
+      "characters": 74
+    }
+  ]
+}

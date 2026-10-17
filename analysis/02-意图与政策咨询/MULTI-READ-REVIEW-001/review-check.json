@@ -1,0 +1,18 @@
+{
+  "id": "MULTI-READ-REVIEW-001",
+  "head": "351b12b6b2bc7e79273e9ea297a2d0c0225cf5f6",
+  "implementation_files_unchanged": true,
+  "source_hashes": {
+    "backend/agent/customer_service_agent.py": "e296bab90a95ff4217828a7cc3500a788fa1ec31123821a1e60fd5d75d579e0a",
+    "backend/agent/tools/planning.py": "862d6280ae9c0ba27a12e47593b828aff3163f651c3c6d8b38adc155abd1aef4",
+    "backend/tests/test_answer_content.py": "ec19adaca64a325454f6815f7a727e7963231e925dbb7c73e104d2494340c4a5",
+    "ecommerce-backend/src/main/java/com/teachdemo/ecommerce/customer_service/CustomerServiceGatewayService.java": "bf3a46bc3d4b468421cf930362ac01e39d121d46b7224e946172e898593c1f1a"
+  },
+  "offline_backend_checks": 288,
+  "offline_probe_cases": 8,
+  "real_model_calls": 0,
+  "real_business_calls": 0,
+  "java_reexecuted": false,
+  "services_loaded": false,
+  "findings": 5
+}

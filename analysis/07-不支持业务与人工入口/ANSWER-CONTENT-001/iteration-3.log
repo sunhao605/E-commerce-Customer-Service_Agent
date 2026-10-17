@@ -1,0 +1,23 @@
+............................................................................................F.......F............................................................................................................................................................
+======================================================================
+FAIL: test_guide_can_use_page_context_without_this_item_phrase (test_evidence_routing.EvidenceExecutionTest.test_guide_can_use_page_context_without_this_item_phrase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_evidence_routing.py", line 308, in test_guide_can_use_page_context_without_this_item_phrase
+    self.assertNotIn("899", response.answer)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '899' unexpectedly found in '山野四人帐篷 商品标价 899 元，库存 3 件。\n\n出发前在合适位置试搭，核对配件和搭建步骤。使用后先清除砂土和杂物，依说明书清洁并充分晾干再收纳；长期潮湿收纳可能带来霉味和涂层问题。通用帐篷养护建议不使用洗衣机或烘干机强洗，具体型号仍以厂商说明为准。通用依据：REI 帐篷养护。\n\n霉味、脱胶或拉链卡顿可能与不同因素有关，首次出现时间、存放条件与异常位置有助于核验；单张照片不能独立确定责任。\n\n本指南提供通用选购、使用与问题排查知识。具体型号的参数、配件和使用条件以说明书及可信商品资料为准；通用指南不证明具体商品的价格、库存、活动资格或订单可退资格。\n\n商品名称不能代替承重、防水等级、容量、续航或睡袋温标等参数。型号资料没有公布的数字，当前无法确认。\n\n以上为通用使用知识，具体型号参数以说明书为准。'
+
+======================================================================
+FAIL: test_page_guide_lookup_only_resolves_identity_not_price (test_evidence_routing.EvidenceExecutionTest.test_page_guide_lookup_only_resolves_identity_not_price)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_evidence_routing.py", line 283, in test_page_guide_lookup_only_resolves_identity_not_price
+    self.assertNotIn("899", response.answer)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '899' unexpectedly found in '山野四人帐篷 商品标价 899 元，库存 3 件。\n\n出发前在合适位置试搭，核对配件和搭建步骤。使用后先清除砂土和杂物，依说明书清洁并充分晾干再收纳；长期潮湿收纳可能带来霉味和涂层问题。通用帐篷养护建议不使用洗衣机或烘干机强洗，具体型号仍以厂商说明为准。通用依据：REI 帐篷养护。\n\n霉味、脱胶或拉链卡顿可能与不同因素有关，首次出现时间、存放条件与异常位置有助于核验；单张照片不能独立确定责任。\n\n本指南提供通用选购、使用与问题排查知识。具体型号的参数、配件和使用条件以说明书及可信商品资料为准；通用指南不证明具体商品的价格、库存、活动资格或订单可退资格。\n\n商品名称不能代替承重、防水等级、容量、续航或睡袋温标等参数。型号资料没有公布的数字，当前无法确认。\n\n以上为通用使用知识，具体型号参数以说明书为准。'
+
+----------------------------------------------------------------------
+Ran 257 tests in 2.211s
+
+FAILED (failures=2)

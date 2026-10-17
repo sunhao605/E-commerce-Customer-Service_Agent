@@ -1,0 +1,185 @@
+..............FFFFFEEEEEEFFFFF
+======================================================================
+ERROR: test_task_relation_contract_is_optional_and_invalid_relation_does_not_grant_control (backend.tests.test_task_lifecycle.TaskLifecycleTest.test_task_relation_contract_is_optional_and_invalid_relation_does_not_grant_control) (relation='resume')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_task_lifecycle.py", line 111, in test_task_relation_contract_is_optional_and_invalid_relation_does_not_grant_control
+    self.assertEqual(parsed['task_relation'], relation)
+                     ~~~~~~^^^^^^^^^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+
+======================================================================
+ERROR: test_task_relation_contract_is_optional_and_invalid_relation_does_not_grant_control (backend.tests.test_task_lifecycle.TaskLifecycleTest.test_task_relation_contract_is_optional_and_invalid_relation_does_not_grant_control) (relation='stop')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_task_lifecycle.py", line 111, in test_task_relation_contract_is_optional_and_invalid_relation_does_not_grant_control
+    self.assertEqual(parsed['task_relation'], relation)
+                     ~~~~~~^^^^^^^^^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+
+======================================================================
+ERROR: test_task_relation_contract_is_optional_and_invalid_relation_does_not_grant_control (backend.tests.test_task_lifecycle.TaskLifecycleTest.test_task_relation_contract_is_optional_and_invalid_relation_does_not_grant_control) (relation='switch')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_task_lifecycle.py", line 111, in test_task_relation_contract_is_optional_and_invalid_relation_does_not_grant_control
+    self.assertEqual(parsed['task_relation'], relation)
+                     ~~~~~~^^^^^^^^^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+
+======================================================================
+ERROR: test_task_relation_contract_is_optional_and_invalid_relation_does_not_grant_control (backend.tests.test_task_lifecycle.TaskLifecycleTest.test_task_relation_contract_is_optional_and_invalid_relation_does_not_grant_control) (relation='unrelated')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_task_lifecycle.py", line 111, in test_task_relation_contract_is_optional_and_invalid_relation_does_not_grant_control
+    self.assertEqual(parsed['task_relation'], relation)
+                     ~~~~~~^^^^^^^^^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+
+======================================================================
+ERROR: test_task_relation_contract_is_optional_and_invalid_relation_does_not_grant_control (backend.tests.test_task_lifecycle.TaskLifecycleTest.test_task_relation_contract_is_optional_and_invalid_relation_does_not_grant_control) (relation='uncertain')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_task_lifecycle.py", line 111, in test_task_relation_contract_is_optional_and_invalid_relation_does_not_grant_control
+    self.assertEqual(parsed['task_relation'], relation)
+                     ~~~~~~^^^^^^^^^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+
+======================================================================
+ERROR: test_task_relation_contract_is_optional_and_invalid_relation_does_not_grant_control (backend.tests.test_task_lifecycle.TaskLifecycleTest.test_task_relation_contract_is_optional_and_invalid_relation_does_not_grant_control)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_task_lifecycle.py", line 113, in test_task_relation_contract_is_optional_and_invalid_relation_does_not_grant_control
+    self.assertEqual(parsed['intent'], 'general_chat')
+                     ~~~~~~^^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+
+======================================================================
+FAIL: test_control_proposal_is_not_a_cancellation_receipt (backend.tests.test_task_lifecycle.TaskLifecycleTest.test_control_proposal_is_not_a_cancellation_receipt) (relation='stop')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_task_lifecycle.py", line 85, in test_control_proposal_is_not_a_cancellation_receipt
+    self.assertEqual(response.session_state['memory']['open_task'], draft)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'int[62 chars]s': []} != {'int[62 chars]s': [{'value': 'ORD9801', 'label': '第一笔'}, {'v[44 chars]': 3}
+- {'candidates': [], 'intent': 'refund_request', 'pending_slot': 'order_id'}
++ {'candidates': [{'label': '第一笔', 'value': 'ORD9801'},
++                 {'label': '第二笔', 'value': 'ORD9802'}],
++  'intent': 'refund_request',
++  'pending_slot': 'order_id',
++  'version': 3}
+
+======================================================================
+FAIL: test_control_proposal_is_not_a_cancellation_receipt (backend.tests.test_task_lifecycle.TaskLifecycleTest.test_control_proposal_is_not_a_cancellation_receipt) (relation='switch')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_task_lifecycle.py", line 85, in test_control_proposal_is_not_a_cancellation_receipt
+    self.assertEqual(response.session_state['memory']['open_task'], draft)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'int[62 chars]s': []} != {'int[62 chars]s': [{'value': 'ORD9801', 'label': '第一笔'}, {'v[44 chars]': 3}
+- {'candidates': [], 'intent': 'refund_request', 'pending_slot': 'order_id'}
++ {'candidates': [{'label': '第一笔', 'value': 'ORD9801'},
++                 {'label': '第二笔', 'value': 'ORD9802'}],
++  'intent': 'refund_request',
++  'pending_slot': 'order_id',
++  'version': 3}
+
+======================================================================
+FAIL: test_explicit_resume_uses_original_snapshot_over_query_and_page (backend.tests.test_task_lifecycle.TaskLifecycleTest.test_explicit_resume_uses_original_snapshot_over_query_and_page)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_task_lifecycle.py", line 75, in test_explicit_resume_uses_original_snapshot_over_query_and_page
+    self.assertEqual(response.session_state['context_report']['chosen_order_id'], 'ORD9802')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'ORD9999' != 'ORD9802'
+- ORD9999
++ ORD9802
+
+
+======================================================================
+FAIL: test_query_candidates_and_refund_candidates_are_independent (backend.tests.test_task_lifecycle.TaskLifecycleTest.test_query_candidates_and_refund_candidates_are_independent)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_task_lifecycle.py", line 47, in test_query_candidates_and_refund_candidates_are_independent
+    self.assertEqual(memory['open_task'], draft)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'intent': 'order_query', 'pending_slot': 'order_id',[95 chars]2'}]} != {'intent': 'refund_request', 'pending_slot': 'order_i[104 chars]': 3}
+Diff is 713 characters long. Set self.maxDiff to None to see it.
+
+======================================================================
+FAIL: test_query_failure_does_not_finish_after_sale_task (backend.tests.test_task_lifecycle.TaskLifecycleTest.test_query_failure_does_not_finish_after_sale_task)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_task_lifecycle.py", line 94, in test_query_failure_does_not_finish_after_sale_task
+    self.assertEqual(response.session_state['memory']['open_task'], draft)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'intent': 'order_query', 'pending_slot': 'order_id',[13 chars]: []} != {'intent': 'refund_request', 'pending_slot': 'order_i[104 chars]': 3}
+- {'candidates': [], 'intent': 'order_query', 'pending_slot': 'order_id'}
++ {'candidates': [{'label': '第一笔', 'value': 'ORD9801'},
++                 {'label': '第二笔', 'value': 'ORD9802'}],
++  'intent': 'refund_request',
++  'pending_slot': 'order_id',
++  'version': 3}
+
+======================================================================
+FAIL: test_unrelated_turn_preserves_other_consultation_states (backend.tests.test_task_lifecycle.TaskLifecycleTest.test_unrelated_turn_preserves_other_consultation_states)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_task_lifecycle.py", line 104, in test_unrelated_turn_preserves_other_consultation_states
+    self.assertEqual(memory['product_query'], product)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'pending_candidates': None, 'original_question': None} != {'pending_candidates': [{'id': 4, 'name': '帐篷'}], 'original_question': '帐篷多少钱'}
+- {'original_question': None, 'pending_candidates': None}
++ {'original_question': '帐篷多少钱', 'pending_candidates': [{'id': 4, 'name': '帐篷'}]}
+
+======================================================================
+FAIL: test_unrelated_turns_preserve_draft_and_read_only_semantics (backend.tests.test_task_lifecycle.TaskLifecycleTest.test_unrelated_turns_preserve_draft_and_read_only_semantics) (intent='order_query')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_task_lifecycle.py", line 36, in test_unrelated_turns_preserve_draft_and_read_only_semantics
+    self.assertEqual(response.session_state['memory']['open_task'], draft)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'intent': 'order_query', 'pending_slot': 'order_id',[13 chars]: []} != {'intent': 'refund_request', 'pending_slot': 'order_i[104 chars]': 3}
+- {'candidates': [], 'intent': 'order_query', 'pending_slot': 'order_id'}
++ {'candidates': [{'label': '第一笔', 'value': 'ORD9801'},
++                 {'label': '第二笔', 'value': 'ORD9802'}],
++  'intent': 'refund_request',
++  'pending_slot': 'order_id',
++  'version': 3}
+
+======================================================================
+FAIL: test_unrelated_turns_preserve_draft_and_read_only_semantics (backend.tests.test_task_lifecycle.TaskLifecycleTest.test_unrelated_turns_preserve_draft_and_read_only_semantics) (intent='refund_status_query')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_task_lifecycle.py", line 36, in test_unrelated_turns_preserve_draft_and_read_only_semantics
+    self.assertEqual(response.session_state['memory']['open_task'], draft)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'intent': 'refund_status_query', 'pending_slot': 'order_id'[14 chars]: []} != {'intent': 'refund_request', 'pending_slot': 'order_id', 'ca[97 chars]': 3}
+- {'candidates': [], 'intent': 'refund_status_query', 'pending_slot': 'order_id'}
++ {'candidates': [{'label': '第一笔', 'value': 'ORD9801'},
++                 {'label': '第二笔', 'value': 'ORD9802'}],
++  'intent': 'refund_request',
++  'pending_slot': 'order_id',
++  'version': 3}
+
+======================================================================
+FAIL: test_unrelated_turns_preserve_draft_and_read_only_semantics (backend.tests.test_task_lifecycle.TaskLifecycleTest.test_unrelated_turns_preserve_draft_and_read_only_semantics) (intent='general_chat')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_task_lifecycle.py", line 36, in test_unrelated_turns_preserve_draft_and_read_only_semantics
+    self.assertEqual(response.session_state['memory']['open_task'], draft)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: None != {'intent': 'refund_request', 'pending_slo[116 chars]': 3}
+
+======================================================================
+FAIL: test_unrelated_turns_preserve_draft_and_read_only_semantics (backend.tests.test_task_lifecycle.TaskLifecycleTest.test_unrelated_turns_preserve_draft_and_read_only_semantics) (intent='unknown')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/sunhao/Downloads/03_AIPMProject/0305_E-commerce-Customer-Service_Agent/backend/tests/test_task_lifecycle.py", line 36, in test_unrelated_turns_preserve_draft_and_read_only_semantics
+    self.assertEqual(response.session_state['memory']['open_task'], draft)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: None != {'intent': 'refund_request', 'pending_slo[116 chars]': 3}
+
+----------------------------------------------------------------------
+Ran 21 tests in 0.273s
+
+FAILED (failures=10, errors=6)

@@ -1,0 +1,930 @@
+--- before/backend/agent/answer_review.py
++++ after/backend/agent/answer_review.py
+@@ -10,12 +10,13 @@
+ from api.schemas import ChatRequest, Citation, RoutePlan, ToolCallTrace
+ from agent.service_capabilities import CHANNEL, capability_answer_text
+ from retrieval.documents import knowledge_time, citation_is_current
+-from retrieval.knowledge import _plain_evidence
++from retrieval.knowledge import _plain_evidence, KnowledgePathResult
+ from retrieval.rules import select_rules, rules_answer
+ 
+ REVIEW_INTENTS = {"service_scope_query", "product_query", "promotion_query", "invoice_query",
+-                  "refund_policy_query", "return_policy_query", "order_query", "refund_status_query"}
+-READ_TOOLS = {"search_products", "get_order_detail", "get_order_logistics", "get_refund_status"}
++                  "refund_policy_query", "return_policy_query", "order_query", "refund_status_query",
++                  "after_sale_eligibility_query"}
++READ_TOOLS = {"search_products", "get_order_detail", "get_order_logistics", "get_refund_status", "get_after_sale_eligibility"}
+ # shortcut: 内部脱敏审阅只保留最近100条进程内记录；真实灰度需持久留存时再接有权限的审计存储。
+ review_audit: deque[dict[str, Any]] = deque(maxlen=100)
+ 
+@@ -38,7 +39,9 @@
+                          tool_calls: list[ToolCallTrace], citations: list[Citation],
+                          capabilities: list[dict[str, Any]], history: list[str],
+                          interaction_policy: dict[str, Any] | None = None,
+-                         content_selection: dict[str, Any] | None = None) -> tuple[dict[str, Any], str, list[str]]:
++                         content_selection: dict[str, Any] | None = None,
++                         knowledge_results: dict[str, KnowledgePathResult] | None = None,
++                         pending_answer: str = "") -> tuple[dict[str, Any], str, list[str]]:
+     """只整理已经取得的事实，不补查、不从候选或模型结论反推事实。"""
+     evidence: list[dict[str, Any]] = [
+         {"id": "request", "kind": "request", "text": request.user_message},
+@@ -121,8 +124,25 @@
+         block = _plain_evidence(citation.snippet)
+         blocks.append(block)
+         ordered_blocks.setdefault("topic:" + metadata.get("answer_topic", ""), []).append(block)
++    # 缺参/取证故障用实际局部结果说明，避免再给同一项追加笼统的“未取到规则”。
++    from retrieval.rules import topic_catalog
++    catalog = topic_catalog()
++    unavailable_domains = {domain for domain, result in (knowledge_results or {}).items()
++                           if not result.citations}
+     if content_selection and content_selection["gaps"]:
+-        blocks.append(rules_answer([], content_selection))
++        visible_gaps = [gap for gap in content_selection["gaps"]
++                        if catalog.get(gap.split(":", 1)[-1]) not in unavailable_domains]
++        blocks.append(rules_answer([], {**content_selection, "gaps": visible_gaps}))
++    for domain, result in (knowledge_results or {}).items():
++        debug = result.retrieval_debug or {}
++        if not result.citations:
++            evidence.append({"id": "knowledge:" + domain, "kind": "knowledge_gap",
++                "status": debug.get("status"), "summary": result.answer,
++                "topics": debug.get("topics", []), "failure": bool(debug.get("failure"))})
++            blocks.append(result.answer)
++    if pending_answer:
++        evidence.append({"id": "clarification", "kind": "clarification", "summary": pending_answer})
++        blocks.append(pending_answer)
+     policy_ids = {(item.metadata or {}).get("policy_id") for item in valid_citations}
+     if policy_ids & {"promotion_camping_season_stack_rule", "member_coupon_gold_rule"}:
+         blocks.append("以上为平台通用规则，不代表当前商品参与活动或本人优惠券已适用，具体组合以商品页和结算条件为准。")
+--- before/backend/agent/customer_service_agent.py
++++ after/backend/agent/customer_service_agent.py
+@@ -38,11 +38,8 @@
+ )
+ from agent.trace import TraceEventNormalizer, public_trace_summary, record_initial_chat_trace, record_trace_events, trace_store
+ from retrieval.knowledge import (
+-    invoice_faq_result,
++    query_knowledge_domain, KnowledgePathResult,
+     low_confidence_result,
+-    policy_query_result,
+-    promotion_policy_result,
+-    product_knowledge_result,
+ )
+ from agent.source_guard import inspect_source
+ from agent.state import MESSAGE_COUNT_BY_SESSION
+@@ -253,6 +250,11 @@
+                 route_plan.required_tools = ["search_products"]
+                 route_plan.tool_candidates = [ToolCandidate(name="search_products", domain="product", risk_level="low", reason="核对已指向商品的类别，为通用指南定位对象。")]
+                 route_plan.needs_business_tools = True
++            if product_resolution["kind"] == "end_pending":
++                route_plan = route_plan.model_copy(update={
++                    "needs_rag": False, "knowledge_domains": [], "retrieval_strategies": [],
++                    "inquiry_topics": [], "topic_status": "empty", "answer_order": [],
++                })
+         runtime_context = runtime_context_summary(request)
+         uses_runtime_identity = is_runtime_identity_query(request.user_message)
+         citations: list[Citation] = []
+@@ -267,6 +269,8 @@
+         rag_retrieval: dict[str, Any] | None = None
+         rag_retrieval_by_domain: dict[str, Any] = {}
+         knowledge_result = None
++        knowledge_results: dict[str, KnowledgePathResult] = {}
++        pending_answer = ""
+         verified_order_id: str | None = None
+         verified_product_name: str | None = None
+         verified_product_id: str | None = None
+@@ -390,114 +394,11 @@
+             risk_level = knowledge_result.risk_level
+             next_action = knowledge_result.next_action
+             needs_human_approval = knowledge_result.needs_human_approval
+-        elif intent == "invoice_query":
+-            # MULTI-READ-001 F3：统一计划逐域取证；单域发票保持原行为（含发票缓存与撤回降级），
+-            # 同轮已识别的跨域主题（如退款到账）不再被主意图排斥。
++        elif intent in {"invoice_query", "refund_policy_query", "return_policy_query", "promotion_query"}:
+             answer = ""
+             risk_level = "low"
+             next_action = "answer_user"
+             needs_human_approval = False
+-            knowledge_result = None
+-            single_domain = [s.knowledge_domain for s in route_plan.retrieval_strategies] == ["invoice"]
+-            for strategy in route_plan.retrieval_strategies:
+-                domain = strategy.knowledge_domain
+-                if domain == "invoice":
+-                    result = invoice_faq_result(request.session_id)
+-                    cache_hit = cache_hit or result.cache_hit
+-                else:
+-                    result = policy_query_result(request.session_id, "refund_policy_query" if domain == "after_sale_policy" else "return_policy_query", selection_message)
+-                record_trace_events(request.session_id, result.trace_events)
+-                citations.extend(result.citations)
+-                rag_retrieval_by_domain[domain] = result.retrieval_debug
+-                trace_store.add(request.session_id, "evidence_domain_completed", {
+-                    **strategy.model_dump(),
+-                    "status": "answered" if result.citations else "no_evidence",
+-                    "retrieval": result.retrieval_debug,
+-                    "citations": [c.model_dump() for c in result.citations],
+-                })
+-                if single_domain:
+-                    # 单域保持原行为：答案/状态来自该域结果（含无证据降级文案）。
+-                    answer = result.answer
+-                    knowledge_result = result
+-                    risk_level = result.risk_level
+-                    next_action = result.next_action
+-                    needs_human_approval = result.needs_human_approval
+-                    rag_retrieval = result.retrieval_debug
+-        elif intent in {"refund_policy_query", "return_policy_query"}:
+-            # MULTI-READ-001 F3：统一计划逐域取证；单域政策保持原行为，
+-            # 有订单号时仍只说明通用规则、不核验订单、不准备申请。
+-            answer = ""
+-            risk_level = "low"
+-            next_action = "answer_user"
+-            needs_human_approval = False
+-            own_domains = {"after_sale_policy", "received_return_policy"}
+-            single_domain = [s.knowledge_domain for s in route_plan.retrieval_strategies] in ([["after_sale_policy"]], [["received_return_policy"]])
+-            for strategy in route_plan.retrieval_strategies:
+-                domain = strategy.knowledge_domain
+-                if domain in own_domains:
+-                    policy_intent = "refund_policy_query" if domain == "after_sale_policy" else "return_policy_query"
+-                    result = policy_query_result(request.session_id, policy_intent, selection_message)
+-                elif domain == "invoice":
+-                    result = invoice_faq_result(request.session_id)
+-                else:
+-                    result = promotion_policy_result(request.session_id, selection_message, clarification_required=False)
+-                record_trace_events(request.session_id, result.trace_events)
+-                citations.extend(result.citations)
+-                rag_retrieval_by_domain[domain] = result.retrieval_debug
+-                trace_store.add(request.session_id, "evidence_domain_completed", {
+-                    **strategy.model_dump(),
+-                    "status": "answered" if result.citations else "no_evidence",
+-                    "retrieval": result.retrieval_debug,
+-                    "citations": [c.model_dump() for c in result.citations],
+-                })
+-                if single_domain:
+-                    # 单域保持原行为：答案/状态来自该域结果（含无证据降级文案）。
+-                    answer = result.answer
+-                    risk_level = result.risk_level
+-                    next_action = result.next_action
+-                    needs_human_approval = result.needs_human_approval
+-                    rag_retrieval = result.retrieval_debug
+-                    knowledge_result = result
+-            if order_id:
+-                answer = f"{answer} 这轮只说明通用规则，没有核验这笔订单，也没有准备申请。" if answer else "这轮只说明通用规则，没有核验这笔订单，也没有准备申请。"
+-        elif intent == "promotion_query":
+-            # MULTI-READ-001 F3：优惠自身域保持原语义（组合澄清、无证据降级），
+-            # 同轮已识别的跨域主题逐域补取证，answer 交给统一生成。
+-            knowledge_result = promotion_policy_result(request.session_id, policy_question, clarification_required="promotion_combination" in route_plan.clarification_fields)
+-            if knowledge_result.next_action == "ask_clarification":
+-                memory["promotion_query"] = {"question": policy_question}
+-            else:
+-                memory.pop("promotion_query", None)
+-            if not knowledge_result.citations and knowledge_result.next_action != "ask_clarification":
+-                intent = "low_confidence_query"
+-            record_trace_events(request.session_id, knowledge_result.trace_events)
+-            citations = knowledge_result.citations
+-            rag_rerank = knowledge_result.rerank
+-            rag_retrieval = knowledge_result.retrieval_debug
+-            risk_level = knowledge_result.risk_level
+-            next_action = knowledge_result.next_action
+-            needs_human_approval = knowledge_result.needs_human_approval
+-            rag_retrieval_by_domain.setdefault("promotion_and_member_policy", knowledge_result.retrieval_debug)
+-            # 澄清或无证据降级时保持原答案；正常有证据时 answer 交给统一生成组织多域内容。
+-            answer = knowledge_result.answer if (knowledge_result.next_action == "ask_clarification" or not knowledge_result.citations) else ""
+-            # 跨域主题的其余域逐项取证（promotion 自身域已由上面取得）。
+-            for strategy in route_plan.retrieval_strategies:
+-                domain = strategy.knowledge_domain
+-                if domain == "promotion_and_member_policy" or domain in rag_retrieval_by_domain:
+-                    continue
+-                if domain == "invoice":
+-                    result = invoice_faq_result(request.session_id)
+-                else:
+-                    result = policy_query_result(request.session_id, "refund_policy_query" if domain == "after_sale_policy" else "return_policy_query", selection_message)
+-                record_trace_events(request.session_id, result.trace_events)
+-                citations.extend(result.citations)
+-                rag_retrieval_by_domain[domain] = result.retrieval_debug
+-                trace_store.add(request.session_id, "evidence_domain_completed", {
+-                    **strategy.model_dump(),
+-                    "status": "answered" if result.citations else "no_evidence",
+-                    "retrieval": result.retrieval_debug,
+-                    "citations": [c.model_dump() for c in result.citations],
+-                })
+         elif intent == "after_sale_eligibility_query":
+             if clarification:
+                 answer = clarification.message + "这轮只查资格，不准备申请。"
+@@ -559,7 +460,7 @@
+                 else:
+                     verified_order_id = order_no(order)
+                     return_reason = extract_return_reason(request.user_message)
+-                    policy_result = policy_query_result(request.session_id, intent, request.user_message)
++                    policy_result = query_knowledge_domain(request.session_id, "received_return_policy", request.user_message)
+                     citations.extend(policy_result.citations)
+                     rag_retrieval = policy_result.retrieval_debug
+                     record_trace_events(request.session_id, policy_result.trace_events)
+@@ -611,10 +512,8 @@
+                         "source": "product_tool_read_failure",
+                     },
+                 )
+-            citations.extend(outcome["citations"])
+-            rag_rerank = outcome.get("rag_rerank")
+-            rag_retrieval = outcome.get("rag_retrieval")
+-            rag_retrieval_by_domain = outcome.get("rag_retrieval_by_domain", {})
++            knowledge_results.update(outcome["knowledge_results"])
++            pending_answer = outcome.get("pending_answer", "")
+         elif intent in {"order_query", "refund_status_query", "refund_request"}:
+             tool_result = self.langchain_tool_runner.run(
+                 request=request,
+@@ -748,7 +647,7 @@
+                     degraded = True
+                     degradation_reason = status_call.error_type or "refund_status_unavailable"
+             elif intent == "refund_request":
+-                policy_result = policy_query_result(request.session_id, intent, request.user_message)
++                policy_result = query_knowledge_domain(request.session_id, "after_sale_policy", request.user_message)
+                 citations.extend(policy_result.citations)
+                 rag_retrieval = policy_result.retrieval_debug
+                 record_trace_events(request.session_id, policy_result.trace_events)
+@@ -825,26 +724,6 @@
+             risk_level = "low"
+             next_action = "answer_user"
+             needs_human_approval = False
+-            for strategy in route_plan.retrieval_strategies:
+-                domain = strategy.knowledge_domain
+-                if domain == "promotion_and_member_policy":
+-                    result = promotion_policy_result(request.session_id, selection_message, clarification_required=False)
+-                elif domain == "product_knowledge":
+-                    result = product_knowledge_result(request.session_id, selection_message)
+-                elif domain == "invoice":
+-                    result = invoice_faq_result(request.session_id)
+-                else:
+-                    policy_intent = "refund_policy_query" if domain == "after_sale_policy" else "return_policy_query"
+-                    result = policy_query_result(request.session_id, policy_intent, selection_message)
+-                record_trace_events(request.session_id, result.trace_events)
+-                citations.extend(result.citations)
+-                rag_retrieval_by_domain[domain] = result.retrieval_debug
+-                trace_store.add(request.session_id, "evidence_domain_completed", {
+-                    **strategy.model_dump(),
+-                    "status": "answered" if result.citations else "no_evidence",
+-                    "retrieval": result.retrieval_debug,
+-                    "citations": [c.model_dump() for c in result.citations],
+-                })
+         elif intent == "unknown":
+             answer = "" if route_plan.needs_business_tools or route_plan.needs_rag else (
+                 f"我收到了订单号 {order_id}，但你还没有说明要办什么。请告诉我是查物流、查进度，还是申请售后。在你说清楚之前，我不会替你选定，也不会查询这笔订单。"
+@@ -859,6 +738,61 @@
+             risk_level = "low"
+             next_action = "answer_user"
+             needs_human_approval = False
++
++        # 所有只读入口共享分发与结果消费；商品入口只额外准备对象参数和咨询状态。
++        if (not uses_runtime_identity and not route_plan.requires_workflow
++            and intent not in {"security_request", "degradation_request"}
++            and (intent != "low_confidence_query" or route_plan.inquiry_topics)):
++            if clarification and next_action == "ask_clarification":
++                pending_answer = answer
++            from retrieval.rules import topic_catalog
++            catalog = topic_catalog()
++            for strategy in route_plan.retrieval_strategies:
++                domain = strategy.knowledge_domain
++                if domain not in knowledge_results:
++                    query = policy_question if domain == "promotion_and_member_policy" else selection_message
++                    pending = None
++                    if domain == "product_knowledge" and not has_product_term(query):
++                        name = product_state.get("product_name") or product_state.get("knowledge_topic")
++                        if name:
++                            query = f"{name}：{query}"
++                        else:
++                            pending = "请补充商品类别或名称，我再说明对应的使用知识。"
++                    knowledge_results[domain] = query_knowledge_domain(request.session_id, domain, query,
++                        clarification_required="promotion_combination" in route_plan.clarification_fields,
++                        pending_message=pending,
++                        topics=[t for t in route_plan.inquiry_topics if catalog.get(t) == domain])
++                result = knowledge_results[domain]
++                record_trace_events(request.session_id, result.trace_events)
++                citations.extend(result.citations)
++                rag_retrieval_by_domain[domain] = result.retrieval_debug
++                rag_retrieval = rag_retrieval or result.retrieval_debug
++                rag_rerank = rag_rerank or result.rerank
++                cache_hit = cache_hit or result.cache_hit
++                trace_store.add(request.session_id, "evidence_domain_completed", {
++                    **strategy.model_dump(), **result.retrieval_debug,
++                    "citations": [c.model_dump() for c in result.citations],
++                })
++                if domain == "promotion_and_member_policy" and intent != "product_query":
++                    if result.next_action == "ask_clarification":
++                        memory["promotion_query"] = {"question": policy_question}
++                    else:
++                        memory.pop("promotion_query", None)
++                if result.next_action == "ask_clarification":
++                    next_action = "ask_clarification"
++                if result.risk_level == "medium":
++                    risk_level = "medium"
++            if knowledge_results:
++                if intent != "product_query":
++                    answer = "\n\n".join(filter(None, [answer, *(r.answer for r in knowledge_results.values())]))
++                if len(knowledge_results) == 1 and not tool_calls and not clarification and intent != "product_query":
++                    knowledge_result = next(iter(knowledge_results.values()))
++                    next_action = knowledge_result.next_action
++                    risk_level = knowledge_result.risk_level
++                    if intent == "promotion_query" and not knowledge_result.citations and next_action != "ask_clarification":
++                        intent = "low_confidence_query"
++                elif next_action == "transfer_to_human" and any(r.citations for r in knowledge_results.values()):
++                    next_action = "answer_user"
+ 
+         # Tool/RAG 文本也是外部数据，进入最终模型前必须按来源做污染检查。
+         external_reports: list[dict[str, Any]] = []
+@@ -891,15 +825,6 @@
+                 },
+             )
+ 
+-        if knowledge_result is not None and route_plan.retrieval_strategies:
+-            strategy = route_plan.retrieval_strategies[0]
+-            rag_retrieval_by_domain[strategy.knowledge_domain] = knowledge_result.retrieval_debug or {"mode": strategy.retrieval_mode, "cache_hit": cache_hit}
+-            trace_store.add(request.session_id, "evidence_domain_completed", {
+-                **strategy.model_dump(),
+-                "status": "pending" if knowledge_result.next_action == "ask_clarification" else ("answered" if knowledge_result.citations else "no_evidence"),
+-                "retrieval": rag_retrieval_by_domain[strategy.knowledge_domain],
+-                "citations": [c.model_dump() for c in knowledge_result.citations],
+-            })
+         if rag_retrieval:
+             trace_store.add(
+                 request.session_id,
+@@ -943,6 +868,7 @@
+             cache_hit=cache_hit,
+             degraded=degraded,
+             skip_final_model=uses_runtime_identity or intent == "after_sale_eligibility_query"
++                or bool(product_resolution and product_resolution["kind"] == "end_pending")
+                 or bool(knowledge_result is not None and not knowledge_result.citations
+                         and knowledge_result.next_action == "answer_user")
+                 or bool(intent in {"refund_request", "return_request"} and not citations)
+@@ -952,6 +878,7 @@
+             context_report=context_report,
+             capability_results=capability_results,
+             route_plan=route_plan,
++            knowledge_results=knowledge_results, pending_answer=pending_answer,
+         )
+         answer = model_answer.answer
+         if model_answer.reviewed_citations is not None:
+@@ -1204,7 +1131,6 @@
+             "risk_level": "low",
+             "next_action": "answer_user",
+             "tool_calls": [],
+-            "citations": [],
+             "verified_product_id": None,
+             "verified_product_name": None,
+             "degraded": False,
+@@ -1221,9 +1147,7 @@
+             },
+             "prompt_fragments": [],
+             "model_calls": 0,
+-            "rag_rerank": None,
+-            "rag_retrieval": None,
+-            "rag_retrieval_by_domain": {},
++            "knowledge_results": {},
+         }
+ 
+         def _finish_product_call(call: ToolCallTrace) -> None:
+@@ -1354,58 +1278,41 @@
+                 outcome["next_action"] = call.next_action or "answer_user"
+                 outcome["risk_level"] = "medium"
+             _finish_product_call(call)
++        outcome["pending_answer"] = outcome["answer"] if outcome["next_action"] == "ask_clarification" else ""
+         pending_domains: list[str] = []
+         pending_fields: list[str] = []
++        from retrieval.rules import topic_catalog
++        catalog = topic_catalog()
+         for strategy in route_plan.retrieval_strategies:
+             domain = strategy.knowledge_domain
+-            result = None
+-            if domain == "product_knowledge" and strategy.retrieval_mode == "hybrid":
++            query = (policy_question or question) if domain == "promotion_and_member_policy" else question
++            pending = None
++            if domain == "product_knowledge":
+                 name = outcome.get("verified_product_name") or (None if route_plan.required_tools and route_plan.needs_product_facts is False else pstate.get("product_name") or pstate.get("knowledge_topic"))
+-                if has_product_term(question) or name:
+-                    if has_product_term(question):
+-                        pstate["knowledge_topic"] = product_query_keyword(question)
+-                    query = question if has_product_term(question) else f"{name}：{question}"
+-                    result = product_knowledge_result(request.session_id, query)
++                if has_product_term(question):
++                    pstate["knowledge_topic"] = product_query_keyword(question)
++                elif name:
++                    query = f"{name}：{question}"
+                 else:
+-                    if pstate.get("pending_identity") is not None:
+-                        text = ("当前商品编号未查到，不能提供对应指南，请核对商品编号或名称。"
+-                            if outcome["tool_calls"] and outcome["tool_calls"][-1].error_type == "product_not_found"
+-                            else "页面商品类别暂未核实，尚不能提供对应指南，可以稍后重试。")
+-                    else:
+-                        text = "请补充商品类别或名称，我再说明对应的使用知识。"
+-                        outcome["next_action"] = "ask_clarification"
+-                    outcome["answer"] = "\n\n".join(filter(None, (outcome["answer"], text)))
+-                    pending_domains.append(domain)
+-            elif domain == "promotion_and_member_policy" and strategy.retrieval_mode == "hybrid":
+-                result = promotion_policy_result(request.session_id, policy_question or question,
+-                    clarification_required="promotion_combination" in route_plan.clarification_fields)
++                    pending = ("当前商品编号未查到，不能提供对应指南，请核对商品编号或名称。"
++                        if pstate.get("pending_identity") is not None
++                        else "请补充商品类别或名称，我再说明对应的使用知识。")
++            result = query_knowledge_domain(request.session_id, domain, query,
++                clarification_required="promotion_combination" in route_plan.clarification_fields,
++                pending_message=pending,
++                pending_action=outcome["next_action"] if pstate.get("pending_identity") is not None else "ask_clarification",
++                topics=[t for t in route_plan.inquiry_topics if catalog.get(t) == domain])
++            outcome["knowledge_results"][domain] = result
++            outcome["answer"] = "\n\n".join(filter(None, (outcome["answer"], result.answer)))
++            if result.next_action == "ask_clarification":
++                pending_domains.append(domain)
++                outcome["next_action"] = "ask_clarification"
++            if domain == "promotion_and_member_policy":
+                 if result.next_action == "ask_clarification":
+-                    pending_domains.append(domain)
+                     pending_fields.append("promotion_combination")
+                     pstate["pending_policy_question"] = policy_question or question
+                 else:
+                     pstate.pop("pending_policy_question", None)
+-            if result is not None:
+-                record_trace_events(request.session_id, result.trace_events)
+-                outcome["citations"].extend(result.citations)
+-                outcome["rag_retrieval"] = result.retrieval_debug
+-                outcome["rag_retrieval_by_domain"][domain] = result.retrieval_debug
+-                text = result.answer
+-                if domain == "promotion_and_member_policy" and result.citations:
+-                    text = "平台通用规则：" + text + "\n这不代表该规则一定适用于当前商品或本人优惠券，具体组合以商品页和结算页为准。"
+-                outcome["answer"] = "\n\n".join(filter(None, (outcome["answer"], text)))
+-                if result.next_action == "ask_clarification":
+-                    outcome["next_action"] = "ask_clarification"
+-                outcome["risk_level"] = "medium" if result.risk_level == "medium" else outcome["risk_level"]
+-                if result.rerank:
+-                    outcome["rag_rerank"] = result.rerank
+-            trace_store.add(request.session_id, "evidence_domain_completed", {
+-                "knowledge_domain": domain, "retrieval_mode": strategy.retrieval_mode,
+-                "citation_scope": strategy.citation_scope,
+-                "status": "pending" if domain in pending_domains else ("answered" if result and result.citations else "no_evidence"),
+-                "retrieval": result.retrieval_debug if result else None,
+-                "citations": [c.model_dump() for c in result.citations] if result else [],
+-            })
+         pending_facts = route_plan.needs_product_facts if status != "answered" else False
+         if pending_facts is not False or pending_domains:
+             pstate["pending_evidence"] = {
+@@ -1450,13 +1357,15 @@
+         context_report: dict[str, Any],
+         capability_results: list[dict[str, Any]],
+         route_plan: RoutePlan,
++        knowledge_results: dict[str, KnowledgePathResult] | None = None,
++        pending_answer: str = "",
+     ) -> FinalAnswerModelResult:
+         """让真实模型生成最终话术，但安全、低置信、降级和缓存命中保留确定性边界。"""
+         from retrieval.rules import select_rules
+         content_selection = None
+         content_context = None
+         content_eligible = (intent in REVIEW_INTENTS and workflow is None and risk_level != "high"
+-                            and next_action == "answer_user"
++                            and (next_action == "answer_user" or bool(knowledge_results))
+                             and all(call.tool_name in READ_TOOLS for call in tool_calls))
+         if content_eligible and (route_plan.needs_rag or citations or route_plan.topic_status in {
+             "invalid_type", "unknown_id", "duplicate", "too_many", "incompatible"
+@@ -1466,7 +1375,8 @@
+             content_context, answer, _ = build_review_context(
+                 request=request, plan=route_plan, answer="", tool_calls=tool_calls,
+                 citations=citations, capabilities=capability_results,
+-                history=context_report["model_context"], content_selection=content_selection)
++                history=context_report["model_context"], content_selection=content_selection,
++                knowledge_results=knowledge_results, pending_answer=pending_answer)
+         fallback_answer = answer if content_context is not None else compose_capability_fallback(answer, capability_results)
+         skip_reason: str | None = None
+         if skip_final_model:
+@@ -1509,7 +1419,8 @@
+             review_context, trusted_fallback, hard_issues = build_review_context(
+                 request=request, plan=route_plan, answer=answer, tool_calls=tool_calls,
+                 citations=citations, capabilities=capability_results, history=context_report["model_context"],
+-                interaction_policy=interaction_policy, content_selection=content_selection)
++                interaction_policy=interaction_policy, content_selection=content_selection,
++                knowledge_results=knowledge_results, pending_answer=pending_answer)
+             trace_store.add(request.session_id, "interaction_policy_queried", {
+                 "session_id": request.session_id,
+                 "failure": interaction_policy.get("failure"),
+--- before/backend/agent/tools/planning.py
++++ after/backend/agent/tools/planning.py
+@@ -240,17 +240,9 @@
+         topic_status = checked
+     if not model_used:
+         topics, topic_status = [], "no_model"
+-    # MULTI-READ-001 R01/R06：已识别的合法只读主题不被主意图互斥过滤。
+-    # 只读咨询类意图（发票/退款政策/退货政策/优惠/能力范围）允许跨域组合：
+-    # 保留其自有知识域，并并入所有已识别主题映射的域，不再按主意图筛掉主题。
+-    # 商品事实/订单资格等对象级 evidence 护栏不在此处放松，仍由原分支控制。
+-    if intent == "service_scope_query":
+-        # 能力是取证需求，不应排斥同轮已识别的只读知识需求。
+-        knowledge_domains = list(dict.fromkeys(topic_catalog()[t] for t in topics))
+-    elif intent in {"invoice_query", "refund_policy_query", "return_policy_query", "promotion_query", "low_confidence_query"}:
+-        topic_domains = [topic_catalog()[t] for t in topics]
+-        knowledge_domains = list(dict.fromkeys([*knowledge_domains, *topic_domains]))
+-    # 主题已在 validate_topics 校验为受控表内合法 ID，全部保留。
++    # 所有只读入口按同一主题目录补齐知识计划；原工具与办理权限不变。
++    if not requires_workflow and intent not in {"security_request", "degradation_request"}:
++        knowledge_domains = list(dict.fromkeys([*knowledge_domains, *(topic_catalog()[t] for t in topics)]))
+     allowed_topics = topics
+     allowed_order = {*("topic:" + t for t in allowed_topics),
+                      *("capability:" + cid for cid in planned_capabilities)}
+@@ -260,13 +252,6 @@
+     # 缺少订单号时保留候选工具，但不允许模型凭空生成参数并执行。
+     order_bound_tools = {"get_order_detail", "get_order_logistics", "get_refund_status", "get_after_sale_eligibility"}
+     executable_tools = required_tools if order_id or not any(name in order_bound_tools for name in required_tools) else []
+-    strategies = {
+-        "product_knowledge": ("hybrid", "section"),
+-        "promotion_and_member_policy": ("hybrid", "section"),
+-        "after_sale_policy": ("hybrid", "section"),
+-        "received_return_policy": ("hybrid", "section"),
+-        "invoice": ("hybrid", "section"),
+-    }
+     return RoutePlan(
+         intent=intent,
+         inquiry_topics=allowed_topics,
+@@ -280,7 +265,8 @@
+         capability_ids=planned_capabilities,
+         needs_product_facts=product_facts,
+         clarification_fields=clarification_fields,
+-        retrieval_strategies=[RetrievalStrategy(knowledge_domain=domain, retrieval_mode=strategies[domain][0], citation_scope=strategies[domain][1]) for domain in knowledge_domains if domain in strategies],
++        retrieval_strategies=[RetrievalStrategy(knowledge_domain=domain, retrieval_mode="hybrid", citation_scope="section")
++                              for domain in knowledge_domains],
+         entity_refs=[order_id] if order_id else [],
+         risk_level=risk_level,
+         requires_workflow=requires_workflow,
+--- before/backend/agent/tools/tool_runtime.py
++++ after/backend/agent/tools/tool_runtime.py
+@@ -53,6 +53,8 @@
+             reason = str(result.get('reason') or '资格事实不完整，请稍后重试').rstrip('。；')
+             summary = f"订单 {order_id} {prefix}：{reason}。这轮只查资格，没有准备申请。"
+         return result, ToolCallTrace(tool_name="get_after_sale_eligibility", arguments=arguments,
++            review_facts={"order_id": order_id, **{key: result.get(key) for key in (
++                "status", "applicationType", "amount", "reason")}},
+             output_summary=summary, status="success", risk_level="low", next_action="answer_user")
+     return None, ToolCallTrace(tool_name="get_after_sale_eligibility", arguments=arguments, output_summary=summary,
+         status="error", error_type=error, risk_level="low",
+--- before/backend/retrieval/knowledge.py
++++ after/backend/retrieval/knowledge.py
+@@ -3,11 +3,12 @@
+ from __future__ import annotations
+ 
+ import re
+-from dataclasses import dataclass
++from dataclasses import dataclass, replace
+ from typing import Any
+ 
+ from api.schemas import *
+-from retrieval.documents import knowledge_admission, knowledge_time, load_knowledge_citation, policy_block_reason
++from retrieval.documents import (knowledge_admission, knowledge_time, load_knowledge_citation,
++                                 policy_block_reason, get_knowledge_snapshot, citation_is_current)
+ from retrieval.hybrid_retrieval import retrieve_knowledge
+ 
+ 
+@@ -353,3 +354,64 @@
+     if "member_coupon_gold_rule" in policy_ids:
+         return "根据荒野户外会员券使用规则，山友会员可领取平台会员券；会员券需在有效期内由本人账号使用，不能转让。"
+     return "没有检索到荒野户外已发布的可信活动或会员规则，我不能编造隐藏券规则。建议以活动页和结算页展示为准，或转人工客服进一步核实。"
++
++
++# 领域职责只在此维护；主意图不参与分发，查询函数仍保留各自的准入规则。
++KNOWLEDGE_PROVIDERS = {
++    "after_sale_policy": ("退款政策", "policy_query_result", ("after_sale_refund",),
++        lambda sid, question, clarify: policy_query_result(sid, "refund_policy_query", question)),
++    "received_return_policy": ("退货政策", "policy_query_result", ("after_sale_return",),
++        lambda sid, question, clarify: policy_query_result(sid, "return_policy_query", question)),
++    "invoice": ("发票规则", "invoice_faq_result", ("payment_invoice",),
++        lambda sid, question, clarify: invoice_faq_result(sid)),
++    "promotion_and_member_policy": ("活动或会员规则", "promotion_policy_result", ("promotion", "member_coupon"),
++        lambda sid, question, clarify: promotion_policy_result(sid, question, clarification_required=clarify)),
++    "product_knowledge": ("商品使用知识", "product_knowledge_result", ("product_knowledge",),
++        lambda sid, question, clarify: product_knowledge_result(sid, question)),
++}
++
++
++def query_knowledge_domain(session_id: str, domain: str, question: str, *,
++                           clarification_required: bool = False, pending_message: str | None = None,
++                           topics: list[str] | None = None,
++                           pending_action: NextAction = "ask_clarification") -> KnowledgePathResult:
++    """按受控领域取证并核对真实来源；一项失败不改变其他项及业务任务。"""
++    spec = KNOWLEDGE_PROVIDERS.get(domain)
++    label, provider, allowed_sources, query = spec or ("所问事项", None, (), None)
++    failure = None
++    source_domains = []
++    if pending_message:
++        result = KnowledgePathResult(pending_message, [], "low", pending_action, False)
++    else:
++        try:
++            if query is None:
++                raise ValueError("unknown_knowledge_domain")
++            result = query(session_id, question, clarification_required)
++            snapshot = get_knowledge_snapshot()
++            for citation in result.citations:
++                canonical = snapshot.citations.get(citation.source.removeprefix("knowledge/"))
++                metadata = citation.metadata or {}
++                scene = canonical.metadata.get("scene_key") if canonical else None
++                source_domains.append(scene)
++                if (scene not in allowed_sources or metadata.get("scene_key") != scene
++                    or not citation_is_current(citation, knowledge_time())
++                    or policy_block_reason(canonical.metadata, knowledge_time())):
++                    raise ValueError("knowledge_source_mismatch")
++        except Exception as exc:
++            failure = str(exc) if isinstance(exc, ValueError) and str(exc) in {
++                "unknown_knowledge_domain", "knowledge_source_mismatch"} else type(exc).__name__
++            result = KnowledgePathResult(f"本轮未能核实{label}，暂不能确认相关内容。", [], "medium", "answer_user", False)
++    status = ("error" if failure else "pending" if result.next_action == "ask_clarification"
++              else "answered" if result.citations else "no_evidence")
++    coverage, gaps = [], []
++    if topics and result.citations:
++        from retrieval.rules import select_rules
++        selected, selection = select_rules(result.citations, topics, [domain])
++        coverage = [topic for topic in topics if any(topic in c.metadata.get("rule_topics", []) for c in selected)]
++        gaps = selection["gaps"]
++        if gaps:
++            status = "partial" if coverage else "no_evidence"
++    debug = {**(result.retrieval_debug or {}), "knowledge_domain": domain, "provider": provider,
++             "source_domains": list(dict.fromkeys(source_domains)), "status": status,
++             "failure": failure, "topics": topics or [], "covered_topics": coverage, "gaps": gaps}
++    return replace(result, retrieval_debug=debug)
+--- before/backend/tests/test_evidence_routing.py
++++ after/backend/tests/test_evidence_routing.py
+@@ -136,6 +136,7 @@
+ 
+     def test_order_eligibility_guard_discards_product_policy_fields(self):
+         self.decision = product_decision(True, ["promotion_and_member_policy"], ["promotion_combination"])
++        self.decision["inquiry_topics"] = []  # 本句只问资格，没有独立政策咨询。
+         response = self.chat("这单能不能退？先别申请")
+         self.assertEqual(response.session_state["intent"], "after_sale_eligibility_query")
+         self.assertEqual(response.session_state["route_plan"]["clarification_fields"], [])
+--- before/backend/tests/test_policy_metadata.py
++++ after/backend/tests/test_policy_metadata.py
+@@ -257,7 +257,7 @@
+              patch("agent.tools.tool_runtime.product_detail_from_ecommerce", return_value=({**chair, "_fact_source": "business_api"}, None)):
+             response = self.chat("轻量露营折叠椅多少钱，露营季满减和会员券能叠加吗？")
+         self.assertIn("899", response.answer)
+-        self.assertIn("暂不能确认", response.answer)
++        self.assertIn("没有核实", response.answer)
+         self.assertNotIn("满 300 减 40", response.answer)
+         self.assertFalse(response.citations)
+         self.assertTrue(response.tool_calls)
+--- before/backend/tests/test_product_knowledge.py
++++ after/backend/tests/test_product_knowledge.py
+@@ -53,7 +53,7 @@
+         self.assertEqual(r.session_state['product_query']['product_id'],'4')
+ 
+     def test_price_only_does_not_append_guide(self):
+-        r=self.chat('轻量露营折叠椅多少钱？')
++        r=self.chat('轻量露营折叠椅多少钱？', [])
+         self.assertIn('899',r.answer);self.assertFalse(self.guide_citations(r))
+ 
+     def test_general_knowledge_does_not_change_refund_draft(self):
+--- before/backend/tests/test_product_query.py
++++ after/backend/tests/test_product_query.py
+@@ -171,7 +171,7 @@
+         self.search_mock.return_value = [CHAIR_A, CHAIR_B]
+         original = "折叠椅多少钱，露营季满减能叠加吗？"
+         knowledge = KnowledgePathResult(answer="通用规则", citations=[], risk_level="low", next_action="answer_user", needs_human_approval=False)
+-        with patch("agent.customer_service_agent.promotion_policy_result", return_value=knowledge) as policy:
++        with patch("retrieval.knowledge.promotion_policy_result", return_value=knowledge) as policy:
+             first = self.chat(original)
+             response = self.chat("第二款")
+         policy.assert_called_once_with("product-test", original, clarification_required=False)
+--- before/backend/tests/test_service_capabilities.py
++++ after/backend/tests/test_service_capabilities.py
+@@ -443,7 +443,7 @@
+ 
+     def test_pure_capability_does_not_collect_unrelated_policy(self):
+         with patch.object(self.agent.route_model_client, "plan_intent", return_value=ModelRouteResult(intent="service_scope_query", used_model=True, capability_ids=["refund_consultation"])), \
+-             patch("agent.customer_service_agent.policy_query_result") as policy, \
++             patch("retrieval.knowledge.policy_query_result") as policy, \
+              patch.object(self.agent.answer_model_client, "compose_answer", wraps=self.agent.answer_model_client.compose_answer) as compose:
+             response = self.chat("支持退款吗？", session_id="bc022-refund")
+         policy.assert_not_called()
+--- /dev/null
++++ after/backend/tests/test_domain_dispatch.py
+@@ -0,0 +1,233 @@
++"""DOMAIN-DISPATCH-001：固定路由和离线知识，核对组件、来源及三个出口。"""
++import copy
++import itertools
++import json
++import unittest
++from unittest.mock import patch
++
++from agent.context import current_memory
++from api.schemas import ChatRequest
++from tests import test_answer_content as fixtures
++from tests.test_answer_content import decision, judgment
++from retrieval import knowledge
++from agent.models.answer_client import ModelInvocationResult
++from retrieval.documents import get_knowledge_snapshot
++from retrieval.documents import load_knowledge_citation
++
++DOMAINS = {
++    'after_sale_policy': ('refund_policy_query', 'refund_arrival', '退款多久到账？', 'policy_query_result', {'after_sale_refund'}),
++    'received_return_policy': ('return_policy_query', 'return_conditions', '签收后的七天无理由退货有哪些条件？', 'policy_query_result', {'after_sale_return'}),
++    'invoice': ('invoice_query', 'invoice_issue', '电子发票多久开好？', 'invoice_faq_result', {'payment_invoice'}),
++    'promotion_and_member_policy': ('promotion_query', 'promotion_stacking', '露营季满减和平台会员券能叠加吗？', 'promotion_policy_result', {'promotion', 'member_coupon'}),
++    'product_knowledge': ('product_query', 'tent_care', '帐篷怎么清洁收纳？', 'product_knowledge_result', {'product_knowledge'}),
++}
++
++
++class DomainDispatchTest(unittest.TestCase):
++    setUp = fixtures.ContentPipelineTest.setUp
++    chat = fixtures.ContentPipelineTest.chat
++
++    def prepare(self, domains, intent=None, **extra):
++        intent = intent or DOMAINS[domains[0]][0]
++        if intent == 'product_query':
++            extra.update(needs_product_facts=False,
++                         knowledge_domains=[d for d in domains if d in {'product_knowledge', 'promotion_and_member_policy'}],
++                         clarification_fields=[])
++        if intent == 'promotion_query':
++            extra.setdefault('clarification_fields', [])
++        self.route.return_value = json.dumps(decision([DOMAINS[d][1] for d in domains], intent, **extra))
++        self.generate.side_effect = TimeoutError('fixed_generation_fault')
++        return ''.join(DOMAINS[d][2] for d in domains)
++
++    def assert_domains(self, response, domains):
++        self.assertEqual(set(response.session_state['route_plan']['knowledge_domains']), set(domains))
++        retrievals = response.session_state['evidence_retrievals']
++        for domain in domains:
++            result = retrievals[domain]
++            self.assertEqual(result['provider'], DOMAINS[domain][3])
++            self.assertEqual(result['status'], 'answered')
++            self.assertTrue(set(result['source_domains']) <= DOMAINS[domain][4])
++            self.assertTrue(result['source_domains'])
++            self.assertIn(DOMAINS[domain][1], [t for c in response.citations for t in c.metadata.get('rule_topics', [])])
++        self.assertIsNone(response.session_state['workflow'])
++        self.assertTrue(response.session_state['read_only_turn'])
++
++    def test_five_single_domains_and_all_ten_pairs_in_both_orders(self):
++        groups = [(d,) for d in DOMAINS] + [order for pair in itertools.combinations(DOMAINS, 2)
++                                                  for order in (pair, pair[::-1])]
++        for domains in groups:
++            with self.subTest(domains=domains):
++                response = self.chat(self.prepare(domains))
++                self.assert_domains(response, domains)
++
++    def test_three_domains_and_all_consultation_entries_use_same_providers(self):
++        groups = [
++            ['invoice', 'promotion_and_member_policy', 'product_knowledge'],
++            ['after_sale_policy', 'invoice', 'promotion_and_member_policy'],
++            ['product_knowledge', 'invoice', 'received_return_policy'],
++        ]
++        for domains in groups:
++            for intent in [*(DOMAINS[d][0] for d in domains), 'service_scope_query']:
++                with self.subTest(domains=domains, intent=intent):
++                    self.assert_domains(self.chat(self.prepare(domains, intent)), domains)
++
++    def test_partial_clarification_keeps_invoice_and_pending_question(self):
++        text = self.prepare(['promotion_and_member_policy', 'invoice'],
++                            clarification_fields=['promotion_combination'])
++        response = self.chat('会员券能和优惠叠加吗？另外发票多久开好？')
++        self.assertIn('24 小时', response.answer)
++        self.assertIn('哪项优惠', response.answer)
++        self.assertLess(response.answer.index('24 小时'), response.answer.index('哪项优惠'))
++        self.assertEqual(response.session_state['next_action'], 'ask_clarification')
++        self.assertFalse(any(c.metadata.get('rule_id') == 'promotion_stacking' for c in response.citations))
++
++    def test_partial_failure_keeps_invoice_and_does_not_claim_unsupported(self):
++        self.prepare(['promotion_and_member_policy', 'invoice'])
++        response = self.chat('火星会员有什么优惠？发票多久开好？')
++        self.assertIn('24 小时', response.answer)
++        self.assertNotIn('不支持发票', response.answer)
++        self.assertNotIn('满 300 减 40', response.answer)
++
++    def test_wrong_source_is_rejected_before_selection_and_generation(self):
++        text = self.prepare(['product_knowledge', 'invoice'])
++        wrong = knowledge.KnowledgePathResult(answer='错误活动资料不能解释养护',
++            citations=[load_knowledge_citation('promotion_policy.md')], risk_level='low',
++            next_action='answer_user', needs_human_approval=False)
++        with patch.object(knowledge, 'product_knowledge_result', return_value=wrong):
++            response = self.chat(text)
++        self.assertIn('24 小时', response.answer)
++        self.assertNotIn('错误活动资料', response.answer)
++        self.assertNotIn('promotion_policy.md', [c.source.removeprefix('knowledge/') for c in response.citations])
++        self.assertEqual(response.session_state['evidence_retrievals']['product_knowledge']['status'], 'error')
++
++    def test_exception_is_local_and_not_retried(self):
++        text = self.prepare(['invoice', 'product_knowledge'])
++        with patch.object(knowledge, 'product_knowledge_result', side_effect=TimeoutError('private error')) as provider:
++            response = self.chat(text)
++        provider.assert_called_once()
++        self.assertIn('24 小时', response.answer)
++        self.assertNotIn('private error', response.answer)
++        self.assertEqual(response.session_state['evidence_retrievals']['product_knowledge']['status'], 'error')
++
++    def test_cross_domain_query_keeps_background_after_sale_state(self):
++        memory = current_memory('content-pipeline', 'U1001')
++        draft = {'intent': 'refund_request', 'pending_slot': 'order_id', 'version': 6,
++                 'candidates': [{'value': 'ORD9801', 'label': '第一笔'}]}
++        memory['open_task'] = copy.deepcopy(draft)
++        domains = ['product_knowledge', 'invoice']
++        response = self.chat(self.prepare(domains))
++        self.assert_domains(response, domains)
++        self.assertEqual(memory['open_task'], draft)
++
++    def test_valid_topics_extend_order_query_plan_without_authorizing_other_tools(self):
++        self.prepare(['invoice', 'product_knowledge'], 'order_query')
++        response = self.chat('先查一下物流。另外帐篷怎么清洗、发票多久开好？')
++        plan = response.session_state['route_plan']
++        self.assertEqual(set(plan['knowledge_domains']), {'invoice', 'product_knowledge'})
++        self.assertEqual([t['name'] for t in plan['tool_candidates']], ['get_order_logistics'])
++        self.assertEqual(response.tool_calls, [])
++        self.assertIn('24 小时', response.answer)
++        self.assertIn('晾干', response.answer)
++        self.assertIsNotNone(response.clarification)
++
++    def test_unknown_domain_has_no_default_provider(self):
++        result = knowledge.query_knowledge_domain('unknown-domain', 'not_configured', '查规则')
++        self.assertEqual(result.citations, [])
++        self.assertEqual(result.retrieval_debug['failure'], 'unknown_knowledge_domain')
++        self.assertIsNone(result.retrieval_debug['provider'])
++        self.assertNotIn('不支持', result.answer)
++
++    def test_forged_version_and_forged_publication_do_not_override_canonical_source(self):
++        original = load_knowledge_citation('product_knowledge.md')
++        for field, value in [('scene_key', 'invoice'), ('version', 'made-up'),
++                             ('snapshot_version', 'old-snapshot')]:
++            with self.subTest(field=field):
++                forged = original.model_copy(deep=True)
++                forged.metadata[field] = value
++                wrong = knowledge.KnowledgePathResult('不要泄漏的伪造正文', [forged], 'low', 'answer_user', False)
++                with patch.object(knowledge, 'product_knowledge_result', return_value=wrong):
++                    result = knowledge.query_knowledge_domain('forged', 'product_knowledge', '帐篷怎么清洗')
++                self.assertEqual(result.citations, [])
++                self.assertEqual(result.retrieval_debug['failure'], 'knowledge_source_mismatch')
++                self.assertNotIn('伪造正文', result.answer)
++        snapshot = copy.deepcopy(get_knowledge_snapshot())
++        snapshot.citations['product_knowledge.md'].metadata['publication_status'] = 'withdrawn'
++        forged = knowledge.KnowledgePathResult('不要泄漏的旧正文', [original], 'low', 'answer_user', False)
++        with patch.object(knowledge, 'get_knowledge_snapshot', return_value=snapshot), \
++             patch.object(knowledge, 'product_knowledge_result', return_value=forged):
++            result = knowledge.query_knowledge_domain('withdrawn', 'product_knowledge', '帐篷怎么清洗')
++        self.assertFalse(result.citations)
++        self.assertEqual(result.retrieval_debug['status'], 'error')
++
++    def test_order_eligibility_and_invoice_keep_structured_evidence_and_original_permission(self):
++        self.prepare(['invoice'], 'after_sale_eligibility_query')
++        with patch('agent.tools.tool_runtime.ecommerce_get', return_value={
++            'orderNo': 'ORD9801', 'status': 'ELIGIBLE', 'applicationType': 'REFUND',
++            'amount': 398, 'reason': '已支付未发货'}):
++            response = self.chat('查 ORD9801 的退款资格，另外发票多久开好？')
++        self.assertIn('398', response.answer)
++        self.assertIn('24 小时', response.answer)
++        self.assertIn('没有准备申请', response.answer)
++        self.assertIsNone(response.session_state['workflow'])
++        self.assertEqual([c.tool_name for c in response.tool_calls], ['get_after_sale_eligibility'])
++
++    def test_normal_repair_and_fallback_share_valid_sources_without_reretrieval(self):
++        for mode in ('normal', 'repair', 'fallback'):
++            with self.subTest(mode=mode):
++                text = self.prepare(['invoice', 'product_knowledge'])
++                self.generate.side_effect = None
++                self.generate.return_value = ModelInvocationResult(content='已核实的正常答复')
++                self.judge.side_effect = None
++                self.judge.return_value = judgment()
++                if mode == 'repair':
++                    self.generate.side_effect = [ModelInvocationResult(content='错误候选'), ModelInvocationResult(content='修复后答复')]
++                    self.judge.side_effect = [judgment('fail'), judgment()]
++                elif mode == 'fallback':
++                    self.generate.side_effect = TimeoutError('fixed')
++                with patch.object(knowledge, 'invoice_faq_result', wraps=knowledge.invoice_faq_result) as invoice, \
++                     patch.object(knowledge, 'product_knowledge_result', wraps=knowledge.product_knowledge_result) as product:
++                    response = self.chat(text)
++                invoice.assert_called_once()
++                product.assert_called_once()
++                self.assert_domains(response, ['invoice', 'product_knowledge'])
++                self.assertEqual(response.session_state['model']['answer_judge']['repair_attempted'], mode == 'repair')
++                if mode == 'fallback':
++                    self.assertIn('24 小时', response.answer)
++                    self.assertIn('晾干', response.answer)
++                else:
++                    self.assertEqual(response.answer, '修复后答复' if mode == 'repair' else '已核实的正常答复')
++
++    def test_ending_product_selection_does_not_execute_its_old_knowledge_plan(self):
++        memory = current_memory('content-pipeline', 'U1001')
++        memory['product_query'] = {'pending_candidates': [{'id': 4, 'name': '帐篷'}]}
++        memory['clarification_focus'] = 'product_query'
++        self.prepare(['product_knowledge', 'invoice'])
++        with patch.object(knowledge, 'product_knowledge_result') as product, \
++             patch.object(knowledge, 'invoice_faq_result') as invoice:
++            response = self.chat('先不看了')
++        product.assert_not_called()
++        invoice.assert_not_called()
++        self.assertEqual(response.citations, [])
++        self.assertIn('结束这次商品选择', response.answer)
++
++    def test_repeated_topics_share_one_domain_read(self):
++        self.prepare(['invoice'])
++        self.route.return_value = json.dumps(decision(['invoice_issue', 'invoice_issue'], 'invoice_query'))
++        with patch.object(knowledge, 'invoice_faq_result', wraps=knowledge.invoice_faq_result) as provider:
++            response = self.chat('发票多久开好，在哪里下载？')
++        provider.assert_called_once()
++        self.assertEqual(response.session_state['route_plan']['knowledge_domains'], ['invoice'])
++        self.assertIn('24 小时', response.answer)
++
++    def test_ambiguous_product_price_does_not_block_independent_invoice(self):
++        self.route.return_value = json.dumps(decision(['invoice_issue'], 'product_query',
++            needs_product_facts=True, knowledge_domains=[], clarification_fields=[]))
++        self.generate.side_effect = TimeoutError('fixed')
++        products = [{'id': i, 'name': f'露营折叠椅{label}', 'price': 100 * i, 'stock': 1, 'active': True}
++                    for i, label in [(1, 'A'), (2, 'B')]]
++        with patch('agent.tools.tool_runtime.products_from_ecommerce', return_value=products):
++            response = self.chat('折叠椅多少钱？发票多久开好？')
++        self.assertIn('24 小时', response.answer)
++        self.assertIn('第二款', response.answer)
++        self.assertEqual(response.session_state['next_action'], 'ask_clarification')
++        self.assertIsNone(response.session_state['workflow'])

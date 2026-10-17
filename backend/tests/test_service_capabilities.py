@@ -49,7 +49,7 @@ class CapabilityContractTest(unittest.TestCase):
             {"intent": "refund_policy_query", "capability_ids": ["refund_consultation"]},
         ):
             with self.subTest(payload=payload):
-                self.assertEqual(RouteModelClient._extract_decision(json.dumps(payload)), payload)
+                self.assertEqual(RouteModelClient._extract_decision(json.dumps(payload)), {**payload, "inquiry_topics": [], "topic_status": "missing"})
         for ids in ("stock_notification", ["../orders"], ["stock_notification", "stock_notification"]):
             self.assertIsNone(RouteModelClient._extract_decision(json.dumps({"intent": "service_scope_query", "capability_ids": ids})))
 
@@ -294,7 +294,7 @@ class CapabilityAnswerTest(unittest.TestCase):
 
     def test_policy_and_multiple_capabilities_share_one_natural_reply(self):
         ids = ["refund_consultation", "stock_notification"]
-        decision = ModelRouteResult(intent="refund_policy_query", used_model=True, capability_ids=ids)
+        decision = ModelRouteResult(intent="refund_policy_query", used_model=True, inquiry_topics=["refund_conditions"], topic_status="valid", capability_ids=ids)
         text = "未发货整单退款需核验资格。当前客服支持符合条件的未发货整单退款，尚未提交申请。目前不支持到货提醒。"
         with patch.object(self.agent.route_model_client, "plan_intent", return_value=decision), \
              patch.object(self.agent.answer_model_client, "compose_answer",
@@ -388,7 +388,7 @@ class CapabilityAnswerTest(unittest.TestCase):
         self.assertNotIn("不支持", response.answer)
 
     def test_capability_query_is_reusable_from_a_policy_intent(self):
-        decision = ModelRouteResult(intent="refund_policy_query", used_model=True, capability_ids=["stock_notification"])
+        decision = ModelRouteResult(intent="refund_policy_query", used_model=True, inquiry_topics=["refund_conditions"], topic_status="valid", capability_ids=["stock_notification"])
         final = FinalAnswerModelResult(answer="未发货整单退款需核验资格。当前不支持到货提醒。", used_model=True)
         with patch.object(self.agent.route_model_client, "plan_intent", return_value=decision), \
              patch.object(self.agent.answer_model_client, "compose_answer", return_value=final) as compose:
@@ -443,7 +443,7 @@ class CapabilityAnswerTest(unittest.TestCase):
 
     def test_pure_capability_does_not_collect_unrelated_policy(self):
         with patch.object(self.agent.route_model_client, "plan_intent", return_value=ModelRouteResult(intent="service_scope_query", used_model=True, capability_ids=["refund_consultation"])), \
-             patch("agent.customer_service_agent.policy_query_result") as policy, \
+             patch("retrieval.knowledge.policy_query_result") as policy, \
              patch.object(self.agent.answer_model_client, "compose_answer", wraps=self.agent.answer_model_client.compose_answer) as compose:
             response = self.chat("支持退款吗？", session_id="bc022-refund")
         policy.assert_not_called()

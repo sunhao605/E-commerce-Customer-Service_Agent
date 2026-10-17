@@ -16,7 +16,9 @@ OTHER = {**TENT, "id": 1, "name": "轻量双人帐篷", "price": 599.0}
 def product_decision(facts=False, domains=None, clarification=None):
     return {"intent": "product_query", "needs_product_facts": facts,
             "knowledge_domains": ["product_knowledge"] if domains is None else domains,
-            "clarification_fields": clarification or []}
+            "clarification_fields": clarification or [],
+            "inquiry_topics": (["tent_care"] if domains is None or "product_knowledge" in domains else [])
+                + (["promotion_stacking"] if domains and "promotion_and_member_policy" in domains else [])}
 
 
 class EvidenceContractTest(unittest.TestCase):
@@ -37,9 +39,9 @@ class EvidenceContractTest(unittest.TestCase):
         for payload in invalid:
             with self.subTest(payload=payload):
                 self.assertIsNone(RouteModelClient._extract_decision(json.dumps(payload)))
-        self.assertEqual(RouteModelClient._extract_decision(json.dumps(valid)), valid)
+        self.assertEqual(RouteModelClient._extract_decision(json.dumps(valid)), {**valid, "topic_status": "valid"})
         unknown = product_decision(facts=None)
-        self.assertEqual(RouteModelClient._extract_decision(json.dumps(unknown)), unknown)
+        self.assertEqual(RouteModelClient._extract_decision(json.dumps(unknown)), {**unknown, "topic_status": "valid"})
 
     def test_one_call_preserves_valid_evidence(self):
         client = RouteModelClient()
@@ -134,6 +136,7 @@ class EvidenceExecutionTest(unittest.TestCase):
 
     def test_order_eligibility_guard_discards_product_policy_fields(self):
         self.decision = product_decision(True, ["promotion_and_member_policy"], ["promotion_combination"])
+        self.decision["inquiry_topics"] = []  # 本句只问资格，没有独立政策咨询。
         response = self.chat("这单能不能退？先别申请")
         self.assertEqual(response.session_state["intent"], "after_sale_eligibility_query")
         self.assertEqual(response.session_state["route_plan"]["clarification_fields"], [])
@@ -169,26 +172,27 @@ class EvidenceExecutionTest(unittest.TestCase):
 
     def test_missing_policy_keeps_verified_price_without_inventing_discount(self):
         self.decision = product_decision(True, ["promotion_and_member_policy"])
+        self.decision["inquiry_topics"] = []  # 未发布活动没有受控主题。
         response = self.chat("山野四人帐篷多少钱，未发布的活动怎么优惠？")
         self.assertIn("899", response.answer)
-        self.assertIn("不能编造", response.answer)
+        self.assertIn("尚未明确", response.answer)
         self.assertEqual(response.citations, [])
         self.assertIsNone(response.session_state["workflow"])
 
     def test_policy_only_has_no_product_evidence_or_tools(self):
-        self.decision = {"intent": "promotion_query", "clarification_fields": []}
+        self.decision = {"intent": "promotion_query", "clarification_fields": [], "inquiry_topics": ["promotion_stacking"]}
         response = self.chat("露营季满减和会员券能叠加吗？")
         self.assertEqual(response.tool_calls, [])
         self.assertIsNone(response.session_state["route_plan"]["needs_product_facts"])
         self.assertIn("promotion_and_member_policy", response.session_state["evidence_retrievals"])
 
     def test_missing_combination_asks_and_resumes_without_fake_order_task(self):
-        self.decision = {"intent": "promotion_query", "clarification_fields": ["promotion_combination"]}
+        self.decision = {"intent": "promotion_query", "clarification_fields": ["promotion_combination"], "inquiry_topics": ["promotion_stacking"]}
         first = self.chat("会员券能否叠加？")
         self.assertEqual(first.citations, [])
         self.assertIn("哪项优惠", first.answer)
         self.assertIsNone(current_memory("evidence-test")["open_task"])
-        self.decision = {"intent": "promotion_query", "clarification_fields": []}
+        self.decision = {"intent": "promotion_query", "clarification_fields": [], "inquiry_topics": ["promotion_stacking"]}
         second = self.chat("和露营季满减")
         self.assertIn("满 300 减 40", second.answer)
         self.assertEqual(second.tool_calls, [])
@@ -200,7 +204,7 @@ class EvidenceExecutionTest(unittest.TestCase):
         self.assertIn("899", first.answer)
         self.assertIn("哪项优惠", first.answer)
         calls = (self.search.call_count, self.detail.call_count)
-        self.decision = {"intent": "promotion_query", "clarification_fields": []}
+        self.decision = {"intent": "promotion_query", "clarification_fields": [], "inquiry_topics": ["promotion_stacking"]}
         second = self.chat("和露营季满减")
         self.assertEqual((self.search.call_count, self.detail.call_count), calls)
         self.assertIn("满 300 减 40", second.answer)
@@ -216,7 +220,7 @@ class EvidenceExecutionTest(unittest.TestCase):
                 self.assertIn("第二款", first.answer)
                 self.assertIn("哪项优惠", first.answer)
                 for message in (("和露营季满减", "第二款") if policy_first else ("第二款", "和露营季满减")):
-                    self.decision = ({"intent": "general_chat"} if message == "第二款" else {"intent": "promotion_query", "clarification_fields": []})
+                    self.decision = ({"intent": "general_chat"} if message == "第二款" else {"intent": "promotion_query", "clarification_fields": [], "inquiry_topics": ["promotion_stacking"]})
                     response = self.chat(message)
                     if message == "第二款":
                         self.assertIn("899", response.answer)
@@ -240,7 +244,8 @@ class EvidenceExecutionTest(unittest.TestCase):
         response = self.chat("帐篷帮我看看")
         self.assertEqual(response.tool_calls, [])
         self.assertIsNone(response.session_state["route_plan"]["needs_product_facts"])
-        self.assertEqual(response.session_state["next_action"], "ask_clarification")
+        self.assertEqual(response.session_state["next_action"], "answer_user")
+        self.assertIn("晾干", response.answer)
 
     def test_end_selection_clears_evidence_even_if_model_is_uncertain(self):
         self.search.return_value = [OTHER, TENT]
@@ -313,14 +318,14 @@ class EvidenceExecutionTest(unittest.TestCase):
         self.assertIsNone(response.session_state["workflow"])
 
     def test_policy_pending_does_not_cross_user_identity(self):
-        self.decision = {"intent": "promotion_query", "clarification_fields": ["promotion_combination"]}
+        self.decision = {"intent": "promotion_query", "clarification_fields": ["promotion_combination"], "inquiry_topics": ["promotion_stacking"]}
         self.chat("会员券能否叠加？")
-        self.decision = {"intent": "promotion_query", "clarification_fields": []}
+        self.decision = {"intent": "promotion_query", "clarification_fields": [], "inquiry_topics": ["promotion_stacking"]}
         self.chat("和露营季满减", user="U1002")
         self.assertNotIn("promotion_query", current_memory("evidence-test", "U1002"))
 
     def test_policy_pending_does_not_override_valid_chat_intent(self):
-        self.decision = {"intent": "promotion_query", "clarification_fields": ["promotion_combination"]}
+        self.decision = {"intent": "promotion_query", "clarification_fields": ["promotion_combination"], "inquiry_topics": ["promotion_stacking"]}
         self.chat("会员券能否叠加？")
         self.decision = {"intent": "general_chat"}
         response = self.chat("和你说再见，先不问了")

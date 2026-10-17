@@ -68,6 +68,9 @@ class RoutePlan(BaseModel):
 
     intent: Intent
     needs_rag: bool
+    inquiry_topics: list[str] = Field(default_factory=list)
+    topic_status: str = "missing"
+    answer_order: list[str] = Field(default_factory=list)
     needs_business_tools: bool
     required_tools: list[str] = Field(default_factory=list)
     tool_candidates: list[ToolCandidate] = Field(default_factory=list)
